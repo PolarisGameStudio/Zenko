@@ -1,0 +1,177 @@
+fileFormatVersion: 2
+guid: d64c8f3b0e74c473f80fbfbd1313bd7f
+timeCreated: 1529873958
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Low_Poly_Models:Mesh_polySurface31
+    100002: Low_Poly_Models:Mesh_polySurface32
+    100004: Low_Poly_Models:Mesh_polySurface33
+    100006: Low_Poly_Models:Mesh_polySurface34
+    100008: Low_Poly_Models:Mesh_polySurface35
+    100010: Low_Poly_Models:Mesh_polySurface36
+    100012: Low_Poly_Models:Mesh_polySurface37
+    100014: Low_Poly_Models:Mesh_rock_forms
+    100016: polySurface30_Low_Poly_Models:Mesh
+    100018: //RootNode
+    400000: Low_Poly_Models:Mesh_polySurface31
+    400002: Low_Poly_Models:Mesh_polySurface32
+    400004: Low_Poly_Models:Mesh_polySurface33
+    400006: Low_Poly_Models:Mesh_polySurface34
+    400008: Low_Poly_Models:Mesh_polySurface35
+    400010: Low_Poly_Models:Mesh_polySurface36
+    400012: Low_Poly_Models:Mesh_polySurface37
+    400014: Low_Poly_Models:Mesh_rock_forms
+    400016: polySurface30_Low_Poly_Models:Mesh
+    400018: //RootNode
+    2300000: Low_Poly_Models:Mesh_polySurface31
+    2300002: Low_Poly_Models:Mesh_polySurface32
+    2300004: Low_Poly_Models:Mesh_polySurface33
+    2300006: Low_Poly_Models:Mesh_polySurface34
+    2300008: Low_Poly_Models:Mesh_polySurface35
+    2300010: Low_Poly_Models:Mesh_polySurface36
+    2300012: Low_Poly_Models:Mesh_polySurface37
+    2300014: Low_Poly_Models:Mesh_rock_forms
+    2300016: polySurface30_Low_Poly_Models:Mesh
+    3300000: Low_Poly_Models:Mesh_polySurface31
+    3300002: Low_Poly_Models:Mesh_polySurface32
+    3300004: Low_Poly_Models:Mesh_polySurface33
+    3300006: Low_Poly_Models:Mesh_polySurface34
+    3300008: Low_Poly_Models:Mesh_polySurface35
+    3300010: Low_Poly_Models:Mesh_polySurface36
+    3300012: Low_Poly_Models:Mesh_polySurface37
+    3300014: Low_Poly_Models:Mesh_rock_forms
+    3300016: polySurface30_Low_Poly_Models:Mesh
+    4300000: Low_Poly_Models:Mesh_polySurface31
+    4300002: Low_Poly_Models:Mesh_polySurface32
+    4300004: Low_Poly_Models:Mesh_polySurface33
+    4300006: Low_Poly_Models:Mesh_polySurface34
+    4300008: Low_Poly_Models:Mesh_polySurface35
+    4300010: Low_Poly_Models:Mesh_polySurface36
+    4300012: Low_Poly_Models:Mesh_polySurface37
+    4300014: Low_Poly_Models:Mesh_rock_forms
+    4300016: polySurface30_Low_Poly_Models:Mesh
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Low_Poly_Models_Mesh_polySurface31Mat
+    second: {fileID: 2100000, guid: 59ce59dd1f0174a8e93a3c459093852c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Low_Poly_Models_Mesh_polySurface32Mat
+    second: {fileID: 2100000, guid: c7bae7fe7d3d146abbfd0fc04e4c37bd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Low_Poly_Models_Mesh_polySurface33Mat
+    second: {fileID: 2100000, guid: 9af5b5810f523432b98663ffaee3cce0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Low_Poly_Models_Mesh_polySurface34Mat
+    second: {fileID: 2100000, guid: 5a48b2c06e7fe4093b76e5f44c51ae04, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Low_Poly_Models_Mesh_polySurface35Mat
+    second: {fileID: 2100000, guid: 0fe2ccf3eec9647a6989759eb3f7a350, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Low_Poly_Models_Mesh_polySurface36Mat
+    second: {fileID: 2100000, guid: a785b2b516af24debb8af1f467174a9d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Low_Poly_Models_Mesh_polySurface37Mat
+    second: {fileID: 2100000, guid: da5fc119a56c64492a2e21c80a4de236, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Low_Poly_Models_Mesh_rock_formsMat
+    second: {fileID: 2100000, guid: aa0dbeabbe8bd4d80ab2aa8e5b8b20ce, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: polySurface30_Low_Poly_Models_MeshMat
+    second: {fileID: 2100000, guid: fa0757d8df1754654840d6e677ebd12f, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
