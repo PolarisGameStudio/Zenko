@@ -39,6 +39,19 @@ public class LevelManager : MonoBehaviour {
 //		Debug.Log("GONNAGETICE");
 //		myicehandler.GiveIce();
 	}
+
+		public void niuNextLevel(int mynum){
+		Debug.Log(mynum);
+		LevelStorer.Lookfor (mynum);
+//		TurnCounter.turncount = 0;
+		levelselector.DestroyAllExceptCamera ();
+		levelselector.CreateBase ();
+		//Debug.Log("GONNAGETICE");
+
+		levelselector.DrawNextLevel (mynum);
+//		Debug.Log("GONNAGETICE");
+//		myicehandler.GiveIce();
+	}
 	void Update(){
 	}
 }

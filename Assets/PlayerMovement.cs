@@ -29,6 +29,7 @@ public class PlayerMovement : MonoBehaviour {
 	string myswipe;
 	bool outofmap;
 	Tile tilescript;
+	bool hasmoved;
 	//public KeySimulator mykeysimulator;
 	// Use this for initialization
 	void Start () {
@@ -42,32 +43,41 @@ public class PlayerMovement : MonoBehaviour {
 		lastFragile = null;
 		isspeeding = false;
 		levelWonBoard = GameObject.Find ("GameWon");
-		//if (levelWonBoard != null) {
-		//	SceneLoading.gamewon = levelWonBoard;
-		//}
-		//levelWonBoard.SetActive (false);
-		//LevelLostBoard = GameObject.Find ("GameLost");
-		//if (LevelLostBoard != null) {
-		//	SceneLoading.gamelost = LevelLostBoard;
-		//}
+		if (levelWonBoard != null) {
+			SceneLoading.gamewon = levelWonBoard;
+			levelWonBoard.SetActive (false);
+
+		}
+		LevelLostBoard = GameObject.Find ("GameLost");
+		if (LevelLostBoard != null) {
+			SceneLoading.gamelost = LevelLostBoard;
+			LevelLostBoard.SetActive (false);
+
+		}
+		//Debug.Log(LevelLostBoard);
 		//LevelLostBoard.SetActive (false);
 		Debug.Log ("TURNEDTOFF");
 		outofmap = false;
+		hasmoved = false;
 
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		if (Input.GetKeyDown (KeyCode.G)){
+			Debug.Log(LevelBuilder.tiles[0,0].isTaken);
+		}
 		myswipe = Swiping.mydirection;
-
+//		Debug.Log(Swiping.mydirection);
 		//Debug.Log (levelWonBoard);
-		/*if (levelWonBoard == null) {
+		if (levelWonBoard == null) {
 			levelWonBoard = SceneLoading.gamewon;
+			levelWonBoard.SetActive(false);
 		}
 		if (LevelLostBoard == null) {
 			LevelLostBoard = SceneLoading.gamelost;
 			LevelLostBoard.SetActive (false);
-		}*/
+		}
 //		Debug.Log (TurnBehaviour.turn + "BEHAV");
 		if (transform.position != startingposition && TurnBehaviour.turn == 0) {
 			TurnBehaviour.turn = 1;
@@ -89,13 +99,13 @@ public class PlayerMovement : MonoBehaviour {
 				isspeeding = false;
 			}  
 			else if (nextaction == "Goal_Action") {
-				//levelWonBoard.SetActive (true);
+				levelWonBoard.SetActive (true);
 				//RatingPopUp.GiveRating ();
-				//this.enabled = false;
+				this.enabled = false;
 				Debug.Log ("Goal");
 			}			
 			else if (nextaction == "Hole_Action") {
-				//LevelLostBoard.SetActive (true);
+				LevelLostBoard.SetActive (true);
 				this.enabled=false;
 				Debug.Log("Hole");
 
@@ -185,7 +195,7 @@ public class PlayerMovement : MonoBehaviour {
 				tiletotest += Vector3.left;
 				FindTileTag ();
 				ActOnTile ();
-				Debug.Log(canmove);
+//				Debug.Log(canmove);
 
 			}
 			//mykeysimulator.A = false;
@@ -236,10 +246,10 @@ public class PlayerMovement : MonoBehaviour {
 	void FindTileTag(){
 		//Collider2D[] colliders = Physics2D.OverlapCircleAll(tiletotest, .1f); ///Presuming the object you are testing also has a collider 0 otherwise{
 		
-		Debug.Log((int)tiletotest.x + "+" + -(int)tiletotest.z);
+//		Debug.Log((int)tiletotest.x + "+" + -(int)tiletotest.z);
 		//Debug.Log(LevelBuilder.tiles[-2,5]);
 		tilescript = LevelBuilder.tiles[(int)tiletotest.x,-(int)tiletotest.z];
-		Debug.Log(tilescript.type);
+//		Debug.Log(tilescript.type);
 		if(tilescript == null){
 			Debug.Log("square null");
 				istiletaken = true;
@@ -266,7 +276,7 @@ public class PlayerMovement : MonoBehaviour {
 			QWERTYMove ();
 		}
 		//if the desired tile is not the place you're standing in it moves there
-		if (currenttile != transform.position /*&& beingdragged == false*/) {
+		if (currenttile != transform.position && beingdragged == false) {
 //			Debug.Log("move");
 			transform.position = Vector3.MoveTowards (transform.position, currenttile, Time.deltaTime * speed); 
 			cantakeinput = false;
@@ -291,7 +301,7 @@ public class PlayerMovement : MonoBehaviour {
 			currenttile = tiletotest;
 		} 
 		else {
-			Debug.Log(tilescript.type);
+//			Debug.Log(tilescript.type);
 			if(outofmap == true){
 				canmove = false;
 				outofmap = false;
@@ -305,6 +315,7 @@ public class PlayerMovement : MonoBehaviour {
 			} else if (tilescript.type == "Goal") {
 				//you'll stop in the tile you checked and stop moving.
 				if (TurnCounter.turncount == 0) {
+					Debug.Log("0 turns");
 					canmove = false;
 				} else {
 					Count ();

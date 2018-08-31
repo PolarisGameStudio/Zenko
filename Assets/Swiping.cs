@@ -28,6 +28,7 @@ public class Swiping : MonoBehaviour {
 		canswipe = true;
 	}
 	void Update () {
+		//Debug.Log("swipe");
 		//one ();
 		two ();
 	}
@@ -79,14 +80,17 @@ public class Swiping : MonoBehaviour {
 
 		if(Input.touches.Length > 0 && canswipe)
 		{
+			Debug.Log("YOUVH");
 			Touch t = Input.GetTouch(0);
 			if(t.phase == TouchPhase.Began)
 			{
+				Debug.Log("A");
 				//save began touch 2d point
 				firstPressPos = new Vector2(t.position.x,t.position.y);
 			}
 			if(t.phase == TouchPhase.Ended)
 			{
+				Debug.Log("D");
 				//save ended touch 2d point
 				secondPressPos = new Vector2(t.position.x,t.position.y);
 
@@ -100,23 +104,35 @@ public class Swiping : MonoBehaviour {
 				if(currentSwipe.y > 0.5 && currentSwipe.x > -0.5f && currentSwipe.x < 0.5f)
 				{
 					Debug.Log("up swipe");
+					Debug.Log(firstPressPos.x + "+" + firstPressPos.y );
+					Debug.Log(secondPressPos.x + "+" + secondPressPos.y);
+
 					mydirection = "Up";
 				}
 				//swipe down
 				if(currentSwipe.y < -0.5 && currentSwipe.x > -0.5f && currentSwipe.x < 0.5f)
 				{
 					Debug.Log("down swipe");
+					Debug.Log(firstPressPos.x + "+" + firstPressPos.y );
+					Debug.Log(secondPressPos.x + "+" + secondPressPos.y);
+
 					mydirection = "Down";
 				}
 				//swipe left
 				if(currentSwipe.x < -0.5 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f)
 				{
+					Debug.Log(firstPressPos.x + "+" + firstPressPos.y);
+					Debug.Log(secondPressPos.x + "+" + secondPressPos.y );
+
 					Debug.Log("left swipe");
 					mydirection = "Left";
 				}
 				//swipe right
 				if(currentSwipe.x > 0.5 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f)
 				{
+					Debug.Log(firstPressPos.x + "+" + firstPressPos.y);
+					Debug.Log(secondPressPos.x + "+" + secondPressPos.y );
+
 					Debug.Log("right swipe");
 					mydirection = "Right";
 				}

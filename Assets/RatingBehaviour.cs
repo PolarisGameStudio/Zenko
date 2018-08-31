@@ -41,6 +41,6 @@ public class RatingBehaviour : MonoBehaviour {
 		} else {
 			rating = 1;
 		}
-		Debug.Log ("max " + totturns + "    cur " + curturns + "     rating " + rating + " " + turnratio);
+		//Debug.Log ("max " + totturns + "    cur " + curturns + "     rating " + rating + " " + turnratio);
 	}
 }

@@ -13,8 +13,8 @@ public class LevelBuilder : MonoBehaviour {
 	public GameObject[] tile;
 	List<GameObject> tileBank = new List<GameObject>();
 
-	static int rows = 8;
-	static int cols = 8;
+	public static int rows = 8;
+	public static int cols = 8;
 	bool renewBoard = false;
 	public static Tile [,] tiles = new Tile[cols,rows];
 
@@ -113,8 +113,12 @@ public class LevelBuilder : MonoBehaviour {
 
 	void Start() {
 	LevelManager.levelselector = this;
+	Debug.Log(LevelManager.levelnum);
 	if (LevelManager.levelnum == null || LevelManager.levelnum == 0) {
-		LevelManager.levelnum = 1;
+		LevelManager.levelnum = 25
+		;
+		Debug.Log(LevelManager.levelnum);
+
 	}
 	levelnum = LevelManager.levelnum;
 	LevelStorer.Lookfor (levelnum);//assigns efficient turn according to dictionary.
@@ -234,10 +238,13 @@ public class LevelBuilder : MonoBehaviour {
 					break;
 				case sfloor_rock:
 					Instantiate (floor_rock, new Vector3 (x, 0, -y), Quaternion.identity);
-					
+					Debug.Log("Assign Rock");
 					break;
 				case sfloor_wood:
 					Instantiate (floor_wood, new Vector3 (x, 0, -y), Quaternion.identity);
+					tiles[x,y].type = "Wood";
+					tiles[x,y].isTaken = true;
+					break;
 					break;
 				case sfloor_left:
 					Instantiate	(floor_left, new Vector3 ((float)(x+0.8), (float)0.5,(float)(-y)), floor_left.transform.rotation);
@@ -291,6 +298,7 @@ public class LevelBuilder : MonoBehaviour {
 	}
 	public void DestroyAllExceptCamera(){
 //		TurnBehaviour.turn = 0;
+		tileBank.Clear();
 		GameObject[] gameobjects = GameObject.FindObjectsOfType <GameObject>();
 
 		foreach (GameObject component in gameobjects)

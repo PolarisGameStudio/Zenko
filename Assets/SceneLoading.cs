@@ -12,7 +12,7 @@ public class SceneLoading : MonoBehaviour {
 //	public IceTileHandler myhandler;
 
 	public void LoadScene(int num){
-		//Swiping.mydirection = "Null";
+		Swiping.mydirection = "Null";
 		//TurnCounter.turncount = 0;
 		Debug.Log ("BOOP");
 		LevelManager.levelnum = num;
@@ -23,38 +23,39 @@ public class SceneLoading : MonoBehaviour {
 		SceneManager.LoadScene(0);
 	}
 	public void NextlevelButton(){
-		//Swiping.mydirection = "Null";
+		Debug.Log("Next button");
+		Swiping.mydirection = "Null";
 		LevelManager.levelnum++;
 		LevelStorer.UnlockLevel (LevelManager.levelnum);
 		LevelStorer.Lookfor (LevelManager.levelnum);
-		//TurnCounter.turncount = 0;
+		TurnCounter.turncount = 0;
 		LevelManager.NextLevel (LevelManager.levelnum);
 		//myhandler.GiveIce();
 
 	}
 	public void PreviousLevelButton(){
-	//	Swiping.mydirection = "Null";
+		Swiping.mydirection = "Null";
 		LevelManager.levelnum--;
 		LevelStorer.Lookfor (LevelManager.levelnum);
-		//TurnCounter.turncount = 0;
+		TurnCounter.turncount = 0;
 		LevelManager.NextLevel (LevelManager.levelnum);
 		//myhandler.GiveIce();
 
 	}
 	public void ResetLevelButton(){
-		//Swiping.mydirection = "Null";
+		Swiping.mydirection = "Null";
 		LevelStorer.Lookfor (LevelManager.levelnum);
-		//TurnCounter.turncount = 0;
+		TurnCounter.turncount = 0;
 		LevelManager.NextLevel (LevelManager.levelnum);
 		//myhandler.GiveIce();
 	}
 	public void Testnum(int num){
 		//initializevalues
 //		AIBrain.pieces.Clear();
-	//	Swiping.mydirection = "Null";
+		Swiping.mydirection = "Null";
 		LevelManager.levelnum = num;		
 		LevelStorer.Lookfor (num);
-		//TurnCounter.turncount = 0;
+		TurnCounter.turncount = 0;
 		LevelManager.NextLevel (num);
 		//myhandler.GiveIce();
 
