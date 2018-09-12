@@ -13,11 +13,12 @@ public class SceneLoading : MonoBehaviour {
 
 	public void LoadScene(int num){
 		Swiping.mydirection = "Null";
-		//TurnCounter.turncount = 0;
-		Debug.Log ("BOOP");
+		TurnCounter.turncount = 0;
+		Debug.Log ("Going to Scene at level " + num);
 		LevelManager.levelnum = num;
 		LevelManager.readytodraw = true;
-		SceneManager.LoadScene(4);
+		SceneManager.LoadScene(1);
+		//NextlevelButton();
 	}
 	public void LoadMenu(){
 		SceneManager.LoadScene(0);
@@ -26,10 +27,15 @@ public class SceneLoading : MonoBehaviour {
 		Debug.Log("Next button");
 		Swiping.mydirection = "Null";
 		LevelManager.levelnum++;
+		//LevelManager.levelnum = Random.Range(0,66);
+
 		LevelStorer.UnlockLevel (LevelManager.levelnum);
 		LevelStorer.Lookfor (LevelManager.levelnum);
 		TurnCounter.turncount = 0;
-		LevelManager.NextLevel (LevelManager.levelnum);
+		//LevelManager.NextLevel (LevelManager.levelnum);
+		//LevelManager.levelnum = Random.Range(0,66);
+		LevelManager.NextLevel(LevelManager.levelnum);
+
 		//myhandler.GiveIce();
 
 	}
@@ -39,6 +45,7 @@ public class SceneLoading : MonoBehaviour {
 		LevelStorer.Lookfor (LevelManager.levelnum);
 		TurnCounter.turncount = 0;
 		LevelManager.NextLevel (LevelManager.levelnum);
+		//LevelManager.NextLevel(Random.Range(0,100));
 		//myhandler.GiveIce();
 
 	}
@@ -74,6 +81,10 @@ public class SceneLoading : MonoBehaviour {
 
 	public void LockAll(){
 		LevelStorer.LockAllLevels();
+	}
+	public void TestButton(){
+		Debug.Log("Buttoned");
+		LoadScene(1);
 	}
 
 	public void GoToLevelSelect(){

@@ -13,7 +13,8 @@ public class PlaneBehavior : MonoBehaviour {
 	public static bool readyToDrop;
 	// Use this for initialization
 	void Start () {
-		cam = camera.GetComponent<Camera>();
+		
+		cam = GameObject.Find ("Main Camera").GetComponent<Camera>();
 //		plane = this.parent;
 		plane = new Plane(Vector3.up, transform.position);
 	}

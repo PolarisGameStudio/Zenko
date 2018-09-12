@@ -23,6 +23,7 @@ public class Dragger : MonoBehaviour {
 	}
 
 	void Update(){
+		//if()
 	}
 
 	 void OnMouseDown() {
@@ -61,11 +62,19 @@ public class Dragger : MonoBehaviour {
 //			Debug.Log(curScreenPoint);
 			transform.position = PlaneBehavior.planePos;
 			myPosition = transform.position;
+			if(Input.touchCount>0){
+				Touch t = Input.GetTouch(0);
+				Swiping.firstPressPos = new Vector2(t.position.x,t.position.y);
+
+			}
+			else{
+				Swiping.firstPressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+			}
 
 //			FindHoveredTile ();
-			Touch t = Input.GetTouch(0);
+			//Touch t = Input.GetTouch(0);
 				//save began touch 2d point
-			Swiping.firstPressPos = new Vector2(t.position.x,t.position.y);
+			//Swiping.firstPressPos = new Vector2(t.position.x,t.position.y);
 		}
 
 	}
@@ -91,9 +100,16 @@ public class Dragger : MonoBehaviour {
 		//Debug.Log()
 
 		//transform.position.y = PlaneBehavior.tiley;
-		Touch t = Input.GetTouch(0);
+		if(Input.touchCount>0){
+			Touch t = Input.GetTouch(0);
+			Swiping.firstPressPos = new Vector2(t.position.x,t.position.y);
+
+		}
+		else{
+			Swiping.firstPressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+		}
 		//save began touch 2d point
-		Swiping.firstPressPos = new Vector2(t.position.x,t.position.y);
+		//Swiping.firstPressPos = new Vector2(t.position.x,t.position.y);
 		Swiping.canswipe = true;
 
 		/*if (TurnBehaviour.turn == 0) {

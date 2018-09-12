@@ -51,9 +51,11 @@ public class LevelStorer : MonoBehaviour {
 			DontDestroyOnLoad(this.gameObject);
 			//return;
 		}
-		//else{
-		//	Destroy(this.gameObject);
-		//}
+		else{
+			Destroy(this.gameObject);
+			Debug.Log("Destroyed LevelStorer");
+			return;
+		}
 
 /*		reset = PlayerPrefs.GetInt ("Reset");
 		if (reset == 0) {
@@ -64,7 +66,6 @@ public class LevelStorer : MonoBehaviour {
 			Debug.Log ("Has playerpref");
 		} else {*/
 			//Load levels for the first time. Init values. only level 1 unlocked.
-
 		Debug.Log ("Giving loaded");
 		LevelStats lv1 = new LevelStats(1,2,false,0);
 		LevelStats lv2 = new LevelStats(2,3,true,0); 
@@ -269,6 +270,8 @@ public class LevelStorer : MonoBehaviour {
 		leveldic.Add (98, lv98);
 		leveldic.Add (99, lv99);
 		leveldic.Add (100, lv100);
+	}
+		
 
 		//Debug.Log(leveldic.Count);
 
@@ -284,10 +287,6 @@ public class LevelStorer : MonoBehaviour {
 			//PlayerPrefs.SetInt ("Loaded", 1);
 		//}
 //		PlayerPrefs.DeleteAll();
-
-
-
-	}
 
 	/*void Update () {
 		if (efficientturns <= 0) {

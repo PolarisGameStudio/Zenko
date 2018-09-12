@@ -113,14 +113,17 @@ public class LevelBuilder : MonoBehaviour {
 
 	void Start() {
 	LevelManager.levelselector = this;
-	Debug.Log(LevelManager.levelnum);
-	if (LevelManager.levelnum == null || LevelManager.levelnum == 0) {
-		LevelManager.levelnum = 25
-		;
+	levelnum = LevelManager.levelnum;
+	 
+	//Debug.Log(LevelManager.levelnum);
+	/*if (LevelManager.levelnum == null || LevelManager.levelnum == 0) {
+		LevelManager.levelnum = 1;
+		//LevelManager.levelnum = Random.Range(1,65);
 		Debug.Log(LevelManager.levelnum);
 
-	}
-	levelnum = LevelManager.levelnum;
+	}*/
+
+	//levelnum = LevelManager.levelnum;
 	LevelStorer.Lookfor (levelnum);//assigns efficient turn according to dictionary.
 	//DrawIce ();
 	//DrawNextLevel (levelnum);
@@ -244,30 +247,36 @@ public class LevelBuilder : MonoBehaviour {
 					Instantiate (floor_wood, new Vector3 (x, 0, -y), Quaternion.identity);
 					tiles[x,y].type = "Wood";
 					tiles[x,y].isTaken = true;
-					break;
+					//break;
 					break;
 				case sfloor_left:
-					Instantiate	(floor_left, new Vector3 ((float)(x+0.8), (float)0.5,(float)(-y)), floor_left.transform.rotation);
-					tiles[x,y].type = "Left";
-					tiles[x,y].isTaken = true;					
+					//Instantiate	(floor_left, new Vector3 ((float)(x+0.8), (float)0.5,(float)(-y)), floor_left.transform.rotation);
+					Instantiate (floor_left, new Vector3 (x, 0, -y), floor_left.transform.rotation);
+
+					//tiles[x,y].type = "Left";
+					//tiles[x,y].isTaken = true;					
 					break;
 				case sfloor_right:
-					Instantiate	(floor_right, new Vector3 ((float)(x-.8), (float)0.5, -y), floor_right.transform.rotation);
-					tiles[x,y].type = "Right";
-					tiles[x,y].isTaken = true;
+					Instantiate	(floor_right, new Vector3 (x,0,-y), floor_right.transform.rotation);
+					//tiles[x,y].type = "Right";
+					//tiles[x,y].isTaken = true;
 					break;
 				case sfloor_up:
-					Instantiate	(floor_up, new Vector3 (x, (float)0.5,(float)zed), floor_up.transform.rotation);
-					tiles[x,y].type = "Up";
-					tiles[x,y].isTaken = true;
+					//Instantiate	(floor_up, new Vector3 (x, (float)0.5,(float)zed), floor_up.transform.rotation);
+					Instantiate (floor_up, new Vector3 (x, 0, -y), floor_up.transform.rotation);
+
+					//tiles[x,y].type = "Up";
+					//tiles[x,y].isTaken = true;
 					break;
 				case sfloor_down:
-					Instantiate	(floor_down, new Vector3 (x, (float)0.5, (float)(-y+.8)), floor_down.transform.rotation);
-					tiles[x,y].type = "Down";
-					tiles[x,y].isTaken = true;
+					Instantiate	(floor_down, new Vector3 (x, 0, -y), floor_down.transform.rotation);
+					//tiles[x,y].type = "Down";
+					//tiles[x,y].isTaken = true;
 					break;
 				case sfloor_fragile:
 					Instantiate (floor_fragile, new Vector3 (x, 0, -y), Quaternion.identity);
+					tiles[x,y].type = "Fragile";
+					tiles[x,y].isTaken = true;
 					break;
 				case sfloor_quicksand:
 					Instantiate (floor_quicksand, new Vector3 (x, 0, -y), Quaternion.identity);

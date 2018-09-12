@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\AssignCamera.cs" />
+     <Compile Include="Assets\AssignCanvasAndButton.cs" />
      <Compile Include="Assets\CanvasBehaviour.cs" />
      <Compile Include="Assets\Dragger.cs" />
      <Compile Include="Assets\FragileBehaviour.cs" />

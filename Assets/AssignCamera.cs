@@ -11,7 +11,7 @@ public class AssignCamera : MonoBehaviour {
 		mycanvas = GetComponent<Canvas> ();
 		GameObject camera = GameObject.Find ("Main Camera");
 		Camera mycamera = camera.GetComponent<Camera>();
-		mycanvas.worldCamera = mycamera;
+		//mycanvas.worldCamera = mycamera;
 	}
 	
 	// Update is called once per frame

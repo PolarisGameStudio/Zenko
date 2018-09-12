@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//using UnityEngine.Color;
 
 public class PlayerMovement : MonoBehaviour {
 
@@ -30,6 +31,7 @@ public class PlayerMovement : MonoBehaviour {
 	bool outofmap;
 	Tile tilescript;
 	bool hasmoved;
+	Color fragilered = new Color(253/255f,65/255f,65/255f,255/255f);
 	//public KeySimulator mykeysimulator;
 	// Use this for initialization
 	void Start () {
@@ -328,6 +330,7 @@ public class PlayerMovement : MonoBehaviour {
 				//you'll stop in the tile you checked and stop moving.
 				currenttile = tiletotest;
 				canmove = false;
+
 				//Qeue up an action when reaching the tile
 				nextaction = "Hole_Action";
 			} else if (tilescript.type == "Wood") {
@@ -366,6 +369,17 @@ public class PlayerMovement : MonoBehaviour {
 				Count ();
 				currenttile = tiletotest;
 				lastFragile = tilescript.tileObj;
+				Vector3 overlapV3 = new Vector3(currenttile.x, currenttile.y, currenttile.z);
+				Debug.Log(overlapV3);
+				Collider[] colliders = Physics.OverlapSphere(overlapV3, .5f);
+				foreach (Collider component in colliders) {
+					if (component.tag == "Fragile") {
+						Debug.Log("Fragile");
+						tileobject = component.gameObject;
+						MeshRenderer tilerenderer = tileobject.GetComponent<MeshRenderer> ();
+						tilerenderer.material.color = fragilered;
+					} 
+				}
 				tilescript.type = "Hole";
 		
 			} else if (tilescript.type == "Quicksand") {
