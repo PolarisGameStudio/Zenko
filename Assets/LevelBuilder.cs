@@ -113,7 +113,11 @@ public class LevelBuilder : MonoBehaviour {
 
 	void Start() {
 	LevelManager.levelselector = this;
-	levelnum = LevelManager.levelnum;
+	if(LevelManager.levelnum == 0)
+	LevelManager.levelnum =1;
+	Debug.Log(LevelManager.levelnum);
+	Debug.Log (levelnum);
+	//LevelManager.levelnum = 1;
 	 
 	//Debug.Log(LevelManager.levelnum);
 	/*if (LevelManager.levelnum == null || LevelManager.levelnum == 0) {
@@ -124,11 +128,11 @@ public class LevelBuilder : MonoBehaviour {
 	}*/
 
 	//levelnum = LevelManager.levelnum;
-	LevelStorer.Lookfor (levelnum);//assigns efficient turn according to dictionary.
+	LevelStorer.Lookfor (LevelManager.levelnum);//assigns efficient turn according to dictionary.
 	//DrawIce ();
 	//DrawNextLevel (levelnum);
 	CreateBase();
-	DrawNextLevel(levelnum);
+	DrawNextLevel(LevelManager.levelnum);
 	//Debug.Log("MEH");
 	//GameObject objectp = GameObject.Find("TheCanvas");
 	//IceTileHandler myhandler = objectp.GetComponent<IceTileHandler>();

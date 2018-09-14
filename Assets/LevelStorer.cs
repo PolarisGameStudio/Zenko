@@ -77,7 +77,7 @@ public class LevelStorer : MonoBehaviour {
 		LevelStats lv8 = new LevelStats(8,3,true,0); 
 		LevelStats lv9 = new LevelStats(9,4,true,0); 
 		LevelStats lv10 = new LevelStats(10,3,true,0); 
-		LevelStats lv11 = new LevelStats(11,5,true,0); 
+		LevelStats lv11 = new LevelStats(11,5,true,0); //too hard, need to make an easier tile level
 		LevelStats lv12 = new LevelStats(12,5,true,0); 
 		LevelStats lv13 = new LevelStats(13,4,true,0); 
 		LevelStats lv14 = new LevelStats(14,4,true,0); 

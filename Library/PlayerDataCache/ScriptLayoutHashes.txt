@@ -175,6 +175,7 @@ a9e1c36c671666e79706791e556d5100 Vuforia.UnityExtensions.dll:Vuforia.VuMarkBehav
 46de0b2f493c7847325c9de1a16605ae Assembly-CSharp.dll:.MonsterPanel
 a104affe48ee1ae9e6c7e0fe2171b86f Assembly-CSharp.dll:.PlayerMovement
 61c2354fa83676cbfc2f4b5994ae9464 Assembly-CSharp.dll:.SceneLoading
+5d91a4973ed39db206ccdb323822e6bf Assembly-CSharp.dll:.AssignCanvasAndButton
 39abd883c7bfdddf404ae705c3acaf02 Assembly-CSharp.dll:.LevelBuilder
 088f0cd77648e7017872c1e1e00c48ce Assembly-CSharp.dll:.Dragger
 32e8fe00b63ed946490b898f6024a2f2 Facebook.Unity.Settings.dll:Facebook.Unity.Settings.FacebookSettings

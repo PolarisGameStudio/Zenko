@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 
 public class SceneLoading : MonoBehaviour {
@@ -9,6 +10,7 @@ public class SceneLoading : MonoBehaviour {
 	public static GameObject gamewon;
 	public static GameObject gamelost;
 	public int testnum;
+	public Text txt;
 //	public IceTileHandler myhandler;
 
 	public void LoadScene(int num){
@@ -27,6 +29,7 @@ public class SceneLoading : MonoBehaviour {
 		Debug.Log("Next button");
 		Swiping.mydirection = "Null";
 		LevelManager.levelnum++;
+		txt.text = LevelManager.levelnum.ToString();
 		//LevelManager.levelnum = Random.Range(0,66);
 
 		LevelStorer.UnlockLevel (LevelManager.levelnum);
@@ -50,6 +53,8 @@ public class SceneLoading : MonoBehaviour {
 
 	}
 	public void ResetLevelButton(){
+		txt.text = LevelManager.levelnum.ToString();
+
 		Swiping.mydirection = "Null";
 		LevelStorer.Lookfor (LevelManager.levelnum);
 		TurnCounter.turncount = 0;
@@ -83,8 +88,16 @@ public class SceneLoading : MonoBehaviour {
 		LevelStorer.LockAllLevels();
 	}
 	public void TestButton(){
+		//LevelManager.levelnum = 1;
 		Debug.Log("Buttoned");
 		LoadScene(1);
+	}
+	public void Plus(){
+		LevelManager.levelnum ++;
+
+	}
+	public void Minus(){
+		LevelManager.levelnum--;
 	}
 
 	public void GoToLevelSelect(){
