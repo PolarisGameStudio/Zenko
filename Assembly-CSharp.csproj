@@ -66,6 +66,7 @@
      <Compile Include="Assets\PlaneBehavior.cs" />
      <Compile Include="Assets\PlayerMovement.cs" />
      <Compile Include="Assets\RatingBehaviour.cs" />
+     <Compile Include="Assets\RatingPopUp.cs" />
      <Compile Include="Assets\Rayito.cs" />
      <Compile Include="Assets\SceneLoading.cs" />
      <Compile Include="Assets\Swiping.cs" />

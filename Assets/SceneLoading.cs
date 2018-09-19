@@ -11,12 +11,26 @@ public class SceneLoading : MonoBehaviour {
 	public static GameObject gamelost;
 	public int testnum;
 	public Text txt;
+	public Text txt2;
 //	public IceTileHandler myhandler;
+	void Start(){
+		if (txt2 == null){
+		}
+		else{
+//			Debug.Log(levelnum + "level");
+			if(LevelManager.levelnum == 0)
+			LevelManager.levelnum = 1;
+			LevelStorer.Lookfor(LevelManager.levelnum);
+			txt2.text = ("Efficient turns is " + LevelStorer.efficientturns);
 
+			Debug.Log(LevelManager.levelnum);
+		}
+	}
 	public void LoadScene(int num){
 		Swiping.mydirection = "Null";
 		TurnCounter.turncount = 0;
 		Debug.Log ("Going to Scene at level " + num);
+		LevelStorer.Lookfor(num);
 		LevelManager.levelnum = num;
 		LevelManager.readytodraw = true;
 		SceneManager.LoadScene(1);
@@ -30,10 +44,13 @@ public class SceneLoading : MonoBehaviour {
 		Swiping.mydirection = "Null";
 		LevelManager.levelnum++;
 		txt.text = LevelManager.levelnum.ToString();
+		//txt2.text = ("Efficient turns is " + LevelStorer.efficientturns);
 		//LevelManager.levelnum = Random.Range(0,66);
 
 		LevelStorer.UnlockLevel (LevelManager.levelnum);
 		LevelStorer.Lookfor (LevelManager.levelnum);
+		txt2.text = ("Efficient turns is " + LevelStorer.efficientturns);
+
 		TurnCounter.turncount = 0;
 		//LevelManager.NextLevel (LevelManager.levelnum);
 		//LevelManager.levelnum = Random.Range(0,66);
@@ -56,6 +73,7 @@ public class SceneLoading : MonoBehaviour {
 		txt.text = LevelManager.levelnum.ToString();
 
 		Swiping.mydirection = "Null";
+		//LevelStorer.UnlockLevel (LevelManager.levelnum);
 		LevelStorer.Lookfor (LevelManager.levelnum);
 		TurnCounter.turncount = 0;
 		LevelManager.NextLevel (LevelManager.levelnum);
@@ -90,7 +108,8 @@ public class SceneLoading : MonoBehaviour {
 	public void TestButton(){
 		//LevelManager.levelnum = 1;
 		Debug.Log("Buttoned");
-		LoadScene(1);
+		LevelManager.levelnum = 4;
+		LoadScene(LevelManager.levelnum);
 	}
 	public void Plus(){
 		LevelManager.levelnum ++;

@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour {
 	bool firstmove; //used to count turns
 	public GameObject levelWonBoard;
 	public GameObject LevelLostBoard;
-//	RatingPopUp PopupScript;
+	//RatingPopUp PopupScript;
 	string myswipe;
 	bool outofmap;
 	Tile tilescript;
@@ -101,8 +101,8 @@ public class PlayerMovement : MonoBehaviour {
 				isspeeding = false;
 			}  
 			else if (nextaction == "Goal_Action") {
+				RatingPopUp.GiveRating ();
 				levelWonBoard.SetActive (true);
-				//RatingPopUp.GiveRating ();
 				this.enabled = false;
 				Debug.Log ("Goal");
 			}			
@@ -121,6 +121,7 @@ public class PlayerMovement : MonoBehaviour {
 				canmove = true;
 				while (canmove == true) {
 					tiletotest += Vector3.left;
+					this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0,0,0));
 					FindTileTag ();
 					ActOnTile ();
 					isspeeding = true;
@@ -134,6 +135,7 @@ public class PlayerMovement : MonoBehaviour {
 				canmove = true;
 				while (canmove == true) {
 					tiletotest += Vector3.right;
+					this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0,180,0));
 					FindTileTag ();
 					ActOnTile ();
 					isspeeding = true;
@@ -146,6 +148,7 @@ public class PlayerMovement : MonoBehaviour {
 				tiletotest = currenttile;
 				canmove = true;
 				while (canmove == true) {
+					this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0,90,0));
 					tiletotest += Vector3.forward;
 					FindTileTag ();
 					ActOnTile ();
@@ -159,6 +162,7 @@ public class PlayerMovement : MonoBehaviour {
 				tiletotest = currenttile;
 				canmove = true;
 				while (canmove == true) {
+					this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0,270,0));
 					tiletotest += Vector3.back;
 					FindTileTag ();
 					ActOnTile ();
@@ -180,6 +184,7 @@ public class PlayerMovement : MonoBehaviour {
 			}
 			while (canmove == true) {
 				character_direction = "Up";
+				this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0,90,0));
 				tiletotest += Vector3.forward;
 				FindTileTag ();
 				ActOnTile ();
@@ -193,7 +198,7 @@ public class PlayerMovement : MonoBehaviour {
 			}
 			while (canmove == true) {	
 				character_direction = "Left";
-
+				this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0,0,0));
 				tiletotest += Vector3.left;
 				FindTileTag ();
 				ActOnTile ();
@@ -209,6 +214,7 @@ public class PlayerMovement : MonoBehaviour {
 			}
 			while (canmove == true) {
 				character_direction = "Down";
+				this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0,270,0));
 				tiletotest += Vector3.back;
 				FindTileTag ();
 				ActOnTile ();
@@ -222,6 +228,7 @@ public class PlayerMovement : MonoBehaviour {
 			}
 			while (canmove == true) {
 				character_direction = "Right";
+				this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0,180,0));
 				tiletotest += Vector3.right;
 				FindTileTag ();
 				ActOnTile ();

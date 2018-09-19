@@ -113,22 +113,19 @@ public class LevelBuilder : MonoBehaviour {
 
 	void Start() {
 	LevelManager.levelselector = this;
-	if(LevelManager.levelnum == 0)
-	LevelManager.levelnum =1;
-	Debug.Log(LevelManager.levelnum);
-	Debug.Log (levelnum);
+
 	//LevelManager.levelnum = 1;
 	 
 	//Debug.Log(LevelManager.levelnum);
-	/*if (LevelManager.levelnum == null || LevelManager.levelnum == 0) {
+	if (LevelManager.levelnum == null || LevelManager.levelnum == 0) {
 		LevelManager.levelnum = 1;
 		//LevelManager.levelnum = Random.Range(1,65);
-		Debug.Log(LevelManager.levelnum);
+		//Debug.Log(LevelManager.levelnum);
 
-	}*/
+	}
 
 	//levelnum = LevelManager.levelnum;
-	LevelStorer.Lookfor (LevelManager.levelnum);//assigns efficient turn according to dictionary.
+	//LevelStorer.Lookfor (LevelManager.levelnum);//assigns efficient turn according to dictionary.
 	//DrawIce ();
 	//DrawNextLevel (levelnum);
 	CreateBase();
@@ -215,10 +212,37 @@ public class LevelBuilder : MonoBehaviour {
 				switch (jagged [y] [x]) {
 				case sstart:
 					Instantiate (floor_start, new Vector3 (x, 0, -y), Quaternion.identity);
-					Instantiate (player, new Vector3 (x, 0, -y), Quaternion.identity);
+					//GameObject p = player;
+					//Instantiate (player, new Vector3 (x, 0, -y), Quaternion.identity);
 					Debug.Log(x + "+" + y);
 					tiles[x,y].type = "Start";
 					tiles[x,y].isTaken = true;
+					if(y == 0 || y==1){
+						//FaceDown();
+						//p.transform.rotation.y = 270;
+						Instantiate (player, new Vector3 (x, 0, -y), Quaternion.Euler(new Vector3(0,270,0)));
+						Debug.Log("Down");
+					}
+					if(y == 6 || y==7){
+						//FaceUp();
+						//p.transform.rotation.y = 90;
+						Instantiate (player, new Vector3 (x, 0, -y), Quaternion.Euler(new Vector3(0,90,0)));
+						Debug.Log("Up");
+
+					}
+					if(x == 0 || x==1){
+						//FaceRight();
+						//p.transform.rotation.y = 180;
+						Instantiate (player, new Vector3 (x, 0, -y), Quaternion.Euler(new Vector3(0,180,0)));
+						Debug.Log("Right");
+
+					}
+					if(x==6 || x==7){
+						//FaceLeft();
+						Instantiate (player, new Vector3 (x, 0, -y), Quaternion.identity);
+						Debug.Log("Left");
+
+					}
 					break;
 				case sgoal:
 					Instantiate (floor_goal, new Vector3 (x, 0, -y), Quaternion.identity);
