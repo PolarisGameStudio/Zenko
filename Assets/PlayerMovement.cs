@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 //using UnityEngine.Color;
@@ -92,8 +92,13 @@ public class PlayerMovement : MonoBehaviour {
 			if (lastFragile != null && lastFragile.transform.position == transform.position) {
 				Debug.Log ("UNUL");
 				//this.enabled = false;
-				int nextlevel = LevelManager.levelnum;
-				LevelManager.NextLevel (nextlevel);
+
+				//int nextlevel = LevelManager.levelnum;
+				//LevelManager.NextLevel (nextlevel);
+
+				LevelLostBoard.SetActive (true);
+				this.enabled=false;
+				Debug.Log("Hole");
 			}
 			else if (nextaction == null) {
 				cantakeinput = true;
@@ -102,6 +107,7 @@ public class PlayerMovement : MonoBehaviour {
 			}  
 			else if (nextaction == "Goal_Action") {
 				RatingPopUp.GiveRating ();
+				
 				levelWonBoard.SetActive (true);
 				this.enabled = false;
 				Debug.Log ("Goal");
@@ -331,6 +337,7 @@ public class PlayerMovement : MonoBehaviour {
 					currenttile = tiletotest;
 					canmove = false;
 					//Qeue up an action when reaching the tile
+					Debug.Log("aqui?");
 					nextaction = "Goal_Action";
 				}
 			} else if (tilescript.type == "Hole") {
@@ -343,7 +350,7 @@ public class PlayerMovement : MonoBehaviour {
 			} else if (tilescript.type == "Wood") {
 				Count ();
 				currenttile = tiletotest;
-				Debug.Log ("Pink");
+				//Debug.Log ("Pink");
 				//canmove = true;
 			} else if (tilescript.type == "Left") {
 				Count ();
@@ -382,9 +389,14 @@ public class PlayerMovement : MonoBehaviour {
 				foreach (Collider component in colliders) {
 					if (component.tag == "Fragile") {
 						Debug.Log("Fragile");
+						Debug.Log(component);
 						tileobject = component.gameObject;
-						MeshRenderer tilerenderer = tileobject.GetComponent<MeshRenderer> ();
-						tilerenderer.material.color = fragilered;
+						//MeshRenderer tilerenderer = tileobject.GetComponentInChildren<MeshRenderer> ();
+						//tilerenderer.material.color = fragilered;
+						component.GetComponent<FragileProperties>().readyToLava = true;
+						component.GetComponent<FragileProperties>().playert = this.gameObject.transform;
+						component.GetComponent<FragileProperties>().myred = fragilered;
+
 					} 
 				}
 				tilescript.type = "Hole";
@@ -403,9 +415,17 @@ public class PlayerMovement : MonoBehaviour {
 			else if (tilescript.type == "Seed") {
 				currenttile = tiletotest;
 				lastSeed = tilescript.tileObj;
-				Debug.Log("Check");
+				//Debug.Log("Check");
 				tilescript.type = tilescript.seedType;
-				tilescript.seedType = "SeededTile";
+				//tilescript.seedType = "SeededTile";
+				lastSeed.GetComponent<Dragger>().readyToPop = true;
+				lastSeed.GetComponent<Dragger>().playert = this.gameObject.transform;
+				//Vector3 scale = lastSeed.GetComponent<Dragger>().myshrinker.transform.localScale;
+				//scale.Set(.33f,.33f,.33f);
+
+				//lastSeed.GetComponent<Dragger>().myshrinker.transform.localScale = scale;
+				
+				//Debug.Log(lastSeed.GetComponent<Dragger>().myshrinker.transform.localScale);//lastSeed.GetComponent<Transform>().localscale.y = 1;
 				//myseedbehaviour = lastSeed.GetComponent<Seed_Behaviour> ();
 				//myseedbehaviour.Unseed ();
 
@@ -431,6 +451,7 @@ public class PlayerMovement : MonoBehaviour {
 
 			}
 				else {
+				Debug.Log(tilescript.type);
 				Debug.Log ("Dong");
 				canmove = false;
 			}

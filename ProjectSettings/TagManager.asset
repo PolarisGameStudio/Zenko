@@ -7,6 +7,9 @@ TagManager:
   - Canvas
   - Fragile
   - Quicksand
+  - Object
+  - Tile
+  - Turn
   layers:
   - Default
   - TransparentFX

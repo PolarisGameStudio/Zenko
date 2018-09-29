@@ -1,4 +1,4 @@
-WindowsStandalone
+OSXStandalone
 0bb4873bb4869e7f713dc5a2cff75198 Assembly-CSharp.dll:.TurnCounter
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
 970a95104359198fe1a98ef48655de8c UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationTrack
@@ -13,6 +13,7 @@ ff05dcdf90651c3d98a9cad3df5e471e UnityEngine.Timeline.dll:UnityEngine.Timeline.C
 6af7378a45ad6da4992a71ef50ddc2eb UnityEngine.Timeline.dll:UnityEngine.Timeline.PlayableTrack
 af723155c251fcfa0e66530a75f3ea4c UnityEngine.Timeline.dll:UnityEngine.Timeline.TimelineAsset
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.RatingBehaviour
+3e2d6e52e5e2845210749b8539096b5b Assembly-CSharp.dll:.TurnGraphics
 a35dc9cca2faebc5f5f1aeb9e8e47bbe UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.UI.dll:UnityEngine.EventSystems.BaseInput
 49cd62a578efc0a599b810a2b66cd49c UnityEngine.UI.dll:UnityEngine.UI.Button
@@ -106,6 +107,7 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 73843688b51256aed059f049c540bca8 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformChild
 528ea1fd7c01796fc60c4e2f172ea229 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
+541e4b9e3a37cc58ce80266bd9aef5de Assembly-CSharp.dll:.RatingPopUp
 dc07d7ad69b399a46e92c483bf1c04ca UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsTracker
 3d76ec4fed2acd7bea821622100ed894 Assembly-CSharp.dll:.AssignCamera
 bc68edb0af574bf79f9550ead8ebae5c UnityEngine.HoloLens.dll:UnityEngine.Audio.AudioSpatializerMicrosoft
@@ -174,10 +176,11 @@ a9e1c36c671666e79706791e556d5100 Vuforia.UnityExtensions.dll:Vuforia.VuMarkBehav
 15bea26698002c6c4a3087131232ce5c Vuforia.UnityExtensions.dll:Vuforia.WordBehaviour
 46de0b2f493c7847325c9de1a16605ae Assembly-CSharp.dll:.MonsterPanel
 a104affe48ee1ae9e6c7e0fe2171b86f Assembly-CSharp.dll:.PlayerMovement
-103c23ef05f3eed3c670d8c2f2882223 Assembly-CSharp.dll:.SceneLoading
+6938ebcd07cf16ac33372081f4c4bec4 Assembly-CSharp.dll:.FragileProperties
+3cbeb0daabc684faed53a4d5a2295f4c Assembly-CSharp.dll:.SceneLoading
 5d91a4973ed39db206ccdb323822e6bf Assembly-CSharp.dll:.AssignCanvasAndButton
-39abd883c7bfdddf404ae705c3acaf02 Assembly-CSharp.dll:.LevelBuilder
-088f0cd77648e7017872c1e1e00c48ce Assembly-CSharp.dll:.Dragger
+cc03fb4eb0842388b9e84e27d7465b45 Assembly-CSharp.dll:.LevelBuilder
+456d5663f56aa2e70b92d5d2ac44e9ed Assembly-CSharp.dll:.Dragger
 32e8fe00b63ed946490b898f6024a2f2 Facebook.Unity.Settings.dll:Facebook.Unity.Settings.FacebookSettings
 f5c3eba9cf9072a33db42bf3a7ed37dc Assembly-CSharp.dll:.MouseOverer
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.TurnBehaviour

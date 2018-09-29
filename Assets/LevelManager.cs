@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class LevelManager : MonoBehaviour {
 
@@ -40,6 +41,10 @@ public class LevelManager : MonoBehaviour {
 //		myicehandler.GiveIce();
 	}
 
+	public static void ResetLevel(){
+		levelselector.ResetPlayer();
+	}
+
 		public void niuNextLevel(int mynum){
 		Debug.Log(mynum);
 		LevelStorer.Lookfor (mynum);
@@ -51,6 +56,32 @@ public class LevelManager : MonoBehaviour {
 		levelselector.DrawNextLevel (mynum);
 //		Debug.Log("GONNAGETICE");
 //		myicehandler.GiveIce();
+	}
+	public static void UnPop(){
+		Dragger[] draggers = (Dragger[]) GameObject.FindObjectsOfType(typeof(Dragger));
+		foreach(Dragger dragger in draggers){
+			if(dragger.mySeedType != "None"){
+				Debug.Log(dragger.mySeedType);
+				dragger.myshrinker.SetActive(true);
+				dragger.myBigger.SetActive(false);
+				Debug.Log((int)dragger.gameObject.transform.position.x);
+				Debug.Log(-(int)dragger.gameObject.transform.position.z);
+				LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x, -(int)dragger.gameObject.transform.position.z].type = "Seed";
+				//LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x, -(int)dragger.gameObject.transform.position.z].seedType = mySeedType;
+
+			}
+		}
+		GameObject[] fragiles = GameObject.FindGameObjectsWithTag("Fragile");
+		foreach(GameObject fragile in fragiles){
+			//Debug.Log(fragile);
+			LevelBuilder.tiles[(int)fragile.transform.position.x, -(int)fragile.transform.position.z].type = "Fragile";
+			MeshRenderer mymesh = fragile.GetComponentInChildren<MeshRenderer>();
+			FragileProperties myproperties = fragile.GetComponent<FragileProperties>();
+//			Debug.Log(myproperties.mypink);
+			Color mycolor = myproperties.mypink;
+			mymesh.material.color = mycolor;
+		}
+
 	}
 	void Update(){
 	}

@@ -20,6 +20,12 @@ public class LevelBuilder : MonoBehaviour {
 
 	static int levelidtoload;
 
+	static Vector2 startpos;
+
+	static Transform playertransform;
+
+	static Transform starttransform;
+
 	/*void ShuffleList(){
 			System.Random rand = new System.Random();
 			int r = tileBank.Count;
@@ -84,7 +90,7 @@ public class LevelBuilder : MonoBehaviour {
 
 
 	
-	public int levelnum;
+	public static int levelnum;
 	//public bool readytodraw;
 
 	public const string sfloor_ice = "0";
@@ -116,16 +122,20 @@ public class LevelBuilder : MonoBehaviour {
 
 	//LevelManager.levelnum = 1;
 	 
-	//Debug.Log(LevelManager.levelnum);
+	//Debug.Log(LevelManager.levelnum + "isthenum");
 	if (LevelManager.levelnum == null || LevelManager.levelnum == 0) {
 		LevelManager.levelnum = 1;
+		levelnum =1;
 		//LevelManager.levelnum = Random.Range(1,65);
 		//Debug.Log(LevelManager.levelnum);
 
 	}
-
+	else{
+		levelnum = LevelManager.levelnum;
+	}
+	LevelManager.levelnum = 15;
 	//levelnum = LevelManager.levelnum;
-	//LevelStorer.Lookfor (LevelManager.levelnum);//assigns efficient turn according to dictionary.
+	LevelStorer.Lookfor (LevelManager.levelnum);//assigns efficient turn according to dictionary.
 	//DrawIce ();
 	//DrawNextLevel (levelnum);
 	CreateBase();
@@ -211,37 +221,40 @@ public class LevelBuilder : MonoBehaviour {
 									//Debug.Log(x + " + " + y);ww
 				switch (jagged [y] [x]) {
 				case sstart:
-					Instantiate (floor_start, new Vector3 (x, 0, -y), Quaternion.identity);
+
+					starttransform = Instantiate (floor_start, new Vector3 (x, 0, -y), Quaternion.identity);
 					//GameObject p = player;
 					//Instantiate (player, new Vector3 (x, 0, -y), Quaternion.identity);
 					Debug.Log(x + "+" + y);
 					tiles[x,y].type = "Start";
 					tiles[x,y].isTaken = true;
+					startpos = new Vector2(x,y);
 					if(y == 0 || y==1){
 						//FaceDown();
 						//p.transform.rotation.y = 270;
-						Instantiate (player, new Vector3 (x, 0, -y), Quaternion.Euler(new Vector3(0,270,0)));
+						playertransform = Instantiate (player, new Vector3 (x, 0, -y), Quaternion.Euler(new Vector3(0,270,0)));
 						Debug.Log("Down");
+						break;
 					}
 					if(y == 6 || y==7){
 						//FaceUp();
 						//p.transform.rotation.y = 90;
-						Instantiate (player, new Vector3 (x, 0, -y), Quaternion.Euler(new Vector3(0,90,0)));
+						playertransform = Instantiate (player, new Vector3 (x, 0, -y), Quaternion.Euler(new Vector3(0,90,0)));
 						Debug.Log("Up");
-
+						break;
 					}
 					if(x == 0 || x==1){
 						//FaceRight();
 						//p.transform.rotation.y = 180;
-						Instantiate (player, new Vector3 (x, 0, -y), Quaternion.Euler(new Vector3(0,180,0)));
+						playertransform = Instantiate (player, new Vector3 (x, 0, -y), Quaternion.Euler(new Vector3(0,180,0)));
 						Debug.Log("Right");
-
+						break;
 					}
 					if(x==6 || x==7){
 						//FaceLeft();
-						Instantiate (player, new Vector3 (x, 0, -y), Quaternion.identity);
+						playertransform = Instantiate (player, new Vector3 (x, 0, -y), Quaternion.identity);
 						Debug.Log("Left");
-
+						break;
 					}
 					break;
 				case sgoal:
@@ -302,12 +315,27 @@ public class LevelBuilder : MonoBehaviour {
 					//tiles[x,y].isTaken = true;
 					break;
 				case sfloor_fragile:
-					Instantiate (floor_fragile, new Vector3 (x, 0, -y), Quaternion.identity);
-					tiles[x,y].type = "Fragile";
-					tiles[x,y].isTaken = true;
+					Collider[] colliders = Physics.OverlapSphere(new Vector3(x,0,-y), .5f);
+					foreach (Collider component in colliders) {
+						Debug.Log(component);
+						if (component.tag == "Tile") {		
+							//component.SetActive(false);
+							Destroy(component.gameObject);
+							Instantiate (floor_fragile, new Vector3 (x, 0, -y), Quaternion.identity);							
+							tiles[x,y].type = "Fragile";
+							tiles[x,y].isTaken = true;
+							break;
+						}
+					}			
 					break;
+					//Instantiate (floor_fragile, new Vector3 (x, 0, -y), Quaternion.identity);
+					//tiles[x,y].type = "Fragile";
+					////tiles[x,y].isTaken = true;
+					//break;
 				case sfloor_quicksand:
 					Instantiate (floor_quicksand, new Vector3 (x, 0, -y), Quaternion.identity);
+					tiles[x,y].type = "Quicksand";
+					tiles[x,y].isTaken = true;					
 					break;
 				case sfloor_boss:
 					Instantiate (floor_boss, new Vector3(x, 0, -y), Quaternion.identity);
@@ -326,6 +354,9 @@ public class LevelBuilder : MonoBehaviour {
 					break;
 				case ssfloor_rock:
 					Instantiate (s_floor_rock, new Vector3 (x, 0, -y), Quaternion.identity);
+					//tiles[x,y].type = "Seed";
+					//tiles[x,y].isTaken = true;
+					//tiles[x,y].seedType = "Wall";
 					break;
 				}
 
@@ -344,6 +375,53 @@ public class LevelBuilder : MonoBehaviour {
 				Destroy (component);
 				//Debug.Log ("destroyed" + component);
 			}
+
+		}
+	}
+	public void ResetPlayer(){
+		Destroy(playertransform.gameObject)/*.SetActive(false)*/;
+		Destroy(starttransform.gameObject)/*.SetActive(false)*/;
+		SpawnPlayer(startpos);
+
+
+	}
+	public void SpawnPlayer(Vector2 thevector){
+		Debug.Log(starttransform);
+		Debug.Log(playertransform);
+		int x = (int)thevector.x;
+		int y = (int)thevector.y;
+		starttransform = Instantiate (floor_start, new Vector3 (x, 0, -y), Quaternion.identity);
+		tiles[x,y].type = "Start";
+		tiles[x,y].isTaken = true;
+
+		if(y == 0 || y==1){
+			//FaceDown();
+			//p.transform.rotation.y = 270;
+			playertransform = Instantiate (player, new Vector3 (x, 0, -y), Quaternion.Euler(new Vector3(0,270,0)));
+			Debug.Log("Down");
+			return;
+		}
+		if(y == 6 || y==7){
+			//FaceUp();
+			//p.transform.rotation.y = 90;
+			playertransform = Instantiate (player, new Vector3 (x, 0, -y), Quaternion.Euler(new Vector3(0,90,0)));
+			Debug.Log("Up");
+			return;
+
+		}
+		if(x == 0 || x==1){
+			//FaceRight();
+			//p.transform.rotation.y = 180;
+			playertransform = Instantiate (player, new Vector3 (x, 0, -y), Quaternion.Euler(new Vector3(0,180,0)));
+			Debug.Log("Right");
+			return;
+
+		}
+		if(x==6 || x==7){
+			//FaceLeft();
+			playertransform = Instantiate (player, new Vector3 (x, 0, -y), Quaternion.identity);
+			Debug.Log("Left");
+			return;
 
 		}
 	}

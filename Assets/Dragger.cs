@@ -15,6 +15,12 @@ public class Dragger : MonoBehaviour {
 	private Vector3 restingpoint;
 	public string myType;
 	Tile mytile;
+	public string mySeedType;
+	public GameObject myshrinker;
+	public GameObject myBigger;
+	public bool readyToPop;
+	public Transform playert;
+	public bool convertWhenReady;
 
 	void Start(){
 		restingpoint = transform.position;
@@ -23,7 +29,21 @@ public class Dragger : MonoBehaviour {
 	}
 
 	void Update(){
-		//if()
+		if(readyToPop){
+			Debug.Log(playert.position);
+			if(Vector3.Distance(playert.position, transform.position) < .7){
+				convertWhenReady = true;
+				readyToPop = false;
+			}
+		}
+		if(convertWhenReady){
+			if(Vector3.Distance(playert.position, transform.position) > .8){
+				myshrinker.SetActive(false);
+				myBigger.SetActive(true);
+				convertWhenReady = false;
+
+			}
+		}
 	}
 
 	 void OnMouseDown() {
@@ -92,6 +112,11 @@ public class Dragger : MonoBehaviour {
 			transform.position = new Vector3(PlaneBehavior.tilex, 0, PlaneBehavior.tiley);
 			LevelBuilder.tiles[(int)transform.position.x, -(int)transform.position.z].type = myType;
 			LevelBuilder.tiles[(int)transform.position.x, -(int)transform.position.z].isTaken = true;
+			LevelBuilder.tiles[(int)transform.position.x, -(int)transform.position.z].tileObj = this.gameObject;
+
+			if (myType == "Seed"){
+			LevelBuilder.tiles[(int)transform.position.x, -(int)transform.position.z].seedType = mySeedType;			
+			}
 		}
 		else{
 			transform.position = restingpoint;
@@ -130,9 +155,10 @@ public class Dragger : MonoBehaviour {
 		//Swiping.firstPressPos = new Vector2(t.position.x,t.position.y);
 
 		//Swiping.canswipe = true;
+	}
+	public void unPop(){
 
-
- }
+	} 
 	/*void FindHoveredTile(){
 		Collider2D[] colliders = Physics2D.OverlapCircleAll(myPosition, .1f); ///Presuming the object you are testing also has a collider 0 otherwise{
 		foreach(Collider2D component in colliders){

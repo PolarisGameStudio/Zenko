@@ -140,3 +140,9 @@ MonoBehaviour:
   needtooccupy: 0
   newtile: {fileID: 0}
   myType: Right
+  mySeedType: None
+  myshrinker: {fileID: 0}
+  myBigger: {fileID: 0}
+  readyToPop: 0
+  playert: {fileID: 0}
+  convertWhenReady: 0

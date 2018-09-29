@@ -19,6 +19,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4299053572363106}
+  - component: {fileID: 114335736349227116}
+  - component: {fileID: 65167810400028580}
   m_Layer: 0
   m_Name: Fragile
   m_TagString: Fragile
@@ -39,7 +41,7 @@ GameObject:
   - component: {fileID: 65219107515312362}
   m_Layer: 0
   m_Name: small_rock2_Low_Poly_Models:Mesh
-  m_TagString: Fragile
+  m_TagString: Object
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -50,8 +52,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1472547233912754}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.230298, y: -1.3772917, z: -2.977851}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4418862024823720}
@@ -112,6 +114,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1817062761748206}
   m_Mesh: {fileID: 4300000, guid: 496dede32be21471c9c295641dcffc9e, type: 3}
+--- !u!65 &65167810400028580
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1472547233912754}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 0.42, z: 0.5}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!65 &65219107515312362
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -120,7 +134,20 @@ BoxCollider:
   m_GameObject: {fileID: 1817062761748206}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.5, z: 0.5}
   m_Center: {x: 0.00000025331974, y: 0.42796475, z: 0}
+--- !u!114 &114335736349227116
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1472547233912754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeb35d465c2a7489385a81e951a8f0b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mymat: {fileID: 2100000, guid: 999f44ce1c58c4764a51b22fa0d264d6, type: 2}
+  mypink: {r: 1, g: 0.7647059, b: 0.7647059, a: 1}

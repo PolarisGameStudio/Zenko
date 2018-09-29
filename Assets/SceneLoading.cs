@@ -74,9 +74,24 @@ public class SceneLoading : MonoBehaviour {
 
 		Swiping.mydirection = "Null";
 		//LevelStorer.UnlockLevel (LevelManager.levelnum);
-		LevelStorer.Lookfor (LevelManager.levelnum);
+		//LevelStorer.Lookfor (LevelManager.levelnum);
 		TurnCounter.turncount = 0;
+		LevelManager.ResetLevel();
+		LevelManager.UnPop();
+		TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
+		//LevelManager.NextLevel (LevelManager.levelnum);
+		//myhandler.GiveIce();
+	}
+	public void ResetAllButton(){
+		txt.text = LevelManager.levelnum.ToString();
+
+		Swiping.mydirection = "Null";
+		//LevelStorer.UnlockLevel (LevelManager.levelnum);
+		//LevelStorer.Lookfor (LevelManager.levelnum);
+		TurnCounter.turncount = 0;
+		//LevelManager.ResetLevel();
 		LevelManager.NextLevel (LevelManager.levelnum);
+		TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
 		//myhandler.GiveIce();
 	}
 	public void Testnum(int num){
@@ -113,10 +128,14 @@ public class SceneLoading : MonoBehaviour {
 	}
 	public void Plus(){
 		LevelManager.levelnum ++;
+		txt.text = LevelManager.levelnum.ToString();
+
 
 	}
 	public void Minus(){
 		LevelManager.levelnum--;
+		txt.text = LevelManager.levelnum.ToString();
+
 	}
 
 	public void GoToLevelSelect(){
