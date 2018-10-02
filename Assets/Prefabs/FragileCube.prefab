@@ -24,12 +24,30 @@ GameObject:
   - component: {fileID: 65253492974385584}
   - component: {fileID: 114423891061458942}
   m_Layer: 0
-  m_Name: pCube1
+  m_Name: Fragile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1978369250229864
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4382303808377876}
+  - component: {fileID: 33793474040818198}
+  - component: {fileID: 23880037501148166}
+  - component: {fileID: 114498599552955402}
+  m_Layer: 0
+  m_Name: Hole
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
 --- !u!1 &1996242498493414
 GameObject:
   m_ObjectHideFlags: 0
@@ -58,6 +76,19 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4664099301932956}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4382303808377876
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1978369250229864}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.018, y: -0.666, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4664099301932956}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4664099301932956
@@ -70,6 +101,7 @@ Transform:
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 4382303808377876}
   - {fileID: 4183143627580382}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -108,6 +140,40 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!23 &23880037501148166
+MeshRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1978369250229864}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 2100000, guid: 1e71cef8ec07741bea02c63c49951646, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
 --- !u!33 &33310641596794424
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -115,6 +181,13 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1370549214931342}
   m_Mesh: {fileID: 4300000, guid: dda6c5254d03d49e4be4c1f99baad61b, type: 3}
+--- !u!33 &33793474040818198
+MeshFilter:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1978369250229864}
+  m_Mesh: {fileID: 4300000, guid: d5f799a622a304256babe25d5ac8adf2, type: 3}
 --- !u!65 &65184846045859460
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -151,6 +224,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canplace: 0
+--- !u!114 &114498599552955402
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1978369250229864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7e7554902fa44e20847b2643a679e2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canplace: 0
 --- !u!114 &114540430311709054
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -168,3 +253,5 @@ MonoBehaviour:
   lavaWhenReady: 0
   playert: {fileID: 0}
   myred: {r: 0, g: 0, b: 0, a: 0}
+  myhole: {fileID: 1978369250229864}
+  myfragile: {fileID: 1370549214931342}

@@ -55,6 +55,8 @@ public class SceneLoading : MonoBehaviour {
 		//LevelManager.NextLevel (LevelManager.levelnum);
 		//LevelManager.levelnum = Random.Range(0,66);
 		LevelManager.NextLevel(LevelManager.levelnum);
+		TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
+
 
 		//myhandler.GiveIce();
 

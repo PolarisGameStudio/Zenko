@@ -9,8 +9,13 @@ public class FragileProperties : MonoBehaviour {
 	public bool lavaWhenReady;
 	public Transform playert;
 	public Color myred;
+	public GameObject myhole;
+	//static GameObject hole;
+	public GameObject myfragile;
+
 	// Use this for initialization
 	void Start () {
+		//hole = myhole;
 		//mypink = GetComponentInChildren<MeshRenderer>().material.color;
 	}
 	
@@ -25,7 +30,9 @@ public class FragileProperties : MonoBehaviour {
 		}
 		if(lavaWhenReady){
 			if(Vector3.Distance(playert.position, transform.position) < .1){
-				GetComponentInChildren<MeshRenderer>().material.color = myred;
+				//GetComponentInChildren<MeshRenderer>().material.color = myred;
+				myhole.SetActive(true);
+				myfragile.SetActive(false);
 				lavaWhenReady = false;
 						//tilerenderer.material.color = fragilered;
 

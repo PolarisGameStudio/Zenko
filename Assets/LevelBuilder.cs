@@ -133,7 +133,7 @@ public class LevelBuilder : MonoBehaviour {
 	else{
 		levelnum = LevelManager.levelnum;
 	}
-	LevelManager.levelnum = 15;
+	LevelManager.levelnum = 65;
 	//levelnum = LevelManager.levelnum;
 	LevelStorer.Lookfor (LevelManager.levelnum);//assigns efficient turn according to dictionary.
 	//DrawIce ();
@@ -318,15 +318,18 @@ public class LevelBuilder : MonoBehaviour {
 					Collider[] colliders = Physics.OverlapSphere(new Vector3(x,0,-y), .5f);
 					foreach (Collider component in colliders) {
 						Debug.Log(component);
-						if (component.tag == "Tile") {		
-							//component.SetActive(false);
-							Destroy(component.gameObject);
-							Instantiate (floor_fragile, new Vector3 (x, 0, -y), Quaternion.identity);							
+						if (component.tag == "Tile") {	
+						Debug.Log(component.gameObject.transform.position);	
+							component.gameObject.SetActive(false);
+							Debug.Log(component.gameObject.activeSelf);
+							//Instantiate (floor_fragile, new Vector3 (x, 0, -y), Quaternion.identity);							
 							tiles[x,y].type = "Fragile";
 							tiles[x,y].isTaken = true;
+							//Destroy(component.gameObject);
+
 							break;
 						}
-					}			
+					}		
 					break;
 					//Instantiate (floor_fragile, new Vector3 (x, 0, -y), Quaternion.identity);
 					//tiles[x,y].type = "Fragile";

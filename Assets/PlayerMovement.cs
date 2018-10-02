@@ -1,4 +1,4 @@
-using System.Collections;
+	using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 //using UnityEngine.Color;
@@ -395,7 +395,7 @@ public class PlayerMovement : MonoBehaviour {
 						//tilerenderer.material.color = fragilered;
 						component.GetComponent<FragileProperties>().readyToLava = true;
 						component.GetComponent<FragileProperties>().playert = this.gameObject.transform;
-						component.GetComponent<FragileProperties>().myred = fragilered;
+						//component.GetComponent<FragileProperties>().myred = fragilered;
 
 					} 
 				}

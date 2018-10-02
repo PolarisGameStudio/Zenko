@@ -77,9 +77,11 @@ public class LevelManager : MonoBehaviour {
 			LevelBuilder.tiles[(int)fragile.transform.position.x, -(int)fragile.transform.position.z].type = "Fragile";
 			MeshRenderer mymesh = fragile.GetComponentInChildren<MeshRenderer>();
 			FragileProperties myproperties = fragile.GetComponent<FragileProperties>();
+			myproperties.myhole.SetActive(false);
+			myproperties.myfragile.SetActive(true);
 //			Debug.Log(myproperties.mypink);
-			Color mycolor = myproperties.mypink;
-			mymesh.material.color = mycolor;
+			//Color mycolor = myproperties.mypink;
+			//mymesh.material.color = mycolor;
 		}
 
 	}
