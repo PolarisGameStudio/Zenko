@@ -18,12 +18,12 @@ public class SceneLoading : MonoBehaviour {
 		}
 		else{
 //			Debug.Log(levelnum + "level");
-			if(LevelManager.levelnum == 0)
+			if(LevelManager.levelnum == 0 || LevelManager.levelnum ==null)
 			LevelManager.levelnum = 1;
 			LevelStorer.Lookfor(LevelManager.levelnum);
 			txt2.text = ("Efficient turns is " + LevelStorer.efficientturns);
-
-			Debug.Log(LevelManager.levelnum);
+			txt.text = LevelManager.levelnum.ToString();
+//			Debug.Log(LevelManager.levelnum);
 		}
 	}
 	public void LoadScene(int num){
@@ -57,6 +57,8 @@ public class SceneLoading : MonoBehaviour {
 		LevelManager.NextLevel(LevelManager.levelnum);
 		TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
 
+		//TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
+
 
 		//myhandler.GiveIce();
 
@@ -80,6 +82,7 @@ public class SceneLoading : MonoBehaviour {
 		TurnCounter.turncount = 0;
 		LevelManager.ResetLevel();
 		LevelManager.UnPop();
+		//TurnGraphics.ClearCounters();
 		TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
 		//LevelManager.NextLevel (LevelManager.levelnum);
 		//myhandler.GiveIce();
@@ -122,11 +125,15 @@ public class SceneLoading : MonoBehaviour {
 	public void LockAll(){
 		LevelStorer.LockAllLevels();
 	}
-	public void TestButton(){
+	public void LoadLevel(int num){
 		//LevelManager.levelnum = 1;
-		Debug.Log("Buttoned");
-		LevelManager.levelnum = 4;
-		LoadScene(LevelManager.levelnum);
+		//Debug.Log(LevelStorer.leveldic.Count);
+		if(LevelStorer.leveldic[num].islocked == false){
+			Debug.Log("Going to Level "+ num);
+			LevelManager.levelnum = num;
+			LoadScene(LevelManager.levelnum);
+		}
+
 	}
 	public void Plus(){
 		LevelManager.levelnum ++;

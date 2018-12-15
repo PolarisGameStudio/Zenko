@@ -32,6 +32,7 @@ public class PlayerMovement : MonoBehaviour {
 	Tile tilescript;
 	bool hasmoved;
 	Color fragilered = new Color(253/255f,65/255f,65/255f,255/255f);
+	TurnGraphics TG;
 	//public KeySimulator mykeysimulator;
 	// Use this for initialization
 	void Start () {
@@ -61,7 +62,7 @@ public class PlayerMovement : MonoBehaviour {
 		Debug.Log ("TURNEDTOFF");
 		outofmap = false;
 		hasmoved = false;
-
+		TG = GameObject.Find("TurnCanvas").GetComponent<TurnGraphics>();
 	}
 	
 	// Update is called once per frame
@@ -302,6 +303,7 @@ public class PlayerMovement : MonoBehaviour {
 		if(firstmove == true && canmove == true){
 			TurnCounter.turncount++;
 			Debug.Log (TurnCounter.turncount);
+			TG.TakeTurn(TurnCounter.turncount);
 		}
 		if(firstmove == true){
 			firstmove = false;

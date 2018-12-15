@@ -33,7 +33,11 @@ public class LevelManager : MonoBehaviour {
 		LevelStorer.Lookfor (mynum);
 //		TurnCounter.turncount = 0;
 		levelselector.DestroyAllExceptCamera ();
-		levelselector.CreateBase ();
+		if(!LevelBuilder.iscreated){
+			levelselector.CreateBase ();
+		}
+
+		levelselector.PlaceBase();
 		//Debug.Log("GONNAGETICE");
 
 		levelselector.DrawNextLevel (mynum);

@@ -1,5 +1,5 @@
 OSXStandalone
-0bb4873bb4869e7f713dc5a2cff75198 Assembly-CSharp.dll:.TurnCounter
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.TurnCounter
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
 970a95104359198fe1a98ef48655de8c UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationTrack
 8144169769d51429c4aedc8b0f92d47b UnityEngine.Timeline.dll:UnityEngine.Timeline.AnimationPlayableAsset
@@ -13,7 +13,7 @@ ff05dcdf90651c3d98a9cad3df5e471e UnityEngine.Timeline.dll:UnityEngine.Timeline.C
 6af7378a45ad6da4992a71ef50ddc2eb UnityEngine.Timeline.dll:UnityEngine.Timeline.PlayableTrack
 af723155c251fcfa0e66530a75f3ea4c UnityEngine.Timeline.dll:UnityEngine.Timeline.TimelineAsset
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.RatingBehaviour
-3e2d6e52e5e2845210749b8539096b5b Assembly-CSharp.dll:.TurnGraphics
+e5a89444452943342843ef0e0f5e452d Assembly-CSharp.dll:.TurnGraphics
 a35dc9cca2faebc5f5f1aeb9e8e47bbe UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.UI.dll:UnityEngine.EventSystems.BaseInput
 49cd62a578efc0a599b810a2b66cd49c UnityEngine.UI.dll:UnityEngine.UI.Button
@@ -176,7 +176,7 @@ a9e1c36c671666e79706791e556d5100 Vuforia.UnityExtensions.dll:Vuforia.VuMarkBehav
 15bea26698002c6c4a3087131232ce5c Vuforia.UnityExtensions.dll:Vuforia.WordBehaviour
 46de0b2f493c7847325c9de1a16605ae Assembly-CSharp.dll:.MonsterPanel
 a104affe48ee1ae9e6c7e0fe2171b86f Assembly-CSharp.dll:.PlayerMovement
-6938ebcd07cf16ac33372081f4c4bec4 Assembly-CSharp.dll:.FragileProperties
+bd30596af5f10c89ed0975dc711a24bf Assembly-CSharp.dll:.FragileProperties
 3cbeb0daabc684faed53a4d5a2295f4c Assembly-CSharp.dll:.SceneLoading
 5d91a4973ed39db206ccdb323822e6bf Assembly-CSharp.dll:.AssignCanvasAndButton
 cc03fb4eb0842388b9e84e27d7465b45 Assembly-CSharp.dll:.LevelBuilder

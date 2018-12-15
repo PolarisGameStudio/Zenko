@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/WorldSelect.unity
     guid: 5fe48d555015a43c79a3ad11d5995cad
   - enabled: 1

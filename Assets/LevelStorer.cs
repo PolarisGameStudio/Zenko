@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LevelStats {
 	public int levelnum;
-	public int turns;
+	public int turns; //best turn solution
 	public bool islocked;
 	public int rating;
 
@@ -45,7 +45,7 @@ public class LevelStorer : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
-		Debug.Log(instance);
+//		Debug.Log(instance);
 		if(instance == null){
 			instance = this;
 			DontDestroyOnLoad(this.gameObject);
@@ -67,15 +67,15 @@ public class LevelStorer : MonoBehaviour {
 		} else {*/
 			//Load levels for the first time. Init values. only level 1 unlocked.
 		Debug.Log ("Giving loaded");
-		LevelStats lv1 = new LevelStats(1,2,false,0);
-		LevelStats lv2 = new LevelStats(2,3,true,0); 
-		LevelStats lv3 = new LevelStats(3,3,true,0); 
-		LevelStats lv4 = new LevelStats(4,4,true,0); 
-		LevelStats lv5 = new LevelStats(5,2,true,0); 
-		LevelStats lv6 = new LevelStats(6,4,true,0); 
-		LevelStats lv7 = new LevelStats(7,4,true,0); 
-		LevelStats lv8 = new LevelStats(8,3,true,0); 
-		LevelStats lv9 = new LevelStats(9,4,true,0); 
+		LevelStats lv1  = new LevelStats(1,2,false,0);
+		LevelStats lv2  = new LevelStats(2,3,true,0); 
+		LevelStats lv3  = new LevelStats(3,3,true,0); 
+		LevelStats lv4  = new LevelStats(4,4,true,0); 
+		LevelStats lv5  = new LevelStats(5,2,true,0); 
+		LevelStats lv6  = new LevelStats(6,4,true,0); 
+		LevelStats lv7  = new LevelStats(7,4,true,0); 
+		LevelStats lv8  = new LevelStats(8,3,true,0); 
+		LevelStats lv9  = new LevelStats(9,4,true,0); 
 		LevelStats lv10 = new LevelStats(10,3,true,0); 
 		LevelStats lv11 = new LevelStats(11,5,true,0); //too hard, need to make an easier tile leveldic
 		LevelStats lv12 = new LevelStats(12,5,true,0); 
@@ -166,9 +166,8 @@ public class LevelStorer : MonoBehaviour {
 		LevelStats lv97 = new LevelStats(97,10,true,0); 
 		LevelStats lv98 = new LevelStats(98,6,true,0); 
 		LevelStats lv99 = new LevelStats(99,3,true,0); 
-		LevelStats lv100 = new LevelStats(100,7,true,0); 
+		LevelStats lv100= new LevelStats(100,7,true,0); 
 
-			
 
 		leveldic.Add (1, lv1);
 		leveldic.Add (2, lv2);
@@ -270,22 +269,9 @@ public class LevelStorer : MonoBehaviour {
 		leveldic.Add (98, lv98);
 		leveldic.Add (99, lv99);
 		leveldic.Add (100, lv100);
-	}
-		
-
 		//Debug.Log(leveldic.Count);
-
-
-
-
-
-
-
-
-
-			
-			//PlayerPrefs.SetInt ("Loaded", 1);
-		//}
+		//PlayerPrefs.SetInt ("Loaded", 1);
+		}
 //		PlayerPrefs.DeleteAll();
 
 	/*void Update () {
@@ -296,7 +282,7 @@ public class LevelStorer : MonoBehaviour {
 	public static void Lookfor(int levelnum){ //unlocks and locks according to save file.
 		maxlevels = leveldic.Count ;
 //		Debug.Log(leveldic.Count);
-	//	Debug.Log ("maxcount" + maxlevels);
+	//	Debug.Log ("maxcount" + ma8levels);
 		if (levelnum <= maxlevels) {
 			efficientturns = leveldic [levelnum].turns;
 		//	Debug.Log ("The number of turns for level " + levelnum + " is " + efficientturns);

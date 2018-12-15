@@ -11,7 +11,7 @@ public class LevelBuilder : MonoBehaviour {
 	//public Brain brain;
 
 	public GameObject[] tile;
-	List<GameObject> tileBank = new List<GameObject>();
+	 List<GameObject> tileBank = new List<GameObject>();
 
 	public static int rows = 8;
 	public static int cols = 8;
@@ -25,6 +25,8 @@ public class LevelBuilder : MonoBehaviour {
 	static Transform playertransform;
 
 	static Transform starttransform;
+
+	public static bool iscreated;
 
 	/*void ShuffleList(){
 			System.Random rand = new System.Random();
@@ -133,12 +135,14 @@ public class LevelBuilder : MonoBehaviour {
 	else{
 		levelnum = LevelManager.levelnum;
 	}
-	LevelManager.levelnum = 65;
+	//LevelManager.levelnum = 65;
 	//levelnum = LevelManager.levelnum;
 	LevelStorer.Lookfor (LevelManager.levelnum);//assigns efficient turn according to dictionary.
 	//DrawIce ();
 	//DrawNextLevel (levelnum);
 	CreateBase();
+	PlaceBase();
+	TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
 	DrawNextLevel(LevelManager.levelnum);
 	//Debug.Log("MEH");
 	//GameObject objectp = GameObject.Find("TheCanvas");
@@ -147,6 +151,12 @@ public class LevelBuilder : MonoBehaviour {
 	//myhandler.GiveIce();
 
 
+	}
+	void Update(){
+		if (Input.GetKeyDown(KeyCode.J)){
+			//DrawNextLevel(LevelManager.levelnum);
+			Debug.Log(tileBank.Count);
+		}
 	}
 
 
@@ -178,6 +188,7 @@ public class LevelBuilder : MonoBehaviour {
 		} 
 	}*/
 	public void CreateBase(){
+		iscreated = true;
 		int numCopies = rows*cols;
 		for (int i =0; i<numCopies;i++){
 			for(int j=0; j < tile.Length; j++){
@@ -186,15 +197,18 @@ public class LevelBuilder : MonoBehaviour {
 				tileBank.Add(o);
 			}
 		}	
-
+	}
+	public void PlaceBase(){
 		for (int r= 0; r< rows; r++){
 			for (int c = 0; c<cols; c++){
 				Vector3 tilePos = new Vector3(c,0,r);
 				for (int n =0; n< tileBank.Count; n++){
 					GameObject o = tileBank[n];
 					if(!o.activeSelf){
+//						Debug.Log(tilePos);
 						o.transform.position = new Vector3(tilePos.x,tilePos.y,-tilePos.z);
 						o.SetActive(true);
+						o.transform.GetChild(0).gameObject.SetActive(true);
 						tiles[c,r] = new Tile(o, "Ice", false	);
 						//Debug.Log(tiles[c,r].type);
 						n = tileBank.Count + 1;
@@ -202,14 +216,13 @@ public class LevelBuilder : MonoBehaviour {
 				}
 			}
 		}
-		
 	}
 
 	public void DrawNextLevel(int levelnumber){
 		//PopulationManager.readytobrain = false;
 		string leveltext = ("Level" + levelnumber.ToString() + ".txt");
 		string levelname = ("Level" + levelnumber.ToString ());
-		Debug.Log("Bouttodraw" + levelnumber);
+//		Debug.Log("Bouttodraw" + levelnumber);
 		checkAndroid (leveltext);
 		string filePath = System.IO.Path.Combine (Application.streamingAssetsPath, leveltext);
 		string[][] jagged = readFile (filePath);
@@ -276,20 +289,38 @@ public class LevelBuilder : MonoBehaviour {
 					//instantiator.GetComponent<Wall_Behaviour>().Start();
 					break;
 				case sfloor_hole:
+					Collider[] colliders = Physics.OverlapSphere(new Vector3(x,0,-y), .5f);
+						foreach (Collider component in colliders) {
+							Debug.Log(component);
+							if (component.tag == "Tile") {	
+								//Debug.Log(component.gameObject.transform.position);	
+								component.gameObject.SetActive(false);
+
+								Debug.Log(component.gameObject.activeSelf);
+								Instantiate (floor_hole, new Vector3 (x, 0, -y), Quaternion.identity);
+								tiles[x,y].type = "Hole";
+								tiles[x,y].isTaken = true;
+								//Destroy(component.gameObject);
+
+								break;
+							}
+						}		
+					break;
+					
 					Instantiate (floor_hole, new Vector3 (x, 0, -y), Quaternion.identity);
 					tiles[x,y].type = "Hole";
 					tiles[x,y].isTaken = true;
 					break;
 				case sfloor_rock:
 					Instantiate (floor_rock, new Vector3 (x, 0, -y), Quaternion.identity);
-					Debug.Log("Assign Rock");
+//					Debug.Log("Assign Rock");
 					break;
 				case sfloor_wood:
 					Instantiate (floor_wood, new Vector3 (x, 0, -y), Quaternion.identity);
 					tiles[x,y].type = "Wood";
 					tiles[x,y].isTaken = true;
 					//break;
-					break;
+					break; 
 				case sfloor_left:
 					//Instantiate	(floor_left, new Vector3 ((float)(x+0.8), (float)0.5,(float)(-y)), floor_left.transform.rotation);
 					Instantiate (floor_left, new Vector3 (x, 0, -y), floor_left.transform.rotation);
@@ -315,14 +346,14 @@ public class LevelBuilder : MonoBehaviour {
 					//tiles[x,y].isTaken = true;
 					break;
 				case sfloor_fragile:
-					Collider[] colliders = Physics.OverlapSphere(new Vector3(x,0,-y), .5f);
-					foreach (Collider component in colliders) {
+					Collider[] collidersf = Physics.OverlapSphere(new Vector3(x,0,-y), .5f);
+					foreach (Collider component in collidersf) {
 						Debug.Log(component);
 						if (component.tag == "Tile") {	
-						Debug.Log(component.gameObject.transform.position);	
+							//Debug.Log(component.gameObject.transform.position);	
 							component.gameObject.SetActive(false);
 							Debug.Log(component.gameObject.activeSelf);
-							//Instantiate (floor_fragile, new Vector3 (x, 0, -y), Quaternion.identity);							
+							Instantiate (floor_fragile, new Vector3 (x, 0, -y), Quaternion.identity);							
 							tiles[x,y].type = "Fragile";
 							tiles[x,y].isTaken = true;
 							//Destroy(component.gameObject);
@@ -369,14 +400,17 @@ public class LevelBuilder : MonoBehaviour {
 	}
 	public void DestroyAllExceptCamera(){
 //		TurnBehaviour.turn = 0;
-		tileBank.Clear();
+		//tileBank.Clear();
 		GameObject[] gameobjects = GameObject.FindObjectsOfType <GameObject>();
 
 		foreach (GameObject component in gameobjects)
 		{
-			if (component.tag != "MainCamera" && component.tag != "Canvas") {
+			if (component.tag != "MainCamera" && component.tag != "Canvas" && component.tag != "Tile") {
 				Destroy (component);
 				//Debug.Log ("destroyed" + component);
+			}
+			if(component.tag == "Tile"){
+				component.SetActive(false);
 			}
 
 		}
@@ -388,6 +422,7 @@ public class LevelBuilder : MonoBehaviour {
 
 
 	}
+
 	public void SpawnPlayer(Vector2 thevector){
 		Debug.Log(starttransform);
 		Debug.Log(playertransform);

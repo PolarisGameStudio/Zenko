@@ -21,8 +21,8 @@ public class FragileProperties : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(readyToLava){
-			Debug.Log(playert.position);
+		if(readyToLava && playert != null){
+			//Debug.Log(playert.position);
 			if(Vector3.Distance(playert.position, transform.position) < .9){
 				lavaWhenReady = true;
 				readyToLava = false;

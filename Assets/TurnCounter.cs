@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TurnCounter : MonoBehaviour {
-	public int bestturns;
+	//public static int bestturns;
+	//static int stbestturns;
 	public static int turncount;
 	private static TurnCounter instance = null;
 
