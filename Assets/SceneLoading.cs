@@ -19,8 +19,8 @@ public class SceneLoading : MonoBehaviour {
 		else{
 //			Debug.Log(levelnum + "level");
 			if(LevelManager.levelnum == 0 || LevelManager.levelnum ==null)
-			LevelManager.levelnum = 1;
-			LevelStorer.Lookfor(LevelManager.levelnum);
+			LevelManager.levelnum = -4;
+			//LevelStorer.Lookfor(LevelManager.levelnum);
 			txt2.text = ("Efficient turns is " + LevelStorer.efficientturns);
 			txt.text = LevelManager.levelnum.ToString();
 //			Debug.Log(LevelManager.levelnum);
@@ -40,6 +40,7 @@ public class SceneLoading : MonoBehaviour {
 		SceneManager.LoadScene(0);
 	}
 	public void NextlevelButton(){
+		LevelManager.israndom = false;
 		Debug.Log("Next button");
 		Swiping.mydirection = "Null";
 		LevelManager.levelnum++;
@@ -56,13 +57,50 @@ public class SceneLoading : MonoBehaviour {
 		//LevelManager.levelnum = Random.Range(0,66);
 		LevelManager.NextLevel(LevelManager.levelnum);
 		TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
+		
 
 		//TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
 
 
 		//myhandler.GiveIce();
-
 	}
+	public void RandomLevel(){
+		Swiping.mydirection = "Null";
+		LevelManager.israndom = true;
+		LevelManager.levelnum = Random.Range(0,102);
+		Debug.Log(LevelManager.levelnum);
+		txt.text = LevelManager.levelnum.ToString();
+		LevelManager.NextRandomLevel();
+		//TurnGraphics.SetRandomTurnCounter();
+		
+		
+	}
+
+	public void PlaceHint(){
+		int mynum = LevelManager.hintnum;
+		//Code to remove type,taken,obj
+		Dragger td = LevelManager.piecetiles[mynum].gameObject.GetComponent<Dragger>();
+		if(td.gameObject.transform.position.x< 8){
+			//Tile tiletoleave = LevelBuilder.tiles[(int)td.gameObject.transform.x]
+
+
+		}
+
+
+		Vector3 Place = new Vector3 (LevelManager.myhints[mynum].x, 0, -LevelManager.myhints[mynum].y);
+		LevelManager.piecetiles[mynum].position = Place;
+
+		LevelBuilder.tiles[(int)Place.x, -(int)Place.z].type = td.myType;
+		LevelBuilder.tiles[(int)Place.x, -(int)Place.z].isTaken = true;
+		LevelBuilder.tiles[(int)Place.x, -(int)Place.z].tileObj = td.gameObject;
+		Debug.Log(Place.z);
+
+		if(td.myType == "Seed"){
+			LevelBuilder.tiles[(int)Place.x, -(int)Place.z].seedType = td.mySeedType;	
+		} 
+		LevelManager.hintnum++;
+	}
+
 	public void PreviousLevelButton(){
 		Swiping.mydirection = "Null";
 		LevelManager.levelnum--;
@@ -128,7 +166,7 @@ public class SceneLoading : MonoBehaviour {
 	public void LoadLevel(int num){
 		//LevelManager.levelnum = 1;
 		//Debug.Log(LevelStorer.leveldic.Count);
-		if(LevelStorer.leveldic[num].islocked == false){
+		if(LevelStorer.leveldic[num].islocked == false || num==1 ){
 			Debug.Log("Going to Level "+ num);
 			LevelManager.levelnum = num;
 			LoadScene(LevelManager.levelnum);

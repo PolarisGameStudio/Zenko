@@ -56,7 +56,7 @@ public class LevelStorer : MonoBehaviour {
 			Debug.Log("Destroyed LevelStorer");
 			return;
 		}
-
+		PlayerPrefs.DeleteAll();
 /*		reset = PlayerPrefs.GetInt ("Reset");
 		if (reset == 0) {
 			PlayerPrefs.DeleteAll ();
@@ -66,7 +66,7 @@ public class LevelStorer : MonoBehaviour {
 			Debug.Log ("Has playerpref");
 		} else {*/
 			//Load levels for the first time. Init values. only level 1 unlocked.
-		Debug.Log ("Giving loaded");
+		//Debug.Log ("Giving loaded");
 		LevelStats lv1  = new LevelStats(1,2,false,0);
 		LevelStats lv2  = new LevelStats(2,3,true,0); 
 		LevelStats lv3  = new LevelStats(3,3,true,0); 
@@ -269,16 +269,48 @@ public class LevelStorer : MonoBehaviour {
 		leveldic.Add (98, lv98);
 		leveldic.Add (99, lv99);
 		leveldic.Add (100, lv100);
-		//Debug.Log(leveldic.Count);
+		Debug.Log(leveldic.Count); 
 		//PlayerPrefs.SetInt ("Loaded", 1);
-		}
-//		PlayerPrefs.DeleteAll();
+		if (PlayerPrefs.HasKey ("Loaded")) {
+			Debug.Log ("Has playerpref");
+			PopulateRatings(); //takes old playerprefs and populates current ratings
 
+		} 
+		else {
+			PopulatePlayerPrefs();
+			PlayerPrefs.SetInt("Loaded",1);
+		}
+
+	}
+		//PlayerPrefs.DeleteAll();
+	//}
 	/*void Update () {
 		if (efficientturns <= 0) {
 			 (LevelManager.levelnum);
 		}
 	}*/
+	void Update(){
+//		Debug.Log(PlayerPrefs.GetInt("Level1Rating"))	;
+	}
+
+	public static void PopulatePlayerPrefs(){
+
+	}
+
+	public static void PopulateRatings(){
+		for(int i=1; i<leveldic.Count+1; i++){
+			string mystring = "Level"+i+"Rating";
+
+			if(PlayerPrefs.GetInt(mystring)>0){
+				leveldic[i].islocked = false;
+				leveldic[i+1].islocked = false;
+				leveldic[i].rating = PlayerPrefs.GetInt(mystring);
+			}
+
+
+		}
+	}
+
 	public static void Lookfor(int levelnum){ //unlocks and locks according to save file.
 		maxlevels = leveldic.Count ;
 //		Debug.Log(leveldic.Count);
@@ -296,7 +328,7 @@ public class LevelStorer : MonoBehaviour {
 		int x = leveldic [levelnum].levelnum;
 		int y = leveldic [levelnum].turns;
 		bool z = false;
-		int r = 1; //RatingBehaviour.rating;
+		int r = 0; //RatingBehaviour.rating;
 		LevelStats newvalue = new LevelStats(x,y,z,r); 
 		leveldic [x] = newvalue;
 	}

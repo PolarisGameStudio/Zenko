@@ -10,6 +10,7 @@ TagManager:
   - Object
   - Tile
   - Turn
+  - RatingText
   layers:
   - Default
   - TransparentFX

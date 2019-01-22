@@ -11,6 +11,10 @@ public class LevelManager : MonoBehaviour {
 	public static bool readytodraw;
 	public static int worldnum;
 	public static int myefficientturns;
+	public static List<Vector2> myhints = new List<Vector2>();
+	public static List<Transform> piecetiles = new List<Transform>();
+	public static bool israndom;
+	public static int hintnum;
 	//public static IceTileHandler myicehandler;
 
 
@@ -29,6 +33,7 @@ public class LevelManager : MonoBehaviour {
 	}*/
 
 	public static void NextLevel(int mynum){
+		myhints = new List<Vector2>();
 		Debug.Log("GONNAGETICE");
 		LevelStorer.Lookfor (mynum);
 //		TurnCounter.turncount = 0;
@@ -45,6 +50,18 @@ public class LevelManager : MonoBehaviour {
 //		myicehandler.GiveIce();
 	}
 
+	public static void NextRandomLevel(){
+		Debug.Log(LevelManager.levelnum);
+		myhints = new List<Vector2>();
+		Debug.Log("GONNAGETICE");
+		levelselector.DestroyAllExceptCamera ();
+		if(!LevelBuilder.iscreated){
+			levelselector.CreateBase ();
+		}
+
+		levelselector.PlaceBase();
+		levelselector.DrawNextLevel (-7); // -4 means random
+	}
 	public static void ResetLevel(){
 		levelselector.ResetPlayer();
 	}
@@ -70,7 +87,10 @@ public class LevelManager : MonoBehaviour {
 				dragger.myBigger.SetActive(false);
 				Debug.Log((int)dragger.gameObject.transform.position.x);
 				Debug.Log(-(int)dragger.gameObject.transform.position.z);
+				if(dragger.gameObject.transform.position.x<8){
 				LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x, -(int)dragger.gameObject.transform.position.z].type = "Seed";
+
+				}
 				//LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x, -(int)dragger.gameObject.transform.position.z].seedType = mySeedType;
 
 			}

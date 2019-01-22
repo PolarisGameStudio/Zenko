@@ -32,7 +32,7 @@ public class TurnGraphics : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		AssignDimensions();
+		//AssignDimensions();
 	//AssignDimensions();
 	}
 	void AssignDimensions(){

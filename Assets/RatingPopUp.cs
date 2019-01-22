@@ -23,17 +23,26 @@ public class RatingPopUp : MonoBehaviour {
 		
 		RatingBehaviour.CalculateRating ();
 		myrating = RatingBehaviour.rating;
+		Debug.Log("My rating is" + myrating);
+		Debug.Log("level "+ LevelManager.levelnum);
 		string prefname = "Level" + LevelManager.levelnum + "Rating";
 		int previousrating = PlayerPrefs.GetInt (prefname);
+		Debug.Log("previousrating" + previousrating);
+		//Debug.Log(prefname);
+		//Debug.Log(previousrating);
+		//Debug.Log(PlayerPrefs.GetInt("Player1Rating"));
 		if (myrating > previousrating) {
 			PlayerPrefs.SetInt (prefname, myrating);
-
+			//Debug.Log("gave "+ prefname + "rating" + myrating);
+			//Debug.Log(PlayerPrefs.GetInt(prefname));
+			LevelStorer.leveldic[LevelManager.levelnum].rating = myrating;
 		}
 		//PlayerPrefs.Save();
 		ready = true;
 		//Debug.Log ("GIVEN");
 		text1.text = "You got " + RatingBehaviour.rating + " Stars";
 		text2.text = "You finished level " + LevelManager.levelnum + "!";
+		PlayerPrefs.Save();
 	}
 
 	/*void OnEnable(){
