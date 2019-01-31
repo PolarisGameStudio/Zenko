@@ -38,8 +38,6 @@ GameObject:
   - component: {fileID: 4183143627580382}
   - component: {fileID: 33310641596794424}
   - component: {fileID: 23584661897741596}
-  - component: {fileID: 65253492974385584}
-  - component: {fileID: 114423891061458942}
   m_Layer: 0
   m_Name: Fragile
   m_TagString: Untagged
@@ -57,6 +55,7 @@ GameObject:
   - component: {fileID: 4664099301932956}
   - component: {fileID: 114540430311709054}
   - component: {fileID: 65184846045859460}
+  - component: {fileID: 114849418627274916}
   m_Layer: 0
   m_Name: FragileCube
   m_TagString: Fragile
@@ -198,31 +197,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &65253492974385584
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1370549214931342}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 0.2, z: 1}
-  m_Center: {x: 0, y: 0.9, z: 0}
---- !u!114 &114423891061458942
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1370549214931342}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7e7554902fa44e20847b2643a679e2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canplace: 0
+  m_Center: {x: 0, y: -0.16, z: 0}
 --- !u!114 &114540430311709054
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -242,3 +217,15 @@ MonoBehaviour:
   myred: {r: 0, g: 0, b: 0, a: 0}
   myhole: {fileID: 1054073243324332}
   myfragile: {fileID: 1370549214931342}
+--- !u!114 &114849418627274916
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1996242498493414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7e7554902fa44e20847b2643a679e2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canplace: 0

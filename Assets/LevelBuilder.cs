@@ -369,25 +369,25 @@ public class LevelBuilder : MonoBehaviour {
 						break; 
 					case sfloor_left:
 						//Instantiate	(floor_left, new Vector3 ((float)(x+0.8), (float)0.5,(float)(-y)), floor_left.transform.rotation);
-						Instantiate (floor_left, new Vector3 (x, 0, -y), floor_left.transform.rotation);
+						Instantiate (floor_left, new Vector3 (x, 0, -y), Quaternion.Euler(new Vector3(0,270,0)));
 
 						//tiles[x,y].type = "Left";
 						//tiles[x,y].isTaken = true;					
 						break;
 					case sfloor_right:
-						Instantiate	(floor_right, new Vector3 (x,0,-y), floor_right.transform.rotation);
+						Instantiate	(floor_right, new Vector3 (x,0,-y), Quaternion.Euler(new Vector3(0,90,0)));
 						//tiles[x,y].type = "Right";
 						//tiles[x,y].isTaken = true;
 						break;
 					case sfloor_up:
 						//Instantiate	(floor_up, new Vector3 (x, (float)0.5,(float)zed), floor_up.transform.rotation);
-						Instantiate (floor_up, new Vector3 (x, 0, -y), floor_up.transform.rotation);
+						Instantiate (floor_up, new Vector3 (x, 0, -y), Quaternion.Euler(new Vector3(0,0,0)));
 
 						//tiles[x,y].type = "Up";
 						//tiles[x,y].isTaken = true;
 						break;
 					case sfloor_down:
-						Instantiate	(floor_down, new Vector3 (x, 0, -y), floor_down.transform.rotation);
+						Instantiate	(floor_down, new Vector3 (x, 0, -y), Quaternion.Euler(new Vector3(0,180,0))	);
 						//tiles[x,y].type = "Down";
 						//tiles[x,y].isTaken = true;
 						break;
@@ -444,41 +444,41 @@ public class LevelBuilder : MonoBehaviour {
 					switch(jagged[y][x].Substring(0,1)){
 
 					case sfloor_left:
-						LevelManager.piecetiles.Add (Instantiate	(floor_left, new Vector3 (8, 0, 0-piecenums), s_floor_left.transform.rotation));
+						LevelManager.piecetiles.Add (Instantiate	(floor_left, new Vector3 (8, 0, 0-piecenums), Quaternion.Euler(new Vector3(0,270,0))));
 						LevelManager.myhints.Add(new Vector2 (hintx,hinty));
 						break;
 					case sfloor_right:
-						LevelManager.piecetiles.Add (Instantiate	(floor_right, new Vector3 (8, 0, 0-piecenums), s_floor_right.transform.rotation));
+						LevelManager.piecetiles.Add (Instantiate	(floor_right, new Vector3 (8, 0, 0-piecenums), Quaternion.Euler(new Vector3(0,90,0))));
 						LevelManager.myhints.Add(new Vector2 (hintx,hinty));
 						break;
 					case sfloor_up:
-						LevelManager.piecetiles.Add (Instantiate	(floor_up, new Vector3 (8, 0, 0-piecenums), s_floor_up.transform.rotation));
+						LevelManager.piecetiles.Add (Instantiate	(floor_up, new Vector3 (8, 0, 0-piecenums), Quaternion.Euler(new Vector3(0,0,0))));
 						LevelManager.myhints.Add(new Vector2 (hintx,hinty));
 						break;
 					case sfloor_down:
-						LevelManager.piecetiles.Add (Instantiate	(floor_down, new Vector3 (8, 0, 0-piecenums), s_floor_down.transform.rotation));
+						LevelManager.piecetiles.Add (Instantiate	(floor_down, new Vector3 (8, 0, 0-piecenums), Quaternion.Euler(new Vector3(0,180,0))));
 						LevelManager.myhints.Add(new Vector2 (hintx,hinty));
 						break;
 					case sfloor_rock:
-						LevelManager.piecetiles.Add (Instantiate (floor_rock, new Vector3 (8, 0, 0-piecenums), Quaternion.identity));
+						LevelManager.piecetiles.Add (Instantiate (floor_rock, new Vector3 (8, 0, -7+piecenums), Quaternion.identity));
 						//Debug.Log(LevelManager.piecetiles.Count);
 						LevelManager.myhints.Add(new Vector2 (hintx,hinty));
 						break;
 
 					case ssfloor_left:
-						LevelManager.piecetiles.Add (Instantiate	(s_floor_left, new Vector3 (8, 0, 0-piecenums), s_floor_left.transform.rotation));
+						LevelManager.piecetiles.Add (Instantiate	(s_floor_left, new Vector3 (8, 0, 0-piecenums), Quaternion.Euler(new Vector3(0,270,0))));
 						LevelManager.myhints.Add(new Vector2 (hintx,hinty));
 						break;
 					case ssfloor_right:
-						LevelManager.piecetiles.Add (Instantiate	(s_floor_right, new Vector3 (8, 0, 0-piecenums), s_floor_right.transform.rotation));
+						LevelManager.piecetiles.Add (Instantiate	(s_floor_right, new Vector3 (8, 0, 0-piecenums), Quaternion.Euler(new Vector3(0,90,0))));
 						LevelManager.myhints.Add(new Vector2 (hintx,hinty));
 						break;
 					case ssfloor_up:
-						LevelManager.piecetiles.Add (Instantiate	(s_floor_up, new Vector3 (8, 0, 0-piecenums), s_floor_up.transform.rotation));
+						LevelManager.piecetiles.Add (Instantiate	(s_floor_up, new Vector3 (8, 0, 0-piecenums), Quaternion.Euler(new Vector3(0,0,0))));
 						LevelManager.myhints.Add(new Vector2 (hintx,hinty));
 						break;
 					case ssfloor_down:
-						LevelManager.piecetiles.Add (Instantiate	(s_floor_down, new Vector3 (8, 0, 0-piecenums), s_floor_down.transform.rotation));
+						LevelManager.piecetiles.Add (Instantiate	(s_floor_down, new Vector3 (8, 0, 0-piecenums),Quaternion.Euler(new Vector3(0,180,0))));
 						LevelManager.myhints.Add(new Vector2 (hintx,hinty));
 						break;
 					case ssfloor_rock:

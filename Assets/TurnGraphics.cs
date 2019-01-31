@@ -43,7 +43,7 @@ public class TurnGraphics : MonoBehaviour {
 	}
 	public void TakeTurn(int num){
 		//nextsprite = greenpaw;
-
+		Debug.Log(LevelStorer.efficientturns);
 		if(num<=LevelStorer.efficientturns)
 		transform.GetChild(num-1).gameObject.GetComponent<Image>().sprite = greenpaw;
 		else if(num<=LevelStorer.efficientturns*2){

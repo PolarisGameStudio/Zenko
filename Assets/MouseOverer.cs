@@ -9,8 +9,14 @@ public class MouseOverer : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		renderer = GetComponent<MeshRenderer>();
+		if(this.gameObject.tag == "Fragile"){
+			renderer = this.gameObject.transform.GetChild(0).GetComponent<MeshRenderer>();
+		}
+		else{
+			renderer = GetComponent<MeshRenderer>();
+		}
 		canplace = true;
+		startcolor = renderer.material.color;
 	}
 	
 	// Update is called once per frame
@@ -19,16 +25,21 @@ public class MouseOverer : MonoBehaviour {
 	}
 	 void OnMouseEnter()
 	{
-		if(LevelBuilder.tiles[(int)transform.position.x, -(int)transform.position.z].isTaken){
-			startcolor = renderer.material.color;
+		if(LevelManager.isdragging){
+			if(LevelBuilder.tiles[(int)transform.position.x, -(int)transform.position.z].isTaken){
+				startcolor = renderer.material.color;
+			    renderer.material.color = Color.red;
+
+			}
+			else{
+			    startcolor = renderer.material.color;
+			    renderer.material.color = Color.yellow;
+			    PlaneBehavior.tilex = (int)transform.position.x;
+			    PlaneBehavior.tiley = (int)transform.position.z;
+			    PlaneBehavior.readyToDrop = true;
+			}	
 		}
-		else{
-		    startcolor = renderer.material.color;
-		    renderer.material.color = Color.yellow;
-		    PlaneBehavior.tilex = (int)transform.position.x;
-		    PlaneBehavior.tiley = (int)transform.position.z;
-		    PlaneBehavior.readyToDrop = true;
-		}
+		
 	   // Debug.Log("Enter");
 	}
 	void OnMouseExit()

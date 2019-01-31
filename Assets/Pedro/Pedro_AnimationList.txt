@@ -1,0 +1,5 @@
+AnimationList_Pedro
+
+10 to 150 Idle
+200 to 400 Dangling
+500 to 555 Drop

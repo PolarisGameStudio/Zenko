@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33012648459239710}
   - component: {fileID: 23264170148111772}
   - component: {fileID: 65434239849637166}
-  - component: {fileID: 114859761156687504}
+  - component: {fileID: 114090540042820034}
   m_Layer: 0
   m_Name: pCube1
   m_TagString: Tile
@@ -125,7 +125,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.14, z: 1}
   m_Center: {x: 0, y: 0.06, z: 0}
---- !u!114 &114859761156687504
+--- !u!114 &114090540042820034
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}

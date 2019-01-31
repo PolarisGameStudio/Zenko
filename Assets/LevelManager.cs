@@ -15,6 +15,8 @@ public class LevelManager : MonoBehaviour {
 	public static List<Transform> piecetiles = new List<Transform>();
 	public static bool israndom;
 	public static int hintnum;
+	public static List<int> hintsgiven = new List<int>();
+	public static bool isdragging;
 	//public static IceTileHandler myicehandler;
 
 
@@ -31,6 +33,9 @@ public class LevelManager : MonoBehaviour {
 		}
 		Destroy(this.gameObject);
 	}*/
+	public static void PopulateLists(){
+
+	}
 
 	public static void NextLevel(int mynum){
 		myhints = new List<Vector2>();
@@ -53,6 +58,22 @@ public class LevelManager : MonoBehaviour {
 	public static void NextRandomLevel(){
 		Debug.Log(LevelManager.levelnum);
 		myhints = new List<Vector2>();
+		hintsgiven = new List<int>();
+		Debug.Log("GONNAGETICE");
+		levelselector.DestroyAllExceptCamera ();
+		if(!LevelBuilder.iscreated){
+			levelselector.CreateBase ();
+		}
+
+		levelselector.PlaceBase();
+		levelselector.DrawNextLevel (-11); // -4 means random
+	}
+
+
+	public static void NextRandomLevel2(){
+		Debug.Log(LevelManager.levelnum);
+		myhints = new List<Vector2>();
+		hintsgiven = new List<int>();
 		Debug.Log("GONNAGETICE");
 		levelselector.DestroyAllExceptCamera ();
 		if(!LevelBuilder.iscreated){
@@ -62,6 +83,7 @@ public class LevelManager : MonoBehaviour {
 		levelselector.PlaceBase();
 		levelselector.DrawNextLevel (-7); // -4 means random
 	}
+
 	public static void ResetLevel(){
 		levelselector.ResetPlayer();
 	}
@@ -99,10 +121,12 @@ public class LevelManager : MonoBehaviour {
 		foreach(GameObject fragile in fragiles){
 			//Debug.Log(fragile);
 			LevelBuilder.tiles[(int)fragile.transform.position.x, -(int)fragile.transform.position.z].type = "Fragile";
-			MeshRenderer mymesh = fragile.GetComponentInChildren<MeshRenderer>();
+			//MeshRenderer mymesh = fragile.GetComponentInChildren<MeshRenderer>();
 			FragileProperties myproperties = fragile.GetComponent<FragileProperties>();
 			myproperties.myhole.SetActive(false);
 			myproperties.myfragile.SetActive(true);
+			myproperties.lavaWhenReady = false;
+			myproperties.readyToLava = false;
 //			Debug.Log(myproperties.mypink);
 			//Color mycolor = myproperties.mypink;
 			//mymesh.material.color = mycolor;

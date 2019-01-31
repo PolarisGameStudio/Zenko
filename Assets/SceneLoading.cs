@@ -67,7 +67,7 @@ public class SceneLoading : MonoBehaviour {
 	public void RandomLevel(){
 		Swiping.mydirection = "Null";
 		LevelManager.israndom = true;
-		LevelManager.levelnum = Random.Range(0,102);
+		LevelManager.levelnum = Random.Range(0,105);
 		Debug.Log(LevelManager.levelnum);
 		txt.text = LevelManager.levelnum.ToString();
 		LevelManager.NextRandomLevel();
@@ -76,11 +76,27 @@ public class SceneLoading : MonoBehaviour {
 		
 	}
 
+	public void RandomLevel2(){
+		Swiping.mydirection = "Null";
+		LevelManager.israndom = true;
+		LevelManager.levelnum = Random.Range(0,102);
+		Debug.Log(LevelManager.levelnum);
+		txt.text = LevelManager.levelnum.ToString();
+		LevelManager.NextRandomLevel2();
+		//TurnGraphics.SetRandomTurnCounter();
+		
+		
+	}
 	public void PlaceHint(){
-		int mynum = LevelManager.hintnum;
+
+
+
+		int mynum = LevelManager.hintnum; 
 		//Code to remove type,taken,obj
 		Dragger td = LevelManager.piecetiles[mynum].gameObject.GetComponent<Dragger>();
-		if(td.gameObject.transform.position.x< 8){
+
+		if(td.gameObject.transform.position.x< 8){ //check to see if its on board (then check to see if its in the right place)
+			
 			//Tile tiletoleave = LevelBuilder.tiles[(int)td.gameObject.transform.x]
 
 
@@ -100,6 +116,106 @@ public class SceneLoading : MonoBehaviour {
 		} 
 		LevelManager.hintnum++;
 	}
+
+	public void PlaceHint2(){
+		//Debug.Log
+		for(int i = 0; i<LevelManager.piecetiles.Count; i++){ //First go through the pieces outside of the board.
+			Dragger td = LevelManager.piecetiles[i].gameObject.GetComponent<Dragger>();
+			if(td.gameObject.transform.position.x>7){//if piece is outside:
+				Debug.Log("Piece number "+ i + "is outside and good to go"); 
+				//need to check if taken by someone of similar type.
+
+				Vector3 Place = new Vector3 (LevelManager.myhints[i].x, 0, -LevelManager.myhints[i].y);
+				if (LevelBuilder.tiles[(int)Place.x, -(int)Place.z].isTaken == false){
+
+					LevelManager.piecetiles[i].position = Place;
+
+					LevelBuilder.tiles[(int)Place.x, -(int)Place.z].type = td.myType;
+					LevelBuilder.tiles[(int)Place.x, -(int)Place.z].isTaken = true;
+					LevelBuilder.tiles[(int)Place.x, -(int)Place.z].tileObj = td.gameObject;
+					td.gameObject.GetComponent<BoxCollider>().enabled = false;					//disable collider so piece stays there.
+					
+					Debug.Log(Place.z);
+
+					if(td.myType == "Seed"){
+						LevelBuilder.tiles[(int)Place.x, -(int)Place.z].seedType = td.mySeedType;	
+					} 
+
+					LevelManager.hintnum++;
+					LevelManager.hintsgiven.Add(i);
+					//td.gameObject.GetComponent<Animator>().SetInteger("Phase", 2);
+					return;
+					//place it
+				}
+				else{
+					Debug.Log("Someone in my place");
+					//Check if one on my place is good or bad.
+					if(td.myType == LevelBuilder.tiles[(int)Place.x, -(int)Place.z].type){//if it's good alternative. 
+						for(int j = 0; j<LevelManager.piecetiles.Count; j++){//search for a new spot
+							if(j!=i){//skip self
+								Dragger td2 = LevelManager.piecetiles[j].gameObject.GetComponent<Dragger>();
+								if(td2.myType == td.myType){		//check if the selected piece is of same type
+									Debug.Log("Same person in my place");
+									Vector3 Place2 = new Vector3 (LevelManager.myhints[j].x, 0, -LevelManager.myhints[j].y);	
+									Debug.Log(Place2);		
+									//Debug.Log(LevelBuilder.tiles[(int)Place2.x, -(int)Place2.z].isTaken)	;				
+									if(LevelBuilder.tiles[(int)Place2.x, -(int)Place2.z].isTaken == false){ 
+										Debug.Log("new target free");
+										LevelManager.piecetiles[i].position = Place2;
+
+										LevelBuilder.tiles[(int)Place2.x, -(int)Place2.z].type = td.myType;
+										LevelBuilder.tiles[(int)Place2.x, -(int)Place2.z].isTaken = true;
+										LevelBuilder.tiles[(int)Place2.x, -(int)Place2.z].tileObj = td.gameObject;
+										td.gameObject.GetComponent<BoxCollider>().enabled = false;					//disable collider so piece stays there.
+										
+										Debug.Log(Place2.z + "Testcloseearly");
+
+										if(td.myType == "Seed"){
+											LevelBuilder.tiles[(int)Place2.x, -(int)Place2.z].seedType = td.mySeedType;	
+										} 
+										//td.gameObject.GetComponent<Animator>().SetInteger("Phase", 2);
+										LevelManager.hintnum++;
+										LevelManager.hintsgiven.Add(i);
+
+										return;										
+									}							//check that their position is open
+																//take their position
+//Debug.Log("Same person in my place");
+								}
+							}
+						}
+					//place this one on the other's place
+
+					}
+					else{//if other is in bad place
+					//skip
+
+					}
+
+				}
+		
+			}
+		}
+		for(int i=0; i < LevelManager.piecetiles.Count; i++){//If no pieces are outside the board.
+			Dragger td = LevelManager.piecetiles[i].gameObject.GetComponent<Dragger>();
+			string piecetype = td.myType;
+			string seedtype = td.mySeedType;
+			Vector3 targetv2 = new Vector3 (LevelManager.myhints[i].x, 0, -LevelManager.myhints[i].y);
+			Vector2 myv2 = new Vector2(td.gameObject.transform.position.x, -td.gameObject.transform.position.z);
+			Debug.Log(LevelManager.myhints[i] +"" +  myv2);
+			//if()//check if same position as same hint position
+
+			//check if it's on the right one or one of same type.
+
+			return;
+
+			for(int j=0; j< LevelManager.piecetiles.Count; j++){
+
+			}
+		}
+
+	}
+
 
 	public void PreviousLevelButton(){
 		Swiping.mydirection = "Null";

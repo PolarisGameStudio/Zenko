@@ -21,6 +21,8 @@ GameObject:
   - component: {fileID: 4186804819182274}
   - component: {fileID: 33246907899614008}
   - component: {fileID: 23443564972936798}
+  - component: {fileID: 65324335797307590}
+  - component: {fileID: 114942650604172708}
   m_Layer: 0
   m_Name: cubotest1:pCube1
   m_TagString: Untagged
@@ -111,3 +113,27 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1216492515730658}
   m_Mesh: {fileID: 4300000, guid: 9d1992b30e89547d79bb3212039cdcb1, type: 3}
+--- !u!65 &65324335797307590
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1216492515730658}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &114942650604172708
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1216492515730658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7e7554902fa44e20847b2643a679e2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canplace: 0

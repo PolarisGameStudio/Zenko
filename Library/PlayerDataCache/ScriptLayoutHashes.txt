@@ -1,4 +1,4 @@
-WindowsStandalone
+iOS
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.LevelDecoder
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.TurnCounter
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
@@ -181,7 +181,7 @@ bd30596af5f10c89ed0975dc711a24bf Assembly-CSharp.dll:.FragileProperties
 3cbeb0daabc684faed53a4d5a2295f4c Assembly-CSharp.dll:.SceneLoading
 5d91a4973ed39db206ccdb323822e6bf Assembly-CSharp.dll:.AssignCanvasAndButton
 cc03fb4eb0842388b9e84e27d7465b45 Assembly-CSharp.dll:.LevelBuilder
-456d5663f56aa2e70b92d5d2ac44e9ed Assembly-CSharp.dll:.Dragger
+7abf60ce24fd0da98768f862d93b563f Assembly-CSharp.dll:.Dragger
 32e8fe00b63ed946490b898f6024a2f2 Facebook.Unity.Settings.dll:Facebook.Unity.Settings.FacebookSettings
 f5c3eba9cf9072a33db42bf3a7ed37dc Assembly-CSharp.dll:.MouseOverer
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.TurnBehaviour
