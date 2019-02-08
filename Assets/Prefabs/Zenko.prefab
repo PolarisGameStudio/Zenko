@@ -299,7 +299,7 @@ MonoBehaviour:
   currenttile: {x: 0, y: 0, z: 0}
   startingposition: {x: 0, y: 0, z: 0}
   cantakeinput: 0
-  speed: 5
+  speed: 4
   direction: 
   tileobject: {fileID: 0}
   nextaction: 

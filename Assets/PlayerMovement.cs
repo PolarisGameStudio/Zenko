@@ -88,7 +88,8 @@ public class PlayerMovement : MonoBehaviour {
 		if (TurnBehaviour.turn == 1 && transform.position == startingposition) {
 			TurnBehaviour.turn = 0; 
 		}
-		if (currenttile == transform.position) {
+		if (currenttile == transform.position) {//do this when reached currenttile
+			GoalBehaviour.isstatic = true;
 			//Debug.Log (tilescript.myTaker.tag);
 			if (lastFragile != null && lastFragile.transform.position == transform.position) {
 				Debug.Log ("UNUL");
@@ -107,9 +108,9 @@ public class PlayerMovement : MonoBehaviour {
 				isspeeding = false;
 			}  
 			else if (nextaction == "Goal_Action") {
-				RatingPopUp.GiveRating ();
+				//RatingPopUp.GiveRating ();
 				
-				levelWonBoard.SetActive (true);
+				//levelWonBoard.SetActive (true);
 				this.enabled = false;
 				Debug.Log ("Goal");
 			}			
@@ -294,6 +295,7 @@ public class PlayerMovement : MonoBehaviour {
 		//if the desired tile is not the place you're standing in it moves there
 		if (currenttile != transform.position && beingdragged == false) {
 //			Debug.Log("move");
+			GoalBehaviour.readytomove = true;
 			transform.position = Vector3.MoveTowards (transform.position, currenttile, Time.deltaTime * speed); 
 			cantakeinput = false;
 			Swiping.mydirection = "Null";
@@ -301,8 +303,12 @@ public class PlayerMovement : MonoBehaviour {
 	}
 	void Count(){
 		if(firstmove == true && canmove == true){
+			if(TurnCounter.turncount == 0){
+				Debug.Log("Anim");
+				LevelBuilder.starttransform.GetComponentInChildren<Animator>().SetInteger("Phase",1);
+			}
 			TurnCounter.turncount++;
-			Debug.Log (TurnCounter.turncount);
+//			Debug.Log (TurnCounter.turncount);
 			TG.TakeTurn(TurnCounter.turncount);
 		}
 		if(firstmove == true){

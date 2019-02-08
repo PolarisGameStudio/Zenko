@@ -22,9 +22,11 @@ public class LevelBuilder : MonoBehaviour {
 
 	static Vector2 startpos;
 
-	static Transform playertransform;
+	public static Transform playertransform;
 
-	static Transform starttransform;
+	public static Transform starttransform;
+
+	public static Transform goaltransform;
 
 	public static bool iscreated;
 
@@ -168,14 +170,15 @@ public class LevelBuilder : MonoBehaviour {
 	CreateBase();
 	PlaceBase();
 	TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
-	if(LevelManager.levelnum == -4){
+	if(LevelManager.levelnum < 0){
 		LevelManager.levelnum = Random.Range(0,102);
 		Debug.Log(LevelManager.levelnum);
-		DrawNextLevel(-4);
+		DrawNextLevel(-11);
 	}
 	else{
 	DrawNextLevel(LevelManager.levelnum);
 	}
+	TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
 	//Debug.Log("MEH");
 	//GameObject objectp = GameObject.Find("TheCanvas");
 	//IceTileHandler myhandler = objectp.GetComponent<IceTileHandler>();
@@ -249,6 +252,58 @@ public class LevelBuilder : MonoBehaviour {
 			}
 		}
 	}
+	public void GoalDirection(int myx, int myy){
+		//Debug.Log(tiles[0,11].type);
+//		if(tiles[0,11].type == null){
+//			Debug.Log("RURU");
+//		}
+		Debug.Log("Directing");
+		Debug.Log(myx + " " + myy);
+		if(myx<5){	
+			//Debug.Log(myx + "" + myy);
+			Debug.Log(tiles[myx+1,myy].type);
+			Debug.Log(myx+1 + " " + myy );
+			if(tiles[myx+1,myy].type!="Wall" && tiles[myx+1,myy].type!="Start" && tiles[myx+1,myy].type!=null){
+			goaltransform.eulerAngles = new Vector3(0f,90f,0f);
+			GoalBehaviour.isvertical = false;
+			return;
+
+			Debug.Log("Right");
+
+			}
+
+
+		}
+		if(myx>4){
+			if(tiles[myx-1,myy].type!="Wall" && tiles[myx-1,myy].type!="Start" && tiles[myx-1,myy].type!=null){
+			goaltransform.eulerAngles = new Vector3(0f,270,0f);
+			GoalBehaviour.isvertical = false;
+
+			Debug.Log("Left");
+			return;
+			}
+		}
+		if(myy>4){
+			if(tiles[myx,myy-1].type!="Wall" && tiles[myx,myy-1].type!="Start" && tiles[myx,myy-1].type!=null){
+			goaltransform.eulerAngles = new Vector3(0f,0f,0f);
+			Debug.Log("Up");
+			GoalBehaviour.isvertical = true;
+
+			return;	
+			}
+		}
+		if(myy<5){
+			if(tiles[myx,myy+1].type!="Wall" && tiles[myx,myy+1].type!="Start" && tiles[myx,myy+1].type!=null){
+			goaltransform.eulerAngles = new Vector3(0f,180f,0f);
+			Debug.Log("Down");
+			GoalBehaviour.isvertical = true;
+
+
+			return;			//rotate transform
+			//return;
+			}
+		}
+	}
 
 	public void DrawNextLevel(int levelnumber){
 		LevelManager.piecetiles = new List<Transform>();
@@ -285,6 +340,7 @@ public class LevelBuilder : MonoBehaviour {
 						//GameObject p = player;
 						//Instantiate (player, new Vector3 (x, 0, -y), Quaternion.identity);
 						Debug.Log(x + "+" + y);
+						tiles[x,y].tileObj = starttransform.gameObject;
 						tiles[x,y].type = "Start";
 						tiles[x,y].isTaken = true;
 						startpos = new Vector2(x,y);
@@ -317,9 +373,10 @@ public class LevelBuilder : MonoBehaviour {
 						}
 						break;
 					case sgoal:
-						Instantiate (floor_goal, new Vector3 (x, 0, -y), Quaternion.identity);
+						goaltransform = Instantiate (floor_goal, new Vector3 (x, 0.162f, -y), Quaternion.identity);
 						tiles[x,y].type = "Goal";
 						tiles[x,y].isTaken = true;
+						tiles[x,y].tileObj = goaltransform.gameObject;
 
 						break;
 					case sfloor_ice:
@@ -488,8 +545,12 @@ public class LevelBuilder : MonoBehaviour {
 					}
 					piecenums++;
 				}
+				if(jagged[y][x].Length ==2){	
+					LevelStorer.efficientturns = int.Parse(jagged[y][x].Substring(1,1));
+				}			
 			}
 		} 
+		GoalDirection((int)goaltransform.position.x,-(int)goaltransform.position.z);
 		Debug.Log(LevelManager.myhints.Count);
 
 		//PopulationManager.readytobrain = true;
@@ -520,6 +581,10 @@ public class LevelBuilder : MonoBehaviour {
 		Destroy(playertransform.gameObject)/*.SetActive(false)*/;
 		Destroy(starttransform.gameObject)/*.SetActive(false)*/;
 		SpawnPlayer(startpos);
+		goaltransform.gameObject.GetComponentInChildren<Animator>().SetInteger("Phase",0);
+		Debug.Log(goaltransform);
+		Debug.Log(goaltransform.gameObject.GetComponentInChildren<Animator>().GetInteger("Phase"));
+
 
 
 	}

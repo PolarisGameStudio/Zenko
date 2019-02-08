@@ -1,0 +1,7 @@
+5: Level Start
+
+30-340:Become Wall
+
+400: End Goal 
+
+400-700: End Level

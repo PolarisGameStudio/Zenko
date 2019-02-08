@@ -66,7 +66,7 @@ public class LevelManager : MonoBehaviour {
 		}
 
 		levelselector.PlaceBase();
-		levelselector.DrawNextLevel (-11); // -4 means random
+		levelselector.DrawNextLevel (-10); // -4 means random
 	}
 
 

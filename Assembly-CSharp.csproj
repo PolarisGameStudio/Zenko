@@ -57,6 +57,8 @@
      <Compile Include="Assets\Dragger.cs" />
      <Compile Include="Assets\FragileBehaviour.cs" />
      <Compile Include="Assets\FragileProperties.cs" />
+     <Compile Include="Assets\Goal_Behaviour.cs" />
+     <Compile Include="Assets\GoalBehaviour.cs" />
      <Compile Include="Assets\LevelBuilder.cs" />
      <Compile Include="Assets\LevelDecoder.cs" />
      <Compile Include="Assets\LevelHandler.cs" />
@@ -97,6 +99,7 @@
      <None Include="Assets\StreamingAssets\Level45.txt" />
      <None Include="Assets\StreamingAssets\Level-4.txt" />
      <None Include="Assets\StreamingAssets\MapLevel-9.txt" />
+     <None Include="Assets\StreamingAssets\Level-12.txt" />
      <None Include="Assets\StreamingAssets\Level33.txt" />
      <None Include="Assets\StreamingAssets\Level-11.txt" />
      <None Include="Assets\StreamingAssets\Level87.txt" />
@@ -166,6 +169,7 @@
      <None Include="Assets\StreamingAssets\Level54.txt" />
      <None Include="Assets\StreamingAssets\Level-3.txt" />
      <None Include="Assets\StreamingAssets\Level47.txt" />
+     <None Include="Assets\Flowerpod\FlowerPod_Animations.txt" />
      <None Include="Assets\StreamingAssets\Level8.txt" />
      <None Include="Assets\StreamingAssets\Level73.txt" />
      <None Include="Assets\StreamingAssets\Level88.txt" />
@@ -189,6 +193,7 @@
      <None Include="Assets\StreamingAssets\Level4.txt" />
      <None Include="Assets\StreamingAssets\Level53.txt" />
      <None Include="Assets\StreamingAssets\Level84.txt" />
+     <None Include="Assets\StreamingAssets\Level-13.txt" />
      <None Include="Assets\StreamingAssets\Level74.txt" />
      <None Include="Assets\StreamingAssets\Level58.txt" />
      <None Include="Assets\StreamingAssets\Level0.txt" />
