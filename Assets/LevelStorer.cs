@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LevelStats {
 	public int levelnum;
@@ -21,17 +22,20 @@ public class Tile{
 	public string type;
 	public bool isTaken;
 	public string seedType;
+	public string isSideways;
 	public Tile(GameObject obj, string t, bool it, string seed){
 		tileObj = obj;
 		type = t;
 		isTaken = it;
 		seedType = seed;
+		isSideways = null;
 	}
 	public Tile(GameObject obj, string t, bool it){
 		tileObj = obj;
 		type = t;
 		isTaken = it;
 		seedType = null;
+		isSideways = null;
 	}
 }
 
@@ -56,7 +60,7 @@ public class LevelStorer : MonoBehaviour {
 			Debug.Log("Destroyed LevelStorer");
 			return;
 		}
-		PlayerPrefs.DeleteAll();
+		//PlayerPrefs.DeleteAll();
 /*		reset = PlayerPrefs.GetInt ("Reset");
 		if (reset == 0) {
 			PlayerPrefs.DeleteAll ();
@@ -66,7 +70,7 @@ public class LevelStorer : MonoBehaviour {
 			Debug.Log ("Has playerpref");
 		} else {*/
 			//Load levels for the first time. Init values. only level 1 unlocked.
-		//Debug.Log ("Giving loaded");
+		Debug.Log ("Giving loaded");
 		LevelStats lv1  = new LevelStats(1,2,false,0);
 		LevelStats lv2  = new LevelStats(2,3,true,0); 
 		LevelStats lv3  = new LevelStats(3,3,true,0); 
@@ -270,17 +274,25 @@ public class LevelStorer : MonoBehaviour {
 		leveldic.Add (99, lv99);
 		leveldic.Add (100, lv100);
 		Debug.Log(leveldic.Count); 
-		//PlayerPrefs.SetInt ("Loaded", 1);
 		if (PlayerPrefs.HasKey ("Loaded")) {
 			Debug.Log ("Has playerpref");
 			PopulateRatings(); //takes old playerprefs and populates current ratings
+			GameManager.mycurrency = PlayerPrefs.GetInt("Currency");
 
 		} 
 		else {
 			PopulatePlayerPrefs();
+			PlayerPrefs.SetInt("CurrentFirst", 1);
+			GameManager.mycurrency = 0;
+			PlayerPrefs.SetInt("Currency", 0);
+			//PopulateRatings();
 			PlayerPrefs.SetInt("Loaded",1);
 		}
+		//PlayerPrefs.SetInt ("Loaded", 1);
 
+		//PlayerPrefs.DeleteAll();
+		//GameManager.mycurrency = PlayerPrefs.GetInt("Currency");
+		GameObject.Find("CurrencyHolder").GetComponentInChildren<Text>().text = GameManager.mycurrency.ToString();
 	}
 		//PlayerPrefs.DeleteAll();
 	//}
@@ -294,7 +306,17 @@ public class LevelStorer : MonoBehaviour {
 	}
 
 	public static void PopulatePlayerPrefs(){
+		for(int i=1; i<leveldic.Count+1; i++){
+			string mystring = "Level"+i+"Rating";
 
+			if(PlayerPrefs.GetInt(mystring)>0){
+				//leveldic[i].islocked = false;
+				//leveldic[i+1].islocked = false;
+				PlayerPrefs.SetInt(mystring, 0);
+			}
+
+
+		}		
 	}
 
 	public static void PopulateRatings(){
@@ -315,22 +337,25 @@ public class LevelStorer : MonoBehaviour {
 		maxlevels = leveldic.Count ;
 //		Debug.Log(leveldic.Count);
 	//	Debug.Log ("maxcount" + ma8levels);
-		if (levelnum <= maxlevels) {
+		if (levelnum <= maxlevels && levelnum >= 0) {
 			efficientturns = leveldic [levelnum].turns;
 		//	Debug.Log ("The number of turns for level " + levelnum + " is " + efficientturns);
 		} 
+		//else if(levelnum < 0){
+			//efficientturns
+		//}
 		else {
 		Debug.Log ("No turn number stored" + levelnum + efficientturns);
 
 		}
 	}
 	public static void UnlockLevel(int levelnum){
-		int x = leveldic [levelnum].levelnum;
+		/*int x = leveldic [levelnum].levelnum;
 		int y = leveldic [levelnum].turns;
 		bool z = false;
 		int r = 0; //RatingBehaviour.rating;
 		LevelStats newvalue = new LevelStats(x,y,z,r); 
-		leveldic [x] = newvalue;
+		leveldic [x] = newvalue;*/
 	}
 
 	public static void LockLevel(int levelnum){

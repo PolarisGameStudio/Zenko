@@ -1,0 +1,1632 @@
+fileFormatVersion: 2
+guid: 610f5562aac96864580a58d25c605722
+timeCreated: 1491462316
+licenseType: Store
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: CartoonUI_4_0
+    21300002: CartoonUI_4_1
+    21300004: CartoonUI_4_2
+    21300006: CartoonUI_4_3
+    21300008: CartoonUI_4_4
+    21300010: CartoonUI_4_5
+    21300012: CartoonUI_4_6
+    21300014: CartoonUI_4_7
+    21300016: CartoonUI_4_8
+    21300018: CartoonUI_4_9
+    21300020: CartoonUI_4_10
+    21300022: CartoonUI_4_11
+    21300024: CartoonUI_4_12
+    21300026: CartoonUI_4_13
+    21300028: CartoonUI_4_14
+    21300030: CartoonUI_4_15
+    21300032: CartoonUI_4_16
+    21300034: CartoonUI_4_17
+    21300036: CartoonUI_4_18
+    21300038: CartoonUI_4_19
+    21300040: CartoonUI_4_20
+    21300042: CartoonUI_4_21
+    21300044: CartoonUI_4_22
+    21300046: CartoonUI_4_23
+    21300048: CartoonUI_4_24
+    21300050: CartoonUI_4_25
+    21300052: CartoonUI_4_26
+    21300054: CartoonUI_4_27
+    21300056: CartoonUI_4_28
+    21300058: CartoonUI_4_29
+    21300060: CartoonUI_4_30
+    21300062: CartoonUI_4_31
+    21300064: CartoonUI_4_32
+    21300066: CartoonUI_4_33
+    21300068: CartoonUI_4_34
+    21300070: CartoonUI_4_35
+    21300072: CartoonUI_4_36
+    21300074: CartoonUI_4_37
+    21300076: CartoonUI_4_38
+    21300078: CartoonUI_4_39
+    21300080: CartoonUI_4_40
+    21300082: CartoonUI_4_41
+    21300084: CartoonUI_4_42
+    21300086: CartoonUI_4_43
+    21300088: CartoonUI_4_44
+    21300090: CartoonUI_4_45
+    21300092: CartoonUI_4_46
+    21300094: CartoonUI_4_47
+    21300096: CartoonUI_4_48
+    21300098: CartoonUI_4_49
+    21300100: CartoonUI_4_50
+    21300102: CartoonUI_4_51
+    21300104: CartoonUI_4_52
+    21300106: CartoonUI_4_53
+    21300108: CartoonUI_4_54
+    21300110: CartoonUI_4_55
+    21300112: CartoonUI_4_56
+    21300114: CartoonUI_4_57
+    21300116: CartoonUI_4_58
+    21300118: CartoonUI_4_59
+    21300120: CartoonUI_4_60
+    21300122: CartoonUI_4_61
+    21300124: CartoonUI_4_62
+    21300126: CartoonUI_4_63
+    21300128: CartoonUI_4_64
+    21300130: CartoonUI_4_65
+    21300132: CartoonUI_4_66
+    21300134: CartoonUI_4_67
+    21300136: CartoonUI_4_68
+    21300138: CartoonUI_4_69
+    21300140: CartoonUI_4_70
+    21300142: CartoonUI_4_71
+    21300144: CartoonUI_4_72
+    21300146: CartoonUI_4_73
+    21300148: CartoonUI_4_74
+    21300150: CartoonUI_4_75
+    21300152: CartoonUI_4_76
+    21300154: CartoonUI_4_77
+    21300156: CartoonUI_4_78
+    21300158: CartoonUI_4_79
+    21300160: CartoonUI_4_80
+    21300162: CartoonUI_4_81
+    21300164: CartoonUI_4_82
+    21300166: CartoonUI_4_83
+    21300168: CartoonUI_4_84
+    21300170: CartoonUI_4_85
+    21300172: CartoonUI_4_86
+    21300174: CartoonUI_4_87
+    21300176: CartoonUI_4_88
+    21300178: CartoonUI_4_89
+    21300180: CartoonUI_4_90
+    21300182: CartoonUI_4_91
+    21300184: CartoonUI_4_92
+    21300186: CartoonUI_4_93
+    21300188: CartoonUI_4_94
+    21300190: CartoonUI_4_95
+    21300192: CartoonUI_4_96
+    21300194: CartoonUI_4_97
+    21300196: CartoonUI_4_98
+    21300198: CartoonUI_4_99
+    21300200: CartoonUI_4_100
+    21300202: CartoonUI_4_101
+    21300204: CartoonUI_4_102
+    21300206: CartoonUI_4_103
+    21300208: CartoonUI_4_104
+    21300210: CartoonUI_4_105
+    21300212: CartoonUI_4_106
+    21300214: CartoonUI_4_107
+    21300216: CartoonUI_4_108
+    21300218: CartoonUI_4_109
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: WebGL
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: CartoonUI_4_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 5912
+        width: 459
+        height: 459
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_1
+      rect:
+        serializedVersion: 2
+        x: 614
+        y: 5912
+        width: 461
+        height: 459
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_2
+      rect:
+        serializedVersion: 2
+        x: 1230
+        y: 5912
+        width: 464
+        height: 459
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_3
+      rect:
+        serializedVersion: 2
+        x: 1849
+        y: 5912
+        width: 461
+        height: 459
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_4
+      rect:
+        serializedVersion: 2
+        x: 2466
+        y: 5912
+        width: 463
+        height: 459
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_5
+      rect:
+        serializedVersion: 2
+        x: 3089
+        y: 5915
+        width: 458
+        height: 456
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_6
+      rect:
+        serializedVersion: 2
+        x: 3706
+        y: 5915
+        width: 458
+        height: 456
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_7
+      rect:
+        serializedVersion: 2
+        x: 4325
+        y: 5915
+        width: 458
+        height: 456
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_8
+      rect:
+        serializedVersion: 2
+        x: 4941
+        y: 5915
+        width: 458
+        height: 456
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_9
+      rect:
+        serializedVersion: 2
+        x: 5560
+        y: 5915
+        width: 453
+        height: 456
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 5383
+        width: 456
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_11
+      rect:
+        serializedVersion: 2
+        x: 617
+        y: 5383
+        width: 458
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_12
+      rect:
+        serializedVersion: 2
+        x: 1233
+        y: 5383
+        width: 458
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_13
+      rect:
+        serializedVersion: 2
+        x: 1852
+        y: 5383
+        width: 458
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_14
+      rect:
+        serializedVersion: 2
+        x: 2471
+        y: 5383
+        width: 457
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_15
+      rect:
+        serializedVersion: 2
+        x: 3087
+        y: 5386
+        width: 458
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_16
+      rect:
+        serializedVersion: 2
+        x: 3706
+        y: 5386
+        width: 458
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_17
+      rect:
+        serializedVersion: 2
+        x: 4324
+        y: 5386
+        width: 458
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_18
+      rect:
+        serializedVersion: 2
+        x: 4941
+        y: 5386
+        width: 458
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_19
+      rect:
+        serializedVersion: 2
+        x: 5560
+        y: 5386
+        width: 453
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4784
+        width: 456
+        height: 459
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_21
+      rect:
+        serializedVersion: 2
+        x: 617
+        y: 4784
+        width: 458
+        height: 459
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_22
+      rect:
+        serializedVersion: 2
+        x: 1233
+        y: 4784
+        width: 458
+        height: 459
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_23
+      rect:
+        serializedVersion: 2
+        x: 1852
+        y: 4784
+        width: 458
+        height: 459
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_24
+      rect:
+        serializedVersion: 2
+        x: 2471
+        y: 4784
+        width: 457
+        height: 459
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_25
+      rect:
+        serializedVersion: 2
+        x: 3087
+        y: 4786
+        width: 458
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_26
+      rect:
+        serializedVersion: 2
+        x: 3706
+        y: 4786
+        width: 458
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_27
+      rect:
+        serializedVersion: 2
+        x: 4324
+        y: 4786
+        width: 458
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_28
+      rect:
+        serializedVersion: 2
+        x: 4941
+        y: 4786
+        width: 458
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_29
+      rect:
+        serializedVersion: 2
+        x: 5560
+        y: 4786
+        width: 453
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_30
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4186
+        width: 456
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_31
+      rect:
+        serializedVersion: 2
+        x: 617
+        y: 4186
+        width: 458
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_32
+      rect:
+        serializedVersion: 2
+        x: 1233
+        y: 4186
+        width: 458
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_33
+      rect:
+        serializedVersion: 2
+        x: 1852
+        y: 4186
+        width: 458
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_34
+      rect:
+        serializedVersion: 2
+        x: 2471
+        y: 4186
+        width: 457
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_35
+      rect:
+        serializedVersion: 2
+        x: 3087
+        y: 4189
+        width: 458
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_36
+      rect:
+        serializedVersion: 2
+        x: 3706
+        y: 4189
+        width: 458
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_37
+      rect:
+        serializedVersion: 2
+        x: 4324
+        y: 4189
+        width: 458
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_38
+      rect:
+        serializedVersion: 2
+        x: 4941
+        y: 4189
+        width: 458
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_39
+      rect:
+        serializedVersion: 2
+        x: 5560
+        y: 4189
+        width: 453
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_40
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3588
+        width: 456
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_41
+      rect:
+        serializedVersion: 2
+        x: 617
+        y: 3588
+        width: 458
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_42
+      rect:
+        serializedVersion: 2
+        x: 1233
+        y: 3588
+        width: 458
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_43
+      rect:
+        serializedVersion: 2
+        x: 1852
+        y: 3588
+        width: 458
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_44
+      rect:
+        serializedVersion: 2
+        x: 2471
+        y: 3588
+        width: 457
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_45
+      rect:
+        serializedVersion: 2
+        x: 3087
+        y: 3589
+        width: 458
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_46
+      rect:
+        serializedVersion: 2
+        x: 3706
+        y: 3589
+        width: 458
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_47
+      rect:
+        serializedVersion: 2
+        x: 4324
+        y: 3589
+        width: 458
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_48
+      rect:
+        serializedVersion: 2
+        x: 4941
+        y: 3589
+        width: 458
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_49
+      rect:
+        serializedVersion: 2
+        x: 5560
+        y: 3589
+        width: 453
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_50
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2988
+        width: 456
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_51
+      rect:
+        serializedVersion: 2
+        x: 617
+        y: 2988
+        width: 458
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_52
+      rect:
+        serializedVersion: 2
+        x: 1233
+        y: 2988
+        width: 458
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_53
+      rect:
+        serializedVersion: 2
+        x: 1852
+        y: 2988
+        width: 458
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_54
+      rect:
+        serializedVersion: 2
+        x: 2471
+        y: 2988
+        width: 457
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_55
+      rect:
+        serializedVersion: 2
+        x: 3087
+        y: 2991
+        width: 458
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_56
+      rect:
+        serializedVersion: 2
+        x: 3706
+        y: 2991
+        width: 458
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_57
+      rect:
+        serializedVersion: 2
+        x: 4324
+        y: 2991
+        width: 458
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_58
+      rect:
+        serializedVersion: 2
+        x: 4941
+        y: 2991
+        width: 458
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_59
+      rect:
+        serializedVersion: 2
+        x: 5560
+        y: 2991
+        width: 453
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_60
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2391
+        width: 456
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_61
+      rect:
+        serializedVersion: 2
+        x: 617
+        y: 2391
+        width: 458
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_62
+      rect:
+        serializedVersion: 2
+        x: 1233
+        y: 2391
+        width: 458
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_63
+      rect:
+        serializedVersion: 2
+        x: 1852
+        y: 2391
+        width: 458
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_64
+      rect:
+        serializedVersion: 2
+        x: 2471
+        y: 2391
+        width: 457
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_65
+      rect:
+        serializedVersion: 2
+        x: 3087
+        y: 2394
+        width: 458
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_66
+      rect:
+        serializedVersion: 2
+        x: 3706
+        y: 2394
+        width: 458
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_67
+      rect:
+        serializedVersion: 2
+        x: 4324
+        y: 2394
+        width: 458
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_68
+      rect:
+        serializedVersion: 2
+        x: 4941
+        y: 2394
+        width: 458
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_69
+      rect:
+        serializedVersion: 2
+        x: 5560
+        y: 2394
+        width: 453
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_70
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1791
+        width: 456
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_71
+      rect:
+        serializedVersion: 2
+        x: 617
+        y: 1791
+        width: 458
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_72
+      rect:
+        serializedVersion: 2
+        x: 1233
+        y: 1791
+        width: 458
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_73
+      rect:
+        serializedVersion: 2
+        x: 1852
+        y: 1791
+        width: 458
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_74
+      rect:
+        serializedVersion: 2
+        x: 2471
+        y: 1791
+        width: 457
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_75
+      rect:
+        serializedVersion: 2
+        x: 3087
+        y: 1793
+        width: 458
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_76
+      rect:
+        serializedVersion: 2
+        x: 3706
+        y: 1793
+        width: 458
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_77
+      rect:
+        serializedVersion: 2
+        x: 4324
+        y: 1793
+        width: 458
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_78
+      rect:
+        serializedVersion: 2
+        x: 4941
+        y: 1793
+        width: 458
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_79
+      rect:
+        serializedVersion: 2
+        x: 5560
+        y: 1793
+        width: 453
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_80
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1193
+        width: 456
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_81
+      rect:
+        serializedVersion: 2
+        x: 617
+        y: 1193
+        width: 458
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_82
+      rect:
+        serializedVersion: 2
+        x: 1233
+        y: 1193
+        width: 458
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_83
+      rect:
+        serializedVersion: 2
+        x: 1852
+        y: 1193
+        width: 458
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_84
+      rect:
+        serializedVersion: 2
+        x: 2471
+        y: 1193
+        width: 457
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_85
+      rect:
+        serializedVersion: 2
+        x: 3087
+        y: 1196
+        width: 458
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_86
+      rect:
+        serializedVersion: 2
+        x: 3706
+        y: 1196
+        width: 458
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_87
+      rect:
+        serializedVersion: 2
+        x: 4324
+        y: 1196
+        width: 458
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_88
+      rect:
+        serializedVersion: 2
+        x: 4941
+        y: 1196
+        width: 458
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_89
+      rect:
+        serializedVersion: 2
+        x: 5560
+        y: 1196
+        width: 453
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_90
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 596
+        width: 456
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_91
+      rect:
+        serializedVersion: 2
+        x: 617
+        y: 596
+        width: 458
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_92
+      rect:
+        serializedVersion: 2
+        x: 1233
+        y: 596
+        width: 458
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_93
+      rect:
+        serializedVersion: 2
+        x: 1852
+        y: 596
+        width: 458
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_94
+      rect:
+        serializedVersion: 2
+        x: 2471
+        y: 596
+        width: 457
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_95
+      rect:
+        serializedVersion: 2
+        x: 3087
+        y: 596
+        width: 458
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_96
+      rect:
+        serializedVersion: 2
+        x: 3706
+        y: 596
+        width: 458
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_97
+      rect:
+        serializedVersion: 2
+        x: 4324
+        y: 596
+        width: 458
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_98
+      rect:
+        serializedVersion: 2
+        x: 4941
+        y: 596
+        width: 458
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_99
+      rect:
+        serializedVersion: 2
+        x: 5560
+        y: 596
+        width: 453
+        height: 457
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_100
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 456
+        height: 453
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_101
+      rect:
+        serializedVersion: 2
+        x: 617
+        y: 0
+        width: 458
+        height: 453
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_102
+      rect:
+        serializedVersion: 2
+        x: 1233
+        y: 0
+        width: 458
+        height: 453
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_103
+      rect:
+        serializedVersion: 2
+        x: 1852
+        y: 0
+        width: 458
+        height: 453
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_104
+      rect:
+        serializedVersion: 2
+        x: 2471
+        y: 0
+        width: 457
+        height: 453
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_105
+      rect:
+        serializedVersion: 2
+        x: 3087
+        y: 0
+        width: 458
+        height: 456
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_106
+      rect:
+        serializedVersion: 2
+        x: 3706
+        y: 0
+        width: 458
+        height: 456
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_107
+      rect:
+        serializedVersion: 2
+        x: 4324
+        y: 0
+        width: 458
+        height: 456
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_108
+      rect:
+        serializedVersion: 2
+        x: 4941
+        y: 0
+        width: 458
+        height: 456
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CartoonUI_4_109
+      rect:
+        serializedVersion: 2
+        x: 5560
+        y: 0
+        width: 453
+        height: 456
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

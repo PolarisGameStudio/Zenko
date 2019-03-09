@@ -1,0 +1,1226 @@
+fileFormatVersion: 2
+guid: 46d191277c325fb4d96da74d839d0c6c
+timeCreated: 1491461571
+licenseType: Store
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Asset 16_0
+    21300002: Asset 16_1
+    21300004: Asset 16_2
+    21300006: Asset 16_3
+    21300008: Asset 16_4
+    21300010: Asset 16_5
+    21300012: Asset 16_6
+    21300014: Asset 16_7
+    21300016: Asset 16_8
+    21300018: Asset 16_9
+    21300020: Asset 16_10
+    21300022: Asset 16_11
+    21300024: Asset 16_12
+    21300026: Asset 16_13
+    21300028: Asset 16_14
+    21300030: Asset 16_15
+    21300032: Asset 16_16
+    21300034: Asset 16_17
+    21300036: Asset 16_18
+    21300038: Asset 16_19
+    21300040: Asset 16_20
+    21300042: Asset 16_21
+    21300044: Asset 16_22
+    21300046: Asset 16_23
+    21300048: Asset 16_24
+    21300050: Asset 16_25
+    21300052: Asset 16_26
+    21300054: Asset 16_27
+    21300056: Asset 16_28
+    21300058: Asset 16_29
+    21300060: Asset 16_30
+    21300062: Asset 16_31
+    21300064: Asset 16_32
+    21300066: Asset 16_33
+    21300068: Asset 16_34
+    21300070: Asset 16_35
+    21300072: Asset 16_36
+    21300074: Asset 16_37
+    21300076: Asset 16_38
+    21300078: Asset 16_39
+    21300080: Asset 16_40
+    21300082: Asset 16_41
+    21300084: Asset 16_42
+    21300086: Asset 16_43
+    21300088: Asset 16_44
+    21300090: Asset 16_45
+    21300092: Asset 16_46
+    21300094: Asset 16_47
+    21300096: Asset 16_48
+    21300098: Asset 16_49
+    21300100: Asset 16_50
+    21300102: Asset 16_51
+    21300104: Asset 16_52
+    21300106: Asset 16_53
+    21300108: Asset 16_54
+    21300110: Asset 16_55
+    21300112: Asset 16_56
+    21300114: Asset 16_57
+    21300116: Asset 16_58
+    21300118: Asset 16_59
+    21300120: Asset 16_60
+    21300122: Asset 16_61
+    21300124: Asset 16_62
+    21300126: Asset 16_63
+    21300128: Asset 16_64
+    21300130: Asset 16_65
+    21300132: Asset 16_66
+    21300134: Asset 16_67
+    21300136: Asset 16_68
+    21300138: Asset 16_69
+    21300140: Asset 16_70
+    21300142: Asset 16_71
+    21300144: Asset 16_72
+    21300146: Asset 16_73
+    21300148: Asset 16_74
+    21300150: Asset 16_75
+    21300152: Asset 16_76
+    21300154: Asset 16_77
+    21300156: Asset 16_78
+    21300158: Asset 16_79
+    21300160: Asset 16_80
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: WebGL
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Asset 16_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4781
+        width: 523
+        height: 523
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_1
+      rect:
+        serializedVersion: 2
+        x: 617
+        y: 4781
+        width: 524
+        height: 523
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_2
+      rect:
+        serializedVersion: 2
+        x: 1238
+        y: 4781
+        width: 524
+        height: 523
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_3
+      rect:
+        serializedVersion: 2
+        x: 1857
+        y: 4781
+        width: 526
+        height: 523
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_4
+      rect:
+        serializedVersion: 2
+        x: 2477
+        y: 4781
+        width: 526
+        height: 523
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_5
+      rect:
+        serializedVersion: 2
+        x: 3097
+        y: 4781
+        width: 526
+        height: 523
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_6
+      rect:
+        serializedVersion: 2
+        x: 3718
+        y: 4781
+        width: 524
+        height: 523
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_7
+      rect:
+        serializedVersion: 2
+        x: 4339
+        y: 4781
+        width: 524
+        height: 523
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_8
+      rect:
+        serializedVersion: 2
+        x: 4957
+        y: 4781
+        width: 523
+        height: 523
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4184
+        width: 523
+        height: 525
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_10
+      rect:
+        serializedVersion: 2
+        x: 617
+        y: 4184
+        width: 524
+        height: 525
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_11
+      rect:
+        serializedVersion: 2
+        x: 1238
+        y: 4184
+        width: 524
+        height: 525
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_12
+      rect:
+        serializedVersion: 2
+        x: 1857
+        y: 4184
+        width: 526
+        height: 525
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_13
+      rect:
+        serializedVersion: 2
+        x: 2477
+        y: 4184
+        width: 526
+        height: 525
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_14
+      rect:
+        serializedVersion: 2
+        x: 3097
+        y: 4184
+        width: 526
+        height: 525
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_15
+      rect:
+        serializedVersion: 2
+        x: 3718
+        y: 4184
+        width: 524
+        height: 525
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_16
+      rect:
+        serializedVersion: 2
+        x: 4339
+        y: 4184
+        width: 524
+        height: 525
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_17
+      rect:
+        serializedVersion: 2
+        x: 4957
+        y: 4184
+        width: 523
+        height: 525
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3585
+        width: 523
+        height: 525
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_19
+      rect:
+        serializedVersion: 2
+        x: 617
+        y: 3585
+        width: 524
+        height: 525
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_20
+      rect:
+        serializedVersion: 2
+        x: 1238
+        y: 3585
+        width: 524
+        height: 525
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_21
+      rect:
+        serializedVersion: 2
+        x: 1857
+        y: 3585
+        width: 526
+        height: 525
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_22
+      rect:
+        serializedVersion: 2
+        x: 2477
+        y: 3585
+        width: 526
+        height: 525
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_23
+      rect:
+        serializedVersion: 2
+        x: 3097
+        y: 3585
+        width: 526
+        height: 525
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_24
+      rect:
+        serializedVersion: 2
+        x: 3718
+        y: 3585
+        width: 524
+        height: 525
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_25
+      rect:
+        serializedVersion: 2
+        x: 4339
+        y: 3585
+        width: 524
+        height: 525
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_26
+      rect:
+        serializedVersion: 2
+        x: 4957
+        y: 3585
+        width: 523
+        height: 525
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_27
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2988
+        width: 523
+        height: 524
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_28
+      rect:
+        serializedVersion: 2
+        x: 617
+        y: 2988
+        width: 524
+        height: 524
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_29
+      rect:
+        serializedVersion: 2
+        x: 1238
+        y: 2988
+        width: 524
+        height: 524
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_30
+      rect:
+        serializedVersion: 2
+        x: 1857
+        y: 2988
+        width: 526
+        height: 524
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_31
+      rect:
+        serializedVersion: 2
+        x: 2477
+        y: 2988
+        width: 526
+        height: 524
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_32
+      rect:
+        serializedVersion: 2
+        x: 3097
+        y: 2988
+        width: 526
+        height: 524
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_33
+      rect:
+        serializedVersion: 2
+        x: 3718
+        y: 2988
+        width: 524
+        height: 524
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_34
+      rect:
+        serializedVersion: 2
+        x: 4339
+        y: 2988
+        width: 524
+        height: 524
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_35
+      rect:
+        serializedVersion: 2
+        x: 4957
+        y: 2988
+        width: 523
+        height: 524
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_36
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2388
+        width: 523
+        height: 527
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_37
+      rect:
+        serializedVersion: 2
+        x: 617
+        y: 2388
+        width: 524
+        height: 527
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_38
+      rect:
+        serializedVersion: 2
+        x: 1238
+        y: 2388
+        width: 524
+        height: 527
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_39
+      rect:
+        serializedVersion: 2
+        x: 1857
+        y: 2388
+        width: 526
+        height: 527
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_40
+      rect:
+        serializedVersion: 2
+        x: 2477
+        y: 2388
+        width: 526
+        height: 527
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_41
+      rect:
+        serializedVersion: 2
+        x: 3097
+        y: 2388
+        width: 526
+        height: 527
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_42
+      rect:
+        serializedVersion: 2
+        x: 3718
+        y: 2388
+        width: 524
+        height: 527
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_43
+      rect:
+        serializedVersion: 2
+        x: 4339
+        y: 2388
+        width: 524
+        height: 527
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_44
+      rect:
+        serializedVersion: 2
+        x: 4957
+        y: 2388
+        width: 523
+        height: 527
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_45
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1792
+        width: 523
+        height: 524
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_46
+      rect:
+        serializedVersion: 2
+        x: 617
+        y: 1792
+        width: 524
+        height: 524
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_47
+      rect:
+        serializedVersion: 2
+        x: 1238
+        y: 1792
+        width: 524
+        height: 524
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_48
+      rect:
+        serializedVersion: 2
+        x: 1857
+        y: 1792
+        width: 526
+        height: 524
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_49
+      rect:
+        serializedVersion: 2
+        x: 2477
+        y: 1792
+        width: 526
+        height: 524
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_50
+      rect:
+        serializedVersion: 2
+        x: 3097
+        y: 1792
+        width: 526
+        height: 524
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_51
+      rect:
+        serializedVersion: 2
+        x: 3718
+        y: 1792
+        width: 524
+        height: 524
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_52
+      rect:
+        serializedVersion: 2
+        x: 4339
+        y: 1792
+        width: 524
+        height: 524
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_53
+      rect:
+        serializedVersion: 2
+        x: 4957
+        y: 1792
+        width: 523
+        height: 524
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_54
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1192
+        width: 523
+        height: 527
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_55
+      rect:
+        serializedVersion: 2
+        x: 617
+        y: 1192
+        width: 524
+        height: 527
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_56
+      rect:
+        serializedVersion: 2
+        x: 1238
+        y: 1192
+        width: 524
+        height: 527
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_57
+      rect:
+        serializedVersion: 2
+        x: 1857
+        y: 1192
+        width: 526
+        height: 527
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_58
+      rect:
+        serializedVersion: 2
+        x: 2477
+        y: 1192
+        width: 526
+        height: 527
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_59
+      rect:
+        serializedVersion: 2
+        x: 3097
+        y: 1192
+        width: 526
+        height: 527
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_60
+      rect:
+        serializedVersion: 2
+        x: 3718
+        y: 1192
+        width: 524
+        height: 527
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_61
+      rect:
+        serializedVersion: 2
+        x: 4339
+        y: 1192
+        width: 524
+        height: 527
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_62
+      rect:
+        serializedVersion: 2
+        x: 4957
+        y: 1192
+        width: 523
+        height: 527
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_63
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 595
+        width: 523
+        height: 525
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_64
+      rect:
+        serializedVersion: 2
+        x: 617
+        y: 595
+        width: 524
+        height: 525
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_65
+      rect:
+        serializedVersion: 2
+        x: 1238
+        y: 595
+        width: 524
+        height: 525
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_66
+      rect:
+        serializedVersion: 2
+        x: 1857
+        y: 595
+        width: 526
+        height: 525
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_67
+      rect:
+        serializedVersion: 2
+        x: 2477
+        y: 595
+        width: 526
+        height: 525
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_68
+      rect:
+        serializedVersion: 2
+        x: 3097
+        y: 595
+        width: 526
+        height: 525
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_69
+      rect:
+        serializedVersion: 2
+        x: 3718
+        y: 595
+        width: 524
+        height: 525
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_70
+      rect:
+        serializedVersion: 2
+        x: 4339
+        y: 595
+        width: 524
+        height: 525
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_71
+      rect:
+        serializedVersion: 2
+        x: 4957
+        y: 595
+        width: 523
+        height: 525
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_72
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 523
+        height: 523
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_73
+      rect:
+        serializedVersion: 2
+        x: 617
+        y: 0
+        width: 524
+        height: 523
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_74
+      rect:
+        serializedVersion: 2
+        x: 1238
+        y: 0
+        width: 524
+        height: 523
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_75
+      rect:
+        serializedVersion: 2
+        x: 1857
+        y: 0
+        width: 526
+        height: 523
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_76
+      rect:
+        serializedVersion: 2
+        x: 2477
+        y: 0
+        width: 526
+        height: 523
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_77
+      rect:
+        serializedVersion: 2
+        x: 3097
+        y: 0
+        width: 526
+        height: 523
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_78
+      rect:
+        serializedVersion: 2
+        x: 3718
+        y: 0
+        width: 524
+        height: 523
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_79
+      rect:
+        serializedVersion: 2
+        x: 4339
+        y: 0
+        width: 524
+        height: 523
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Asset 16_80
+      rect:
+        serializedVersion: 2
+        x: 4957
+        y: 0
+        width: 523
+        height: 523
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

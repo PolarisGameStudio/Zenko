@@ -1,29 +1,28 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fragile_Behaviour : MonoBehaviour {
-
-	public Sprite after;
-	public Sprite before;
-	public bool isafter;
-	public bool ishole;
-	//public Rock_Behaviour mybehaviour;
-
+public class FragileBehaviour : MonoBehaviour {
+	public bool readytolava;
+	public GameObject player;
 	// Use this for initialization
 	void Start () {
-		isafter = false;
-		ishole = false;
+		readytolava = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (this.gameObject.tag == "Hole" && ishole!= true) {
-			SpriteRenderer mySpriter = GetComponent<SpriteRenderer> ();
-			mySpriter.sprite = after;
-			ishole = true;
-			//mybehaviour.MakeHole ();	
+//			float distance = Vector3.Distance(player.transform.position , this.transform.position);
+
+//		Debug.Log(distance);
+		if(readytolava){
+
+			float distance = Vector3.Distance(player.transform.position , this.transform.parent.transform.position);
+//			Debug.Log(distance);
+			if(distance<0.98){
+				GetComponent<Animator>().SetInteger("Phase",1);
+				readytolava = false;
+			}
 		}
 	}
-
 }
