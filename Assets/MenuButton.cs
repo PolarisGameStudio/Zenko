@@ -14,7 +14,8 @@ public class MenuButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler{
     public UnityEvent OnRelease;
     bool done;
     bool restarted;
-    bool open;
+    public static bool open;
+    public GameObject ConfigMenu;
 	// Use this for initialization
 	void Start () {
 		open = false;	
@@ -27,11 +28,14 @@ public class MenuButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler{
 
 	public void toggleMenu(){
         Debug.Log("menu");
-            open = !open;
+            MenuButton.open = !MenuButton.open;
             for(int i=0; i<buttons.Count; i++){
                 buttons[i].SetActive(open);
             }
 	}
+    public void closeMenu(){
+
+    }
 /*	public IENumerator buttonAction(){
 
 	}*/
@@ -74,5 +78,12 @@ public class MenuButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler{
         // do any custom "OnHold" behavior here
  
             yield return null; // makes the loop wait until next frame to continue
+    }
+    public void toggleCongifMenu(){
+        ConfigMenu.SetActive(true);
+        //set menu to back only.
+    }
+    public void closeConfigMenu(){
+        ConfigMenu.SetActive(false);
     }
 }

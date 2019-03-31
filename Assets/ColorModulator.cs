@@ -47,7 +47,7 @@ public class ColorModulator : MonoBehaviour {
 		}*/
 
 		modifyAll();
-		Debug.Log(ButtonHolder.levelbuttons.Count);
+//		Debug.Log(ButtonHolder.levelbuttons.Count);
 	}
 	void modifyAll(){
 

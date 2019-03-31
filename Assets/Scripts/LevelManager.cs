@@ -18,6 +18,7 @@ public class LevelManager : MonoBehaviour {
 	public static int hintnum;
 	public static List<int> hintsgiven = new List<int>();
 	public static bool isdragging;
+	public static bool ispotd;
 	//public static IceTileHandler myicehandler;
 
 
@@ -47,11 +48,12 @@ public class LevelManager : MonoBehaviour {
 		if(!LevelBuilder.iscreated){
 			levelselector.CreateBase ();
 		}
-		levelselector.CreateOuterBase();
+		levelselector.drawNormal(mynum);
+		/*levelselector.CreateOuterBase();
 		levelselector.PlaceBase();
 		//Debug.Log("GONNAGETICE");
 
-		levelselector.DrawNextLevel (mynum);
+		levelselector.DrawNextLevel (mynum);*/
 //		Debug.Log("GONNAGETICE");
 //		myicehandler.GiveIce();
 	}
@@ -85,6 +87,14 @@ public class LevelManager : MonoBehaviour {
 		levelselector.CreateOuterBase();
 
 		levelselector.DrawNextLevel (-105); // -4 means random
+	}
+
+	public static void NextPotd(){
+		myhints = new List<Vector2>();
+		hintsgiven = new List<int>();
+		Debug.Log("GONNAGETICE");
+		levelselector.DestroyAllExceptCamera ();
+		levelselector.drawPotd(Random.Range(0,LevelBuilder.startersPotd.Count));
 	}
 
 	public static void ResetLevel(){

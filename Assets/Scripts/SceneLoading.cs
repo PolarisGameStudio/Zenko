@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 
 public class SceneLoading : MonoBehaviour {
@@ -16,17 +17,23 @@ public class SceneLoading : MonoBehaviour {
 	Dragger td2;
 //	public IceTileHandler myhandler;
 	void Start(){
-		if (txt2 == null){
+		if (txt2 == null){ //if loading menu
 		}
-		else{
+		else{//if loading level scene
 //			Debug.Log(levelnum + "level");
-			if(LevelManager.levelnum == 0 || LevelManager.levelnum ==null)
-			LevelManager.levelnum = -4;
+			Debug.Log(LevelManager.levelnum);
+			if(LevelManager.levelnum == 0 || LevelManager.levelnum ==null){
+			LevelManager.levelnum = 1;				
+			}
+			Debug.Log("sceneloadingstuff");
+
 			//LevelStorer.Lookfor(LevelManager.levelnum);
 			txt2.text = ("Efficient turns is " + LevelStorer.efficientturns);
 			txt.text = LevelManager.levelnum.ToString();
 //			Debug.Log(LevelManager.levelnum);
 		}
+		GameObject.Find("CurrencyHolder").GetComponentInChildren<Text>().text = GameManager.mycurrency.ToString();
+		
 	}
 	public void LoadScene(int num){
 		Swiping.mydirection = "Null";
@@ -35,6 +42,7 @@ public class SceneLoading : MonoBehaviour {
 		LevelStorer.Lookfor(num);
 		LevelManager.levelnum = num;
 		LevelManager.readytodraw = true;
+		LevelManager.ispotd = false;
 		SceneManager.LoadScene(1);
 		//NextlevelButton();
 	}
@@ -69,10 +77,29 @@ public class SceneLoading : MonoBehaviour {
 	public void muteMusic(){
 		AudioSource ms = GameObject.Find("Music Source").GetComponent<AudioSource>();
 		ms.mute = !ms.mute;
+		if(ms.mute){
+			EventSystem.current.currentSelectedGameObject.GetComponent<Image>().sprite = 
+			EventSystem.current.currentSelectedGameObject.GetComponent<ImageSwitch>().imagetwo;			
+		}
+		else{
+			EventSystem.current.currentSelectedGameObject.GetComponent<Image>().sprite = 
+			EventSystem.current.currentSelectedGameObject.GetComponent<ImageSwitch>().imageone;
+		}
+
+
+
 	}
 	public void muteSfx(){
 		AudioSource sfxs = GameObject.Find("Sfx Source").GetComponent<AudioSource>();
 		sfxs.mute = !sfxs.mute;
+		if(sfxs.mute){
+			EventSystem.current.currentSelectedGameObject.GetComponent<Image>().sprite = 
+			EventSystem.current.currentSelectedGameObject.GetComponent<ImageSwitch>().imagetwo;			
+		}
+		else{
+			EventSystem.current.currentSelectedGameObject.GetComponent<Image>().sprite = 
+			EventSystem.current.currentSelectedGameObject.GetComponent<ImageSwitch>().imageone;
+		}
 	}
 	public void RandomLevel(){
 		Swiping.mydirection = "Null";
@@ -83,8 +110,6 @@ public class SceneLoading : MonoBehaviour {
 		TurnCounter.turncount = 0;
 		LevelManager.NextRandomLevel();
 		TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
-		
-		
 	}
 
 	public void RandomLevel2(){
@@ -96,9 +121,25 @@ public class SceneLoading : MonoBehaviour {
 		TurnCounter.turncount = 0;
 		LevelManager.NextRandomLevel2();
 		TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
-		
-		
 	}
+	public void Potd(){
+		Swiping.mydirection = "Null";
+		txt.text = "RANDOM POTD";
+		TurnCounter.turncount = 0;
+		LevelManager.NextPotd();
+		TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
+	}	
+	public void loadPotdMap(){
+		Swiping.mydirection = "Null";
+		TurnCounter.turncount = 0;
+		int num = Random.Range(0,10);
+		Debug.Log ("Going to Scene POTD at " + num);
+		//LevelStorer.Lookfor(num);
+		LevelManager.levelnum = num;
+		LevelManager.ispotd = true;
+		SceneManager.LoadScene(1);
+	}
+
 	public static void SetStars(int rating){
 
 		if(rating == 1){
@@ -169,7 +210,8 @@ public class SceneLoading : MonoBehaviour {
 		LevelManager.ResetLevel();
 		LevelManager.UnPop();
 		//TurnGraphics.ClearCounters();
-		TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
+		//TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
+		ProgressBar.InitializeProgressBar(LevelStorer.efficientturns);
 		//LevelManager.NextLevel (LevelManager.levelnum);
 		//myhandler.GiveIce();
 	}
@@ -244,12 +286,30 @@ public class SceneLoading : MonoBehaviour {
 	}
 	public void adventureMode(){
 		transform.Find("Level_Box").gameObject.SetActive(true);
+		transform.Find("Level_Box").Find("ButtonHolder").GetComponent<LevelMenu>().clearMenu();
 		transform.Find("Level_Box").Find("ButtonHolder").GetComponent<LevelMenu>().currentfirst = PlayerPrefs.GetInt("CurrentFirst");
 		transform.Find("Level_Box").Find("ButtonHolder").GetComponent<LevelMenu>().populateMenu();
 
+		transform.Find("MenuHolder").Find("Menu").gameObject.SetActive(false);
+		transform.Find("MenuHolder").Find("CloseLevel_Box").gameObject.SetActive(true);
+		transform.Find("MenuHolder").Find("MusicToggle").gameObject.SetActive(false);
+		transform.Find("MenuHolder").Find("SfxToggle").gameObject.SetActive(false);
+		transform.Find("MenuHolder").Find("Config").gameObject.SetActive(false);
+		if(MenuButton.open){
+			MenuButton.open = false;
+		}
+
 
 	}
+	public void closeAdventureMode(){
+		transform.Find("Level_Box").gameObject.SetActive(false);
+		//remove curbuttons
+		transform.Find("Level_Box").Find("ButtonHolder").GetComponent<LevelMenu>().currentfirst = PlayerPrefs.GetInt("CurrentFirst");
 
+
+		transform.Find("MenuHolder").Find("Menu").gameObject.SetActive(true);
+		transform.Find("MenuHolder").Find("CloseLevel_Box").gameObject.SetActive(false);		
+	}
 	public void GoToWorldSelect(){
 			SceneManager.LoadScene (1);
 	}

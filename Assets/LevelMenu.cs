@@ -83,7 +83,7 @@ public class LevelMenu : MonoBehaviour {
 		sl.LoadLevel(buttonnum);
 	}
 
-	void clearMenu(){
+	public void clearMenu(){
 		for (int i = 0; i < levelbuttons.Count; i++){
 			levelbuttons[i].SetActive(false);
 			Destroy(levelbuttons[i]);

@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviour {
 	Tile tilescript;
 	bool hasmoved;
 	Color fragilered = new Color(253/255f,65/255f,65/255f,255/255f);
-	TurnGraphics TG;
+	ProgressBar TG;
 	string type;
 	//public KeySimulator mykeysimulator;
 	// Use this for initialization
@@ -63,7 +63,7 @@ public class PlayerMovement : MonoBehaviour {
 		Debug.Log ("TURNEDTOFF");
 		outofmap = false;
 		hasmoved = false;
-		TG = GameObject.Find("TurnCanvas").GetComponent<TurnGraphics>();
+		TG = GameObject.Find("ProgressBar").GetComponent<ProgressBar>();
 	}
 	
 	// Update is called once per frame
@@ -114,7 +114,7 @@ public class PlayerMovement : MonoBehaviour {
 				RatingPopUp.GiveRating ();
 				
 				levelWonBoard.SetActive (true);
-				SceneLoading.SetStars(RatingPopUp.myrating);
+ 				SceneLoading.SetStars(RatingPopUp.myrating);
 				this.enabled = false;
 				Debug.Log ("Goal");
 			}			
@@ -323,7 +323,7 @@ public class PlayerMovement : MonoBehaviour {
 			}
 			TurnCounter.turncount++;
 //			Debug.Log (TurnCounter.turncount);
-			TG.TakeTurn(TurnCounter.turncount);
+			ProgressBar.TakeTurn(TurnCounter.turncount);
 		}
 		if(firstmove == true){
 			firstmove = false;

@@ -17,8 +17,11 @@ public class LevelBuilder : MonoBehaviour {
 
 	public static int rows = 8;
 	public static int cols = 8;
+
+	public static int totaldimension = 8;
+
 	bool renewBoard = false;
-	public static Tile [,] tiles = new Tile[cols,rows];
+	public static Tile [,] tiles = new Tile[10,10];
 
 	static int levelidtoload;
 
@@ -32,9 +35,17 @@ public class LevelBuilder : MonoBehaviour {
 
 	public static bool iscreated;
 
+	public static string[] levelsHorizontal;
+
+	public static int[] startersHorizonal;
+
 	List<GameObject> outertileBank = new List<GameObject>();
 
 	int howfar;
+
+	public static string[] levelsPotd;
+
+	public static List<int> startersPotd;
 
 	//public static List<Transform> piecetiles = new List<Transform>();
 
@@ -67,16 +78,145 @@ public class LevelBuilder : MonoBehaviour {
 		Debug.Log (filePath);
 	}
 
+	public void initPotd(){ //feeds levelPotd string array from textfile.
+		startersPotd = new List<int>();
+		string text = System.IO.File.ReadAllText(System.IO.Path.Combine (Application.streamingAssetsPath, "MapDatabase.txt"));
+		string[] lines = Regex.Split(text, "\n");
+		Debug.Log(lines[0]);
+		for(int i =0; i<lines.Length;i++){
+			startersPotd.Add(i);
+//			Debug.Log(lines[i].Length);
+//			Debug.Log(lines[i]);
+			int mapsize = int.Parse(lines[i].Substring(3,1));		
+			if(lines[i].Length == 5){
+				mapsize = int.Parse(lines[i].Substring(3,2));
+			}			
+			i = i + mapsize + 2;
+		}
+		levelsPotd = (string[])lines.Clone();
+	}
+	public void drawNormal(int levelnumber){
+		LevelManager.piecetiles = new List<Transform>();
+		LevelManager.myhints = new List<Vector2>();
+		LevelManager.hintnum = 0;
+		//PopulationManager.readytobrain = false;
+		string leveltext = ("Level" + levelnumber.ToString() + ".txt");
+		string levelname = ("Level" + levelnumber.ToString ());
+//		Debug.Log("Bouttodraw" + levelnumber);
+		//StartCoroutine(checkAndroid (leveltext));
+		string filePath = System.IO.Path.Combine (Application.streamingAssetsPath, leveltext);
+		Debug.Log(filePath);
+		string[][] jagged = readFile (filePath);
+		//mysnowh;
+		//check dimension.
+
+		tiles = new Tile [totaldimension, totaldimension];
+		CreateBase();
+		CreateOuterBase();
+		PlaceBase();
+		if(levelnumber < 0){
+			Debug.Log(LevelManager.levelnum);
+			jagged = readRandomFile(filePath, LevelManager.levelnum);
+			//Debug.Log(randomer);
+		}
+		piecenums = 0;
+		Debug.Log(jagged.Length);	
+		// create planes based on matrix
+		for (int y = 0; y < totaldimension+1; y++) {
+//			Debug.Log(y);
+			for (int x = 0; x < jagged [y].Length; x++) {
+				double zed = (-y) + (-0.8);
+				//Debug.Log(x + " + " + y);ww
+//				Debug.Log(jagged[y][x]);
+				placeOnWorld(jagged,y,x);
+							
+			}
+		} 
+		GoalDirection((int)goaltransform.position.x,-(int)goaltransform.position.z);
+		Debug.Log(LevelManager.myhints.Count);
+		Debug.Log(LevelStorer.efficientturns);
+		if(LevelBuilder.totaldimension == 10){
+			CameraController.changePosition(1,1);
+			//LightController.setLight(1,1);
+
+		}
+		else if (LevelBuilder.totaldimension < 10){
+			CameraController.changePosition(0,0);
+			//LightController.setLight(0,0);
+
+		}
+		ProgressBar.InitializeProgressBar(LevelStorer.efficientturns);
+		//PopulationManager.readytobrain = true;
+	}
+	public void drawPotd(int num){
+		string[][] jagged = readPotd(num);
+		Debug.Log("TOTAL DIMENSION IS" + totaldimension);
+		tiles = new Tile [totaldimension, totaldimension];
+//		Debug.Log(tiles[9,9]);
+//		Debug.Log(tiles[10,10]);
+		CreateBase();
+		CreateOuterBase();
+		PlaceBase();
+		LevelManager.piecetiles = new List<Transform>();
+		LevelManager.myhints = new List<Vector2>();
+		LevelManager.hintnum = 0;
+		piecenums = 0;
+		for (int y = 0; y < totaldimension+1; y++) {
+			Debug.Log(jagged[y].Length);
+			for (int x = 0; x < jagged[y].Length; x++) {
+				double zed = (-y) + (-0.8);
+				placeOnWorld(jagged,y,x);
+							
+			}
+		} 
+		GoalDirection((int)goaltransform.position.x,-(int)goaltransform.position.z);
+		if(LevelBuilder.totaldimension == 10){
+			CameraController.changePosition(1,1);
+			//LightController.setLight(1,1);
+
+		}
+		else if (LevelBuilder.totaldimension < 10){
+			CameraController.changePosition(0,0);
+			//LightController.setLight(0,0);
+
+		}
+		ProgressBar.InitializeProgressBar(LevelStorer.efficientturns);
+	}
+
+	string[][] readPotd(int place){
+		string text = System.IO.File.ReadAllText(System.IO.Path.Combine (Application.streamingAssetsPath, "MapDatabase.txt"));
+		string firstline = levelsPotd[startersPotd[place]];
+		Debug.Log("Firstline" + firstline);
+		totaldimension = int.Parse(firstline.Substring(3,1));
+		if(firstline.Length == 5){
+			totaldimension = int.Parse(firstline.Substring(3,2));
+		}
+		string[] lines = new string[totaldimension+1];
+		for (int i=0; i<totaldimension+1; i++){
+			lines[i] = levelsPotd[startersPotd[place]+1+i];
+		}
+		Debug.Log(lines[lines.Length-1]);
+		string[][] levelBase = new string [totaldimension+1][];
+//		Debug.Log(lines);
+		for (int i = 0; i<totaldimension+1; i++){
+			string[] stringsOfLine = Regex.Split (lines [i], " ");
+			levelBase [i] = stringsOfLine;
+		}
+		return levelBase;
+	}
+
 	string[][] readFile(string file){
 		string text = System.IO.File.ReadAllText (file);
 		string[] lines = Regex.Split (text, "\n");
 		int rows = lines.Length;
+		Debug.Log(lines.Length);
 		string[][] levelBase = new string[rows][];
 		for (int i = 0; i < lines.Length; i++) {
 //			Debug.Log(lines[i]);
 			string[] stringsOfLine = Regex.Split (lines [i], " ");
 			levelBase [i] = stringsOfLine;
 		}
+		totaldimension = rows-1;
 		Debug.Log(levelBase);
 		return levelBase;
 	}
@@ -86,6 +226,7 @@ public class LevelBuilder : MonoBehaviour {
 		string text = System.IO.File.ReadAllText (file);
 		string[] lines = Regex.Split (text, "\n");
 		int rows = lines.Length;
+		Debug.Log(rows);
 		string[][] levelBase = new string[rows][];
 		int initialpos = 1 + 11*pos;
 		Debug.Log(lines[0]);
@@ -96,8 +237,15 @@ public class LevelBuilder : MonoBehaviour {
 			levelBase [i] = stringsOfLine;
 		}
 
-		Debug.Log(levelBase[7]);
+		//Debug.Log(levelBase[7][0]);
 		return levelBase;
+	}
+
+	void assignStarters(string file, int pos){
+		string text = System.IO.File.ReadAllText(file);
+		string[] lines = Regex.Split(text, "\n");
+		int rows = lines.Length;
+
 	}
 
 	public Transform player;
@@ -152,47 +300,64 @@ public class LevelBuilder : MonoBehaviour {
 	public const string ssfloor_down = "d";
 	public const string ssfloor_rock = "p";
 
+	float mysnowh;
+	int piecenums;
+
 
 
 
 	void Start() {
 	//LevelManager.newicarus = true;
 	LevelManager.levelselector = this;
+	initPotd();
+	//GameObject.Find("Menu").GetComponent<MenuButton>().ConfigMenu.SetActive(false);
 
 	//LevelManager.levelnum = 1;
 	 
 	//Debug.Log(LevelManager.levelnum + "isthenum");
-	Debug.Log(LevelManager.levelnum);
+	Debug.Log(LevelManager.levelnum); //number that was fed in before loading level scene.
 	if (LevelManager.levelnum == null || LevelManager.levelnum == 0) {
-		LevelManager.levelnum = -1;
-		levelnum =-1;
-		//LevelManager.levelnum = Random.Range(1,65);
-		//Debug.Log(LevelManager.levelnum);
-
+		LevelManager.levelnum = 1;
+		levelnum =1;
 	}
 	else{
 		levelnum = LevelManager.levelnum;
 	}
+
 	//LevelManager.levelnum = 65;
 	//levelnum = LevelManager.levelnum;
 	//LevelStorer.Lookfor (LevelManager.levelnum);//assigns efficient turn according to dictionary.
 	//DrawIce ();
 	//DrawNextLevel (levelnum);
-	CreateOuterBase();
-	CreateBase();
-	PlaceBase();
-	TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
-	if(LevelManager.levelnum < 0){
+	if(!LevelManager.ispotd){
+		//load potd maps
+		drawNormal(LevelManager.levelnum);
+		/*string leveltext = ("Level" + LevelManager.levelnum + ".txt");	
+		string filePath = System.IO.Path.Combine (Application.streamingAssetsPath, leveltext);	
+		string[][] jagged = readFile (filePath);
+		Debug.Log(totaldimension);
+		CreateOuterBase();
+		CreateBase();
+		PlaceBase();
+		TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
+		DrawNextLevel(LevelManager.levelnum);*/
+
+	}
+	else{
+		drawPotd(LevelManager.levelnum);
+	}
+
+	/*if(LevelManager.levelnum < 0){
 		LevelManager.levelnum = Random.Range(0,102);
 		Debug.Log(LevelManager.levelnum);
 		DrawNextLevel(-11);
 	}
 	else{
 	DrawNextLevel(LevelManager.levelnum);
-	}
-	TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
+	}*/
+	//TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
 	GameObject.Find("CurrencyHolder").GetComponentInChildren<Text>().text = GameManager.mycurrency.ToString();
-
+	//Debug.Log(readPotd(2));
 	//Debug.Log("MEH");
 	//GameObject objectp = GameObject.Find("TheCanvas");
 	//IceTileHandler myhandler = objectp.GetComponent<IceTileHandler>();
@@ -238,7 +403,7 @@ public class LevelBuilder : MonoBehaviour {
 	}*/
 	public void CreateBase(){
 		iscreated = true;
-		int numCopies = rows*cols;
+		int numCopies = totaldimension*totaldimension;
 		for (int i =0; i<numCopies;i++){
 			for(int j=0; j < tile.Length; j++){
 				GameObject o = (GameObject) Instantiate(tile[j],new Vector3(-10,-10,0), tile[j].transform.rotation);
@@ -248,8 +413,8 @@ public class LevelBuilder : MonoBehaviour {
 		}	
 	}
 	public void PlaceBase(){
-		for (int r= 0; r< rows; r++){
-			for (int c = 0; c<cols; c++){
+		for (int r= 0; r< totaldimension; r++){
+			for (int c = 0; c<totaldimension; c++){
 				Vector3 tilePos = new Vector3(c,0,r);
 				for (int n =0; n< tileBank.Count; n++){
 					GameObject o = tileBank[n];
@@ -272,18 +437,18 @@ public class LevelBuilder : MonoBehaviour {
 			howfar++;
 			for(int y = 0; y<25;y++){
 				InstantiateRandomEnvironment(new Vector2(-x,y));
-				InstantiateRandomEnvironment(new Vector2(x+7,y));
+				InstantiateRandomEnvironment(new Vector2(x+(totaldimension-1),y));
 				if(y!=0){
 					InstantiateRandomEnvironment(new Vector2(-x,-y));
-					InstantiateRandomEnvironment(new Vector2(x+7,-y));					
+					InstantiateRandomEnvironment(new Vector2(x+(totaldimension-1),-y));					
 				}
 			}
 		}	
 		howfar=3;
-		for(int x=0;x<8;x++){
+		for(int x=0;x<totaldimension;x++){
 			for(int y=1; y<25; y++){
 				InstantiateRandomEnvironment(new Vector2(x,y));
-				InstantiateSnow(new Vector2(x,-y-7));				
+				InstantiateSnow(new Vector2(x,-y-(totaldimension-1)));				
 			}
 		}	
 	}
@@ -396,7 +561,10 @@ public class LevelBuilder : MonoBehaviour {
 			}
 		}
 	}
+	public void MakeLevel(){
+		//FindDimension();
 
+	}
 	public void DrawNextLevel(int levelnumber){
 		LevelManager.piecetiles = new List<Transform>();
 		LevelManager.myhints = new List<Vector2>();
@@ -409,13 +577,13 @@ public class LevelBuilder : MonoBehaviour {
 		string filePath = System.IO.Path.Combine (Application.streamingAssetsPath, leveltext);
 		Debug.Log(filePath);
 		string[][] jagged = readFile (filePath);
-		float mysnowh;
+		//mysnowh;
 		if(levelnumber < 0){
 			Debug.Log(LevelManager.levelnum);
 			jagged = readRandomFile(filePath, LevelManager.levelnum);
 			//Debug.Log(randomer);
 		}
-		int piecenums = 0;
+		piecenums = 0;
 		Debug.Log(jagged.Length);	
 		// create planes based on matrix
 		for (int y = 0; y < 9; y++) {
@@ -424,254 +592,261 @@ public class LevelBuilder : MonoBehaviour {
 				double zed = (-y) + (-0.8);
 				//Debug.Log(x + " + " + y);ww
 //				Debug.Log(jagged[y][x]);
-				if(jagged[y][x].Length == 1){
-//					Debug.Log("1 in " + jagged[y][x]);
-					switch (jagged [y] [x]) {
-					case sstart:
-
-						starttransform = Instantiate (floor_start, new Vector3 (x, 0, -y), Quaternion.identity);
-						//GameObject p = player;
-						//Instantiate (player, new Vector3 (x, 0, -y), Quaternion.identity);
-						mysnowh = Random.Range(0f,0.12f);
-						//Instantiate (floor_snow, new Vector3 (x, -mysnowh, -y), Quaternion.identity);
-
-
-						Debug.Log(x + "+" + y);
-						tiles[x,y].tileObj = starttransform.gameObject;
-						tiles[x,y].type = "Start";
-						tiles[x,y].isTaken = true;
-						startpos = new Vector2(x,y);
-						if(y == 0 || y==1){
-							//FaceDown();
-							//p.transform.rotation.y = 270;
-							playertransform = Instantiate (player, new Vector3 (x, 0, -y), Quaternion.Euler(new Vector3(0,270,0)));
-							Debug.Log("Down");
-							break;
-						}
-						if(y == 6 || y==7){
-							//FaceUp();
-							//p.transform.rotation.y = 90;
-							playertransform = Instantiate (player, new Vector3 (x, 0, -y), Quaternion.Euler(new Vector3(0,90,0)));
-							Debug.Log("Up");
-							break;
-						}
-						if(x == 0 || x==1){
-							//FaceRight();
-							//p.transform.rotation.y = 180;
-							playertransform = Instantiate (player, new Vector3 (x, 0, -y), Quaternion.Euler(new Vector3(0,180,0)));
-							Debug.Log("Right");
-							break;
-						}
-						if(x==6 || x==7){
-							//FaceLeft();
-							playertransform = Instantiate (player, new Vector3 (x, 0, -y), Quaternion.identity);
-							Debug.Log("Left");
-							break;
-						}
-						break;
-					case sgoal:
-						goaltransform = Instantiate (floor_goal, new Vector3 (x, 0.162f, -y), Quaternion.identity);
-						tiles[x,y].type = "Goal";
-						tiles[x,y].isTaken = true;
-						tiles[x,y].tileObj = goaltransform.gameObject;
-						mysnowh = Random.Range(0f,0.12f);
-						//Instantiate (floor_snow, new Vector3 (x, -mysnowh, -y), Quaternion.identity);
-
-						break;
-					case sfloor_ice:
-					//	Instantiate (floor_ice, new Vector3 (x, -y, 0), Quaternion.identity);
-						break;
-					case sfloor_wall:
-						//Transform instantiator = floor_wall;
-						int numerator = Random.Range(0,6);
-						mysnowh = Random.Range(0.05f,0.12f);
-						Instantiate (floor_snow, new Vector3 (x, -mysnowh, -y), Quaternion.identity);
-						Instantiate (floor_rocks[numerator], new Vector3 (x, 0, -y), Quaternion.identity);
-						//Instantiate (floor_wall, new Vector3 (x, 0, -y), Quaternion.identity);
-						tiles[x,y].type = "Wall";
-						tiles[x,y].isTaken = true;
-
-						//instantiator = Instantiate (instantiator, new Vector3 (x, -y, 0), Quaternion.identity);
-						//instantiator.GetComponent<Wall_Behaviour>().Start();
-						break;
-					case sfloor_hole:
-						Collider[] colliders = Physics.OverlapSphere(new Vector3(x,0,-y), .5f);
-							foreach (Collider component in colliders) {
-								Debug.Log(component);
-								if (component.tag == "Tile") {	
-									//Debug.Log(component.gameObject.transform.position);	
-									component.gameObject.SetActive(false);
-
-									Debug.Log(component.gameObject.activeSelf);
-									Instantiate (floor_hole, new Vector3 (x, 0, -y), Quaternion.identity);
-									tiles[x,y].type = "Hole";
-									tiles[x,y].isTaken = true;
-									//Destroy(component.gameObject);
-
-									break;
-								}
-							}		
-						break;
-						
-						Instantiate (floor_hole, new Vector3 (x, 0, -y), Quaternion.identity);
-						tiles[x,y].type = "Hole";
-						tiles[x,y].isTaken = true;
-						break;
-					case sfloor_rock:
-						Instantiate (floor_rock, new Vector3 (x, 0, -y), Quaternion.identity);
-	//					Debug.Log("Assign Rock");
-						break;
-					case sfloor_wood:
-						Collider[] collidersw = Physics.OverlapSphere(new Vector3(x,0,-y), .5f);
-						foreach (Collider component in collidersw) {
-//							Debug.Log(component);
-							if (component.tag == "Tile") {	
-								//Debug.Log(component.gameObject.transform.position);	
-								//component.gameObject.SetActive(false);
-//								Debug.Log(component.gameObject.activeSelf);
-								Instantiate (floor_wood, new Vector3 (x, 0, -y), Quaternion.identity);							
-								tiles[x,y].type = "Wood";
-								tiles[x,y].isTaken = true;
-								//Destroy(component.gameObject);
-
-								break;
-							}
-						}		
-						//Instantiate (floor_wood, new Vector3 (x, 0, -y), Quaternion.identity);
-						//tiles[x,y].type = "Wood";
-						//tiles[x,y].isTaken = true;
-						//break;
-						break; 
-					case sfloor_left:
-						//Instantiate	(floor_left, new Vector3 ((float)(x+0.8), (float)0.5,(float)(-y)), floor_left.transform.rotation);
-						Instantiate (floor_left, new Vector3 (x, 0, -y), Quaternion.Euler(new Vector3(0,270,0)));
-
-						//tiles[x,y].type = "Left";
-						//tiles[x,y].isTaken = true;					
-						break;
-					case sfloor_right:
-						Instantiate	(floor_right, new Vector3 (x,0,-y), Quaternion.Euler(new Vector3(0,90,0)));
-						//tiles[x,y].type = "Right";
-						//tiles[x,y].isTaken = true;
-						break;
-					case sfloor_up:
-						//Instantiate	(floor_up, new Vector3 (x, (float)0.5,(float)zed), floor_up.transform.rotation);
-						Instantiate (floor_up, new Vector3 (x, 0, -y), Quaternion.Euler(new Vector3(0,0,0)));
-
-						//tiles[x,y].type = "Up";
-						//tiles[x,y].isTaken = true;
-						break;
-					case sfloor_down:
-						Instantiate	(floor_down, new Vector3 (x, 0, -y), Quaternion.Euler(new Vector3(0,180,0))	);
-						//tiles[x,y].type = "Down";
-						//tiles[x,y].isTaken = true;
-						break;
-					case sfloor_fragile:
-						Collider[] collidersf = Physics.OverlapSphere(new Vector3(x,0,-y), .5f);
-						foreach (Collider component in collidersf) {
-//							Debug.Log(component);
-							if (component.tag == "Tile") {	
-								//Debug.Log(component.gameObject.transform.position);	
-								component.gameObject.SetActive(false);
-//								Debug.Log(component.gameObject.activeSelf);
-								Instantiate (floor_fragile, new Vector3 (x, 0, -y), Quaternion.identity);							
-								tiles[x,y].type = "Fragile";
-								tiles[x,y].isTaken = true;
-								//Destroy(component.gameObject);
-
-								break;
-							}
-						}		
-						break;
-						//Instantiate (floor_fragile, new Vector3 (x, 0, -y), Quaternion.identity);
-						//tiles[x,y].type = "Fragile";
-						////tiles[x,y].isTaken = true;
-						//break;
-					case sfloor_quicksand:
-						Instantiate (floor_quicksand, new Vector3 (x, 0, -y), Quaternion.identity);
-						tiles[x,y].type = "Quicksand";
-						tiles[x,y].isTaken = true;					
-						break;
-					case sfloor_boss:
-						Instantiate (floor_boss, new Vector3(x, 0, -y), Quaternion.identity);
-						break;
-					case ssfloor_left:
-						Instantiate	(s_floor_left, new Vector3 (x, 0, -y), s_floor_left.transform.rotation);
-						break;
-					case ssfloor_right:
-						Instantiate	(s_floor_right, new Vector3 (x, 0, -y), s_floor_right.transform.rotation);
-						break;
-					case ssfloor_up:
-						Instantiate	(s_floor_up, new Vector3 (x, 0, -y), s_floor_up.transform.rotation);
-						break;
-					case ssfloor_down:
-						Instantiate	(s_floor_down, new Vector3 (x, 0, -y), s_floor_down.transform.rotation);
-						break;
-					case ssfloor_rock:
-						Instantiate (s_floor_rock, new Vector3 (x, 0, -y), Quaternion.identity);
-						break;
-					}
-				}
-				if(jagged[y][x].Length ==3){
-//					Debug.Log(jagged[y][x].Substring(0,1));
-					int hintx = int.Parse(jagged[y][x].Substring(1,1));
-					int hinty = int.Parse(jagged[y][x].Substring(2,1));
-					switch(jagged[y][x].Substring(0,1)){
-
-					case sfloor_left:
-						LevelManager.piecetiles.Add (Instantiate	(floor_left, new Vector3 (2+piecenums, 0, -8), Quaternion.Euler(new Vector3(0,270,0))));
-						LevelManager.myhints.Add(new Vector2 (hintx,hinty));
-						break;
-					case sfloor_right:
-						LevelManager.piecetiles.Add (Instantiate	(floor_right, new Vector3 (2+piecenums, 0, -8), Quaternion.Euler(new Vector3(0,90,0))));
-						LevelManager.myhints.Add(new Vector2 (hintx,hinty));
-						break;
-					case sfloor_up:
-						LevelManager.piecetiles.Add (Instantiate	(floor_up, new Vector3 (2+piecenums, 0, -8), Quaternion.Euler(new Vector3(0,0,0))));
-						LevelManager.myhints.Add(new Vector2 (hintx,hinty));
-						break;
-					case sfloor_down:
-						LevelManager.piecetiles.Add (Instantiate	(floor_down, new Vector3 (2+piecenums, 0, -8), Quaternion.Euler(new Vector3(0,180,0))));
-						LevelManager.myhints.Add(new Vector2 (hintx,hinty));
-						break;
-					case sfloor_rock:
-						LevelManager.piecetiles.Add (Instantiate (floor_rock, new Vector3 (2+piecenums, 0, -8), Quaternion.identity));
-						//Debug.Log(LevelManager.piecetiles.Count);
-						LevelManager.myhints.Add(new Vector2 (hintx,hinty));
-						break;
-
-					case ssfloor_left:
-						LevelManager.piecetiles.Add (Instantiate	(s_floor_left, new Vector3 (2+piecenums, 0, -8), Quaternion.Euler(new Vector3(0,270,0))));
-						LevelManager.myhints.Add(new Vector2 (hintx,hinty));
-						break;
-					case ssfloor_right:
-						LevelManager.piecetiles.Add (Instantiate	(s_floor_right, new Vector3 (2+piecenums, 0, -8), Quaternion.Euler(new Vector3(0,90,0))));
-						LevelManager.myhints.Add(new Vector2 (hintx,hinty));
-						break;
-					case ssfloor_up:
-						LevelManager.piecetiles.Add (Instantiate	(s_floor_up, new Vector3 (2+piecenums, 0, -8), Quaternion.Euler(new Vector3(0,0,0))));
-						LevelManager.myhints.Add(new Vector2 (hintx,hinty));
-						break;
-					case ssfloor_down:
-						LevelManager.piecetiles.Add (Instantiate	(s_floor_down, new Vector3 (2+piecenums, 0, -8),Quaternion.Euler(new Vector3(0,180,0))));
-						LevelManager.myhints.Add(new Vector2 (hintx,hinty));
-						break;
-					case ssfloor_rock:
-						LevelManager.piecetiles.Add (Instantiate (s_floor_rock, new Vector3 (2+piecenums, 0, -8), Quaternion.identity));
-						LevelManager.myhints.Add(new Vector2 (hintx,hinty));
-						break;
-					}
-					piecenums++;
-				}
-				if(jagged[y][x].Length ==2){	
-					LevelStorer.efficientturns = int.Parse(jagged[y][x].Substring(1,1));
-				}			
+				placeOnWorld(jagged,y,x);
+							
 			}
 		} 
 		GoalDirection((int)goaltransform.position.x,-(int)goaltransform.position.z);
 		Debug.Log(LevelManager.myhints.Count);
-
 		//PopulationManager.readytobrain = true;
+	}
+	public void placeOnWorld(string[][] jagged,int y, int x){
+//		Debug.Log(tiles.GetLength(0));
+//		Debug.Log("X " +x + "Y "+ y);
+		Debug.Log(jagged[y][x]);
+		if(jagged[y][x].Length == 1){
+		//					Debug.Log("1 in " + jagged[y][x]);
+			switch (jagged [y] [x]) {
+			case sstart:
+
+				starttransform = Instantiate (floor_start, new Vector3 (x, 0, -y), Quaternion.identity);
+				//GameObject p = player;
+				//Instantiate (player, new Vector3 (x, 0, -y), Quaternion.identity);
+				mysnowh = Random.Range(0f,0.12f);
+				//Instantiate (floor_snow, new Vector3 (x, -mysnowh, -y), Quaternion.identity);
+
+
+				Debug.Log(x + "+" + y);
+				tiles[x,y].tileObj = starttransform.gameObject;
+				tiles[x,y].type = "Start";
+				tiles[x,y].isTaken = true;
+				startpos = new Vector2(x,y);
+				if(y == 0 || y==1){
+					//FaceDown();
+					//p.transform.rotation.y = 270;
+					playertransform = Instantiate (player, new Vector3 (x, 0, -y), Quaternion.Euler(new Vector3(0,270,0)));
+					Debug.Log("Down");
+					break;
+				}
+				if(y == 6 || y==7){
+					//FaceUp();
+					//p.transform.rotation.y = 90;
+					playertransform = Instantiate (player, new Vector3 (x, 0, -y), Quaternion.Euler(new Vector3(0,90,0)));
+					Debug.Log("Up");
+					break;
+				}
+				if(x == 0 || x==1){
+					//FaceRight();
+					//p.transform.rotation.y = 180;
+					playertransform = Instantiate (player, new Vector3 (x, 0, -y), Quaternion.Euler(new Vector3(0,180,0)));
+					Debug.Log("Right");
+					break;
+				}
+				if(x==6 || x==7){
+					//FaceLeft();
+					playertransform = Instantiate (player, new Vector3 (x, 0, -y), Quaternion.identity);
+					Debug.Log("Left");
+					break;
+				}
+				break;
+			case sgoal:
+				goaltransform = Instantiate (floor_goal, new Vector3 (x, 0.162f, -y), Quaternion.identity);
+				tiles[x,y].type = "Goal";
+				tiles[x,y].isTaken = true;
+				tiles[x,y].tileObj = goaltransform.gameObject;
+				mysnowh = Random.Range(0f,0.12f);
+				//Instantiate (floor_snow, new Vector3 (x, -mysnowh, -y), Quaternion.identity);
+
+				break;
+			case sfloor_ice:
+			//	Instantiate (floor_ice, new Vector3 (x, -y, 0), Quaternion.identity);
+				break;
+			case sfloor_wall:
+				//Transform instantiator = floor_wall;
+				int numerator = Random.Range(0,6);
+				mysnowh = Random.Range(0.05f,0.12f);
+				Instantiate (floor_snow, new Vector3 (x, -mysnowh, -y), Quaternion.identity);
+				Instantiate (floor_rocks[numerator], new Vector3 (x, 0, -y), Quaternion.identity);
+				//Instantiate (floor_wall, new Vector3 (x, 0, -y), Quaternion.identity);
+				tiles[x,y].type = "Wall";
+				tiles[x,y].isTaken = true;
+
+				//instantiator = Instantiate (instantiator, new Vector3 (x, -y, 0), Quaternion.identity);
+				//instantiator.GetComponent<Wall_Behaviour>().Start();
+				break;
+			case sfloor_hole:
+				Collider[] colliders = Physics.OverlapSphere(new Vector3(x,0,-y), .5f);
+					foreach (Collider component in colliders) {
+						Debug.Log(component);
+						if (component.tag == "Tile") {	
+							//Debug.Log(component.gameObject.transform.position);	
+							component.gameObject.SetActive(false);
+
+							Debug.Log(component.gameObject.activeSelf);
+							Instantiate (floor_hole, new Vector3 (x, 0, -y), Quaternion.identity);
+							tiles[x,y].type = "Hole";
+							tiles[x,y].isTaken = true;
+							//Destroy(component.gameObject);
+
+							break;
+						}
+					}		
+				break;
+				
+				Instantiate (floor_hole, new Vector3 (x, 0, -y), Quaternion.identity);
+				tiles[x,y].type = "Hole";
+				tiles[x,y].isTaken = true;
+				break;
+			case sfloor_rock:
+				Instantiate (floor_rock, new Vector3 (x, 0, -y), Quaternion.identity);
+		//					Debug.Log("Assign Rock");
+				break;
+			case sfloor_wood:
+				Collider[] collidersw = Physics.OverlapSphere(new Vector3(x,0,-y), .5f);
+				foreach (Collider component in collidersw) {
+		//							Debug.Log(component);
+					if (component.tag == "Tile") {	
+						//Debug.Log(component.gameObject.transform.position);	
+						//component.gameObject.SetActive(false);
+		//								Debug.Log(component.gameObject.activeSelf);
+						Instantiate (floor_wood, new Vector3 (x, 0, -y), Quaternion.identity);							
+						tiles[x,y].type = "Wood";
+						tiles[x,y].isTaken = true;
+						//Destroy(component.gameObject);
+
+						break;
+					}
+				}		
+				//Instantiate (floor_wood, new Vector3 (x, 0, -y), Quaternion.identity);
+				//tiles[x,y].type = "Wood";
+				//tiles[x,y].isTaken = true;
+				//break;
+				break; 
+			case sfloor_left:
+				//Instantiate	(floor_left, new Vector3 ((float)(x+0.8), (float)0.5,(float)(-y)), floor_left.transform.rotation);
+				Instantiate (floor_left, new Vector3 (x, 0, -y), Quaternion.Euler(new Vector3(0,270,0)));
+
+				//tiles[x,y].type = "Left";
+				//tiles[x,y].isTaken = true;					
+				break;
+			case sfloor_right:
+				Instantiate	(floor_right, new Vector3 (x,0,-y), Quaternion.Euler(new Vector3(0,90,0)));
+				//tiles[x,y].type = "Right";
+				//tiles[x,y].isTaken = true;
+				break;
+			case sfloor_up:
+				//Instantiate	(floor_up, new Vector3 (x, (float)0.5,(float)zed), floor_up.transform.rotation);
+				Instantiate (floor_up, new Vector3 (x, 0, -y), Quaternion.Euler(new Vector3(0,0,0)));
+
+				//tiles[x,y].type = "Up";
+				//tiles[x,y].isTaken = true;
+				break;
+			case sfloor_down:
+				Instantiate	(floor_down, new Vector3 (x, 0, -y), Quaternion.Euler(new Vector3(0,180,0))	);
+				//tiles[x,y].type = "Down";
+				//tiles[x,y].isTaken = true;
+				break;
+			case sfloor_fragile:
+				Collider[] collidersf = Physics.OverlapSphere(new Vector3(x,0,-y), .5f);
+				foreach (Collider component in collidersf) {
+		//							Debug.Log(component);
+					if (component.tag == "Tile") {	
+						//Debug.Log(component.gameObject.transform.position);	
+						component.gameObject.SetActive(false);
+		//								Debug.Log(component.gameObject.activeSelf);
+						Instantiate (floor_fragile, new Vector3 (x, 0, -y), Quaternion.identity);							
+						tiles[x,y].type = "Fragile";
+						tiles[x,y].isTaken = true;
+						//Destroy(component.gameObject);
+
+						break;
+					}
+				}		
+				break;
+				//Instantiate (floor_fragile, new Vector3 (x, 0, -y), Quaternion.identity);
+				//tiles[x,y].type = "Fragile";
+				////tiles[x,y].isTaken = true;
+				//break;
+			case sfloor_quicksand:
+				Instantiate (floor_quicksand, new Vector3 (x, 0, -y), Quaternion.identity);
+				tiles[x,y].type = "Quicksand";
+				tiles[x,y].isTaken = true;					
+				break;
+			case sfloor_boss:
+				Instantiate (floor_boss, new Vector3(x, 0, -y), Quaternion.identity);
+				break;
+			case ssfloor_left:
+				Instantiate	(s_floor_left, new Vector3 (x, 0, -y), s_floor_left.transform.rotation);
+				break;
+			case ssfloor_right:
+				Instantiate	(s_floor_right, new Vector3 (x, 0, -y), s_floor_right.transform.rotation);
+				break;
+			case ssfloor_up:
+				Instantiate	(s_floor_up, new Vector3 (x, 0, -y), s_floor_up.transform.rotation);
+				break;
+			case ssfloor_down:
+				Instantiate	(s_floor_down, new Vector3 (x, 0, -y), s_floor_down.transform.rotation);
+				break;
+			case ssfloor_rock:
+				Instantiate (s_floor_rock, new Vector3 (x, 0, -y), Quaternion.identity);
+				break;
+			}
+		}
+		if(jagged[y][x].Length ==3){
+		//					Debug.Log(jagged[y][x].Substring(0,1));
+			int hintx = int.Parse(jagged[y][x].Substring(1,1));
+			int hinty = int.Parse(jagged[y][x].Substring(2,1));
+			switch(jagged[y][x].Substring(0,1)){
+
+			case sfloor_left:
+				LevelManager.piecetiles.Add (Instantiate	(floor_left, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,270,0))));
+				LevelManager.myhints.Add(new Vector2 (hintx,hinty));
+				break;
+			case sfloor_right:
+				LevelManager.piecetiles.Add (Instantiate	(floor_right, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,90,0))));
+				LevelManager.myhints.Add(new Vector2 (hintx,hinty));
+				break;
+			case sfloor_up:
+				LevelManager.piecetiles.Add (Instantiate	(floor_up, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,0,0))));
+				LevelManager.myhints.Add(new Vector2 (hintx,hinty));
+				break;
+			case sfloor_down:
+				LevelManager.piecetiles.Add (Instantiate	(floor_down, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,180,0))));
+				LevelManager.myhints.Add(new Vector2 (hintx,hinty));
+				break;
+			case sfloor_rock:
+				LevelManager.piecetiles.Add (Instantiate (floor_rock, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.identity));
+				//Debug.Log(LevelManager.piecetiles.Count);
+				LevelManager.myhints.Add(new Vector2 (hintx,hinty));
+				break;
+
+			case ssfloor_left:
+				LevelManager.piecetiles.Add (Instantiate	(s_floor_left, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,270,0))));
+				LevelManager.myhints.Add(new Vector2 (hintx,hinty));
+				break;
+			case ssfloor_right:
+				LevelManager.piecetiles.Add (Instantiate	(s_floor_right, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,90,0))));
+				LevelManager.myhints.Add(new Vector2 (hintx,hinty));
+				break;
+			case ssfloor_up:
+				LevelManager.piecetiles.Add (Instantiate	(s_floor_up, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,0,0))));
+				LevelManager.myhints.Add(new Vector2 (hintx,hinty));
+				break;
+			case ssfloor_down:
+				LevelManager.piecetiles.Add (Instantiate	(s_floor_down, new Vector3 (2+piecenums, 0, -totaldimension),Quaternion.Euler(new Vector3(0,180,0))));
+				LevelManager.myhints.Add(new Vector2 (hintx,hinty));
+				break;
+			case ssfloor_rock:
+				LevelManager.piecetiles.Add (Instantiate (s_floor_rock, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.identity));
+				LevelManager.myhints.Add(new Vector2 (hintx,hinty));
+				break;
+			}
+			piecenums++;
+		}
+		if(jagged[y][x].Length ==2){	
+			LevelStorer.efficientturns = int.Parse(jagged[y][x].Substring(1,1));
+			Debug.Log("Assigned turns as " + LevelStorer.efficientturns);
+		}
 	}
 
 	public void DrawRandomFromDataBase(){

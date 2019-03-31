@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -82,7 +82,7 @@ public class Dragger : MonoBehaviour {
 			//Cursor.visible = false;
 			Debug.Log (-transform.position.z);
 			Debug.Log(transform.position.x);
-			if(transform.position.x<LevelBuilder.cols&& -transform.position.z<LevelBuilder.rows){
+			if(transform.position.x<LevelBuilder.totaldimension&& -transform.position.z<LevelBuilder.totaldimension){
 				mytile = LevelBuilder.tiles[(int)gameObject.transform.position.x, -(int)gameObject.transform.position.z];
 				mytile.type = "Ice";
 				mytile.isTaken = false;
@@ -119,7 +119,7 @@ public class Dragger : MonoBehaviour {
 
 			if(!gotosky){
 				transform.position = positiontogo;
-				if(positiontogo.x<LevelBuilder.cols && -transform.position.z<LevelBuilder.rows){
+				if(positiontogo.x<LevelBuilder.totaldimension && -transform.position.z<LevelBuilder.totaldimension){
 					//transform.position = new Vector3(mytile);
 				}
 			}

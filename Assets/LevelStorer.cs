@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Text.RegularExpressions;
 using UnityEngine.UI;
+using System.IO;
 
 public class LevelStats {
 	public int levelnum;
@@ -46,6 +48,8 @@ public class LevelStorer : MonoBehaviour {
 	bool hasinitd;
 	private static LevelStorer instance = null;
 	int reset;
+	StreamWriter normalmaps;
+
 
 	// Use this for initialization
 	void Awake () {
@@ -102,9 +106,9 @@ public class LevelStorer : MonoBehaviour {
 		LevelStats lv29 = new LevelStats(29,8,true,0); 
 		LevelStats lv30 = new LevelStats(30,5,true,0); 
 		LevelStats lv31 = new LevelStats(31,5,true,0); 
-		LevelStats lv32 = new LevelStats(32,1,true,0); 
-		LevelStats lv33 = new LevelStats(33,3,true,0); 
-		LevelStats lv34 = new LevelStats(34,2,true,0); 
+		LevelStats lv32 = new LevelStats(32,3,true,0); 
+		LevelStats lv33 = new LevelStats(33,1,true,0); 
+		LevelStats lv34 = new LevelStats(34,3,true,0); 
 		LevelStats lv35 = new LevelStats(35,4,true,0); 
 		LevelStats lv36 = new LevelStats(36,2,true,0); 
 		LevelStats lv37 = new LevelStats(37,5,true,0); 
@@ -273,7 +277,7 @@ public class LevelStorer : MonoBehaviour {
 		leveldic.Add (98, lv98);
 		leveldic.Add (99, lv99);
 		leveldic.Add (100, lv100);
-		Debug.Log(leveldic.Count); 
+//		Debug.Log(leveldic.Count); 
 		if (PlayerPrefs.HasKey ("Loaded")) {
 			Debug.Log ("Has playerpref");
 			PopulateRatings(); //takes old playerprefs and populates current ratings
@@ -303,6 +307,35 @@ public class LevelStorer : MonoBehaviour {
 	}*/
 	void Update(){
 //		Debug.Log(PlayerPrefs.GetInt("Level1Rating"))	;
+	}
+	void Start(){
+		/*string path = Application.dataPath + "/NormalLevels.txt";
+		normalmaps = File.CreateText(path);
+		List<string> levelmaps = new List<string>();
+		//GameObject.Find("CurrencyHolder").GetComponentInChildren<Text>().text = GameManager.mycurrency.ToString();
+		for(int i=1; i<50;i++){
+			string leveltext = ("Level" + i + ".txt");
+
+			string filePath = System.IO.Path.Combine (Application.streamingAssetsPath, leveltext);
+			//Debug.Log(filePath);
+			//string[][] jagged = readFile (filePath);
+
+			string text = System.IO.File.ReadAllText (filePath);
+			string[] lines = Regex.Split (text, "\n");
+			for (int j =0; j<lines.Length; j++){
+				levelmaps.Add(lines[j]);
+			}
+		}
+		foreach(string line in levelmaps){
+			Debug.Log(line);
+			normalmaps.WriteLine(line);
+		}
+		Debug.Log(levelmaps);
+
+*/
+	}
+	void OnApplicationQuit(){
+		//normalmaps.Close();
 	}
 
 	public static void PopulatePlayerPrefs(){

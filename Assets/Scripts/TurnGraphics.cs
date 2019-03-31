@@ -43,7 +43,7 @@ public class TurnGraphics : MonoBehaviour {
 	}
 	public void TakeTurn(int num){
 		//nextsprite = greenpaw;
-		Debug.Log(LevelStorer.efficientturns);
+		/*Debug.Log(LevelStorer.efficientturns);
 		if(num<=LevelStorer.efficientturns)
 		transform.GetChild(num-1).gameObject.GetComponent<Image>().sprite = greenpaw;
 		else if(num<=LevelStorer.efficientturns*2){
@@ -51,7 +51,7 @@ public class TurnGraphics : MonoBehaviour {
 		}
 		else if(num<=LevelStorer.efficientturns*3){
 		transform.GetChild(num-(2*LevelStorer.efficientturns)-1).gameObject.GetComponent<Image>().sprite = redpaw;
-		}
+		}*/
 
 
 	}
@@ -70,6 +70,56 @@ public class TurnGraphics : MonoBehaviour {
 		turnorb1.GetComponent<RectTransform>().localScale = new Vector3(.98f,.98f,.98f);
 		neworbs.Add(turnorb1);	
 	}
+
+
+	public static void SetTurnCounter(int eturns){
+		/*curorbs = neworbs;
+//		Debug.Log(curorbs.Count);
+		if(0<curorbs.Count){
+			for(int i=0; i<curorbs.Count; i++){
+				Destroy(curorbs[i]);
+			}
+		}
+		curorbs.Clear();
+		//Debug.Log(curorbs.Count);
+		Debug.Log("Efficient turns = " + eturns);
+		switch(eturns){
+			case 1:
+				Create1();
+				break;
+			case 2:
+				Create2();
+				break;
+			case 3:
+				Create3();
+				break;
+			case 4:
+				Create4();
+				break;
+			case 5:
+				Create5();
+				break;
+			case 6:
+				Create6();
+				break;
+			case 7:
+				Create7();
+				break;
+			case 8:
+				Create8();
+				break;
+			case 9:
+				Create9();
+				break;
+			case 10:
+				Create10();
+				break;
+		}*/
+	}
+
+	
+
+
 	static void Create1(){
 		CreateImage(0,0);
 	}
@@ -201,49 +251,4 @@ public class TurnGraphics : MonoBehaviour {
 		CreateImage(0,0);
 		
 	}	
-
-	public static void SetTurnCounter(int eturns){
-		curorbs = neworbs;
-//		Debug.Log(curorbs.Count);
-		if(0<curorbs.Count){
-			for(int i=0; i<curorbs.Count; i++){
-				Destroy(curorbs[i]);
-			}
-		}
-		curorbs.Clear();
-		//Debug.Log(curorbs.Count);
-		Debug.Log("Efficient turns = " + eturns);
-		switch(eturns){
-			case 1:
-				Create1();
-				break;
-			case 2:
-				Create2();
-				break;
-			case 3:
-				Create3();
-				break;
-			case 4:
-				Create4();
-				break;
-			case 5:
-				Create5();
-				break;
-			case 6:
-				Create6();
-				break;
-			case 7:
-				Create7();
-				break;
-			case 8:
-				Create8();
-				break;
-			case 9:
-				Create9();
-				break;
-			case 10:
-				Create10();
-				break;
-		}
-	}
 }
