@@ -330,18 +330,82 @@ public class PlayerMovement : MonoBehaviour {
 		}
 		RatingBehaviour.CalculateRating ();
 	}
+	void PopSeed(string type){
+		Debug.Log(type);
+		Debug.Log(tilescript.seedType);
+		Debug.Log(tiletotest.x + " " + tiletotest.z);
+		if(tilescript.seedType == "Wall"){
+			tilescript.type = tilescript.seedType;
+
+		}
+		if(tilescript.seedType == "Left"){
+			tilescript.type = "Wall";
+			if(LevelBuilder.tiles[(int)currenttile.x-1,-(int)currenttile.z].type == "Ice"){
+				LevelBuilder.tiles[(int)currenttile.x-1,-(int)currenttile.z].type = "Left";
+				LevelBuilder.tiles[(int)currenttile.x-1,-(int)currenttile.z].isTaken = true;				
+			}
+			else{
+				LevelBuilder.tiles[(int)currenttile.x-1, -(int)currenttile.z].isSideways = "Left";				
+			}
+
+			Debug.Log(LevelBuilder.tiles[(int)currenttile.x-1,-(int)currenttile.z].type);
+		}
+		if(tilescript.seedType == "Right"){
+			tilescript.type = "Wall";
+			if(LevelBuilder.tiles[(int)currenttile.x+1,-(int)currenttile.z].type == "Ice"){
+				LevelBuilder.tiles[(int)currenttile.x+1,-(int)currenttile.z].type = "Right";
+				LevelBuilder.tiles[(int)currenttile.x+1,-(int)currenttile.z].isTaken = true;
+			}
+			else{
+				LevelBuilder.tiles[(int)currenttile.x+1,-(int)currenttile.z].isSideways = "Right";
+			}
+			Debug.Log(LevelBuilder.tiles[(int)currenttile.x+1,-(int)currenttile.z].type);
+		}
+		if(tilescript.seedType == "Up"){
+			tilescript.type = "Wall";
+			if(LevelBuilder.tiles[(int)currenttile.x,-(int)currenttile.z-1].type == "Ice"){
+				LevelBuilder.tiles[(int)currenttile.x,-(int)currenttile.z-1].type = "Up";
+				LevelBuilder.tiles[(int)currenttile.x,-(int)currenttile.z-1].isTaken = true;
+			}
+			else{
+				LevelBuilder.tiles[(int)currenttile.x,-(int)currenttile.z-1].isSideways = "Up";
+			}
+			Debug.Log(LevelBuilder.tiles[(int)currenttile.x,-(int)currenttile.z-1].type);
+			LevelBuilder.tiles[(int)currenttile.x,-(int)currenttile.z-1].isSideways = "Up";
+
+
+		}
+		if(tilescript.seedType == "Down"){
+			tilescript.type = "Wall";
+			if(LevelBuilder.tiles[(int)currenttile.x,-(int)currenttile.z+1].type == "Ice"){
+				LevelBuilder.tiles[(int)currenttile.x,-(int)currenttile.z+1].type = "Down";
+				LevelBuilder.tiles[(int)currenttile.x,-(int)currenttile.z+1].isTaken = true;
+			}
+			else{
+				LevelBuilder.tiles[(int)currenttile.x,-(int)currenttile.z+1].isSideways = "Down";
+			}
+			Debug.Log(LevelBuilder.tiles[(int)currenttile.x,-(int)currenttile.z+1].type);
+			LevelBuilder.tiles[(int)currenttile.x,-(int)currenttile.z+1].isSideways = "Down";
+		}
+		lastSeed.GetComponent<Dragger>().readyToPop = true;
+		lastSeed.GetComponent<Dragger>().playert = this.gameObject.transform;
+	}
 	//Individual Behaviours to be stored in the following.
 	void ActOnTile(){
-		if (istiletaken == false) {
+		/*if (istiletaken == false) {
 			//move and keep moving i	f theres nothing but ice
 			Count ();
 			currenttile = tiletotest;
-		} 
-		else {
+		} */
+
 //			Debug.Log(tilescript.type);
 			if(outofmap == true){
 				canmove = false;
 				outofmap = false;
+			}
+			else if (tilescript.type == "Ice"){
+				Count ();
+				currenttile = tiletotest;				
 			}
 			else if (tilescript.type == "Wall" || tilescript.type == "Start") {
 				//the desired tile is the previous one and u stop looking for next tiles.
@@ -383,44 +447,40 @@ public class PlayerMovement : MonoBehaviour {
 					isspeeding = true;				
 				}
 			} else if (tilescript.type == "Left") {
-				if(!LevelManager.newicarus){
+
 					Count ();
 					currenttile = tiletotest;
 					canmove = false;
 					nextaction = "Left_Action";
 					isspeeding = true;
 
-				}
+			
 				
 			} else if (tilescript.type == "Right") {
-				if(!LevelManager.newicarus){
+
 					Count ();
 					currenttile = tiletotest;
 					canmove = false;
 					nextaction = "Right_Action";
 					isspeeding = true;
-				}
-				else{
 
-				}
 			} else if (tilescript.type == "Up") {
-				if(!LevelManager.newicarus){
+
 					Count ();
 					currenttile = tiletotest;
 					canmove = false;
 					nextaction = "Up_Action";
 					isspeeding = true;
-				}
+	
 
 			} else if (tilescript.type == "Down") {
-				if(!LevelManager.newicarus){
+
 					Count ();
 					currenttile = tiletotest;
 					canmove = false;
 					nextaction = "Down_Action";
 					isspeeding = true;
-					Debug.Log("DOWNWONWON");
-				}
+
 
 			} else if (tilescript.type == "Fragile") {
 				Count ();
@@ -471,10 +531,9 @@ public class PlayerMovement : MonoBehaviour {
 				currenttile = tiletotest;
 				lastSeed = tilescript.tileObj;
 				//Debug.Log("Check");
-				tilescript.type = tilescript.seedType;
+				//tilescript.type = tilescript.seedType;
+				PopSeed(tilescript.seedType);
 				//tilescript.seedType = "SeededTile";
-				lastSeed.GetComponent<Dragger>().readyToPop = true;
-				lastSeed.GetComponent<Dragger>().playert = this.gameObject.transform;
 				//Vector3 scale = lastSeed.GetComponent<Dragger>().myshrinker.transform.localScale;
 				//scale.Set(.33f,.33f,.33f);
 
@@ -511,7 +570,5 @@ public class PlayerMovement : MonoBehaviour {
 				canmove = false;
 			}
 			Count ();
-
-		}
 	}
 }

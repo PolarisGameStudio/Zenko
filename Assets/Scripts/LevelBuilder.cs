@@ -80,7 +80,7 @@ public class LevelBuilder : MonoBehaviour {
 
 	public void initPotd(){ //feeds levelPotd string array from textfile.
 		startersPotd = new List<int>();
-		string text = System.IO.File.ReadAllText(System.IO.Path.Combine (Application.streamingAssetsPath, "MapDatabase.txt"));
+		string text = System.IO.File.ReadAllText(System.IO.Path.Combine (Application.streamingAssetsPath, "3Ptest.txt"));
 		string[] lines = Regex.Split(text, "\n");
 		Debug.Log(lines[0]);
 		for(int i =0; i<lines.Length;i++){
@@ -184,7 +184,7 @@ public class LevelBuilder : MonoBehaviour {
 	}
 
 	string[][] readPotd(int place){
-		string text = System.IO.File.ReadAllText(System.IO.Path.Combine (Application.streamingAssetsPath, "MapDatabase.txt"));
+		string text = System.IO.File.ReadAllText(System.IO.Path.Combine (Application.streamingAssetsPath, "3Ptest.txt"));
 		string firstline = levelsPotd[startersPotd[place]];
 		Debug.Log("Firstline" + firstline);
 		totaldimension = int.Parse(firstline.Substring(3,1));

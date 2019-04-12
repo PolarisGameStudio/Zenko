@@ -32,10 +32,13 @@ public class GoalBehaviour : MonoBehaviour {
 		//if(myplayer.GetComponent<PlayerMovement>().currenttile != myplayer.transform.position){
 		//	Debug.Log("Moving");
 		//}
+		if(LevelBuilder.playertransform!= null){
 		newx = LevelBuilder.playertransform.position.x;
 		newy = -LevelBuilder.playertransform.position.z;
 		xdif = Mathf.Abs(newx-transform.position.x);
-		ydif = Mathf.Abs(newy+transform.position.z);
+		ydif = Mathf.Abs(newy+transform.position.z);			
+		}
+
 //		Debug.Log(lastphase);
 
 		if(readytomove){

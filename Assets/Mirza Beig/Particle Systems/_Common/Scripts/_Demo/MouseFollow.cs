@@ -63,15 +63,31 @@ namespace MirzaBeig
 
                 void Update()
                 {
-                    Vector3 mousePosition = Input.mousePosition;
-                    mousePosition.z = distanceFromCamera;
+                    if(Random.Range(0,25)>10 && !LevelManager.isdragging){
+                        Vector3 mousePosition = new Vector3(Random.Range(0,Screen.width), Random.Range(0,Screen.height), distanceFromCamera);
+                        //Vector3 mousePosition = Input.mousePosition;
+                  //      Debug.Log(mousePosition);
+                        mousePosition.z = distanceFromCamera;
 
-                    Vector3 mouseScreenToWorld = Camera.main.ScreenToWorldPoint(mousePosition);
+                        Vector3 mouseScreenToWorld = Camera.main.ScreenToWorldPoint(mousePosition);
 
-                    float deltaTime = !ignoreTimeScale ? Time.deltaTime : Time.unscaledDeltaTime;
-                    Vector3 position = Vector3.Lerp(transform.position, mouseScreenToWorld, 1.0f - Mathf.Exp(-speed * deltaTime));
+                        float deltaTime = !ignoreTimeScale ? Time.deltaTime : Time.unscaledDeltaTime;
+                        Vector3 position = Vector3.Lerp(transform.position, mouseScreenToWorld, 1.0f - Mathf.Exp(-speed * deltaTime));
 
-                    transform.position = position;
+                        transform.position = position;                       
+                    }
+                    if(LevelManager.isdragging){
+                        Vector3 mousePosition = Input.mousePosition;
+                        mousePosition.z = distanceFromCamera;
+
+                        Vector3 mouseScreenToWorld = Camera.main.ScreenToWorldPoint(mousePosition);
+
+                        float deltaTime = !ignoreTimeScale ? Time.deltaTime : Time.unscaledDeltaTime;
+                        Vector3 position = Vector3.Lerp(transform.position, mouseScreenToWorld, 1.0f - Mathf.Exp(-speed * deltaTime));
+
+                        transform.position = position;                       
+                    }
+
                 }
 
                 // ...

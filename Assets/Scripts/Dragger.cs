@@ -22,8 +22,11 @@ public class Dragger : MonoBehaviour {
 	public Transform playert;
 	public bool convertWhenReady;
 	public Vector3 positiontogo;
+	public Vector3 lastposition;
 	public bool gototile;
 	public bool gotosky;
+	public GameObject currenttile;
+	public GameObject pasttile;
 
 	void Start(){
 		restingpoint = transform.position;
@@ -80,12 +83,17 @@ public class Dragger : MonoBehaviour {
 			Swiping.canswipe = false;
 			offset = gameObject.transform.position - Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 15));
 			//Cursor.visible = false;
-			Debug.Log (-transform.position.z);
-			Debug.Log(transform.position.x);
+			//Debug.Log (-transform.position.z);
+			//Debug.Log(transform.position.x);
 			if(transform.position.x<LevelBuilder.totaldimension&& -transform.position.z<LevelBuilder.totaldimension){
 				mytile = LevelBuilder.tiles[(int)gameObject.transform.position.x, -(int)gameObject.transform.position.z];
 				mytile.type = "Ice";
 				mytile.isTaken = false;
+				Debug.Log(mytile.isSideways);
+				if(mytile.isSideways != null){
+					mytile.type = mytile.isSideways;
+					mytile.isTaken = true;
+				}
 				Debug.Log(mytile);
 				if(myType == "Left" || myType == "Right" ||myType == "Up" ||myType == "Down"){
 					Debug.Log("Removing ice");
@@ -97,6 +105,7 @@ public class Dragger : MonoBehaviour {
 				//gotosky = true;
 
 			}
+			CheckAvailableTile(positiontogo);
 
 
 			//if(LevelBuilder.tiles[(int)gameObject.transform.position.x, -(int)gameObject.transform.position].type){
@@ -114,8 +123,18 @@ public class Dragger : MonoBehaviour {
 			Vector3 curPosition = Camera.main.ScreenToWorldPoint (curScreenPoint) + offset;
 			// curPosition.x = _lockedYPosition;
 //			Debug.Log(curScreenPoint);
+
 			positiontogo = PlaneBehavior.planePos;	
+
 			positiontogo = new Vector3(Mathf.RoundToInt(PlaneBehavior.planePos.x), PlaneBehavior.planePos.y, Mathf.RoundToInt(PlaneBehavior.planePos.z));	
+			if(lastposition != positiontogo){
+				//Debug.Log("Change");
+				CheckAvailableTile(positiontogo);
+			}			
+			lastposition = positiontogo;
+
+//			Debug.Log(positiontogo);
+
 
 			if(!gotosky){
 				transform.position = positiontogo;
@@ -141,7 +160,46 @@ public class Dragger : MonoBehaviour {
 		}
 
 	}
- 
+ void placeNormal(){
+ 	if(LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].type == "Left" || 
+ 	LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].type == "Down" ||
+ 	LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].type == "Up" ||
+ 	LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].type == "Right"){
+ 		
+ 		LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].isSideways = LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].type;
+ 		
+ 		}
+	
+	LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].type = myType;
+	LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].isTaken = true;
+	LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].tileObj = this.gameObject;	
+	
+ }
+
+ void CheckAvailableTile(Vector3 position){
+ 	Collider[] colliders = Physics.OverlapSphere(new Vector3(position.x,0,position.z), .5f);	
+	foreach (Collider component in colliders) {
+		Debug.Log(component.gameObject);
+		currenttile = component.gameObject;
+	}
+	//Debug.Log(position.x + "" + position.z);
+	if(position.x>-1 && position.x<LevelBuilder.totaldimension && position.z<0 && position.z>-LevelBuilder.totaldimension){
+		Debug.Log("Doing it");
+		if(pasttile != null){
+			pasttile.GetComponent<MouseOverer>().Leave();
+		}
+		currenttile.GetComponent<MouseOverer>().Enter();
+
+		pasttile = currenttile;
+	}
+	else{
+		if(pasttile!= null){
+			pasttile.GetComponent<MouseOverer>().Leave();
+
+		}
+	}
+
+ }
  void OnMouseUp()
  {
  	toggleColliders();
@@ -156,6 +214,7 @@ public class Dragger : MonoBehaviour {
 		GetComponent<BoxCollider>().enabled = true;
 		if(PlaneBehavior.readyToDrop){//from mouseoverer
 			//transform.position = new Vector3(PlaneBehavior.tilex, 0, PlaneBehavior.tiley);
+			currenttile.GetComponent<MeshRenderer>().material.color = currenttile.GetComponent<MouseOverer>().startcolor;
 			positiontogo = new Vector3(PlaneBehavior.tilex, 0, PlaneBehavior.tiley);
 			gototile = true;
 			if(myType == "Left" || myType == "Right" ||myType == "Up" ||myType == "Down"){
@@ -163,10 +222,10 @@ public class Dragger : MonoBehaviour {
 
 			}
 			else{
-				//placeNormal();
-				LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].type = myType;
+				placeNormal();
+				/*LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].type = myType;
 				LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].isTaken = true;
-				LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].tileObj = this.gameObject;				
+				LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].tileObj = this.gameObject;*/				
 			}
 			
 			if(myType == "Wall"){
@@ -181,6 +240,7 @@ public class Dragger : MonoBehaviour {
 			}
 		}
 		else{
+			currenttile.GetComponent<MeshRenderer>().material.color = currenttile.GetComponent<MouseOverer>().startcolor;
 			transform.position = restingpoint;
 			if(myType == "Wall"){
 				this.gameObject.GetComponent<Animator>().SetInteger("Phase", 0);
@@ -234,7 +294,7 @@ public class Dragger : MonoBehaviour {
 			LevelBuilder.tiles[(int)target.x, -(int)target.z].tileObj = this.gameObject;
 			if(LevelBuilder.tiles[(int)target.x-1, -(int)target.z].type == "Ice"){
 				LevelBuilder.tiles[(int)target.x-1, -(int)target.z].type = type;		
-				LevelBuilder.tiles[(int)target.x-1, -(int)target.z].isTaken = true;				
+				//LevelBuilder.tiles[(int)target.x-1, -(int)target.z].isTaken = true;				
 			}	
 			/*else if(LevelBuilder.tiles[(int)target.x-1, -(int)target.z].type == "Wood"){
 				LevelBuilder.tiles[(int)target.x-1, -(int)target.z].type = "Wood" + type;		
@@ -256,7 +316,7 @@ public class Dragger : MonoBehaviour {
 			LevelBuilder.tiles[(int)target.x, -(int)target.z].tileObj = this.gameObject;
 			if(LevelBuilder.tiles[(int)target.x+1, -(int)target.z].type == "Ice"){
 				LevelBuilder.tiles[(int)target.x+1, -(int)target.z].type = type;		
-				LevelBuilder.tiles[(int)target.x+1, -(int)target.z].isTaken = true;				
+				//LevelBuilder.tiles[(int)target.x+1, -(int)target.z].isTaken = true;				
 			}	
 			else{
 				LevelBuilder.tiles[(int)target.x+1, -(int)target.z].isSideways = "Right";
@@ -269,7 +329,7 @@ public class Dragger : MonoBehaviour {
 			LevelBuilder.tiles[(int)target.x, -(int)target.z].tileObj = this.gameObject;	
 			if(LevelBuilder.tiles[(int)target.x, -(int)target.z-1].type == "Ice"){
 				LevelBuilder.tiles[(int)target.x, -(int)target.z-1].type = type;		
-				LevelBuilder.tiles[(int)target.x, -(int)target.z-1].isTaken = true;				
+				//LevelBuilder.tiles[(int)target.x, -(int)target.z-1].isTaken = true;				
 			}	
 			else{
 				LevelBuilder.tiles[(int)target.x, -(int)target.z-1].isSideways = "Up";
@@ -281,7 +341,7 @@ public class Dragger : MonoBehaviour {
 			LevelBuilder.tiles[(int)target.x, -(int)target.z].tileObj = this.gameObject;	
 			if(LevelBuilder.tiles[(int)target.x, -(int)target.z+1].type == "Ice"){
 				LevelBuilder.tiles[(int)target.x, -(int)target.z+1].type = type;		
-				LevelBuilder.tiles[(int)target.x, -(int)target.z+1].isTaken = true;				
+				//		qavsxvgczLevelBuilder.tiles[(int)target.x, -(int)target.z+1].isTaken = true;				
 			}	
 			else{
 				LevelBuilder.tiles[(int)target.x, -(int)target.z+1].isSideways = "Down";
@@ -294,7 +354,7 @@ public class Dragger : MonoBehaviour {
 		if(type == "Left"){
 			if(LevelBuilder.tiles[(int)target.x-1, -(int)target.z].type == type){
 				LevelBuilder.tiles[(int)target.x-1, -(int)target.z].type = "Ice";		
-				LevelBuilder.tiles[(int)target.x-1, -(int)target.z].isTaken = false;	
+				//LevelBuilder.tiles[(int)target.x-1, -(int)target.z].isTaken = false;	
 				LevelBuilder.tiles[(int)target.x-1, -(int)target.z].isSideways = null;					
 			}
 			else if(LevelBuilder.tiles[(int)target.x-1, -(int)target.z].isSideways == type){
@@ -307,7 +367,7 @@ public class Dragger : MonoBehaviour {
 		if(type =="Right"){
 			if(LevelBuilder.tiles[(int)target.x+1, -(int)target.z].type == type){
 				LevelBuilder.tiles[(int)target.x+1, -(int)target.z].type = "Ice";		
-				LevelBuilder.tiles[(int)target.x+1, -(int)target.z].isTaken = false;	
+				//LevelBuilder.tiles[(int)target.x+1, -(int)target.z].isTaken = false;	
 				LevelBuilder.tiles[(int)target.x+1, -(int)target.z].isSideways = null;					
 			}		
 			else if(LevelBuilder.tiles[(int)target.x+1, -(int)target.z].isSideways == type){
@@ -318,7 +378,7 @@ public class Dragger : MonoBehaviour {
 		if(type == "Up" ){	
 			if(LevelBuilder.tiles[(int)target.x, -(int)target.z-1].type == type){
 				LevelBuilder.tiles[(int)target.x, -(int)target.z-1].type = "Ice";		
-				LevelBuilder.tiles[(int)target.x, -(int)target.z-1].isTaken = false;	
+				//LevelBuilder.tiles[(int)target.x, -(int)target.z-1].isTaken = false;	
 				LevelBuilder.tiles[(int)target.x, -(int)target.z-1].isSideways = null;					
 			}	
 			else if(LevelBuilder.tiles[(int)target.x, -(int)target.z-1].isSideways == type){
@@ -329,7 +389,7 @@ public class Dragger : MonoBehaviour {
 		if(type == "Down"){
 			if(LevelBuilder.tiles[(int)target.x, -(int)target.z+1].type == type){
 				LevelBuilder.tiles[(int)target.x, -(int)target.z+1].type = "Ice";		
-				LevelBuilder.tiles[(int)target.x, -(int)target.z+1].isTaken = false;	
+				//LevelBuilder.tiles[(int)target.x, -(int)target.z+1].isTaken = false;	
 				LevelBuilder.tiles[(int)target.x, -(int)target.z+1].isSideways = null;					
 			}
 			else if(LevelBuilder.tiles[(int)target.x, -(int)target.z+1].isSideways == type){

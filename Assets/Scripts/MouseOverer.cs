@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MouseOverer : MonoBehaviour {
-	private Color startcolor;
+	public Color startcolor;
 	private MeshRenderer renderer;
 	public bool canplace;
 
@@ -17,13 +17,7 @@ public class MouseOverer : MonoBehaviour {
 		//NEED TO MAKE A DIFF ONE FOR FRAGILE (has many renderers); 
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-	 void OnMouseEnter()
-	{
-		//if()
+	public void Enter(){
 		if(LevelManager.isdragging){
 			if(LevelBuilder.tiles[(int)transform.position.x, -(int)transform.position.z].isTaken){
 				startcolor = renderer.material.color;
@@ -41,8 +35,7 @@ public class MouseOverer : MonoBehaviour {
 		
 	   // Debug.Log("Enter");
 	}
-	void OnMouseExit()
-	{
+	public void Leave(){
 		if(LevelBuilder.tiles[(int)transform.position.x, -(int)transform.position.z].isTaken){
 		    renderer.material.color = startcolor;
 		    PlaneBehavior.readyToDrop = false;

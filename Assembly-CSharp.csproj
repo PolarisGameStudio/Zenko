@@ -221,6 +221,7 @@
      <None Include="Assets\StreamingAssets\Level63.txt" />
      <None Include="Assets\StreamingAssets\Level14.txt" />
      <None Include="Assets\Mirza Beig\Shaders\Particles\Distortion\TextureDistortion-Add.shader" />
+     <None Include="Assets\StreamingAssets\3test.txt" />
      <None Include="Assets\StreamingAssets\Level-20.txt" />
      <None Include="Assets\StreamingAssets\4x4_LRUD1_Medium.txt" />
      <None Include="Assets\Mirza Beig\Shaders\Image Effects\Resources\Sharpen\Sharpen.shader" />
@@ -314,6 +315,7 @@
      <None Include="Assets\StreamingAssets\Level81.txt" />
      <None Include="Assets\StreamingAssets\MixedMaps.txt" />
      <None Include="Assets\StreamingAssets\Level16.txt" />
+     <None Include="Assets\StreamingAssets\3Ptest.txt" />
      <None Include="Assets\StreamingAssets\Potd.txt" />
      <None Include="Assets\StreamingAssets\Level4.txt" />
      <None Include="Assets\StreamingAssets\Level53.txt" />

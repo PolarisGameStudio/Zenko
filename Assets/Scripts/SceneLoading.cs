@@ -323,7 +323,7 @@ public class SceneLoading : MonoBehaviour {
 			LevelBuilder.tiles[(int)target.x, -(int)target.z].tileObj = td.gameObject;
 			if(LevelBuilder.tiles[(int)target.x-1, -(int)target.z].type == "Ice"){
 				LevelBuilder.tiles[(int)target.x-1, -(int)target.z].type = type;		
-				LevelBuilder.tiles[(int)target.x-1, -(int)target.z].isTaken = true;				
+				//LevelBuilder.tiles[(int)target.x-1, -(int)target.z].isTaken = true;				
 			}	
 			/*else if(LevelBuilder.tiles[(int)target.x-1, -(int)target.z].type == "Wood"){
 				LevelBuilder.tiles[(int)target.x-1, -(int)target.z].type = "Wood" + type;		
@@ -345,7 +345,7 @@ public class SceneLoading : MonoBehaviour {
 			LevelBuilder.tiles[(int)target.x, -(int)target.z].tileObj = td.gameObject;
 			if(LevelBuilder.tiles[(int)target.x+1, -(int)target.z].type == "Ice"){
 				LevelBuilder.tiles[(int)target.x+1, -(int)target.z].type = type;		
-				LevelBuilder.tiles[(int)target.x+1, -(int)target.z].isTaken = true;				
+				//LevelBuilder.tiles[(int)target.x+1, -(int)target.z].isTaken = true;				
 			}	
 			else{
 				LevelBuilder.tiles[(int)target.x+1, -(int)target.z].isSideways = "Right";
@@ -358,7 +358,7 @@ public class SceneLoading : MonoBehaviour {
 			LevelBuilder.tiles[(int)target.x, -(int)target.z].tileObj = td.gameObject;	
 			if(LevelBuilder.tiles[(int)target.x, -(int)target.z-1].type == "Ice"){
 				LevelBuilder.tiles[(int)target.x, -(int)target.z-1].type = type;		
-				LevelBuilder.tiles[(int)target.x, -(int)target.z-1].isTaken = true;				
+				//LevelBuilder.tiles[(int)target.x, -(int)target.z-1].isTaken = true;				
 			}	
 			else{
 				LevelBuilder.tiles[(int)target.x, -(int)target.z-1].isSideways = "Up";
@@ -370,16 +370,42 @@ public class SceneLoading : MonoBehaviour {
 			LevelBuilder.tiles[(int)target.x, -(int)target.z].tileObj = td.gameObject;	
 			if(LevelBuilder.tiles[(int)target.x, -(int)target.z+1].type == "Ice"){
 				LevelBuilder.tiles[(int)target.x, -(int)target.z+1].type = type;		
-				LevelBuilder.tiles[(int)target.x, -(int)target.z+1].isTaken = true;				
+				//LevelBuilder.tiles[(int)target.x, -(int)target.z+1].isTaken = true;				
 			}	
 			else{
 				LevelBuilder.tiles[(int)target.x, -(int)target.z+1].isSideways = "Down";
 			}
 		}
 	}
+	public void removePiece(Vector3 target, string type){
+		if(type == "Wall"){
+			LevelBuilder.tiles[(int)target.x, -(int)target.z].type = "Ice";
+			LevelBuilder.tiles[(int)target.x, -(int)target.z].isTaken = false;	
+			if(LevelBuilder.tiles[(int)target.x, -(int)target.z].isSideways != null){
+				LevelBuilder.tiles[(int)target.x, -(int)target.z].type = LevelBuilder.tiles[(int)target.x, -(int)target.z].isSideways;
+			}			
+		}
 
+
+		if(type == "Left" || type == "Right" || type == "Down" || type == "Up" )	{
+			removeIcarus(type, target);
+		}
+		if(type == "Seed"){
+			LevelBuilder.tiles[(int)target.x, -(int)target.z].type = "Ice";
+			LevelBuilder.tiles[(int)target.x, -(int)target.z].isTaken = false;	
+			if(LevelBuilder.tiles[(int)target.x, -(int)target.z].isSideways != null){
+				LevelBuilder.tiles[(int)target.x, -(int)target.z].type = LevelBuilder.tiles[(int)target.x, -(int)target.z].isSideways;
+			}				
+		}
+	}
 	public void removeIcarus(string type, Vector3 target){
 		Debug.Log(type);
+		LevelBuilder.tiles[(int)target.x, -(int)target.z].type = "Ice";
+		LevelBuilder.tiles[(int)target.x, -(int)target.z].isTaken = false;	
+		if(LevelBuilder.tiles[(int)target.x, -(int)target.z].isSideways != null){
+				LevelBuilder.tiles[(int)target.x, -(int)target.z].type = LevelBuilder.tiles[(int)target.x, -(int)target.z].isSideways;
+		}	
+
 		if(type == "Left"){
 			if(LevelBuilder.tiles[(int)target.x-1, -(int)target.z].type == type){
 				LevelBuilder.tiles[(int)target.x-1, -(int)target.z].type = "Ice";		
@@ -427,6 +453,21 @@ public class SceneLoading : MonoBehaviour {
 			}		
 		}
 	}
+ void placeNormal(Vector3 positiontogo){
+ 	if(LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].type == "Left" || 
+ 	LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].type == "Down" ||
+ 	LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].type == "Up" ||
+ 	LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].type == "Right"){
+ 		
+ 		LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].isSideways = LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].type;
+ 		
+ 		}
+	Debug.Log(td.myType);
+	LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].type = td.myType;
+	LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].isTaken = true;
+	LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].tileObj = td.gameObject;	
+	
+ }
 	public void PlaceHint2(){
 		//Debug.Log
 		for(int i = 0; i<LevelManager.piecetiles.Count; i++){ //First go through the pieces outside of the board.
@@ -438,24 +479,18 @@ public class SceneLoading : MonoBehaviour {
 				//If no one is on their assigned (ideal) tile, place it. and return.
 
 				Vector3 Place = new Vector3 (LevelManager.myhints[i].x, 0, -LevelManager.myhints[i].y);
-				if (LevelBuilder.tiles[(int)Place.x, -(int)Place.z].isTaken == false){
-
-//					LevelBuilder.tiles[(int)td.gameObject.transform.position.x, -(int)td.gameObject.transform.position.z].type = "Ice";
-//					LevelBuilder.tiles[(int)td.gameObject.transform.position.x, -(int)td.gameObject.transform.position.z].isTaken = false;
-					//LevelBuilder.tiles[(int)Place.x, -(int)Place.z].tileObj = td.gameObject;
-
-
-
+				if (LevelBuilder.tiles[(int)Place.x, -(int)Place.z].isTaken == false){ //if it's intended place is free
 					LevelManager.piecetiles[i].position = Place;
+
 					if(td.myType == "Left" || td.myType == "Right" || td.myType == "Up" || td.myType == "Down"){
 						placeIcarus(td.myType, Place);
 
 						}
 						else{
-							//placeNormal();
-							LevelBuilder.tiles[(int)Place.x, -(int)Place.z].type = td.myType;
-							LevelBuilder.tiles[(int)Place.x, -(int)Place.z].isTaken = true;
-							LevelBuilder.tiles[(int)Place.x, -(int)Place.z].tileObj = td.gameObject;				
+							placeNormal(Place);
+							//LevelBuilder.tiles[(int)Place.x, -(int)Place.z].type = td.myType;
+							//LevelBuilder.tiles[(int)Place.x, -(int)Place.z].isTaken = true;
+							//LevelBuilder.tiles[(int)Place.x, -(int)Place.z].tileObj = td.gameObject;				
 						}
 
 					td.gameObject.GetComponent<BoxCollider>().enabled = false;	
@@ -509,10 +544,7 @@ public class SceneLoading : MonoBehaviour {
 
 											}
 											else{
-												//placeNormal();
-												LevelBuilder.tiles[(int)Place2.x, -(int)Place2.z].type = td.myType;
-												LevelBuilder.tiles[(int)Place2.x, -(int)Place2.z].isTaken = true;
-												LevelBuilder.tiles[(int)Place2.x, -(int)Place2.z].tileObj = td.gameObject;				
+												placeNormal(Place2);			
 											}
 
 										td.gameObject.GetComponent<BoxCollider>().enabled = false;					//disable collider so piece stays there.
@@ -574,17 +606,29 @@ public class SceneLoading : MonoBehaviour {
 				if(alternative == false){//If not on an alternative (then move), look for it's hint.
 
 					Debug.Log("Time to place");
+					//this needs work.
 					if(LevelBuilder.tiles[(int)Place.x, -(int)Place.z].isTaken == false){ //if hint place is free
 						Debug.Log("Locked on target");
+						//remove
+						removePiece(td.gameObject.transform.position, 
+							td.myType);
+						//LevelBuilder.tiles[(int)td.gameObject.transform.position.x, -(int)td.gameObject.transform.position.z].type = null;
+						//LevelBuilder.tiles[(int)td.gameObject.transform.position.x, -(int)td.gameObject.transform.position.z].isTaken = false;
+						
 
-						LevelBuilder.tiles[(int)td.gameObject.transform.position.x, -(int)td.gameObject.transform.position.z].type = null;
-						LevelBuilder.tiles[(int)td.gameObject.transform.position.x, -(int)td.gameObject.transform.position.z].isTaken = false;
-						
 						LevelManager.piecetiles[i].position = Place;
+
+						if(td.myType == "Left" || td.myType == "Right" || td.myType == "Up" || td.myType == "Down"){
+							placeIcarus(td.myType, Place);
+
+						}
+						else{
+								placeNormal(Place);
+								//LevelBuilder.tiles[(int)Place.x, -(int)Place.z].type = td.myType;
+								//LevelBuilder.tiles[(int)Place.x, -(int)Place.z].isTaken = true;
+								//LevelBuilder.tiles[(int)Place.x, -(int)Place.z].tileObj = td.gameObject;				
 						
-						LevelBuilder.tiles[(int)Place.x, -(int)Place.z].type = td.myType;
-						LevelBuilder.tiles[(int)Place.x, -(int)Place.z].isTaken = true;
-						LevelBuilder.tiles[(int)Place.x, -(int)Place.z].tileObj = td.gameObject;
+						}
 						td.gameObject.GetComponent<BoxCollider>().enabled = false;					//disable collider so piece stays there.
 						
 						Debug.Log(Place.z);
