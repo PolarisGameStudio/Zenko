@@ -20,13 +20,13 @@ public class MouseOverer : MonoBehaviour {
 	public void Enter(){
 		if(LevelManager.isdragging){
 			if(LevelBuilder.tiles[(int)transform.position.x, -(int)transform.position.z].isTaken){
-				startcolor = renderer.material.color;
-			    renderer.material.color = Color.red;
+				//startcolor = renderer.material.color;
+			    //renderer.material.color = Color.red;
 
 			}
 			else{
-			    startcolor = renderer.material.color;
-			    renderer.material.color = Color.yellow;
+			  //  startcolor = renderer.material.color;
+			   // renderer.material.color = Color.yellow;
 			    PlaneBehavior.tilex = (int)transform.position.x;
 			    PlaneBehavior.tiley = (int)transform.position.z;
 			    PlaneBehavior.readyToDrop = true;
@@ -37,12 +37,12 @@ public class MouseOverer : MonoBehaviour {
 	}
 	public void Leave(){
 		if(LevelBuilder.tiles[(int)transform.position.x, -(int)transform.position.z].isTaken){
-		    renderer.material.color = startcolor;
+		   // renderer.material.color = startcolor;
 		    PlaneBehavior.readyToDrop = false;
 
 		}
 		else{
-		    renderer.material.color = startcolor;
+		    //renderer.material.color = startcolor;
 		    PlaneBehavior.readyToDrop = false;
 		}
 	    //PlaneBehavior

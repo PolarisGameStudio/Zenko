@@ -27,8 +27,10 @@ public class Dragger : MonoBehaviour {
 	public bool gotosky;
 	public GameObject currenttile;
 	public GameObject pasttile;
+	public GameObject particle;
 
 	void Start(){
+		particle = GameObject.Find("Main Camera").GetComponent<LevelBuilder>().smoke_particle.gameObject;
 		restingpoint = transform.position;
 		gototile = false;
 		gotosky = false;
@@ -105,7 +107,11 @@ public class Dragger : MonoBehaviour {
 				//gotosky = true;
 
 			}
-			CheckAvailableTile(positiontogo);
+			// positiontogo = PlaneBehavior.planePos;	
+
+			// positiontogo = new Vector3(Mathf.RoundToInt(PlaneBehavior.planePos.x), PlaneBehavior.planePos.y, Mathf.RoundToInt(PlaneBehavior.planePos.z));	
+			
+			// CheckAvailableTile(positiontogo);
 
 
 			//if(LevelBuilder.tiles[(int)gameObject.transform.position.x, -(int)gameObject.transform.position].type){
@@ -113,6 +119,8 @@ public class Dragger : MonoBehaviour {
 			//}
 			GetComponent<BoxCollider>().enabled = false;
 		}
+
+	
 		//notmoving = false;
  }
  
@@ -127,7 +135,7 @@ public class Dragger : MonoBehaviour {
 			positiontogo = PlaneBehavior.planePos;	
 
 			positiontogo = new Vector3(Mathf.RoundToInt(PlaneBehavior.planePos.x), PlaneBehavior.planePos.y, Mathf.RoundToInt(PlaneBehavior.planePos.z));	
-			if(lastposition != positiontogo){
+			if(lastposition != positiontogo || currenttile == null){
 				//Debug.Log("Change");
 				CheckAvailableTile(positiontogo);
 			}			
@@ -183,25 +191,47 @@ public class Dragger : MonoBehaviour {
 		currenttile = component.gameObject;
 	}
 	//Debug.Log(position.x + "" + position.z);
-	if(position.x>-1 && position.x<LevelBuilder.totaldimension && position.z<0 && position.z>-LevelBuilder.totaldimension){
+	if(position.x>-1 && position.x<LevelBuilder.totaldimension && position.z<1 && position.z>-LevelBuilder.totaldimension){
 		Debug.Log("Doing it");
 		if(pasttile != null){
 			pasttile.GetComponent<MouseOverer>().Leave();
 		}
-		currenttile.GetComponent<MouseOverer>().Enter();
+		if(currenttile!= null && currenttile != pasttile){
+			currenttile.GetComponent<MouseOverer>().Enter();
+
+		}
 
 		pasttile = currenttile;
+		particle.SetActive(true);
+		particle.transform.position = new Vector3(position.x, particle.transform.position.y, position.z);
+		if(LevelBuilder.tiles[(int)position.x, -(int)position.z].isTaken){
+			particle.transform.GetChild(0).GetComponent<Renderer>().enabled = false;
+			particle.transform.GetChild(1).GetComponent<Renderer>().enabled = true;
+
+		}
+		else{
+			particle.transform.GetChild(0).GetComponent<Renderer>().enabled = true;
+			particle.transform.GetChild(1).GetComponent<Renderer>().enabled = false;
+		}
 	}
 	else{
+		particle.transform.GetChild(0).GetComponent<Renderer>().enabled = false;
+		particle.transform.GetChild(1).GetComponent<Renderer>().enabled = false;
 		if(pasttile!= null){
 			pasttile.GetComponent<MouseOverer>().Leave();
 
 		}
 	}
+	Debug.Log(position.x + " " + position.z);
 
  }
  void OnMouseUp()
  {
+ 	if(particle != null){
+ 		particle.transform.GetChild(0).GetComponent<Renderer>().enabled = false;
+		particle.transform.GetChild(1).GetComponent<Renderer>().enabled = false; 		
+ 	}
+
  	toggleColliders();
  	LevelManager.isdragging = false;
  	Cursor.visible = true;
@@ -212,9 +242,19 @@ public class Dragger : MonoBehaviour {
 		Debug.Log(PlaneBehavior.tilex);
 		Debug.Log(PlaneBehavior.tiley);
 		GetComponent<BoxCollider>().enabled = true;
+		if(currenttile  == null){
+		positiontogo = PlaneBehavior.planePos;	
+
+		positiontogo = new Vector3(Mathf.RoundToInt(PlaneBehavior.planePos.x), PlaneBehavior.planePos.y, Mathf.RoundToInt(PlaneBehavior.planePos.z));	
+	 	Collider[] colliders = Physics.OverlapSphere(new Vector3(positiontogo.x,0,positiontogo.z), .5f);	
+		foreach (Collider component in colliders) {
+			Debug.Log(component.gameObject);
+			currenttile = component.gameObject;
+		}
+
+		}
 		if(PlaneBehavior.readyToDrop){//from mouseoverer
 			//transform.position = new Vector3(PlaneBehavior.tilex, 0, PlaneBehavior.tiley);
-			currenttile.GetComponent<MeshRenderer>().material.color = currenttile.GetComponent<MouseOverer>().startcolor;
 			positiontogo = new Vector3(PlaneBehavior.tilex, 0, PlaneBehavior.tiley);
 			gototile = true;
 			if(myType == "Left" || myType == "Right" ||myType == "Up" ||myType == "Down"){
@@ -240,14 +280,16 @@ public class Dragger : MonoBehaviour {
 			}
 		}
 		else{
-			currenttile.GetComponent<MeshRenderer>().material.color = currenttile.GetComponent<MouseOverer>().startcolor;
+				
 			transform.position = restingpoint;
 			if(myType == "Wall"){
 				this.gameObject.GetComponent<Animator>().SetInteger("Phase", 0);
 			}
 			if(myType == "Left" || myType == "Right" ||myType == "Up" ||myType == "Down"){
-			this.gameObject.GetComponent<Animator>().SetInteger("Phase", 0);
-			}	
+			this.gameObject.GetComponent<Animator>().SetInteger("Phase", 0);				
+			}
+	
+
 		}
 	}
 		//Debug.Log()
@@ -264,6 +306,8 @@ public class Dragger : MonoBehaviour {
 		//save began touch 2d point
 		//Swiping.firstPressPos = new Vector2(t.position.x,t.position.y);
 		Swiping.canswipe = true;
+		currenttile = null;
+		pasttile = null;
 
 		/*if (TurnBehaviour.turn == 0) {
    			 Cursor.visible = true;

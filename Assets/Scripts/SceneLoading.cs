@@ -240,7 +240,7 @@ public class SceneLoading : MonoBehaviour {
 	}
 	public void GoToWorld(int worldnumber){
 
-
+		LevelBuilder.iscreated = false;
 		//LevelManager.worldnum = worldnumber;
 		SceneManager.LoadScene(worldnumber);
 		//change camera position depending on 

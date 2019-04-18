@@ -63,7 +63,7 @@ namespace MirzaBeig
 
                 void Update()
                 {
-                    if(Random.Range(0,25)>10 && !LevelManager.isdragging){
+                    if(Random.Range(0,25)>20 && !LevelManager.isdragging){
                         Vector3 mousePosition = new Vector3(Random.Range(0,Screen.width), Random.Range(0,Screen.height), distanceFromCamera);
                         //Vector3 mousePosition = Input.mousePosition;
                   //      Debug.Log(mousePosition);

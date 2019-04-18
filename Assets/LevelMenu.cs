@@ -36,7 +36,7 @@ public class LevelMenu : MonoBehaviour {
 		buttonnum = num;
 		btn.onClick.AddListener(delegate{sl.LoadLevel(num);});
 		curbutton.transform.GetChild(0).GetComponent<Text>().text = num.ToString();
-		if(num != 1){
+		/*if(num != 1){
 			if(LevelStorer.leveldic[num-1].rating == 0){//previous level has no stars
 				curbutton.transform.GetChild(0).gameObject.SetActive(false);	
 				curbutton.transform.GetChild(1).gameObject.SetActive(true);			
@@ -57,7 +57,7 @@ public class LevelMenu : MonoBehaviour {
 				}
 			}
 		}
-		else{
+		else{*/
 				if(LevelStorer.leveldic[num].rating == 1){
 					curbutton.transform.GetChild(3).GetChild(1).GetChild(1).gameObject.SetActive(true);
 				}
@@ -70,7 +70,7 @@ public class LevelMenu : MonoBehaviour {
 					curbutton.transform.GetChild(3).GetChild(1).GetChild(1).gameObject.SetActive(true);
 					curbutton.transform.GetChild(3).GetChild(1).GetChild(2).gameObject.SetActive(true);
 				}			
-		}
+		//}
 
 
 		//curbutton

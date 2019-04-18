@@ -45,7 +45,12 @@ public class LevelBuilder : MonoBehaviour {
 
 	public static string[] levelsPotd;
 
+	public static string[] levelsAdventure;
+
+	public static List<int> startersAdventure;
+
 	public static List<int> startersPotd;
+
 
 	//public static List<Transform> piecetiles = new List<Transform>();
 
@@ -80,7 +85,7 @@ public class LevelBuilder : MonoBehaviour {
 
 	public void initPotd(){ //feeds levelPotd string array from textfile.
 		startersPotd = new List<int>();
-		string text = System.IO.File.ReadAllText(System.IO.Path.Combine (Application.streamingAssetsPath, "3Ptest.txt"));
+		string text = System.IO.File.ReadAllText(System.IO.Path.Combine (Application.streamingAssetsPath, "1Icarusmaps.txt"));
 		string[] lines = Regex.Split(text, "\n");
 		Debug.Log(lines[0]);
 		for(int i =0; i<lines.Length;i++){
@@ -95,7 +100,31 @@ public class LevelBuilder : MonoBehaviour {
 		}
 		levelsPotd = (string[])lines.Clone();
 	}
-	public void drawNormal(int levelnumber){
+	public void initAdventure(){ //feeds Adventure string array from textfile.
+		startersAdventure = new List<int>();
+		string text = System.IO.File.ReadAllText(System.IO.Path.Combine (Application.streamingAssetsPath, "AdventureLevels.txt"));
+		string[] lines = Regex.Split(text, "\n");
+
+		Debug.Log(lines[0]);
+		bool nextismap;
+		nextismap = true;
+		for(int i =0; i<lines.Length;i++){
+			if(nextismap){
+				startersAdventure.Add(i);
+			}
+			nextismap = false;
+//			Debug.Log(lines[i].Length);
+//			Debug.Log(lines[i]);		
+			if(lines[i] == ""){
+				//Debug.Log("BREAK");
+				nextismap = true;
+			}			
+			//i = i + mapsize + 2;
+		}
+		levelsAdventure = (string[])lines.Clone();
+	}
+
+	public void drawAdventure(int levelnumber){
 		LevelManager.piecetiles = new List<Transform>();
 		LevelManager.myhints = new List<Vector2>();
 		LevelManager.hintnum = 0;
@@ -111,7 +140,66 @@ public class LevelBuilder : MonoBehaviour {
 		//check dimension.
 
 		tiles = new Tile [totaldimension, totaldimension];
-		CreateBase();
+		if(!iscreated){
+			CreateBase();
+
+		}
+		CreateOuterBase();
+		PlaceBase();
+		if(levelnumber < 0){
+			Debug.Log(LevelManager.levelnum);
+			jagged = readRandomFile(filePath, LevelManager.levelnum);
+			//Debug.Log(randomer);
+		}
+		piecenums = 0;
+		Debug.Log(jagged.Length);	
+		// create planes based on matrix
+		for (int y = 0; y < totaldimension+1; y++) {
+//			Debug.Log(y);
+			for (int x = 0; x < jagged [y].Length; x++) {
+				double zed = (-y) + (-0.8);
+				//Debug.Log(x + " + " + y);ww
+//				Debug.Log(jagged[y][x]);
+				placeOnWorld(jagged,y,x);
+							
+			}
+		} 
+		GoalDirection((int)goaltransform.position.x,-(int)goaltransform.position.z);
+		Debug.Log(LevelManager.myhints.Count);
+		Debug.Log(LevelStorer.efficientturns);
+		if(LevelBuilder.totaldimension == 10){
+			CameraController.changePosition(1,1);
+			//LightController.setLight(1,1);
+
+		}
+		else if (LevelBuilder.totaldimension < 10){
+			CameraController.changePosition(0,0);
+			//LightController.setLight(0,0);
+
+		}
+		ProgressBar.InitializeProgressBar(LevelStorer.efficientturns);
+		//PopulationManager.readytobrain = true;		
+	}
+	public void drawNormal(int levelnumber){
+		LevelManager.piecetiles = new List<Transform>();
+		LevelManager.myhints = new List<Vector2>();
+		LevelManager.hintnum = 0;
+		//PopulationManager.readytobrain = false;
+		string leveltext = ("Level" + levelnumber.ToString() + ".txt");
+		string levelname = ("Level" + levelnumber.ToString ());
+//		Debug.Log("Bouttodraw" + levelnumber);
+		//StartCoroutine(checkAndroid (leveltext));
+		//string filePath = System.IO.Path.Combine (Application.streamingAssetsPath, leveltext);
+		Debug.Log(filePath);
+		string[][] jagged = readAdventure (levelnumber);
+		//mysnowh;
+		//check dimension.
+
+		tiles = new Tile [totaldimension, totaldimension];
+		if(!iscreated){
+			CreateBase();
+
+		}
 		CreateOuterBase();
 		PlaceBase();
 		if(levelnumber < 0){
@@ -154,7 +242,10 @@ public class LevelBuilder : MonoBehaviour {
 		tiles = new Tile [totaldimension, totaldimension];
 //		Debug.Log(tiles[9,9]);
 //		Debug.Log(tiles[10,10]);
-		CreateBase();
+		if(!iscreated){
+			CreateBase ();
+		}
+		//CreateBase();
 		CreateOuterBase();
 		PlaceBase();
 		LevelManager.piecetiles = new List<Transform>();
@@ -182,10 +273,50 @@ public class LevelBuilder : MonoBehaviour {
 		}
 		ProgressBar.InitializeProgressBar(LevelStorer.efficientturns);
 	}
+	string[][] readAdventure(int place){
+		place = place-1;
+		LevelSaver.currentmap = new List<string>();
+		string text = System.IO.File.ReadAllText(System.IO.Path.Combine (Application.streamingAssetsPath, "AdventureLevels.txt"));
+		string firstline = levelsAdventure[startersAdventure[place]];
+		LevelSaver.currentmap.Add(firstline);
 
+		Debug.Log("Firstline" + firstline);
+		//totaldimension = int.Parse(firstline.Substring(3,1));
+		bool donescanning = false;
+		int linenumber = 1;
+		Debug.Log(levelsAdventure[startersAdventure[place]+linenumber]);
+		while(!donescanning){
+			if(levelsAdventure[startersAdventure[place]+linenumber] == ""){
+				donescanning = true;
+				totaldimension = linenumber-2;
+				Debug.Log(totaldimension);
+			}	
+			linenumber++;
+		}
+
+		string[] lines = new string[totaldimension+1];
+
+		for (int i=0; i<totaldimension+1; i++){
+			lines[i] = levelsAdventure[startersAdventure[place]+1+i];
+			LevelSaver.currentmap.Add(lines[i]);
+		}
+
+		LevelSaver.currentmap.Add("");
+		Debug.Log(lines[lines.Length-1]);
+
+		string[][] levelBase = new string [totaldimension+1][];
+//		Debug.Log(lines);
+		for (int i = 0; i<totaldimension+1; i++){
+			string[] stringsOfLine = Regex.Split (lines [i], " ");
+			levelBase [i] = stringsOfLine;
+		}
+		return levelBase;
+	}
 	string[][] readPotd(int place){
-		string text = System.IO.File.ReadAllText(System.IO.Path.Combine (Application.streamingAssetsPath, "3Ptest.txt"));
+		LevelSaver.currentmap = new List<string>();
+		string text = System.IO.File.ReadAllText(System.IO.Path.Combine (Application.streamingAssetsPath, "1Icarusmaps.txt"));
 		string firstline = levelsPotd[startersPotd[place]];
+		LevelSaver.currentmap.Add(firstline);
 		Debug.Log("Firstline" + firstline);
 		totaldimension = int.Parse(firstline.Substring(3,1));
 		if(firstline.Length == 5){
@@ -194,7 +325,9 @@ public class LevelBuilder : MonoBehaviour {
 		string[] lines = new string[totaldimension+1];
 		for (int i=0; i<totaldimension+1; i++){
 			lines[i] = levelsPotd[startersPotd[place]+1+i];
+			LevelSaver.currentmap.Add(lines[i]);
 		}
+		LevelSaver.currentmap.Add("");
 		Debug.Log(lines[lines.Length-1]);
 		string[][] levelBase = new string [totaldimension+1][];
 //		Debug.Log(lines);
@@ -247,7 +380,7 @@ public class LevelBuilder : MonoBehaviour {
 		int rows = lines.Length;
 
 	}
-
+	public Transform smoke_particle;
 	public Transform player;
 	public Transform floor_ice;
 	public Transform floor_wall;
@@ -310,6 +443,8 @@ public class LevelBuilder : MonoBehaviour {
 	//LevelManager.newicarus = true;
 	LevelManager.levelselector = this;
 	initPotd();
+	initAdventure();
+	//readAdventure(3);
 	//GameObject.Find("Menu").GetComponent<MenuButton>().ConfigMenu.SetActive(false);
 
 	//LevelManager.levelnum = 1;
@@ -432,7 +567,7 @@ public class LevelBuilder : MonoBehaviour {
 		}
 	}
 	public void CreateOuterBase(){
-		howfar = 0;
+		/*howfar = 0;
 		for(int x=1; x<13; x++){
 			howfar++;
 			for(int y = 0; y<25;y++){
@@ -450,7 +585,7 @@ public class LevelBuilder : MonoBehaviour {
 				InstantiateRandomEnvironment(new Vector2(x,y));
 				InstantiateSnow(new Vector2(x,-y-(totaldimension-1)));				
 			}
-		}	
+		}*/	
 	}
 	public void InstantiateRandomEnvironment(Vector2 xy){
 		Instantiate (environment_ice, new Vector3 (xy.x, 0, xy.y), Quaternion.identity);
@@ -871,8 +1006,14 @@ public class LevelBuilder : MonoBehaviour {
 		}
 	}
 	public void ResetPlayer(){
+		if(playertransform != null){
 		Destroy(playertransform.gameObject)/*.SetActive(false)*/;
+
+		}
+		if(starttransform != null){
 		Destroy(starttransform.gameObject)/*.SetActive(false)*/;
+
+		}
 		SpawnPlayer(startpos);
 		goaltransform.gameObject.GetComponentInChildren<Animator>().SetInteger("Phase",0);
 		Debug.Log(goaltransform);

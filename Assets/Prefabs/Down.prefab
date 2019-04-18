@@ -1457,8 +1457,12 @@ MonoBehaviour:
   playert: {fileID: 0}
   convertWhenReady: 0
   positiontogo: {x: 0, y: 0, z: 0}
+  lastposition: {x: 0, y: 0, z: 0}
   gototile: 0
   gotosky: 0
+  currenttile: {fileID: 0}
+  pasttile: {fileID: 0}
+  particle: {fileID: 0}
 --- !u!137 &137379612421925486
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
