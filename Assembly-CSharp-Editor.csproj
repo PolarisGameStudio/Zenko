@@ -78,6 +78,7 @@
      <None Include="Assets\StreamingAssets\Level89.txt" />
      <None Include="Assets\StreamingAssets\Level42.txt" />
      <None Include="Assets\StreamingAssets\Level62.txt" />
+     <None Include="Assets\StreamingAssets\Ch1 5x5 candidates.txt" />
      <None Include="Assets\Mirza Beig\Shaders\Image Effects\Tests\Screen Rain.shader" />
      <None Include="Assets\StreamingAssets\Level52.txt" />
      <None Include="Assets\StreamingAssets\Level-8.txt" />
