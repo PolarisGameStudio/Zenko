@@ -11,13 +11,13 @@ public class PlaneBehavior : MonoBehaviour {
 	public static int tilex;
 	public static int tiley;
 	public static bool readyToDrop;
-	public static int offsetup;
+	public static float offsetup;
 	public static Vector2 curpos;
 	public static Vector2 previouspos;
 	public static bool hashad; //checks if previouspos is not empty.
 	// Use this for initialization
 	void Start () {
-		offsetup = 1;
+		offsetup = .8f;
 		
 		cam = GameObject.Find ("Main Camera").GetComponent<Camera>();
 //		plane = this.parent;
@@ -37,7 +37,7 @@ public class PlaneBehavior : MonoBehaviour {
 //		Debug.Log(ray.GetPoint(rayDistance));
 			planePos = ray.GetPoint(rayDistance);
 			planePos = planePos + Vector3.up*offsetup;
-
+//			Debug.Log(planePos);
 			curpos = new Vector2(Mathf.RoundToInt(planePos.x), -Mathf.RoundToInt(planePos.z));
 			/*if(planePos.x<7.4 && planePos.x>-0.5 && planePos.z>-7.4 && planePos.z<.5){
 				LevelBuilder.tiles[(int)curpos.x,(int)curpos.y].tileObj.GetComponentInChildren<MeshRenderer>().material.color = Color.red;

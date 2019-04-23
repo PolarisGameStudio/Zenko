@@ -24,7 +24,7 @@ public class ColorModulator : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		hue++;
 		if(hue>359){
 			hue = 0;

@@ -33,7 +33,7 @@ public class MouseOverer : MonoBehaviour {
 			}	
 		}
 		
-	   // Debug.Log("Enter");
+	    Debug.Log("Enter");
 	}
 	public void Leave(){
 		if(LevelBuilder.tiles[(int)transform.position.x, -(int)transform.position.z].isTaken){
@@ -46,6 +46,6 @@ public class MouseOverer : MonoBehaviour {
 		    PlaneBehavior.readyToDrop = false;
 		}
 	    //PlaneBehavior
-	    //Debug.Log("Exit");
+	    Debug.Log("Exit");
 	}
 }

@@ -1,4 +1,4 @@
-	using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 //using UnityEngine.Color;
@@ -112,11 +112,9 @@ public class PlayerMovement : MonoBehaviour {
 			}  
 			else if (nextaction == "Goal_Action") {
 				RatingPopUp.GiveRating ();
-				
-				levelWonBoard.SetActive (true);
  				SceneLoading.SetStars(RatingPopUp.myrating);
-				this.enabled = false;
-				Debug.Log ("Goal");
+ 				this.enabled = false;
+				StartCoroutine(PopWin());
 			}			
 			else if (nextaction == "Hole_Action") {
 				LevelLostBoard.SetActive (true);
@@ -570,5 +568,11 @@ public class PlayerMovement : MonoBehaviour {
 				canmove = false;
 			}
 			Count ();
+	}
+	IEnumerator PopWin(){
+		yield return new WaitForSeconds(1);
+		levelWonBoard.SetActive (true);
+
+
 	}
 }
