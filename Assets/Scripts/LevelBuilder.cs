@@ -51,6 +51,8 @@ public class LevelBuilder : MonoBehaviour {
 
 	public static List<int> startersPotd;
 
+	public Color mygray;// = new Color(173/255f,173/255f,173/255f,1f);
+
 
 	//public static List<Transform> piecetiles = new List<Transform>();
 
@@ -85,7 +87,7 @@ public class LevelBuilder : MonoBehaviour {
 
 	public void initPotd(){ //feeds levelPotd string array from textfile.
 		startersPotd = new List<int>();
-		string text = System.IO.File.ReadAllText(System.IO.Path.Combine (Application.streamingAssetsPath, "1Icarusmaps.txt"));
+		string text = System.IO.File.ReadAllText(System.IO.Path.Combine (Application.streamingAssetsPath, "Ch3_Candidates.txt"));
 		string[] lines = Regex.Split(text, "\n");
 		Debug.Log(lines[0]);
 		for(int i =0; i<lines.Length;i++){
@@ -127,7 +129,9 @@ public class LevelBuilder : MonoBehaviour {
 	public void drawAdventure(int levelnumber){
 		LevelManager.piecetiles = new List<Transform>();
 		LevelManager.myhints = new List<Vector2>();
+		LevelManager.hints = new List<Hint>();
 		LevelManager.hintnum = 0;
+		PieceHolders.placedpieces = new List<Dragger>();
 		//PopulationManager.readytobrain = false;
 		string leveltext = ("Level" + levelnumber.ToString() + ".txt");
 		string levelname = ("Level" + levelnumber.ToString ());
@@ -185,6 +189,8 @@ public class LevelBuilder : MonoBehaviour {
 		LevelManager.piecetiles = new List<Transform>();
 		LevelManager.myhints = new List<Vector2>();
 		LevelManager.hintnum = 0;
+		LevelManager.hints = new List<Hint>();
+		PieceHolders.placedpieces = new List<Dragger>();
 		//PopulationManager.readytobrain = false;
 		string leveltext = ("Level" + levelnumber.ToString() + ".txt");
 		string levelname = ("Level" + levelnumber.ToString ());
@@ -253,6 +259,8 @@ public class LevelBuilder : MonoBehaviour {
 		LevelManager.piecetiles = new List<Transform>();
 		LevelManager.myhints = new List<Vector2>();
 		LevelManager.hintnum = 0;
+		LevelManager.hints = new List<Hint>();
+		PieceHolders.placedpieces = new List<Dragger>();
 		piecenums = 0;
 		for (int y = 0; y < totaldimension+1; y++) {
 			Debug.Log(jagged[y].Length);
@@ -316,7 +324,7 @@ public class LevelBuilder : MonoBehaviour {
 	}
 	string[][] readPotd(int place){
 		LevelSaver.currentmap = new List<string>();
-		string text = System.IO.File.ReadAllText(System.IO.Path.Combine (Application.streamingAssetsPath, "1Icarusmaps.txt"));
+		string text = System.IO.File.ReadAllText(System.IO.Path.Combine (Application.streamingAssetsPath, "Ch3_Candidates.txt"));
 		string firstline = levelsPotd[startersPotd[place]];
 		LevelSaver.currentmap.Add(firstline);
 		Debug.Log("Firstline" + firstline);
@@ -808,7 +816,17 @@ public class LevelBuilder : MonoBehaviour {
 				//Instantiate (floor_wall, new Vector3 (x, 0, -y), Quaternion.identity);
 				tiles[x,y].type = "Wall";
 				tiles[x,y].isTaken = true;
+				/*Collider[] colliderswall = Physics.OverlapSphere(new Vector3(x,0,-y), .5f);
+					foreach (Collider component in colliderswall) {
+						Debug.Log(component);
+						if (component.tag == "Tile") {	
+							//Debug.Log(component.gameObject.transform.position);	
+							component.gameObject.GetComponent<Renderer>().material.color = mygray;
+							//Destroy(component.gameObject);
 
+							break;
+						}
+					}	*/
 				//instantiator = Instantiate (instantiator, new Vector3 (x, -y, 0), Quaternion.identity);
 				//instantiator.GetComponent<Wall_Behaviour>().Start();
 				break;
@@ -939,28 +957,33 @@ public class LevelBuilder : MonoBehaviour {
 			case sfloor_left:
 				//LevelManager.piecetiles.Add (Instantiate	(floor_left, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,270,0))));
 				LevelManager.myhints.Add(new Vector2 (hintx,hinty));
+				LevelManager.hints.Add(new Hint("Left", hintx,hinty));
 				pieceHolder.AddPiece("Left");
 				break;
 			case sfloor_right:
 				//LevelManager.piecetiles.Add (Instantiate	(floor_right, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,90,0))));
 				LevelManager.myhints.Add(new Vector2 (hintx,hinty));
 				pieceHolder.AddPiece("Right");
+				LevelManager.hints.Add(new Hint("Right", hintx,hinty));
 				break;
 			case sfloor_up:
 				//LevelManager.piecetiles.Add (Instantiate	(floor_up, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,0,0))));
 				LevelManager.myhints.Add(new Vector2 (hintx,hinty));
 				pieceHolder.AddPiece("Up");
+				LevelManager.hints.Add(new Hint("Up", hintx,hinty));
 				break;
 			case sfloor_down:
 				//LevelManager.piecetiles.Add (Instantiate	(floor_down, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,180,0))));
 				LevelManager.myhints.Add(new Vector2 (hintx,hinty));
 				pieceHolder.AddPiece("Down");
+				LevelManager.hints.Add(new Hint("Down", hintx,hinty));
 				break;
 			case sfloor_rock:
 				//LevelManager.piecetiles.Add (Instantiate (floor_rock, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.identity));
 				//Debug.Log(LevelManager.piecetiles.Count);
 				LevelManager.myhints.Add(new Vector2 (hintx,hinty));
-				pieceHolder.AddPiece("Pedro");
+				pieceHolder.AddPiece("Wall");
+				LevelManager.hints.Add(new Hint("Wall", hintx,hinty));
 				break;
 
 			case ssfloor_left:

@@ -68,6 +68,13 @@ public class PlayerMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if(canmove){
+			this.transform.GetChild(3).GetComponent<Animator>().SetInteger("Phase", 0);
+
+		}
+		if(!canmove){
+			this.transform.GetChild(3).GetComponent<Animator>().SetInteger("Phase", 1);
+		}
 		if (Input.GetKeyDown (KeyCode.G)){
 			Debug.Log(LevelBuilder.tiles[0,0].isTaken);
 		}

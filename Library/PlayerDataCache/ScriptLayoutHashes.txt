@@ -1,4 +1,4 @@
-WindowsStandalone
+OSXStandalone
 54d540980ddebac8e1bdf83ae536015a Assembly-CSharp.dll:MirzaBeig.Scripting.Effects.TurbulenceParticleForceField
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.LevelDecoder
 52c689b617b54a57c7bbfde345c8c207 Assembly-CSharp.dll:.RewindParticleSystemSuperSimple
@@ -134,7 +134,7 @@ b7b27784fd7ef3e851166d6f03601c9b Assembly-CSharp.dll:MirzaBeig.ParticleSystems.A
 5cf565a34915b7dc56d4ef7c4f8efffc Assembly-CSharp.dll:MirzaBeig.ParticleSystems.Demos.DemoManager
 cac5e62c64bc02a8223e45b78da71b3c Assembly-CSharp.dll:MirzaBeig.Shaders.ImageEffects.MirzaPostProcessing
 dc07d7ad69b399a46e92c483bf1c04ca UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsTracker
-6c8087df8c96cea043530c9cf218feae Assembly-CSharp.dll:.UIMonster
+0781d907322089d044812e029d04d85e Assembly-CSharp.dll:.UIMonster
 3d76ec4fed2acd7bea821622100ed894 Assembly-CSharp.dll:.AssignCamera
 bc68edb0af574bf79f9550ead8ebae5c UnityEngine.HoloLens.dll:UnityEngine.Audio.AudioSpatializerMicrosoft
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInput
@@ -219,7 +219,7 @@ bd30596af5f10c89ed0975dc711a24bf Assembly-CSharp.dll:.FragileProperties
 5d91a4973ed39db206ccdb323822e6bf Assembly-CSharp.dll:.AssignCanvasAndButton
 8cdc3117ac4cf3f5ce308e10cb0f8612 Assembly-CSharp.dll:.ParticlePlexusDemo_CameraRig
 dd0ddc8e64e55ed6d59383aa2a8b6592 Assembly-CSharp.dll:MirzaBeig.Shaders.ImageEffects.Sharpen
-a9039f6d6232102f69f66b6b6c064122 Assembly-CSharp.dll:.LevelBuilder
+31a38e5ff272751cbc8e2a08be0f8ec5 Assembly-CSharp.dll:.LevelBuilder
 1713319fd49e8495aef76ed9f1956072 Assembly-CSharp.dll:MirzaBeig.ParticleSystems.TransformNoise
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.LevelSaver
 e81c2ec0ab92ddcc0c0e5d15848f24ee Assembly-CSharp.dll:MirzaBeig.Scripting.Effects.ParticleLights

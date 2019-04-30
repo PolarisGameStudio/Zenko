@@ -3,6 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
+public class Hint{
+	public string type;
+	public int x;
+	public int y;
+	public Hint(string newtype, int newx, int newy){
+		type = newtype;
+		x = newx;
+		y = newy;
+	}
+}
+
 public class LevelManager : MonoBehaviour {
 
 	public static bool newicarus;
@@ -13,12 +24,14 @@ public class LevelManager : MonoBehaviour {
 	public static int worldnum;
 	public static int myefficientturns;
 	public static List<Vector2> myhints = new List<Vector2>();
+	public static List<string> mypieces = new List<string>();
 	public static List<Transform> piecetiles = new List<Transform>();
 	public static bool israndom;
 	public static int hintnum;
 	public static List<int> hintsgiven = new List<int>();
 	public static bool isdragging;
 	public static bool ispotd;
+	public static List<Hint> hints = new List<Hint>();
 	//public static IceTileHandler myicehandler;
 
 

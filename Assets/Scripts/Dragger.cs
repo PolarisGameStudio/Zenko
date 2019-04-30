@@ -80,10 +80,11 @@ public class Dragger : MonoBehaviour {
 	}
 
 	 public void OnMouseDown() {
-		transform.GetChild(1).gameObject.SetActive(false);
+		//transform.GetChild(1).gameObject.SetActive(false);
   	  //screenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position); // I removed this line to prevent centring 
   	 // _lockedYPosition = screenPoint.y;
 	 	toggleColliders();
+//	 	Debug.Log(TurnBehaviour.turn);
 		if (TurnBehaviour.turn == 0) {
 			if(myType == "Wall"){
 				this.gameObject.GetComponent<Animator>().SetInteger("Phase", 1);
@@ -228,7 +229,10 @@ public class Dragger : MonoBehaviour {
 		pasttile = currenttile;
 		particle.SetActive(true);
 		particle.transform.position = new Vector3(position.x, particle.transform.position.y, position.z);
-		this.gameObject.GetComponent<Animator>().SetInteger("Phase", 1);
+		if(myType == "Wall" || myType == "Up" ||myType == "Down" ||myType == "Right" ||myType == "Left" ){
+			this.gameObject.GetComponent<Animator>().SetInteger("Phase", 1);
+
+		}
 
 		if(LevelBuilder.tiles[(int)position.x, -(int)position.z].isTaken){
 			particle.transform.GetChild(0).GetComponent<Renderer>().enabled = false;
@@ -245,7 +249,10 @@ public class Dragger : MonoBehaviour {
 		}
 	}
 	else{
-		this.gameObject.GetComponent<Animator>().SetInteger("Phase", 0);
+		if(myType == "Wall" || myType == "Up" ||myType == "Down" ||myType == "Right" ||myType == "Left" ){
+			this.gameObject.GetComponent<Animator>().SetInteger("Phase", 0);
+
+		}
 		isinboard = false;
 		particle.transform.GetChild(0).GetComponent<Renderer>().enabled = false;
 		particle.transform.GetChild(1).GetComponent<Renderer>().enabled = false;
@@ -291,6 +298,7 @@ public class Dragger : MonoBehaviour {
 
 		}
 		if(PlaneBehavior.readyToDrop){//from mouseoverer
+			PieceHolders.placedpieces.Add(this);
 			//transform.position = new Vector3(PlaneBehavior.tilex, 0, PlaneBehavior.tiley);
 			positiontogo = new Vector3(PlaneBehavior.tilex, 0, PlaneBehavior.tiley);
 			gototile = true;
@@ -318,7 +326,10 @@ public class Dragger : MonoBehaviour {
 			pieceHolder.unshadeImage(myType);
 		}
 		else{
-			this.gameObject.GetComponent<Animator>().SetInteger("Phase", 0);
+			if(myType == "Wall" || myType == "Up" ||myType == "Down" ||myType == "Right" ||myType == "Left" ){
+				this.gameObject.GetComponent<Animator>().SetInteger("Phase", 0);
+
+			}
 
 			transform.GetChild(1).gameObject.SetActive(true);				
 			transform.position = restingpoint;
@@ -328,8 +339,9 @@ public class Dragger : MonoBehaviour {
 			if(myType == "Left" || myType == "Right" ||myType == "Up" ||myType == "Down"){
 			this.gameObject.GetComponent<Animator>().SetInteger("Phase", 0);				
 			}
+			PieceHolders.placedpieces.Remove(this);
+			pieceHolder.updateValueUp(myType);			
 			Destroy(this.gameObject);
-			pieceHolder.updateValueUp(myType);
 	
 
 		}

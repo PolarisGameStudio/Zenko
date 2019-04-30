@@ -7,6 +7,7 @@ public class UIMonster : MonoBehaviour {
 	public GameObject mypiece;
 	public string mytype;
 	public PieceHolders pieceHolder;
+	public List<GameObject> piecesSpawned;
 	// Use this for initialization
 	void Start () {
 		pieceHolder = GameObject.Find("PieceHolders").GetComponent<PieceHolders>();
@@ -16,13 +17,27 @@ public class UIMonster : MonoBehaviour {
 	void Update () {
 		
 	}
-	public void Spawnit(){
-		Instantiate(mypiece, new Vector3(0, 0, 0), Quaternion.identity);
-
+	public GameObject Spawnit(){
+		GameObject spawned = Instantiate(mypiece, new Vector3(0, 0, 0), Quaternion.identity);
+		RotateIcarus(spawned);
+		spawned.transform.GetChild(1).gameObject.SetActive(false);
+		piecesSpawned.Add(spawned);
+		return spawned;
+	}
+	public void RotateIcarus(GameObject Icarus){
+		if(mytype == "Left"){
+			Icarus.transform.eulerAngles =  new Vector3(0f,270f,0f);
+		}
+		if(mytype == "Right"){
+			Icarus.transform.eulerAngles = new Vector3(0f,90f,0f);
+		}
+		if(mytype == "Down"){
+			Icarus.transform.eulerAngles = new Vector3(0f,180f,0f);
+		}
 	}
 	public void OnPointerDown(){
 		PlaneBehavior.readyToDrop = false;
-		if(pieceHolder.isAvailable(mytype)){
+		if(pieceHolder.isAvailable(mytype) && TurnBehaviour.turn == 0){
 			pieceHolder.updateValueDown(mytype);
 			Color tempColor = GetComponent<Image>().color;
 			tempColor.a = .5f;
