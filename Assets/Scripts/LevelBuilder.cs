@@ -1005,7 +1005,10 @@ public class LevelBuilder : MonoBehaviour {
 			case ssfloor_rock:
 				LevelManager.piecetiles.Add (Instantiate (s_floor_rock, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.identity));
 				LevelManager.myhints.Add(new Vector2 (hintx,hinty));
+				//pieceHolder.AddPiece("WallSeed");
+				//LevelManager.hints.Add(new Hint("WallSeed", hintx,hinty));
 				break;
+
 			}
 			piecenums++;
 		}

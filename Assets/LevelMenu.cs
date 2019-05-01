@@ -108,7 +108,7 @@ public class LevelMenu : MonoBehaviour {
 	}
 
 	public void populateMenuUp(){
-		if(currentfirst <81){
+		if(currentfirst <181){
 			clearMenu();
 			for (int i = currentfirst+20; i < currentfirst+40; i++){
 				createButton(i);

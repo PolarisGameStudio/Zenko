@@ -124,7 +124,7 @@ public class PlayerMovement : MonoBehaviour {
 				StartCoroutine(PopWin());
 			}			
 			else if (nextaction == "Hole_Action") {
-				LevelLostBoard.SetActive (true);
+				StartCoroutine(PopLose());
 				this.enabled=false;
 				Debug.Log("Hole");
 
@@ -580,6 +580,11 @@ public class PlayerMovement : MonoBehaviour {
 		yield return new WaitForSeconds(1);
 		levelWonBoard.SetActive (true);
 
+
+	}
+	IEnumerator PopLose(){
+		yield return new WaitForSeconds(.4f);
+		LevelLostBoard.SetActive (true);
 
 	}
 }

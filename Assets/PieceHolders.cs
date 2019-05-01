@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -29,7 +29,7 @@ public class PieceHolders : MonoBehaviour {
 	public GameObject rightHolder;
 	public GameObject upHolder;
 	public GameObject downHolder;
-	public GameObject pedroSeedHolder;
+	public GameObject wallSeedHolder;
 	public GameObject leftSeedHolder;
 	public GameObject rightSeedHolder;
 	public GameObject upSeedHolder;
@@ -39,7 +39,7 @@ public class PieceHolders : MonoBehaviour {
 	public int rightNumber;
 	public int upNumber;
 	public int downNumber;
-	public int pedroSeedNumber;
+	public int wallSeedNumber;
 	public int leftSeedNumber;
 	public int rightSeedNumber;
 	public int upSeedNumber;
@@ -64,6 +64,7 @@ public class PieceHolders : MonoBehaviour {
 		rightHolder.SetActive(false);
 		upHolder.SetActive(false);
 		downHolder.SetActive(false);
+		wallSeedHolder.SetActive(false);
 		initValues();
 		holders = new List<Holder>();
 	}
@@ -74,11 +75,13 @@ public class PieceHolders : MonoBehaviour {
 	upNumber = 0;
 	downNumber = 0;
 	holdersNumber = 0;
+	wallSeedNumber = 0;
 	pedroHolder.GetComponent<Image>().color = Color.white;
 	leftHolder.GetComponent<Image>().color = Color.white;
 	upHolder.GetComponent<Image>().color = Color.white;
 	rightHolder.GetComponent<Image>().color = Color.white;
 	downHolder.GetComponent<Image>().color = Color.white;
+	wallSeedHolder.GetComponent<Image>().color = Color.white;
 	}
 	public void InitHolder(string type){
 		if(type == "Pedro" || type ==  "Wall"){
@@ -95,6 +98,9 @@ public class PieceHolders : MonoBehaviour {
 		}
 		if(type == "Down"){
 			holders.Add(new Holder(type,1,1,downHolder,true));
+		}
+		if(type == "WallSeed"){
+			holders.Add(new Holder(type,1,1,wallSeedHolder,true));
 		}
 	}
 	public void AddtoHolder(string type){
@@ -179,12 +185,25 @@ public class PieceHolders : MonoBehaviour {
 				initSize();
 			}			
 		}
+		if(type == "WallSeed"){
+			if(wallSeedHolder.active){
+				wallSeedNumber++;
+				AddtoHolder(type);
+			}
+			else{
+				InitHolder(type);
+				wallSeedHolder.SetActive(true);
+				holdersNumber++;
+				wallSeedNumber++;
+				initSize();
+			}			
+		}
 		updateText(type);
 	}
 	public void updateValueUp(string type){
 		if(type == "Pedro" || type == "Wall"){
 			pedroNumber ++;
-			pedroHolder.transform.GetChild(0).transform.GetComponent<Text>().text = "Pedro x" + pedroNumber;
+			pedroHolder.transform.GetChild(0).transform.GetComponent<Text>().text = "Wall x" + pedroNumber;
 			pedroHolder.GetComponent<Image>().color = Color.white;
 
 		}
@@ -208,6 +227,11 @@ public class PieceHolders : MonoBehaviour {
 			rightHolder.transform.GetChild(0).transform.GetComponent<Text>().text = "Right x" + rightNumber;
 			rightHolder.GetComponent<Image>().color = Color.white;
 		}		
+		if(type == "WallSeed"){
+			wallSeedNumber++;
+			wallSeedHolder.transform.GetChild(0).transform.GetComponent<Text>().text = "WallSeed x" + wallSeedNumber;
+			wallSeedHolder.GetComponent<Image>().color = Color.white;
+		}	
 	}
 	public void unshadeImage(string type){
 		if(type == "Pedro" || type == "Wall"){
@@ -234,7 +258,12 @@ public class PieceHolders : MonoBehaviour {
 			Color tempColor = rightHolder.GetComponent<Image>().color;
 			tempColor.a = 1f;
 			rightHolder.GetComponent<Image>().color = tempColor;
-		}				
+		}	
+		if(type == "WallSeed"){
+			Color tempColor = rightHolder.GetComponent<Image>().color;
+			tempColor.a = 1f;
+			wallSeedHolder.GetComponent<Image>().color = tempColor;
+		}					
 	}
 	public bool isAvailable(string type){
 		if(type == "Pedro" || type == "Wall"){
@@ -271,6 +300,14 @@ public class PieceHolders : MonoBehaviour {
 		}
 		if(type == "Up"){
 			if(upNumber!=0){
+				return true;
+			}
+			else{
+				return false;
+			}
+		}
+		if(type == "WallSeed"){
+			if(wallSeedNumber!=0){
 				return true;
 			}
 			else{
@@ -315,11 +352,18 @@ public class PieceHolders : MonoBehaviour {
 			if(rightNumber == 0){
 				rightHolder.GetComponent<Image>().color = Color.gray;
 			}
+		}	
+		if(type == "WallSeed"){
+			wallSeedNumber--;
+			wallSeedHolder.transform.GetChild(0).transform.GetComponent<Text>().text = "WallSeed x" + wallSeedNumber;
+			if(wallSeedNumber == 0){
+				wallSeedHolder.GetComponent<Image>().color = Color.gray;
+			}
 		}		
 	}	
 	public void updateText(string type){
 		if(type == "Pedro" || type == "Wall"){
-			pedroHolder.transform.GetChild(0).transform.GetComponent<Text>().text = "Pedro x" + pedroNumber;
+			pedroHolder.transform.GetChild(0).transform.GetComponent<Text>().text = "Wall x" + pedroNumber;
 		}
 		if(type == "Up"){
 			upHolder.transform.GetChild(0).transform.GetComponent<Text>().text = "Up x" + upNumber;
@@ -332,6 +376,9 @@ public class PieceHolders : MonoBehaviour {
 		}
 		if(type == "Right"){
 			rightHolder.transform.GetChild(0).transform.GetComponent<Text>().text = "Right x" + rightNumber;
+		}
+		if(type == "WallSeed"){
+			wallSeedHolder.transform.GetChild(0).transform.GetComponent<Text>().text = "WallSeed x" + rightNumber;
 		}
 	}
 	public void Hint(){//right now works for one stored solution.
@@ -380,7 +427,7 @@ public class PieceHolders : MonoBehaviour {
 						postogo = LookforPosition(holders[i].name);
 						//Debug.Log("Instantiate a "+ holders[i].name);
 						if(postogo!= new Vector2(0,0)){
-							 piece = holders[i].mygameobject.GetComponent<UIMonster>().Spawnit();
+							piece = holders[i].mygameobject.GetComponent<UIMonster>().Spawnit();
 							PlaceHint(piece.GetComponent<Dragger>(), postogo);
 							updateValueDown(holders[i].name);
 							return;
