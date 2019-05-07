@@ -538,6 +538,15 @@ public class PlayerMovement : MonoBehaviour {
 				//Debug.Log("Check");
 				//tilescript.type = tilescript.seedType;
 				PopSeed(tilescript.seedType);
+				
+				if(tilescript.isSideways!= null){
+					//Count ();
+					//currenttile = tiletotest;
+					canmove = false;
+					nextaction = tilescript.isSideways+ "_Action";
+					Debug.Log(nextaction);
+					isspeeding = true;				
+				}
 				//tilescript.seedType = "SeededTile";
 				//Vector3 scale = lastSeed.GetComponent<Dragger>().myshrinker.transform.localScale;
 				//scale.Set(.33f,.33f,.33f);

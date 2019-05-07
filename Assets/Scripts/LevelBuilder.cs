@@ -87,8 +87,8 @@ public class LevelBuilder : MonoBehaviour {
 
 	public void initPotd(){ //feeds levelPotd string array from textfile.
 		startersPotd = new List<int>();
-		string text = System.IO.File.ReadAllText(System.IO.Path.Combine (Application.streamingAssetsPath, "Ch3_Candidates.txt"));
-		string[] lines = Regex.Split(text, "\n");
+		string text = System.IO.File.ReadAllText(System.IO.Path.Combine (Application.streamingAssetsPath, "Ch3_3piece.txt"));
+		string[] lines = Regex.Split(text, "\r\n");
 		Debug.Log(lines[0]);
 		for(int i =0; i<lines.Length;i++){
 			startersPotd.Add(i);
@@ -105,7 +105,7 @@ public class LevelBuilder : MonoBehaviour {
 	public void initAdventure(){ //feeds Adventure string array from textfile.
 		startersAdventure = new List<int>();
 		string text = System.IO.File.ReadAllText(System.IO.Path.Combine (Application.streamingAssetsPath, "AdventureLevels.txt"));
-		string[] lines = Regex.Split(text, "\n");
+		string[] lines = Regex.Split(text, "\r\n");
 
 		Debug.Log(lines[0]);
 		bool nextismap;
@@ -266,6 +266,7 @@ public class LevelBuilder : MonoBehaviour {
 			Debug.Log(jagged[y].Length);
 			for (int x = 0; x < jagged[y].Length; x++) {
 				double zed = (-y) + (-0.8);
+				Debug.Log(jagged[y][x]);
 				placeOnWorld(jagged,y,x);
 							
 			}
@@ -324,7 +325,7 @@ public class LevelBuilder : MonoBehaviour {
 	}
 	string[][] readPotd(int place){
 		LevelSaver.currentmap = new List<string>();
-		string text = System.IO.File.ReadAllText(System.IO.Path.Combine (Application.streamingAssetsPath, "Ch3_Candidates.txt"));
+		string text = System.IO.File.ReadAllText(System.IO.Path.Combine (Application.streamingAssetsPath, "Ch3_3piece.txt"));
 		string firstline = levelsPotd[startersPotd[place]];
 		LevelSaver.currentmap.Add(firstline);
 		Debug.Log("Firstline" + firstline);
@@ -956,32 +957,32 @@ public class LevelBuilder : MonoBehaviour {
 
 			case sfloor_left:
 				//LevelManager.piecetiles.Add (Instantiate	(floor_left, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,270,0))));
-				LevelManager.myhints.Add(new Vector2 (hintx,hinty));
+				//LevelManager.myhints.Add(new Vector2 (hintx,hinty));
 				LevelManager.hints.Add(new Hint("Left", hintx,hinty));
 				pieceHolder.AddPiece("Left");
 				break;
 			case sfloor_right:
 				//LevelManager.piecetiles.Add (Instantiate	(floor_right, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,90,0))));
-				LevelManager.myhints.Add(new Vector2 (hintx,hinty));
+				//LevelManager.myhints.Add(new Vector2 (hintx,hinty));
 				pieceHolder.AddPiece("Right");
 				LevelManager.hints.Add(new Hint("Right", hintx,hinty));
 				break;
 			case sfloor_up:
 				//LevelManager.piecetiles.Add (Instantiate	(floor_up, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,0,0))));
-				LevelManager.myhints.Add(new Vector2 (hintx,hinty));
+				//LevelManager.myhints.Add(new Vector2 (hintx,hinty));
 				pieceHolder.AddPiece("Up");
 				LevelManager.hints.Add(new Hint("Up", hintx,hinty));
 				break;
 			case sfloor_down:
 				//LevelManager.piecetiles.Add (Instantiate	(floor_down, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,180,0))));
-				LevelManager.myhints.Add(new Vector2 (hintx,hinty));
+				//LevelManager.myhints.Add(new Vector2 (hintx,hinty));
 				pieceHolder.AddPiece("Down");
 				LevelManager.hints.Add(new Hint("Down", hintx,hinty));
 				break;
 			case sfloor_rock:
 				//LevelManager.piecetiles.Add (Instantiate (floor_rock, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.identity));
 				//Debug.Log(LevelManager.piecetiles.Count);
-				LevelManager.myhints.Add(new Vector2 (hintx,hinty));
+				//LevelManager.myhints.Add(new Vector2 (hintx,hinty));
 				pieceHolder.AddPiece("Wall");
 				LevelManager.hints.Add(new Hint("Wall", hintx,hinty));
 				break;
@@ -1003,8 +1004,11 @@ public class LevelBuilder : MonoBehaviour {
 				LevelManager.myhints.Add(new Vector2 (hintx,hinty));
 				break;
 			case ssfloor_rock:
-				LevelManager.piecetiles.Add (Instantiate (s_floor_rock, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.identity));
-				LevelManager.myhints.Add(new Vector2 (hintx,hinty));
+			//Debug.Log("Wallseed");
+				//LevelManager.piecetiles.Add (Instantiate (s_floor_rock, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.identity));
+				//LevelManager.myhints.Add(new Vector2 (hintx,hinty));
+				pieceHolder.AddPiece("WallSeed");
+				LevelManager.hints.Add(new Hint("WallSeed", hintx,hinty));
 				break;
 			}
 			piecenums++;

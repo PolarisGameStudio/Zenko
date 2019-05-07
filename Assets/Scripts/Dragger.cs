@@ -107,7 +107,7 @@ public class Dragger : MonoBehaviour {
 				Debug.Log(mytile.isSideways);
 				if(mytile.isSideways != null){
 					mytile.type = mytile.isSideways;
-					mytile.isTaken = true;
+					mytile.isTaken = false;
 				}
 				Debug.Log(mytile);
 				if(myType == "Left" || myType == "Right" ||myType == "Up" ||myType == "Down"){
@@ -340,7 +340,15 @@ public class Dragger : MonoBehaviour {
 			this.gameObject.GetComponent<Animator>().SetInteger("Phase", 0);				
 			}
 			PieceHolders.placedpieces.Remove(this);
-			pieceHolder.updateValueUp(myType);			
+			if(myType == "Seed"){
+				string name = mySeedType + myType;
+				Debug.Log(name);
+				pieceHolder.updateValueUp(name);	
+			}
+			else{
+				pieceHolder.updateValueUp(myType);	
+			}
+		
 			Destroy(this.gameObject);
 	
 
@@ -515,7 +523,7 @@ public class Dragger : MonoBehaviour {
 				tilescript = tentativetile.GetComponent<TileHandler> ();
 				//newtile = tentativetile;
 				//tiletodropsprite = tentativetile.GetComponent<SpriteRenderer> ();
-				//tiletodropsprite.color = Color.black;
+				//tiletodropsprite.- = Color.black;
 
 				//tilescript.myTaker = this.gameObject;
 				//tilescript.isTaken = true;
