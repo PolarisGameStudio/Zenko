@@ -182,8 +182,10 @@
      <None Include="Assets\StreamingAssets\Level-12.txt" />
      <None Include="Assets\StreamingAssets\Level33.txt" />
      <None Include="Assets\StreamingAssets\Level-11.txt" />
+     <None Include="Assets\StreamingAssets\Ch3_6x6.txt" />
      <None Include="Assets\Mirza Beig\Shaders\Particles\Intersection Highlight\IntersectionHighlight-Add.shader" />
      <None Include="Assets\StreamingAssets\Level87.txt" />
+     <None Include="Assets\StreamingAssets\Ch3_5x5.txt" />
      <None Include="Assets\StreamingAssets\Level94.txt" />
      <None Include="Assets\StreamingAssets\Level91.txt" />
      <None Include="Assets\Mirza Beig\Shaders\Particles\Animation Blend\AnimBlend-Add.shader" />
@@ -264,7 +266,9 @@
      <None Include="Assets\StreamingAssets\Level-19.txt" />
      <None Include="Assets\StreamingAssets\Level44.txt" />
      <None Include="Assets\TSF\Shaders\TSFOutline.shader" />
+     <None Include="Assets\StreamingAssets\Ch3_7x7.txt" />
      <None Include="Assets\StreamingAssets\8by8ice.txt" />
+     <None Include="Assets\StreamingAssets\Ch3_GoodCandidates.txt" />
      <None Include="Assets\StreamingAssets\Level92.txt" />
      <None Include="Assets\StreamingAssets\Level24.txt" />
      <None Include="Assets\StreamingAssets\Level69.txt" />
@@ -276,6 +280,7 @@
      <None Include="Assets\StreamingAssets\Level82.txt" />
      <None Include="Assets\StreamingAssets\Level100.txt" />
      <None Include="Assets\StreamingAssets\Level64.txt" />
+     <None Include="Assets\StreamingAssets\Ch3_lrud.txt" />
      <None Include="Assets\StreamingAssets\Level-105.txt" />
      <None Include="Assets\StreamingAssets\Level90.txt" />
      <None Include="Assets\Mirza Beig\_DOCS\README - Storm VFX.txt" />
@@ -325,6 +330,7 @@
      <None Include="Assets\StreamingAssets\Level65.txt" />
      <None Include="Assets\StreamingAssets\Level83.txt" />
      <None Include="Assets\StreamingAssets\Leve-16.txt" />
+     <None Include="Assets\StreamingAssets\Ch3_BigMaps.txt" />
      <None Include="Assets\Mirza Beig\Shaders\Particles\Distance Fade\DistanceFade-AnimBlendAdd.shader" />
      <None Include="Assets\StreamingAssets\Level-107.txt" />
      <None Include="Assets\StreamingAssets\Level68.txt" />
@@ -347,6 +353,7 @@
      <None Include="Assets\StreamingAssets\Level-103.txt" />
      <None Include="Assets\StreamingAssets\Level58.txt" />
      <None Include="Assets\StreamingAssets\Ch2Harder.txt" />
+     <None Include="Assets\StreamingAssets\Ch3_8x8.txt" />
      <None Include="Assets\StreamingAssets\Level0.txt" />
      <None Include="Assets\StreamingAssets\Level31.txt" />
  <Reference Include="Unity.TextMeshPro.Editor">

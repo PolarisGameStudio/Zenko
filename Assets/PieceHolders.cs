@@ -382,7 +382,7 @@ public class PieceHolders : MonoBehaviour {
 		}
 	}
 	public void Hint(){//right now works for one stored solution.
-		Debug.Log(placedpieces.Count);
+		Debug.Log(placedpieces.Count + "Pieces placed");
 		Vector2 postogo;
 		GameObject piece;
 		string postype;
@@ -425,6 +425,7 @@ public class PieceHolders : MonoBehaviour {
 							 piece = holders[i].mygameobject.GetComponent<UIMonster>().Spawnit();
 							PlaceHint(piece.GetComponent<Dragger>(), postogo);
 							updateValueDown(holders[i].name);
+							placedpieces.Add(piece.GetComponent<Dragger>());
 							return;
 						}
 					}
@@ -438,6 +439,7 @@ public class PieceHolders : MonoBehaviour {
 						if(postogo!= new Vector2(0,0)){
 							 piece = holders[i].mygameobject.GetComponent<UIMonster>().Spawnit();
 							PlaceHint(piece.GetComponent<Dragger>(), postogo);
+							placedpieces.Add(piece.GetComponent<Dragger>());
 							updateValueDown(holders[i].name);
 							return;
 						}
@@ -458,7 +460,7 @@ public class PieceHolders : MonoBehaviour {
 		if(dragger.myType == "Left" || dragger.myType == "Up" || dragger.myType == "Down" || dragger.myType == "Right"){
 			placeIcarus(position,dragger);
 		}
-		placedpieces.Add(dragger);
+		//placedpieces.Add(dragger);
 	}
 	public bool PartofSolution(int position){
 		string postype;

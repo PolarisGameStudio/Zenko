@@ -50,13 +50,17 @@ public class Dragger : MonoBehaviour {
 			}
 		}
 		if(convertWhenReady){
-			if(Vector3.Distance(playert.position, transform.position) > .8){
+			if(playert != null){			
+				if(Vector3.Distance(playert.position, transform.position) > .8){
 				myshrinker.SetActive(false);
 				myBigger.SetActive(true);
 				myBigger.gameObject.GetComponent<Animator>().SetInteger("Phase", 2);
 				convertWhenReady = false;
 
 			}
+		}
+
+
 		}
 		if(gototile){
 			transform.position = Vector3.MoveTowards (transform.position, positiontogo, Time.deltaTime * 8); 
@@ -80,6 +84,7 @@ public class Dragger : MonoBehaviour {
 	}
 
 	 public void OnMouseDown() {
+	 	PieceHolders.placedpieces.Remove(this);
 		//transform.GetChild(1).gameObject.SetActive(false);
   	  //screenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position); // I removed this line to prevent centring 
   	 // _lockedYPosition = screenPoint.y;
@@ -271,6 +276,7 @@ public class Dragger : MonoBehaviour {
  }
  void OnMouseUp()
  {
+ 	string pieceholdername;
  	if(particle != null){
  		particle.transform.GetChild(0).GetComponent<Renderer>().enabled = false;
 		particle.transform.GetChild(1).GetComponent<Renderer>().enabled = false; 
@@ -323,7 +329,13 @@ public class Dragger : MonoBehaviour {
 			if (myType == "Seed"){
 			LevelBuilder.tiles[(int)transform.position.x, -(int)transform.position.z].seedType = mySeedType;			
 			}
-			pieceHolder.unshadeImage(myType);
+			if(myType == "Seed"){
+				pieceholdername = mySeedType + myType;
+			}
+			else{
+				pieceholdername = myType;
+			}
+			pieceHolder.unshadeImage(pieceholdername);
 		}
 		else{
 			if(myType == "Wall" || myType == "Up" ||myType == "Down" ||myType == "Right" ||myType == "Left" ){
@@ -339,7 +351,7 @@ public class Dragger : MonoBehaviour {
 			if(myType == "Left" || myType == "Right" ||myType == "Up" ||myType == "Down"){
 			this.gameObject.GetComponent<Animator>().SetInteger("Phase", 0);				
 			}
-			PieceHolders.placedpieces.Remove(this);
+			//PieceHolders.placedpieces.Remove(this);
 			if(myType == "Seed"){
 				string name = mySeedType + myType;
 				Debug.Log(name);

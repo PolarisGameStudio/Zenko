@@ -278,7 +278,7 @@ public class PlayerMovement : MonoBehaviour {
 	}*/
 	void FindTileTag(){
 		Debug.Log("FINDING TAG");
-		//Collider2D[] colliders = Physics2D.OverlapCircleAll(tiletotest, .1f); ///Presuming the object you are testing also has a collider 0 otherwise{
+	//Collider2D[] colliders = Physics2D.OverlapCircleAll(tiletotest, .1f); ///Presuming the object you are testing also has a collider 0 otherwise{
 		
 //		Debug.Log((int)tiletotest.x + "+" + -(int)tiletotest.z);
 		//Debug.Log(LevelBuilder.tiles[-2,5]);

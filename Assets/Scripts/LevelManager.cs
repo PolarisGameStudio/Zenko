@@ -184,6 +184,7 @@ public class LevelManager : MonoBehaviour {
 				Debug.Log(dragger.mySeedType);
 				dragger.myshrinker.SetActive(true);
 				dragger.myBigger.SetActive(false);
+				dragger.convertWhenReady = false;
 				Debug.Log((int)dragger.gameObject.transform.position.x);
 				Debug.Log(-(int)dragger.gameObject.transform.position.z);
 				if(dragger.gameObject.transform.position.z > -LevelBuilder.totaldimension){//checks for pieces inside board
