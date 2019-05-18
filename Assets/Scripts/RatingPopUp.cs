@@ -50,16 +50,16 @@ public class RatingPopUp : MonoBehaviour {
 		AddCurrency(previousrating, myrating);
 		//starholder = gameObject.transform.Find("Ribbon");
 		if(myrating == 1){
-			starholder.transform.GetChild(1).transform.GetChild(0).gameObject.SetActive(true);
+			starholder.transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(true);
 		}
 		else if(myrating == 2){
 			starholder.transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(true);
-			starholder.transform.GetChild(2).transform.GetChild(0).gameObject.SetActive(true);
+			starholder.transform.GetChild(1).transform.GetChild(0).gameObject.SetActive(true);
 
 		}
 		else if(myrating == 3){
-			starholder.transform.GetChild(1).transform.GetChild(0).gameObject.SetActive(true);
 			starholder.transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(true);
+			starholder.transform.GetChild(1).transform.GetChild(0).gameObject.SetActive(true);
 			starholder.transform.GetChild(2).transform.GetChild(0).gameObject.SetActive(true);
 		}
 	}
@@ -68,7 +68,7 @@ public class RatingPopUp : MonoBehaviour {
 		if(prevr == 0){
 			GameManager.mycurrency = GameManager.mycurrency + newr;
 			PlayerPrefs.SetInt("Currency", GameManager.mycurrency);
-			GameObject.Find("CurrencyHolder").GetComponentInChildren<Text>().text = GameManager.mycurrency.ToString();
+			//GameObject.Find("CurrencyHolder").GetComponentInChildren<Text>().text = GameManager.mycurrency.ToString();
 		}
 		else if(newr == prevr){
 			//GameManager.mycurrency = new;
@@ -77,8 +77,8 @@ public class RatingPopUp : MonoBehaviour {
 		else if(prevr < newr){
 			GameManager.mycurrency = GameManager.mycurrency + (newr - prevr);
 			PlayerPrefs.SetInt("Currency", GameManager.mycurrency);	
-			GameObject.Find("CurrencyHolder").GetComponentInChildren<Text>().text = GameManager.mycurrency.ToString();
-			Debug.Log(GameObject.Find("CurrencyHolder").GetComponentInChildren<Text>().text);
+			//GameObject.Find("CurrencyHolder").GetComponentInChildren<Text>().text = GameManager.mycurrency.ToString();
+			//Debug.Log(GameObject.Find("CurrencyHolder").GetComponentInChildren<Text>().text);
 		}
 	}
 	/*void OnEnable(){

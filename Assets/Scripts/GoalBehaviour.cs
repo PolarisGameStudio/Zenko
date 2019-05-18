@@ -94,13 +94,14 @@ public class GoalBehaviour : MonoBehaviour {
 				if(newy<oldy){//moving up
 					Debug.Log("Moving where");
 					if(xdif<.9){
-						Debug.Log(ydif);
+						//Debug.Log(ydif);
 						if(ydif<1.5){
-							Debug.Log(-transform.position.z);
-							Debug.Log(newy);
+							//Debug.Log(-transform.position.z);
+							//Debug.Log(newy);
 							if(-transform.position.z<newy){
 							//	Debug.Log("Doing this");
 								myanim.SetInteger("Phase",2);
+								AnimateFoxGoal();
 								lastphase = 2;								
 							}
 
@@ -119,6 +120,7 @@ public class GoalBehaviour : MonoBehaviour {
 					if(xdif<.9){
 						if(ydif<1.5){
 							myanim.SetInteger("Phase",2);
+							AnimateFoxGoal();
 							lastphase = 2;
 						}
 						else{
@@ -169,6 +171,7 @@ public class GoalBehaviour : MonoBehaviour {
 					if(ydif<.9){
 						if(xdif<1.5){
 							myanim.SetInteger("Phase",2);
+							AnimateFoxGoal();
 							lastphase = 2;
 						}
 						else{
@@ -185,6 +188,7 @@ public class GoalBehaviour : MonoBehaviour {
 					if(ydif<.9){
 						if(xdif<1.5){
 							myanim.SetInteger("Phase",2);
+							AnimateFoxGoal();
 							lastphase = 2;
 						}
 						else{
@@ -215,5 +219,10 @@ public class GoalBehaviour : MonoBehaviour {
 	void EatFox(){
 
 	}
+	void AnimateFoxGoal(){
+		LevelBuilder.playertransform.GetComponent<PlayerMovement>().speed = 3;
+		LevelBuilder.playertransform.GetChild(3).GetComponent<Animator>().SetInteger("Phase", 2);
+	}
+
 
 }

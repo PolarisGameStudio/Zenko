@@ -72,7 +72,8 @@ public class PlayerMovement : MonoBehaviour {
 			this.transform.GetChild(3).GetComponent<Animator>().SetInteger("Phase", 0);
 
 		}
-		if(!canmove){
+		if(!canmove && nextaction != "Goal_Action"){
+			//Debug.Log("SETTING");
 			this.transform.GetChild(3).GetComponent<Animator>().SetInteger("Phase", 1);
 		}
 		if (Input.GetKeyDown (KeyCode.G)){
@@ -107,10 +108,12 @@ public class PlayerMovement : MonoBehaviour {
 				//int nextlevel = LevelManager.levelnum;
 				//LevelManager.NextLevel (nextlevel);
 
-				LevelLostBoard.SetActive (true);
 				this.enabled=false;
+
 				Debug.Log("Hole");
+				StartCoroutine(PopLose());
 			}
+
 			else if (nextaction == null) {
 //				Debug.Log("Null");
 				cantakeinput = true;
@@ -119,14 +122,15 @@ public class PlayerMovement : MonoBehaviour {
 			}  
 			else if (nextaction == "Goal_Action") {
 				RatingPopUp.GiveRating ();
- 				SceneLoading.SetStars(RatingPopUp.myrating);
+ 				SceneLoading.SetStars(RatingBehaviour.currentrating);
  				this.enabled = false;
 				StartCoroutine(PopWin());
 			}			
 			else if (nextaction == "Hole_Action") {
-				LevelLostBoard.SetActive (true);
+
 				this.enabled=false;
 				Debug.Log("Hole");
+				StartCoroutine(PopLose());
 
 				//int nextlevel = LevelManager.levelnum;
 				//LevelManager.NextLevel (nextlevel);
@@ -313,7 +317,7 @@ public class PlayerMovement : MonoBehaviour {
 		}
 		//if the desired tile is not the place you're standing in it moves there
 		if (currenttile != transform.position && beingdragged == false) {
-//			Debug.Log("move");
+			//Debug.Log("move");
 			GoalBehaviour.readytomove = true;
 			transform.position = Vector3.MoveTowards (transform.position, currenttile, Time.deltaTime * speed); 
 			cantakeinput = false;
@@ -397,6 +401,7 @@ public class PlayerMovement : MonoBehaviour {
 	}
 	//Individual Behaviours to be stored in the following.
 	void ActOnTile(){
+		Swiping.mydirection = "Null";
 		/*if (istiletaken == false) {
 			//move and keep moving i	f theres nothing but ice
 			Count ();
@@ -414,6 +419,7 @@ public class PlayerMovement : MonoBehaviour {
 			}
 			else if (tilescript.type == "Wall" || tilescript.type == "Start") {
 				//the desired tile is the previous one and u stop looking for next tiles.
+				//Swiping.mydirection = "Null";
 				canmove = false;
 				Debug.Log("canmove is false now");
 				Count ();
@@ -591,4 +597,9 @@ public class PlayerMovement : MonoBehaviour {
 
 
 	}
+	IEnumerator PopLose(){
+		yield return new WaitForSeconds(.5f);
+		LevelLostBoard.SetActive (true);
+	}
+
 }

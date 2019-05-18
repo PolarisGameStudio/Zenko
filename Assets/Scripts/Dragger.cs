@@ -42,6 +42,7 @@ public class Dragger : MonoBehaviour {
 	}
 
 	void Update(){
+		//Debug.Log(Input.touchCount);
 		if(readyToPop){
 			Debug.Log(playert.position);
 			if(Vector3.Distance(playert.position, transform.position) < .7){
@@ -78,19 +79,21 @@ public class Dragger : MonoBehaviour {
 			OnMouseDrag();
 		}
 		if(Input.GetMouseButtonUp(0) && startedDragging){
+			startedDragging = false;			
 			OnMouseUp();
-			startedDragging = false;
+
 		}
 	}
 
 	 public void OnMouseDown() {
-	 	PieceHolders.placedpieces.Remove(this);
+	 	//PieceHolders.placedpieces.Remove(this);
 		//transform.GetChild(1).gameObject.SetActive(false);
   	  //screenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position); // I removed this line to prevent centring 
   	 // _lockedYPosition = screenPoint.y;
 	 	toggleColliders();
 //	 	Debug.Log(TurnBehaviour.turn);
 		if (TurnBehaviour.turn == 0) {
+			PieceHolders.placedpieces.Remove(this);
 			if(myType == "Wall"){
 				this.gameObject.GetComponent<Animator>().SetInteger("Phase", 1);
 			}
@@ -104,10 +107,11 @@ public class Dragger : MonoBehaviour {
 			//Cursor.visible = false;
 			//Debug.Log (-transform.position.z);
 			//Debug.Log(transform.position.x);
-			Debug.Log(transform.position.x + "" + transform.position.z);
+			Debug.Log(transform.position.x + "" + transform.position.z);//HERES WHERE THE PROBLEM BE
 			if(transform.position.x<LevelBuilder.totaldimension&& -transform.position.z<LevelBuilder.totaldimension){
 				mytile = LevelBuilder.tiles[(int)gameObject.transform.position.x, -(int)gameObject.transform.position.z];
 				mytile.type = "Ice";
+				Debug.Log("UNTAKING IT");
 				mytile.isTaken = false;
 				Debug.Log(mytile.isSideways);
 				if(mytile.isSideways != null){
@@ -276,6 +280,7 @@ public class Dragger : MonoBehaviour {
  }
  void OnMouseUp()
  {
+  	Swiping.mydirection = "Null";
  	string pieceholdername;
  	if(particle != null){
  		particle.transform.GetChild(0).GetComponent<Renderer>().enabled = false;
@@ -284,9 +289,9 @@ public class Dragger : MonoBehaviour {
  	}
 
  	toggleColliders();
- 	LevelManager.isdragging = false;
+
  	Cursor.visible = true;
- 	Swiping.mydirection = "Null";
+
  	if(TurnBehaviour.turn == 0)
  	{
 		Debug.Log(PlaneBehavior.tilex);
@@ -382,6 +387,7 @@ public class Dragger : MonoBehaviour {
 		Swiping.canswipe = true;
 		currenttile = null;
 		pasttile = null;
+ 		LevelManager.isdragging = false;
 
 		/*if (TurnBehaviour.turn == 0) {
    			 Cursor.visible = true;

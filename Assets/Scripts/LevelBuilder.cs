@@ -85,9 +85,24 @@ public class LevelBuilder : MonoBehaviour {
 		Debug.Log (filePath);
 	}
 
-	public void initPotd(){ //feeds levelPotd string array from textfile.
+	public IEnumerator initPotd(){ //feeds levelPotd string array from textfile.
 		startersPotd = new List<int>();
-		string text = System.IO.File.ReadAllText(System.IO.Path.Combine (Application.streamingAssetsPath, "Ch3_6x6.txt"));
+		string file = "Ch4_6x6v2.txt";
+		filePath = System.IO.Path.Combine(Application.streamingAssetsPath, file);
+		Debug.Log (filePath + "FILEPAPAPATH");
+		result = " ";
+		if (filePath.Contains ("://") || filePath.Contains(":///"))  {
+			UnityWebRequest www = UnityWebRequest.Get (filePath);
+			yield return www.SendWebRequest ();
+			result = www.downloadHandler.text;
+			Debug.Log (result);
+
+		} 
+		else{
+			result = System.IO.File.ReadAllText (filePath);
+		}
+		string text = result;
+		//string text = System.IO.File.ReadAllText(System.IO.Path.Combine (Application.streamingAssetsPath, "Ch4_Easy.txt"));
 		string[] lines = Regex.Split(text, "\r\n");
 		Debug.Log(lines[0]);
 		for(int i =0; i<lines.Length;i++){
@@ -102,10 +117,28 @@ public class LevelBuilder : MonoBehaviour {
 			i = i + mapsize + 2;
 		}
 		levelsPotd = (string[])lines.Clone();
+		if(LevelManager.ispotd){
+			drawPotd(LevelManager.levelnum);
+		}
 	}
-	public void initAdventure(){ //feeds Adventure string array from textfile.
+	public IEnumerator initAdventure(){ //feeds Adventure string array from textfile.
 		startersAdventure = new List<int>();
-		string text = System.IO.File.ReadAllText(System.IO.Path.Combine (Application.streamingAssetsPath, "AdventureLevels.txt"));
+		string file = "AdventureLevels.txt";
+		filePath = System.IO.Path.Combine(Application.streamingAssetsPath, file);
+		Debug.Log (filePath + "FILEPAPAPATH");
+		result = " ";
+		if (filePath.Contains ("://") || filePath.Contains(":///"))  {
+			UnityWebRequest www = UnityWebRequest.Get (filePath);
+			yield return www.SendWebRequest ();
+			result = www.downloadHandler.text;
+			Debug.Log (result);
+
+		} 
+		else{
+			result = System.IO.File.ReadAllText (filePath);
+		}
+		string text = result;
+		//string text = System.IO.File.ReadAllText(System.IO.Path.Combine (Application.streamingAssetsPath, "AdventureLevels.txt"));
 		string[] lines = Regex.Split(text, "\r\n");
 
 		Debug.Log(lines[0]);
@@ -125,9 +158,13 @@ public class LevelBuilder : MonoBehaviour {
 			//i = i + mapsize + 2;
 		}
 		levelsAdventure = (string[])lines.Clone();
+		if(!LevelManager.ispotd){
+			//load potd maps
+			drawNormal(LevelManager.levelnum);
+		}
 	}
 
-	public void drawAdventure(int levelnumber){
+	/*public void drawAdventure(int levelnumber){
 		LevelManager.piecetiles = new List<Transform>();
 		LevelManager.myhints = new List<Vector2>();
 		LevelManager.hints = new List<Hint>();
@@ -184,8 +221,9 @@ public class LevelBuilder : MonoBehaviour {
 		}
 		ProgressBar.InitializeProgressBar(LevelStorer.efficientturns);
 		//PopulationManager.readytobrain = true;		
-	}
+	}*/
 	public void drawNormal(int levelnumber){
+		Debug.Log(levelnumber);
 		pieceHolder.reset();
 		LevelManager.piecetiles = new List<Transform>();
 		LevelManager.myhints = new List<Vector2>();
@@ -288,7 +326,7 @@ public class LevelBuilder : MonoBehaviour {
 	string[][] readAdventure(int place){
 		place = place-1;
 		LevelSaver.currentmap = new List<string>();
-		string text = System.IO.File.ReadAllText(System.IO.Path.Combine (Application.streamingAssetsPath, "AdventureLevels.txt"));
+		//string text = System.IO.File.ReadAllText(System.IO.Path.Combine (Application.streamingAssetsPath, "AdventureLevels.txt"));
 		string firstline = levelsAdventure[startersAdventure[place]];
 		LevelSaver.currentmap.Add(firstline);
 
@@ -326,7 +364,7 @@ public class LevelBuilder : MonoBehaviour {
 	}
 	string[][] readPotd(int place){
 		LevelSaver.currentmap = new List<string>();
-		string text = System.IO.File.ReadAllText(System.IO.Path.Combine (Application.streamingAssetsPath, "Ch3_6x6.txt"));
+		//string text = System.IO.File.ReadAllText(System.IO.Path.Combine (Application.streamingAssetsPath, "Ch4_Easy.txt"));
 		string firstline = levelsPotd[startersPotd[place]];
 		LevelSaver.currentmap.Add(firstline);
 		Debug.Log("Firstline" + firstline);
@@ -452,11 +490,12 @@ public class LevelBuilder : MonoBehaviour {
 
 
 	void Start() {
+	Swiping.mydirection = "Null";
 	pieceHolder = pieceHolderHolder.GetComponent<PieceHolders>();
 	//LevelManager.newicarus = true;
 	LevelManager.levelselector = this;
-	initPotd();
-	initAdventure();
+	StartCoroutine(initPotd());
+	StartCoroutine(initAdventure());
 	//readAdventure(3);
 	//GameObject.Find("Menu").GetComponent<MenuButton>().ConfigMenu.SetActive(false);
 
@@ -477,9 +516,9 @@ public class LevelBuilder : MonoBehaviour {
 	//LevelStorer.Lookfor (LevelManager.levelnum);//assigns efficient turn according to dictionary.
 	//DrawIce ();
 	//DrawNextLevel (levelnum);
-	if(!LevelManager.ispotd){
+	//if(!LevelManager.ispotd){
 		//load potd maps
-		drawNormal(LevelManager.levelnum);
+		//drawNormal(LevelManager.levelnum);
 		/*string leveltext = ("Level" + LevelManager.levelnum + ".txt");	
 		string filePath = System.IO.Path.Combine (Application.streamingAssetsPath, leveltext);	
 		string[][] jagged = readFile (filePath);
@@ -490,10 +529,10 @@ public class LevelBuilder : MonoBehaviour {
 		TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
 		DrawNextLevel(LevelManager.levelnum);*/
 
-	}
-	else{
-		drawPotd(LevelManager.levelnum);
-	}
+	//}
+	//else{
+	//	drawPotd(LevelManager.levelnum);
+	//}
 
 	/*if(LevelManager.levelnum < 0){
 		LevelManager.levelnum = Random.Range(0,102);
@@ -504,7 +543,7 @@ public class LevelBuilder : MonoBehaviour {
 	DrawNextLevel(LevelManager.levelnum);
 	}*/
 	//TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
-	GameObject.Find("CurrencyHolder").GetComponentInChildren<Text>().text = GameManager.mycurrency.ToString();
+	//GameObject.Find("CurrencyHolder").GetComponentInChildren<Text>().text = GameManager.mycurrency.ToString();
 	//Debug.Log(readPotd(2));
 	//Debug.Log("MEH");
 	//GameObject objectp = GameObject.Find("TheCanvas");
@@ -995,20 +1034,28 @@ public class LevelBuilder : MonoBehaviour {
 					break;
 
 				case ssfloor_left:
-					LevelManager.piecetiles.Add (Instantiate	(s_floor_left, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,270,0))));
-					LevelManager.myhints.Add(new Vector2 (hintx,hinty));
+					//LevelManager.piecetiles.Add (Instantiate	(s_floor_left, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,270,0))));
+					//LevelManager.myhints.Add(new Vector2 (hintx,hinty));
+					pieceHolder.AddPiece("LeftSeed");
+					LevelManager.hints.Add(new Hint("LeftSeed", hintx,hinty));
 					break;
 				case ssfloor_right:
-					LevelManager.piecetiles.Add (Instantiate	(s_floor_right, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,90,0))));
-					LevelManager.myhints.Add(new Vector2 (hintx,hinty));
+					pieceHolder.AddPiece("RightSeed");
+					LevelManager.hints.Add(new Hint("RightSeed", hintx,hinty));
+					// LevelManager.piecetiles.Add (Instantiate	(s_floor_right, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,90,0))));
+					// LevelManager.myhints.Add(new Vector2 (hintx,hinty));
 					break;
 				case ssfloor_up:
-					LevelManager.piecetiles.Add (Instantiate	(s_floor_up, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,0,0))));
-					LevelManager.myhints.Add(new Vector2 (hintx,hinty));
+					pieceHolder.AddPiece("UpSeed");
+					LevelManager.hints.Add(new Hint("UpSeed", hintx,hinty));
+					// LevelManager.piecetiles.Add (Instantiate	(s_floor_up, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,0,0))));
+					// LevelManager.myhints.Add(new Vector2 (hintx,hinty));
 					break;
 				case ssfloor_down:
-					LevelManager.piecetiles.Add (Instantiate	(s_floor_down, new Vector3 (2+piecenums, 0, -totaldimension),Quaternion.Euler(new Vector3(0,180,0))));
-					LevelManager.myhints.Add(new Vector2 (hintx,hinty));
+					pieceHolder.AddPiece("DownSeed");
+					LevelManager.hints.Add(new Hint("DownSeed", hintx,hinty));
+					// LevelManager.piecetiles.Add (Instantiate	(s_floor_down, new Vector3 (2+piecenums, 0, -totaldimension),Quaternion.Euler(new Vector3(0,180,0))));
+					// LevelManager.myhints.Add(new Vector2 (hintx,hinty));
 					break;
 				case ssfloor_rock:
 				//Debug.Log("Wallseed");

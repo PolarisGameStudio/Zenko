@@ -65,6 +65,10 @@ public class PieceHolders : MonoBehaviour {
 		upHolder.SetActive(false);
 		downHolder.SetActive(false);
 		wallSeedHolder.SetActive(false);
+		leftSeedHolder.SetActive(false);
+		rightSeedHolder.SetActive(false);
+		upSeedHolder.SetActive(false);
+		downSeedHolder.SetActive(false);
 		initValues();
 		holders = new List<Holder>();
 	}
@@ -75,6 +79,10 @@ public class PieceHolders : MonoBehaviour {
 	upNumber = 0;
 	downNumber = 0;
 	wallSeedNumber = 0;
+	leftSeedNumber =0;
+	rightSeedNumber =0;
+	upSeedNumber =0;
+	downSeedNumber =0;
 	holdersNumber = 0;
 	pedroHolder.GetComponent<Image>().color = Color.white;
 	leftHolder.GetComponent<Image>().color = Color.white;
@@ -82,6 +90,10 @@ public class PieceHolders : MonoBehaviour {
 	rightHolder.GetComponent<Image>().color = Color.white;
 	downHolder.GetComponent<Image>().color = Color.white;
 	wallSeedHolder.GetComponent<Image>().color = Color.white;
+	leftSeedHolder.GetComponent<Image>().color = Color.white;
+	rightSeedHolder.GetComponent<Image>().color = Color.white;
+	upSeedHolder.GetComponent<Image>().color = Color.white;
+	downSeedHolder.GetComponent<Image>().color = Color.white;
 	}
 	public void InitHolder(string type){
 		if(type == "Pedro" || type ==  "Wall"){
@@ -101,6 +113,18 @@ public class PieceHolders : MonoBehaviour {
 		}
 		if(type == "WallSeed"){
 			holders.Add(new Holder(type,1,1,wallSeedHolder,true));
+		}
+		if(type == "LeftSeed"){
+			holders.Add(new Holder(type,1,1,leftSeedHolder,true));
+		}
+		if(type == "RightSeed"){
+			holders.Add(new Holder(type,1,1,rightSeedHolder,true));
+		}
+		if(type == "UpSeed"){
+			holders.Add(new Holder(type,1,1,upSeedHolder,true));
+		}
+		if(type == "DownSeed"){
+			holders.Add(new Holder(type,1,1,downSeedHolder,true));
 		}
 	}
 	public void AddtoHolder(string type){
@@ -198,6 +222,58 @@ public class PieceHolders : MonoBehaviour {
 				initSize();
 			}			
 		}
+		if(type == "LeftSeed"){
+			if(leftSeedHolder.active){
+				leftSeedNumber++;
+				AddtoHolder(type);
+			}
+			else{
+				InitHolder(type);
+				leftSeedHolder.SetActive(true);
+				holdersNumber++;
+				leftSeedNumber++;
+				initSize();
+			}			
+		}
+		if(type == "RightSeed"){
+			if(rightSeedHolder.active){
+				rightSeedNumber++;
+				AddtoHolder(type);
+			}
+			else{
+				InitHolder(type);
+				rightSeedHolder.SetActive(true);
+				holdersNumber++;
+				rightSeedNumber++;
+				initSize();
+			}			
+		}
+		if(type == "UpSeed"){
+			if(upSeedHolder.active){
+				upSeedNumber++;
+				AddtoHolder(type);
+			}
+			else{
+				InitHolder(type);
+				upSeedHolder.SetActive(true);
+				holdersNumber++;
+				upSeedNumber++;
+				initSize();
+			}			
+		}
+		if(type == "DownSeed"){
+			if(downSeedHolder.active){
+				downSeedNumber++;
+				AddtoHolder(type);
+			}
+			else{
+				InitHolder(type);
+				downSeedHolder.SetActive(true);
+				holdersNumber++;
+				downSeedNumber++;
+				initSize();
+			}			
+		}
 		updateText(type);
 	}
 	public void updateValueUp(string type){
@@ -232,6 +308,26 @@ public class PieceHolders : MonoBehaviour {
 			wallSeedHolder.transform.GetChild(0).transform.GetComponent<Text>().text = "WallSeed x" + wallSeedNumber;
 			wallSeedHolder.GetComponent<Image>().color = Color.white;
 		}
+		if(type == "LeftSeed"){
+			leftSeedNumber++;
+			leftSeedHolder.transform.GetChild(0).transform.GetComponent<Text>().text = "LeftSeed x" + leftSeedNumber;
+			leftSeedHolder.GetComponent<Image>().color = Color.white;
+		}
+		if(type == "RightSeed"){
+			rightSeedNumber++;
+			rightSeedHolder.transform.GetChild(0).transform.GetComponent<Text>().text = "RightSeed x" + rightSeedNumber;
+			rightSeedHolder.GetComponent<Image>().color = Color.white;
+		}
+		if(type == "UpSeed"){
+			upSeedNumber++;
+			upSeedHolder.transform.GetChild(0).transform.GetComponent<Text>().text = "UpSeed x" + upSeedNumber;
+			upSeedHolder.GetComponent<Image>().color = Color.white;
+		}
+		if(type == "DownSeed"){
+			downSeedNumber++;
+			downSeedHolder.transform.GetChild(0).transform.GetComponent<Text>().text = "DownSeed x" + wallSeedNumber;
+			downSeedHolder.GetComponent<Image>().color = Color.white;
+		}
 	}
 	public void unshadeImage(string type){
 		if(type == "Pedro" || type == "Wall"){
@@ -263,7 +359,27 @@ public class PieceHolders : MonoBehaviour {
 			Color tempColor = wallSeedHolder.GetComponent<Image>().color;
 			tempColor.a = 1f;
 			wallSeedHolder.GetComponent<Image>().color = tempColor;
-		}				
+		}		
+		if(type == "LeftSeed"){
+			Color tempColor = leftSeedHolder.GetComponent<Image>().color;
+			tempColor.a = 1f;
+			leftSeedHolder.GetComponent<Image>().color = tempColor;
+		}	
+		if(type == "RightSeed"){
+			Color tempColor = rightSeedHolder.GetComponent<Image>().color;
+			tempColor.a = 1f;
+			rightSeedHolder.GetComponent<Image>().color = tempColor;
+		}	
+		if(type == "UpSeed"){
+			Color tempColor = upSeedHolder.GetComponent<Image>().color;
+			tempColor.a = 1f;
+			upSeedHolder.GetComponent<Image>().color = tempColor;
+		}	
+		if(type == "DownSeed"){
+			Color tempColor = downSeedHolder.GetComponent<Image>().color;
+			tempColor.a = 1f;
+			downSeedHolder.GetComponent<Image>().color = tempColor;
+		}			
 	}
 	public bool isAvailable(string type){
 		if(type == "Pedro" || type == "Wall"){
@@ -308,6 +424,38 @@ public class PieceHolders : MonoBehaviour {
 		}
 		if(type == "WallSeed"){
 			if(wallSeedNumber!=0){
+				return true;
+			}
+			else{
+				return false;
+			}
+		}
+		if(type == "LeftSeed"){
+			if(leftSeedNumber!=0){
+				return true;
+			}
+			else{
+				return false;
+			}
+		}
+		if(type == "RightSeed"){
+			if(rightSeedNumber!=0){
+				return true;
+			}
+			else{
+				return false;
+			}
+		}
+		if(type == "UpSeed"){
+			if(upSeedNumber!=0){
+				return true;
+			}
+			else{
+				return false;
+			}
+		}
+		if(type == "DownSeed"){
+			if(downSeedNumber!=0){
 				return true;
 			}
 			else{
@@ -359,6 +507,34 @@ public class PieceHolders : MonoBehaviour {
 			if(wallSeedNumber == 0){
 				wallSeedHolder.GetComponent<Image>().color = Color.gray;
 			}
+		}	
+		if(type == "LeftSeed"){
+			leftSeedNumber--;
+			leftSeedHolder.transform.GetChild(0).transform.GetComponent<Text>().text = "LeftSeed x" + leftSeedNumber;
+			if(leftSeedNumber == 0){
+				leftSeedHolder.GetComponent<Image>().color = Color.gray;
+			}
+		}	
+		if(type == "RightSeed"){
+			rightSeedNumber--;
+			rightSeedHolder.transform.GetChild(0).transform.GetComponent<Text>().text = "RightSeed x" + rightSeedNumber;
+			if(rightSeedNumber == 0){
+				rightSeedHolder.GetComponent<Image>().color = Color.gray;
+			}
+		}	
+		if(type == "UpSeed"){
+			upSeedNumber--;
+			upSeedHolder.transform.GetChild(0).transform.GetComponent<Text>().text = "UpSeed x" + upSeedNumber;
+			if(upSeedNumber == 0){
+				upSeedHolder.GetComponent<Image>().color = Color.gray;
+			}
+		}	
+		if(type == "DownSeed"){
+			downSeedNumber--;
+			downSeedHolder.transform.GetChild(0).transform.GetComponent<Text>().text = "DownSeed x" + downSeedNumber;
+			if(downSeedNumber == 0){
+				downSeedHolder.GetComponent<Image>().color = Color.gray;
+			}
 		}		
 	}	
 	public void updateText(string type){
@@ -379,6 +555,18 @@ public class PieceHolders : MonoBehaviour {
 		}
 		if(type == "WallSeed"){
 			wallSeedHolder.transform.GetChild(0).transform.GetComponent<Text>().text = "WallSeed x" + wallSeedNumber;
+		}
+		if(type == "RightSeed"){
+			rightSeedHolder.transform.GetChild(0).transform.GetComponent<Text>().text = "RightSeed x" + rightSeedNumber;
+		}
+		if(type == "LeftSeed"){
+			leftSeedHolder.transform.GetChild(0).transform.GetComponent<Text>().text = "LeftSeed x" + leftSeedNumber;
+		}
+		if(type == "UpSeed"){
+			upSeedHolder.transform.GetChild(0).transform.GetComponent<Text>().text = "UpSeed x" + upSeedNumber;
+		}
+		if(type == "DownSeed"){
+			downSeedHolder.transform.GetChild(0).transform.GetComponent<Text>().text = "DownSeed x" + downSeedNumber;
 		}
 	}
 	public void Hint(){//right now works for one stored solution.

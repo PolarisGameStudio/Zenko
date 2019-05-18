@@ -495,7 +495,7 @@ public class LevelStorer : MonoBehaviour {
 
 		//PlayerPrefs.DeleteAll();
 		//GameManager.mycurrency = PlayerPrefs.GetInt("Currency");
-		GameObject.Find("CurrencyHolder").GetComponentInChildren<Text>().text = GameManager.mycurrency.ToString();
+		//GameObject.Find("CurrencyHolder").GetComponentInChildren<Text>().text = GameManager.mycurrency.ToString();
 	}
 		//PlayerPrefs.DeleteAll();
 	//}
