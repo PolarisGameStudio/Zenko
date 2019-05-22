@@ -17,6 +17,7 @@ public class SceneLoading : MonoBehaviour {
 	Dragger td2;
 //	public IceTileHandler myhandler;
 	void Start(){
+		Application.targetFrameRate = 30;
 		if (txt2 == null){ //if loading menu, this is pointless and relies on bugs, try a public bool.
 		
 		}

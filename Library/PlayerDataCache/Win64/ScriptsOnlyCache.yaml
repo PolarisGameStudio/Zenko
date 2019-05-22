@@ -1634,4 +1634,4 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/WorldSelect.unity
   - Assets/Level.unity
-  playerPath: D:/ZenkoMay15/Zenko.exe
+  playerPath: D:/ZenkoMay19/Zenko.exe

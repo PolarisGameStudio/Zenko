@@ -198,8 +198,11 @@
      <None Include="Assets\4x4_1Icarus.txt" />
      <None Include="Assets\StreamingAssets\Level30.txt" />
      <None Include="Assets\StreamingAssets\Level98.txt" />
+     <None Include="Assets\StreamingAssets\Ch4_allv1.txt" />
      <None Include="Assets\mapsData.txt" />
      <None Include="Assets\StreamingAssets\Level78.txt" />
+     <None Include="Assets\StreamingAssets\Ch4_7x7.txt" />
+     <None Include="Assets\StreamingAssets\Ch4_8x8.txt" />
      <None Include="Assets\StreamingAssets\Level93.txt" />
      <None Include="Assets\StreamingAssets\Ch2Hard.txt" />
      <None Include="Assets\StreamingAssets\Level39.txt" />
@@ -275,11 +278,13 @@
      <None Include="Assets\StreamingAssets\Ch3_7x7.txt" />
      <None Include="Assets\StreamingAssets\8by8ice.txt" />
      <None Include="Assets\StreamingAssets\Ch3_GoodCandidates.txt" />
+     <None Include="Assets\StreamingAssets\Ch4_3piece.txt" />
      <None Include="Assets\StreamingAssets\Level92.txt" />
      <None Include="Assets\StreamingAssets\Level24.txt" />
      <None Include="Assets\StreamingAssets\Level69.txt" />
      <None Include="Assets\StreamingAssets\Ch4_2piece.txt" />
      <None Include="Assets\Mirza Beig\Particle Systems\_Common\Shaders\ASE Templates\Particle Alpha Blend Textureless.shader" />
+     <None Include="Assets\StreamingAssets\Seed_Experiments.txt" />
      <None Include="Assets\StreamingAssets\Level25.txt" />
      <None Include="Assets\TSF\Shaders\TSF.shader" />
      <None Include="Assets\StreamingAssets\Level-9.txt" />
