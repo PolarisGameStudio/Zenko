@@ -17,6 +17,9 @@ public class SceneLoading : MonoBehaviour {
 	Dragger td2;
 //	public IceTileHandler myhandler;
 	void Start(){
+		string teststring = "WallSeed";
+		Debug.Log(teststring.Length);
+		Debug.Log(teststring.Substring(teststring.Length-4,4));
 		Application.targetFrameRate = 30;
 		if (txt2 == null){ //if loading menu, this is pointless and relies on bugs, try a public bool.
 		

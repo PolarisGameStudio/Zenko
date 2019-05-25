@@ -37,6 +37,8 @@ ScriptsOnlyBuild:
     - TurnGraphics
     - UIMonster
     - VolumeSliders
+    UnityEditor.TestRunner.dll:
+    - UnityEditor.TestTools.TestRunner.TestListCacheData
     UnityEngine.UI.dll:
     - UnityEngine.EventSystems.EventSystem
     - UnityEngine.EventSystems.EventTrigger
@@ -50,6 +52,7 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.Slider
     - UnityEngine.UI.Text
     com.unity.multiplayer-hlapi.Runtime.dll:
+    - UnityEngine.Networking.NetworkCallbacks
     - UnityEngine.Networking.NetworkIdentity
   sceneClasses:
     Assets/Level.unity:
@@ -1257,7 +1260,7 @@ ScriptsOnlyBuild:
     className: ParticleLights
   - hash:
       serializedVersion: 2
-      Hash: b00526c6830399b482f4520fb862cb2e
+      Hash: 1ced055dac47ca2c6b23714d0d759909
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Dragger

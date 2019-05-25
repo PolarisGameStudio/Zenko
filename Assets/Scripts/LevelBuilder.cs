@@ -23,6 +23,8 @@ public class LevelBuilder : MonoBehaviour {
 	bool renewBoard = false;
 	public static Tile [,] tiles = new Tile[10,10];
 
+	public static List<Vector2> iceTiles = new List<Vector2>();
+
 	static int levelidtoload;
 
 	static Vector2 startpos;
@@ -111,7 +113,7 @@ public class LevelBuilder : MonoBehaviour {
 //			Debug.Log(lines[i]);
 			int mapsize = int.Parse(lines[i].Substring(3,1));		
 			if(lines[i].Length == 5){
-				Debug.Log("size it up for " );
+				//Debug.Log("size it up for " );
 				mapsize = int.Parse(lines[i].Substring(3,2));
 			}			
 			i = i + mapsize + 2;
@@ -271,11 +273,13 @@ public class LevelBuilder : MonoBehaviour {
 		Debug.Log(LevelStorer.efficientturns);
 		if(LevelBuilder.totaldimension == 10){
 			CameraController.changePosition(1,1);
+			CameraController.changeFovAndRot((int)32,52.9f);
 			//LightController.setLight(1,1);
 
 		}
 		else if (LevelBuilder.totaldimension < 10){
 			CameraController.changePosition(0,0);
+			CameraController.changeFovAndRot((int)27,52f);
 			//LightController.setLight(0,0);
 
 		}
@@ -305,7 +309,7 @@ public class LevelBuilder : MonoBehaviour {
 			Debug.Log(jagged[y].Length);
 			for (int x = 0; x < jagged[y].Length; x++) {
 				double zed = (-y) + (-0.8);
-				Debug.Log(jagged[y][x]);
+				//Debug.Log(jagged[y][x]);
 				placeOnWorld(jagged,y,x);
 							
 			}
@@ -313,11 +317,13 @@ public class LevelBuilder : MonoBehaviour {
 		GoalDirection((int)goaltransform.position.x,-(int)goaltransform.position.z);
 		if(LevelBuilder.totaldimension == 10){
 			CameraController.changePosition(1,1);
+			CameraController.changeFovAndRot((int)32,52.9f);
 			//LightController.setLight(1,1);
 
 		}
 		else if (LevelBuilder.totaldimension < 10){
 			CameraController.changePosition(0,0);
+			CameraController.changeFovAndRot((int)27,52f);
 			//LightController.setLight(0,0);
 
 		}
@@ -604,7 +610,7 @@ public class LevelBuilder : MonoBehaviour {
 		for (int r= 0; r< totaldimension; r++){
 			for (int c = 0; c<totaldimension; c++){
 				Vector3 tilePos = new Vector3(c,0,r);
-				Debug.Log("TILEBANK SIZE IS" + tileBank.Count);
+				//Debug.Log("TILEBANK SIZE IS" + tileBank.Count);
 				for (int n =0; n< tileBank.Count; n++){
 					GameObject o = tileBank[n];
 					if(!o.activeSelf){
@@ -992,6 +998,7 @@ public class LevelBuilder : MonoBehaviour {
 			}
 		}
 		if(jagged[y][x].Length ==3){
+			populateIce();
 		//					Debug.Log(jagged[y][x].Substring(0,1));
 			int hintx = int.Parse(jagged[y][x].Substring(1,1));
 			int hinty = int.Parse(jagged[y][x].Substring(2,1));
@@ -1005,55 +1012,64 @@ public class LevelBuilder : MonoBehaviour {
 					//LevelManager.piecetiles.Add (Instantiate	(floor_left, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,270,0))));
 					//LevelManager.myhints.Add(new Vector2 (hintx,hinty));
 					LevelManager.hints.Add(new Hint("Left", hintx,hinty));
-					pieceHolder.AddPiece("Left");
+					//pieceHolder.AddPiece("Left");
+					PlaceCreature("Left");
 					break;
 				case sfloor_right:
 					//LevelManager.piecetiles.Add (Instantiate	(floor_right, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,90,0))));
 					//LevelManager.myhints.Add(new Vector2 (hintx,hinty));
-					pieceHolder.AddPiece("Right");
+					//pieceHolder.AddPiece("Right");
 					LevelManager.hints.Add(new Hint("Right", hintx,hinty));
+					PlaceCreature("Right");
 					break;
 				case sfloor_up:
 					//LevelManager.piecetiles.Add (Instantiate	(floor_up, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,0,0))));
 					//LevelManager.myhints.Add(new Vector2 (hintx,hinty));
-					pieceHolder.AddPiece("Up");
+					//pieceHolder.AddPiece("Up");
 					LevelManager.hints.Add(new Hint("Up", hintx,hinty));
+					PlaceCreature("Up");
 					break;
 				case sfloor_down:
 					//LevelManager.piecetiles.Add (Instantiate	(floor_down, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,180,0))));
 					//LevelManager.myhints.Add(new Vector2 (hintx,hinty));
-					pieceHolder.AddPiece("Down");
+					//pieceHolder.AddPiece("Down");
 					LevelManager.hints.Add(new Hint("Down", hintx,hinty));
+					PlaceCreature("Down");
 					break;
 				case sfloor_rock:
 					//LevelManager.piecetiles.Add (Instantiate (floor_rock, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.identity));
 					//Debug.Log(LevelManager.piecetiles.Count);
 					//LevelManager.myhints.Add(new Vector2 (hintx,hinty));
-					pieceHolder.AddPiece("Wall");
+					//pieceHolder.AddPiece("Wall");
 					LevelManager.hints.Add(new Hint("Wall", hintx,hinty));
+					PlaceCreature("Wall");
 					break;
 
 				case ssfloor_left:
 					//LevelManager.piecetiles.Add (Instantiate	(s_floor_left, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,270,0))));
 					//LevelManager.myhints.Add(new Vector2 (hintx,hinty));
-					pieceHolder.AddPiece("LeftSeed");
+					//pieceHolder.AddPiece("LeftSeed");
 					LevelManager.hints.Add(new Hint("LeftSeed", hintx,hinty));
+					PlaceCreature("LeftSeed");
 					break;
 				case ssfloor_right:
-					pieceHolder.AddPiece("RightSeed");
+					//pieceHolder.AddPiece("RightSeed");
 					LevelManager.hints.Add(new Hint("RightSeed", hintx,hinty));
+					PlaceCreature("RightSeed");
 					// LevelManager.piecetiles.Add (Instantiate	(s_floor_right, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,90,0))));
 					// LevelManager.myhints.Add(new Vector2 (hintx,hinty));
 					break;
 				case ssfloor_up:
-					pieceHolder.AddPiece("UpSeed");
+					//pieceHolder.AddPiece("UpSeed");
 					LevelManager.hints.Add(new Hint("UpSeed", hintx,hinty));
+					PlaceCreature("UpSeed");
 					// LevelManager.piecetiles.Add (Instantiate	(s_floor_up, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,0,0))));
 					// LevelManager.myhints.Add(new Vector2 (hintx,hinty));
 					break;
 				case ssfloor_down:
-					pieceHolder.AddPiece("DownSeed");
+				//	pieceHolder.AddPiece("DownSeed");
 					LevelManager.hints.Add(new Hint("DownSeed", hintx,hinty));
+					PlaceCreature("DownSeed");
 					// LevelManager.piecetiles.Add (Instantiate	(s_floor_down, new Vector3 (2+piecenums, 0, -totaldimension),Quaternion.Euler(new Vector3(0,180,0))));
 					// LevelManager.myhints.Add(new Vector2 (hintx,hinty));
 					break;
@@ -1061,8 +1077,9 @@ public class LevelBuilder : MonoBehaviour {
 				//Debug.Log("Wallseed");
 					//LevelManager.piecetiles.Add (Instantiate (s_floor_rock, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.identity));
 					//LevelManager.myhints.Add(new Vector2 (hintx,hinty));
-					pieceHolder.AddPiece("WallSeed");
+					//pieceHolder.AddPiece("WallSeed");
 					LevelManager.hints.Add(new Hint("WallSeed", hintx,hinty));
+					PlaceCreature("WallSeed");
 					break;
 				}
 				piecenums++;				
@@ -1152,6 +1169,136 @@ public class LevelBuilder : MonoBehaviour {
 			Debug.Log("Left");
 			return;
 
+		}
+	}
+	public void populateIce(){
+		iceTiles.Clear();
+		Debug.Log(totaldimension);
+		for(int i = 0; i<totaldimension; i++){
+			for(int j = 0; j<totaldimension; j++){
+				if (tiles[i,j].type == "Ice"){
+					iceTiles.Add(new Vector2(i,j));
+				}
+			}
+		}
+		Debug.Log(iceTiles[0]);
+		Debug.Log(iceTiles[iceTiles.Count-1]);
+	}
+	public void PlaceCreature(string creaturetype){
+		RemoveSolutions(creaturetype);
+		int randomplace = Random.Range(0,iceTiles.Count);
+		Vector2 tileplace = new Vector2(iceTiles[randomplace].x, iceTiles[randomplace].y);
+		Vector3 pieceplace = new Vector3(iceTiles[randomplace].x, 0, -iceTiles[randomplace].y);
+		Tile currenttile = tiles[(int)tileplace.x,(int)tileplace.y];
+		string myseedtype = "Not";
+		if(creaturetype.Length>5){
+			myseedtype = creaturetype.Substring(0,creaturetype.Length-4);
+			creaturetype = creaturetype.Substring(creaturetype.Length-4,4);	
+			Debug.Log("seedtype is " + myseedtype);
+
+		}
+		switch(creaturetype){
+		case "Wall":
+			Transform wallpiece = Instantiate (floor_rock, pieceplace, Quaternion.identity);
+			currenttile.isTaken = true;
+			currenttile.type = "Wall";
+			wallpiece.gameObject.GetComponentInChildren<Animator>().SetInteger("Phase",2);
+			break;
+		case "Left":
+			Transform leftpiece = Instantiate (floor_left, pieceplace, Quaternion.Euler(new Vector3(0,270,0)));
+			leftpiece.gameObject.GetComponentInChildren<Animator>().SetInteger("Phase",2);
+			currenttile.isTaken = true;
+			currenttile.type = "Wall";
+			currenttile.tileObj = leftpiece.gameObject;
+			if(LevelBuilder.tiles[(int)tileplace.x-1, (int)tileplace.y].type == "Ice"){
+				LevelBuilder.tiles[(int)tileplace.x-1, (int)tileplace.y].type = leftpiece.gameObject.GetComponent<Dragger>().myType;		
+			}	
+
+			else{
+				LevelBuilder.tiles[(int)tileplace.x-1, (int)tileplace.y].isSideways = "Left";
+			}
+			break;
+		case "Up":
+			Transform uppiece = Instantiate (floor_up, pieceplace, Quaternion.Euler(new Vector3(0,0,0)));
+			uppiece.gameObject.GetComponentInChildren<Animator>().SetInteger("Phase",2);
+			currenttile.isTaken = true;
+			currenttile.type = "Wall";
+			currenttile.tileObj = uppiece.gameObject;
+			if(LevelBuilder.tiles[(int)tileplace.x, (int)tileplace.y-1].type == "Ice"){
+				LevelBuilder.tiles[(int)tileplace.x, (int)tileplace.y-1].type = uppiece.gameObject.GetComponent<Dragger>().myType;		
+			}	
+
+			else{
+				LevelBuilder.tiles[(int)tileplace.x, (int)tileplace.y-1].isSideways = "Up";
+			}
+			break;
+		case "Right":
+			Transform rightpiece = Instantiate (floor_right, pieceplace, Quaternion.Euler(new Vector3(0,90,0)));
+			rightpiece.gameObject.GetComponentInChildren<Animator>().SetInteger("Phase",2);
+			currenttile.isTaken = true;
+			currenttile.type = "Wall";
+			currenttile.tileObj = rightpiece.gameObject;
+			if(LevelBuilder.tiles[(int)tileplace.x+1, (int)tileplace.y].type == "Ice"){
+				LevelBuilder.tiles[(int)tileplace.x+1, (int)tileplace.y].type = rightpiece.gameObject.GetComponent<Dragger>().myType;		
+			}	
+
+			else{
+				LevelBuilder.tiles[(int)tileplace.x+1, (int)tileplace.y].isSideways = "Right";
+			}	
+			break;
+		case "Down":
+			Transform downpiece = Instantiate (floor_down, pieceplace, Quaternion.Euler(new Vector3(0,180,0)));
+			downpiece.gameObject.GetComponentInChildren<Animator>().SetInteger("Phase",2);				
+			currenttile.isTaken = true;
+			currenttile.type = "Wall";
+			currenttile.tileObj = downpiece.gameObject;
+			if(LevelBuilder.tiles[(int)tileplace.x, (int)tileplace.y+1].type == "Ice"){
+				LevelBuilder.tiles[(int)tileplace.x, (int)tileplace.y+1].type = downpiece.gameObject.GetComponent<Dragger>().myType;		
+			}	
+
+			else{
+				LevelBuilder.tiles[(int)tileplace.x, (int)tileplace.y+1].isSideways = "Down";
+			}
+
+			break;
+		case "Seed":
+			Transform seedpiece;
+			switch(myseedtype){
+			case "Wall":
+				seedpiece = Instantiate (s_floor_rock, pieceplace, Quaternion.identity);
+				currenttile.tileObj = seedpiece.gameObject;		
+				break;
+			case "Left":
+				seedpiece = Instantiate (s_floor_left, pieceplace, Quaternion.Euler(new Vector3(0,270,0)));
+				currenttile.tileObj = seedpiece.gameObject;						
+				break;
+			case "Up":
+				seedpiece = Instantiate (s_floor_up, pieceplace, Quaternion.Euler(new Vector3(0,0,0)));
+				currenttile.tileObj = seedpiece.gameObject;	
+				break;
+			case "Right":
+				seedpiece = Instantiate (s_floor_right, pieceplace, Quaternion.Euler(new Vector3(0,90,0)));
+				currenttile.tileObj = seedpiece.gameObject;	
+				break;
+			case "Down":
+				seedpiece = Instantiate (s_floor_down, pieceplace, Quaternion.Euler(new Vector3(0,180,0)));
+				currenttile.tileObj = seedpiece.gameObject;	
+				break;
+			}
+			
+			//seedpiece.gameObject.GetComponentInChildren<Animator>().SetInteger("Phase",2);				
+			currenttile.isTaken = true;
+			currenttile.type = "Seed";
+			currenttile.seedType = myseedtype;
+			break;
+			//s_floor_left
+		}
+	}
+	public void RemoveSolutions(string creaturetype){
+		for (int i = 0; i<LevelManager.hints.Count; i++){
+			if(LevelManager.hints[0].type == creaturetype){
+				iceTiles.Remove(new Vector2(LevelManager.hints[0].x, LevelManager.hints[0].y));
+			}
 		}
 	}
 }

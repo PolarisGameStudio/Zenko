@@ -31,6 +31,7 @@ public class Dragger : MonoBehaviour {
 	public bool isinboard;
 	public bool startedDragging;
 	public PieceHolders pieceHolder;
+	public Vector3 piecePosition;
 	void Start(){
 		particle = GameObject.Find("Main Camera").GetComponent<LevelBuilder>().smoke_particle.gameObject;
 		restingpoint = transform.position;
@@ -93,6 +94,8 @@ public class Dragger : MonoBehaviour {
 	 	toggleColliders();
 //	 	Debug.Log(TurnBehaviour.turn);
 		if (TurnBehaviour.turn == 0) {
+			PlaneBehavior.readyToDrop = false;
+
 			PieceHolders.placedpieces.Remove(this);
 			if(myType == "Wall"){
 				this.gameObject.GetComponent<Animator>().SetInteger("Phase", 1);
@@ -107,12 +110,14 @@ public class Dragger : MonoBehaviour {
 			//Cursor.visible = false;
 			//Debug.Log (-transform.position.z);
 			//Debug.Log(transform.position.x);
-			Debug.Log(transform.position.x + "" + transform.position.z);//HERES WHERE THE PROBLEM BE
-			if(transform.position.x<LevelBuilder.totaldimension&& -transform.position.z<LevelBuilder.totaldimension){
+			Debug.Log(transform.position.x + "" + transform.position.z + "totaldimension" + LevelBuilder.totaldimension);//HERES WHERE THE PROBLEM BE
+			//Fix this to avoid untaking wrong tiles when clicking on the 3d object but the planepos somewhere else.
+			if(transform.position.x<LevelBuilder.totaldimension && transform.position.x>0 && -transform.position.z<LevelBuilder.totaldimension && transform.position.z<0){
 				mytile = LevelBuilder.tiles[(int)gameObject.transform.position.x, -(int)gameObject.transform.position.z];
 				mytile.type = "Ice";
-				Debug.Log("UNTAKING IT");
+				Debug.Log("UNTAKING IT at" + (int)gameObject.transform.position.x + -(int)gameObject.transform.position.z);
 				mytile.isTaken = false;
+				//Debug.Log(LevelBuilder.tiles[(int)gameObject.transform.position.x, -(int)gameObject.transform.position.z-1].isTaken);
 				Debug.Log(mytile.isSideways);
 				if(mytile.isSideways != null){
 					mytile.type = mytile.isSideways;
@@ -141,8 +146,6 @@ public class Dragger : MonoBehaviour {
 			//}
 			GetComponent<BoxCollider>().enabled = false;
 		}
-
-		
 			//notmoving =	 	false;	
  }
  
@@ -155,8 +158,12 @@ public class Dragger : MonoBehaviour {
 //			Debug.Log(curScreenPoint);
 
 			positiontogo = PlaneBehavior.planePos;	
-
+			piecePosition = new Vector3(PlaneBehavior.planePos.x, PlaneBehavior.planePos.y, PlaneBehavior.planePos.z);
 			positiontogo = new Vector3(Mathf.RoundToInt(PlaneBehavior.planePos.x), PlaneBehavior.planePos.y, Mathf.RoundToInt(PlaneBehavior.planePos.z));	
+			Debug.Log("positiontogo" + positiontogo);
+					Debug.Log("value of test" + LevelBuilder.tiles[2,1].isTaken);
+					Debug.Log("isreadytodrop" + PlaneBehavior.readyToDrop);
+
 			if(lastposition != positiontogo || currenttile == null){
 				//Debug.Log("Change");	
 				CheckAvailableTile(positiontogo);
@@ -173,7 +180,7 @@ public class Dragger : MonoBehaviour {
 
 
 			if(!gotosky){
-				transform.position = positiontogo;
+				transform.position = piecePosition;
 				if(positiontogo.x<LevelBuilder.totaldimension && -transform.position.z<LevelBuilder.totaldimension){
 					//transform.position = new Vector3(mytile);
 				}
@@ -213,6 +220,7 @@ public class Dragger : MonoBehaviour {
  }
 
  void CheckAvailableTile(Vector3 position){
+ 	Debug.Log("Checkingavail at " + position);
  	Collider[] colliders = Physics.OverlapSphere(new Vector3(position.x,0,position.z), .5f);	
 	foreach (Collider component in colliders) {
 		if(component.tag == "Tile"){
@@ -226,6 +234,7 @@ public class Dragger : MonoBehaviour {
 	if(position.x>-1 && position.x<LevelBuilder.totaldimension && position.z<1 && position.z>-LevelBuilder.totaldimension){
 		isinboard = true;
 		Debug.Log("Doing it");
+		//Debug.Log("value of test" + LevelBuilder.tiles[2,1].isTaken);
 		if(pasttile != null){
 			pasttile.GetComponent<MouseOverer>().Leave();
 		}
@@ -332,7 +341,7 @@ public class Dragger : MonoBehaviour {
 			}			
 
 			if (myType == "Seed"){
-			LevelBuilder.tiles[(int)transform.position.x, -(int)transform.position.z].seedType = mySeedType;			
+			LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].seedType = mySeedType;			
 			}
 			if(myType == "Seed"){
 				pieceholdername = mySeedType + myType;
@@ -365,8 +374,8 @@ public class Dragger : MonoBehaviour {
 			else{
 				pieceHolder.updateValueUp(myType);	
 			}
-		
-			Destroy(this.gameObject);
+				
+			//Destroy(this.gameObject);
 	
 
 		}

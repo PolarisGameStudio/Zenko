@@ -610,7 +610,7 @@ public class PieceHolders : MonoBehaviour {
 						postogo = LookforPosition(holders[i].name);
 						//Debug.Log("Instantiate a "+ holders[i].name);
 						if(postogo!= new Vector2(0,0)){
-							 piece = holders[i].mygameobject.GetComponent<UIMonster>().Spawnit();
+							piece = holders[i].mygameobject.GetComponent<UIMonster>().Spawnit();
 							PlaceHint(piece.GetComponent<Dragger>(), postogo);
 							updateValueDown(holders[i].name);
 							placedpieces.Add(piece.GetComponent<Dragger>());
@@ -715,9 +715,13 @@ public class PieceHolders : MonoBehaviour {
 		if(td.myType == "Seed"){
 			LevelBuilder.tiles[(int)positiontogo.x, (int)positiontogo.y].seedType = td.mySeedType;
 		}
+		if(td.myType == "Wall"){
+			td.gameObject.GetComponent<Animator>().SetInteger("Phase", 2);
+		}
 		
 	}
 	public void placeIcarus(Vector2 target, Dragger td){
+		td.gameObject.GetComponent<Animator>().SetInteger("Phase", 2);
 		if(td.myType == "Left"){
 			LevelBuilder.tiles[(int)target.x, (int)target.y].type = "Wall";
 			LevelBuilder.tiles[(int)target.x, (int)target.y].isTaken = true;

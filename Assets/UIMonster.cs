@@ -83,7 +83,7 @@ public class UIMonster : MonoBehaviour {
 				mynewpiece.GetComponent<Dragger>().startedDragging = true;	 	
 			}
 			else if(mytype == "WallSeed"){
-				GameObject mynewpiece = Instantiate(mypiece, spawnposition, Quaternion.Euler(new Vector3(0,90,0)));
+				GameObject mynewpiece = Instantiate(mypiece, spawnposition, Quaternion.Euler(new Vector3(0,0,0)));
 				mynewpiece.GetComponent<Dragger>().OnMouseDown();
 				mynewpiece.GetComponent<Dragger>().startedDragging = true;	 	
 			}
