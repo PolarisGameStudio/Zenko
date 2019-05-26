@@ -105,7 +105,7 @@ public class LevelBuilder : MonoBehaviour {
 		}
 		string text = result;
 		//string text = System.IO.File.ReadAllText(System.IO.Path.Combine (Application.streamingAssetsPath, "Ch4_Easy.txt"));
-		string[] lines = Regex.Split(text, "\r\n");
+		string[] lines = Regex.Split(text, "\r?\n");
 		Debug.Log(lines[0]);
 		for(int i =0; i<lines.Length;i++){
 			startersPotd.Add(i);
@@ -141,7 +141,7 @@ public class LevelBuilder : MonoBehaviour {
 		}
 		string text = result;
 		//string text = System.IO.File.ReadAllText(System.IO.Path.Combine (Application.streamingAssetsPath, "AdventureLevels.txt"));
-		string[] lines = Regex.Split(text, "\r\n");
+		string[] lines = Regex.Split(text, "\r?\n");
 
 		Debug.Log(lines[0]);
 		bool nextismap;
@@ -1203,6 +1203,7 @@ public class LevelBuilder : MonoBehaviour {
 			currenttile.isTaken = true;
 			currenttile.type = "Wall";
 			wallpiece.gameObject.GetComponentInChildren<Animator>().SetInteger("Phase",2);
+			PieceHolders.placedpieces.Add(wallpiece.gameObject.GetComponent<Dragger>());
 			break;
 		case "Left":
 			Transform leftpiece = Instantiate (floor_left, pieceplace, Quaternion.Euler(new Vector3(0,270,0)));
@@ -1217,6 +1218,7 @@ public class LevelBuilder : MonoBehaviour {
 			else{
 				LevelBuilder.tiles[(int)tileplace.x-1, (int)tileplace.y].isSideways = "Left";
 			}
+			PieceHolders.placedpieces.Add(leftpiece.gameObject.GetComponent<Dragger>());
 			break;
 		case "Up":
 			Transform uppiece = Instantiate (floor_up, pieceplace, Quaternion.Euler(new Vector3(0,0,0)));
@@ -1231,6 +1233,7 @@ public class LevelBuilder : MonoBehaviour {
 			else{
 				LevelBuilder.tiles[(int)tileplace.x, (int)tileplace.y-1].isSideways = "Up";
 			}
+			PieceHolders.placedpieces.Add(uppiece.gameObject.GetComponent<Dragger>());
 			break;
 		case "Right":
 			Transform rightpiece = Instantiate (floor_right, pieceplace, Quaternion.Euler(new Vector3(0,90,0)));
@@ -1245,6 +1248,7 @@ public class LevelBuilder : MonoBehaviour {
 			else{
 				LevelBuilder.tiles[(int)tileplace.x+1, (int)tileplace.y].isSideways = "Right";
 			}	
+			PieceHolders.placedpieces.Add(rightpiece.gameObject.GetComponent<Dragger>());
 			break;
 		case "Down":
 			Transform downpiece = Instantiate (floor_down, pieceplace, Quaternion.Euler(new Vector3(0,180,0)));
@@ -1259,33 +1263,37 @@ public class LevelBuilder : MonoBehaviour {
 			else{
 				LevelBuilder.tiles[(int)tileplace.x, (int)tileplace.y+1].isSideways = "Down";
 			}
-
+			PieceHolders.placedpieces.Add(downpiece.gameObject.GetComponent<Dragger>());
 			break;
 		case "Seed":
 			Transform seedpiece;
 			switch(myseedtype){
 			case "Wall":
 				seedpiece = Instantiate (s_floor_rock, pieceplace, Quaternion.identity);
-				currenttile.tileObj = seedpiece.gameObject;		
+				currenttile.tileObj = seedpiece.gameObject;	
+				PieceHolders.placedpieces.Add(seedpiece.gameObject.GetComponent<Dragger>());	
 				break;
 			case "Left":
 				seedpiece = Instantiate (s_floor_left, pieceplace, Quaternion.Euler(new Vector3(0,270,0)));
-				currenttile.tileObj = seedpiece.gameObject;						
+				currenttile.tileObj = seedpiece.gameObject;	
+				PieceHolders.placedpieces.Add(seedpiece.gameObject.GetComponent<Dragger>());					
 				break;
 			case "Up":
 				seedpiece = Instantiate (s_floor_up, pieceplace, Quaternion.Euler(new Vector3(0,0,0)));
 				currenttile.tileObj = seedpiece.gameObject;	
+				PieceHolders.placedpieces.Add(seedpiece.gameObject.GetComponent<Dragger>());
 				break;
 			case "Right":
 				seedpiece = Instantiate (s_floor_right, pieceplace, Quaternion.Euler(new Vector3(0,90,0)));
 				currenttile.tileObj = seedpiece.gameObject;	
+				PieceHolders.placedpieces.Add(seedpiece.gameObject.GetComponent<Dragger>());
 				break;
 			case "Down":
 				seedpiece = Instantiate (s_floor_down, pieceplace, Quaternion.Euler(new Vector3(0,180,0)));
 				currenttile.tileObj = seedpiece.gameObject;	
+				PieceHolders.placedpieces.Add(seedpiece.gameObject.GetComponent<Dragger>());
 				break;
 			}
-			
 			//seedpiece.gameObject.GetComponentInChildren<Animator>().SetInteger("Phase",2);				
 			currenttile.isTaken = true;
 			currenttile.type = "Seed";
