@@ -16,4 +16,10 @@ public class CameraController : MonoBehaviour {
 	static public void changePosition(int shiftx, int shifty){
 		Camera.main.gameObject.transform.position = new Vector3(cameraorigin.x+shiftx, cameraorigin.y, cameraorigin.z-shifty);
 	}
+	static public void changeFovAndRot(int fov, float rot){
+		Camera.main.fieldOfView = fov;
+		Camera.main.gameObject.transform.rotation = Quaternion.Euler(rot,0,0);
+	}
+
 }
+	

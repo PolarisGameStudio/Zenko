@@ -72,7 +72,8 @@ public class PlayerMovement : MonoBehaviour {
 			this.transform.GetChild(3).GetComponent<Animator>().SetInteger("Phase", 0);
 
 		}
-		if(!canmove){
+		if(!canmove && nextaction != "Goal_Action"){
+			//Debug.Log("SETTING");
 			this.transform.GetChild(3).GetComponent<Animator>().SetInteger("Phase", 1);
 		}
 		if (Input.GetKeyDown (KeyCode.G)){
@@ -107,10 +108,12 @@ public class PlayerMovement : MonoBehaviour {
 				//int nextlevel = LevelManager.levelnum;
 				//LevelManager.NextLevel (nextlevel);
 
-				LevelLostBoard.SetActive (true);
 				this.enabled=false;
+
 				Debug.Log("Hole");
+				StartCoroutine(PopLose());
 			}
+
 			else if (nextaction == null) {
 //				Debug.Log("Null");
 				cantakeinput = true;
@@ -119,14 +122,19 @@ public class PlayerMovement : MonoBehaviour {
 			}  
 			else if (nextaction == "Goal_Action") {
 				RatingPopUp.GiveRating ();
- 				SceneLoading.SetStars(RatingPopUp.myrating);
+ 				SceneLoading.SetStars(RatingBehaviour.currentrating);
  				this.enabled = false;
 				StartCoroutine(PopWin());
 			}			
 			else if (nextaction == "Hole_Action") {
+<<<<<<< HEAD
 				StartCoroutine(PopLose());
+=======
+
+>>>>>>> Winbuild
 				this.enabled=false;
 				Debug.Log("Hole");
+				StartCoroutine(PopLose());
 
 				//int nextlevel = LevelManager.levelnum;
 				//LevelManager.NextLevel (nextlevel);
@@ -278,7 +286,7 @@ public class PlayerMovement : MonoBehaviour {
 	}*/
 	void FindTileTag(){
 		Debug.Log("FINDING TAG");
-		//Collider2D[] colliders = Physics2D.OverlapCircleAll(tiletotest, .1f); ///Presuming the object you are testing also has a collider 0 otherwise{
+	//Collider2D[] colliders = Physics2D.OverlapCircleAll(tiletotest, .1f); ///Presuming the object you are testing also has a collider 0 otherwise{
 		
 //		Debug.Log((int)tiletotest.x + "+" + -(int)tiletotest.z);
 		//Debug.Log(LevelBuilder.tiles[-2,5]);
@@ -313,7 +321,7 @@ public class PlayerMovement : MonoBehaviour {
 		}
 		//if the desired tile is not the place you're standing in it moves there
 		if (currenttile != transform.position && beingdragged == false) {
-//			Debug.Log("move");
+			//Debug.Log("move");
 			GoalBehaviour.readytomove = true;
 			transform.position = Vector3.MoveTowards (transform.position, currenttile, Time.deltaTime * speed); 
 			cantakeinput = false;
@@ -397,6 +405,7 @@ public class PlayerMovement : MonoBehaviour {
 	}
 	//Individual Behaviours to be stored in the following.
 	void ActOnTile(){
+		Swiping.mydirection = "Null";
 		/*if (istiletaken == false) {
 			//move and keep moving i	f theres nothing but ice
 			Count ();
@@ -414,6 +423,7 @@ public class PlayerMovement : MonoBehaviour {
 			}
 			else if (tilescript.type == "Wall" || tilescript.type == "Start") {
 				//the desired tile is the previous one and u stop looking for next tiles.
+				//Swiping.mydirection = "Null";
 				canmove = false;
 				Debug.Log("canmove is false now");
 				Count ();
@@ -538,6 +548,15 @@ public class PlayerMovement : MonoBehaviour {
 				//Debug.Log("Check");
 				//tilescript.type = tilescript.seedType;
 				PopSeed(tilescript.seedType);
+				
+				if(tilescript.isSideways!= null){
+					//Count ();
+					//currenttile = tiletotest;
+					canmove = false;
+					nextaction = tilescript.isSideways+ "_Action";
+					Debug.Log(nextaction);
+					isspeeding = true;				
+				}
 				//tilescript.seedType = "SeededTile";
 				//Vector3 scale = lastSeed.GetComponent<Dragger>().myshrinker.transform.localScale;
 				//scale.Set(.33f,.33f,.33f);
@@ -583,8 +602,15 @@ public class PlayerMovement : MonoBehaviour {
 
 	}
 	IEnumerator PopLose(){
+<<<<<<< HEAD
 		yield return new WaitForSeconds(.4f);
 		LevelLostBoard.SetActive (true);
 
 	}
+=======
+		yield return new WaitForSeconds(.5f);
+		LevelLostBoard.SetActive (true);
+	}
+
+>>>>>>> Winbuild
 }

@@ -81,9 +81,20 @@ public class MenuButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler{
     }
     public void toggleCongifMenu(){
         ConfigMenu.SetActive(true);
+        Swiping.canswipe = false;
         //set menu to back only.
     }
     public void closeConfigMenu(){
         ConfigMenu.SetActive(false);
+        Swiping.canswipe = true;
+        Swiping.mydirection = "Null";
+        if(Input.touchCount>0){
+            Touch t = Input.GetTouch(0);
+            Swiping.firstPressPos = new Vector2(t.position.x,t.position.y);
+
+        }
+        else{
+            Swiping.firstPressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        }
     }
 }

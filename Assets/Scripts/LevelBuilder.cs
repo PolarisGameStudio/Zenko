@@ -15,13 +15,15 @@ public class LevelBuilder : MonoBehaviour {
 	 List<GameObject> tileBank = new List<GameObject>();
 	//public static Transform icetile;
 
-	public static int rows = 8;
-	public static int cols = 8;
+	public static int rows = 10;
+	public static int cols = 10;
 
-	public static int totaldimension = 8;
+	public static int totaldimension = 10;
 
 	bool renewBoard = false;
 	public static Tile [,] tiles = new Tile[10,10];
+
+	public static List<Vector2> iceTiles = new List<Vector2>();
 
 	static int levelidtoload;
 
@@ -85,10 +87,25 @@ public class LevelBuilder : MonoBehaviour {
 		Debug.Log (filePath);
 	}
 
-	public void initPotd(){ //feeds levelPotd string array from textfile.
+	public IEnumerator initPotd(){ //feeds levelPotd string array from textfile.
 		startersPotd = new List<int>();
-		string text = System.IO.File.ReadAllText(System.IO.Path.Combine (Application.streamingAssetsPath, "Ch3_Candidates.txt"));
-		string[] lines = Regex.Split(text, "\n");
+		string file = "Ch4_allv1.txt";
+		filePath = System.IO.Path.Combine(Application.streamingAssetsPath, file);
+		Debug.Log (filePath + "FILEPAPAPATH");
+		result = " ";
+		if (filePath.Contains ("://") || filePath.Contains(":///"))  {
+			UnityWebRequest www = UnityWebRequest.Get (filePath);
+			yield return www.SendWebRequest ();
+			result = www.downloadHandler.text;
+			Debug.Log (result);
+
+		} 
+		else{
+			result = System.IO.File.ReadAllText (filePath);
+		}
+		string text = result;
+		//string text = System.IO.File.ReadAllText(System.IO.Path.Combine (Application.streamingAssetsPath, "Ch4_Easy.txt"));
+		string[] lines = Regex.Split(text, "\r?\n");
 		Debug.Log(lines[0]);
 		for(int i =0; i<lines.Length;i++){
 			startersPotd.Add(i);
@@ -96,16 +113,35 @@ public class LevelBuilder : MonoBehaviour {
 //			Debug.Log(lines[i]);
 			int mapsize = int.Parse(lines[i].Substring(3,1));		
 			if(lines[i].Length == 5){
+				//Debug.Log("size it up for " );
 				mapsize = int.Parse(lines[i].Substring(3,2));
 			}			
 			i = i + mapsize + 2;
 		}
 		levelsPotd = (string[])lines.Clone();
+		if(LevelManager.ispotd){
+			drawPotd(LevelManager.levelnum);
+		}
 	}
-	public void initAdventure(){ //feeds Adventure string array from textfile.
+	public IEnumerator initAdventure(){ //feeds Adventure string array from textfile.
 		startersAdventure = new List<int>();
-		string text = System.IO.File.ReadAllText(System.IO.Path.Combine (Application.streamingAssetsPath, "AdventureLevels.txt"));
-		string[] lines = Regex.Split(text, "\n");
+		string file = "AdventureLevels.txt";
+		filePath = System.IO.Path.Combine(Application.streamingAssetsPath, file);
+		Debug.Log (filePath + "FILEPAPAPATH");
+		result = " ";
+		if (filePath.Contains ("://") || filePath.Contains(":///"))  {
+			UnityWebRequest www = UnityWebRequest.Get (filePath);
+			yield return www.SendWebRequest ();
+			result = www.downloadHandler.text;
+			Debug.Log (result);
+
+		} 
+		else{
+			result = System.IO.File.ReadAllText (filePath);
+		}
+		string text = result;
+		//string text = System.IO.File.ReadAllText(System.IO.Path.Combine (Application.streamingAssetsPath, "AdventureLevels.txt"));
+		string[] lines = Regex.Split(text, "\r?\n");
 
 		Debug.Log(lines[0]);
 		bool nextismap;
@@ -124,9 +160,13 @@ public class LevelBuilder : MonoBehaviour {
 			//i = i + mapsize + 2;
 		}
 		levelsAdventure = (string[])lines.Clone();
+		if(!LevelManager.ispotd){
+			//load potd maps
+			drawNormal(LevelManager.levelnum);
+		}
 	}
 
-	public void drawAdventure(int levelnumber){
+	/*public void drawAdventure(int levelnumber){
 		LevelManager.piecetiles = new List<Transform>();
 		LevelManager.myhints = new List<Vector2>();
 		LevelManager.hints = new List<Hint>();
@@ -183,8 +223,9 @@ public class LevelBuilder : MonoBehaviour {
 		}
 		ProgressBar.InitializeProgressBar(LevelStorer.efficientturns);
 		//PopulationManager.readytobrain = true;		
-	}
+	}*/
 	public void drawNormal(int levelnumber){
+		Debug.Log(levelnumber);
 		pieceHolder.reset();
 		LevelManager.piecetiles = new List<Transform>();
 		LevelManager.myhints = new List<Vector2>();
@@ -232,11 +273,13 @@ public class LevelBuilder : MonoBehaviour {
 		Debug.Log(LevelStorer.efficientturns);
 		if(LevelBuilder.totaldimension == 10){
 			CameraController.changePosition(1,1);
+			CameraController.changeFovAndRot((int)32,52.9f);
 			//LightController.setLight(1,1);
 
 		}
 		else if (LevelBuilder.totaldimension < 10){
 			CameraController.changePosition(0,0);
+			CameraController.changeFovAndRot((int)27,52f);
 			//LightController.setLight(0,0);
 
 		}
@@ -266,6 +309,7 @@ public class LevelBuilder : MonoBehaviour {
 			Debug.Log(jagged[y].Length);
 			for (int x = 0; x < jagged[y].Length; x++) {
 				double zed = (-y) + (-0.8);
+				//Debug.Log(jagged[y][x]);
 				placeOnWorld(jagged,y,x);
 							
 			}
@@ -273,11 +317,13 @@ public class LevelBuilder : MonoBehaviour {
 		GoalDirection((int)goaltransform.position.x,-(int)goaltransform.position.z);
 		if(LevelBuilder.totaldimension == 10){
 			CameraController.changePosition(1,1);
+			CameraController.changeFovAndRot((int)32,52.9f);
 			//LightController.setLight(1,1);
 
 		}
 		else if (LevelBuilder.totaldimension < 10){
 			CameraController.changePosition(0,0);
+			CameraController.changeFovAndRot((int)27,52f);
 			//LightController.setLight(0,0);
 
 		}
@@ -286,7 +332,7 @@ public class LevelBuilder : MonoBehaviour {
 	string[][] readAdventure(int place){
 		place = place-1;
 		LevelSaver.currentmap = new List<string>();
-		string text = System.IO.File.ReadAllText(System.IO.Path.Combine (Application.streamingAssetsPath, "AdventureLevels.txt"));
+		//string text = System.IO.File.ReadAllText(System.IO.Path.Combine (Application.streamingAssetsPath, "AdventureLevels.txt"));
 		string firstline = levelsAdventure[startersAdventure[place]];
 		LevelSaver.currentmap.Add(firstline);
 
@@ -324,7 +370,7 @@ public class LevelBuilder : MonoBehaviour {
 	}
 	string[][] readPotd(int place){
 		LevelSaver.currentmap = new List<string>();
-		string text = System.IO.File.ReadAllText(System.IO.Path.Combine (Application.streamingAssetsPath, "Ch3_Candidates.txt"));
+		//string text = System.IO.File.ReadAllText(System.IO.Path.Combine (Application.streamingAssetsPath, "Ch4_Easy.txt"));
 		string firstline = levelsPotd[startersPotd[place]];
 		LevelSaver.currentmap.Add(firstline);
 		Debug.Log("Firstline" + firstline);
@@ -450,11 +496,12 @@ public class LevelBuilder : MonoBehaviour {
 
 
 	void Start() {
+	Swiping.mydirection = "Null";
 	pieceHolder = pieceHolderHolder.GetComponent<PieceHolders>();
 	//LevelManager.newicarus = true;
 	LevelManager.levelselector = this;
-	initPotd();
-	initAdventure();
+	StartCoroutine(initPotd());
+	StartCoroutine(initAdventure());
 	//readAdventure(3);
 	//GameObject.Find("Menu").GetComponent<MenuButton>().ConfigMenu.SetActive(false);
 
@@ -475,9 +522,9 @@ public class LevelBuilder : MonoBehaviour {
 	//LevelStorer.Lookfor (LevelManager.levelnum);//assigns efficient turn according to dictionary.
 	//DrawIce ();
 	//DrawNextLevel (levelnum);
-	if(!LevelManager.ispotd){
+	//if(!LevelManager.ispotd){
 		//load potd maps
-		drawNormal(LevelManager.levelnum);
+		//drawNormal(LevelManager.levelnum);
 		/*string leveltext = ("Level" + LevelManager.levelnum + ".txt");	
 		string filePath = System.IO.Path.Combine (Application.streamingAssetsPath, leveltext);	
 		string[][] jagged = readFile (filePath);
@@ -488,10 +535,10 @@ public class LevelBuilder : MonoBehaviour {
 		TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
 		DrawNextLevel(LevelManager.levelnum);*/
 
-	}
-	else{
-		drawPotd(LevelManager.levelnum);
-	}
+	//}
+	//else{
+	//	drawPotd(LevelManager.levelnum);
+	//}
 
 	/*if(LevelManager.levelnum < 0){
 		LevelManager.levelnum = Random.Range(0,102);
@@ -502,7 +549,7 @@ public class LevelBuilder : MonoBehaviour {
 	DrawNextLevel(LevelManager.levelnum);
 	}*/
 	//TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
-	GameObject.Find("CurrencyHolder").GetComponentInChildren<Text>().text = GameManager.mycurrency.ToString();
+	//GameObject.Find("CurrencyHolder").GetComponentInChildren<Text>().text = GameManager.mycurrency.ToString();
 	//Debug.Log(readPotd(2));
 	//Debug.Log("MEH");
 	//GameObject objectp = GameObject.Find("TheCanvas");
@@ -549,7 +596,8 @@ public class LevelBuilder : MonoBehaviour {
 	}*/
 	public void CreateBase(){
 		iscreated = true;
-		int numCopies = totaldimension*totaldimension;
+		//int numCopies = totaldimension*totaldimension;
+		int numCopies = 100;
 		for (int i =0; i<numCopies;i++){
 			for(int j=0; j < tile.Length; j++){
 				GameObject o = (GameObject) Instantiate(tile[j],new Vector3(-10,-10,0), tile[j].transform.rotation);
@@ -562,6 +610,7 @@ public class LevelBuilder : MonoBehaviour {
 		for (int r= 0; r< totaldimension; r++){
 			for (int c = 0; c<totaldimension; c++){
 				Vector3 tilePos = new Vector3(c,0,r);
+				//Debug.Log("TILEBANK SIZE IS" + tileBank.Count);
 				for (int n =0; n< tileBank.Count; n++){
 					GameObject o = tileBank[n];
 					if(!o.activeSelf){
@@ -767,28 +816,28 @@ public class LevelBuilder : MonoBehaviour {
 				tiles[x,y].type = "Start";
 				tiles[x,y].isTaken = true;
 				startpos = new Vector2(x,y);
-				if(y == 0 || y==1){
+				if(y == 0 || y==1 || y==2 ){
 					//FaceDown();
 					//p.transform.rotation.y = 270;
 					playertransform = Instantiate (player, new Vector3 (x, 0, -y), Quaternion.Euler(new Vector3(0,270,0)));
 					Debug.Log("Down");
 					break;
 				}
-				if(y == 6 || y==7){
+				if(y == totaldimension-1 || y==totaldimension-2 || y==totaldimension-3){
 					//FaceUp();
 					//p.transform.rotation.y = 90;
 					playertransform = Instantiate (player, new Vector3 (x, 0, -y), Quaternion.Euler(new Vector3(0,90,0)));
 					Debug.Log("Up");
 					break;
 				}
-				if(x == 0 || x==1){
+				if(x == 0 || x==1 || x==2){
 					//FaceRight();
 					//p.transform.rotation.y = 180;
 					playertransform = Instantiate (player, new Vector3 (x, 0, -y), Quaternion.Euler(new Vector3(0,180,0)));
 					Debug.Log("Right");
 					break;
 				}
-				if(x==6 || x==7){
+				if(x==totaldimension-1 || x==totaldimension-2 || x==totaldimension-3){
 					//FaceLeft();
 					playertransform = Instantiate (player, new Vector3 (x, 0, -y), Quaternion.identity);
 					Debug.Log("Left");
@@ -949,43 +998,54 @@ public class LevelBuilder : MonoBehaviour {
 			}
 		}
 		if(jagged[y][x].Length ==3){
+			populateIce();
 		//					Debug.Log(jagged[y][x].Substring(0,1));
 			int hintx = int.Parse(jagged[y][x].Substring(1,1));
 			int hinty = int.Parse(jagged[y][x].Substring(2,1));
-			switch(jagged[y][x].Substring(0,1)){
+			if(jagged[y][x].Substring(0,1) == "T"){
+				LevelStorer.efficientturns = int.Parse(jagged[y][x].Substring(1,2));				
+			}
+			else{
+				switch(jagged[y][x].Substring(0,1)){
 
-			case sfloor_left:
-				//LevelManager.piecetiles.Add (Instantiate	(floor_left, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,270,0))));
-				LevelManager.myhints.Add(new Vector2 (hintx,hinty));
-				LevelManager.hints.Add(new Hint("Left", hintx,hinty));
-				pieceHolder.AddPiece("Left");
-				break;
-			case sfloor_right:
-				//LevelManager.piecetiles.Add (Instantiate	(floor_right, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,90,0))));
-				LevelManager.myhints.Add(new Vector2 (hintx,hinty));
-				pieceHolder.AddPiece("Right");
-				LevelManager.hints.Add(new Hint("Right", hintx,hinty));
-				break;
-			case sfloor_up:
-				//LevelManager.piecetiles.Add (Instantiate	(floor_up, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,0,0))));
-				LevelManager.myhints.Add(new Vector2 (hintx,hinty));
-				pieceHolder.AddPiece("Up");
-				LevelManager.hints.Add(new Hint("Up", hintx,hinty));
-				break;
-			case sfloor_down:
-				//LevelManager.piecetiles.Add (Instantiate	(floor_down, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,180,0))));
-				LevelManager.myhints.Add(new Vector2 (hintx,hinty));
-				pieceHolder.AddPiece("Down");
-				LevelManager.hints.Add(new Hint("Down", hintx,hinty));
-				break;
-			case sfloor_rock:
-				//LevelManager.piecetiles.Add (Instantiate (floor_rock, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.identity));
-				//Debug.Log(LevelManager.piecetiles.Count);
-				LevelManager.myhints.Add(new Vector2 (hintx,hinty));
-				pieceHolder.AddPiece("Wall");
-				LevelManager.hints.Add(new Hint("Wall", hintx,hinty));
-				break;
+				case sfloor_left:
+					//LevelManager.piecetiles.Add (Instantiate	(floor_left, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,270,0))));
+					//LevelManager.myhints.Add(new Vector2 (hintx,hinty));
+					LevelManager.hints.Add(new Hint("Left", hintx,hinty));
+					//pieceHolder.AddPiece("Left");
+					PlaceCreature("Left");
+					break;
+				case sfloor_right:
+					//LevelManager.piecetiles.Add (Instantiate	(floor_right, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,90,0))));
+					//LevelManager.myhints.Add(new Vector2 (hintx,hinty));
+					//pieceHolder.AddPiece("Right");
+					LevelManager.hints.Add(new Hint("Right", hintx,hinty));
+					PlaceCreature("Right");
+					break;
+				case sfloor_up:
+					//LevelManager.piecetiles.Add (Instantiate	(floor_up, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,0,0))));
+					//LevelManager.myhints.Add(new Vector2 (hintx,hinty));
+					//pieceHolder.AddPiece("Up");
+					LevelManager.hints.Add(new Hint("Up", hintx,hinty));
+					PlaceCreature("Up");
+					break;
+				case sfloor_down:
+					//LevelManager.piecetiles.Add (Instantiate	(floor_down, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,180,0))));
+					//LevelManager.myhints.Add(new Vector2 (hintx,hinty));
+					//pieceHolder.AddPiece("Down");
+					LevelManager.hints.Add(new Hint("Down", hintx,hinty));
+					PlaceCreature("Down");
+					break;
+				case sfloor_rock:
+					//LevelManager.piecetiles.Add (Instantiate (floor_rock, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.identity));
+					//Debug.Log(LevelManager.piecetiles.Count);
+					//LevelManager.myhints.Add(new Vector2 (hintx,hinty));
+					//pieceHolder.AddPiece("Wall");
+					LevelManager.hints.Add(new Hint("Wall", hintx,hinty));
+					PlaceCreature("Wall");
+					break;
 
+<<<<<<< HEAD
 			case ssfloor_left:
 				LevelManager.piecetiles.Add (Instantiate	(s_floor_left, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,270,0))));
 				LevelManager.myhints.Add(new Vector2 (hintx,hinty));
@@ -1009,8 +1069,48 @@ public class LevelBuilder : MonoBehaviour {
 				//LevelManager.hints.Add(new Hint("WallSeed", hintx,hinty));
 				break;
 
+=======
+				case ssfloor_left:
+					//LevelManager.piecetiles.Add (Instantiate	(s_floor_left, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,270,0))));
+					//LevelManager.myhints.Add(new Vector2 (hintx,hinty));
+					//pieceHolder.AddPiece("LeftSeed");
+					LevelManager.hints.Add(new Hint("LeftSeed", hintx,hinty));
+					PlaceCreature("LeftSeed");
+					break;
+				case ssfloor_right:
+					//pieceHolder.AddPiece("RightSeed");
+					LevelManager.hints.Add(new Hint("RightSeed", hintx,hinty));
+					PlaceCreature("RightSeed");
+					// LevelManager.piecetiles.Add (Instantiate	(s_floor_right, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,90,0))));
+					// LevelManager.myhints.Add(new Vector2 (hintx,hinty));
+					break;
+				case ssfloor_up:
+					//pieceHolder.AddPiece("UpSeed");
+					LevelManager.hints.Add(new Hint("UpSeed", hintx,hinty));
+					PlaceCreature("UpSeed");
+					// LevelManager.piecetiles.Add (Instantiate	(s_floor_up, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,0,0))));
+					// LevelManager.myhints.Add(new Vector2 (hintx,hinty));
+					break;
+				case ssfloor_down:
+				//	pieceHolder.AddPiece("DownSeed");
+					LevelManager.hints.Add(new Hint("DownSeed", hintx,hinty));
+					PlaceCreature("DownSeed");
+					// LevelManager.piecetiles.Add (Instantiate	(s_floor_down, new Vector3 (2+piecenums, 0, -totaldimension),Quaternion.Euler(new Vector3(0,180,0))));
+					// LevelManager.myhints.Add(new Vector2 (hintx,hinty));
+					break;
+				case ssfloor_rock:
+				//Debug.Log("Wallseed");
+					//LevelManager.piecetiles.Add (Instantiate (s_floor_rock, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.identity));
+					//LevelManager.myhints.Add(new Vector2 (hintx,hinty));
+					//pieceHolder.AddPiece("WallSeed");
+					LevelManager.hints.Add(new Hint("WallSeed", hintx,hinty));
+					PlaceCreature("WallSeed");
+					break;
+				}
+				piecenums++;				
+>>>>>>> Winbuild
 			}
-			piecenums++;
+			
 		}
 		if(jagged[y][x].Length ==2){	
 			LevelStorer.efficientturns = int.Parse(jagged[y][x].Substring(1,1));
@@ -1066,14 +1166,14 @@ public class LevelBuilder : MonoBehaviour {
 		tiles[x,y].type = "Start";
 		tiles[x,y].isTaken = true;
 
-		if(y == 0 || y==1){
+		if(y == 0 || y==1 || y==2){
 			//FaceDown();
 			//p.transform.rotation.y = 270;
 			playertransform = Instantiate (player, new Vector3 (x, 0, -y), Quaternion.Euler(new Vector3(0,270,0)));
 			Debug.Log("Down");
 			return;
 		}
-		if(y == 6 || y==7){
+		if(y==totaldimension-1 || y==totaldimension-2 || y==totaldimension-3 ){
 			//FaceUp();
 			//p.transform.rotation.y = 90;
 			playertransform = Instantiate (player, new Vector3 (x, 0, -y), Quaternion.Euler(new Vector3(0,90,0)));
@@ -1081,7 +1181,7 @@ public class LevelBuilder : MonoBehaviour {
 			return;
 
 		}
-		if(x == 0 || x==1){
+		if(x == 0 || x==1 || x==2){
 			//FaceRight();
 			//p.transform.rotation.y = 180;
 			playertransform = Instantiate (player, new Vector3 (x, 0, -y), Quaternion.Euler(new Vector3(0,180,0)));
@@ -1089,12 +1189,150 @@ public class LevelBuilder : MonoBehaviour {
 			return;
 
 		}
-		if(x==6 || x==7){
+		if(x==totaldimension-1 || x==totaldimension-2 || x==totaldimension-3 ){
 			//FaceLeft();
 			playertransform = Instantiate (player, new Vector3 (x, 0, -y), Quaternion.identity);
 			Debug.Log("Left");
 			return;
 
+		}
+	}
+	public void populateIce(){
+		iceTiles.Clear();
+		Debug.Log(totaldimension);
+		for(int i = 0; i<totaldimension; i++){
+			for(int j = 0; j<totaldimension; j++){
+				if (tiles[i,j].type == "Ice"){
+					iceTiles.Add(new Vector2(i,j));
+				}
+			}
+		}
+		Debug.Log(iceTiles[0]);
+		Debug.Log(iceTiles[iceTiles.Count-1]);
+	}
+	public void PlaceCreature(string creaturetype){
+		RemoveSolutions(creaturetype);
+		int randomplace = Random.Range(0,iceTiles.Count);
+		Vector2 tileplace = new Vector2(iceTiles[randomplace].x, iceTiles[randomplace].y);
+		Vector3 pieceplace = new Vector3(iceTiles[randomplace].x, 0, -iceTiles[randomplace].y);
+		Tile currenttile = tiles[(int)tileplace.x,(int)tileplace.y];
+		string myseedtype = "Not";
+		if(creaturetype.Length>5){
+			myseedtype = creaturetype.Substring(0,creaturetype.Length-4);
+			creaturetype = creaturetype.Substring(creaturetype.Length-4,4);	
+			Debug.Log("seedtype is " + myseedtype);
+
+		}
+		switch(creaturetype){
+		case "Wall":
+			Transform wallpiece = Instantiate (floor_rock, pieceplace, Quaternion.identity);
+			currenttile.isTaken = true;
+			currenttile.type = "Wall";
+			wallpiece.gameObject.GetComponentInChildren<Animator>().SetInteger("Phase",2);
+			PieceHolders.placedpieces.Add(wallpiece.gameObject.GetComponent<Dragger>());
+			break;
+		case "Left":
+			Transform leftpiece = Instantiate (floor_left, pieceplace, Quaternion.Euler(new Vector3(0,270,0)));
+			leftpiece.gameObject.GetComponentInChildren<Animator>().SetInteger("Phase",2);
+			currenttile.isTaken = true;
+			currenttile.type = "Wall";
+			currenttile.tileObj = leftpiece.gameObject;
+			if(LevelBuilder.tiles[(int)tileplace.x-1, (int)tileplace.y].type == "Ice"){
+				LevelBuilder.tiles[(int)tileplace.x-1, (int)tileplace.y].type = leftpiece.gameObject.GetComponent<Dragger>().myType;		
+			}	
+
+			else{
+				LevelBuilder.tiles[(int)tileplace.x-1, (int)tileplace.y].isSideways = "Left";
+			}
+			PieceHolders.placedpieces.Add(leftpiece.gameObject.GetComponent<Dragger>());
+			break;
+		case "Up":
+			Transform uppiece = Instantiate (floor_up, pieceplace, Quaternion.Euler(new Vector3(0,0,0)));
+			uppiece.gameObject.GetComponentInChildren<Animator>().SetInteger("Phase",2);
+			currenttile.isTaken = true;
+			currenttile.type = "Wall";
+			currenttile.tileObj = uppiece.gameObject;
+			if(LevelBuilder.tiles[(int)tileplace.x, (int)tileplace.y-1].type == "Ice"){
+				LevelBuilder.tiles[(int)tileplace.x, (int)tileplace.y-1].type = uppiece.gameObject.GetComponent<Dragger>().myType;		
+			}	
+
+			else{
+				LevelBuilder.tiles[(int)tileplace.x, (int)tileplace.y-1].isSideways = "Up";
+			}
+			PieceHolders.placedpieces.Add(uppiece.gameObject.GetComponent<Dragger>());
+			break;
+		case "Right":
+			Transform rightpiece = Instantiate (floor_right, pieceplace, Quaternion.Euler(new Vector3(0,90,0)));
+			rightpiece.gameObject.GetComponentInChildren<Animator>().SetInteger("Phase",2);
+			currenttile.isTaken = true;
+			currenttile.type = "Wall";
+			currenttile.tileObj = rightpiece.gameObject;
+			if(LevelBuilder.tiles[(int)tileplace.x+1, (int)tileplace.y].type == "Ice"){
+				LevelBuilder.tiles[(int)tileplace.x+1, (int)tileplace.y].type = rightpiece.gameObject.GetComponent<Dragger>().myType;		
+			}	
+
+			else{
+				LevelBuilder.tiles[(int)tileplace.x+1, (int)tileplace.y].isSideways = "Right";
+			}	
+			PieceHolders.placedpieces.Add(rightpiece.gameObject.GetComponent<Dragger>());
+			break;
+		case "Down":
+			Transform downpiece = Instantiate (floor_down, pieceplace, Quaternion.Euler(new Vector3(0,180,0)));
+			downpiece.gameObject.GetComponentInChildren<Animator>().SetInteger("Phase",2);				
+			currenttile.isTaken = true;
+			currenttile.type = "Wall";
+			currenttile.tileObj = downpiece.gameObject;
+			if(LevelBuilder.tiles[(int)tileplace.x, (int)tileplace.y+1].type == "Ice"){
+				LevelBuilder.tiles[(int)tileplace.x, (int)tileplace.y+1].type = downpiece.gameObject.GetComponent<Dragger>().myType;		
+			}	
+
+			else{
+				LevelBuilder.tiles[(int)tileplace.x, (int)tileplace.y+1].isSideways = "Down";
+			}
+			PieceHolders.placedpieces.Add(downpiece.gameObject.GetComponent<Dragger>());
+			break;
+		case "Seed":
+			Transform seedpiece;
+			switch(myseedtype){
+			case "Wall":
+				seedpiece = Instantiate (s_floor_rock, pieceplace, Quaternion.identity);
+				currenttile.tileObj = seedpiece.gameObject;	
+				PieceHolders.placedpieces.Add(seedpiece.gameObject.GetComponent<Dragger>());	
+				break;
+			case "Left":
+				seedpiece = Instantiate (s_floor_left, pieceplace, Quaternion.Euler(new Vector3(0,270,0)));
+				currenttile.tileObj = seedpiece.gameObject;	
+				PieceHolders.placedpieces.Add(seedpiece.gameObject.GetComponent<Dragger>());					
+				break;
+			case "Up":
+				seedpiece = Instantiate (s_floor_up, pieceplace, Quaternion.Euler(new Vector3(0,0,0)));
+				currenttile.tileObj = seedpiece.gameObject;	
+				PieceHolders.placedpieces.Add(seedpiece.gameObject.GetComponent<Dragger>());
+				break;
+			case "Right":
+				seedpiece = Instantiate (s_floor_right, pieceplace, Quaternion.Euler(new Vector3(0,90,0)));
+				currenttile.tileObj = seedpiece.gameObject;	
+				PieceHolders.placedpieces.Add(seedpiece.gameObject.GetComponent<Dragger>());
+				break;
+			case "Down":
+				seedpiece = Instantiate (s_floor_down, pieceplace, Quaternion.Euler(new Vector3(0,180,0)));
+				currenttile.tileObj = seedpiece.gameObject;	
+				PieceHolders.placedpieces.Add(seedpiece.gameObject.GetComponent<Dragger>());
+				break;
+			}
+			//seedpiece.gameObject.GetComponentInChildren<Animator>().SetInteger("Phase",2);				
+			currenttile.isTaken = true;
+			currenttile.type = "Seed";
+			currenttile.seedType = myseedtype;
+			break;
+			//s_floor_left
+		}
+	}
+	public void RemoveSolutions(string creaturetype){
+		for (int i = 0; i<LevelManager.hints.Count; i++){
+			if(LevelManager.hints[0].type == creaturetype){
+				iceTiles.Remove(new Vector2(LevelManager.hints[0].x, LevelManager.hints[0].y));
+			}
 		}
 	}
 }

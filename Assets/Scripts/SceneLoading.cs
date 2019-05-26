@@ -17,7 +17,12 @@ public class SceneLoading : MonoBehaviour {
 	Dragger td2;
 //	public IceTileHandler myhandler;
 	void Start(){
-		if (txt2 == null){ //if loading menu
+		string teststring = "WallSeed";
+		Debug.Log(teststring.Length);
+		Debug.Log(teststring.Substring(teststring.Length-4,4));
+		Application.targetFrameRate = 30;
+		if (txt2 == null){ //if loading menu, this is pointless and relies on bugs, try a public bool.
+		
 		}
 		else{//if loading level scene
 //			Debug.Log(levelnum + "level");
@@ -28,11 +33,12 @@ public class SceneLoading : MonoBehaviour {
 			Debug.Log("sceneloadingstuff");
 
 			//LevelStorer.Lookfor(LevelManager.levelnum);
-			txt2.text = ("Efficient turns is " + LevelStorer.efficientturns);
+			//txt2.text = ("Efficient turns is " + LevelStorer.efficientturns);
 			txt.text = LevelManager.levelnum.ToString();
+			RatingBehaviour.InitializeRating();
 //			Debug.Log(LevelManager.levelnum);
 		}
-		GameObject.Find("CurrencyHolder").GetComponentInChildren<Text>().text = GameManager.mycurrency.ToString();
+		//GameObject.Find("CurrencyHolder").GetComponentInChildren<Text>().text = GameManager.mycurrency.ToString();
 		
 	}
 	public void LoadScene(int num){
@@ -52,7 +58,7 @@ public class SceneLoading : MonoBehaviour {
 	public void NextlevelButton(){
 		LevelManager.israndom = false;
 		Debug.Log("Next button");
-		Swiping.mydirection = "Null";
+
 		LevelManager.levelnum++;
 		txt.text = LevelManager.levelnum.ToString();
 		//txt2.text = ("Efficient turns is " + LevelStorer.efficientturns);
@@ -60,7 +66,7 @@ public class SceneLoading : MonoBehaviour {
 
 		LevelStorer.UnlockLevel (LevelManager.levelnum);
 		LevelStorer.Lookfor (LevelManager.levelnum);
-		txt2.text = ("Efficient turns is " + LevelStorer.efficientturns);
+		//txt2.text = ("Efficient turns is " + LevelStorer.efficientturns);
 
 		TurnCounter.turncount = 0;
 		//LevelManager.NextLevel (LevelManager.levelnum);
@@ -68,7 +74,8 @@ public class SceneLoading : MonoBehaviour {
 		LevelManager.NextLevel(LevelManager.levelnum);
 		TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
 		
-
+		Swiping.mydirection = "Null";
+		RatingBehaviour.RestartRating();
 		//TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
 
 
@@ -128,6 +135,7 @@ public class SceneLoading : MonoBehaviour {
 		TurnCounter.turncount = 0;
 		LevelManager.NextPotd();
 		TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
+		RatingBehaviour.RestartRating();
 	}	
 	public void loadPotdMap(){
 		Swiping.mydirection = "Null";
@@ -143,20 +151,25 @@ public class SceneLoading : MonoBehaviour {
 	public static void SetStars(int rating){
 
 		if(rating == 1){
-			RatingPopUp.starholder.transform.GetChild(1).transform.GetChild(0).gameObject.SetActive(true);
-			RatingPopUp.starholder.transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(false);
+			RatingPopUp.starholder.transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(true);
+			RatingPopUp.starholder.transform.GetChild(1).transform.GetChild(0).gameObject.SetActive(false);
 			RatingPopUp.starholder.transform.GetChild(2).transform.GetChild(0).gameObject.SetActive(false);
 		
 		}
 		else if(rating == 2){
 			RatingPopUp.starholder.transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(true);
-			RatingPopUp.starholder.transform.GetChild(2).transform.GetChild(0).gameObject.SetActive(true);
-			RatingPopUp.starholder.transform.GetChild(1).transform.GetChild(0).gameObject.SetActive(false);
+			RatingPopUp.starholder.transform.GetChild(1).transform.GetChild(0).gameObject.SetActive(true);
+			RatingPopUp.starholder.transform.GetChild(2).transform.GetChild(0).gameObject.SetActive(false);
 		}
 		else if(rating == 3){
 			RatingPopUp.starholder.transform.GetChild(1).transform.GetChild(0).gameObject.SetActive(true);
 			RatingPopUp.starholder.transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(true);
 			RatingPopUp.starholder.transform.GetChild(2).transform.GetChild(0).gameObject.SetActive(true);
+		}
+		else if (rating == 0){
+			RatingPopUp.starholder.transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(false);
+			RatingPopUp.starholder.transform.GetChild(1).transform.GetChild(0).gameObject.SetActive(false);
+			RatingPopUp.starholder.transform.GetChild(2).transform.GetChild(0).gameObject.SetActive(false);			
 		}
 	}
 	public void PlaceHint(){
@@ -203,7 +216,7 @@ public class SceneLoading : MonoBehaviour {
 	public void ResetLevelButton(){
 		txt.text = LevelManager.levelnum.ToString();
 
-		Swiping.mydirection = "Null";
+
 		//LevelStorer.UnlockLevel (LevelManager.levelnum);
 		//LevelStorer.Lookfor (LevelManager.levelnum);
 		TurnCounter.turncount = 0;
@@ -214,11 +227,13 @@ public class SceneLoading : MonoBehaviour {
 		ProgressBar.InitializeProgressBar(LevelStorer.efficientturns);
 		//LevelManager.NextLevel (LevelManager.levelnum);
 		//myhandler.GiveIce();
+		Swiping.mydirection = "Null";
+		RatingBehaviour.RestartRating();
 	}
 	public void ResetAllButton(){
 		txt.text = LevelManager.levelnum.ToString();
 
-		Swiping.mydirection = "Null";
+
 		//LevelStorer.UnlockLevel (LevelManager.levelnum);
 		//LevelStorer.Lookfor (LevelManager.levelnum);
 		TurnCounter.turncount = 0;
@@ -226,6 +241,7 @@ public class SceneLoading : MonoBehaviour {
 		LevelManager.NextLevel (LevelManager.levelnum);
 		TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
 		//myhandler.GiveIce();
+		Swiping.mydirection = "Null";
 	}
 	public void Testnum(int num){
 		//initializevalues

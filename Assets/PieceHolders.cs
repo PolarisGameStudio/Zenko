@@ -39,11 +39,15 @@ public class PieceHolders : MonoBehaviour {
 	public int rightNumber;
 	public int upNumber;
 	public int downNumber;
+<<<<<<< HEAD
 	public int wallSeedNumber;
+=======
+>>>>>>> Winbuild
 	public int leftSeedNumber;
 	public int rightSeedNumber;
 	public int upSeedNumber;
 	public int downSeedNumber;
+	public int wallSeedNumber;
 	public static List<Dragger> placedpieces = new List<Dragger>();
 	// Use this for initialization
 	void Awake () {
@@ -65,6 +69,13 @@ public class PieceHolders : MonoBehaviour {
 		upHolder.SetActive(false);
 		downHolder.SetActive(false);
 		wallSeedHolder.SetActive(false);
+<<<<<<< HEAD
+=======
+		leftSeedHolder.SetActive(false);
+		rightSeedHolder.SetActive(false);
+		upSeedHolder.SetActive(false);
+		downSeedHolder.SetActive(false);
+>>>>>>> Winbuild
 		initValues();
 		holders = new List<Holder>();
 	}
@@ -74,6 +85,11 @@ public class PieceHolders : MonoBehaviour {
 	rightNumber = 0;
 	upNumber = 0;
 	downNumber = 0;
+	wallSeedNumber = 0;
+	leftSeedNumber =0;
+	rightSeedNumber =0;
+	upSeedNumber =0;
+	downSeedNumber =0;
 	holdersNumber = 0;
 	wallSeedNumber = 0;
 	pedroHolder.GetComponent<Image>().color = Color.white;
@@ -82,6 +98,13 @@ public class PieceHolders : MonoBehaviour {
 	rightHolder.GetComponent<Image>().color = Color.white;
 	downHolder.GetComponent<Image>().color = Color.white;
 	wallSeedHolder.GetComponent<Image>().color = Color.white;
+<<<<<<< HEAD
+=======
+	leftSeedHolder.GetComponent<Image>().color = Color.white;
+	rightSeedHolder.GetComponent<Image>().color = Color.white;
+	upSeedHolder.GetComponent<Image>().color = Color.white;
+	downSeedHolder.GetComponent<Image>().color = Color.white;
+>>>>>>> Winbuild
 	}
 	public void InitHolder(string type){
 		if(type == "Pedro" || type ==  "Wall"){
@@ -102,6 +125,21 @@ public class PieceHolders : MonoBehaviour {
 		if(type == "WallSeed"){
 			holders.Add(new Holder(type,1,1,wallSeedHolder,true));
 		}
+<<<<<<< HEAD
+=======
+		if(type == "LeftSeed"){
+			holders.Add(new Holder(type,1,1,leftSeedHolder,true));
+		}
+		if(type == "RightSeed"){
+			holders.Add(new Holder(type,1,1,rightSeedHolder,true));
+		}
+		if(type == "UpSeed"){
+			holders.Add(new Holder(type,1,1,upSeedHolder,true));
+		}
+		if(type == "DownSeed"){
+			holders.Add(new Holder(type,1,1,downSeedHolder,true));
+		}
+>>>>>>> Winbuild
 	}
 	public void AddtoHolder(string type){
 		//Debug.Log("Test");
@@ -198,6 +236,61 @@ public class PieceHolders : MonoBehaviour {
 				initSize();
 			}			
 		}
+<<<<<<< HEAD
+=======
+		if(type == "LeftSeed"){
+			if(leftSeedHolder.active){
+				leftSeedNumber++;
+				AddtoHolder(type);
+			}
+			else{
+				InitHolder(type);
+				leftSeedHolder.SetActive(true);
+				holdersNumber++;
+				leftSeedNumber++;
+				initSize();
+			}			
+		}
+		if(type == "RightSeed"){
+			if(rightSeedHolder.active){
+				rightSeedNumber++;
+				AddtoHolder(type);
+			}
+			else{
+				InitHolder(type);
+				rightSeedHolder.SetActive(true);
+				holdersNumber++;
+				rightSeedNumber++;
+				initSize();
+			}			
+		}
+		if(type == "UpSeed"){
+			if(upSeedHolder.active){
+				upSeedNumber++;
+				AddtoHolder(type);
+			}
+			else{
+				InitHolder(type);
+				upSeedHolder.SetActive(true);
+				holdersNumber++;
+				upSeedNumber++;
+				initSize();
+			}			
+		}
+		if(type == "DownSeed"){
+			if(downSeedHolder.active){
+				downSeedNumber++;
+				AddtoHolder(type);
+			}
+			else{
+				InitHolder(type);
+				downSeedHolder.SetActive(true);
+				holdersNumber++;
+				downSeedNumber++;
+				initSize();
+			}			
+		}
+>>>>>>> Winbuild
 		updateText(type);
 	}
 	public void updateValueUp(string type){
@@ -231,7 +324,31 @@ public class PieceHolders : MonoBehaviour {
 			wallSeedNumber++;
 			wallSeedHolder.transform.GetChild(0).transform.GetComponent<Text>().text = "WallSeed x" + wallSeedNumber;
 			wallSeedHolder.GetComponent<Image>().color = Color.white;
+<<<<<<< HEAD
 		}	
+=======
+		}
+		if(type == "LeftSeed"){
+			leftSeedNumber++;
+			leftSeedHolder.transform.GetChild(0).transform.GetComponent<Text>().text = "LeftSeed x" + leftSeedNumber;
+			leftSeedHolder.GetComponent<Image>().color = Color.white;
+		}
+		if(type == "RightSeed"){
+			rightSeedNumber++;
+			rightSeedHolder.transform.GetChild(0).transform.GetComponent<Text>().text = "RightSeed x" + rightSeedNumber;
+			rightSeedHolder.GetComponent<Image>().color = Color.white;
+		}
+		if(type == "UpSeed"){
+			upSeedNumber++;
+			upSeedHolder.transform.GetChild(0).transform.GetComponent<Text>().text = "UpSeed x" + upSeedNumber;
+			upSeedHolder.GetComponent<Image>().color = Color.white;
+		}
+		if(type == "DownSeed"){
+			downSeedNumber++;
+			downSeedHolder.transform.GetChild(0).transform.GetComponent<Text>().text = "DownSeed x" + wallSeedNumber;
+			downSeedHolder.GetComponent<Image>().color = Color.white;
+		}
+>>>>>>> Winbuild
 	}
 	public void unshadeImage(string type){
 		if(type == "Pedro" || type == "Wall"){
@@ -260,10 +377,37 @@ public class PieceHolders : MonoBehaviour {
 			rightHolder.GetComponent<Image>().color = tempColor;
 		}	
 		if(type == "WallSeed"){
+<<<<<<< HEAD
 			Color tempColor = rightHolder.GetComponent<Image>().color;
 			tempColor.a = 1f;
 			wallSeedHolder.GetComponent<Image>().color = tempColor;
 		}					
+=======
+			Color tempColor = wallSeedHolder.GetComponent<Image>().color;
+			tempColor.a = 1f;
+			wallSeedHolder.GetComponent<Image>().color = tempColor;
+		}		
+		if(type == "LeftSeed"){
+			Color tempColor = leftSeedHolder.GetComponent<Image>().color;
+			tempColor.a = 1f;
+			leftSeedHolder.GetComponent<Image>().color = tempColor;
+		}	
+		if(type == "RightSeed"){
+			Color tempColor = rightSeedHolder.GetComponent<Image>().color;
+			tempColor.a = 1f;
+			rightSeedHolder.GetComponent<Image>().color = tempColor;
+		}	
+		if(type == "UpSeed"){
+			Color tempColor = upSeedHolder.GetComponent<Image>().color;
+			tempColor.a = 1f;
+			upSeedHolder.GetComponent<Image>().color = tempColor;
+		}	
+		if(type == "DownSeed"){
+			Color tempColor = downSeedHolder.GetComponent<Image>().color;
+			tempColor.a = 1f;
+			downSeedHolder.GetComponent<Image>().color = tempColor;
+		}			
+>>>>>>> Winbuild
 	}
 	public bool isAvailable(string type){
 		if(type == "Pedro" || type == "Wall"){
@@ -314,12 +458,47 @@ public class PieceHolders : MonoBehaviour {
 				return false;
 			}
 		}
+<<<<<<< HEAD
+=======
+		if(type == "LeftSeed"){
+			if(leftSeedNumber!=0){
+				return true;
+			}
+			else{
+				return false;
+			}
+		}
+		if(type == "RightSeed"){
+			if(rightSeedNumber!=0){
+				return true;
+			}
+			else{
+				return false;
+			}
+		}
+		if(type == "UpSeed"){
+			if(upSeedNumber!=0){
+				return true;
+			}
+			else{
+				return false;
+			}
+		}
+		if(type == "DownSeed"){
+			if(downSeedNumber!=0){
+				return true;
+			}
+			else{
+				return false;
+			}
+		}
+>>>>>>> Winbuild
 		else return false;
 	}
 	public void updateValueDown(string type){
 		if(type == "Pedro" || type == "Wall"){
 			pedroNumber --;
-			pedroHolder.transform.GetChild(0).transform.GetComponent<Text>().text = "Pedro x" + pedroNumber;
+			pedroHolder.transform.GetChild(0).transform.GetComponent<Text>().text = "Wall x" + pedroNumber;
 			if(pedroNumber == 0){
 				pedroHolder.GetComponent<Image>().color = Color.gray;
 			}
@@ -359,6 +538,37 @@ public class PieceHolders : MonoBehaviour {
 			if(wallSeedNumber == 0){
 				wallSeedHolder.GetComponent<Image>().color = Color.gray;
 			}
+<<<<<<< HEAD
+=======
+		}	
+		if(type == "LeftSeed"){
+			leftSeedNumber--;
+			leftSeedHolder.transform.GetChild(0).transform.GetComponent<Text>().text = "LeftSeed x" + leftSeedNumber;
+			if(leftSeedNumber == 0){
+				leftSeedHolder.GetComponent<Image>().color = Color.gray;
+			}
+		}	
+		if(type == "RightSeed"){
+			rightSeedNumber--;
+			rightSeedHolder.transform.GetChild(0).transform.GetComponent<Text>().text = "RightSeed x" + rightSeedNumber;
+			if(rightSeedNumber == 0){
+				rightSeedHolder.GetComponent<Image>().color = Color.gray;
+			}
+		}	
+		if(type == "UpSeed"){
+			upSeedNumber--;
+			upSeedHolder.transform.GetChild(0).transform.GetComponent<Text>().text = "UpSeed x" + upSeedNumber;
+			if(upSeedNumber == 0){
+				upSeedHolder.GetComponent<Image>().color = Color.gray;
+			}
+		}	
+		if(type == "DownSeed"){
+			downSeedNumber--;
+			downSeedHolder.transform.GetChild(0).transform.GetComponent<Text>().text = "DownSeed x" + downSeedNumber;
+			if(downSeedNumber == 0){
+				downSeedHolder.GetComponent<Image>().color = Color.gray;
+			}
+>>>>>>> Winbuild
 		}		
 	}	
 	public void updateText(string type){
@@ -378,13 +588,30 @@ public class PieceHolders : MonoBehaviour {
 			rightHolder.transform.GetChild(0).transform.GetComponent<Text>().text = "Right x" + rightNumber;
 		}
 		if(type == "WallSeed"){
+<<<<<<< HEAD
 			wallSeedHolder.transform.GetChild(0).transform.GetComponent<Text>().text = "WallSeed x" + rightNumber;
+=======
+			wallSeedHolder.transform.GetChild(0).transform.GetComponent<Text>().text = "WallSeed x" + wallSeedNumber;
+		}
+		if(type == "RightSeed"){
+			rightSeedHolder.transform.GetChild(0).transform.GetComponent<Text>().text = "RightSeed x" + rightSeedNumber;
+		}
+		if(type == "LeftSeed"){
+			leftSeedHolder.transform.GetChild(0).transform.GetComponent<Text>().text = "LeftSeed x" + leftSeedNumber;
+		}
+		if(type == "UpSeed"){
+			upSeedHolder.transform.GetChild(0).transform.GetComponent<Text>().text = "UpSeed x" + upSeedNumber;
+		}
+		if(type == "DownSeed"){
+			downSeedHolder.transform.GetChild(0).transform.GetComponent<Text>().text = "DownSeed x" + downSeedNumber;
+>>>>>>> Winbuild
 		}
 	}
 	public void Hint(){//right now works for one stored solution.
-		Debug.Log(placedpieces.Count);
+		Debug.Log(placedpieces.Count + "Pieces placed");
 		Vector2 postogo;
 		GameObject piece;
+		string postype;
 		if(TurnBehaviour.turn == 0){
 			if(placedpieces.Count!=0){ //if any pieces are on board.
 				for(int i = 0; i < placedpieces.Count; i++){//first pass, to confirm the ones in right place
@@ -395,12 +622,20 @@ public class PieceHolders : MonoBehaviour {
 						placedpieces[i].transform.GetChild(1).GetComponent<Renderer>().material.color = Color.green;
 					}
 
-				}
+				} 
 				for(int i = 0; i < placedpieces.Count; i++){//second pass, to correct the first one found in wrong place.
 					if(!PartofSolution(i)){
+						if(placedpieces[i].myType == "Seed"){
+							postype =placedpieces[i].mySeedType + placedpieces[i].myType;
+						}
+						else{
+							postype = placedpieces[i].myType;
+						}
+						Debug.Log(placedpieces[i].myType);
 						removePiece(new Vector2(placedpieces[i].transform.position.x, -placedpieces[i].transform.position.z), placedpieces[i].myType);
 						//LookforPosition(placedpieces[i].myType);
-						 postogo = LookforPosition(placedpieces[i].myType);
+						postogo = LookforPosition(postype);
+						Debug.Log(postogo);
 						if(postogo != new Vector2(0,0)){
 							PlaceHint(placedpieces[i], postogo);
 							return;
@@ -413,9 +648,10 @@ public class PieceHolders : MonoBehaviour {
 						postogo = LookforPosition(holders[i].name);
 						//Debug.Log("Instantiate a "+ holders[i].name);
 						if(postogo!= new Vector2(0,0)){
-							 piece = holders[i].mygameobject.GetComponent<UIMonster>().Spawnit();
+							piece = holders[i].mygameobject.GetComponent<UIMonster>().Spawnit();
 							PlaceHint(piece.GetComponent<Dragger>(), postogo);
 							updateValueDown(holders[i].name);
+							placedpieces.Add(piece.GetComponent<Dragger>());
 							return;
 						}
 					}
@@ -429,6 +665,7 @@ public class PieceHolders : MonoBehaviour {
 						if(postogo!= new Vector2(0,0)){
 							piece = holders[i].mygameobject.GetComponent<UIMonster>().Spawnit();
 							PlaceHint(piece.GetComponent<Dragger>(), postogo);
+							placedpieces.Add(piece.GetComponent<Dragger>());
 							updateValueDown(holders[i].name);
 							return;
 						}
@@ -442,18 +679,27 @@ public class PieceHolders : MonoBehaviour {
 	public void PlaceHint(Dragger dragger, Vector2 position){
 		dragger.transform.GetChild(1).gameObject.SetActive(true);
 
-		dragger.transform.position = new Vector3(position.x,0,-position.y);
-		if(dragger.myType == "Wall"){
+		dragger.transform.position = new Vector3(position.x,0,-position.y);	
+		if(dragger.myType == "Wall" || dragger.myType == "Seed"){
 			placeNormal(position, dragger);
 		}
 		if(dragger.myType == "Left" || dragger.myType == "Up" || dragger.myType == "Down" || dragger.myType == "Right"){
 			placeIcarus(position,dragger);
 		}
-		placedpieces.Add(dragger);
+		//placedpieces.Add(dragger);
 	}
 	public bool PartofSolution(int position){
+		string postype;
+		if(placedpieces[position].myType == "Seed"){
+			postype =placedpieces[position].mySeedType + placedpieces[position].myType;
+		}
+		else{
+			postype = placedpieces[position].myType;
+		}
 		for (int i = 0; i <LevelManager.hints.Count; i++){
-			if(placedpieces[position].myType == LevelManager.hints[i].type && 
+		Debug.Log(placedpieces[position].myType + "" + LevelManager.hints[i].type);
+
+			if(postype == LevelManager.hints[i].type && 
 				placedpieces[position].transform.position.x == LevelManager.hints[i].x &&
 				-placedpieces[position].transform.position.z == LevelManager.hints[i].y){
 
@@ -504,9 +750,16 @@ public class PieceHolders : MonoBehaviour {
 		LevelBuilder.tiles[(int)positiontogo.x, (int)positiontogo.y].type = td.myType;
 		LevelBuilder.tiles[(int)positiontogo.x, (int)positiontogo.y].isTaken = true;
 		LevelBuilder.tiles[(int)positiontogo.x, (int)positiontogo.y].tileObj = td.gameObject;	
+		if(td.myType == "Seed"){
+			LevelBuilder.tiles[(int)positiontogo.x, (int)positiontogo.y].seedType = td.mySeedType;
+		}
+		if(td.myType == "Wall"){
+			td.gameObject.GetComponent<Animator>().SetInteger("Phase", 2);
+		}
 		
 	}
 	public void placeIcarus(Vector2 target, Dragger td){
+		td.gameObject.GetComponent<Animator>().SetInteger("Phase", 2);
 		if(td.myType == "Left"){
 			LevelBuilder.tiles[(int)target.x, (int)target.y].type = "Wall";
 			LevelBuilder.tiles[(int)target.x, (int)target.y].isTaken = true;
@@ -570,6 +823,7 @@ public class PieceHolders : MonoBehaviour {
 			removeIcarus(type, target);
 		}
 		if(type == "Seed"){
+			Debug.Log("SEEDED");
 			LevelBuilder.tiles[(int)target.x, (int)target.y].type = "Ice";
 			LevelBuilder.tiles[(int)target.x, (int)target.y].isTaken = false;	
 			if(LevelBuilder.tiles[(int)target.x, (int)target.y].isSideways != null){
