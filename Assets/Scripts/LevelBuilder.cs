@@ -1304,8 +1304,8 @@ public class LevelBuilder : MonoBehaviour {
 	}
 	public void RemoveSolutions(string creaturetype){
 		for (int i = 0; i<LevelManager.hints.Count; i++){
-			if(LevelManager.hints[0].type == creaturetype){
-				iceTiles.Remove(new Vector2(LevelManager.hints[0].x, LevelManager.hints[0].y));
+			if(LevelManager.hints[i].type == creaturetype){
+				iceTiles.Remove(new Vector2(LevelManager.hints[i].x, LevelManager.hints[i].y));
 			}
 		}
 	}
