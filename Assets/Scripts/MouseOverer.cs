@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,11 +20,9 @@ public class MouseOverer : MonoBehaviour {
 	public void Enter(){
 		if(LevelManager.isdragging){
 			if(LevelBuilder.tiles[(int)transform.position.x, -(int)transform.position.z].isTaken){
-				//PlaneBehavior.readyToDrop = false;
 				//startcolor = renderer.material.color;
 			    //renderer.material.color = Color.red;
-			    PlaneBehavior.tilex = (int)transform.position.x;
-			    PlaneBehavior.tiley = (int)transform.position.z;
+
 			}
 			else{
 			  //  startcolor = renderer.material.color;

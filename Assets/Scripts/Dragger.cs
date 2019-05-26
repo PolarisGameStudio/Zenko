@@ -31,7 +31,6 @@ public class Dragger : MonoBehaviour {
 	public bool isinboard;
 	public bool startedDragging;
 	public PieceHolders pieceHolder;
-	public Vector3 piecePosition;
 	void Start(){
 		particle = GameObject.Find("Main Camera").GetComponent<LevelBuilder>().smoke_particle.gameObject;
 		restingpoint = transform.position;
@@ -43,7 +42,6 @@ public class Dragger : MonoBehaviour {
 	}
 
 	void Update(){
-		//Debug.Log(Input.touchCount);
 		if(readyToPop){
 			Debug.Log(playert.position);
 			if(Vector3.Distance(playert.position, transform.position) < .7){
@@ -52,17 +50,13 @@ public class Dragger : MonoBehaviour {
 			}
 		}
 		if(convertWhenReady){
-			if(playert != null){			
-				if(Vector3.Distance(playert.position, transform.position) > .8){
+			if(Vector3.Distance(playert.position, transform.position) > .8){
 				myshrinker.SetActive(false);
 				myBigger.SetActive(true);
 				myBigger.gameObject.GetComponent<Animator>().SetInteger("Phase", 2);
 				convertWhenReady = false;
 
 			}
-		}
-
-
 		}
 		if(gototile){
 			transform.position = Vector3.MoveTowards (transform.position, positiontogo, Time.deltaTime * 8); 
@@ -80,23 +74,18 @@ public class Dragger : MonoBehaviour {
 			OnMouseDrag();
 		}
 		if(Input.GetMouseButtonUp(0) && startedDragging){
-			startedDragging = false;			
 			OnMouseUp();
-
+			startedDragging = false;
 		}
 	}
 
 	 public void OnMouseDown() {
-	 	//PieceHolders.placedpieces.Remove(this);
 		//transform.GetChild(1).gameObject.SetActive(false);
   	  //screenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position); // I removed this line to prevent centring 
   	 // _lockedYPosition = screenPoint.y;
 	 	toggleColliders();
 //	 	Debug.Log(TurnBehaviour.turn);
 		if (TurnBehaviour.turn == 0) {
-			PlaneBehavior.readyToDrop = false;
-
-			PieceHolders.placedpieces.Remove(this);
 			if(myType == "Wall"){
 				this.gameObject.GetComponent<Animator>().SetInteger("Phase", 1);
 			}
@@ -110,18 +99,15 @@ public class Dragger : MonoBehaviour {
 			//Cursor.visible = false;
 			//Debug.Log (-transform.position.z);
 			//Debug.Log(transform.position.x);
-			Debug.Log(transform.position.x + "" + transform.position.z + "totaldimension" + LevelBuilder.totaldimension);//HERES WHERE THE PROBLEM BE
-			//Fix this to avoid untaking wrong tiles when clicking on the 3d object but the planepos somewhere else.
-			if(transform.position.x<LevelBuilder.totaldimension && transform.position.x>0 && -transform.position.z<LevelBuilder.totaldimension && transform.position.z<0){
+			Debug.Log(transform.position.x + "" + transform.position.z);
+			if(transform.position.x<LevelBuilder.totaldimension&& -transform.position.z<LevelBuilder.totaldimension){
 				mytile = LevelBuilder.tiles[(int)gameObject.transform.position.x, -(int)gameObject.transform.position.z];
 				mytile.type = "Ice";
-				Debug.Log("UNTAKING IT at" + (int)gameObject.transform.position.x + -(int)gameObject.transform.position.z);
 				mytile.isTaken = false;
-				//Debug.Log(LevelBuilder.tiles[(int)gameObject.transform.position.x, -(int)gameObject.transform.position.z-1].isTaken);
 				Debug.Log(mytile.isSideways);
 				if(mytile.isSideways != null){
 					mytile.type = mytile.isSideways;
-					mytile.isTaken = false;
+					mytile.isTaken = true;
 				}
 				Debug.Log(mytile);
 				if(myType == "Left" || myType == "Right" ||myType == "Up" ||myType == "Down"){
@@ -146,6 +132,8 @@ public class Dragger : MonoBehaviour {
 			//}
 			GetComponent<BoxCollider>().enabled = false;
 		}
+
+		
 			//notmoving =	 	false;	
  }
  
@@ -158,12 +146,8 @@ public class Dragger : MonoBehaviour {
 //			Debug.Log(curScreenPoint);
 
 			positiontogo = PlaneBehavior.planePos;	
-			piecePosition = new Vector3(PlaneBehavior.planePos.x, PlaneBehavior.planePos.y, PlaneBehavior.planePos.z);
-			positiontogo = new Vector3(Mathf.RoundToInt(PlaneBehavior.planePos.x), PlaneBehavior.planePos.y, Mathf.RoundToInt(PlaneBehavior.planePos.z));	
-			Debug.Log("positiontogo" + positiontogo);
-					Debug.Log("value of test" + LevelBuilder.tiles[2,1].isTaken);
-					Debug.Log("isreadytodrop" + PlaneBehavior.readyToDrop);
 
+			positiontogo = new Vector3(Mathf.RoundToInt(PlaneBehavior.planePos.x), PlaneBehavior.planePos.y, Mathf.RoundToInt(PlaneBehavior.planePos.z));	
 			if(lastposition != positiontogo || currenttile == null){
 				//Debug.Log("Change");	
 				CheckAvailableTile(positiontogo);
@@ -180,7 +164,7 @@ public class Dragger : MonoBehaviour {
 
 
 			if(!gotosky){
-				transform.position = piecePosition;
+				transform.position = positiontogo;
 				if(positiontogo.x<LevelBuilder.totaldimension && -transform.position.z<LevelBuilder.totaldimension){
 					//transform.position = new Vector3(mytile);
 				}
@@ -220,7 +204,6 @@ public class Dragger : MonoBehaviour {
  }
 
  void CheckAvailableTile(Vector3 position){
- 	Debug.Log("Checkingavail at " + position);
  	Collider[] colliders = Physics.OverlapSphere(new Vector3(position.x,0,position.z), .5f);	
 	foreach (Collider component in colliders) {
 		if(component.tag == "Tile"){
@@ -234,7 +217,6 @@ public class Dragger : MonoBehaviour {
 	if(position.x>-1 && position.x<LevelBuilder.totaldimension && position.z<1 && position.z>-LevelBuilder.totaldimension){
 		isinboard = true;
 		Debug.Log("Doing it");
-		//Debug.Log("value of test" + LevelBuilder.tiles[2,1].isTaken);
 		if(pasttile != null){
 			pasttile.GetComponent<MouseOverer>().Leave();
 		}
@@ -289,8 +271,6 @@ public class Dragger : MonoBehaviour {
  }
  void OnMouseUp()
  {
-  	Swiping.mydirection = "Null";
- 	string pieceholdername;
  	if(particle != null){
  		particle.transform.GetChild(0).GetComponent<Renderer>().enabled = false;
 		particle.transform.GetChild(1).GetComponent<Renderer>().enabled = false; 
@@ -298,9 +278,9 @@ public class Dragger : MonoBehaviour {
  	}
 
  	toggleColliders();
-
+ 	LevelManager.isdragging = false;
  	Cursor.visible = true;
-
+ 	Swiping.mydirection = "Null";
  	if(TurnBehaviour.turn == 0)
  	{
 		Debug.Log(PlaneBehavior.tilex);
@@ -341,15 +321,9 @@ public class Dragger : MonoBehaviour {
 			}			
 
 			if (myType == "Seed"){
-			LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].seedType = mySeedType;			
+			LevelBuilder.tiles[(int)transform.position.x, -(int)transform.position.z].seedType = mySeedType;			
 			}
-			if(myType == "Seed"){
-				pieceholdername = mySeedType + myType;
-			}
-			else{
-				pieceholdername = myType;
-			}
-			pieceHolder.unshadeImage(pieceholdername);
+			pieceHolder.unshadeImage(myType);
 		}
 		else{
 			if(myType == "Wall" || myType == "Up" ||myType == "Down" ||myType == "Right" ||myType == "Left" ){
@@ -365,17 +339,9 @@ public class Dragger : MonoBehaviour {
 			if(myType == "Left" || myType == "Right" ||myType == "Up" ||myType == "Down"){
 			this.gameObject.GetComponent<Animator>().SetInteger("Phase", 0);				
 			}
-			//PieceHolders.placedpieces.Remove(this);
-			if(myType == "Seed"){
-				string name = mySeedType + myType;
-				Debug.Log(name);
-				pieceHolder.updateValueUp(name);	
-			}
-			else{
-				pieceHolder.updateValueUp(myType);	
-			}
-				
-			//Destroy(this.gameObject);
+			PieceHolders.placedpieces.Remove(this);
+			pieceHolder.updateValueUp(myType);			
+			Destroy(this.gameObject);
 	
 
 		}
@@ -396,7 +362,6 @@ public class Dragger : MonoBehaviour {
 		Swiping.canswipe = true;
 		currenttile = null;
 		pasttile = null;
- 		LevelManager.isdragging = false;
 
 		/*if (TurnBehaviour.turn == 0) {
    			 Cursor.visible = true;
@@ -550,7 +515,7 @@ public class Dragger : MonoBehaviour {
 				tilescript = tentativetile.GetComponent<TileHandler> ();
 				//newtile = tentativetile;
 				//tiletodropsprite = tentativetile.GetComponent<SpriteRenderer> ();
-				//tiletodropsprite.- = Color.black;
+				//tiletodropsprite.color = Color.black;
 
 				//tilescript.myTaker = this.gameObject;
 				//tilescript.isTaken = true;

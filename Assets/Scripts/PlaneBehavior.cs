@@ -76,17 +76,5 @@ public class PlaneBehavior : MonoBehaviour {
 		Ray mr = new Ray(mousePosN, mousePosF-mousePosN);
 		return mr;
 	}
-	public Vector3 forcePlanePos(){
-		Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-		float rayDistance = 100;
-		if(plane.Raycast(ray,out rayDistance)){
-//		Debug.Log(ray.GetPoint(rayDistance));
-			planePos = ray.GetPoint(rayDistance);
-			planePos = planePos + Vector3.up*offsetup;
-//			Debug.Log(planePos);
-			//curpos = new Vector2(Mathf.RoundToInt(planePos.x), -Mathf.RoundToInt(planePos.z));	
-			return planePos;
-		}
-		else return new Vector3(0,0,0);
-	}
+
 }

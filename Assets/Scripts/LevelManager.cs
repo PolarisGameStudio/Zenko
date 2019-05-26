@@ -132,7 +132,6 @@ public class LevelManager : MonoBehaviour {
 			if(LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x-1, -(int)dragger.gameObject.transform.position.z].type == type){
 				LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x-1, -(int)dragger.gameObject.transform.position.z].type = "Ice";
 				LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x-1, -(int)dragger.gameObject.transform.position.z].isTaken = false;
-				LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x-1, -(int)dragger.gameObject.transform.position.z].isSideways = null;
 
 			}
 			else{
@@ -146,7 +145,6 @@ public class LevelManager : MonoBehaviour {
 			if(LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x+1, -(int)dragger.gameObject.transform.position.z].type == type){
 				LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x+1, -(int)dragger.gameObject.transform.position.z].type = "Ice";
 				LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x+1, -(int)dragger.gameObject.transform.position.z].isTaken = false;
-				LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x+1, -(int)dragger.gameObject.transform.position.z].isSideways = null;
 
 			}
 			else{
@@ -159,7 +157,6 @@ public class LevelManager : MonoBehaviour {
 			if(LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x, -(int)dragger.gameObject.transform.position.z-1].type == type){
 				LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x, -(int)dragger.gameObject.transform.position.z-1].type = "Ice";
 				LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x, -(int)dragger.gameObject.transform.position.z-1].isTaken = false;
-				LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x, -(int)dragger.gameObject.transform.position.z-1].isSideways = null;
 
 			}
 			else{
@@ -172,7 +169,6 @@ public class LevelManager : MonoBehaviour {
 			if(LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x, -(int)dragger.gameObject.transform.position.z+1].type == type){
 				LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x, -(int)dragger.gameObject.transform.position.z+1].type = "Ice";
 				LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x, -(int)dragger.gameObject.transform.position.z+1].isTaken = false;
-				LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x, -(int)dragger.gameObject.transform.position.z+1].isSideways = null;
 
 			}
 			else{
@@ -188,7 +184,6 @@ public class LevelManager : MonoBehaviour {
 				Debug.Log(dragger.mySeedType);
 				dragger.myshrinker.SetActive(true);
 				dragger.myBigger.SetActive(false);
-				dragger.convertWhenReady = false;
 				Debug.Log((int)dragger.gameObject.transform.position.x);
 				Debug.Log(-(int)dragger.gameObject.transform.position.z);
 				if(dragger.gameObject.transform.position.z > -LevelBuilder.totaldimension){//checks for pieces inside board
