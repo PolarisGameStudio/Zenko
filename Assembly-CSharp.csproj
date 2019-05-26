@@ -347,6 +347,7 @@
      <None Include="Assets\StreamingAssets\Level65.txt" />
      <None Include="Assets\StreamingAssets\Level83.txt" />
      <None Include="Assets\StreamingAssets\Leve-16.txt" />
+     <None Include="Assets\StreamingAssets\ch4_morenotboring.txt" />
      <None Include="Assets\StreamingAssets\Ch3_BigMaps.txt" />
      <None Include="Assets\Mirza Beig\Shaders\Particles\Distance Fade\DistanceFade-AnimBlendAdd.shader" />
      <None Include="Assets\StreamingAssets\Level-107.txt" />
