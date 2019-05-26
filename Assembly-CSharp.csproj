@@ -301,7 +301,7 @@
      <None Include="Assets\StreamingAssets\RandomMaps.txt" />
      <None Include="Assets\StreamingAssets\Level66.txt" />
      <None Include="Assets\Mirza Beig\Shaders\Particles\Intersection Highlight\IntersectionHighlight-Alpha.shader" />
-     <None Include="Assets\StreamingAssets\level5.txt" />
+     <None Include="Assets\StreamingAssets\Level5.txt" />
      <None Include="Assets\Mirza Beig\Shaders\Standard\Standard-Terrain Rain 2.shader" />
      <None Include="Assets\StreamingAssets\Level-14.txt" />
      <None Include="Assets\StreamingAssets\Level77.txt" />
