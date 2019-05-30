@@ -89,7 +89,7 @@ public class LevelBuilder : MonoBehaviour {
 
 	public IEnumerator initPotd(){ //feeds levelPotd string array from textfile.
 		startersPotd = new List<int>();
-		string file = "Ch4_allv1.txt";
+		string file = "Ch4_Big.txt";
 		filePath = System.IO.Path.Combine(Application.streamingAssetsPath, file);
 		Debug.Log (filePath + "FILEPAPAPATH");
 		result = " ";
@@ -111,6 +111,7 @@ public class LevelBuilder : MonoBehaviour {
 			startersPotd.Add(i);
 //			Debug.Log(lines[i].Length);
 //			Debug.Log(lines[i]);
+			//Debug.Log(i + "is line number");
 			int mapsize = int.Parse(lines[i].Substring(3,1));		
 			if(lines[i].Length == 5){
 				//Debug.Log("size it up for " );
@@ -1185,11 +1186,22 @@ public class LevelBuilder : MonoBehaviour {
 		Debug.Log(iceTiles[iceTiles.Count-1]);
 	}
 	public void PlaceCreature(string creaturetype){
+
 		RemoveSolutions(creaturetype);
 		int randomplace = Random.Range(0,iceTiles.Count);
-		Vector2 tileplace = new Vector2(iceTiles[randomplace].x, iceTiles[randomplace].y);
-		Vector3 pieceplace = new Vector3(iceTiles[randomplace].x, 0, -iceTiles[randomplace].y);
+		// if(creaturetype == "Up"){
+		// 	randomplace = 6;
+		// }
+		// if(creaturetype == "RightSeed"){
+		// 	randomplace = 3;
+		// }
+
+		//int randomplace = Random.Range(0,iceTiles.Count);
+
+		Vector2 tileplace = new Vector2(iceTiles[randomplace].x, iceTiles[randomplace].y);//vector 2 for 2d placement in tiles group
+		Vector3 pieceplace = new Vector3(iceTiles[randomplace].x, 0, -iceTiles[randomplace].y);//vector 3 for gameworld position
 		Tile currenttile = tiles[(int)tileplace.x,(int)tileplace.y];
+
 		string myseedtype = "Not";
 		if(creaturetype.Length>5){
 			myseedtype = creaturetype.Substring(0,creaturetype.Length-4);
@@ -1272,32 +1284,49 @@ public class LevelBuilder : MonoBehaviour {
 				seedpiece = Instantiate (s_floor_rock, pieceplace, Quaternion.identity);
 				currenttile.tileObj = seedpiece.gameObject;	
 				PieceHolders.placedpieces.Add(seedpiece.gameObject.GetComponent<Dragger>());	
+			currenttile.isTaken = true;
+			currenttile.type = "Seed";
+			Debug.Log("Seed type is " + myseedtype);
+			currenttile.seedType = myseedtype;
 				break;
 			case "Left":
 				seedpiece = Instantiate (s_floor_left, pieceplace, Quaternion.Euler(new Vector3(0,270,0)));
 				currenttile.tileObj = seedpiece.gameObject;	
-				PieceHolders.placedpieces.Add(seedpiece.gameObject.GetComponent<Dragger>());					
+				PieceHolders.placedpieces.Add(seedpiece.gameObject.GetComponent<Dragger>());
+			currenttile.isTaken = true;
+			currenttile.type = "Seed";
+			Debug.Log("Seed type is " + myseedtype);
+			currenttile.seedType = myseedtype;					
 				break;
 			case "Up":
 				seedpiece = Instantiate (s_floor_up, pieceplace, Quaternion.Euler(new Vector3(0,0,0)));
 				currenttile.tileObj = seedpiece.gameObject;	
 				PieceHolders.placedpieces.Add(seedpiece.gameObject.GetComponent<Dragger>());
+			currenttile.isTaken = true;
+			currenttile.type = "Seed";
+			Debug.Log("Seed type is " + myseedtype);
+			currenttile.seedType = myseedtype;
 				break;
 			case "Right":
 				seedpiece = Instantiate (s_floor_right, pieceplace, Quaternion.Euler(new Vector3(0,90,0)));
 				currenttile.tileObj = seedpiece.gameObject;	
 				PieceHolders.placedpieces.Add(seedpiece.gameObject.GetComponent<Dragger>());
+			currenttile.isTaken = true;
+			currenttile.type = "Seed";
+			Debug.Log("Seed type is " + myseedtype);
+			currenttile.seedType = myseedtype;
 				break;
 			case "Down":
 				seedpiece = Instantiate (s_floor_down, pieceplace, Quaternion.Euler(new Vector3(0,180,0)));
 				currenttile.tileObj = seedpiece.gameObject;	
 				PieceHolders.placedpieces.Add(seedpiece.gameObject.GetComponent<Dragger>());
+			currenttile.isTaken = true;
+			currenttile.type = "Seed";
+			Debug.Log("Seed type is " + myseedtype);
+			currenttile.seedType = myseedtype;
 				break;
 			}
 			//seedpiece.gameObject.GetComponentInChildren<Animator>().SetInteger("Phase",2);				
-			currenttile.isTaken = true;
-			currenttile.type = "Seed";
-			currenttile.seedType = myseedtype;
 			break;
 			//s_floor_left
 		}

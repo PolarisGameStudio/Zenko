@@ -92,7 +92,7 @@ public class GoalBehaviour : MonoBehaviour {
 					
 				}
 				if(newy<oldy){//moving up
-					Debug.Log("Moving where");
+//					Debug.Log("Moving where");
 					if(xdif<.9){
 						//Debug.Log(ydif);
 						if(ydif<1.5){

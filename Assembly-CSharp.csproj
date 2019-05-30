@@ -135,6 +135,7 @@
      <Compile Include="Assets\Scripts\LevelDecoder.cs" />
      <Compile Include="Assets\Scripts\LevelHandler.cs" />
      <Compile Include="Assets\Scripts\LevelManager.cs" />
+     <Compile Include="Assets\Scripts\LevelOrganizer.cs" />
      <Compile Include="Assets\Scripts\Levels.cs" />
      <Compile Include="Assets\Scripts\MonsterPanel.cs" />
      <Compile Include="Assets\Scripts\MouseOverer.cs" />
@@ -248,6 +249,7 @@
      <None Include="Assets\Mirza Beig\Shaders\Particles\Distortion\TextureDistortion-Add.shader" />
      <None Include="Assets\StreamingAssets\3test.txt" />
      <None Include="Assets\StreamingAssets\Level-20.txt" />
+     <None Include="Assets\StreamingAssets\ch4_notboring3.txt" />
      <None Include="Assets\StreamingAssets\4x4_LRUD1_Medium.txt" />
      <None Include="Assets\Mirza Beig\Shaders\Image Effects\Resources\Sharpen\Sharpen.shader" />
      <None Include="Assets\StreamingAssets\newestpotd.txt" />
@@ -329,6 +331,7 @@
      <None Include="Assets\Mirza Beig\_DOCS\README - Particle Force Fields.txt" />
      <None Include="Assets\StreamingAssets\Level-15.txt" />
      <None Include="Assets\StreamingAssets\Level-18.txt" />
+     <None Include="Assets\StreamingAssets\Ch4notboring2.txt" />
      <None Include="Assets\StreamingAssets\Level18.txt" />
      <None Include="Assets\Mirza Beig\Editor Extensions\Utilities\Multi-Asset Renamer\README.txt" />
      <None Include="Assets\StreamingAssets\Level-102.txt" />
@@ -343,6 +346,7 @@
      <None Include="Assets\StreamingAssets\Ch4_5x5.txt" />
      <None Include="Assets\StreamingAssets\Level40.txt" />
      <None Include="Assets\StreamingAssets\Level26.txt" />
+     <None Include="Assets\StreamingAssets\Ch4_Big.txt" />
      <None Include="Assets\StreamingAssets\Level56.txt" />
      <None Include="Assets\StreamingAssets\Level65.txt" />
      <None Include="Assets\StreamingAssets\Level83.txt" />

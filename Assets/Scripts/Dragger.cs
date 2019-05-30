@@ -28,6 +28,7 @@ public class Dragger : MonoBehaviour {
 	public GameObject currenttile;
 	public GameObject pasttile;
 	public GameObject particle;
+	public GameObject lastgoodtile;
 	public bool isinboard;
 	public bool startedDragging;
 	public PieceHolders pieceHolder;
@@ -39,7 +40,15 @@ public class Dragger : MonoBehaviour {
 		gotosky = false;
 		pieceHolder = GameObject.Find("PieceHolders").GetComponent<PieceHolders>();
 //		AIBrain.pieces.Add(this.gameObject);
+	 	Collider[] colliders = Physics.OverlapSphere(new Vector3(transform.position.x,0,transform.position.z), .5f);	
+		foreach (Collider component in colliders) {
+			if(component.tag == "Tile"){
+			lastgoodtile = component.gameObject;			
+			}
+			//Debug.Log(component.gameObject);
 
+	//		Debug.Log("current is " + currenttile);
+		}
 	}
 
 	void Update(){
@@ -93,6 +102,8 @@ public class Dragger : MonoBehaviour {
   	 // _lockedYPosition = screenPoint.y;
 	 	toggleColliders();
 //	 	Debug.Log(TurnBehaviour.turn);
+
+
 		if (TurnBehaviour.turn == 0) {
 			PlaneBehavior.readyToDrop = false;
 
@@ -160,20 +171,20 @@ public class Dragger : MonoBehaviour {
 			positiontogo = PlaneBehavior.planePos;	
 			piecePosition = new Vector3(PlaneBehavior.planePos.x, PlaneBehavior.planePos.y, PlaneBehavior.planePos.z);
 			positiontogo = new Vector3(Mathf.RoundToInt(PlaneBehavior.planePos.x), PlaneBehavior.planePos.y, Mathf.RoundToInt(PlaneBehavior.planePos.z));	
-			Debug.Log("positiontogo" + positiontogo);
-					Debug.Log("value of test" + LevelBuilder.tiles[2,1].isTaken);
-					Debug.Log("isreadytodrop" + PlaneBehavior.readyToDrop);
+//			Debug.Log("positiontogo" + positiontogo);
+//			Debug.Log("value of test" + LevelBuilder.tiles[2,1].isTaken);
+//			Debug.Log("isreadytodrop" + PlaneBehavior.readyToDrop);
 
 			if(lastposition != positiontogo || currenttile == null){
 				//Debug.Log("Change");	
 				CheckAvailableTile(positiontogo);
 			}	
-			if(!isinboard)	{
+			/*if(!isinboard)	{
 
 			positiontogo = PlaneBehavior.planePos;	
 			transform.GetChild(1).gameObject.SetActive(false);
 
-			}
+			}*/
 
 			lastposition = positiontogo;
 //			Debug.Log(positiontogo);
@@ -240,48 +251,60 @@ public class Dragger : MonoBehaviour {
 		}
 		if(currenttile!= null && currenttile != pasttile){
 			currenttile.GetComponent<MouseOverer>().Enter();
-			transform.GetChild(1).gameObject.SetActive(true);		
-
+			transform.GetChild(1).gameObject.SetActive(true);	
+			if(PlaneBehavior.readyToDrop){
+				lastgoodtile = currenttile;	
+			}	
 		}
 
 		pasttile = currenttile;
 		particle.SetActive(true);
-		particle.transform.position = new Vector3(position.x, particle.transform.position.y, position.z);
+		Debug.Log("lastgoodtile is" + lastgoodtile.transform.position);
+		particle.transform.position = new Vector3(lastgoodtile.transform.position.x, particle.transform.position.y, lastgoodtile.transform.position.z);//change this
+
 		if(myType == "Wall" || myType == "Up" ||myType == "Down" ||myType == "Right" ||myType == "Left" ){
 			this.gameObject.GetComponent<Animator>().SetInteger("Phase", 1);
 
 		}
 
 		if(LevelBuilder.tiles[(int)position.x, -(int)position.z].isTaken){
-			particle.transform.GetChild(0).GetComponent<Renderer>().enabled = false;
-			particle.transform.GetChild(1).GetComponent<Renderer>().enabled = true;
-			particle.transform.GetChild(2).GetComponent<Renderer>().enabled = false;
-
-
-		}
-		else{
+			PlaneBehavior.ClosestTile();
+			lastgoodtile = PlaneBehavior.highlightedTile;	
+			particle.transform.position = new Vector3(lastgoodtile.transform.position.x, particle.transform.position.y, lastgoodtile.transform.position.z);//change this
+		
 			particle.transform.GetChild(0).GetComponent<Renderer>().enabled = true;
 			particle.transform.GetChild(1).GetComponent<Renderer>().enabled = false;
 			particle.transform.GetChild(2).GetComponent<Renderer>().enabled = false;
-
+		}
+		else{
+			
+			particle.transform.GetChild(0).GetComponent<Renderer>().enabled = true;
+			particle.transform.GetChild(1).GetComponent<Renderer>().enabled = false;
+			particle.transform.GetChild(2).GetComponent<Renderer>().enabled = false;
 		}
 	}
 	else{
 		if(myType == "Wall" || myType == "Up" ||myType == "Down" ||myType == "Right" ||myType == "Left" ){
-			this.gameObject.GetComponent<Animator>().SetInteger("Phase", 0);
+			//this.gameObject.GetComponent<Animator>().SetInteger("Phase", 2);
 
 		}
 		isinboard = false;
-		particle.transform.GetChild(0).GetComponent<Renderer>().enabled = false;
+		particle.transform.GetChild(0).GetComponent<Renderer>().enabled = true;
 		particle.transform.GetChild(1).GetComponent<Renderer>().enabled = false;
-		particle.transform.GetChild(2).GetComponent<Renderer>().enabled = true;
+		particle.transform.GetChild(2).GetComponent<Renderer>().enabled = false;
 		if(pasttile!= null){
 			pasttile.GetComponent<MouseOverer>().Leave();
 
 		}
 		currenttile = null;
 		pasttile = null;
-		particle.transform.position = new Vector3(PlaneBehavior.planePos.x, particle.transform.position.y, PlaneBehavior.planePos.z);
+		PlaneBehavior.ClosestTile();
+		lastgoodtile = PlaneBehavior.highlightedTile;
+		// lastgoodtile = ClosestTile(position);
+		//ClosestTile(position);
+		particle.transform.position = new Vector3(lastgoodtile.transform.position.x, particle.transform.position.y, lastgoodtile.transform.position.z);//change this
+
+		//particle.transform.position = new Vector3(PlaneBehavior.planePos.x, particle.transform.position.y, PlaneBehavior.planePos.z);
 
 	}
 //	Debug.Log(position.x + " " + position.z);
@@ -352,7 +375,53 @@ public class Dragger : MonoBehaviour {
 			pieceHolder.unshadeImage(pieceholdername);
 		}
 		else{
-			if(myType == "Wall" || myType == "Up" ||myType == "Down" ||myType == "Right" ||myType == "Left" ){
+			Debug.Log("Out but can go to " + lastgoodtile.transform.position);
+
+
+			PieceHolders.placedpieces.Add(this);
+			//transform.position = new Vector3(PlaneBehavior.tilex, 0, PlaneBehavior.tiley);
+			positiontogo = new Vector3(lastgoodtile.transform.position.x, 0, lastgoodtile.transform.position.z);
+			gototile = true;
+			if(myType == "Left" || myType == "Right" ||myType == "Up" ||myType == "Down"){
+			placeIcarus(myType, positiontogo);
+
+			}
+			else{
+				placeNormal();
+				/*LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].type = myType;
+				LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].isTaken = true;
+				LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].tileObj = this.gameObject;*/				
+			}
+			
+			if(myType == "Wall"){
+			this.gameObject.GetComponent<Animator>().SetInteger("Phase", 2);
+			}
+			if(myType == "Left" || myType == "Right" ||myType == "Up" ||myType == "Down"){
+			this.gameObject.GetComponent<Animator>().SetInteger("Phase", 2);
+			}			
+
+			if (myType == "Seed"){
+			LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].seedType = mySeedType;			
+			}
+			if(myType == "Seed"){
+				pieceholdername = mySeedType + myType;
+			}
+			else{
+				pieceholdername = myType;
+			}
+			pieceHolder.unshadeImage(pieceholdername);
+
+
+
+
+
+
+
+
+
+
+
+			/*if(myType == "Wall" || myType == "Up" ||myType == "Down" ||myType == "Right" ||myType == "Left" ){
 				this.gameObject.GetComponent<Animator>().SetInteger("Phase", 0);
 
 			}
@@ -373,7 +442,7 @@ public class Dragger : MonoBehaviour {
 			}
 			else{
 				pieceHolder.updateValueUp(myType);	
-			}
+			}*/
 				
 			//Destroy(this.gameObject);
 	
@@ -383,6 +452,7 @@ public class Dragger : MonoBehaviour {
 		//Debug.Log()
 
 		//transform.position.y = PlaneBehavior.tiley;
+		Debug.Log("outside?");
 		if(Input.touchCount>0){
 			Touch t = Input.GetTouch(0);
 			Swiping.firstPressPos = new Vector2(t.position.x,t.position.y);
@@ -541,6 +611,26 @@ public class Dragger : MonoBehaviour {
 				LevelManager.piecetiles[i].gameObject.GetComponent<BoxCollider>().enabled = !LevelManager.piecetiles[i].gameObject.GetComponent<BoxCollider>().enabled;
 			}
 		}
+	}
+	public void ClosestTile(Vector3 position){
+		int currentx = (int)position.x;
+		int currenty = (int)-position.z;
+		Debug.Log(currentx + "" + currenty);
+		
+		if(currentx < 0 ){
+			currentx= 0;
+		}
+		if(currenty < 0){
+			currenty = 0;
+		}
+		if(currentx > LevelBuilder.totaldimension-1){
+			currentx = LevelBuilder.totaldimension-1;
+		}
+		if(currenty > LevelBuilder.totaldimension-1){
+			currenty = LevelBuilder.totaldimension-1;
+		}
+		Debug.Log(currentx + "" + currenty);
+
 	}
 	/*void FindHoveredTile(){
 		Collider2D[] colliders = Physics2D.OverlapCircleAll(myPosition, .1f); ///Presuming the object you are testing also has a collider 0 otherwise{

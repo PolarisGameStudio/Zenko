@@ -826,24 +826,27 @@ public class PieceHolders : MonoBehaviour {
 			}
 		}
 		if(type == "Up" ){	
-			if(LevelBuilder.tiles[(int)target.x, (int)target.y+1].type == type){
-				LevelBuilder.tiles[(int)target.x, (int)target.y+1].type = "Ice";		
-				LevelBuilder.tiles[(int)target.x, (int)target.y+1].isTaken = false;	
-				LevelBuilder.tiles[(int)target.x, (int)target.y+1].isSideways = null;					
-			}	
-			else if(LevelBuilder.tiles[(int)target.x, (int)target.y+1].isSideways == type){
-				LevelBuilder.tiles[(int)target.x, (int)target.y+1].isSideways = null;
-
-			}	
-		}
-		if(type == "Down"){
 			if(LevelBuilder.tiles[(int)target.x, (int)target.y-1].type == type){
 				LevelBuilder.tiles[(int)target.x, (int)target.y-1].type = "Ice";		
 				LevelBuilder.tiles[(int)target.x, (int)target.y-1].isTaken = false;	
 				LevelBuilder.tiles[(int)target.x, (int)target.y-1].isSideways = null;					
-			}
+			}	
 			else if(LevelBuilder.tiles[(int)target.x, (int)target.y-1].isSideways == type){
 				LevelBuilder.tiles[(int)target.x, (int)target.y-1].isSideways = null;
+
+			}	
+			//else if (LevelBuilder.tiles[(int)target.x, (int)target.y+1].type == "Ice"){
+			//	LevelBuilder.tiles[(int)target.x, (int)target.y+1].isSideways = null;//THESE CAN BE REPLACED BY NAMESIDEWAYS() WHICH CAN LOOK FOR LRUDS AROUND IT.
+			//}
+		}
+		if(type == "Down"){
+			if(LevelBuilder.tiles[(int)target.x, (int)target.y+1].type == type){
+				LevelBuilder.tiles[(int)target.x, (int)target.y+1].type = "Ice";		
+				LevelBuilder.tiles[(int)target.x, (int)target.y+1].isTaken = false;	
+				LevelBuilder.tiles[(int)target.x, (int)target.y+1].isSideways = null;					
+			}
+			else if(LevelBuilder.tiles[(int)target.x, (int)target.y+1].isSideways == type){
+				LevelBuilder.tiles[(int)target.x, (int)target.y+1].isSideways = null;
 
 			}		
 		}

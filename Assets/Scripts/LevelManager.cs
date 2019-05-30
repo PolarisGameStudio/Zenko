@@ -32,6 +32,7 @@ public class LevelManager : MonoBehaviour {
 	public static bool isdragging;
 	public static bool ispotd;
 	public static List<Hint> hints = new List<Hint>();
+	//public static GameObject lastgoodtile;
 	//public static IceTileHandler myicehandler;
 
 

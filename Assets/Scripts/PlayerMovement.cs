@@ -541,6 +541,7 @@ public class PlayerMovement : MonoBehaviour {
 			else if (tilescript.type == "Seed") {
 				currenttile = tiletotest;
 				lastSeed = tilescript.tileObj;
+				Debug.Log(tilescript.tileObj);
 				//Debug.Log("Check");
 				//tilescript.type = tilescript.seedType;
 				PopSeed(tilescript.seedType);
