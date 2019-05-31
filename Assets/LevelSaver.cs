@@ -22,6 +22,11 @@ public class LevelSaver : MonoBehaviour {
 			sl.WriteLine(line);
 		}
 	}
+	/*public static void StoreBiggie(){
+		foreach(string line in currentmap){
+			sl.WriteLine(line);
+		}		
+	}*/
 	void OnApplicationQuit(){
 		sl.Close();
 	}

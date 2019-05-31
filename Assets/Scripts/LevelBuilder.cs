@@ -89,7 +89,7 @@ public class LevelBuilder : MonoBehaviour {
 
 	public IEnumerator initPotd(){ //feeds levelPotd string array from textfile.
 		startersPotd = new List<int>();
-		string file = "Ch4_Big.txt";
+		string file = "FilteredMaps.txt";
 		filePath = System.IO.Path.Combine(Application.streamingAssetsPath, file);
 		Debug.Log (filePath + "FILEPAPAPATH");
 		result = " ";
@@ -374,7 +374,6 @@ public class LevelBuilder : MonoBehaviour {
 		//string text = System.IO.File.ReadAllText(System.IO.Path.Combine (Application.streamingAssetsPath, "Ch4_Easy.txt"));
 		string firstline = levelsPotd[startersPotd[place]];
 		LevelSaver.currentmap.Add(firstline);
-		Debug.Log("Firstline" + firstline);
 		totaldimension = int.Parse(firstline.Substring(3,1));
 		if(firstline.Length == 5){
 			totaldimension = int.Parse(firstline.Substring(3,2));

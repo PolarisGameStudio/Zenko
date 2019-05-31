@@ -164,6 +164,7 @@
      <None Include="Assets\StreamingAssets\Level27.txt" />
      <None Include="Assets\StreamingAssets\Level-10.txt" />
      <None Include="Assets\Pedro\Pedro_AnimationList.txt" />
+     <None Include="Assets\newbigmaps.txt" />
      <None Include="Assets\StreamingAssets\Level29.txt" />
      <None Include="Assets\Mirza Beig\Shaders\Particles\Distortion\TextureDistortion-Alpha.shader" />
      <None Include="Assets\StreamingAssets\Level96.txt" />
@@ -210,6 +211,7 @@
      <None Include="Assets\StreamingAssets\Level22.txt" />
      <None Include="Assets\StreamingAssets\Level21.txt" />
      <None Include="Assets\StreamingAssets\Level6.txt" />
+     <None Include="Assets\StreamingAssets\FilteredMaps.txt" />
      <None Include="Assets\Mirza Beig\Shaders\Particles\Distortion\Distortion-Add.shader" />
      <None Include="Assets\Icarus\Icarus_Animation.txt" />
      <None Include="Assets\StreamingAssets\Level46.txt" />
