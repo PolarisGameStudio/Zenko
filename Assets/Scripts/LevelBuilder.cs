@@ -55,6 +55,8 @@ public class LevelBuilder : MonoBehaviour {
 
 	public Color mygray;// = new Color(173/255f,173/255f,173/255f,1f);
 
+	public static int playerInitialRotation;
+
 
 	//public static List<Transform> piecetiles = new List<Transform>();
 
@@ -259,7 +261,7 @@ public class LevelBuilder : MonoBehaviour {
 		piecenums = 0;
 		Debug.Log(jagged.Length);	
 		// create planes based on matrix
-		for (int y = 0; y < totaldimension+1; y++) {
+		for (int y = 0; y < totaldimension; y++) {
 //			Debug.Log(y);
 			for (int x = 0; x < jagged [y].Length; x++) {
 				double zed = (-y) + (-0.8);
@@ -270,6 +272,17 @@ public class LevelBuilder : MonoBehaviour {
 			}
 		} 
 		GoalDirection((int)goaltransform.position.x,-(int)goaltransform.position.z);
+		StartDirection((int)starttransform.position.x,-(int)starttransform.position.z);
+		for (int y = totaldimension; y < totaldimension+1; y++) {
+//			Debug.Log(y);
+			for (int x = 0; x < jagged [y].Length; x++) {
+				double zed = (-y) + (-0.8);
+				//Debug.Log(x + " + " + y);ww
+//				Debug.Log(jagged[y][x]);
+				placeOnWorld(jagged,y,x);
+							
+			}
+		} 
 		Debug.Log(LevelManager.myhints.Count);
 		Debug.Log(LevelStorer.efficientturns);
 		if(LevelBuilder.totaldimension == 10){
@@ -306,16 +319,28 @@ public class LevelBuilder : MonoBehaviour {
 		LevelManager.hints = new List<Hint>();
 		PieceHolders.placedpieces = new List<Dragger>();
 		piecenums = 0;
-		for (int y = 0; y < totaldimension+1; y++) {
-			Debug.Log(jagged[y].Length);
-			for (int x = 0; x < jagged[y].Length; x++) {
+		for (int y = 0; y < totaldimension; y++) {
+//			Debug.Log(y);
+			for (int x = 0; x < jagged [y].Length; x++) {
 				double zed = (-y) + (-0.8);
-				//Debug.Log(jagged[y][x]);
+				//Debug.Log(x + " + " + y);ww
+//				Debug.Log(jagged[y][x]);
 				placeOnWorld(jagged,y,x);
 							
 			}
 		} 
 		GoalDirection((int)goaltransform.position.x,-(int)goaltransform.position.z);
+		StartDirection((int)starttransform.position.x,-(int)starttransform.position.z);
+		for (int y = totaldimension; y < totaldimension+1; y++) {
+//			Debug.Log(y);
+			for (int x = 0; x < jagged [y].Length; x++) {
+				double zed = (-y) + (-0.8);
+				//Debug.Log(x + " + " + y);ww
+//				Debug.Log(jagged[y][x]);
+				placeOnWorld(jagged,y,x);
+							
+			}
+		} 
 		if(LevelBuilder.totaldimension == 10){
 			CameraController.changePosition(1,1);
 			CameraController.changeFovAndRot((int)32,52.9f);
@@ -704,6 +729,54 @@ public class LevelBuilder : MonoBehaviour {
 			}
 		}
 	}
+	public void StartDirection(int myx, int myy){
+		Debug.Log("Directing");
+		Debug.Log(myx + " " + myy);
+		Collider[] colliders = Physics.OverlapSphere(new Vector3(myx,0,-(myy+1)), .5f);
+		foreach (Collider component in colliders) {
+			if (component.tag == "Tile"){
+				if(tiles[myx,myy+1].type != "Wall" && tiles[myx,myy+1].type != "Goal"){
+					Debug.Log("Down");
+					playertransform.eulerAngles = new Vector3(0f,270f,0f);
+					playerInitialRotation = 270;
+					return;
+				}
+			}
+		}
+		colliders = Physics.OverlapSphere(new Vector3(myx,0,-(myy-1)), .5f);
+		foreach (Collider component in colliders) {
+			if (component.tag == "Tile"){
+				if(tiles[myx,myy-1].type != "Wall" && tiles[myx,myy-1].type != "Goal"){
+					Debug.Log("Up");
+					playertransform.eulerAngles = new Vector3(0f,90f,0f);
+					playerInitialRotation = 90;
+					return;				
+				}
+			}
+		}
+		colliders = Physics.OverlapSphere(new Vector3(myx+1,0,-myy), .5f);
+		foreach (Collider component in colliders) {
+			if (component.tag == "Tile"){
+				if(tiles[myx+1,myy].type != "Wall"  && tiles[myx+1,myy].type != "Goal"){
+					Debug.Log("Right");
+					playertransform.eulerAngles = new Vector3(0f,180f,0f);
+					playerInitialRotation = 180;
+					return;
+				}
+			}
+		}
+		colliders = Physics.OverlapSphere(new Vector3(myx-1,0,-myy), .5f);
+		foreach (Collider component in colliders) {
+			if (component.tag == "Tile"){
+				if(tiles[myx-1,myy].type != "Wall" && tiles[myx-1,myy].type != "Goal"){
+					playertransform.eulerAngles = new Vector3(0f,0f,0f);
+					playerInitialRotation = 0;
+					Debug.Log("Left");
+					return;
+				}
+			}
+		}
+	}
 	public void GoalDirection(int myx, int myy){
 		//Debug.Log(tiles[0,11].type);
 //		if(tiles[0,11].type == null){
@@ -711,50 +784,100 @@ public class LevelBuilder : MonoBehaviour {
 //		}
 		Debug.Log("Directing");
 		Debug.Log(myx + " " + myy);
-		if(myx<5){	
-			//Debug.Log(myx + "" + myy);
-			Debug.Log(tiles[myx+1,myy].type);
-			Debug.Log(myx+1 + " " + myy );
-			if(tiles[myx+1,myy].type!="Wall" && tiles[myx+1,myy].type!="Start" && tiles[myx+1,myy].type!=null){
-			goaltransform.eulerAngles = new Vector3(0f,90f,0f);
-			GoalBehaviour.isvertical = false;
-			return;
-
-			Debug.Log("Right");
-
+		Collider[] colliders = Physics.OverlapSphere(new Vector3(myx,0,-(myy+1)), .5f);
+			foreach (Collider component in colliders) {
+				if (component.tag == "Tile"){
+					if(tiles[myx,myy+1].type != "Wall" && tiles[myx,myy+1].type != "Start"){
+						Debug.Log("Down");
+						goaltransform.eulerAngles = new Vector3(0f,180f,0f);
+						GoalBehaviour.isvertical = true;
+						return;
+					}
+				}
+			}
+		colliders = Physics.OverlapSphere(new Vector3(myx,0,-(myy-1)), .5f);
+			foreach (Collider component in colliders) {
+				if (component.tag == "Tile"){
+					if(tiles[myx,myy-1].type != "Wall" && tiles[myx,myy-1].type != "Start"){
+						Debug.Log("Up");
+						goaltransform.eulerAngles = new Vector3(0f,0f,0f);
+						GoalBehaviour.isvertical = true;	
+						return;				}
+				}
+			}
+		colliders = Physics.OverlapSphere(new Vector3(myx+1,0,-myy), .5f);
+			foreach (Collider component in colliders) {
+				if (component.tag == "Tile"){
+					if(tiles[myx+1,myy].type != "Wall" && tiles[myx+1,myy].type != "Start"){
+						Debug.Log("Right");
+						goaltransform.eulerAngles = new Vector3(0f,90f,0f);
+						GoalBehaviour.isvertical = false;
+						return;
+					}
+				}
+			}
+		colliders = Physics.OverlapSphere(new Vector3(myx-1,0,-myy), .5f);
+			foreach (Collider component in colliders) {
+				if (component.tag == "Tile"){
+					if(tiles[myx-1,myy].type != "Wall" && tiles[myx-1,myy].type != "Start"){
+						goaltransform.eulerAngles = new Vector3(0f,270,0f);
+						GoalBehaviour.isvertical = false;
+						Debug.Log("Left");
+						return;
+					}
+				}
 			}
 
 
-		}
-		if(myx>4){
-			if(tiles[myx-1,myy].type!="Wall" && tiles[myx-1,myy].type!="Start" && tiles[myx-1,myy].type!=null){
-			goaltransform.eulerAngles = new Vector3(0f,270,0f);
-			GoalBehaviour.isvertical = false;
-
-			Debug.Log("Left");
-			return;
-			}
-		}
-		if(myy>4){
-			if(tiles[myx,myy-1].type!="Wall" && tiles[myx,myy-1].type!="Start" && tiles[myx,myy-1].type!=null){
-			goaltransform.eulerAngles = new Vector3(0f,0f,0f);
-			Debug.Log("Up");
-			GoalBehaviour.isvertical = true;
-
-			return;	
-			}
-		}
-		if(myy<5){
-			if(tiles[myx,myy+1].type!="Wall" && tiles[myx,myy+1].type!="Start" && tiles[myx,myy+1].type!=null){
-			goaltransform.eulerAngles = new Vector3(0f,180f,0f);
-			Debug.Log("Down");
-			GoalBehaviour.isvertical = true;
 
 
-			return;			//rotate transform
-			//return;
-			}
-		}
+
+
+
+		// if(myx<5){	
+		// 	//Debug.Log(myx + "" + myy);
+		// 	Debug.Log(tiles[myx+1,myy].type);
+		// 	Debug.Log(myx+1 + " " + myy );
+		// 	if(tiles[myx+1,myy].type!="Wall" && tiles[myx+1,myy].type!="Start" && tiles[myx+1,myy].type!=null){
+		// 	goaltransform.eulerAngles = new Vector3(0f,90f,0f);
+		// 	GoalBehaviour.isvertical = false;
+		// 	return;
+
+		// 	Debug.Log("Right");
+
+		// 	}
+
+
+		// }
+		// if(myx>4){
+		// 	if(tiles[myx-1,myy].type!="Wall" && tiles[myx-1,myy].type!="Start" && tiles[myx-1,myy].type!=null){
+		// 	goaltransform.eulerAngles = new Vector3(0f,270,0f);
+		// 	GoalBehaviour.isvertical = false;
+
+		// 	Debug.Log("Left");
+		// 	return;
+		// 	}
+		// }
+		// if(myy>4){
+		// 	if(tiles[myx,myy-1].type!="Wall" && tiles[myx,myy-1].type!="Start" && tiles[myx,myy-1].type!=null){
+		// 	goaltransform.eulerAngles = new Vector3(0f,0f,0f);
+		// 	Debug.Log("Up");
+		// 	GoalBehaviour.isvertical = true;
+
+		// 	return;	
+		// 	}
+		// }
+		// if(myy<5){
+		// 	if(tiles[myx,myy+1].type!="Wall" && tiles[myx,myy+1].type!="Start" && tiles[myx,myy+1].type!=null){
+		// 	goaltransform.eulerAngles = new Vector3(0f,180f,0f);
+		// 	Debug.Log("Down");
+		// 	GoalBehaviour.isvertical = true;
+
+
+		// 	return;			//rotate transform
+		// 	//return;
+		// 	}
+		// }
 	}
 	public void MakeLevel(){
 		//FindDimension();
@@ -1124,12 +1247,16 @@ public class LevelBuilder : MonoBehaviour {
 		}
 		SpawnPlayer(startpos);
 		goaltransform.gameObject.GetComponentInChildren<Animator>().SetInteger("Phase",0);
+		GoalBehaviour.restartGoal();
+		GoalBehaviour.goaling = false;
 		Debug.Log(goaltransform);
 		Debug.Log(goaltransform.gameObject.GetComponentInChildren<Animator>().GetInteger("Phase"));
 
 
 
 	}
+
+
 
 	public void SpawnPlayer(Vector2 thevector){
 		Debug.Log(starttransform);
@@ -1139,41 +1266,15 @@ public class LevelBuilder : MonoBehaviour {
 		starttransform = Instantiate (floor_start, new Vector3 (x, 0, -y), Quaternion.identity);
 		tiles[x,y].type = "Start";
 		tiles[x,y].isTaken = true;
+		Debug.Log(playerInitialRotation + "rot");
+		playertransform = Instantiate (player, new Vector3 (x, 0, -y), Quaternion.Euler(new Vector3(0,0,0)));
+		playertransform.eulerAngles = new Vector3(0f,playerInitialRotation,0f);
 
-		if(y == 0 || y==1 || y==2){
-			//FaceDown();
-			//p.transform.rotation.y = 270;
-			playertransform = Instantiate (player, new Vector3 (x, 0, -y), Quaternion.Euler(new Vector3(0,270,0)));
-			Debug.Log("Down");
-			return;
-		}
-		if(y==totaldimension-1 || y==totaldimension-2 || y==totaldimension-3 ){
-			//FaceUp();
-			//p.transform.rotation.y = 90;
-			playertransform = Instantiate (player, new Vector3 (x, 0, -y), Quaternion.Euler(new Vector3(0,90,0)));
-			Debug.Log("Up");
-			return;
-
-		}
-		if(x == 0 || x==1 || x==2){
-			//FaceRight();
-			//p.transform.rotation.y = 180;
-			playertransform = Instantiate (player, new Vector3 (x, 0, -y), Quaternion.Euler(new Vector3(0,180,0)));
-			Debug.Log("Right");
-			return;
-
-		}
-		if(x==totaldimension-1 || x==totaldimension-2 || x==totaldimension-3 ){
-			//FaceLeft();
-			playertransform = Instantiate (player, new Vector3 (x, 0, -y), Quaternion.identity);
-			Debug.Log("Left");
-			return;
-
-		}
+		//StartDirection((int)starttransform.position.x,-(int)starttransform.position.z);
 	}
 	public void populateIce(){
 		iceTiles.Clear();
-		Debug.Log(totaldimension);
+//		Debug.Log(totaldimension);
 		for(int i = 0; i<totaldimension; i++){
 			for(int j = 0; j<totaldimension; j++){
 				if (tiles[i,j].type == "Ice"){
@@ -1181,8 +1282,8 @@ public class LevelBuilder : MonoBehaviour {
 				}
 			}
 		}
-		Debug.Log(iceTiles[0]);
-		Debug.Log(iceTiles[iceTiles.Count-1]);
+//		Debug.Log(iceTiles[0]);
+//		Debug.Log(iceTiles[iceTiles.Count-1]);
 	}
 	public void PlaceCreature(string creaturetype){
 

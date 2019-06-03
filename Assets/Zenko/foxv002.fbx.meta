@@ -1,132 +1,374 @@
 fileFormatVersion: 2
 guid: 633d7630744c14bbea1525a57f49e11f
-timeCreated: 1556651621
-licenseType: Free
 ModelImporter:
-  serializedVersion: 22
-  fileIDToRecycleName:
-    100000: fox_head_base
-    100002: fox_jaw_base
-    100004: fox_jaw_mid
-    100006: fox_l_back_leg_base
-    100008: fox_l_back_leg_end
-    100010: fox_l_back_leg_foot
-    100012: fox_l_back_leg_knee
-    100014: fox_l_back_leg_mid
-    100016: fox_l_ear_base
-    100018: fox_l_ear_mid
-    100020: fox_l_ear_top
-    100022: fox_l_eye
-    100024: fox_l_frnt_leg_end
-    100026: fox_l_frnt_leg_fjoint
-    100028: fox_l_frnt_leg_foot
-    100030: fox_l_frnt_leg_knee
-    100032: fox_l_frnt_leg_shoulder
-    100034: fox_l_whisker_base
-    100036: fox_l_whisker_mid
-    100038: fox_neck_base
-    100040: fox_r_back_leg_base
-    100042: fox_r_back_leg_end
-    100044: fox_r_back_leg_foot
-    100046: fox_r_back_leg_knee
-    100048: fox_r_back_leg_mid
-    100050: fox_r_ear_base
-    100052: fox_r_ear_mid
-    100054: fox_r_ear_top
-    100056: fox_r_eye
-    100058: fox_r_frnt_leg_end
-    100060: fox_r_frnt_leg_fjoint
-    100062: fox_r_frnt_leg_foot
-    100064: fox_r_frnt_leg_knee
-    100066: fox_r_frnt_leg_shoulder
-    100068: fox_r_whisker_base
-    100070: fox_r_whisker_mid
-    100072: fox_spine_01
-    100074: fox_spine_02
-    100076: fox_spine_03
-    100078: fox_spine_04
-    100080: fox_spine_base
-    100082: fox_tail_01
-    100084: fox_tail_02
-    100086: fox_tail_03
-    100088: fox_tail_04
-    100090: fox_tail_05
-    100092: fox_tail_06
-    100094: fox_tail_base
-    100096: //RootNode
-    100098: pCube8
-    100100: pSphere2
-    100102: transform3
-    100104: transform6
-    100106: transform7
-    400000: fox_head_base
-    400002: fox_jaw_base
-    400004: fox_jaw_mid
-    400006: fox_l_back_leg_base
-    400008: fox_l_back_leg_end
-    400010: fox_l_back_leg_foot
-    400012: fox_l_back_leg_knee
-    400014: fox_l_back_leg_mid
-    400016: fox_l_ear_base
-    400018: fox_l_ear_mid
-    400020: fox_l_ear_top
-    400022: fox_l_eye
-    400024: fox_l_frnt_leg_end
-    400026: fox_l_frnt_leg_fjoint
-    400028: fox_l_frnt_leg_foot
-    400030: fox_l_frnt_leg_knee
-    400032: fox_l_frnt_leg_shoulder
-    400034: fox_l_whisker_base
-    400036: fox_l_whisker_mid
-    400038: fox_neck_base
-    400040: fox_r_back_leg_base
-    400042: fox_r_back_leg_end
-    400044: fox_r_back_leg_foot
-    400046: fox_r_back_leg_knee
-    400048: fox_r_back_leg_mid
-    400050: fox_r_ear_base
-    400052: fox_r_ear_mid
-    400054: fox_r_ear_top
-    400056: fox_r_eye
-    400058: fox_r_frnt_leg_end
-    400060: fox_r_frnt_leg_fjoint
-    400062: fox_r_frnt_leg_foot
-    400064: fox_r_frnt_leg_knee
-    400066: fox_r_frnt_leg_shoulder
-    400068: fox_r_whisker_base
-    400070: fox_r_whisker_mid
-    400072: fox_spine_01
-    400074: fox_spine_02
-    400076: fox_spine_03
-    400078: fox_spine_04
-    400080: fox_spine_base
-    400082: fox_tail_01
-    400084: fox_tail_02
-    400086: fox_tail_03
-    400088: fox_tail_04
-    400090: fox_tail_05
-    400092: fox_tail_06
-    400094: fox_tail_base
-    400096: //RootNode
-    400098: pCube8
-    400100: pSphere2
-    400102: transform3
-    400104: transform6
-    400106: transform7
-    4300000: pCube8
-    4300002: pSphere2
-    7400000: Breathe
-    7400002: R Head Tilt
-    7400004: L Head Tilt
-    7400006: Tail Play
-    7400008: Sliding
-    7400010: Fast Sliding
-    7400012: Fall Death
-    7400014: Flower Jump
-    7400016: Stop
-    9500000: //RootNode
-    13700000: pCube8
-    13700002: pSphere2
+  serializedVersion: 25
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: fox_head_base
+  - first:
+      1: 100002
+    second: fox_jaw_base
+  - first:
+      1: 100004
+    second: fox_jaw_mid
+  - first:
+      1: 100006
+    second: fox_l_back_leg_base
+  - first:
+      1: 100008
+    second: fox_l_back_leg_end
+  - first:
+      1: 100010
+    second: fox_l_back_leg_foot
+  - first:
+      1: 100012
+    second: fox_l_back_leg_knee
+  - first:
+      1: 100014
+    second: fox_l_back_leg_mid
+  - first:
+      1: 100016
+    second: fox_l_ear_base
+  - first:
+      1: 100018
+    second: fox_l_ear_mid
+  - first:
+      1: 100020
+    second: fox_l_ear_top
+  - first:
+      1: 100022
+    second: fox_l_eye
+  - first:
+      1: 100024
+    second: fox_l_frnt_leg_end
+  - first:
+      1: 100026
+    second: fox_l_frnt_leg_fjoint
+  - first:
+      1: 100028
+    second: fox_l_frnt_leg_foot
+  - first:
+      1: 100030
+    second: fox_l_frnt_leg_knee
+  - first:
+      1: 100032
+    second: fox_l_frnt_leg_shoulder
+  - first:
+      1: 100034
+    second: fox_l_whisker_base
+  - first:
+      1: 100036
+    second: fox_l_whisker_mid
+  - first:
+      1: 100038
+    second: fox_neck_base
+  - first:
+      1: 100040
+    second: fox_r_back_leg_base
+  - first:
+      1: 100042
+    second: fox_r_back_leg_end
+  - first:
+      1: 100044
+    second: fox_r_back_leg_foot
+  - first:
+      1: 100046
+    second: fox_r_back_leg_knee
+  - first:
+      1: 100048
+    second: fox_r_back_leg_mid
+  - first:
+      1: 100050
+    second: fox_r_ear_base
+  - first:
+      1: 100052
+    second: fox_r_ear_mid
+  - first:
+      1: 100054
+    second: fox_r_ear_top
+  - first:
+      1: 100056
+    second: fox_r_eye
+  - first:
+      1: 100058
+    second: fox_r_frnt_leg_end
+  - first:
+      1: 100060
+    second: fox_r_frnt_leg_fjoint
+  - first:
+      1: 100062
+    second: fox_r_frnt_leg_foot
+  - first:
+      1: 100064
+    second: fox_r_frnt_leg_knee
+  - first:
+      1: 100066
+    second: fox_r_frnt_leg_shoulder
+  - first:
+      1: 100068
+    second: fox_r_whisker_base
+  - first:
+      1: 100070
+    second: fox_r_whisker_mid
+  - first:
+      1: 100072
+    second: fox_spine_01
+  - first:
+      1: 100074
+    second: fox_spine_02
+  - first:
+      1: 100076
+    second: fox_spine_03
+  - first:
+      1: 100078
+    second: fox_spine_04
+  - first:
+      1: 100080
+    second: fox_spine_base
+  - first:
+      1: 100082
+    second: fox_tail_01
+  - first:
+      1: 100084
+    second: fox_tail_02
+  - first:
+      1: 100086
+    second: fox_tail_03
+  - first:
+      1: 100088
+    second: fox_tail_04
+  - first:
+      1: 100090
+    second: fox_tail_05
+  - first:
+      1: 100092
+    second: fox_tail_06
+  - first:
+      1: 100094
+    second: fox_tail_base
+  - first:
+      1: 100096
+    second: //RootNode
+  - first:
+      1: 100098
+    second: pCube8
+  - first:
+      1: 100100
+    second: pSphere2
+  - first:
+      1: 100102
+    second: transform3
+  - first:
+      1: 100104
+    second: transform6
+  - first:
+      1: 100106
+    second: transform7
+  - first:
+      4: 400000
+    second: fox_head_base
+  - first:
+      4: 400002
+    second: fox_jaw_base
+  - first:
+      4: 400004
+    second: fox_jaw_mid
+  - first:
+      4: 400006
+    second: fox_l_back_leg_base
+  - first:
+      4: 400008
+    second: fox_l_back_leg_end
+  - first:
+      4: 400010
+    second: fox_l_back_leg_foot
+  - first:
+      4: 400012
+    second: fox_l_back_leg_knee
+  - first:
+      4: 400014
+    second: fox_l_back_leg_mid
+  - first:
+      4: 400016
+    second: fox_l_ear_base
+  - first:
+      4: 400018
+    second: fox_l_ear_mid
+  - first:
+      4: 400020
+    second: fox_l_ear_top
+  - first:
+      4: 400022
+    second: fox_l_eye
+  - first:
+      4: 400024
+    second: fox_l_frnt_leg_end
+  - first:
+      4: 400026
+    second: fox_l_frnt_leg_fjoint
+  - first:
+      4: 400028
+    second: fox_l_frnt_leg_foot
+  - first:
+      4: 400030
+    second: fox_l_frnt_leg_knee
+  - first:
+      4: 400032
+    second: fox_l_frnt_leg_shoulder
+  - first:
+      4: 400034
+    second: fox_l_whisker_base
+  - first:
+      4: 400036
+    second: fox_l_whisker_mid
+  - first:
+      4: 400038
+    second: fox_neck_base
+  - first:
+      4: 400040
+    second: fox_r_back_leg_base
+  - first:
+      4: 400042
+    second: fox_r_back_leg_end
+  - first:
+      4: 400044
+    second: fox_r_back_leg_foot
+  - first:
+      4: 400046
+    second: fox_r_back_leg_knee
+  - first:
+      4: 400048
+    second: fox_r_back_leg_mid
+  - first:
+      4: 400050
+    second: fox_r_ear_base
+  - first:
+      4: 400052
+    second: fox_r_ear_mid
+  - first:
+      4: 400054
+    second: fox_r_ear_top
+  - first:
+      4: 400056
+    second: fox_r_eye
+  - first:
+      4: 400058
+    second: fox_r_frnt_leg_end
+  - first:
+      4: 400060
+    second: fox_r_frnt_leg_fjoint
+  - first:
+      4: 400062
+    second: fox_r_frnt_leg_foot
+  - first:
+      4: 400064
+    second: fox_r_frnt_leg_knee
+  - first:
+      4: 400066
+    second: fox_r_frnt_leg_shoulder
+  - first:
+      4: 400068
+    second: fox_r_whisker_base
+  - first:
+      4: 400070
+    second: fox_r_whisker_mid
+  - first:
+      4: 400072
+    second: fox_spine_01
+  - first:
+      4: 400074
+    second: fox_spine_02
+  - first:
+      4: 400076
+    second: fox_spine_03
+  - first:
+      4: 400078
+    second: fox_spine_04
+  - first:
+      4: 400080
+    second: fox_spine_base
+  - first:
+      4: 400082
+    second: fox_tail_01
+  - first:
+      4: 400084
+    second: fox_tail_02
+  - first:
+      4: 400086
+    second: fox_tail_03
+  - first:
+      4: 400088
+    second: fox_tail_04
+  - first:
+      4: 400090
+    second: fox_tail_05
+  - first:
+      4: 400092
+    second: fox_tail_06
+  - first:
+      4: 400094
+    second: fox_tail_base
+  - first:
+      4: 400096
+    second: //RootNode
+  - first:
+      4: 400098
+    second: pCube8
+  - first:
+      4: 400100
+    second: pSphere2
+  - first:
+      4: 400102
+    second: transform3
+  - first:
+      4: 400104
+    second: transform6
+  - first:
+      4: 400106
+    second: transform7
+  - first:
+      43: 4300000
+    second: pCube8
+  - first:
+      43: 4300002
+    second: pSphere2
+  - first:
+      74: 7400000
+    second: Breathe
+  - first:
+      74: 7400002
+    second: R Head Tilt
+  - first:
+      74: 7400004
+    second: L Head Tilt
+  - first:
+      74: 7400006
+    second: Tail Play
+  - first:
+      74: 7400008
+    second: Sliding
+  - first:
+      74: 7400010
+    second: Fast Sliding
+  - first:
+      74: 7400012
+    second: Fall Death
+  - first:
+      74: 7400014
+    second: Flower Jump
+  - first:
+      74: 7400016
+    second: Stop
+  - first:
+      95: 9500000
+    second: //RootNode
+  - first:
+      137: 13700000
+    second: pCube8
+  - first:
+      137: 13700002
+    second: pSphere2
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -151,6 +393,7 @@ ModelImporter:
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
+    importConstraints: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
@@ -162,15 +405,16 @@ ModelImporter:
     - serializedVersion: 16
       name: Breathe
       takeName: Take 001
-      firstFrame: 1
-      lastFrame: 29
+      internalID: 7400000
+      firstFrame: 2
+      lastFrame: 29.5
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -190,6 +434,7 @@ ModelImporter:
     - serializedVersion: 16
       name: R Head Tilt
       takeName: Take 001
+      internalID: 7400002
       firstFrame: 120
       lastFrame: 155
       wrapMode: 0
@@ -218,6 +463,7 @@ ModelImporter:
     - serializedVersion: 16
       name: L Head Tilt
       takeName: Take 001
+      internalID: 7400004
       firstFrame: 160
       lastFrame: 195
       wrapMode: 0
@@ -246,6 +492,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Tail Play
       takeName: Take 001
+      internalID: 7400006
       firstFrame: 200
       lastFrame: 230
       wrapMode: 0
@@ -254,7 +501,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -274,7 +521,8 @@ ModelImporter:
     - serializedVersion: 16
       name: Sliding
       takeName: Take 001
-      firstFrame: 31
+      internalID: 7400008
+      firstFrame: 32
       lastFrame: 45
       wrapMode: 0
       orientationOffsetY: 0
@@ -282,7 +530,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -302,7 +550,8 @@ ModelImporter:
     - serializedVersion: 16
       name: Fast Sliding
       takeName: Take 001
-      firstFrame: 71
+      internalID: 7400010
+      firstFrame: 72
       lastFrame: 89
       wrapMode: 0
       orientationOffsetY: 0
@@ -310,7 +559,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -330,6 +579,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Fall Death
       takeName: Take 001
+      internalID: 7400012
       firstFrame: 105
       lastFrame: 115
       wrapMode: 0
@@ -358,6 +608,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Flower Jump
       takeName: Take 001
+      internalID: 7400014
       firstFrame: 51
       lastFrame: 65
       wrapMode: 0
@@ -386,6 +637,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Stop
       takeName: Take 001
+      internalID: 7400016
       firstFrame: 91
       lastFrame: 100
       wrapMode: 0
@@ -417,6 +669,7 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
+    useSRGBMaterialColor: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
@@ -424,9 +677,14 @@ ModelImporter:
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
@@ -437,10 +695,14 @@ ModelImporter:
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human: []
     skeleton: []
     armTwist: 0.5
@@ -450,8 +712,8 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: 
-    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1

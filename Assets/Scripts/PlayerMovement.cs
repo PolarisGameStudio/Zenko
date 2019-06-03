@@ -34,6 +34,7 @@ public class PlayerMovement : MonoBehaviour {
 	Color fragilered = new Color(253/255f,65/255f,65/255f,255/255f);
 	ProgressBar TG;
 	string type;
+	int tilenumber;
 	//public KeySimulator mykeysimulator;
 	// Use this for initialization
 	void Start () {
@@ -72,7 +73,7 @@ public class PlayerMovement : MonoBehaviour {
 			this.transform.GetChild(3).GetComponent<Animator>().SetInteger("Phase", 0);
 
 		}
-		if(!canmove && nextaction != "Goal_Action"){
+		if(!canmove && !GoalBehaviour.goaling){
 			//Debug.Log("SETTING");
 			this.transform.GetChild(3).GetComponent<Animator>().SetInteger("Phase", 1);
 		}
@@ -210,12 +211,14 @@ public class PlayerMovement : MonoBehaviour {
 			if (canmove == true) {
 				firstmove = true;
 			}
+			tilenumber = 0;
 			while (canmove == true) {
 				character_direction = "Up";
 				this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0,90,0));
 				tiletotest += Vector3.forward;
 				FindTileTag ();
 				ActOnTile ();
+				tilenumber++;
 			}
 			//mykeysimulator.W = false;
 		}
@@ -224,12 +227,14 @@ public class PlayerMovement : MonoBehaviour {
 			if (canmove == true) {
 				firstmove = true;
 			}
+			tilenumber = 0;
 			while (canmove == true) {	
 				character_direction = "Left";
 				this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0,0,0));
 				tiletotest += Vector3.left;
 				FindTileTag ();
 				ActOnTile ();
+				tilenumber++;
 //				Debug.Log(canmove);
 
 			}
@@ -240,12 +245,14 @@ public class PlayerMovement : MonoBehaviour {
 			if (canmove == true) {
 				firstmove = true;
 			}
+			tilenumber =0;
 			while (canmove == true) {
 				character_direction = "Down";
 				this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0,270,0));
 				tiletotest += Vector3.back;
 				FindTileTag ();
 				ActOnTile ();
+				tilenumber++;
 			}
 			//mykeysimulator.S = false;
 		}
@@ -254,12 +261,14 @@ public class PlayerMovement : MonoBehaviour {
 			if (canmove == true) {
 				firstmove = true;
 			}
+			tilenumber = 0;
 			while (canmove == true) {
 				character_direction = "Right";
 				this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0,180,0));
 				tiletotest += Vector3.right;
 				FindTileTag ();
 				ActOnTile ();
+				tilenumber++;
 			}
 			//mykeysimulator.D = false;
 		}
@@ -430,6 +439,12 @@ public class PlayerMovement : MonoBehaviour {
 					Debug.Log("0 turns");
 					canmove = false;
 				} else {
+					if(tilenumber == 0){
+					GoalBehaviour.goaling = true;
+					this.transform.GetChild(3).GetComponent<Animator>().SetInteger("Phase", 2);
+					speed = 3;
+					}
+
 					Count ();
 					currenttile = tiletotest;
 					canmove = false;

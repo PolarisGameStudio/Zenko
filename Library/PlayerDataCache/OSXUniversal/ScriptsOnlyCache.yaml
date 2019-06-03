@@ -16,6 +16,7 @@ ScriptsOnlyBuild:
     - LevelBuilder
     - LevelManager
     - LevelMenu
+    - LevelOrganizer
     - LevelSaver
     - LevelStorer
     - LightController
@@ -173,13 +174,15 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10750}
     - Class: 114
-      Script: {instanceID: 10766}
+      Script: {instanceID: 10764}
     - Class: 114
-      Script: {instanceID: 11060}
+      Script: {instanceID: 10768}
     - Class: 114
-      Script: {instanceID: 11090}
+      Script: {instanceID: 11062}
     - Class: 114
-      Script: {instanceID: 11106}
+      Script: {instanceID: 11092}
+    - Class: 114
+      Script: {instanceID: 11108}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -314,7 +317,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10750}
     - Class: 114
-      Script: {instanceID: 10766}
+      Script: {instanceID: 10768}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -1260,7 +1263,7 @@ ScriptsOnlyBuild:
     className: ParticleLights
   - hash:
       serializedVersion: 2
-      Hash: 1ced055dac47ca2c6b23714d0d759909
+      Hash: b264fa212e4cce27054b2055b8101338
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Dragger
@@ -1488,6 +1491,12 @@ ScriptsOnlyBuild:
     className: LevelManager
   - hash:
       serializedVersion: 2
+      Hash: 2f9a2191846d38828e294dc6e169fcc6
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: LevelOrganizer
+  - hash:
+      serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
@@ -1634,4 +1643,4 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/WorldSelect.unity
   - Assets/Level.unity
-  playerPath: /Users/bernardolimonvillarreal/Desktop/ZenkoMacMay27/ZenkoMacMay27.app
+  playerPath: /Users/bernardolimonvillarreal/Desktop/ZenkoMacMay31/ZenkoMacMay31.app

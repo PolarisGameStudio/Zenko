@@ -122,6 +122,7 @@
      <Compile Include="Assets\MouseEventsGenerator.cs" />
      <Compile Include="Assets\NokobotUIPack\Demo\Scripts\GoToNextScene.cs" />
      <Compile Include="Assets\PieceHolders.cs" />
+     <Compile Include="Assets\PlayerFollower.cs" />
      <Compile Include="Assets\ProgressBar.cs" />
      <Compile Include="Assets\Scripts\AssignCamera.cs" />
      <Compile Include="Assets\Scripts\AssignCanvasAndButton.cs" />
@@ -216,6 +217,7 @@
      <None Include="Assets\Icarus\Icarus_Animation.txt" />
      <None Include="Assets\StreamingAssets\Level46.txt" />
      <None Include="Assets\StreamingAssets\AdventureLevels.txt" />
+     <None Include="Assets\StreamingAssets\notboring4.txt" />
      <None Include="Assets\StreamingAssets\Level50.txt" />
      <None Include="Assets\StreamingAssets\Ch4_notboring.txt" />
      <None Include="Assets\StreamingAssets\Level-6.txt" />
@@ -387,6 +389,12 @@
  <Reference Include="com.unity.multiplayer-hlapi.Editor">
  <HintPath>/Users/bernardolimonvillarreal/Documents/GitHub/Zenko/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Editor.dll</HintPath>
  </Reference>
+ <Reference Include="Unity.RenderPipelines.Core.Editor">
+ <HintPath>/Users/bernardolimonvillarreal/Documents/GitHub/Zenko/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.RenderPipelines.Core.Runtime">
+ <HintPath>/Users/bernardolimonvillarreal/Documents/GitHub/Zenko/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Runtime.dll</HintPath>
+ </Reference>
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>/Users/bernardolimonvillarreal/Documents/GitHub/Zenko/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
@@ -405,11 +413,20 @@
  <Reference Include="UnityEngine.XR.LegacyInputHelpers">
  <HintPath>/Users/bernardolimonvillarreal/Documents/GitHub/Zenko/Library/ScriptAssemblies/UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
  </Reference>
+ <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
+ <HintPath>/Users/bernardolimonvillarreal/Documents/GitHub/Zenko/Library/ScriptAssemblies/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEditor.SpatialTracking">
  <HintPath>/Users/bernardolimonvillarreal/Documents/GitHub/Zenko/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.SpatialTracking">
  <HintPath>/Users/bernardolimonvillarreal/Documents/GitHub/Zenko/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.ShaderGraph.Editor">
+ <HintPath>/Users/bernardolimonvillarreal/Documents/GitHub/Zenko/Library/ScriptAssemblies/Unity.ShaderGraph.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
+ <HintPath>/Users/bernardolimonvillarreal/Documents/GitHub/Zenko/Library/ScriptAssemblies/Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro">
  <HintPath>/Users/bernardolimonvillarreal/Documents/GitHub/Zenko/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>

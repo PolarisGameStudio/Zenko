@@ -18,15 +18,21 @@ public class GoalBehaviour : MonoBehaviour {
 	public static bool movingtowards;
 	public static bool movingaway;
 	public static int lastphase;
+	public static bool goaling;
 	// Use this for initialization
 	void Start () {
 		myanim = GetComponentInChildren<Animator>();
 		readytomove = false;
 		isstatic =true;
+		goaling = false;
 //		Debug.Log(transform.rotation.y);
 //		Debug.Log(newx);
 	}
-	
+	public static void restartGoal(){
+		readytomove = false;
+		isstatic =true;
+		goaling = false;
+	}
 	// Update is called once per frame
 	void Update () {
 		//if(myplayer.GetComponent<PlayerMovement>().currenttile != myplayer.transform.position){
@@ -100,6 +106,7 @@ public class GoalBehaviour : MonoBehaviour {
 							//Debug.Log(newy);
 							if(-transform.position.z<newy){
 							//	Debug.Log("Doing this");
+								goaling = true;
 								myanim.SetInteger("Phase",2);
 								AnimateFoxGoal();
 								lastphase = 2;								
@@ -119,6 +126,8 @@ public class GoalBehaviour : MonoBehaviour {
 				if(newy>oldy){//moving down
 					if(xdif<.9){
 						if(ydif<1.5){
+							goaling = true;
+
 							myanim.SetInteger("Phase",2);
 							AnimateFoxGoal();
 							lastphase = 2;
@@ -170,6 +179,7 @@ public class GoalBehaviour : MonoBehaviour {
 				if(newx>oldx){//moving right
 					if(ydif<.9){
 						if(xdif<1.5){
+							goaling = true;
 							myanim.SetInteger("Phase",2);
 							AnimateFoxGoal();
 							lastphase = 2;
@@ -187,6 +197,7 @@ public class GoalBehaviour : MonoBehaviour {
 				if(newx<oldx){//moving down
 					if(ydif<.9){
 						if(xdif<1.5){
+							goaling = true;
 							myanim.SetInteger("Phase",2);
 							AnimateFoxGoal();
 							lastphase = 2;
