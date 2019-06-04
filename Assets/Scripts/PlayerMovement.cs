@@ -35,10 +35,12 @@ public class PlayerMovement : MonoBehaviour {
 	ProgressBar TG;
 	string type;
 	int tilenumber;
+	public PlayerAnimation animationController;
 	//public KeySimulator mykeysimulator;
 	// Use this for initialization
 	void Start () {
 		//current tile works as a target to move to
+		animationController = GetComponent<PlayerAnimation>();
 		startingposition = transform.position;
 		currenttile = transform.position;
 		cantakeinput = true;
@@ -93,6 +95,9 @@ public class PlayerMovement : MonoBehaviour {
 		}
 //		Debug.Log (TurnBehaviour.turn + "BEHAV");
 		if (transform.position != startingposition && TurnBehaviour.turn == 0) {
+			foreach (Dragger piece in PieceHolders.placedpieces){
+				piece.gameObject.transform.GetComponent<BoxCollider>().enabled = false;
+			}
 			TurnBehaviour.turn = 1;
 		}
 		if (TurnBehaviour.turn == 1 && transform.position == startingposition) {
@@ -442,6 +447,7 @@ public class PlayerMovement : MonoBehaviour {
 					if(tilenumber == 0){
 					GoalBehaviour.goaling = true;
 					this.transform.GetChild(3).GetComponent<Animator>().SetInteger("Phase", 2);
+					StartCoroutine(animationController.Disappear(.4f));
 					speed = 3;
 					}
 

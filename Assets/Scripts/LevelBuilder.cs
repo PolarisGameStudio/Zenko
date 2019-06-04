@@ -716,7 +716,8 @@ public class LevelBuilder : MonoBehaviour {
 	public void InstantiateSnow(Vector2 xy){
 		Instantiate (environment_ice, new Vector3 (xy.x, 0, xy.y), Quaternion.identity);
 		int randomizer = Random.Range(0,10);
-		float snowrandom = Random.Range(0f,.1f);
+		float snowrandom = Random.Range(0f,.06f);
+		Debug.Log(snowrandom);	
 		//if(randomizer == 2){
 		Instantiate (floor_snow, new Vector3 (xy.x, -snowrandom, xy.y), Quaternion.identity);		
 	}
@@ -930,7 +931,7 @@ public class LevelBuilder : MonoBehaviour {
 				starttransform = Instantiate (floor_start, new Vector3 (x, 0, -y), Quaternion.identity);
 				//GameObject p = player;
 				//Instantiate (player, new Vector3 (x, 0, -y), Quaternion.identity);
-				mysnowh = Random.Range(0f,0.12f);
+				mysnowh = Random.Range(0f,0.08f);
 				//Instantiate (floor_snow, new Vector3 (x, -mysnowh, -y), Quaternion.identity);
 
 
@@ -972,7 +973,7 @@ public class LevelBuilder : MonoBehaviour {
 				tiles[x,y].type = "Goal";
 				tiles[x,y].isTaken = true;
 				tiles[x,y].tileObj = goaltransform.gameObject;
-				mysnowh = Random.Range(0f,0.12f);
+				mysnowh = Random.Range(0f,0.09f);
 				//Instantiate (floor_snow, new Vector3 (x, -mysnowh, -y), Quaternion.identity);
 
 				break;
@@ -982,7 +983,7 @@ public class LevelBuilder : MonoBehaviour {
 			case sfloor_wall:
 				//Transform instantiator = floor_wall;
 				int numerator = Random.Range(0,6);
-				mysnowh = Random.Range(0.05f,0.12f);
+				mysnowh = Random.Range(0.05f,0.10f);
 				Instantiate (floor_snow, new Vector3 (x, -mysnowh, -y), Quaternion.identity);
 				Instantiate (floor_rocks[numerator], new Vector3 (x, 0, -y), Quaternion.identity);
 				//Instantiate (floor_wall, new Vector3 (x, 0, -y), Quaternion.identity);
@@ -1251,7 +1252,9 @@ public class LevelBuilder : MonoBehaviour {
 		GoalBehaviour.goaling = false;
 		Debug.Log(goaltransform);
 		Debug.Log(goaltransform.gameObject.GetComponentInChildren<Animator>().GetInteger("Phase"));
-
+		foreach (Dragger piece in PieceHolders.placedpieces){
+			piece.gameObject.GetComponent<BoxCollider>().enabled = true;
+		}
 
 
 	}

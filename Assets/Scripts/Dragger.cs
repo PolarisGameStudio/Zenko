@@ -272,15 +272,17 @@ public class Dragger : MonoBehaviour {
 			lastgoodtile = PlaneBehavior.highlightedTile;	
 			particle.transform.position = new Vector3(lastgoodtile.transform.position.x, particle.transform.position.y, lastgoodtile.transform.position.z);//change this
 		
-			particle.transform.GetChild(0).GetComponent<Renderer>().enabled = true;
-			particle.transform.GetChild(1).GetComponent<Renderer>().enabled = false;
-			particle.transform.GetChild(2).GetComponent<Renderer>().enabled = false;
+			// particle.transform.GetChild(0).GetComponent<Renderer>().enabled = true;
+			// particle.transform.GetChild(1).GetComponent<Renderer>().enabled = false;
+			// particle.transform.GetChild(2).GetComponent<Renderer>().enabled = false;
+			particle.transform.GetChild(0).gameObject.SetActive(true);
 		}
 		else{
 			
-			particle.transform.GetChild(0).GetComponent<Renderer>().enabled = true;
-			particle.transform.GetChild(1).GetComponent<Renderer>().enabled = false;
-			particle.transform.GetChild(2).GetComponent<Renderer>().enabled = false;
+			// particle.transform.GetChild(0).GetComponent<Renderer>().enabled = true;
+			// particle.transform.GetChild(1).GetComponent<Renderer>().enabled = false;
+			// particle.transform.GetChild(2).GetComponent<Renderer>().enabled = false;
+			particle.transform.GetChild(0).gameObject.SetActive(true);
 		}
 	}
 	else{
@@ -289,9 +291,10 @@ public class Dragger : MonoBehaviour {
 
 		}
 		isinboard = false;
-		particle.transform.GetChild(0).GetComponent<Renderer>().enabled = true;
-		particle.transform.GetChild(1).GetComponent<Renderer>().enabled = false;
-		particle.transform.GetChild(2).GetComponent<Renderer>().enabled = false;
+		// particle.transform.GetChild(0).GetComponent<Renderer>().enabled = true;
+		// particle.transform.GetChild(1).GetComponent<Renderer>().enabled = false;
+		// particle.transform.GetChild(2).GetComponent<Renderer>().enabled = false;
+		particle.transform.GetChild(0).gameObject.SetActive(true);;
 		if(pasttile!= null){
 			pasttile.GetComponent<MouseOverer>().Leave();
 
@@ -315,9 +318,10 @@ public class Dragger : MonoBehaviour {
   	Swiping.mydirection = "Null";
  	string pieceholdername;
  	if(particle != null){
- 		particle.transform.GetChild(0).GetComponent<Renderer>().enabled = false;
-		particle.transform.GetChild(1).GetComponent<Renderer>().enabled = false; 
-		particle.transform.GetChild(2).GetComponent<Renderer>().enabled = false; 
+ 	// 	particle.transform.GetChild(0).GetComponent<Renderer>().enabled = false;
+		// particle.transform.GetChild(1).GetComponent<Renderer>().enabled = false; 
+		// particle.transform.GetChild(2).GetComponent<Renderer>().enabled = false; 
+		particle.transform.GetChild(0).gameObject.SetActive(false);
  	}
 
  	toggleColliders();

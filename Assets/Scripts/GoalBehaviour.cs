@@ -19,6 +19,7 @@ public class GoalBehaviour : MonoBehaviour {
 	public static bool movingaway;
 	public static int lastphase;
 	public static bool goaling;
+
 	// Use this for initialization
 	void Start () {
 		myanim = GetComponentInChildren<Animator>();
@@ -38,6 +39,7 @@ public class GoalBehaviour : MonoBehaviour {
 		//if(myplayer.GetComponent<PlayerMovement>().currenttile != myplayer.transform.position){
 		//	Debug.Log("Moving");
 		//}
+
 		if(LevelBuilder.playertransform!= null){
 		newx = LevelBuilder.playertransform.position.x;
 		newy = -LevelBuilder.playertransform.position.z;
@@ -231,8 +233,10 @@ public class GoalBehaviour : MonoBehaviour {
 
 	}
 	void AnimateFoxGoal(){
+		StartCoroutine(LevelBuilder.playertransform.GetComponent<PlayerAnimation>().Disappear(.8f));
 		LevelBuilder.playertransform.GetComponent<PlayerMovement>().speed = 3;
 		LevelBuilder.playertransform.GetChild(3).GetComponent<Animator>().SetInteger("Phase", 2);
+		//LevelBuilder.playertransform.GetComponent<PlayerAnimation>().Disappear(1);
 	}
 
 
