@@ -57,6 +57,7 @@ public class LevelBuilder : MonoBehaviour {
 
 	public static int playerInitialRotation;
 
+	public static bool resetting;
 
 	//public static List<Transform> piecetiles = new List<Transform>();
 
@@ -298,6 +299,7 @@ public class LevelBuilder : MonoBehaviour {
 
 		}
 		ProgressBar.InitializeProgressBar(LevelStorer.efficientturns);
+		playertransform.gameObject.GetComponent<PlayerMovement>().canmove = true;
 		//PopulationManager.readytobrain = true;
 	}
 	public void drawPotd(int num){
@@ -354,6 +356,8 @@ public class LevelBuilder : MonoBehaviour {
 
 		}
 		ProgressBar.InitializeProgressBar(LevelStorer.efficientturns);
+		playertransform.gameObject.GetComponent<PlayerMovement>().canmove = true;
+
 	}
 	string[][] readAdventure(int place){
 		place = place-1;
@@ -735,7 +739,7 @@ public class LevelBuilder : MonoBehaviour {
 		Debug.Log(myx + " " + myy);
 		Collider[] colliders = Physics.OverlapSphere(new Vector3(myx,0,-(myy+1)), .5f);
 		foreach (Collider component in colliders) {
-			if (component.tag == "Tile"){
+			if (component.tag == "Tile" || component.tag == "Fragile"){
 				if(tiles[myx,myy+1].type != "Wall" && tiles[myx,myy+1].type != "Goal"){
 					Debug.Log("Down");
 					playertransform.eulerAngles = new Vector3(0f,270f,0f);
@@ -746,7 +750,7 @@ public class LevelBuilder : MonoBehaviour {
 		}
 		colliders = Physics.OverlapSphere(new Vector3(myx,0,-(myy-1)), .5f);
 		foreach (Collider component in colliders) {
-			if (component.tag == "Tile"){
+			if (component.tag == "Tile"|| component.tag == "Fragile"){
 				if(tiles[myx,myy-1].type != "Wall" && tiles[myx,myy-1].type != "Goal"){
 					Debug.Log("Up");
 					playertransform.eulerAngles = new Vector3(0f,90f,0f);
@@ -757,7 +761,7 @@ public class LevelBuilder : MonoBehaviour {
 		}
 		colliders = Physics.OverlapSphere(new Vector3(myx+1,0,-myy), .5f);
 		foreach (Collider component in colliders) {
-			if (component.tag == "Tile"){
+			if (component.tag == "Tile"|| component.tag == "Fragile"){
 				if(tiles[myx+1,myy].type != "Wall"  && tiles[myx+1,myy].type != "Goal"){
 					Debug.Log("Right");
 					playertransform.eulerAngles = new Vector3(0f,180f,0f);
@@ -768,7 +772,7 @@ public class LevelBuilder : MonoBehaviour {
 		}
 		colliders = Physics.OverlapSphere(new Vector3(myx-1,0,-myy), .5f);
 		foreach (Collider component in colliders) {
-			if (component.tag == "Tile"){
+			if (component.tag == "Tile"|| component.tag == "Fragile"){
 				if(tiles[myx-1,myy].type != "Wall" && tiles[myx-1,myy].type != "Goal"){
 					playertransform.eulerAngles = new Vector3(0f,0f,0f);
 					playerInitialRotation = 0;
@@ -787,7 +791,7 @@ public class LevelBuilder : MonoBehaviour {
 		Debug.Log(myx + " " + myy);
 		Collider[] colliders = Physics.OverlapSphere(new Vector3(myx,0,-(myy+1)), .5f);
 			foreach (Collider component in colliders) {
-				if (component.tag == "Tile"){
+				if (component.tag == "Tile"|| component.tag == "Fragile"){
 					if(tiles[myx,myy+1].type != "Wall" && tiles[myx,myy+1].type != "Start"){
 						Debug.Log("Down");
 						goaltransform.eulerAngles = new Vector3(0f,180f,0f);
@@ -798,7 +802,7 @@ public class LevelBuilder : MonoBehaviour {
 			}
 		colliders = Physics.OverlapSphere(new Vector3(myx,0,-(myy-1)), .5f);
 			foreach (Collider component in colliders) {
-				if (component.tag == "Tile"){
+				if (component.tag == "Tile"|| component.tag == "Fragile"){
 					if(tiles[myx,myy-1].type != "Wall" && tiles[myx,myy-1].type != "Start"){
 						Debug.Log("Up");
 						goaltransform.eulerAngles = new Vector3(0f,0f,0f);
@@ -808,7 +812,7 @@ public class LevelBuilder : MonoBehaviour {
 			}
 		colliders = Physics.OverlapSphere(new Vector3(myx+1,0,-myy), .5f);
 			foreach (Collider component in colliders) {
-				if (component.tag == "Tile"){
+				if (component.tag == "Tile"|| component.tag == "Fragile"){
 					if(tiles[myx+1,myy].type != "Wall" && tiles[myx+1,myy].type != "Start"){
 						Debug.Log("Right");
 						goaltransform.eulerAngles = new Vector3(0f,90f,0f);
@@ -819,7 +823,7 @@ public class LevelBuilder : MonoBehaviour {
 			}
 		colliders = Physics.OverlapSphere(new Vector3(myx-1,0,-myy), .5f);
 			foreach (Collider component in colliders) {
-				if (component.tag == "Tile"){
+				if (component.tag == "Tile"|| component.tag == "Fragile"){
 					if(tiles[myx-1,myy].type != "Wall" && tiles[myx-1,myy].type != "Start"){
 						goaltransform.eulerAngles = new Vector3(0f,270,0f);
 						GoalBehaviour.isvertical = false;
@@ -1238,38 +1242,59 @@ public class LevelBuilder : MonoBehaviour {
 		}
 	}
 	public void ResetPlayer(){
-		if(playertransform != null){
-		Destroy(playertransform.gameObject)/*.SetActive(false)*/;
 
-		}
-		if(starttransform != null){
-		Destroy(starttransform.gameObject)/*.SetActive(false)*/;
+		if(!resetting){
+			GoalBehaviour.active = false;
+			resetting = true;
+			if(playertransform != null){
+				StartCoroutine(DestroyPlayer(.4f, playertransform));
+				//Destroy(playertransform.gameObject)/*.SetActive(false)*/;
 
+			}
+			if(starttransform != null){
+				Destroy(starttransform.gameObject)/*.SetActive(false)*/;
+				SpawnStart(startpos);
+			}
+			goaltransform.gameObject.GetComponentInChildren<Animator>().SetInteger("Phase",0);
+			GoalBehaviour.restartGoal();
+			GoalBehaviour.goaling = false;
+			Debug.Log(goaltransform);
+			Debug.Log(goaltransform.gameObject.GetComponentInChildren<Animator>().GetInteger("Phase"));
+			foreach (Dragger piece in PieceHolders.placedpieces){
+				piece.gameObject.GetComponent<BoxCollider>().enabled = true;
+			}		
 		}
-		SpawnPlayer(startpos);
-		goaltransform.gameObject.GetComponentInChildren<Animator>().SetInteger("Phase",0);
-		GoalBehaviour.restartGoal();
-		GoalBehaviour.goaling = false;
-		Debug.Log(goaltransform);
-		Debug.Log(goaltransform.gameObject.GetComponentInChildren<Animator>().GetInteger("Phase"));
-		foreach (Dragger piece in PieceHolders.placedpieces){
-			piece.gameObject.GetComponent<BoxCollider>().enabled = true;
+	}
+
+	public IEnumerator DestroyPlayer(float fadetime, Transform ptransform){
+		float lowValue = -1f;
+		float highValue = 1f;
+		for(float t = 0.0f; t<fadetime; t+= Time.deltaTime){
+			float normalizedTime = t/fadetime;
+			ptransform.gameObject.GetComponent<PlayerAnimation>().dissolveMat.SetFloat("Vector1_B5CA3B27", Mathf.Lerp(lowValue,highValue,normalizedTime));
+			yield return null;
 		}
+			ptransform.gameObject.GetComponent<PlayerAnimation>().dissolveMat.SetFloat("Vector1_B5CA3B27", highValue);
+			Destroy(playertransform.gameObject);
+			SpawnPlayer(startpos);
+			resetting = false;
+			GoalBehaviour.active = true;
 
 
 	}
-
-
+	public void SpawnStart(Vector2 thevector){
+		int x = (int)thevector.x;
+		int y = (int)thevector.y;
+		starttransform = Instantiate (floor_start, new Vector3 (x, 0, -y), Quaternion.identity);
+		tiles[x,y].type = "Start";
+		tiles[x,y].isTaken = true;		
+	}
 
 	public void SpawnPlayer(Vector2 thevector){
 		Debug.Log(starttransform);
 		Debug.Log(playertransform);
 		int x = (int)thevector.x;
 		int y = (int)thevector.y;
-		starttransform = Instantiate (floor_start, new Vector3 (x, 0, -y), Quaternion.identity);
-		tiles[x,y].type = "Start";
-		tiles[x,y].isTaken = true;
-		Debug.Log(playerInitialRotation + "rot");
 		playertransform = Instantiate (player, new Vector3 (x, 0, -y), Quaternion.Euler(new Vector3(0,0,0)));
 		playertransform.eulerAngles = new Vector3(0f,playerInitialRotation,0f);
 

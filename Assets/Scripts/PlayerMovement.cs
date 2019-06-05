@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour {
 	public GameObject tileobject;
 //	Tilehandler tilescript;
 	Vector3 tiletotest;
-	bool canmove;
+	public bool canmove;
 	GameObject tiletaker;
 	public string nextaction;
 	public bool beingdragged;
@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour {
 		startingposition = transform.position;
 		currenttile = transform.position;
 		cantakeinput = true;
-		canmove = true;
+		//canmove = true;
 		nextaction = null;
 		beingdragged = false;
 		lastFragile = null;
@@ -118,6 +118,8 @@ public class PlayerMovement : MonoBehaviour {
 
 				Debug.Log("Hole");
 				StartCoroutine(PopLose());
+				StartCoroutine(animationController.Disappear(.3f));
+
 			}
 
 			else if (nextaction == null) {
@@ -137,6 +139,8 @@ public class PlayerMovement : MonoBehaviour {
 				this.enabled=false;
 				Debug.Log("Hole");
 				StartCoroutine(PopLose());
+				StartCoroutine(animationController.Disappear(.3f));
+
 
 				//int nextlevel = LevelManager.levelnum;
 				//LevelManager.NextLevel (nextlevel);
@@ -213,6 +217,7 @@ public class PlayerMovement : MonoBehaviour {
 	void QWERTYMove(){
 		if (Input.GetKeyDown (KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow) || myswipe == "Up" /*|| mykeysimulator.W*/ ) {
 			tiletotest = currenttile;
+			Debug.Log(tiletotest);
 			if (canmove == true) {
 				firstmove = true;
 			}
@@ -295,34 +300,44 @@ public class PlayerMovement : MonoBehaviour {
 		}
 	}*/
 	void FindTileTag(){
-		Debug.Log("FINDING TAG");
+//		Debug.Log("FINDING TAG");
 	//Collider2D[] colliders = Physics2D.OverlapCircleAll(tiletotest, .1f); ///Presuming the object you are testing also has a collider 0 otherwise{
 		
 //		Debug.Log((int)tiletotest.x + "+" + -(int)tiletotest.z);
 		//Debug.Log(LevelBuilder.tiles[-2,5]);
-		tilescript = LevelBuilder.tiles[(int)tiletotest.x,-(int)tiletotest.z];
-		Debug.Log(tilescript.type);
+		//tilescript = LevelBuilder.tiles[(int)tiletotest.x,-(int)tiletotest.z];
 //		Debug.Log(tilescript.type);
-		if(tilescript == null){
-			Debug.Log("square null");
-				istiletaken = true;
-				outofmap = true;
-				Debug.Log("no collider");
-
+//		Debug.Log(tilescript.type);
+		if(inside()){
+				tilescript = LevelBuilder.tiles[(int)tiletotest.x,-(int)tiletotest.z];
+				/*
+				foreach (Collider2D component in colliders) {
+					if (component.tag == "Ground") {
+						tileobject = component.gameObject;
+						tilescript = tileobject.GetComponent<TileHandler> ();
+						istiletaken = tilescript.isTaken;
+					} */
+				//tileobject = LevelBuilder.tiles[(int)tiletotest.x, (int)tiletotest.z].tileObj;	
+				//istiletaken = LevelBuilder.tiles[(int)tiletotest.x, (int)tiletotest.z].isTaken;
+				istiletaken = tilescript.isTaken;			
 		}
 		else{
-			/*
-			foreach (Collider2D component in colliders) {
-				if (component.tag == "Ground") {
-					tileobject = component.gameObject;
-					tilescript = tileobject.GetComponent<TileHandler> ();
-					istiletaken = tilescript.isTaken;
-				} */
-			//tileobject = LevelBuilder.tiles[(int)tiletotest.x, (int)tiletotest.z].tileObj;	
-			//istiletaken = LevelBuilder.tiles[(int)tiletotest.x, (int)tiletotest.z].isTaken;
-			istiletaken = tilescript.isTaken;
-			
+				//Debug.Log("square null");
+				istiletaken = true;
+				outofmap = true;
+				//Debug.Log("no collider");
 		}
+		
+	}
+	public bool inside(){
+//		Debug.Log(tiletotest.x);
+//		Debug.Log(tiletotest.z);
+		if((int)tiletotest.x>=0 && (int)tiletotest.x <= LevelBuilder.totaldimension && 
+			-(int)tiletotest.z>=0 && -(int)tiletotest.z <= LevelBuilder.totaldimension){
+			return true;
+		}
+		else 
+		return false;
 	}
 	void Movement(){  
 		//check for input when its your turn.
@@ -341,7 +356,7 @@ public class PlayerMovement : MonoBehaviour {
 	void Count(){
 		if(firstmove == true && canmove == true){
 			if(TurnCounter.turncount == 0){
-				Debug.Log("Anim");
+//				Debug.Log("Anim");
 				LevelBuilder.starttransform.GetComponentInChildren<Animator>().SetInteger("Phase",1);
 			}
 			TurnCounter.turncount++;
@@ -427,6 +442,7 @@ public class PlayerMovement : MonoBehaviour {
 				canmove = false;
 				outofmap = false;
 			}
+
 			else if (tilescript.type == "Ice"){
 				Count ();
 				currenttile = tiletotest;				
@@ -523,14 +539,14 @@ public class PlayerMovement : MonoBehaviour {
 				Collider[] colliders = Physics.OverlapSphere(overlapV3, .5f);
 				foreach (Collider component in colliders) {
 					if (component.tag == "Fragile") {
-						Debug.Log("Fragile");
-						Debug.Log(component);
+//						Debug.Log("Fragile");
+//						Debug.Log(component);
 						//tileobject = component.gameObject;
 						//MeshRenderer tilerenderer = tileobject.GetComponentInChildren<MeshRenderer> ();
 						//tilerenderer.material.color = fragilered;
 						component.GetComponent<FragileBehaviour>().readytolava = true;
 						component.GetComponent<FragileBehaviour>().player = this.gameObject;
-						Debug.Log(component.GetComponent<FragileBehaviour>().player);	
+//						Debug.Log(component.GetComponent<FragileBehaviour>().player);	
 						//component.GetComponent<FragileProperties>().myred = fragilered;
 
 					} 
@@ -620,8 +636,24 @@ public class PlayerMovement : MonoBehaviour {
 
 	}
 	IEnumerator PopLose(){
-		yield return new WaitForSeconds(.5f);
-		LevelLostBoard.SetActive (true);
+		float fadetime = 1.5f;
+		float initpos = 0;
+		float finalpos = -4;
+		bool hasdowned = false;
+		for(float t = 0.0f; t<fadetime; t+= Time.deltaTime){
+			float normalizedTime = t/fadetime;
+			//Debug.Log(Mathf.Lerp(lowValue,highValue,normalizedTime));//kick
+			transform.position = new Vector3(transform.position.x, Mathf.Lerp(initpos,finalpos,normalizedTime), transform.position.z);
+			if(transform.position.y < -1.5f && !hasdowned && !LevelBuilder.resetting){
+				hasdowned = true;
+				LevelLostBoard.SetActive (true);
+			}
+			yield return null;
+		}
+		//Debug.Log(highValue);
+		//dissolveMat.SetFloat("Vector1_B5CA3B27", highValue);
+		//yield return new WaitForSeconds(.5f);
+		//LevelLostBoard.SetActive (true);
 	}
 
 }

@@ -820,8 +820,8 @@ public class PieceHolders : MonoBehaviour {
 				LevelBuilder.tiles[(int)target.x+1, (int)target.y].isTaken = false;	
 				LevelBuilder.tiles[(int)target.x+1, (int)target.y].isSideways = null;					
 			}		
-			else if(LevelBuilder.tiles[(int)target.x+1, (int)target.z].isSideways == type){
-				LevelBuilder.tiles[(int)target.x+1, (int)target.z].isSideways = null;
+			else if(LevelBuilder.tiles[(int)target.x+1, (int)target.y].isSideways == type){
+				LevelBuilder.tiles[(int)target.x+1, (int)target.y].isSideways = null;
 
 			}
 		}

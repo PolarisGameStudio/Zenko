@@ -244,7 +244,7 @@ public class Dragger : MonoBehaviour {
 	//Debug.Log(position.x + "" + position.z);
 	if(position.x>-1 && position.x<LevelBuilder.totaldimension && position.z<1 && position.z>-LevelBuilder.totaldimension){
 		isinboard = true;
-		Debug.Log("Doing it");
+//		Debug.Log("Doing it");
 		//Debug.Log("value of test" + LevelBuilder.tiles[2,1].isTaken);
 		if(pasttile != null){
 			pasttile.GetComponent<MouseOverer>().Leave();

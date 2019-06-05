@@ -13,7 +13,7 @@ public class PlayerAnimation : MonoBehaviour
     void Start()
     {
     	dissolveMat.SetFloat("Vector1_B5CA3B27", highValue);
-    	StartCoroutine(Appear(1));
+    	StartCoroutine(Appear(.5f));
 
     }
 
@@ -32,11 +32,11 @@ public class PlayerAnimation : MonoBehaviour
 
 		for(float t = 0.0f; t<fadetime; t+= Time.deltaTime){
 			float normalizedTime = t/fadetime;
-			Debug.Log(Mathf.Lerp(lowValue,highValue,normalizedTime));//kick
+//			Debug.Log(Mathf.Lerp(lowValue,highValue,normalizedTime));//kick
 			dissolveMat.SetFloat("Vector1_B5CA3B27", Mathf.Lerp(lowValue,highValue,normalizedTime));
 			yield return null;
 		}
-			Debug.Log(highValue);
+//			Debug.Log(highValue);
 			dissolveMat.SetFloat("Vector1_B5CA3B27", highValue);
 
 
@@ -44,11 +44,11 @@ public class PlayerAnimation : MonoBehaviour
     public IEnumerator Appear(float fadetime){
 		for(float t = 0.0f; t<fadetime; t+= Time.deltaTime){
 			float normalizedTime = t/fadetime;
-			Debug.Log(Mathf.Lerp(highValue,lowValue,normalizedTime));//kick
+//			Debug.Log(Mathf.Lerp(highValue,lowValue,normalizedTime));//kick
 			dissolveMat.SetFloat("Vector1_B5CA3B27", Mathf.Lerp(highValue,lowValue,normalizedTime));
 			yield return null;
 		}
-			Debug.Log(lowValue);
+			//Debug.Log(lowValue);
 			dissolveMat.SetFloat("Vector1_B5CA3B27", lowValue);
 
     }
