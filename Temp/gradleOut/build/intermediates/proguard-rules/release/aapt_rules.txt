@@ -1,2 +1,0 @@
-# Referenced at /Users/bernardolimonvillarreal/Documents/GitHub/Zenko/Temp/gradleOut/build/intermediates/merged_manifests/release/processReleaseManifest/merged/AndroidManifest.xml:40
--keep class com.unity3d.player.UnityPlayerActivity { <init>(...); }

@@ -1,6 +1,0 @@
-com.Zenko.BrightLightsalt.BuildConfig
-com.Zenko.BrightLightsalt.R
-com.Zenko.BrightLightsalt.R$drawable
-com.Zenko.BrightLightsalt.R$mipmap
-com.Zenko.BrightLightsalt.R$string
-com.Zenko.BrightLightsalt.R$style
