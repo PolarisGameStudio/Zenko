@@ -36,6 +36,10 @@ public class PlayerMovement : MonoBehaviour {
 	string type;
 	int tilenumber;
 	public PlayerAnimation animationController;
+	public static bool boop;
+	public Vector3 lastbooped;
+	public static bool boopout;
+	public static Vector3 shakeNoise;
 	//public KeySimulator mykeysimulator;
 	// Use this for initialization
 	void Start () {
@@ -103,7 +107,65 @@ public class PlayerMovement : MonoBehaviour {
 		if (TurnBehaviour.turn == 1 && transform.position == startingposition) {
 			TurnBehaviour.turn = 0; 
 		}
+		// if(Vector3.Distance(currenttile, transform.position) <.5f && !boop && 
+		// 	transform.position != startingposition && nextaction != "Goal_Action" && nextaction != "Hole_Action"){
+		// 	if(lastFragile != null && Vector3.Distance(lastFragile.transform.position,transform.position) <.5f){
+
+		// 	}
+		// 	else{
+		// 		Debug.Log(lastbooped + " " + currenttile);
+		// 		Debug.Log(boop);
+		// 		if(lastbooped != currenttile){
+		// 			boop = true;
+		// 			lastbooped = currenttile;
+		// 			Debug.Log("booped");
+		// 		}
+		// 		Debug.Log("stopped");				
+		// 	}
+		// }
+		if(Vector3.Distance(currenttile, transform.position) <.6f && !boop && 
+			transform.position != startingposition && nextaction !="Goal_Action"){
+			Debug.Log(lastbooped + " " + currenttile);
+			Debug.Log(boop);
+			if(lastbooped != currenttile){
+				boop = true;
+				lastbooped = currenttile;
+				Debug.Log("booped");
+				AssignShakeOrientation(character_direction);
+			}
+			Debug.Log("stopped");				
+		}
+		// if(Vector3.Distance(currenttile, transform.position) <.6f && !boopout && 
+		// 	transform.position != startingposition && nextaction == "Goal_Action"){
+		// 	//StartCoroutine(ShakeOut());
+		// 	Debug.Log(lastbooped + " " + currenttile);
+		// 	Debug.Log(boop);
+		// 	if(lastbooped != currenttile){
+		// 		boopout = true;
+		// 		lastbooped = currenttile;
+		// 		Debug.Log("booped");
+		// 	}
+		// 	Debug.Log("stopped");	
+		// }
+		// if(Vector3.Distance(currenttile, transform.position) <.5f && !boopout && 
+		// 	transform.position != startingposition && 
+		// 	(nextaction == "Hole_Action" || (lastFragile != null && Vector3.Distance(lastFragile.transform.position,transform.position) <.5f))){
+		// 	if(nextaction == "Left_Action" || nextaction == "Right_Action" || nextaction == "Down_Action" || nextaction == "Up_Action"){
+
+		// 	}
+		// 	else{
+		// 		Debug.Log(lastbooped + " " + currenttile);
+		// 		Debug.Log(boop);
+		// 		if(lastbooped != currenttile){
+		// 			boopout = true;
+		// 			lastbooped = currenttile;
+		// 			Debug.Log("booped");
+		// 		}
+		// 		Debug.Log("stopped");				
+		// 	}
+		// }
 		if (currenttile == transform.position) {//do this when reached currenttile
+
 			GoalBehaviour.isstatic = true;
 //			Debug.Log(nextaction);
 			//Debug.Log (tilescript.myTaker.tag);
@@ -152,6 +214,7 @@ public class PlayerMovement : MonoBehaviour {
 				tiletotest = currenttile;
 				canmove = true;
 				while (canmove == true) {
+					character_direction = "Left";
 					tiletotest += Vector3.left;
 					this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0,0,0));
 					FindTileTag ();
@@ -163,11 +226,11 @@ public class PlayerMovement : MonoBehaviour {
 				}
 			}
 			else if (nextaction == "Right_Action") {
-								Debug.Log(nextaction);
-
+				Debug.Log(nextaction);
 				tiletotest = currenttile;
 				canmove = true;
 				while (canmove == true) {
+					character_direction = "Right";
 					tiletotest += Vector3.right;
 					this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0,180,0));
 					FindTileTag ();
@@ -180,7 +243,7 @@ public class PlayerMovement : MonoBehaviour {
 			}
 			else if (nextaction == "Up_Action") {
 								Debug.Log(nextaction);
-
+				character_direction = "Up";
 				tiletotest = currenttile;
 				canmove = true;
 				while (canmove == true) {
@@ -196,7 +259,7 @@ public class PlayerMovement : MonoBehaviour {
 			}
 			else if (nextaction == "Down_Action") {
 								Debug.Log(nextaction);
-
+				character_direction = "Down";
 				tiletotest = currenttile;
 				canmove = true;
 				while (canmove == true) {
@@ -213,13 +276,50 @@ public class PlayerMovement : MonoBehaviour {
 		}
 			Movement ();
 	}
-
+	// IEnumerator ShakeOut(){
+	// 	yield return new WaitForSeconds(.1f);
+	// 	Debug.Log(lastbooped + " " + currenttile);
+	// 	Debug.Log(boop);
+	// 	if(lastbooped != currenttile){
+	// 		boopout = true;
+	// 		lastbooped = currenttile;
+	// 		Debug.Log("booped");
+	// 	}
+	// 	Debug.Log("stopped");				
+	// }
+	public void AssignShakeOrientation(string shakeDirection){
+		if(shakeDirection == "Up"){
+			shakeNoise = new Vector3(0,0,-.5f);
+		}
+		if(shakeDirection == "Down"){
+			shakeNoise = new Vector3(0,0,.5f);
+		}
+		if(shakeDirection == "Left"){
+			shakeNoise = new Vector3(.5f,0,0);
+		}
+		if(shakeDirection == "Right"){
+			shakeNoise = new Vector3(-.5f,0,0);
+		}
+		if(nextaction == "Up_Action"){
+			shakeNoise = new Vector3(0,0,-.5f);
+		}
+		if(nextaction == "Down_Action"){
+			shakeNoise = new Vector3(0,0,.5f);
+		}
+		if(nextaction == "Left_Action"){
+			shakeNoise = new Vector3(.5f,0,0);
+		}
+		if(nextaction == "Right_Action"){
+			shakeNoise = new Vector3(-.5f,0,0);
+		}
+	}
 	void QWERTYMove(){
 		if (Input.GetKeyDown (KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow) || myswipe == "Up" /*|| mykeysimulator.W*/ ) {
 			tiletotest = currenttile;
 			Debug.Log(tiletotest);
 			if (canmove == true) {
 				firstmove = true;
+				boop = false;
 			}
 			tilenumber = 0;
 			while (canmove == true) {
@@ -236,6 +336,7 @@ public class PlayerMovement : MonoBehaviour {
 			tiletotest = currenttile;
 			if (canmove == true) {
 				firstmove = true;
+				boop = false;
 			}
 			tilenumber = 0;
 			while (canmove == true) {	
@@ -254,6 +355,7 @@ public class PlayerMovement : MonoBehaviour {
 			tiletotest = currenttile;
 			if (canmove == true) {
 				firstmove = true;
+				boop = false;
 			}
 			tilenumber =0;
 			while (canmove == true) {
@@ -270,6 +372,7 @@ public class PlayerMovement : MonoBehaviour {
 			tiletotest = currenttile;
 			if (canmove == true) {
 				firstmove = true;
+				boop = false;
 			}
 			tilenumber = 0;
 			while (canmove == true) {

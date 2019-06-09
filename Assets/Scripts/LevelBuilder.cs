@@ -674,7 +674,7 @@ public class LevelBuilder : MonoBehaviour {
 				InstantiateRandomEnvironment(new Vector2(x,y));
 				InstantiateSnow(new Vector2(x,-y-(totaldimension-1)));				
 			}
-		}*
+		}
 	}
 	public void InstantiateRandomEnvironment(Vector2 xy){
 		Instantiate (environment_ice, new Vector3 (xy.x, 0, xy.y), Quaternion.identity);
@@ -1244,6 +1244,8 @@ public class LevelBuilder : MonoBehaviour {
 	public void ResetPlayer(){
 
 		if(!resetting){
+			playertransform.gameObject.GetComponent<PlayerMovement>().LevelLostBoard.SetActive(false);
+			playertransform.gameObject.GetComponent<PlayerMovement>().levelWonBoard.SetActive(false);
 			GoalBehaviour.active = false;
 			resetting = true;
 			if(playertransform != null){
@@ -1251,10 +1253,10 @@ public class LevelBuilder : MonoBehaviour {
 				//Destroy(playertransform.gameObject)/*.SetActive(false)*/;
 
 			}
-			if(starttransform != null){
-				Destroy(starttransform.gameObject)/*.SetActive(false)*/;
-				SpawnStart(startpos);
-			}
+			// if(starttransform != null){
+			// 	Destroy(starttransform.gameObject)/*.SetActive(false)*/;
+			// 	SpawnStart(startpos);
+			// }
 			goaltransform.gameObject.GetComponentInChildren<Animator>().SetInteger("Phase",0);
 			GoalBehaviour.restartGoal();
 			GoalBehaviour.goaling = false;
@@ -1269,6 +1271,7 @@ public class LevelBuilder : MonoBehaviour {
 	public IEnumerator DestroyPlayer(float fadetime, Transform ptransform){
 		float lowValue = -1f;
 		float highValue = 1f;
+		ptransform.gameObject.GetComponent<PlayerMovement>().enabled = false;
 		for(float t = 0.0f; t<fadetime; t+= Time.deltaTime){
 			float normalizedTime = t/fadetime;
 			ptransform.gameObject.GetComponent<PlayerAnimation>().dissolveMat.SetFloat("Vector1_B5CA3B27", Mathf.Lerp(lowValue,highValue,normalizedTime));
@@ -1279,6 +1282,10 @@ public class LevelBuilder : MonoBehaviour {
 			SpawnPlayer(startpos);
 			resetting = false;
 			GoalBehaviour.active = true;
+			if(starttransform != null){
+				Destroy(starttransform.gameObject)/*.SetActive(false)*/;
+				SpawnStart(startpos);
+			}
 
 
 	}

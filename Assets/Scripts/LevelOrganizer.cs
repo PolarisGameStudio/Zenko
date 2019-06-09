@@ -17,7 +17,7 @@ public class LevelOrganizer : MonoBehaviour {
 	public void Start(){
 		string path = Application.dataPath + "/newbigmaps.txt";
 		sl = File.CreateText(path);	
-		StartCoroutine(unshufflePotd());
+		//StartCoroutine(unshufflePotd());
 	}
 	public IEnumerator unshufflePotd(){ //feeds levelPotd string array from textfile.
 		startersPotd = new List<int>();

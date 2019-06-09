@@ -81,14 +81,22 @@ namespace MirzaBeig
                     {
                         float randomRange = 32.0f;
 
-                        perlinNoiseX.x = Random.Range(-randomRange, randomRange);
-                        perlinNoiseX.y = Random.Range(-randomRange, randomRange);
+                        // perlinNoiseX.x = Random.Range(-randomRange, randomRange);
+                        // perlinNoiseX.y = Random.Range(-randomRange, randomRange);
 
-                        perlinNoiseY.x = Random.Range(-randomRange, randomRange);
-                        perlinNoiseY.y = Random.Range(-randomRange, randomRange);
+                        // perlinNoiseY.x = Random.Range(-randomRange, randomRange);
+                        // perlinNoiseY.y = Random.Range(-randomRange, randomRange);
 
-                        perlinNoiseZ.x = Random.Range(-randomRange, randomRange);
-                        perlinNoiseZ.y = Random.Range(-randomRange, randomRange);
+                        // perlinNoiseZ.x = Random.Range(-randomRange, randomRange);
+                        // perlinNoiseZ.y = Random.Range(-randomRange, randomRange);
+                        perlinNoiseX.x = 32;
+                        perlinNoiseX.y = 32;
+
+                        perlinNoiseY.x = 32;
+                        perlinNoiseY.y = 32;
+
+                        perlinNoiseZ.x = 32;
+                        perlinNoiseZ.y = 32;
                     }
 
                     public Shake(float amplitude, float frequency, float duration, CameraShakeTarget target, AnimationCurve amplitudeOverLifetimeCurve)
@@ -148,10 +156,10 @@ namespace MirzaBeig
                         perlinNoiseY += frequencyVector;
                         perlinNoiseZ += frequencyVector;
 
-                        noise.x = Mathf.PerlinNoise(perlinNoiseX.x, perlinNoiseX.y) - 0.5f;
-                        noise.y = Mathf.PerlinNoise(perlinNoiseY.x, perlinNoiseY.y) - 0.5f;
-                        noise.z = Mathf.PerlinNoise(perlinNoiseZ.x, perlinNoiseZ.y) - 0.5f;
-
+                        // noise.x = PlayerMovement.;//Mathf.PerlinNoise(perlinNoiseX.x, perlinNoiseX.y) - 0.5f;
+                        // noise.y = 0;//Mathf.PerlinNoise(perlinNoiseY.x, perlinNoiseY.y) - 0.5f;
+                        // noise.z = 0;//Mathf.PerlinNoise(perlinNoiseZ.x, perlinNoiseZ.y) - 0.5f;
+                        noise = PlayerMovement.shakeNoise;
                         float amplitudeOverLifetime = amplitudeOverLifetimeCurve.Evaluate(1.0f - (timeRemaining / duration));
 
                         noise *= amplitude * amplitudeOverLifetime;
@@ -161,7 +169,7 @@ namespace MirzaBeig
                 }
 
                 // ...
-
+               // public static bool boop;
                 public float smoothDampTime = 0.025f;
 
                 Vector3 smoothDampPositionVelocity;
@@ -176,7 +184,7 @@ namespace MirzaBeig
 
                 void Start()
                 {
-
+                //	boop = false;
                 }
 
                 // ...
@@ -194,13 +202,26 @@ namespace MirzaBeig
 
                 void Update()
                 {
+                	
+
+                	if(PlayerMovement.boop == true){
+                        Debug.Log(CameraShakeTarget.Position);
+                        Add(.3f, 5.0f, .15f, CameraShakeTarget.Position, CameraShakeAmplitudeCurve.FadeInOut75);  
+                        PlayerMovement.boop = false;   
+                        //Debug.Log("ADD");          		
+                	}
+                	if(PlayerMovement.boopout == true){
+                        Add(1.0f, 1.0f, 1.5f, CameraShakeTarget.Position, CameraShakeAmplitudeCurve.FadeInOut25);
+						PlayerMovement.boopout = false;               		
+                	}
                     if (Input.GetKeyDown(KeyCode.F))
                     {
-                        Add(0.25f, 1.0f, 2.0f, CameraShakeTarget.Position, CameraShakeAmplitudeCurve.FadeInOut25);
+                        Debug.Log(CameraShakeTarget.Position);
+                        Add(0.1f, 5.0f, .3f, CameraShakeTarget.Position, CameraShakeAmplitudeCurve.FadeInOut75);
                     }
                     if (Input.GetKeyDown(KeyCode.G))
                     {
-                        Add(15.0f, 1.0f, 2.0f, CameraShakeTarget.Rotation, CameraShakeAmplitudeCurve.FadeInOut25);
+                        Add(10.0f, 1.0f, 2.0f, CameraShakeTarget.Position, CameraShakeAmplitudeCurve.FadeInOut25);
                     }
 
                     if (Input.GetKey(KeyCode.H))
@@ -208,8 +229,10 @@ namespace MirzaBeig
 
                     }
 
-                    Vector3 positionOffset = Vector3.zero;
-                    Vector3 rotationOffset = Vector3.zero;
+                    Vector3 positionOffset = CameraController.cameraposition;//new Vector3(3.5f, 12.11f, -13.37f);
+                    Vector3 rotationOffset = CameraController.eulerangles;//new Vector3(52,0,0);
+
+
 
                     for (int i = 0; i < shakes.Count; i++)
                     {
@@ -229,6 +252,8 @@ namespace MirzaBeig
 
                     transform.localPosition = Vector3.SmoothDamp(transform.localPosition, positionOffset, ref smoothDampPositionVelocity, smoothDampTime);
 
+                    //Debug.Log(transform.localEulerAngles);
+//                    Debug.Log(eulerAngles);
                     Vector3 eulerAngles = transform.localEulerAngles;
 
                     eulerAngles.x = Mathf.SmoothDampAngle(eulerAngles.x, rotationOffset.x, ref smoothDampRotationVelocityX, smoothDampTime);

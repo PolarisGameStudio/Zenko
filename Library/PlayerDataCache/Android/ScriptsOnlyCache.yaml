@@ -6,6 +6,7 @@ ScriptsOnlyBuild:
     - BoxPad
     - CameraController
     - CanvasBehaviour
+    - CloudMovement
     - ColorModulator
     - Dragger
     - FragileBehaviour
@@ -21,6 +22,7 @@ ScriptsOnlyBuild:
     - LevelStorer
     - LightController
     - MenuButton
+    - MirzaBeig.ParticleSystems.Demos.CameraShake
     - MirzaBeig.ParticleSystems.Demos.MouseFollow
     - MirzaBeig.Scripting.Effects.AttractionParticleAffector
     - MirzaBeig.Scripting.Effects.TurbulenceParticleAffector
@@ -125,6 +127,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9622}
     - Class: 114
+      Script: {instanceID: 9640}
+    - Class: 114
       Script: {instanceID: 9678}
     - Class: 114
       Script: {instanceID: 9704}
@@ -181,27 +185,29 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11040}
     - Class: 114
-      Script: {instanceID: 11174}
+      Script: {instanceID: 11044}
     - Class: 114
-      Script: {instanceID: 11192}
+      Script: {instanceID: 11176}
     - Class: 114
-      Script: {instanceID: 11464}
+      Script: {instanceID: 11194}
     - Class: 114
-      Script: {instanceID: 11634}
+      Script: {instanceID: 11466}
     - Class: 114
-      Script: {instanceID: 11828}
+      Script: {instanceID: 11486}
     - Class: 114
-      Script: {instanceID: 11850}
+      Script: {instanceID: 11638}
     - Class: 114
-      Script: {instanceID: 11860}
+      Script: {instanceID: 11832}
     - Class: 114
-      Script: {instanceID: 12350}
+      Script: {instanceID: 11854}
     - Class: 114
-      Script: {instanceID: 12402}
+      Script: {instanceID: 11864}
     - Class: 114
-      Script: {instanceID: 12444}
+      Script: {instanceID: 12354}
     - Class: 114
-      Script: {instanceID: 46484}
+      Script: {instanceID: 12406}
+    - Class: 114
+      Script: {instanceID: 12448}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -326,19 +332,19 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11040}
     - Class: 114
-      Script: {instanceID: 11048}
+      Script: {instanceID: 11050}
     - Class: 114
-      Script: {instanceID: 11512}
+      Script: {instanceID: 11516}
     - Class: 114
-      Script: {instanceID: 11602}
+      Script: {instanceID: 11606}
     - Class: 114
-      Script: {instanceID: 11634}
+      Script: {instanceID: 11638}
     - Class: 114
-      Script: {instanceID: 11818}
+      Script: {instanceID: 11822}
     - Class: 114
-      Script: {instanceID: 11828}
+      Script: {instanceID: 11832}
     - Class: 114
-      Script: {instanceID: 11860}
+      Script: {instanceID: 11864}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -1248,7 +1254,7 @@ ScriptsOnlyBuild:
     className: MonsterPanel
   - hash:
       serializedVersion: 2
-      Hash: abafccedc807a682a74ff0a40a1d4fb1
+      Hash: 9a0318164557ee1edeff981da902c0c5
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerMovement
@@ -1410,6 +1416,12 @@ ScriptsOnlyBuild:
     className: ImageSwitch
   - hash:
       serializedVersion: 2
+      Hash: 82ea4d56c3cab31f431667bc3d7c3615
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PlayerAnimation
+  - hash:
+      serializedVersion: 2
       Hash: 50c443b12ccc0b475183318b5088bcc5
     assemblyName: Unity.Postprocessing.Runtime.dll
     namespaceName: UnityEngine.Rendering.PostProcessing
@@ -1564,6 +1576,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: TimelineAsset
+  - hash:
+      serializedVersion: 2
+      Hash: 00caa88c05b5d341a8d1f0d03979fd01
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: CloudMovement
   - hash:
       serializedVersion: 2
       Hash: f22b8fdbadfd4221ab8afd1e930f1458
@@ -1816,14 +1834,8 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GoalBehaviour
-  - hash:
-      serializedVersion: 2
-      Hash: 82ea4d56c3cab31f431667bc3d7c3615
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: PlayerAnimation
   platform: 13
   scenePathNames:
   - Assets/WorldSelect.unity
   - Assets/Level.unity
-  playerPath: /Users/bernardolimonvillarreal/Desktop/ZenkoJunio3/ZenkoJunio3.apk
+  playerPath: /Users/bernardolimonvillarreal/Desktop/ZenkoJunio3/ZenkoJunio6.apk

@@ -27,6 +27,7 @@ public class GoalBehaviour : MonoBehaviour {
 		readytomove = false;
 		isstatic =true;
 		goaling = false;
+		active = true;
 //		Debug.Log(transform.rotation.y);
 //		Debug.Log(newx);
 	}

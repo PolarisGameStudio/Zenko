@@ -7189,15 +7189,18 @@ MonoBehaviour:
   currenttile: {x: 0, y: 0, z: 0}
   startingposition: {x: 0, y: 0, z: 0}
   cantakeinput: 0
-  speed: 4
+  speed: 6
   direction: 
   tileobject: {fileID: 0}
+  canmove: 0
   nextaction: 
   beingdragged: 0
   lastFragile: {fileID: 0}
   lastSeed: {fileID: 0}
   levelWonBoard: {fileID: 0}
   LevelLostBoard: {fileID: 0}
+  animationController: {fileID: 0}
+  lastbooped: {x: 0, y: 0, z: 0}
 --- !u!114 &2126156538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7211,6 +7214,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dissolveMat: {fileID: 2100000, guid: 894eb3705d6504c7eaf593354e38d5cd, type: 2}
+  lowValue: -1
+  highValue: 1
 --- !u!1 &1872221251349726
 GameObject:
   m_ObjectHideFlags: 0
