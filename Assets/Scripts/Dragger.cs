@@ -104,7 +104,7 @@ public class Dragger : MonoBehaviour {
 //	 	Debug.Log(TurnBehaviour.turn);
 
 
-		if (TurnBehaviour.turn == 0) {
+		if (TurnBehaviour.turn == 0 || LevelBuilder.resetting) {
 			PlaneBehavior.readyToDrop = false;
 
 			PieceHolders.placedpieces.Remove(this);

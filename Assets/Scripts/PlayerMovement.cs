@@ -314,77 +314,80 @@ public class PlayerMovement : MonoBehaviour {
 		}
 	}
 	void QWERTYMove(){
-		if (Input.GetKeyDown (KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow) || myswipe == "Up" /*|| mykeysimulator.W*/ ) {
-			tiletotest = currenttile;
-			Debug.Log(tiletotest);
-			if (canmove == true) {
-				firstmove = true;
-				boop = false;
+		if(!LevelManager.isdragging){
+			if (Input.GetKeyDown (KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow) || myswipe == "Up" /*|| mykeysimulator.W*/ ) {
+				tiletotest = currenttile;
+				Debug.Log(tiletotest);
+				if (canmove == true) {
+					firstmove = true;
+					boop = false;
+				}
+				tilenumber = 0;
+				while (canmove == true) {
+					character_direction = "Up";
+					this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0,90,0));
+					tiletotest += Vector3.forward;
+					FindTileTag ();
+					ActOnTile ();
+					tilenumber++;
+				}
+				//mykeysimulator.W = false;
 			}
-			tilenumber = 0;
-			while (canmove == true) {
-				character_direction = "Up";
-				this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0,90,0));
-				tiletotest += Vector3.forward;
-				FindTileTag ();
-				ActOnTile ();
-				tilenumber++;
-			}
-			//mykeysimulator.W = false;
-		}
-		if (Input.GetKeyDown (KeyCode.A)|| Input.GetKeyDown(KeyCode.LeftArrow) || myswipe == "Left" /*|| mykeysimulator.A*/) {
-			tiletotest = currenttile;
-			if (canmove == true) {
-				firstmove = true;
-				boop = false;
-			}
-			tilenumber = 0;
-			while (canmove == true) {	
-				character_direction = "Left";
-				this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0,0,0));
-				tiletotest += Vector3.left;
-				FindTileTag ();
-				ActOnTile ();
-				tilenumber++;
-//				Debug.Log(canmove);
+			if (Input.GetKeyDown (KeyCode.A)|| Input.GetKeyDown(KeyCode.LeftArrow) || myswipe == "Left" /*|| mykeysimulator.A*/) {
+				tiletotest = currenttile;
+				if (canmove == true) {
+					firstmove = true;
+					boop = false;
+				}
+				tilenumber = 0;
+				while (canmove == true) {	
+					character_direction = "Left";
+					this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0,0,0));
+					tiletotest += Vector3.left;
+					FindTileTag ();
+					ActOnTile ();
+					tilenumber++;
+	//				Debug.Log(canmove);
 
+				}
+				//mykeysimulator.A = false;
 			}
-			//mykeysimulator.A = false;
+			if (Input.GetKeyDown (KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow) || myswipe == "Down" /*|| mykeysimulator.S */) {
+				tiletotest = currenttile;
+				if (canmove == true) {
+					firstmove = true;
+					boop = false;
+				}
+				tilenumber =0;
+				while (canmove == true) {
+					character_direction = "Down";
+					this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0,270,0));
+					tiletotest += Vector3.back;
+					FindTileTag ();
+					ActOnTile ();
+					tilenumber++;
+				}
+				//mykeysimulator.S = false;
+			}
+			if (Input.GetKeyDown (KeyCode.D)|| Input.GetKeyDown(KeyCode.RightArrow) || myswipe == "Right" /*|| mykeysimulator.D*/) {
+				tiletotest = currenttile;
+				if (canmove == true) {
+					firstmove = true;
+					boop = false;
+				}
+				tilenumber = 0;
+				while (canmove == true) {
+					character_direction = "Right";
+					this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0,180,0));
+					tiletotest += Vector3.right;
+					FindTileTag ();
+					ActOnTile ();
+					tilenumber++;
+				}
+				//mykeysimulator.D = false;
+			}			
 		}
-		if (Input.GetKeyDown (KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow) || myswipe == "Down" /*|| mykeysimulator.S */) {
-			tiletotest = currenttile;
-			if (canmove == true) {
-				firstmove = true;
-				boop = false;
-			}
-			tilenumber =0;
-			while (canmove == true) {
-				character_direction = "Down";
-				this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0,270,0));
-				tiletotest += Vector3.back;
-				FindTileTag ();
-				ActOnTile ();
-				tilenumber++;
-			}
-			//mykeysimulator.S = false;
-		}
-		if (Input.GetKeyDown (KeyCode.D)|| Input.GetKeyDown(KeyCode.RightArrow) || myswipe == "Right" /*|| mykeysimulator.D*/) {
-			tiletotest = currenttile;
-			if (canmove == true) {
-				firstmove = true;
-				boop = false;
-			}
-			tilenumber = 0;
-			while (canmove == true) {
-				character_direction = "Right";
-				this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0,180,0));
-				tiletotest += Vector3.right;
-				FindTileTag ();
-				ActOnTile ();
-				tilenumber++;
-			}
-			//mykeysimulator.D = false;
-		}
+		
 	}
 	/*void FindTileTag(){
 		Collider2D[] colliders = Physics2D.OverlapCircleAll(tiletotest, .1f); ///Presuming the object you are testing also has a collider 0 otherwise{
