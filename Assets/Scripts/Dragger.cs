@@ -162,7 +162,7 @@ public class Dragger : MonoBehaviour {
  
  void OnMouseDrag()
 	{ 
-		if (TurnBehaviour.turn == 0) {
+		if (TurnBehaviour.turn == 0 || LevelBuilder.resetting) {
 			Vector3 curScreenPoint = new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 15);
 			Vector3 curPosition = Camera.main.ScreenToWorldPoint (curScreenPoint) + offset;
 			// curPosition.x = _lockedYPosition;

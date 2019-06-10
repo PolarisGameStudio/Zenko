@@ -206,7 +206,7 @@ namespace MirzaBeig
 
                 	if(PlayerMovement.boop == true){
                         Debug.Log(CameraShakeTarget.Position);
-                        Add(.3f, 5.0f, .15f, CameraShakeTarget.Position, CameraShakeAmplitudeCurve.FadeInOut75);  
+                        Add(.3f, 5.0f, .1f, CameraShakeTarget.Position, CameraShakeAmplitudeCurve.FadeInOut75);  
                         PlayerMovement.boop = false;   
                         //Debug.Log("ADD");          		
                 	}
