@@ -987,8 +987,10 @@ public class LevelBuilder : MonoBehaviour {
 			case sfloor_wall:
 				//Transform instantiator = floor_wall;
 				int numerator = Random.Range(0,6);
-				mysnowh = Random.Range(0.05f,0.10f);
-				Instantiate (floor_snow, new Vector3 (x, -mysnowh, -y), Quaternion.identity);
+				mysnowh = 0.04f;//Random.Range(0.05f,0.10f);
+				int[] validchoices = {0,90,180,270};
+				int randomint = validchoices[Random.Range(0,validchoices.Length)];
+				Instantiate (floor_snow, new Vector3 (x, -mysnowh, -y),  Quaternion.Euler(new Vector3(0,randomint,0)));
 				Instantiate (floor_rocks[numerator], new Vector3 (x, 0, -y), Quaternion.identity);
 				//Instantiate (floor_wall, new Vector3 (x, 0, -y), Quaternion.identity);
 				tiles[x,y].type = "Wall";
