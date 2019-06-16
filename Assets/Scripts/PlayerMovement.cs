@@ -125,15 +125,15 @@ public class PlayerMovement : MonoBehaviour {
 		// }
 		if(Vector3.Distance(currenttile, transform.position) <.6f && !boop && 
 			transform.position != startingposition && nextaction !="Goal_Action"){
-			Debug.Log(lastbooped + " " + currenttile);
-			Debug.Log(boop);
+//			Debug.Log(lastbooped + " " + currenttile);
+//			Debug.Log(boop);
 			if(lastbooped != currenttile){
 				boop = true;
 				lastbooped = currenttile;
-				Debug.Log("booped");
+				//Debug.Log("booped");
 				AssignShakeOrientation(character_direction);
 			}
-			Debug.Log("stopped");				
+			//Debug.Log("stopped");				
 		}
 		// if(Vector3.Distance(currenttile, transform.position) <.6f && !boopout && 
 		// 	transform.position != startingposition && nextaction == "Goal_Action"){

@@ -250,7 +250,6 @@ public class LevelBuilder : MonoBehaviour {
 		tiles = new Tile [totaldimension, totaldimension];
 		if(!iscreated){
 			CreateBase();
-
 		}
 		CreateOuterBase();
 		PlaceBase();
@@ -737,6 +736,7 @@ public class LevelBuilder : MonoBehaviour {
 	public void StartDirection(int myx, int myy){
 		Debug.Log("Directing");
 		Debug.Log(myx + " " + myy);
+		Debug.Log(tiles.Length);
 		Collider[] colliders = Physics.OverlapSphere(new Vector3(myx,0,-(myy+1)), .5f);
 		foreach (Collider component in colliders) {
 			if (component.tag == "Tile" || component.tag == "Fragile"){
@@ -761,6 +761,7 @@ public class LevelBuilder : MonoBehaviour {
 		}
 		colliders = Physics.OverlapSphere(new Vector3(myx+1,0,-myy), .5f);
 		foreach (Collider component in colliders) {
+			Debug.Log(component.tag);
 			if (component.tag == "Tile"|| component.tag == "Fragile"){
 				if(tiles[myx+1,myy].type != "Wall"  && tiles[myx+1,myy].type != "Goal"){
 					Debug.Log("Right");
@@ -1234,6 +1235,7 @@ public class LevelBuilder : MonoBehaviour {
 		foreach (GameObject component in gameobjects)
 		{
 			if (component.tag != "MainCamera" && component.tag != "Canvas" && component.tag != "Tile") {
+				component.SetActive(false);
 				Destroy (component);
 				//Debug.Log ("destroyed" + component);
 			}
