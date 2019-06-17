@@ -130,9 +130,9 @@ public class GoalBehaviour : MonoBehaviour {
 						if(ydif<1.5){
 							if(-transform.position.z>newy){
 
-								Debug.Log(newy);
+//								Debug.Log(newy);
 								goaling = true;
-								Debug.Log("Doing this too");
+//								Debug.Log("Doing this too");
 								myanim.SetInteger("Phase",2);
 								AnimateFoxGoal();
 								lastphase = 2;

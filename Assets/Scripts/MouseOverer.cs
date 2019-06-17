@@ -48,6 +48,6 @@ public class MouseOverer : MonoBehaviour {
 		    PlaneBehavior.readyToDrop = false;
 		}
 	    //PlaneBehavior
-	    Debug.Log("Exit");
+//	    Debug.Log("Exit");
 	}
 }

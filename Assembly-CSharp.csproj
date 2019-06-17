@@ -230,6 +230,7 @@
      <None Include="Assets\StreamingAssets\Level-106.txt" />
      <None Include="Assets\StreamingAssets\Level9.txt" />
      <None Include="Assets\Mirza Beig\Shaders\Standard\Standard-Terrain Rain.shader" />
+     <None Include="Assets\StreamingAssets\DoubleHitMaps2.txt" />
      <None Include="Assets\StreamingAssets\Level10.txt" />
      <None Include="Assets\StreamingAssets\Level76.txt" />
      <None Include="Assets\StreamingAssets\newnewpotd.txt" />
@@ -361,6 +362,7 @@
      <None Include="Assets\StreamingAssets\Level83.txt" />
      <None Include="Assets\StreamingAssets\Leve-16.txt" />
      <None Include="Assets\StreamingAssets\ch4_morenotboring.txt" />
+     <None Include="Assets\StreamingAssets\DoubleHitMaps1.txt" />
      <None Include="Assets\StreamingAssets\Ch3_BigMaps.txt" />
      <None Include="Assets\Mirza Beig\Shaders\Particles\Distance Fade\DistanceFade-AnimBlendAdd.shader" />
      <None Include="Assets\StreamingAssets\Level-107.txt" />
@@ -388,6 +390,7 @@
      <None Include="Assets\StreamingAssets\Ch3_8x8.txt" />
      <None Include="Assets\StreamingAssets\Level0.txt" />
      <None Include="Assets\StreamingAssets\Level31.txt" />
+     <None Include="Assets\StreamingAssets\LongDoubleHitMaps.txt" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>/Users/bernardolimonvillarreal/Documents/GitHub/Zenko/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>

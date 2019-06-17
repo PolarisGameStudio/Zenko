@@ -40,6 +40,7 @@ public class PlayerMovement : MonoBehaviour {
 	public Vector3 lastbooped;
 	public static bool boopout;
 	public static Vector3 shakeNoise;
+	public static bool longgoal;
 	//public KeySimulator mykeysimulator;
 	// Use this for initialization
 	void Start () {
@@ -67,7 +68,7 @@ public class PlayerMovement : MonoBehaviour {
 		}
 		//Debug.Log(LevelLostBoard);
 		//LevelLostBoard.SetActive (false);
-		Debug.Log ("TURNEDTOFF");
+//		Debug.Log ("TURNEDTOFF");
 		outofmap = false;
 		hasmoved = false;
 		TG = GameObject.Find("ProgressBar").GetComponent<ProgressBar>();
@@ -317,7 +318,7 @@ public class PlayerMovement : MonoBehaviour {
 		if(!LevelManager.isdragging){
 			if (Input.GetKeyDown (KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow) || myswipe == "Up" /*|| mykeysimulator.W*/ ) {
 				tiletotest = currenttile;
-				Debug.Log(tiletotest);
+//				Debug.Log(tiletotest);
 				if (canmove == true) {
 					firstmove = true;
 					boop = false;
@@ -467,7 +468,7 @@ public class PlayerMovement : MonoBehaviour {
 			}
 			TurnCounter.turncount++;
 //			Debug.Log (TurnCounter.turncount);
-			ProgressBar.TakeTurn(TurnCounter.turncount);
+			TG.TakeTurn(TurnCounter.turncount);
 		}
 		if(firstmove == true){
 			firstmove = false;
@@ -566,6 +567,13 @@ public class PlayerMovement : MonoBehaviour {
 					Debug.Log("0 turns");
 					canmove = false;
 				} else {
+//					Debug.Log("THE POSITION IS" + transform.position + " + " + currenttile);
+					if(transform.position == currenttile){
+						longgoal = false;
+					}
+					else{
+						longgoal = true;
+					}
 					if(tilenumber == 0){
 					GoalBehaviour.goaling = true;
 					this.transform.GetChild(3).GetComponent<Animator>().SetInteger("Phase", 2);
@@ -736,8 +744,15 @@ public class PlayerMovement : MonoBehaviour {
 			Count ();
 	}
 	IEnumerator PopWin(){
-		yield return new WaitForSeconds(1);
+		if(longgoal){
+		yield return new WaitForSeconds(.6f);
 		levelWonBoard.SetActive (true);
+
+		}
+		else{
+		yield return new WaitForSeconds(.64f);	
+		levelWonBoard.SetActive (true);
+		}
 
 
 	}
