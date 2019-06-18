@@ -13,7 +13,12 @@ public class RatingBehaviour : MonoBehaviour {
 	static GameObject star1;
 	static GameObject star2;
 	static GameObject star3;
-
+	public Sprite Lstar;
+	public Sprite Lnotstar;
+	public Sprite Mstar;
+	public Sprite Mnotstar;
+	public Sprite Rstar;
+	public Sprite Rnotstar;
 	// Use this for initialization
 	void Awake(){
 		if(instance == null)
@@ -26,12 +31,10 @@ public class RatingBehaviour : MonoBehaviour {
 	}
 
 	void Start () {
-		
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		//CalculateRating ();
 	}
 
 	static public void CalculateRating(){
@@ -60,15 +63,15 @@ public class RatingBehaviour : MonoBehaviour {
 		star1 = GameObject.Find("Star1");
 		star2 = GameObject.Find("Star2");
 		star3 = GameObject.Find("Star3");
-		star1.GetComponent<Image>().color = Color.green;
-		star2.GetComponent<Image>().color = Color.green;
-		star3.GetComponent<Image>().color = Color.green;
+		star1.GetComponent<Image>().color = Color.white;
+		star2.GetComponent<Image>().color = Color.white;
+		star3.GetComponent<Image>().color = Color.white;
 	}
 	static public void RestartRating(){
 		currentrating = 3;
-		star1.GetComponent<Image>().color = Color.green;
-		star2.GetComponent<Image>().color = Color.green;
-		star3.GetComponent<Image>().color = Color.green;		
+		star1.GetComponent<Image>().color = Color.white;
+		star2.GetComponent<Image>().color = Color.white;
+		star3.GetComponent<Image>().color = Color.white;		
 	}
 	static public void ChangeRating(int newrating){
 		if(newrating == 2){
