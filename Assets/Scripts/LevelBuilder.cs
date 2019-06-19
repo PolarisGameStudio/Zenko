@@ -544,7 +544,7 @@ public class LevelBuilder : MonoBehaviour {
 	else{
 		levelnum = LevelManager.levelnum;
 	}
-
+	
 	//LevelManager.levelnum = 65;
 	//levelnum = LevelManager.levelnum;
 	//LevelStorer.Lookfor (LevelManager.levelnum);//assigns efficient turn according to dictionary.

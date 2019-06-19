@@ -3291,7 +3291,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.65026855, y: -0.025024414}
+  m_AnchoredPosition: {x: 0.6503906, y: -0.025024414}
   m_SizeDelta: {x: -1.3004, y: -0.049988}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &306098721
@@ -8902,8 +8902,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: dd1fddc8c2a3341399113ed48c12bd5a, type: 3}
-  m_PlayOnAwake: 0
+  m_audioClip: {fileID: 8300000, guid: 1a6e7a9ef11a54adfbda0626013953a4, type: 3}
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
@@ -10855,7 +10855,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -2.6500244, y: 280}
+  m_AnchoredPosition: {x: -2.6499023, y: 280}
   m_SizeDelta: {x: 1217.8999, y: 394.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &865378253
@@ -19140,6 +19140,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   ConfigMenu: {fileID: 978612708}
+  levelText: {fileID: 0}
 --- !u!114 &1499581844
 MonoBehaviour:
   m_ObjectHideFlags: 0

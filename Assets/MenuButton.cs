@@ -16,6 +16,7 @@ public class MenuButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler{
     bool restarted;
     public static bool open;
     public GameObject ConfigMenu;
+    public GameObject levelText;
 	// Use this for initialization
 	void Start () {
 		open = false;	
@@ -29,8 +30,15 @@ public class MenuButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler{
 	public void toggleMenu(){
         Debug.Log("menu");
             MenuButton.open = !MenuButton.open;
+            RectTransform myrt = levelText.GetComponent<RectTransform>();
             for(int i=0; i<buttons.Count; i++){
                 buttons[i].SetActive(open);
+            }
+            if(MenuButton.open){
+                myrt.localPosition = new Vector3 (myrt.localPosition.x,-430,0);
+            }
+            else{
+                myrt.localPosition = new Vector3 (myrt.localPosition.x,0,0);
             }
 	}
     public void closeMenu(){

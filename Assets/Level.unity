@@ -198,6 +198,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   ConfigMenu: {fileID: 0}
+  levelText: {fileID: 0}
 --- !u!114 &9106771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11169,6 +11170,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   ConfigMenu: {fileID: 0}
+  levelText: {fileID: 0}
 --- !u!114 &360300456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23355,6 +23357,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   ConfigMenu: {fileID: 0}
+  levelText: {fileID: 0}
 --- !u!114 &951400847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30173,6 +30176,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   ConfigMenu: {fileID: 0}
+  levelText: {fileID: 0}
 --- !u!114 &1235935066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47724,6 +47728,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   ConfigMenu: {fileID: 263808772}
+  levelText: {fileID: 1040518190}
 --- !u!114 &1699481247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50434,8 +50439,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: dd1fddc8c2a3341399113ed48c12bd5a, type: 3}
-  m_PlayOnAwake: 0
+  m_audioClip: {fileID: 8300000, guid: 1a6e7a9ef11a54adfbda0626013953a4, type: 3}
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
