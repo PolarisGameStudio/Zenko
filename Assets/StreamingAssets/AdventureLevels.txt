@@ -4,10 +4,10 @@ Level1_TutorialSwipeAndGoal
 1 1 0 0 0 0 1 1 
 1 1 0 0 0 0 1 1 
 1 1 0 0 0 0 1 1
-1 1 0 0 0 0 1 1 
-1 1 1 G 1 1 1 1 
+1 1 0 0 0 0 G 1 
+1 1 1 1 1 1 1 1 
 1 1 1 1 1 1 1 1
-T1
+T2
 
 Level2_TutorialPiece //SE OCUPA MAS WALLS randoms donde no se use
 1 1 1 1 1 1 1 1
@@ -106,7 +106,7 @@ Level10//////////////////////////////////////////////////replace
 1 1 0 0 0 0 1 1 
 1 1 1 1 1 1 1 1 
 1 1 1 1 1 1 1 1
-P54 T4
+P25 T4
 
 Level11
 1 1 1 1 1 1 1 1

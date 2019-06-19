@@ -69,13 +69,34 @@ public class ProgressBar : MonoBehaviour {
 	}
 	public IEnumerator IncreaseBar(float fadetime, int step){
 		float startingHeight = (step-1)*stepvalue;
-		for(float t = 0.0f; t<fadetime; t+= Time.deltaTime){
-			float normalizedTime = t/fadetime;
-//			Debug.Log("1");
-			progressFluid.GetComponent<RectTransform>().sizeDelta =	new Vector2(50, (stepvalue*(step-1))+(stepvalue*Mathf.Lerp(0,1, normalizedTime)));
-			yield return null;
+		if(step == LevelStorer.efficientturns){
+			for(float t = 0.0f; t<fadetime; t+= Time.deltaTime){
+				float normalizedTime = t/fadetime;
+	//			Debug.Log("1");
+				progressFluid.GetComponent<RectTransform>().sizeDelta =	new Vector2(50, (stepvalue*(step-1))+(1.1f*stepvalue*Mathf.Lerp(0,1, normalizedTime)));
+				yield return null;
+			}
+			progressFluid.GetComponent<RectTransform>().sizeDelta =	new Vector2(50, (stepvalue*step));			
+
 		}
-		progressFluid.GetComponent<RectTransform>().sizeDelta =	new Vector2(50, (stepvalue*step));
+		else{
+			for(float t = 0.0f; t<fadetime; t+= Time.deltaTime){
+				float normalizedTime = t/fadetime;
+	//			Debug.Log("1");
+				progressFluid.GetComponent<RectTransform>().sizeDelta =	new Vector2(50, (stepvalue*(step-1))+(1.1f*stepvalue*Mathf.Lerp(0,1, normalizedTime)));
+				yield return null;
+			}
+			float current = (stepvalue*(step-1))+(1.1f*stepvalue);
+			for(float t = 0.0f; t<fadetime; t+= Time.deltaTime){
+				float normalizedTime = t/fadetime;
+	//			Debug.Log("1");
+				progressFluid.GetComponent<RectTransform>().sizeDelta =	new Vector2(50, current-(.1f*stepvalue*Mathf.Lerp(0,1, normalizedTime)));
+				yield return null;
+			}
+			progressFluid.GetComponent<RectTransform>().sizeDelta =	new Vector2(50, (stepvalue*step));			
+		}
+
+
 	}
 	// public static void TakeTurn(int number){
 	// 	if(number <= LevelStorer.efficientturns){

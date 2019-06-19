@@ -64,6 +64,7 @@
      <Compile Include="Assets\FragileBehaviour.cs" />
      <Compile Include="Assets\GameManager.cs" />
      <Compile Include="Assets\HueModifier.cs" />
+     <Compile Include="Assets\ImageHolder.cs" />
      <Compile Include="Assets\ImageSwitch.cs" />
      <Compile Include="Assets\LevelMenu.cs" />
      <Compile Include="Assets\LevelSaver.cs" />
@@ -235,6 +236,7 @@
      <None Include="Assets\StreamingAssets\Level76.txt" />
      <None Include="Assets\StreamingAssets\newnewpotd.txt" />
      <None Include="Assets\StreamingAssets\Level-100.txt" />
+     <None Include="Assets\StreamingAssets\DoubleHitMaps3.txt" />
      <None Include="Assets\StreamingAssets\Level41.txt" />
      <None Include="Assets\Mirza Beig\Shaders\Particles\Alpha Cutoff\AlphaCutoff-Add.shader" />
      <None Include="Assets\StreamingAssets\Level35.txt" />

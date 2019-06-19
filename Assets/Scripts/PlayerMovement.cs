@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 //using UnityEngine.Color;
 
 public class PlayerMovement : MonoBehaviour {
@@ -41,6 +42,8 @@ public class PlayerMovement : MonoBehaviour {
 	public static bool boopout;
 	public static Vector3 shakeNoise;
 	public static bool longgoal;
+	GameObject menuButton;
+	GameObject hintButton;
 	//public KeySimulator mykeysimulator;
 	// Use this for initialization
 	void Start () {
@@ -72,6 +75,8 @@ public class PlayerMovement : MonoBehaviour {
 		outofmap = false;
 		hasmoved = false;
 		TG = GameObject.Find("ProgressBar").GetComponent<ProgressBar>();
+		menuButton = GameObject.Find("Menu");
+		hintButton = GameObject.Find("Hint");
 	}
 	
 	// Update is called once per frame
@@ -104,9 +109,13 @@ public class PlayerMovement : MonoBehaviour {
 				piece.gameObject.transform.GetComponent<BoxCollider>().enabled = false;
 			}
 			TurnBehaviour.turn = 1;
+			menuButton.GetComponent<Image>().sprite = menuButton.GetComponent<ImageHolder>().imagetwo;
+			hintButton.GetComponent<Image>().sprite = hintButton.GetComponent<ImageHolder>().imagetwo;
 		}
 		if (TurnBehaviour.turn == 1 && transform.position == startingposition) {
 			TurnBehaviour.turn = 0; 
+			menuButton.GetComponent<Image>().sprite = menuButton.GetComponent<ImageHolder>().imageone;
+			hintButton.GetComponent<Image>().sprite = hintButton.GetComponent<ImageHolder>().imageone;
 		}
 		// if(Vector3.Distance(currenttile, transform.position) <.5f && !boop && 
 		// 	transform.position != startingposition && nextaction != "Goal_Action" && nextaction != "Hole_Action"){

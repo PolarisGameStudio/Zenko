@@ -10,6 +10,7 @@ public class Holder{
 	public GameObject mygameobject;
 	public bool active;
 
+
 	public Holder(string newname, int newmaxpieces, int newcurrentpieces,
 		GameObject newgameobject, bool isactive){
 		name = newname;
@@ -45,9 +46,11 @@ public class PieceHolders : MonoBehaviour {
 	public int downSeedNumber;
 	public int wallSeedNumber;
 	public static List<Dragger> placedpieces = new List<Dragger>();
+	SceneLoading sl;
 	// Use this for initialization
 	void Awake () {
 		initValues();
+		sl = GameObject.Find("Main Canvas").GetComponent<SceneLoading>();
 	}
 	
 	// Update is called once per frame
@@ -637,6 +640,14 @@ public class PieceHolders : MonoBehaviour {
 			}			
 		}
 		
+	}
+	public void HintOrRestart(){
+		if(TurnBehaviour.turn == 0){
+			Hint();
+		}
+		if(TurnBehaviour.turn == 1){
+			sl.ResetLevelButton();
+		}
 	}
 	public void PlaceHint(Dragger dragger, Vector2 position){
 		dragger.transform.GetChild(1).gameObject.SetActive(true);
