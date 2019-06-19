@@ -92,7 +92,7 @@ public class LevelBuilder : MonoBehaviour {
 
 	public IEnumerator initPotd(){ //feeds levelPotd string array from textfile.
 		startersPotd = new List<int>();
-		string file = "LongDoubleHitMaps.txt";
+		string file = "FilteredMaps.txt";
 		filePath = System.IO.Path.Combine(Application.streamingAssetsPath, file);
 		Debug.Log (filePath + "FILEPAPAPATH");
 		result = " ";

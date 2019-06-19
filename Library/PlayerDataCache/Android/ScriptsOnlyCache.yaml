@@ -174,37 +174,37 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10844}
     - Class: 114
-      Script: {instanceID: 10948}
+      Script: {instanceID: 10900}
     - Class: 114
-      Script: {instanceID: 10986}
+      Script: {instanceID: 10950}
     - Class: 114
-      Script: {instanceID: 11000}
+      Script: {instanceID: 10988}
     - Class: 114
-      Script: {instanceID: 11042}
+      Script: {instanceID: 11002}
     - Class: 114
-      Script: {instanceID: 11046}
+      Script: {instanceID: 11044}
     - Class: 114
-      Script: {instanceID: 11178}
+      Script: {instanceID: 11048}
     - Class: 114
-      Script: {instanceID: 11196}
+      Script: {instanceID: 11180}
     - Class: 114
-      Script: {instanceID: 11488}
+      Script: {instanceID: 11198}
     - Class: 114
-      Script: {instanceID: 11640}
+      Script: {instanceID: 11490}
     - Class: 114
-      Script: {instanceID: 11834}
+      Script: {instanceID: 11642}
     - Class: 114
-      Script: {instanceID: 11856}
+      Script: {instanceID: 11836}
     - Class: 114
-      Script: {instanceID: 11866}
+      Script: {instanceID: 11858}
     - Class: 114
-      Script: {instanceID: 12356}
+      Script: {instanceID: 11868}
     - Class: 114
-      Script: {instanceID: 12408}
+      Script: {instanceID: 12358}
     - Class: 114
-      Script: {instanceID: 12450}
+      Script: {instanceID: 12410}
     - Class: 114
-      Script: {instanceID: 37472}
+      Script: {instanceID: 12452}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -327,21 +327,21 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10844}
     - Class: 114
-      Script: {instanceID: 11042}
+      Script: {instanceID: 11044}
     - Class: 114
-      Script: {instanceID: 11052}
+      Script: {instanceID: 11054}
     - Class: 114
-      Script: {instanceID: 11518}
+      Script: {instanceID: 11520}
     - Class: 114
-      Script: {instanceID: 11608}
+      Script: {instanceID: 11610}
     - Class: 114
-      Script: {instanceID: 11640}
+      Script: {instanceID: 11642}
     - Class: 114
-      Script: {instanceID: 11824}
+      Script: {instanceID: 11826}
     - Class: 114
-      Script: {instanceID: 11834}
+      Script: {instanceID: 11836}
     - Class: 114
-      Script: {instanceID: 11866}
+      Script: {instanceID: 11868}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -1317,6 +1317,12 @@ ScriptsOnlyBuild:
     className: SignalTrack
   - hash:
       serializedVersion: 2
+      Hash: 736a3336b4d7fc96958e4d54ec01485c
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ImageHolder
+  - hash:
+      serializedVersion: 2
       Hash: a56a613ad082615f31e91b12f9052ee8
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
@@ -1831,12 +1837,6 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GoalBehaviour
-  - hash:
-      serializedVersion: 2
-      Hash: 736a3336b4d7fc96958e4d54ec01485c
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: ImageHolder
   platform: 13
   scenePathNames:
   - Assets/WorldSelect.unity

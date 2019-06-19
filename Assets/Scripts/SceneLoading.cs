@@ -81,6 +81,14 @@ public class SceneLoading : MonoBehaviour {
 
 		//myhandler.GiveIce();
 	}
+	public void NextWon(){
+		if(LevelManager.ispotd){
+			Potd();
+		}
+		if(!LevelManager.ispotd){
+			NextlevelButton();
+		}
+	}
 	public void muteMusic(){
 		AudioSource ms = GameObject.Find("Music Source").GetComponent<AudioSource>();
 		ms.mute = !ms.mute;
@@ -133,6 +141,7 @@ public class SceneLoading : MonoBehaviour {
 		Swiping.mydirection = "Null";
 		txt.text = "RANDOM POTD";
 		TurnCounter.turncount = 0;
+		LevelManager.ispotd = true;
 		LevelManager.NextPotd();
 		TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
 		RatingBehaviour.RestartRating();
@@ -273,6 +282,7 @@ public class SceneLoading : MonoBehaviour {
 		//LevelManager.levelnum = 1;
 		//Debug.Log(LevelStorer.leveldic.Count);
 		//if(LevelStorer.leveldic[num].islocked == false || num==1 ){
+
 			Debug.Log("Going to Level "+ num);
 			LevelManager.levelnum = num;
 			LoadScene(LevelManager.levelnum);
