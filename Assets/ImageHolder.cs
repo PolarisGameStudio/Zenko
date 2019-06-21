@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class ImageHolder : MonoBehaviour {
 	public Sprite imageone;
 	public Sprite imagetwo;
-	public string type;
 	// Use this for initialization
 	void Start () {
 

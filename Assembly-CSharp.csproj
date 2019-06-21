@@ -174,6 +174,7 @@
      <None Include="Assets\StreamingAssets\Level96.txt" />
      <None Include="Assets\StreamingAssets\Level12.txt" />
      <None Include="Assets\StreamingAssets\Level3.txt" />
+     <None Include="Assets\StreamingAssets\SmallFilteredMaps.txt" />
      <None Include="Assets\StreamingAssets\Level19.txt" />
      <None Include="Assets\StreamingAssets\Level-101.txt" />
      <None Include="Assets\StreamingAssets\Level89.txt" />
@@ -225,6 +226,7 @@
      <None Include="Assets\StreamingAssets\Ch4_notboring.txt" />
      <None Include="Assets\StreamingAssets\Level-6.txt" />
      <None Include="Assets\StreamingAssets\Level48.txt" />
+     <None Include="Assets\StreamingAssets\SmallDoubleHitMaps1.txt" />
      <None Include="Assets\StreamingAssets\Level20.txt" />
      <None Include="Assets\StreamingAssets\Level67.txt" />
      <None Include="Assets\StreamingAssets\Level-17.txt" />
@@ -261,6 +263,7 @@
      <None Include="Assets\StreamingAssets\Level-20.txt" />
      <None Include="Assets\StreamingAssets\ch4_notboring3.txt" />
      <None Include="Assets\StreamingAssets\4x4_LRUD1_Medium.txt" />
+     <None Include="Assets\StreamingAssets\DoubleHitMaps4.txt" />
      <None Include="Assets\Mirza Beig\Shaders\Image Effects\Resources\Sharpen\Sharpen.shader" />
      <None Include="Assets\StreamingAssets\TestMap.txt" />
      <None Include="Assets\StreamingAssets\newestpotd.txt" />
@@ -332,6 +335,7 @@
      <None Include="Assets\StreamingAssets\Level8.txt" />
      <None Include="Assets\Mirza Beig\_DOCS\README - Particle Plexus.txt" />
      <None Include="Assets\Mirza Beig\Particle Systems\_Common\Shaders\ASE Templates\Particle Anim Alpha Blend + MV Tex.shader" />
+     <None Include="Assets\StreamingAssets\DoubleHitMaps5.txt" />
      <None Include="Assets\StreamingAssets\Level73.txt" />
      <None Include="Assets\StreamingAssets\Level88.txt" />
      <None Include="Assets\StreamingAssets\Level11.txt" />

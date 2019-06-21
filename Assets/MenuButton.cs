@@ -17,6 +17,7 @@ public class MenuButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler{
     public static bool open;
     public GameObject ConfigMenu;
     public GameObject levelText;
+    public GameObject ringObject;
 	// Use this for initialization
 	void Start () {
 		open = false;	
@@ -31,16 +32,33 @@ public class MenuButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler{
         Debug.Log("menu");
             MenuButton.open = !MenuButton.open;
             RectTransform myrt = levelText.GetComponent<RectTransform>();
+            
             for(int i=0; i<buttons.Count; i++){
                 buttons[i].SetActive(open);
             }
             if(MenuButton.open){
-                myrt.localPosition = new Vector3 (myrt.localPosition.x,-430,0);
+                myrt.localPosition = new Vector3 (myrt.localPosition.x,-410,0);
+                StartCoroutine(RotateRing(-30, .2f));
             }
             else{
                 myrt.localPosition = new Vector3 (myrt.localPosition.x,0,0);
+                StartCoroutine(RotateRing(30, .2f));
             }
 	}
+	public void toggleMenuWorld(){
+            MenuButton.open = !MenuButton.open;
+            for(int i=0; i<buttons.Count; i++){
+                buttons[i].SetActive(open);
+            }	
+        }
+    public IEnumerator RotateRing(float target, float fadetime){
+        for(float t = 0.0f; t<fadetime; t+= Time.deltaTime){
+            float normalizedTime = t/fadetime;
+            ringObject.GetComponent<RectTransform>().eulerAngles = new Vector3(0, 0, target*Mathf.Lerp(0,1, normalizedTime));
+            yield return null;
+        }
+        ringObject.GetComponent<RectTransform>().eulerAngles = new Vector3(0, 0, target);
+    }
     public void closeMenu(){
 
     }

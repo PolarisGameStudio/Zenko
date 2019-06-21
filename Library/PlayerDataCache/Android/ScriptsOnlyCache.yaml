@@ -49,10 +49,8 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.TestListCacheData
@@ -69,7 +67,6 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.Slider
     - UnityEngine.UI.Text
     com.unity.multiplayer-hlapi.Runtime.dll:
-    - UnityEngine.Networking.NetworkCallbacks
     - UnityEngine.Networking.NetworkIdentity
   sceneClasses:
     Assets/Level.unity:
@@ -328,6 +325,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 10802}
     - Class: 114
       Script: {instanceID: 10844}
+    - Class: 114
+      Script: {instanceID: 10900}
     - Class: 114
       Script: {instanceID: 11044}
     - Class: 114
@@ -1319,7 +1318,7 @@ ScriptsOnlyBuild:
     className: SignalTrack
   - hash:
       serializedVersion: 2
-      Hash: 736a3336b4d7fc96958e4d54ec01485c
+      Hash: 422d5747ab964a06c2ba3a8d97268eb3
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ImageHolder
@@ -1843,4 +1842,4 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/WorldSelect.unity
   - Assets/Level.unity
-  playerPath: /Users/bernardolimonvillarreal/Desktop/ZenkoJunio3/ZenkoJunio9.apk
+  playerPath: /Users/bernardolimonvillarreal/Desktop/ZenkoJunio19android.apk

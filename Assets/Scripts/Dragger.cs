@@ -33,7 +33,9 @@ public class Dragger : MonoBehaviour {
 	public bool startedDragging;
 	public PieceHolders pieceHolder;
 	public Vector3 piecePosition;
+	public bool hinting;
 	void Start(){
+		hinting = false;
 		particle = GameObject.Find("Main Camera").GetComponent<LevelBuilder>().smoke_particle.gameObject;
 		restingpoint = transform.position;
 		gototile = false;
@@ -86,7 +88,12 @@ public class Dragger : MonoBehaviour {
 			}
 		}
 		if(startedDragging){
-			OnMouseDrag();
+			if(PieceHolders.hinting){
+
+			}
+			else{
+				OnMouseDrag();
+			}
 		}
 		if(Input.GetMouseButtonUp(0) && startedDragging){
 			startedDragging = false;			
@@ -94,7 +101,9 @@ public class Dragger : MonoBehaviour {
 
 		}
 	}
-
+	public void GoToHint(){
+//		StartCoroutine(HintMove());
+	}
 	 public void OnMouseDown() {
 	 	//PieceHolders.placedpieces.Remove(this);
 		//transform.GetChild(1).gameObject.SetActive(false);
@@ -159,8 +168,56 @@ public class Dragger : MonoBehaviour {
 		}
 			//notmoving =	 	false;	
  }
- 
- void OnMouseDrag()
+  	public IEnumerator HintMove(Vector3 postogo){ 
+  		OnMouseDown();
+  		float fadetime = 2;
+
+        for(float t = 0.0f; t<fadetime; t+= Time.deltaTime){
+        	float normalizedTime = t/fadetime;
+            Vector3 currentposition = new Vector3(Mathf.Lerp(0,1, normalizedTime),Mathf.Lerp(0,1, normalizedTime),Mathf.Lerp(0,1, normalizedTime));
+            DragHint(currentposition);
+            yield return null;
+        }
+
+
+	}
+	public void DragHint(Vector3 postogo){
+		/*if (TurnBehaviour.turn == 0 || LevelBuilder.resetting) {
+			Vector3 curScreenPoint = new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 15);
+			Vector3 curPosition = Camera.main.ScreenToWorldPoint (curScreenPoint) + offset;
+
+
+			positiontogo = PlaneBehavior.planePos;	
+			piecePosition = new Vector3(PlaneBehavior.planePos.x, PlaneBehavior.planePos.y, PlaneBehavior.planePos.z);
+			positiontogo = new Vector3(Mathf.RoundToInt(PlaneBehavior.planePos.x), PlaneBehavior.planePos.y, Mathf.RoundToInt(PlaneBehavior.planePos.z));	
+
+
+			if(lastposition != positiontogo || currenttile == null){
+				CheckAvailableTile(positiontogo);
+			}	
+
+
+			lastposition = positiontogo;
+
+
+			if(!gotosky){
+				transform.position = piecePosition;
+				if(positiontogo.x<LevelBuilder.totaldimension && -transform.position.z<LevelBuilder.totaldimension){
+				}
+			}
+
+			myPosition = transform.position;
+			if(Input.touchCount>0){
+				Touch t = Input.GetTouch(0);
+				Swiping.firstPressPos = new Vector2(t.position.x,t.position.y);
+
+			}
+			else{
+				Swiping.firstPressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+			}
+		}*/
+	}
+public void OnMouseDrag()
 	{ 
 		if (TurnBehaviour.turn == 0 || LevelBuilder.resetting) {
 			Vector3 curScreenPoint = new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 15);

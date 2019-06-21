@@ -13,6 +13,7 @@ ScriptsOnlyBuild:
     - GameManager
     - GoalBehaviour
     - HueModifier
+    - ImageHolder
     - ImageSwitch
     - LevelBuilder
     - LevelManager
@@ -20,7 +21,6 @@ ScriptsOnlyBuild:
     - LevelOrganizer
     - LevelSaver
     - LevelStorer
-    - LightController
     - MenuButton
     - MirzaBeig.ParticleSystems.Demos.CameraShake
     - MirzaBeig.ParticleSystems.Demos.MouseFollow
@@ -31,9 +31,9 @@ ScriptsOnlyBuild:
     - PieceHolders
     - PlaneBehavior
     - PlayerAnimation
-    - PlayerFollower
     - PlayerMovement
     - ProgressBar
+    - RatingBehaviour
     - RatingButtonText
     - RatingPopUp
     - Rayito
@@ -49,8 +49,10 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.TestListCacheData
@@ -116,11 +118,11 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9422}
     - Class: 114
-      Script: {instanceID: 9430}
-    - Class: 114
       Script: {instanceID: 9474}
     - Class: 114
       Script: {instanceID: 9494}
+    - Class: 114
+      Script: {instanceID: 9530}
     - Class: 114
       Script: {instanceID: 9624}
     - Class: 114
@@ -174,37 +176,37 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10844}
     - Class: 114
-      Script: {instanceID: 10948}
+      Script: {instanceID: 10900}
     - Class: 114
-      Script: {instanceID: 10986}
+      Script: {instanceID: 10950}
     - Class: 114
-      Script: {instanceID: 11000}
+      Script: {instanceID: 10988}
     - Class: 114
-      Script: {instanceID: 11042}
+      Script: {instanceID: 11002}
     - Class: 114
-      Script: {instanceID: 11046}
+      Script: {instanceID: 11044}
     - Class: 114
-      Script: {instanceID: 11178}
+      Script: {instanceID: 11048}
     - Class: 114
-      Script: {instanceID: 11196}
+      Script: {instanceID: 11180}
     - Class: 114
-      Script: {instanceID: 11468}
+      Script: {instanceID: 11198}
     - Class: 114
-      Script: {instanceID: 11488}
+      Script: {instanceID: 11490}
     - Class: 114
-      Script: {instanceID: 11640}
+      Script: {instanceID: 11642}
     - Class: 114
-      Script: {instanceID: 11834}
+      Script: {instanceID: 11836}
     - Class: 114
-      Script: {instanceID: 11856}
+      Script: {instanceID: 11858}
     - Class: 114
-      Script: {instanceID: 11866}
+      Script: {instanceID: 11868}
     - Class: 114
-      Script: {instanceID: 12356}
+      Script: {instanceID: 12358}
     - Class: 114
-      Script: {instanceID: 12408}
+      Script: {instanceID: 12410}
     - Class: 114
-      Script: {instanceID: 12450}
+      Script: {instanceID: 12452}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -327,21 +329,21 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10844}
     - Class: 114
-      Script: {instanceID: 11042}
+      Script: {instanceID: 11044}
     - Class: 114
-      Script: {instanceID: 11052}
+      Script: {instanceID: 11054}
     - Class: 114
-      Script: {instanceID: 11518}
+      Script: {instanceID: 11520}
     - Class: 114
-      Script: {instanceID: 11608}
+      Script: {instanceID: 11610}
     - Class: 114
-      Script: {instanceID: 11640}
+      Script: {instanceID: 11642}
     - Class: 114
-      Script: {instanceID: 11824}
+      Script: {instanceID: 11826}
     - Class: 114
-      Script: {instanceID: 11834}
+      Script: {instanceID: 11836}
     - Class: 114
-      Script: {instanceID: 11866}
+      Script: {instanceID: 11868}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -489,7 +491,7 @@ ScriptsOnlyBuild:
     className: HueModifier
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: f68f6946ea852efb0ccf7d2225da7c2f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: RatingBehaviour
@@ -1233,7 +1235,7 @@ ScriptsOnlyBuild:
     className: Rotator
   - hash:
       serializedVersion: 2
-      Hash: 060842c18546501f53b0e68c564f5373
+      Hash: 28e33d69bd757b8b6279cedd36d4cd2d
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ProgressBar
@@ -1315,6 +1317,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: SignalTrack
+  - hash:
+      serializedVersion: 2
+      Hash: 736a3336b4d7fc96958e4d54ec01485c
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ImageHolder
   - hash:
       serializedVersion: 2
       Hash: a56a613ad082615f31e91b12f9052ee8
@@ -1629,7 +1637,7 @@ ScriptsOnlyBuild:
     className: TextMeshProUGUI
   - hash:
       serializedVersion: 2
-      Hash: 539dadab76c6148d6065c3349b9bdfc4
+      Hash: c58903346e3476ac6c87950eae987f59
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MenuButton
@@ -1835,4 +1843,4 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/WorldSelect.unity
   - Assets/Level.unity
-  playerPath: /Users/bernardolimonvillarreal/Desktop/Zenkowinjune9/Zenkomacjune9/ZenkomacJune9.app
+  playerPath: /Users/bernardolimonvillarreal/Desktop/ZenkoMacJune19/ZenkomacJune19.app

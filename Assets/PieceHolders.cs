@@ -45,6 +45,7 @@ public class PieceHolders : MonoBehaviour {
 	public int upSeedNumber;
 	public int downSeedNumber;
 	public int wallSeedNumber;
+	public static bool hinting;
 	public static List<Dragger> placedpieces = new List<Dragger>();
 	SceneLoading sl;
 	// Use this for initialization
@@ -649,10 +650,14 @@ public class PieceHolders : MonoBehaviour {
 			sl.ResetLevelButton();
 		}
 	}
+	public IEnumerator HintTowards(Vector3 targetpos, Dragger dragger){
+		dragger.transform.position = new Vector3(targetpos.x,0,targetpos.y);	
+		
+		yield return null;
+	}
 	public void PlaceHint(Dragger dragger, Vector2 position){
-		dragger.transform.GetChild(1).gameObject.SetActive(true);
-
-		dragger.transform.position = new Vector3(position.x,0,-position.y);	
+		//dragger.transform.GetChild(1).gameObject.SetActive(true);
+		StartCoroutine(HintTowards(new Vector3(position.x,0,-position.y), dragger));
 		if(dragger.myType == "Wall" || dragger.myType == "Seed"){
 			placeNormal(position, dragger);
 		}
