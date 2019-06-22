@@ -5,8 +5,8 @@ using System.Linq;
 
 public class PlaneBehavior : MonoBehaviour {
 	public GameObject camera;
-	Camera cam;
-	Plane plane;
+	static Camera cam;
+	static Plane plane;
 	Vector3 m0;
 	public static Vector3 planePos;
 	public static int tilex;
@@ -21,10 +21,13 @@ public class PlaneBehavior : MonoBehaviour {
 	public static int currenty;
 	public static List<Vector3> hoverCandidates = new List<Vector3>();
 	public static GameObject highlightedTile;
+	public static Vector3 simulatedMouse;
+	//public static PlaneBehavior myPlaneBehavior;
 	//public static Vector2 origin;
 	//public static Vector2 target;
 	// Use this for initialization
 	void Start () {
+//		myPlaneBehavior = this.Instance;
 		offsetup = .8f;
 		
 		cam = GameObject.Find ("Main Camera").GetComponent<Camera>();
@@ -36,48 +39,50 @@ public class PlaneBehavior : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		PlaneRay();
+		if(!PieceHolders.hinting){
+			if(LevelManager.isdragging){
+				PlaneRay();
+			}
+		}
+		else{
+		RoboRay(simulatedMouse);
+
+		}
 		if (Input.GetKeyDown (KeyCode.T)){
 			ClosestTile();
 		}
 		//ClosestX();
 		//ClosestTile();
 	}
-	void PlaneRay(){
+	
+	public static void RoboRay(Vector3 target){
+		Vector3 origin = cam.transform.position;
+		Ray ray = new Ray(origin, target-origin);
+		float rayDistance = 100;
+		Debug.Log(ray.origin + " " + ray.direction);
+		Debug.Log(simulatedMouse);
+		if(plane.Raycast(ray,out rayDistance)){
+//		Debug.Log(ray.GetPoint(rayDistance));
+			planePos = ray.GetPoint(rayDistance);
+			planePos = planePos + Vector3.up*offsetup;
+			Debug.Log(planePos);
+//			Debug.Log(planePos);
+			curpos = new Vector2(Mathf.RoundToInt(planePos.x), -Mathf.RoundToInt(planePos.z));
+		}
+        Debug.DrawRay(ray.origin, ray.direction * 100, Color.yellow);
+	}
 
+	void PlaneRay(){
+		Debug.Log(Input.mousePosition);
 		Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+		Debug.Log(ray.origin + " " + ray.direction);
 		float rayDistance = 100;
 		if(plane.Raycast(ray,out rayDistance)){
 //		Debug.Log(ray.GetPoint(rayDistance));
 			planePos = ray.GetPoint(rayDistance);
 			planePos = planePos + Vector3.up*offsetup;
-//			Debug.Log(planePos);
+			Debug.Log(planePos);
 			curpos = new Vector2(Mathf.RoundToInt(planePos.x), -Mathf.RoundToInt(planePos.z));
-			/*if(planePos.x<7.4 && planePos.x>-0.5 && planePos.z>-7.4 && planePos.z<.5){
-				LevelBuilder.tiles[(int)curpos.x,(int)curpos.y].tileObj.GetComponentInChildren<MeshRenderer>().material.color = Color.red;
-				Debug.Log(curpos.x +"" + curpos.y);
-				if(hashad){
-					if((int)curpos.x != (int) previouspos.x || (int)curpos.y != curpos.y ){
-						Debug.Log(curpos + "" + previouspos);
-						LevelBuilder.tiles[Mathf.RoundToInt(previouspos.x), Mathf.RoundToInt(previouspos.y)].tileObj.GetComponentInChildren<MeshRenderer>().
-						material.color = Color.white;
-						//Debug.Log("Inboard");
-					}
-				}
-				previouspos =curpos;
-				hashad = true;
-			}*/
-			//Debug.Log("Giving prev"); //not getting here when previouspos doesnt exist. stops at l48.	
-
-			//previouspos = curpos;
-			//hashad = true;
-			//float diff = Vector2.Distance(previouspos, curpos);
-			//if(diff != 0){
-			//	LevelBuilder.tiles[(int)previouspos.x, (int)previouspos.x].tileObj.GetComponentInChildren<MeshRenderer>().
-				//material.color = Color.white;
-			//}
-
-
 		}
         Debug.DrawRay(ray.origin, ray.direction * 100, Color.yellow);
 	}

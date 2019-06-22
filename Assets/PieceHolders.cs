@@ -46,6 +46,7 @@ public class PieceHolders : MonoBehaviour {
 	public int downSeedNumber;
 	public int wallSeedNumber;
 	public static bool hinting;
+	public static Dragger draggee;
 	public static List<Dragger> placedpieces = new List<Dragger>();
 	SceneLoading sl;
 	// Use this for initialization
@@ -643,7 +644,7 @@ public class PieceHolders : MonoBehaviour {
 		
 	}
 	public void HintOrRestart(){
-		if(TurnBehaviour.turn == 0){
+		if(TurnBehaviour.turn == 0&&!hinting){
 			Hint();
 		}
 		if(TurnBehaviour.turn == 1){
@@ -652,18 +653,18 @@ public class PieceHolders : MonoBehaviour {
 	}
 	public IEnumerator HintTowards(Vector3 targetpos, Dragger dragger){
 		dragger.transform.position = new Vector3(targetpos.x,0,targetpos.y);	
-		
-		yield return null;
+		yield break;
 	}
 	public void PlaceHint(Dragger dragger, Vector2 position){
 		//dragger.transform.GetChild(1).gameObject.SetActive(true);
-		StartCoroutine(HintTowards(new Vector3(position.x,0,-position.y), dragger));
-		if(dragger.myType == "Wall" || dragger.myType == "Seed"){
-			placeNormal(position, dragger);
-		}
-		if(dragger.myType == "Left" || dragger.myType == "Up" || dragger.myType == "Down" || dragger.myType == "Right"){
-			placeIcarus(position,dragger);
-		}
+		draggee = dragger;
+		dragger.GoToHint(new Vector3(position.x,0,-position.y));
+		// if(dragger.myType == "Wall" || dragger.myType == "Seed"){
+		// 	placeNormal(position, dragger);
+		// }
+		// if(dragger.myType == "Left" || dragger.myType == "Up" || dragger.myType == "Down" || dragger.myType == "Right"){
+		// 	placeIcarus(position,dragger);
+		// }
 		//placedpieces.Add(dragger);
 	}
 	public bool PartofSolution(int position){

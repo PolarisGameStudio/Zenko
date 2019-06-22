@@ -33,9 +33,7 @@ public class Dragger : MonoBehaviour {
 	public bool startedDragging;
 	public PieceHolders pieceHolder;
 	public Vector3 piecePosition;
-	public bool hinting;
 	void Start(){
-		hinting = false;
 		particle = GameObject.Find("Main Camera").GetComponent<LevelBuilder>().smoke_particle.gameObject;
 		restingpoint = transform.position;
 		gototile = false;
@@ -101,8 +99,10 @@ public class Dragger : MonoBehaviour {
 
 		}
 	}
-	public void GoToHint(){
-//		StartCoroutine(HintMove());
+	public void GoToHint(Vector3 postogo){
+		PieceHolders.hinting = true;
+
+		StartCoroutine(HintMove(postogo));
 	}
 	 public void OnMouseDown() {
 	 	//PieceHolders.placedpieces.Remove(this);
@@ -171,14 +171,36 @@ public class Dragger : MonoBehaviour {
   	public IEnumerator HintMove(Vector3 postogo){ 
   		OnMouseDown();
   		float fadetime = 2;
-
+  		Vector3 initialPosition = transform.position;
+  		initialPosition.y = .23f;
+  		postogo.y = .23f;
+  		Vector3 distance = postogo-initialPosition;
+  		Debug.Log(postogo + "postogo");
+  		PlaneBehavior.RoboRay(initialPosition);
         for(float t = 0.0f; t<fadetime; t+= Time.deltaTime){
         	float normalizedTime = t/fadetime;
-            Vector3 currentposition = new Vector3(Mathf.Lerp(0,1, normalizedTime),Mathf.Lerp(0,1, normalizedTime),Mathf.Lerp(0,1, normalizedTime));
-            DragHint(currentposition);
+            PlaneBehavior.simulatedMouse = new Vector3(initialPosition.x+distance.x*Mathf.Lerp(0,1, normalizedTime),.23f,initialPosition.z+distance.z*Mathf.Lerp(0,1, normalizedTime));
+            OnMouseDrag();
             yield return null;
         }
-
+		PlaneBehavior.simulatedMouse = postogo;
+        //while(transform.position != postogo){
+        OnMouseDrag();
+        //}
+        OnMouseUp();
+        Vector3 position = new Vector2 (postogo.x, -postogo.z);
+        Debug.Log(position);
+		if(myType == "Wall" || myType == "Seed"){
+			pieceHolder.placeNormal(position, this);
+		}
+		if(myType == "Left" || myType == "Up" || myType == "Down" || myType == "Right"){
+			pieceHolder.placeIcarus(position,this);
+		}
+        startedDragging = false;
+        PieceHolders.hinting = false;
+//        Vector3 currentposition = new Vector3(Mathf.Lerp(0,1, normalizedTime),Mathf.Lerp(0,1, normalizedTime),Mathf.Lerp(0,1, normalizedTime));
+        //OnMouseDrag();
+        yield break;
 
 	}
 	public void DragHint(Vector3 postogo){
