@@ -59,13 +59,13 @@ public class PlaneBehavior : MonoBehaviour {
 		Vector3 origin = cam.transform.position;
 		Ray ray = new Ray(origin, target-origin);
 		float rayDistance = 100;
-		Debug.Log(ray.origin + " " + ray.direction);
-		Debug.Log(simulatedMouse);
+//		Debug.Log(ray.origin + " " + ray.direction);
+//		Debug.Log(simulatedMouse);
 		if(plane.Raycast(ray,out rayDistance)){
 //		Debug.Log(ray.GetPoint(rayDistance));
 			planePos = ray.GetPoint(rayDistance);
 			planePos = planePos + Vector3.up*offsetup;
-			Debug.Log(planePos);
+//			Debug.Log(planePos);
 //			Debug.Log(planePos);
 			curpos = new Vector2(Mathf.RoundToInt(planePos.x), -Mathf.RoundToInt(planePos.z));
 		}
@@ -226,9 +226,9 @@ public class PlaneBehavior : MonoBehaviour {
 		float distance = Vector2.Distance(origin, target);
 		Vector3 candidate = new Vector3(xpoint,ypoint,distance);
 		hoverCandidates.Add(candidate);
-		Debug.Log(origin);
-		Debug.Log(target);
-		Debug.Log(distance);
+		// Debug.Log(origin);
+		// Debug.Log(target);
+		// Debug.Log(distance);
 	}
 	public static void SortCandidates(){
 		hoverCandidates = hoverCandidates.OrderBy(x => x.z).ToList();

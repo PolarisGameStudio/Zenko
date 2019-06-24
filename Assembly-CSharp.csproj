@@ -175,6 +175,7 @@
      <None Include="Assets\StreamingAssets\Level12.txt" />
      <None Include="Assets\StreamingAssets\Level3.txt" />
      <None Include="Assets\StreamingAssets\SmallFilteredMaps.txt" />
+     <None Include="Assets\StreamingAssets\SmallDoubleHitMaps3.txt" />
      <None Include="Assets\StreamingAssets\Level19.txt" />
      <None Include="Assets\StreamingAssets\Level-101.txt" />
      <None Include="Assets\StreamingAssets\Level89.txt" />
@@ -312,6 +313,8 @@
      <None Include="Assets\StreamingAssets\Level64.txt" />
      <None Include="Assets\StreamingAssets\Ch3_lrud.txt" />
      <None Include="Assets\StreamingAssets\Level-105.txt" />
+     <None Include="Assets\StreamingAssets\FilteredSmallTwoTouch.txt" />
+     <None Include="Assets\StreamingAssets\SmallDoubleHitMaps2.txt" />
      <None Include="Assets\StreamingAssets\Level90.txt" />
      <None Include="Assets\Mirza Beig\_DOCS\README - Storm VFX.txt" />
      <None Include="Assets\StreamingAssets\RandomMaps.txt" />

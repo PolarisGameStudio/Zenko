@@ -21,7 +21,7 @@ public class LevelOrganizer : MonoBehaviour {
 	}
 	public IEnumerator unshufflePotd(){ //feeds levelPotd string array from textfile.
 		startersPotd = new List<int>();
-		string file = "SmallDoubleHitMaps1.txt";
+		string file = "SmallDoubleHitMaps3.txt";
 		filePath = System.IO.Path.Combine(Application.streamingAssetsPath, file);
 		Debug.Log (filePath + "FILEPAPAPATH");
 		result = " ";

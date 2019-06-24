@@ -170,16 +170,20 @@ public class Dragger : MonoBehaviour {
  }
   	public IEnumerator HintMove(Vector3 postogo){ 
   		OnMouseDown();
-  		float fadetime = 2;
+  		//float fadetime = 2;
   		Vector3 initialPosition = transform.position;
   		initialPosition.y = .23f;
   		postogo.y = .23f;
-  		Vector3 distance = postogo-initialPosition;
+  		Vector3 direction = postogo-initialPosition;
+  		Debug.Log(direction);
+  		float distance = Vector3.Distance(postogo, initialPosition);
+  		float fadetime = .5f*distance;
+  		Debug.Log(distance);
   		Debug.Log(postogo + "postogo");
   		PlaneBehavior.RoboRay(initialPosition);
         for(float t = 0.0f; t<fadetime; t+= Time.deltaTime){
         	float normalizedTime = t/fadetime;
-            PlaneBehavior.simulatedMouse = new Vector3(initialPosition.x+distance.x*Mathf.Lerp(0,1, normalizedTime),.23f,initialPosition.z+distance.z*Mathf.Lerp(0,1, normalizedTime));
+            PlaneBehavior.simulatedMouse = new Vector3(initialPosition.x+direction.x*Mathf.Lerp(0,1, normalizedTime),.23f,initialPosition.z+direction.z*Mathf.Lerp(0,1, normalizedTime));
             OnMouseDrag();
             yield return null;
         }
