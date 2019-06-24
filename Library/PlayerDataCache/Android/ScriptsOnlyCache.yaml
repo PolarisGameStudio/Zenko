@@ -67,6 +67,7 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.Slider
     - UnityEngine.UI.Text
     com.unity.multiplayer-hlapi.Runtime.dll:
+    - UnityEngine.Networking.NetworkCallbacks
     - UnityEngine.Networking.NetworkIdentity
   sceneClasses:
     Assets/Level.unity:
@@ -1636,7 +1637,7 @@ ScriptsOnlyBuild:
     className: TextMeshProUGUI
   - hash:
       serializedVersion: 2
-      Hash: c58903346e3476ac6c87950eae987f59
+      Hash: 51baca7ac1ea253a4d2486be2db11d1d
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MenuButton
