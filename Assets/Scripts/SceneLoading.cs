@@ -295,7 +295,7 @@ public class SceneLoading : MonoBehaviour {
 			Debug.Log("Going to Level "+ num);
 			LevelManager.levelnum = num;
 			LoadScene(LevelManager.levelnum);
-			MusicHandler.PlayInitialLoop(0);
+			MusicHandler.PlayInitialLoop();
 		//}
 
 	}
