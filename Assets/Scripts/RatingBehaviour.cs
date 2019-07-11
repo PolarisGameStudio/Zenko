@@ -43,9 +43,14 @@ public class RatingBehaviour : MonoBehaviour {
 		turnratio = curturns / totturns;
 		if (turnratio <= 1) {
 			rating = 3;
-		} else if (turnratio <= 2) {
+		} else if (turnratio <= 1.5) {
 			rating = 2;
-		} else if (turnratio< 3){
+		} else if (turnratio<2){
+			if(totturns>2){
+				rating = 1;
+			}
+		}
+		else if(turnratio == 2 && totturns<=2){
 			rating = 1;
 		}
 		else{
@@ -63,27 +68,45 @@ public class RatingBehaviour : MonoBehaviour {
 		star1 = GameObject.Find("Star1");
 		star2 = GameObject.Find("Star2");
 		star3 = GameObject.Find("Star3");
-		star1.GetComponent<Image>().color = Color.white;
-		star2.GetComponent<Image>().color = Color.white;
-		star3.GetComponent<Image>().color = Color.white;
+		star1.GetComponent<Image>().sprite = instance.Lstar;
+		star2.GetComponent<Image>().sprite = instance.Mstar;
+		star3.GetComponent<Image>().sprite = instance.Rstar;
 	}
 	static public void RestartRating(){
 		currentrating = 3;
-		star1.GetComponent<Image>().color = Color.white;
-		star2.GetComponent<Image>().color = Color.white;
-		star3.GetComponent<Image>().color = Color.white;		
+		star1.GetComponent<Image>().sprite = instance.Lstar;
+		star2.GetComponent<Image>().sprite = instance.Mstar;
+		star3.GetComponent<Image>().sprite = instance.Rstar;		
 	}
 	static public void ChangeRating(int newrating){
 		if(newrating == 2){
-			star3.GetComponent<Image>().color = Color.red;
+			star3.GetComponent<Image>().sprite = instance.Rnotstar;
 		}
 		if(newrating == 1){
-			star2.GetComponent<Image>().color = Color.red;
+			star3.GetComponent<Image>().sprite = instance.Rnotstar;
+			star2.GetComponent<Image>().sprite = instance.Mnotstar;
 		}
 		if(newrating == 0){
-			star1.GetComponent<Image>().color = Color.red;
+			star1.GetComponent<Image>().sprite = instance.Lnotstar;
+			star2.GetComponent<Image>().sprite = instance.Mnotstar;
+			star3.GetComponent<Image>().sprite = instance.Rnotstar;
+			//ProgressBar.progressFluid2.GetComponent<Image>().color = new Color(1,76/255f,76/255f,1);
+			if(totturns == 2){
+				instance.StartCoroutine(instance.ModulateColor(.2f, new Color(1,76/255f,76/255f,1)));
+			
+			}
+			//Debug.Log(ProgressBar.progressFluid2.GetComponent<Image>().color);
+
 		}
 		currentrating = newrating;
 	}
-
+	public IEnumerator ModulateColor(float fadetime, Color color){
+			for(float t = 0.0f; t<fadetime; t+= Time.deltaTime){
+				float normalizedTime = t/fadetime;
+	//			Debug.Log("1");
+				ProgressBar.progressFluid2.GetComponent<Image>().color = new Color(1, color.g*normalizedTime,
+					color.b*normalizedTime,1);
+				yield return null;
+			}		
+	}
 }

@@ -135,7 +135,7 @@ public class Dragger : MonoBehaviour {
 			if(transform.position.x<LevelBuilder.totaldimension && transform.position.x>0 && -transform.position.z<LevelBuilder.totaldimension && transform.position.z<0){
 				mytile = LevelBuilder.tiles[(int)gameObject.transform.position.x, -(int)gameObject.transform.position.z];
 				mytile.type = "Ice";
-				Debug.Log("UNTAKING IT at" + (int)gameObject.transform.position.x + -(int)gameObject.transform.position.z);
+				Debug.Log("UNTAKING IT at" + (int)gameObject.transform.position.x + -(int)gameObject.transform.position.z + "Type "+ myType);
 				mytile.isTaken = false;
 				//Debug.Log(LevelBuilder.tiles[(int)gameObject.transform.position.x, -(int)gameObject.transform.position.z-1].isTaken);
 				Debug.Log(mytile.isSideways);
@@ -177,7 +177,7 @@ public class Dragger : MonoBehaviour {
   		Vector3 direction = postogo-initialPosition;
   		Debug.Log(direction);
   		float distance = Vector3.Distance(postogo, initialPosition);
-  		float fadetime = .5f*distance;
+  		float fadetime = .3f*distance;
   		Debug.Log(distance);
   		Debug.Log(postogo + "postogo");
   		PlaneBehavior.RoboRay(initialPosition);
@@ -204,6 +204,10 @@ public class Dragger : MonoBehaviour {
         PieceHolders.hinting = false;
 //        Vector3 currentposition = new Vector3(Mathf.Lerp(0,1, normalizedTime),Mathf.Lerp(0,1, normalizedTime),Mathf.Lerp(0,1, normalizedTime));
         //OnMouseDrag();
+        //turn on colliders of draggers.
+        for(int i=0; i<PieceHolders.placedpieces.Count; i++){
+        	PieceHolders.placedpieces[i].gameObject.GetComponent<BoxCollider>().enabled = true;
+        }
         yield break;
 
 	}
@@ -640,6 +644,7 @@ public void OnMouseDrag()
 	}
 
 	public void removeIcarus(string type, Vector3 target){
+		Debug.Log("ICARUS IS BEING REMOVED");
 		Debug.Log(type);
 		if(type == "Left"){
 			if(LevelBuilder.tiles[(int)target.x-1, -(int)target.z].type == type){

@@ -36,11 +36,11 @@ public class LevelManager : MonoBehaviour {
 	//public static IceTileHandler myicehandler;
 
 
-	//private static LevelManager instance = null;
+	private static LevelManager instance = null;
 
 
 
-	/*void Awake(){
+	void Awake(){
 		if(instance == null)
 		{
 			instance = this;
@@ -48,7 +48,8 @@ public class LevelManager : MonoBehaviour {
 			return;
 		}
 		Destroy(this.gameObject);
-	}*/
+	}
+
 	public static void PopulateLists(){
 
 	}

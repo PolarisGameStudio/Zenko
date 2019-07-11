@@ -57,13 +57,13 @@ public class PlayerMovement : MonoBehaviour {
 		beingdragged = false;
 		lastFragile = null;
 		isspeeding = false;
-		levelWonBoard = GameObject.Find ("GameWon");
+		levelWonBoard = LevelBuilder.winboard;
 		if (levelWonBoard != null) {
 			SceneLoading.gamewon = levelWonBoard;
 			levelWonBoard.SetActive (false);
 
 		}
-		LevelLostBoard = GameObject.Find ("GameLost");
+		LevelLostBoard = LevelBuilder.loseboard;
 		if (LevelLostBoard != null) {
 			SceneLoading.gamelost = LevelLostBoard;
 			LevelLostBoard.SetActive (false);
@@ -82,12 +82,12 @@ public class PlayerMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(canmove){
-			this.transform.GetChild(3).GetComponent<Animator>().SetInteger("Phase", 0);
+			this.transform.GetChild(0).GetComponent<Animator>().SetInteger("Phase", 0);
 
 		}
 		if(!canmove && !GoalBehaviour.goaling){
 			//Debug.Log("SETTING");
-			this.transform.GetChild(3).GetComponent<Animator>().SetInteger("Phase", 1);
+			this.transform.GetChild(0).GetComponent<Animator>().SetInteger("Phase", 1);
 		}
 		if (Input.GetKeyDown (KeyCode.G)){
 			Debug.Log(LevelBuilder.tiles[0,0].isTaken);
@@ -268,7 +268,7 @@ public class PlayerMovement : MonoBehaviour {
 				}
 			}
 			else if (nextaction == "Down_Action") {
-								Debug.Log(nextaction);
+				Debug.Log(nextaction);
 				character_direction = "Down";
 				tiletotest = currenttile;
 				canmove = true;
@@ -478,6 +478,7 @@ public class PlayerMovement : MonoBehaviour {
 			TurnCounter.turncount++;
 //			Debug.Log (TurnCounter.turncount);
 			TG.TakeTurn(TurnCounter.turncount);
+			DotHandler.TakeTurn(TurnCounter.turncount);
 		}
 		if(firstmove == true){
 			firstmove = false;
@@ -585,7 +586,7 @@ public class PlayerMovement : MonoBehaviour {
 					}
 					if(tilenumber == 0){
 					GoalBehaviour.goaling = true;
-					this.transform.GetChild(3).GetComponent<Animator>().SetInteger("Phase", 2);
+					this.transform.GetChild(0).GetComponent<Animator>().SetInteger("Phase", 2);
 					StartCoroutine(animationController.Disappear(.4f));
 					speed = 3;
 					}

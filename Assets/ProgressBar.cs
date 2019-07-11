@@ -15,7 +15,9 @@ public class ProgressBar : MonoBehaviour {
 	public Color fillerColor;
 	static float stepvalue;
 	public static GameObject progressFluid;
+	public static GameObject progressFluid2;
 	ProgressBar instance;
+	public static float width;
 	// Use this for initialization
 	void Awake () {
 		instance = this;
@@ -25,7 +27,9 @@ public class ProgressBar : MonoBehaviour {
 		colortwo = color2;
 		progressColor = fillerColor;
 		progressFluid = this.transform.GetChild(1).gameObject;
+		progressFluid2 = this.transform.GetChild(2).gameObject;
 		totalHeight = 700;
+		width = 39.5f;
 	}
 	
 	// Update is called once per frame
@@ -52,7 +56,9 @@ public class ProgressBar : MonoBehaviour {
 	// 	}
 	// }
 	public static void InitializeProgressBar(int size){
-		progressFluid.GetComponent<RectTransform>().sizeDelta = new Vector2(50, 0);
+		progressFluid.GetComponent<RectTransform>().sizeDelta = new Vector2(width, 0);
+		progressFluid2.GetComponent<RectTransform>().sizeDelta = new Vector2(width, 0);
+		progressFluid2.GetComponent<Image>().color = new Color(1,1,1,1);
 		stepvalue = totalHeight/size;
 	}
 	public void TakeTurn(int number){
@@ -61,7 +67,7 @@ public class ProgressBar : MonoBehaviour {
 			StartCoroutine(IncreaseBar(.2f, number));
 		}
 		else if(number<= LevelStorer.efficientturns*2){	
-
+			StartCoroutine(IncreaseBar2(.2f,number));
 		}
 		else if(number <= LevelStorer.efficientturns*3){
 
@@ -73,30 +79,79 @@ public class ProgressBar : MonoBehaviour {
 			for(float t = 0.0f; t<fadetime; t+= Time.deltaTime){
 				float normalizedTime = t/fadetime;
 	//			Debug.Log("1");
-				progressFluid.GetComponent<RectTransform>().sizeDelta =	new Vector2(50, (stepvalue*(step-1))+(1.1f*stepvalue*Mathf.Lerp(0,1, normalizedTime)));
+				progressFluid.GetComponent<RectTransform>().sizeDelta =	new Vector2(width, (stepvalue*(step-1))+(1.1f*stepvalue*Mathf.Lerp(0,1, normalizedTime)));
 				yield return null;
 			}
-			progressFluid.GetComponent<RectTransform>().sizeDelta =	new Vector2(50, (stepvalue*step));			
+			progressFluid.GetComponent<RectTransform>().sizeDelta =	new Vector2(width, (stepvalue*step));			
 
 		}
 		else{
 			for(float t = 0.0f; t<fadetime; t+= Time.deltaTime){
 				float normalizedTime = t/fadetime;
 	//			Debug.Log("1");
-				progressFluid.GetComponent<RectTransform>().sizeDelta =	new Vector2(50, (stepvalue*(step-1))+(1.1f*stepvalue*Mathf.Lerp(0,1, normalizedTime)));
+				progressFluid.GetComponent<RectTransform>().sizeDelta =	new Vector2(width, (stepvalue*(step-1))+(1.1f*stepvalue*Mathf.Lerp(0,1, normalizedTime)));
 				yield return null;
 			}
 			float current = (stepvalue*(step-1))+(1.1f*stepvalue);
 			for(float t = 0.0f; t<fadetime; t+= Time.deltaTime){
 				float normalizedTime = t/fadetime;
 	//			Debug.Log("1");
-				progressFluid.GetComponent<RectTransform>().sizeDelta =	new Vector2(50, current-(.1f*stepvalue*Mathf.Lerp(0,1, normalizedTime)));
+				progressFluid.GetComponent<RectTransform>().sizeDelta =	new Vector2(width, current-(.1f*stepvalue*Mathf.Lerp(0,1, normalizedTime)));
 				yield return null;
 			}
-			progressFluid.GetComponent<RectTransform>().sizeDelta =	new Vector2(50, (stepvalue*step));			
+			progressFluid.GetComponent<RectTransform>().sizeDelta =	new Vector2(width, (stepvalue*step));			
 		}
 
 
+	}
+	public IEnumerator IncreaseBar2 (float fadetime, int step){
+		int efturns = LevelStorer.efficientturns;
+		float startingHeight = (step-1-efturns)*stepvalue;
+		if(step == efturns*2){
+			for(float t = 0.0f; t<fadetime; t+= Time.deltaTime){
+				Debug.Log("STEPPER");
+				float normalizedTime = t/fadetime;
+	//			Debug.Log("1");
+				progressFluid2.GetComponent<RectTransform>().sizeDelta =	new Vector2(width, (stepvalue*(step-1-efturns))+(1.1f*stepvalue*Mathf.Lerp(0,1, normalizedTime)));
+				
+				yield return null;
+			}
+			progressFluid2.GetComponent<RectTransform>().sizeDelta =	new Vector2(width, (stepvalue*(step-efturns)));		
+			if(efturns != 2){
+				instance.StartCoroutine(instance.ModulateColor(.2f, new Color(1,76/255f,76/255f,1)));
+			}
+
+
+		}
+		else{
+			for(float t = 0.0f; t<fadetime; t+= Time.deltaTime){
+				float normalizedTime = t/fadetime;
+	//			Debug.Log("1");
+				progressFluid2.GetComponent<RectTransform>().sizeDelta =	new Vector2(width, (stepvalue*(step-1-efturns))+(1.1f*stepvalue*Mathf.Lerp(0,1, normalizedTime)));
+				yield return null;
+			}
+			float current = (stepvalue*(step-1-efturns))+(1.1f*stepvalue);
+			for(float t = 0.0f; t<fadetime; t+= Time.deltaTime){
+				float normalizedTime = t/fadetime;
+	//			Debug.Log("1");
+				progressFluid2.GetComponent<RectTransform>().sizeDelta =	new Vector2(width, current-(.1f*stepvalue*Mathf.Lerp(0,1, normalizedTime)));
+				//instance.StartCoroutine(instance.ModulateColor(.2f, new Color(1,76/255f,76/255f,1)));
+				
+				yield return null;
+			}
+			progressFluid2.GetComponent<RectTransform>().sizeDelta =	new Vector2(width, (stepvalue*(step-efturns)));	
+
+		}
+
+	}
+	public IEnumerator ModulateColor(float fadetime, Color color){
+			for(float t = 0.0f; t<fadetime; t+= Time.deltaTime){
+				float normalizedTime = t/fadetime;
+	//			Debug.Log("1");
+				ProgressBar.progressFluid2.GetComponent<Image>().color = new Color(1, color.g*normalizedTime,
+					color.b*normalizedTime,1);
+				yield return null;
+			}		
 	}
 	// public static void TakeTurn(int number){
 	// 	if(number <= LevelStorer.efficientturns){

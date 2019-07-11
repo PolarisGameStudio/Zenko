@@ -57,7 +57,7 @@ public class PieceHolders : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		//Debug.Log(LevelBuilder.tiles[6,4].isTaken);
 	}
 	public void initSize(){
 		RectTransform rt = GetComponent<RectTransform>();
@@ -574,7 +574,24 @@ public class PieceHolders : MonoBehaviour {
 			downSeedHolder.transform.GetChild(0).transform.GetComponent<Text>().text = "DownSeed x" + downSeedNumber;
 		}
 	}
+	public void AssignHint(){
+		StartCoroutine(HintWrapper());
+	}
+	public IEnumerator HintWrapper(){
+		//make sure draggers are off and cant move fox.
+		//turn off draggers
+		//
+		hinting = true;
+		LevelManager.isdragging = true;
+		for(int i = 0; i <placedpieces.Count; i++){
+			placedpieces[i].gameObject.GetComponent<BoxCollider>().enabled = false;
+		}
+		LevelBuilder.hintboard.SetActive(false);
+		yield return new WaitForSeconds(.1f);
+		Hint();
+	}
 	public void Hint(){//right now works for one stored solution.
+		LevelBuilder.hintboard.SetActive(false);
 		Debug.Log(placedpieces.Count + "Pieces placed");
 		Vector2 postogo;
 		GameObject piece;
@@ -586,6 +603,7 @@ public class PieceHolders : MonoBehaviour {
 					if(PartofSolution(i)){//if placed in a correct solution, this is to find if any piece is in the right place.
 					//filter out solutions without this piece
 						Debug.Log("Piece in the right place");
+						//CrownPiece(Dragger placedpieces[i]);
 						placedpieces[i].transform.GetChild(1).GetComponent<Renderer>().material.color = Color.green;
 					}
 
@@ -599,11 +617,11 @@ public class PieceHolders : MonoBehaviour {
 							postype = placedpieces[i].myType;
 						}
 						Debug.Log(placedpieces[i].myType);
-						removePiece(new Vector2(placedpieces[i].transform.position.x, -placedpieces[i].transform.position.z), placedpieces[i].myType);
 						//LookforPosition(placedpieces[i].myType);
 						postogo = LookforPosition(postype);
 						Debug.Log(postogo);
 						if(postogo != new Vector2(0,0)){
+							removePiece(new Vector2(placedpieces[i].transform.position.x, -placedpieces[i].transform.position.z), placedpieces[i].myType);
 							PlaceHint(placedpieces[i], postogo);
 							return;
 
@@ -625,12 +643,13 @@ public class PieceHolders : MonoBehaviour {
 				}
 			}
 			else{//if no pieces placed, ergo all in respective holders.
+				Debug.Log("nothing");
 				for(int i=0; i < holders.Count; i++){
 					if(holders[i].currentpieces > 0){
 						postogo = LookforPosition(holders[i].name);
 						//Debug.Log("Instantiate a "+ holders[i].name);
 						if(postogo!= new Vector2(0,0)){
-							 piece = holders[i].mygameobject.GetComponent<UIMonster>().Spawnit();
+							piece = holders[i].mygameobject.GetComponent<UIMonster>().Spawnit();
 							PlaceHint(piece.GetComponent<Dragger>(), postogo);
 							placedpieces.Add(piece.GetComponent<Dragger>());
 							updateValueDown(holders[i].name);
@@ -641,15 +660,46 @@ public class PieceHolders : MonoBehaviour {
 				}
 			}			
 		}
+		Debug.Log("End hint");
+		hinting = false;
+        for(int i=0; i<placedpieces.Count; i++){
+        	placedpieces[i].gameObject.GetComponent<BoxCollider>().enabled = true;
+        }
+        LevelManager.isdragging = false;
 		
+	}
+	public void CrownPiece(Dragger dg){
+		
+	}
+	public void HintMenu(){
+		LevelManager.isdragging = true;
+		for(int i = 0; i <placedpieces.Count; i++){
+			placedpieces[i].gameObject.GetComponent<BoxCollider>().enabled = false;
+		}
+		LevelBuilder.hintboard.SetActive(true);
+	}
+	public void CloseHintMenu(){
+		LevelBuilder.hintboard.SetActive(false);
+		hinting = false;
+        for(int i=0; i<placedpieces.Count; i++){
+        	placedpieces[i].gameObject.GetComponent<BoxCollider>().enabled = true;
+        }
+        LevelManager.isdragging = false;
+
 	}
 	public void HintOrRestart(){
 		if(TurnBehaviour.turn == 0&&!hinting){
-			Hint();
+			HintMenu();
 		}
 		if(TurnBehaviour.turn == 1){
 			sl.ResetLevelButton();
 		}
+	}
+	public void RestartAndHint(){
+		SceneLoading.gamelost.SetActive(false);
+		sl.ResetLevelButton();
+		HintMenu();
+		//Debug.Log(placedpieces[0].gameObject.GetComponent<BoxCollider>().enabled);
 	}
 	public IEnumerator HintTowards(Vector3 targetpos, Dragger dragger){
 		dragger.transform.position = new Vector3(targetpos.x,0,targetpos.y);	

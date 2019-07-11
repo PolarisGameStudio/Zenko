@@ -59,6 +59,13 @@ public class LevelBuilder : MonoBehaviour {
 
 	public static bool resetting;
 
+	public GameObject mywinboard;
+	public static GameObject winboard;
+	public GameObject myloseboard;
+	public static GameObject loseboard;	
+	public GameObject myhintboard;
+	public static GameObject hintboard;	
+
 	//public static List<Transform> piecetiles = new List<Transform>();
 
 	/*void ShuffleList(){
@@ -73,7 +80,11 @@ public class LevelBuilder : MonoBehaviour {
 				tileBank[r] = val;
 			}
 		}*/
-
+	public void Awake(){
+		winboard = mywinboard;
+		loseboard = myloseboard;
+		hintboard = myhintboard;
+	}
 	IEnumerator checkAndroid(string file){
 		filePath = System.IO.Path.Combine(Application.streamingAssetsPath, file);
 		Debug.Log (filePath + "FILEPAPAPATH");
@@ -298,6 +309,7 @@ public class LevelBuilder : MonoBehaviour {
 
 		}
 		ProgressBar.InitializeProgressBar(LevelStorer.efficientturns);
+		DotHandler.InitializeDots(LevelStorer.efficientturns);
 		playertransform.gameObject.GetComponent<PlayerMovement>().canmove = true;
 		//PopulationManager.readytobrain = true;
 	}
@@ -355,6 +367,7 @@ public class LevelBuilder : MonoBehaviour {
 
 		}
 		ProgressBar.InitializeProgressBar(LevelStorer.efficientturns);
+		DotHandler.InitializeDots(LevelStorer.efficientturns);
 		playertransform.gameObject.GetComponent<PlayerMovement>().canmove = true;
 
 	}

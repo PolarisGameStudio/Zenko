@@ -22,7 +22,7 @@ public class SceneLoading : MonoBehaviour {
 		Debug.Log(teststring.Substring(teststring.Length-4,4));
 		Application.targetFrameRate = 30;
 		if (txt2 == null){ //if loading menu, this is pointless and relies on bugs, try a public bool.
-		
+			MusicHandler.PlayTitleTheme();
 		}
 		else{//if loading level scene
 //			Debug.Log(levelnum + "level");
@@ -34,7 +34,9 @@ public class SceneLoading : MonoBehaviour {
 
 			//LevelStorer.Lookfor(LevelManager.levelnum);
 			//txt2.text = ("Efficient turns is " + LevelStorer.efficientturns);
-			txt.text = LevelManager.levelnum.ToString();
+			int world = Mathf.FloorToInt(LevelManager.levelnum/50)  + 1;
+			int levelinworld = LevelManager.levelnum - ((world-1)*50);
+			txt.text = "World " + world.ToString() + "-" + levelinworld.ToString();
 			RatingBehaviour.InitializeRating();
 //			Debug.Log(LevelManager.levelnum);
 		}
@@ -60,7 +62,9 @@ public class SceneLoading : MonoBehaviour {
 		Debug.Log("Next button");
 
 		LevelManager.levelnum++;
-		txt.text = LevelManager.levelnum.ToString();
+		int world = Mathf.FloorToInt(LevelManager.levelnum/50)  + 1;
+		int levelinworld = LevelManager.levelnum - ((world-1)*50);
+		txt.text = "World " + world.ToString() + "-" + levelinworld.ToString();
 		//txt2.text = ("Efficient turns is " + LevelStorer.efficientturns);
 		//LevelManager.levelnum = Random.Range(0,66);
 
@@ -223,7 +227,9 @@ public class SceneLoading : MonoBehaviour {
 
 	}
 	public void ResetLevelButton(){
-		txt.text = LevelManager.levelnum.ToString();
+		int world = Mathf.FloorToInt(LevelManager.levelnum/50)  + 1;
+		int levelinworld = LevelManager.levelnum - ((world-1)*50);
+		txt.text = "World " + world.ToString() + "-" + levelinworld.ToString();
 
 
 		//LevelStorer.UnlockLevel (LevelManager.levelnum);
@@ -234,13 +240,16 @@ public class SceneLoading : MonoBehaviour {
 		//TurnGraphics.ClearCounters();
 		//TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
 		ProgressBar.InitializeProgressBar(LevelStorer.efficientturns);
+		DotHandler.InitializeDots(LevelStorer.efficientturns);
 		//LevelManager.NextLevel (LevelManager.levelnum);
 		//myhandler.GiveIce();
 		Swiping.mydirection = "Null";
 		RatingBehaviour.RestartRating();
 	}
 	public void ResetAllButton(){
-		txt.text = LevelManager.levelnum.ToString();
+		int world = Mathf.FloorToInt(LevelManager.levelnum/50)  + 1;
+		int levelinworld = LevelManager.levelnum - ((world-1)*50);
+		txt.text = "World " + world.ToString() + "-" + levelinworld.ToString();
 
 
 		//LevelStorer.UnlockLevel (LevelManager.levelnum);
@@ -286,6 +295,7 @@ public class SceneLoading : MonoBehaviour {
 			Debug.Log("Going to Level "+ num);
 			LevelManager.levelnum = num;
 			LoadScene(LevelManager.levelnum);
+			MusicHandler.PlayInitialLoop(0);
 		//}
 
 	}

@@ -61,6 +61,7 @@
      <Compile Include="Assets\CloudMovement.cs" />
      <Compile Include="Assets\ColorModulator.cs" />
      <Compile Include="Assets\CurrencyScript.cs" />
+     <Compile Include="Assets\DotHandler.cs" />
      <Compile Include="Assets\FragileBehaviour.cs" />
      <Compile Include="Assets\GameManager.cs" />
      <Compile Include="Assets\HueModifier.cs" />
@@ -122,6 +123,7 @@
      <Compile Include="Assets\Mirza Beig\Shaders\Image Effects\Resources\Sharpen\Sharpen.cs" />
      <Compile Include="Assets\MouseDownTouch.cs" />
      <Compile Include="Assets\MouseEventsGenerator.cs" />
+     <Compile Include="Assets\MusicHandler.cs" />
      <Compile Include="Assets\NokobotUIPack\Demo\Scripts\GoToNextScene.cs" />
      <Compile Include="Assets\PieceHolders.cs" />
      <Compile Include="Assets\PlayerAnimation.cs" />
@@ -320,7 +322,7 @@
      <None Include="Assets\StreamingAssets\RandomMaps.txt" />
      <None Include="Assets\StreamingAssets\Level66.txt" />
      <None Include="Assets\Mirza Beig\Shaders\Particles\Intersection Highlight\IntersectionHighlight-Alpha.shader" />
-     <None Include="Assets\StreamingAssets\level5.txt" />
+     <None Include="Assets\StreamingAssets\Level5.txt" />
      <None Include="Assets\Mirza Beig\Shaders\Standard\Standard-Terrain Rain 2.shader" />
      <None Include="Assets\StreamingAssets\Level-14.txt" />
      <None Include="Assets\StreamingAssets\Level77.txt" />

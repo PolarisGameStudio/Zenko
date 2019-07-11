@@ -243,7 +243,7 @@ public class GoalBehaviour : MonoBehaviour {
 	void AnimateFoxGoal(){
 		StartCoroutine(LevelBuilder.playertransform.GetComponent<PlayerAnimation>().Disappear(.8f));
 		LevelBuilder.playertransform.GetComponent<PlayerMovement>().speed = 3;
-		LevelBuilder.playertransform.GetChild(3).GetComponent<Animator>().SetInteger("Phase", 2);
+		LevelBuilder.playertransform.GetChild(0).GetComponent<Animator>().SetInteger("Phase", 2);
 		//LevelBuilder.playertransform.GetComponent<PlayerAnimation>().Disappear(1);
 	}
 
