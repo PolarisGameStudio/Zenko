@@ -504,9 +504,7 @@ public class LevelStorer : MonoBehaviour {
 			 (LevelManager.levelnum);
 		}
 	}*/
-	void Update(){
-//		Debug.Log(PlayerPrefs.GetInt("Level1Rating"))	;
-	}
+
 	void Start(){
 		/*string path = Application.dataPath + "/NormalLevels.txt";
 		normalmaps = File.CreateText(path);

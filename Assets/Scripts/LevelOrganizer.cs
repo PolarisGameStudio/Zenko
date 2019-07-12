@@ -15,8 +15,8 @@ public class LevelOrganizer : MonoBehaviour {
 	public LevelSaver ls;
 	StreamWriter sl;
 	public void Start(){
-		string path = Application.dataPath + "/newbigmaps.txt";
-		sl = File.CreateText(path);	
+		//string path = Application.dataPath + "/newbigmaps.txt";
+		//sl = File.CreateText(path);	
 		//StartCoroutine(unshufflePotd());
 	}
 	public IEnumerator unshufflePotd(){ //feeds levelPotd string array from textfile.
@@ -93,7 +93,7 @@ public class LevelOrganizer : MonoBehaviour {
 		}
 	}
 	void OnApplicationQuit(){
-		sl.Close();
+//		sl.Close();
 	}
 }
 // 	public void drawPotd(int num){

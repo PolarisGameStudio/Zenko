@@ -92,10 +92,10 @@ namespace MirzaBeig
 
                 // ...
 
-                void LateUpdate()
+                /*void LateUpdate()
                 {
 
-                }
+                }*/
 
                 // =================================	
                 // End functions.

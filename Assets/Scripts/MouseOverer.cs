@@ -13,7 +13,7 @@ public class MouseOverer : MonoBehaviour {
 		renderer = GetComponent<MeshRenderer>();
 
 		canplace = true;
-		startcolor = renderer.material.color;
+		//startcolor = renderer.material.color;
 		//NEED TO MAKE A DIFF ONE FOR FRAGILE (has many renderers); 
 	}
 	

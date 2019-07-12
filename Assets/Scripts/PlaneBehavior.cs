@@ -48,9 +48,9 @@ public class PlaneBehavior : MonoBehaviour {
 		RoboRay(simulatedMouse);
 
 		}
-		if (Input.GetKeyDown (KeyCode.T)){
+		/*if (Input.GetKeyDown (KeyCode.T)){
 			ClosestTile();
-		}
+		*/
 		//ClosestX();
 		//ClosestTile();
 	}

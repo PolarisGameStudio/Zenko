@@ -214,7 +214,7 @@ namespace MirzaBeig
                         Add(1.0f, 1.0f, 1.5f, CameraShakeTarget.Position, CameraShakeAmplitudeCurve.FadeInOut25);
 						PlayerMovement.boopout = false;               		
                 	}
-                    if (Input.GetKeyDown(KeyCode.F))
+                    /*if (Input.GetKeyDown(KeyCode.F))
                     {
                         Debug.Log(CameraShakeTarget.Position);
                         Add(0.1f, 5.0f, .3f, CameraShakeTarget.Position, CameraShakeAmplitudeCurve.FadeInOut75);
@@ -227,7 +227,7 @@ namespace MirzaBeig
                     if (Input.GetKey(KeyCode.H))
                     {
 
-                    }
+                    }*/
 
                     Vector3 positionOffset = CameraController.cameraposition;//new Vector3(3.5f, 12.11f, -13.37f);
                     Vector3 rotationOffset = CameraController.eulerangles;//new Vector3(52,0,0);

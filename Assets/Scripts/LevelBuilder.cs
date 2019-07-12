@@ -600,12 +600,12 @@ public class LevelBuilder : MonoBehaviour {
 
 
 	}
-	void Update(){
+	/*void Update(){
 		if (Input.GetKeyDown(KeyCode.J)){
 			//DrawNextLevel(LevelManager.levelnum);
 			Debug.Log(tileBank.Count);
 		}
-	}
+	}*/
 
 
 		/*if (LevelManager.readytodraw) {

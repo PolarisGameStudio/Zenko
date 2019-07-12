@@ -14,9 +14,9 @@ public class LevelSaver : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	//void Update () {
 		
-	}
+	//}
 	public void StoreLevel(){
 		foreach(string line in currentmap){
 			sl.WriteLine(line);

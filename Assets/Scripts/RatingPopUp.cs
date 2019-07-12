@@ -87,7 +87,7 @@ public class RatingPopUp : MonoBehaviour {
 		mySecondText.text = "You finished level " + LevelManager.levelnum + "!";
 	}*/
 	// Update is called once per frame
-	void Update () {
+	/*void Update () {
 		if (myrating != RatingBehaviour.rating) {
 			myText.text = "You got " + RatingBehaviour.rating + " Stars";
 			mySecondText.text = "You finished level " + LevelManager.levelnum + "!";
@@ -97,5 +97,5 @@ public class RatingPopUp : MonoBehaviour {
 			mySecondText.text = "You finished level " + LevelManager.levelnum + "!";
 			ready = false;
 		}
-	}
+	}*/
 }

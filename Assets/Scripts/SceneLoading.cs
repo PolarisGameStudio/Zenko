@@ -20,7 +20,7 @@ public class SceneLoading : MonoBehaviour {
 		string teststring = "WallSeed";
 		Debug.Log(teststring.Length);
 		Debug.Log(teststring.Substring(teststring.Length-4,4));
-		Application.targetFrameRate = 30;
+		Application.targetFrameRate = 60;
 		if (txt2 == null){ //if loading menu, this is pointless and relies on bugs, try a public bool.
 			MusicHandler.PlayTitleTheme();
 		}
@@ -348,9 +348,7 @@ public class SceneLoading : MonoBehaviour {
 	}
 	public void GoToWorldSelect(){
 			SceneManager.LoadScene (1);
-	}
-	void Update(){
-//		Debug.Log (gamewon);
+			MusicHandler.running = false;
 	}
 	public void placeIcarus(string type, Vector3 target){
 		if(type == "Left"){

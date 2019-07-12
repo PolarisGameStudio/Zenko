@@ -18,7 +18,7 @@ public class CloudMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         MoveClouds(clouds1);
         MoveClouds(clouds2);
