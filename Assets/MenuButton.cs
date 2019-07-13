@@ -18,15 +18,17 @@ public class MenuButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler{
     public GameObject ConfigMenu;
     public GameObject levelText;
     public GameObject ringObject;
+
 	// Use this for initialization
 	void Start () {
 		open = false;	
+        LevelBuilder.settingsBoard = ConfigMenu;
 	}
 	
 	// Update is called once per frame
-	void Update () {
-//		StartCoroutine(buttonAction());
-	}
+// 	void Update () {
+// //		StartCoroutine(buttonAction());
+// 	}
 
 	public void toggleMenu(){
         Debug.Log("menu");

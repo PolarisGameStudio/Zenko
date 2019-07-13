@@ -687,6 +687,9 @@ public class PieceHolders : MonoBehaviour {
         LevelManager.isdragging = false;
 
 	}
+	public void CloseSettings(){
+		LevelBuilder.settingsBoard.SetActive(false);
+	}
 	public void HintOrRestart(){
 		if(TurnBehaviour.turn == 0&&!hinting){
 			HintMenu();

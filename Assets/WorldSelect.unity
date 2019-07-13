@@ -98,7 +98,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
   m_LightingDataAsset: {fileID: 112000002, guid: 93060202f50d648f091c58bfe677f945,
     type: 2}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -9719,11 +9719,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.5
       objectReference: {fileID: 0}
-    - target: {fileID: 4655859050310922480, guid: 95f28b1b2b021423fa5eebc072e890ac,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: toggleMenuWorld
-      objectReference: {fileID: 0}
     - target: {fileID: 4655859050310922485, guid: 95f28b1b2b021423fa5eebc072e890ac,
         type: 3}
       propertyPath: buttons.Array.size
@@ -9739,6 +9734,11 @@ PrefabInstance:
       propertyPath: buttons.Array.data[1]
       value: 
       objectReference: {fileID: 1438222117}
+    - target: {fileID: 4655859050310922480, guid: 95f28b1b2b021423fa5eebc072e890ac,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: toggleMenuWorld
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 95f28b1b2b021423fa5eebc072e890ac, type: 3}
 --- !u!1 &816479019
@@ -14247,6 +14247,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ClearFlags
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 20913165458271974, guid: 5aa59414663034cb3b7a385cf1ddbb8a,
+        type: 3}
+      propertyPath: m_AllowDynamicResolution
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4634565591364562, guid: 5aa59414663034cb3b7a385cf1ddbb8a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -23851,8 +23856,32 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 771130330, guid: 21afbef644c6740df825b001b1e494b1, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 771130332, guid: 21afbef644c6740df825b001b1e494b1, type: 3}
+      propertyPath: Mute
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 771130333, guid: 21afbef644c6740df825b001b1e494b1, type: 3}
+      propertyPath: Mute
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 771130336, guid: 21afbef644c6740df825b001b1e494b1, type: 3}
+      propertyPath: levelLoops.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: d70e64a6f37a14c2a94c10a66c8931ed, type: 3}
+    - target: {fileID: 771130336, guid: 21afbef644c6740df825b001b1e494b1, type: 3}
+      propertyPath: levelLoops.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: e9959109635f44fe3bbc4aaf86b312fa, type: 3}
+    - target: {fileID: 771130336, guid: 21afbef644c6740df825b001b1e494b1, type: 3}
+      propertyPath: levelLoops.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: eb2771e85d5074297a9601a1d4df422d, type: 3}
+    - target: {fileID: 771130336, guid: 21afbef644c6740df825b001b1e494b1, type: 3}
+      propertyPath: titleTheme
+      value: 
+      objectReference: {fileID: 8300000, guid: b65465b8490964cc18781372b6b14ff7, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21afbef644c6740df825b001b1e494b1, type: 3}
 --- !u!1 &1993430186

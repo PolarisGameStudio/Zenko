@@ -19,9 +19,7 @@ public class VolumeSliders : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		
-	}
+
 
 	public void SlideSound(){
 		SoundSource.volume = Soundslider.value;

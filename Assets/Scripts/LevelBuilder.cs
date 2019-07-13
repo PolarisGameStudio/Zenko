@@ -65,6 +65,7 @@ public class LevelBuilder : MonoBehaviour {
 	public static GameObject loseboard;	
 	public GameObject myhintboard;
 	public static GameObject hintboard;	
+	public static GameObject settingsBoard;
 
 	//public static List<Transform> piecetiles = new List<Transform>();
 

@@ -20,6 +20,7 @@ public class MusicHandler : MonoBehaviour
     static int flip;
     static int nextLoop;
     public static bool running;
+    public static bool hasFocus;
 
     void Awake()
     {
@@ -34,12 +35,22 @@ public class MusicHandler : MonoBehaviour
 
     void Start()
     {
+        hasFocus = true;
         flip = 0;
         running = false;
     }
+    void OnApplicationFocus(){
+        hasFocus = !hasFocus;
+        if(!hasFocus) 
+        AudioListener.pause = true;
+        if(hasFocus)
+        AudioListener.pause = false;
 
+
+    }
     void Update()
     {
+        Debug.Log(AudioSettings.dspTime);
         if(!running){
             return;
         }

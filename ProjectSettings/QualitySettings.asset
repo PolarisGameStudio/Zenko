@@ -231,7 +231,7 @@ QualitySettings:
     - tvOS
     - iPhone
   m_PerPlatformDefaultQuality:
-    Android: 3
+    Android: 0
     Samsung TV: 0
     Standalone: 5
     Tizen: 0

@@ -8,6 +8,7 @@ ScriptsOnlyBuild:
     - CanvasBehaviour
     - CloudMovement
     - ColorModulator
+    - DotHandler
     - Dragger
     - FragileBehaviour
     - GameManager
@@ -28,6 +29,7 @@ ScriptsOnlyBuild:
     - MirzaBeig.Scripting.Effects.TurbulenceParticleAffector
     - MirzaBeig.Scripting.Effects.VortexParticleAffector
     - MouseOverer
+    - MusicHandler
     - PieceHolders
     - PlaneBehavior
     - PlayerAnimation
@@ -49,10 +51,8 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.TestListCacheData
@@ -172,41 +172,43 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10742}
     - Class: 114
-      Script: {instanceID: 10802}
+      Script: {instanceID: 10792}
     - Class: 114
-      Script: {instanceID: 10844}
+      Script: {instanceID: 10804}
     - Class: 114
-      Script: {instanceID: 10900}
+      Script: {instanceID: 10846}
     - Class: 114
-      Script: {instanceID: 10950}
+      Script: {instanceID: 10902}
     - Class: 114
-      Script: {instanceID: 10988}
+      Script: {instanceID: 10952}
     - Class: 114
-      Script: {instanceID: 11002}
+      Script: {instanceID: 10990}
     - Class: 114
-      Script: {instanceID: 11044}
+      Script: {instanceID: 11004}
     - Class: 114
-      Script: {instanceID: 11048}
+      Script: {instanceID: 11050}
     - Class: 114
-      Script: {instanceID: 11180}
+      Script: {instanceID: 11146}
     - Class: 114
-      Script: {instanceID: 11198}
+      Script: {instanceID: 11184}
     - Class: 114
-      Script: {instanceID: 11490}
+      Script: {instanceID: 11202}
     - Class: 114
-      Script: {instanceID: 11642}
+      Script: {instanceID: 11494}
     - Class: 114
-      Script: {instanceID: 11836}
+      Script: {instanceID: 11646}
     - Class: 114
-      Script: {instanceID: 11858}
+      Script: {instanceID: 11840}
     - Class: 114
-      Script: {instanceID: 11868}
+      Script: {instanceID: 11862}
     - Class: 114
-      Script: {instanceID: 12358}
+      Script: {instanceID: 11872}
     - Class: 114
-      Script: {instanceID: 12410}
+      Script: {instanceID: 12362}
     - Class: 114
-      Script: {instanceID: 12452}
+      Script: {instanceID: 12414}
+    - Class: 114
+      Script: {instanceID: 12456}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -325,25 +327,29 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10746}
     - Class: 114
-      Script: {instanceID: 10802}
+      Script: {instanceID: 10792}
     - Class: 114
-      Script: {instanceID: 10844}
+      Script: {instanceID: 10804}
     - Class: 114
-      Script: {instanceID: 11044}
+      Script: {instanceID: 10846}
     - Class: 114
-      Script: {instanceID: 11054}
+      Script: {instanceID: 10902}
     - Class: 114
-      Script: {instanceID: 11520}
+      Script: {instanceID: 11046}
     - Class: 114
-      Script: {instanceID: 11610}
+      Script: {instanceID: 11056}
     - Class: 114
-      Script: {instanceID: 11642}
+      Script: {instanceID: 11524}
     - Class: 114
-      Script: {instanceID: 11826}
+      Script: {instanceID: 11614}
     - Class: 114
-      Script: {instanceID: 11836}
+      Script: {instanceID: 11646}
     - Class: 114
-      Script: {instanceID: 11868}
+      Script: {instanceID: 11830}
+    - Class: 114
+      Script: {instanceID: 11840}
+    - Class: 114
+      Script: {instanceID: 11872}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -533,7 +539,7 @@ ScriptsOnlyBuild:
     className: GroupTrack
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: 7aca0d367aecbd2e9fe31877e323e040
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: CameraController
@@ -1295,6 +1301,12 @@ ScriptsOnlyBuild:
     className: TMP_Asset
   - hash:
       serializedVersion: 2
+      Hash: ad2a8f6546a5fbd879a1913a5483a8d9
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: MusicHandler
+  - hash:
+      serializedVersion: 2
       Hash: edd87449c1b05645c17d8ee0aa33c536
     assemblyName: Assembly-CSharp.dll
     namespaceName: MirzaBeig.ParticleSystems.Demos
@@ -1319,7 +1331,7 @@ ScriptsOnlyBuild:
     className: SignalTrack
   - hash:
       serializedVersion: 2
-      Hash: 736a3336b4d7fc96958e4d54ec01485c
+      Hash: 422d5747ab964a06c2ba3a8d97268eb3
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ImageHolder
@@ -1355,7 +1367,7 @@ ScriptsOnlyBuild:
     className: AnalyticsEventTrackerEditor
   - hash:
       serializedVersion: 2
-      Hash: f34d0f836093ed8eb933e86ef607a007
+      Hash: 759edd02bea985532070bb15e5da2de2
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: LevelBuilder
@@ -1449,6 +1461,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: MirzaBeig.ParticleSystems.Demos
     className: FPSTest
+  - hash:
+      serializedVersion: 2
+      Hash: 6225d3e8ee06629734178e1e8d03dd1b
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: DotHandler
   - hash:
       serializedVersion: 2
       Hash: 48f272696bbf77f699c75fa1cee001e5
@@ -1637,7 +1655,7 @@ ScriptsOnlyBuild:
     className: TextMeshProUGUI
   - hash:
       serializedVersion: 2
-      Hash: c58903346e3476ac6c87950eae987f59
+      Hash: 51baca7ac1ea253a4d2486be2db11d1d
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MenuButton
@@ -1843,4 +1861,4 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/WorldSelect.unity
   - Assets/Level.unity
-  playerPath: /Users/bernardolimonvillarreal/Desktop/ZenkoMacJune19/ZenkomacJune19.app
+  playerPath: /Users/bernardolimonvillarreal/Desktop/ZenkoMacBeta/ZenkoMacBeta.app
