@@ -34,14 +34,20 @@ public class SceneLoading : MonoBehaviour {
 
 			//LevelStorer.Lookfor(LevelManager.levelnum);
 			//txt2.text = ("Efficient turns is " + LevelStorer.efficientturns);
-			int world = Mathf.FloorToInt(LevelManager.levelnum/50)  + 1;
-			int levelinworld = LevelManager.levelnum - ((world-1)*50);
-			txt.text = "World " + world.ToString() + "-" + levelinworld.ToString();
+			// int world = Mathf.FloorToInt(LevelManager.levelnum/50)  + 1;
+			// int levelinworld = LevelManager.levelnum - ((world-1)*50);
+			// txt.text = "World " + world.ToString() + "-" + levelinworld.ToString();
+			AssignLevelName();
 			RatingBehaviour.InitializeRating();
 //			Debug.Log(LevelManager.levelnum);
 		}
 		//GameObject.Find("CurrencyHolder").GetComponentInChildren<Text>().text = GameManager.mycurrency.ToString();
 		
+	}
+	public void AssignLevelName(){
+		int world = Mathf.FloorToInt((LevelManager.levelnum-1)/50)  + 1;
+		int levelinworld = LevelManager.levelnum - ((world-1)*50);
+		txt.text = "World " + world.ToString() + "-" + levelinworld.ToString();		
 	}
 	public void LoadScene(int num){
 		Swiping.mydirection = "Null";
@@ -62,9 +68,10 @@ public class SceneLoading : MonoBehaviour {
 		Debug.Log("Next button");
 
 		LevelManager.levelnum++;
-		int world = Mathf.FloorToInt(LevelManager.levelnum/50)  + 1;
-		int levelinworld = LevelManager.levelnum - ((world-1)*50);
-		txt.text = "World " + world.ToString() + "-" + levelinworld.ToString();
+		// int world = Mathf.FloorToInt(LevelManager.levelnum/50)  + 1;
+		// int levelinworld = LevelManager.levelnum - ((world-1)*50);
+		// txt.text = "World " + world.ToString() + "-" + levelinworld.ToString();
+		AssignLevelName();
 		//txt2.text = ("Efficient turns is " + LevelStorer.efficientturns);
 		//LevelManager.levelnum = Random.Range(0,66);
 
@@ -227,9 +234,10 @@ public class SceneLoading : MonoBehaviour {
 
 	}
 	public void ResetLevelButton(){
-		int world = Mathf.FloorToInt(LevelManager.levelnum/50)  + 1;
-		int levelinworld = LevelManager.levelnum - ((world-1)*50);
-		txt.text = "World " + world.ToString() + "-" + levelinworld.ToString();
+		// int world = Mathf.FloorToInt(LevelManager.levelnum/50)  + 1;
+		// int levelinworld = LevelManager.levelnum - ((world-1)*50);
+		// txt.text = "World " + world.ToString() + "-" + levelinworld.ToString();
+		AssignLevelName();
 
 
 		//LevelStorer.UnlockLevel (LevelManager.levelnum);
@@ -247,10 +255,10 @@ public class SceneLoading : MonoBehaviour {
 		RatingBehaviour.RestartRating();
 	}
 	public void ResetAllButton(){
-		int world = Mathf.FloorToInt(LevelManager.levelnum/50)  + 1;
-		int levelinworld = LevelManager.levelnum - ((world-1)*50);
-		txt.text = "World " + world.ToString() + "-" + levelinworld.ToString();
-
+		// int world = Mathf.FloorToInt(LevelManager.levelnum/50)  + 1;
+		// int levelinworld = LevelManager.levelnum - ((world-1)*50);
+		// txt.text = "World " + world.ToString() + "-" + levelinworld.ToString();
+		AssignLevelName();
 
 		//LevelStorer.UnlockLevel (LevelManager.levelnum);
 		//LevelStorer.Lookfor (LevelManager.levelnum);

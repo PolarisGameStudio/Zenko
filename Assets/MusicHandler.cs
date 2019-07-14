@@ -43,14 +43,16 @@ public class MusicHandler : MonoBehaviour
         hasFocus = !hasFocus;
         if(!hasFocus) 
         AudioListener.pause = true;
-        if(hasFocus)
-        AudioListener.pause = false;
+
 
 
     }
     void Update()
     {
-        Debug.Log(AudioSettings.dspTime);
+//        Debug.Log(AudioSettings.dspTime);
+        if(AudioListener.pause == true){
+            AudioListener.pause = false;
+        }
         if(!running){
             return;
         }

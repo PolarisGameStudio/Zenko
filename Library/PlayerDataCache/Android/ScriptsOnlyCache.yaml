@@ -69,7 +69,6 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.Slider
     - UnityEngine.UI.Text
     com.unity.multiplayer-hlapi.Runtime.dll:
-    - UnityEngine.Networking.NetworkCallbacks
     - UnityEngine.Networking.NetworkIdentity
   sceneClasses:
     Assets/Level.unity:
@@ -185,8 +184,6 @@ ScriptsOnlyBuild:
       Script: {instanceID: 10990}
     - Class: 114
       Script: {instanceID: 11004}
-    - Class: 114
-      Script: {instanceID: 11046}
     - Class: 114
       Script: {instanceID: 11050}
     - Class: 114
@@ -1863,4 +1860,4 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/WorldSelect.unity
   - Assets/Level.unity
-  playerPath: /Users/bernardolimonvillarreal/Desktop/ZenkoBetaAPK/zenkobeta1.3(Scr_Res_Fix_2).apk
+  playerPath: /Users/bernardolimonvillarreal/Desktop/ZenkoBetaAPK/zenkobeta2.apk
