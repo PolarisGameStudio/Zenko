@@ -331,6 +331,7 @@ public class PlayerMovement : MonoBehaviour {
 				if (canmove == true) {
 					firstmove = true;
 					boop = false;
+					MenuButton.CloseMenu();
 				}
 				tilenumber = 0;
 				while (canmove == true) {
@@ -348,6 +349,7 @@ public class PlayerMovement : MonoBehaviour {
 				if (canmove == true) {
 					firstmove = true;
 					boop = false;
+					MenuButton.CloseMenu();
 				}
 				tilenumber = 0;
 				while (canmove == true) {	
@@ -367,6 +369,7 @@ public class PlayerMovement : MonoBehaviour {
 				if (canmove == true) {
 					firstmove = true;
 					boop = false;
+					MenuButton.CloseMenu();
 				}
 				tilenumber =0;
 				while (canmove == true) {
@@ -384,6 +387,7 @@ public class PlayerMovement : MonoBehaviour {
 				if (canmove == true) {
 					firstmove = true;
 					boop = false;
+					MenuButton.CloseMenu();
 				}
 				tilenumber = 0;
 				while (canmove == true) {
@@ -755,13 +759,18 @@ public class PlayerMovement : MonoBehaviour {
 	}
 	IEnumerator PopWin(){
 		if(longgoal){
-		yield return new WaitForSeconds(.6f);
-		levelWonBoard.SetActive (true);
-
+			yield return new WaitForSeconds(.6f);
+			levelWonBoard.SetActive (true);
+			if(MenuButton.open){
+				MenuButton.CloseMenu();
+			}
 		}
 		else{
-		yield return new WaitForSeconds(.64f);	
-		levelWonBoard.SetActive (true);
+			yield return new WaitForSeconds(.64f);	
+			levelWonBoard.SetActive (true);
+			if(MenuButton.open){
+				MenuButton.CloseMenu();
+			}
 		}
 
 
@@ -778,6 +787,9 @@ public class PlayerMovement : MonoBehaviour {
 			if(transform.position.y < -1.5f && !hasdowned && !LevelBuilder.resetting){
 				hasdowned = true;
 				LevelLostBoard.SetActive (true);
+				if(MenuButton.open){
+					MenuButton.CloseMenu();
+				}
 			}
 			yield return null;
 		}

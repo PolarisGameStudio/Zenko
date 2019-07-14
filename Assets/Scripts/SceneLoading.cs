@@ -31,7 +31,7 @@ public class SceneLoading : MonoBehaviour {
 			LevelManager.levelnum = 1;				
 			}
 			Debug.Log("sceneloadingstuff");
-
+			//MusicHandler.PlayInitialLoop();
 			//LevelStorer.Lookfor(LevelManager.levelnum);
 			//txt2.text = ("Efficient turns is " + LevelStorer.efficientturns);
 			// int world = Mathf.FloorToInt(LevelManager.levelnum/50)  + 1;
@@ -156,12 +156,16 @@ public class SceneLoading : MonoBehaviour {
 		LevelManager.NextPotd();
 		TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
 		RatingBehaviour.RestartRating();
+		//MusicHandler.PlayInitialLoop();
+
 	}	
 	public void loadPotdMap(){
 		Swiping.mydirection = "Null";
 		TurnCounter.turncount = 0;
 		int num = Random.Range(0,10);
 		Debug.Log ("Going to Scene POTD at " + num);
+		MusicHandler.PlayInitialLoop();
+
 		//LevelStorer.Lookfor(num);
 		LevelManager.levelnum = num;
 		LevelManager.ispotd = true;
@@ -253,6 +257,7 @@ public class SceneLoading : MonoBehaviour {
 		//myhandler.GiveIce();
 		Swiping.mydirection = "Null";
 		RatingBehaviour.RestartRating();
+		MenuButton.CloseMenu();
 	}
 	public void ResetAllButton(){
 		// int world = Mathf.FloorToInt(LevelManager.levelnum/50)  + 1;
@@ -268,6 +273,7 @@ public class SceneLoading : MonoBehaviour {
 		TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
 		//myhandler.GiveIce();
 		Swiping.mydirection = "Null";
+		MenuButton.CloseMenu();
 	}
 	public void Testnum(int num){
 		//initializevalues
@@ -336,8 +342,6 @@ public class SceneLoading : MonoBehaviour {
 
 		transform.Find("MenuHolder").Find("Menu").gameObject.SetActive(false);
 		transform.Find("MenuHolder").Find("CloseLevel_Box").gameObject.SetActive(true);
-		transform.Find("MenuHolder").Find("MusicToggle").gameObject.SetActive(false);
-		transform.Find("MenuHolder").Find("SfxToggle").gameObject.SetActive(false);
 		transform.Find("MenuHolder").Find("Config").gameObject.SetActive(false);
 		if(MenuButton.open){
 			MenuButton.open = false;

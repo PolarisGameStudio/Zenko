@@ -481,6 +481,7 @@ public class LevelStorer : MonoBehaviour {
 			Debug.Log ("Has playerpref");
 			PopulateRatings(); //takes old playerprefs and populates current ratings
 			GameManager.mycurrency = PlayerPrefs.GetInt("Currency");
+			Debug.Log(PlayerPrefs.GetInt("hintCurrency"));
 
 		} 
 		else {

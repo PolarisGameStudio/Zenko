@@ -49,6 +49,7 @@ public class PieceHolders : MonoBehaviour {
 	public static Dragger draggee;
 	public static List<Dragger> placedpieces = new List<Dragger>();
 	SceneLoading sl;
+	public Text hintText;
 	// Use this for initialization
 	void Awake () {
 		initValues();
@@ -597,68 +598,68 @@ public class PieceHolders : MonoBehaviour {
 		GameObject piece;
 		string postype;
 		if(TurnBehaviour.turn == 0){
-			if(placedpieces.Count!=0){ //if any pieces are on board.
-				for(int i = 0; i < placedpieces.Count; i++){//first pass, to confirm the ones in right place
-					//Debug.Log(placedpieces[i].myType + "" + placedpieces[i].transform.position.x + "" + -placedpieces[i].transform.position.z);
-					if(PartofSolution(i)){//if placed in a correct solution, this is to find if any piece is in the right place.
-					//filter out solutions without this piece
-						Debug.Log("Piece in the right place");
-						//CrownPiece(Dragger placedpieces[i]);
-						placedpieces[i].transform.GetChild(1).GetComponent<Renderer>().material.color = Color.green;
-					}
-
-				} 
-				for(int i = 0; i < placedpieces.Count; i++){//second pass, to correct the first one found in wrong place.
-					if(!PartofSolution(i)){
-						if(placedpieces[i].myType == "Seed"){
-							postype =placedpieces[i].mySeedType + placedpieces[i].myType;
-						}
-						else{
-							postype = placedpieces[i].myType;
-						}
-						Debug.Log(placedpieces[i].myType);
-						//LookforPosition(placedpieces[i].myType);
-						postogo = LookforPosition(postype);
-						Debug.Log(postogo);
-						if(postogo != new Vector2(0,0)){
-							removePiece(new Vector2(placedpieces[i].transform.position.x, -placedpieces[i].transform.position.z), placedpieces[i].myType);
-							PlaceHint(placedpieces[i], postogo);
-							return;
-
-						}
-					}
+			for(int i = 0; i < placedpieces.Count; i++){//first pass, to confirm the ones in right place
+				//Debug.Log(placedpieces[i].myType + "" + placedpieces[i].transform.position.x + "" + -placedpieces[i].transform.position.z);
+				if(PartofSolution(i)){//if placed in a correct solution, this is to find if any piece is in the right place.
+				//filter out solutions without this piece
+					Debug.Log("Piece in the right place");
+					//CrownPiece(Dragger placedpieces[i]);
+					placedpieces[i].transform.GetChild(1).GetComponent<Renderer>().material.color = Color.green;
 				}
-				for(int i=0; i < holders.Count; i++){//if none on board can be moved to a good one (because a wrong is there), look through holders
-					if(holders[i].currentpieces > 0){
-						postogo = LookforPosition(holders[i].name);
-						//Debug.Log("Instantiate a "+ holders[i].name);
-						if(postogo!= new Vector2(0,0)){
-							piece = holders[i].mygameobject.GetComponent<UIMonster>().Spawnit();
-							PlaceHint(piece.GetComponent<Dragger>(), postogo);
-							updateValueDown(holders[i].name);
-							placedpieces.Add(piece.GetComponent<Dragger>());
-							return;
-						}
+
+			} 
+			for(int i = 0; i < placedpieces.Count; i++){//second pass, to correct the first one found in wrong place.
+				if(!PartofSolution(i)){
+					if(placedpieces[i].myType == "Seed"){
+						postype =placedpieces[i].mySeedType + placedpieces[i].myType;
+					}
+					else{
+						postype = placedpieces[i].myType;
+					}
+					Debug.Log(placedpieces[i].myType);
+					//LookforPosition(placedpieces[i].myType);
+					postogo = LookforPosition(postype);
+					Debug.Log(postogo);
+					if(postogo != new Vector2(0,0)){
+						removePiece(new Vector2(placedpieces[i].transform.position.x, -placedpieces[i].transform.position.z), placedpieces[i].myType);
+						PlaceHint(placedpieces[i], postogo);
+						return;
+
 					}
 				}
 			}
-			else{//if no pieces placed, ergo all in respective holders.
-				Debug.Log("nothing");
-				for(int i=0; i < holders.Count; i++){
-					if(holders[i].currentpieces > 0){
-						postogo = LookforPosition(holders[i].name);
-						//Debug.Log("Instantiate a "+ holders[i].name);
-						if(postogo!= new Vector2(0,0)){
-							piece = holders[i].mygameobject.GetComponent<UIMonster>().Spawnit();
-							PlaceHint(piece.GetComponent<Dragger>(), postogo);
-							placedpieces.Add(piece.GetComponent<Dragger>());
-							updateValueDown(holders[i].name);
-							return;
-						}
-
+			for(int i=0; i < holders.Count; i++){//if none on board can be moved to a good one (because a wrong is there), look through holders
+				if(holders[i].currentpieces > 0){
+					postogo = LookforPosition(holders[i].name);
+					//Debug.Log("Instantiate a "+ holders[i].name);
+					if(postogo!= new Vector2(0,0)){
+						piece = holders[i].mygameobject.GetComponent<UIMonster>().Spawnit();
+						PlaceHint(piece.GetComponent<Dragger>(), postogo);
+						updateValueDown(holders[i].name);
+						placedpieces.Add(piece.GetComponent<Dragger>());
+						return;
 					}
 				}
-			}			
+			}
+			// for(int i = 0; i < placedpieces.Count; i++){//second pass, to correct the first one found in wrong place.
+			// 	if(!PartofSolution(i)){
+			// 		if(placedpieces[i].myType == "Seed"){
+			// 			postype =placedpieces[i].mySeedType + placedpieces[i].myType;
+			// 		}
+			// 		else{
+			// 			postype = placedpieces[i].myType;
+			// 		}
+			// 		Debug.Log(placedpieces[i].myType);
+			// 		//LookforPosition(placedpieces[i].myType);
+			// 		postogo = LookforPosition(postype);
+			// 		Debug.Log(postogo);
+			// 		if(postogo == new Vector2(0,0)){
+			// 			//Swap(i);
+			// 			return;
+
+			// 		}
+			// 	}				
+			// }
 		}
 		Debug.Log("End hint");
 		hinting = false;
@@ -666,13 +667,23 @@ public class PieceHolders : MonoBehaviour {
         	placedpieces[i].gameObject.GetComponent<BoxCollider>().enabled = true;
         }
         LevelManager.isdragging = false;
-		
 	}
+	/*public void Swap(int place){
+		for(int i =0; i<LevelManager.hints.Count; i++){
+			if(type != LevelManager.hints[i].type){
+				if(!Occupied(LevelManager.hints[i])){
+					return new Vector2(LevelManager.hints[i].x, LevelManager.hints[i].y);
+				}
+			}
+		}
+		return new Vector2(0,0);		
+	}*/
 	public void CrownPiece(Dragger dg){
 		
 	}
 	public void HintMenu(){
 		LevelManager.isdragging = true;
+		hintText.text = "Hint x " + LevelManager.hintCurrency.ToString();
 		for(int i = 0; i <placedpieces.Count; i++){
 			placedpieces[i].gameObject.GetComponent<BoxCollider>().enabled = false;
 		}
@@ -687,8 +698,10 @@ public class PieceHolders : MonoBehaviour {
         LevelManager.isdragging = false;
 
 	}
-	public void CloseSettings(){
-		LevelBuilder.settingsBoard.SetActive(false);
+	public void WatchAd(){
+		LevelManager.hintCurrency = LevelManager.hintCurrency+3;
+		PlayerPrefs.SetInt("hintCurrency", LevelManager.hintCurrency);
+		hintText.text = "Hint x " + LevelManager.hintCurrency.ToString();
 	}
 	public void HintOrRestart(){
 		if(TurnBehaviour.turn == 0&&!hinting){

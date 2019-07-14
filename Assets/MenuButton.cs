@@ -18,7 +18,13 @@ public class MenuButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler{
     public GameObject ConfigMenu;
     public GameObject levelText;
     public GameObject ringObject;
+    public static MenuButton thisMB;
 
+
+    void Awake()
+    {
+        thisMB = this;
+    }
 	// Use this for initialization
 	void Start () {
 		open = false;	
@@ -29,10 +35,17 @@ public class MenuButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler{
 // 	void Update () {
 // //		StartCoroutine(buttonAction());
 // 	}
+    public static void CloseMenu(){
+        if(open){
+            thisMB.toggleMenu();
+           
+        }
+    }
 
 	public void toggleMenu(){
         Debug.Log("menu");
             MenuButton.open = !MenuButton.open;
+            Debug.Log(levelText.GetComponent<RectTransform>());
             RectTransform myrt = levelText.GetComponent<RectTransform>();
             
             for(int i=0; i<buttons.Count; i++){
@@ -110,6 +123,11 @@ public class MenuButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler{
     public void toggleCongifMenu(){
         ConfigMenu.SetActive(true);
         Swiping.canswipe = false;
+        if(open){
+            toggleMenu();
+        }
+        LevelManager.isdragging = true;
+
         //set menu to back only.
     }
     public void closeConfigMenu(){
@@ -124,5 +142,12 @@ public class MenuButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler{
         else{
             Swiping.firstPressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
         }
+        LevelManager.isdragging = false;
+
+    }
+    public void CloseSettings(){
+        ConfigMenu.SetActive(false);
+                LevelManager.isdragging = false;
+
     }
 }
