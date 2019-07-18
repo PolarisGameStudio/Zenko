@@ -725,6 +725,9 @@ public class PieceHolders : MonoBehaviour {
 		//dragger.transform.GetChild(1).gameObject.SetActive(true);
 		draggee = dragger;
 		dragger.GoToHint(new Vector3(position.x,0,-position.y));
+		LevelManager.hintCurrency--;
+		PlayerPrefs.SetInt("hintCurrency", LevelManager.hintCurrency);
+		hintText.text = "Hint x " + LevelManager.hintCurrency.ToString();
 		// if(dragger.myType == "Wall" || dragger.myType == "Seed"){
 		// 	placeNormal(position, dragger);
 		// }
