@@ -7,6 +7,7 @@ public class GameModeHandler : MonoBehaviour
 	public GameObject[] initialObjects;
 	public GameObject[] Modes;
 	public GameObject addButton;
+    public GameObject menuButton;
 	public static GameModeHandler Instance;
 	bool initialized;
 	int currentMode;
@@ -45,10 +46,12 @@ public class GameModeHandler : MonoBehaviour
     public static void TurnOff(){
     	Instance.transform.GetChild(0).gameObject.SetActive(false);
     	Instance.addButton.SetActive(false);
+        Instance.menuButton.SetActive(false);
     }
     public static void TurnON(){
     	Instance.transform.GetChild(0).gameObject.SetActive(true);
     	Instance.addButton.SetActive(true);
+        Instance.menuButton.SetActive(true);
 
     }
     public int nextInCycle(int curPlace){
