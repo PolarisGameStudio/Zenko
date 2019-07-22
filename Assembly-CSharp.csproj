@@ -65,6 +65,7 @@
      <Compile Include="Assets\DotHandler.cs" />
      <Compile Include="Assets\FragileBehaviour.cs" />
      <Compile Include="Assets\GameManager.cs" />
+     <Compile Include="Assets\GameModeHandler.cs" />
      <Compile Include="Assets\HueModifier.cs" />
      <Compile Include="Assets\ImageHolder.cs" />
      <Compile Include="Assets\ImageSwitch.cs" />

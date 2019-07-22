@@ -340,6 +340,7 @@ public class SceneLoading : MonoBehaviour {
 		transform.Find("Level_Box").Find("ButtonHolder").GetComponent<LevelMenu>().currentfirst = PlayerPrefs.GetInt("CurrentFirst");
 		transform.Find("Level_Box").Find("ButtonHolder").GetComponent<LevelMenu>().populateMenu();
 
+		GameModeHandler.TurnOff();
 		transform.Find("MenuHolder").Find("Menu").gameObject.SetActive(false);
 		transform.Find("MenuHolder").Find("CloseLevel_Box").gameObject.SetActive(true);
 		transform.Find("MenuHolder").Find("Config").gameObject.SetActive(false);
