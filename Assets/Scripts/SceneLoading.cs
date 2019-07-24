@@ -64,6 +64,7 @@ public class SceneLoading : MonoBehaviour {
 		SceneManager.LoadScene(0);
 	}
 	public void NextlevelButton(){
+		LevelBuilder.ChangeBackground("Color_A7A46709",new Color(0,0,0,0), .3f);
 		LevelManager.israndom = false;
 		Debug.Log("Next button");
 
@@ -149,6 +150,8 @@ public class SceneLoading : MonoBehaviour {
 		TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
 	}
 	public void Potd(){
+		LevelBuilder.ChangeBackground("Color_A7A46709",new Color(0,0,0,0), .3f);
+
 		Swiping.mydirection = "Null";
 		txt.text = "RANDOM POTD";
 		TurnCounter.turncount = 0;
@@ -241,6 +244,7 @@ public class SceneLoading : MonoBehaviour {
 		// int world = Mathf.FloorToInt(LevelManager.levelnum/50)  + 1;
 		// int levelinworld = LevelManager.levelnum - ((world-1)*50);
 		// txt.text = "World " + world.ToString() + "-" + levelinworld.ToString();
+		LevelBuilder.ChangeBackground("Color_A7A46709",new Color(0,0,0,0), .3f);
 		AssignLevelName();
 
 
@@ -347,6 +351,7 @@ public class SceneLoading : MonoBehaviour {
 		if(MenuButton.open){
 			MenuButton.open = false;
 		}
+		CameraController.Fade(.2f,1f);
 
 
 	}
@@ -357,7 +362,9 @@ public class SceneLoading : MonoBehaviour {
 
 
 		transform.Find("MenuHolder").Find("Menu").gameObject.SetActive(true);
-		transform.Find("MenuHolder").Find("CloseLevel_Box").gameObject.SetActive(false);		
+		transform.Find("MenuHolder").Find("CloseLevel_Box").gameObject.SetActive(false);
+		GameModeHandler.TurnOn();		
+		CameraController.Fade(.2f,0.4f);
 	}
 	public void GoToWorldSelect(){
 			SceneManager.LoadScene (1);

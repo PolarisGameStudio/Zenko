@@ -47,8 +47,10 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEngine.UI.dll:
     - UnityEngine.EventSystems.EventSystem
@@ -147,61 +149,61 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9980}
     - Class: 114
-      Script: {instanceID: 10282}
+      Script: {instanceID: 10284}
     - Class: 114
-      Script: {instanceID: 10406}
+      Script: {instanceID: 10408}
     - Class: 114
-      Script: {instanceID: 10446}
+      Script: {instanceID: 10448}
     - Class: 114
-      Script: {instanceID: 10596}
+      Script: {instanceID: 10598}
     - Class: 114
-      Script: {instanceID: 10672}
+      Script: {instanceID: 10676}
     - Class: 114
-      Script: {instanceID: 10732}
+      Script: {instanceID: 10736}
     - Class: 114
-      Script: {instanceID: 10742}
+      Script: {instanceID: 10746}
     - Class: 114
-      Script: {instanceID: 10784}
+      Script: {instanceID: 10788}
     - Class: 114
-      Script: {instanceID: 10840}
+      Script: {instanceID: 10844}
     - Class: 114
-      Script: {instanceID: 10886}
+      Script: {instanceID: 10890}
     - Class: 114
-      Script: {instanceID: 10922}
+      Script: {instanceID: 10926}
     - Class: 114
-      Script: {instanceID: 10932}
+      Script: {instanceID: 10936}
     - Class: 114
-      Script: {instanceID: 10976}
+      Script: {instanceID: 10980}
     - Class: 114
-      Script: {instanceID: 11070}
+      Script: {instanceID: 11074}
     - Class: 114
-      Script: {instanceID: 11108}
+      Script: {instanceID: 11112}
     - Class: 114
-      Script: {instanceID: 11126}
+      Script: {instanceID: 11130}
     - Class: 114
-      Script: {instanceID: 11414}
+      Script: {instanceID: 11402}
     - Class: 114
-      Script: {instanceID: 11560}
+      Script: {instanceID: 11418}
     - Class: 114
-      Script: {instanceID: 11750}
+      Script: {instanceID: 11564}
     - Class: 114
-      Script: {instanceID: 11772}
+      Script: {instanceID: 11754}
     - Class: 114
-      Script: {instanceID: 11782}
+      Script: {instanceID: 11776}
     - Class: 114
-      Script: {instanceID: 12256}
+      Script: {instanceID: 11786}
     - Class: 114
-      Script: {instanceID: 12308}
+      Script: {instanceID: 12260}
     - Class: 114
-      Script: {instanceID: 12346}
+      Script: {instanceID: 12350}
     - Class: 114
-      Script: {instanceID: 23138}
+      Script: {instanceID: 28402}
     - Class: 114
-      Script: {instanceID: 23142}
+      Script: {instanceID: 28406}
     - Class: 114
-      Script: {instanceID: 23146}
+      Script: {instanceID: 28410}
     - Class: 114
-      Script: {instanceID: 23150}
+      Script: {instanceID: 28414}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -274,6 +276,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9572}
     - Class: 114
+      Script: {instanceID: 9606}
+    - Class: 114
       Script: {instanceID: 9650}
     - Class: 114
       Script: {instanceID: 9688}
@@ -314,35 +318,35 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10126}
     - Class: 114
-      Script: {instanceID: 10446}
+      Script: {instanceID: 10448}
     - Class: 114
-      Script: {instanceID: 10498}
+      Script: {instanceID: 10500}
     - Class: 114
-      Script: {instanceID: 10688}
+      Script: {instanceID: 10692}
     - Class: 114
-      Script: {instanceID: 10732}
+      Script: {instanceID: 10736}
     - Class: 114
-      Script: {instanceID: 10742}
+      Script: {instanceID: 10746}
     - Class: 114
-      Script: {instanceID: 10784}
+      Script: {instanceID: 10788}
     - Class: 114
-      Script: {instanceID: 10840}
+      Script: {instanceID: 10844}
     - Class: 114
-      Script: {instanceID: 10982}
+      Script: {instanceID: 10986}
     - Class: 114
-      Script: {instanceID: 11444}
+      Script: {instanceID: 11448}
     - Class: 114
-      Script: {instanceID: 11528}
+      Script: {instanceID: 11532}
     - Class: 114
-      Script: {instanceID: 11560}
+      Script: {instanceID: 11564}
     - Class: 114
-      Script: {instanceID: 11740}
+      Script: {instanceID: 11744}
     - Class: 114
-      Script: {instanceID: 11750}
+      Script: {instanceID: 11754}
     - Class: 114
-      Script: {instanceID: 11782}
+      Script: {instanceID: 11786}
     - Class: 114
-      Script: {instanceID: 11852}
+      Script: {instanceID: 11856}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -484,7 +488,7 @@ ScriptsOnlyBuild:
     className: GroupTrack
   - hash:
       serializedVersion: 2
-      Hash: 7aca0d367aecbd2e9fe31877e323e040
+      Hash: 42c80c7a33443db94b124c4b708b7e3d
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: CameraController
@@ -740,18 +744,6 @@ ScriptsOnlyBuild:
     assemblyName: com.unity.multiplayer-hlapi.Runtime.dll
     namespaceName: UnityEngine.Networking
     className: NetworkTransform
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: UnityEngine.Advertisements.dll
-    namespaceName: UnityEngine.Advertisements
-    className: CallbackExecutor
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: UnityEngine.Advertisements.dll
-    namespaceName: UnityEngine.Advertisements.Editor
-    className: Placeholder
   - hash:
       serializedVersion: 2
       Hash: cf9f5cf2c3145a37ac07f00e50e460f9
@@ -1222,7 +1214,7 @@ ScriptsOnlyBuild:
     className: AnalyticsEventTrackerEditor
   - hash:
       serializedVersion: 2
-      Hash: 759edd02bea985532070bb15e5da2de2
+      Hash: 5ba10f75751e7d42515e8225c768fcd2
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: LevelBuilder
@@ -1504,7 +1496,7 @@ ScriptsOnlyBuild:
     className: Swiping
   - hash:
       serializedVersion: 2
-      Hash: a8aebde3b7fb9005819788295177a8e7
+      Hash: 80e900e3c0f5123183a913a9b8908fb5
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameModeHandler
@@ -1620,4 +1612,4 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/WorldSelect.unity
   - Assets/Level.unity
-  playerPath: /Users/bernardolimonvillarreal/Desktop/ZenkoBetaAPK/ZenkoTest04.aab
+  playerPath: /Users/bernardolimonvillarreal/Desktop/ZenkoBetaAPK/ZenkoTest17NOGAMESSERVICES.aab

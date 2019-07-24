@@ -12,13 +12,15 @@ public class CameraController : MonoBehaviour {
 	public CameraShake shaker;
 	bool topdown;
 	public Text screenText;
+	public static CameraController Instance;
+	public GameObject gameModeBackground;
 	// Use this for initialization
 	void Awake () {
 		topdown = false;
 		cameraposition = transform.localPosition;
 		eulerangles = transform.localEulerAngles;
 		cameraorigin = new Vector3(Camera.main.gameObject.transform.position.x, Camera.main.gameObject.transform.position.y, Camera.main.gameObject.transform.position.z);
-	
+		Instance = this;
 	}
 	void Start(){
 		Application.targetFrameRate = 30;
@@ -48,6 +50,26 @@ public class CameraController : MonoBehaviour {
 
 		}
 	}*/
+
+	public IEnumerator FadeBackgroundTo(float fadetime, float alphaPercentage){
+		Debug.Log("Fading");
+		Image image = gameModeBackground.GetComponent<Image>();
+		Debug.Log(image);
+		float initValue = image.color.a;
+		Color tempColor = image.color;
+		Debug.Log(initValue);
+		for(float t = 0.0f; t<fadetime; t+= Time.deltaTime){
+			float normalizedTime = t/fadetime;
+			tempColor.a = (float)Mathf.Lerp(initValue, alphaPercentage, normalizedTime);
+			image.color = tempColor;
+			yield return null;
+		}
+		tempColor.a = alphaPercentage;
+		image.color = tempColor;
+	}
+	public static void Fade(float time, float alphaPercentage){
+		Instance.StartCoroutine(Instance.FadeBackgroundTo(time,alphaPercentage));
+	}
 	public void ChangeResolution(){
 		Debug.Log(Screen.currentResolution);
 		//Debug.Log(Screen.currentResolution.x);

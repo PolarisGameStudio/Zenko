@@ -6,6 +6,8 @@ using UnityEngine.Networking;
 using UnityEngine.UI;
 
 public class LevelBuilder : MonoBehaviour {
+	public Material backgroundMaterial;
+	public static Material background;
 	private string filePath;
 	private string result;
 //	IceTileHandler myhandler;
@@ -66,6 +68,7 @@ public class LevelBuilder : MonoBehaviour {
 	public GameObject myhintboard;
 	public static GameObject hintboard;	
 	public static GameObject settingsBoard;
+	public static LevelBuilder Instance;
 
 	//public static List<Transform> piecetiles = new List<Transform>();
 
@@ -82,6 +85,9 @@ public class LevelBuilder : MonoBehaviour {
 			}
 		}*/
 	public void Awake(){
+		Instance = this;
+		background = backgroundMaterial;
+		background.SetColor("Color_A7A46709", new Color(0,0,0,0));
 		winboard = mywinboard;
 		loseboard = myloseboard;
 		hintboard = myhintboard;
@@ -101,7 +107,24 @@ public class LevelBuilder : MonoBehaviour {
 		Debug.Log (result);
 		Debug.Log (filePath);
 	}
+	public static void ChangeBackground(string colorVariable, Color newcolor, float fadetime){
+		Instance.StartCoroutine(Instance.ChangeColor(colorVariable, newcolor, fadetime));
+	}
+	public IEnumerator ChangeColor(string colorVariable,Color newcolor, float fadetime){
+		Color initColor = backgroundMaterial.GetColor("Color_A7A46709");
+		Color currentColor;
+		for(float t = 0.0f; t<fadetime; t+= Time.deltaTime){
+			float normalizedTime = t/fadetime;
+			currentColor = new Color((float)Mathf.Lerp(initColor.r, newcolor.r, normalizedTime),
+				(float)Mathf.Lerp(initColor.g, newcolor.g, normalizedTime),
+				(float)Mathf.Lerp(initColor.b, newcolor.b, normalizedTime),
+				(float)Mathf.Lerp(initColor.a, newcolor.a, normalizedTime));
 
+			backgroundMaterial.SetColor(colorVariable, currentColor);
+			yield return null;
+		}		
+		backgroundMaterial.SetColor(colorVariable, newcolor);	
+	}
 	public IEnumerator initPotd(){ //feeds levelPotd string array from textfile.
 		startersPotd = new List<int>();
 		string file = "FilteredMaps.txt";

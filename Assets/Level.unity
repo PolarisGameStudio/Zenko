@@ -21114,6 +21114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b982ab87f8d804e178d53efa42577135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  backgroundMaterial: {fileID: 2100000, guid: d7ed93f44a6ba4157a2cd532cacc402b, type: 2}
   tile:
   - {fileID: 1824310829739640, guid: 50e5cb720717e4a86917ed134a78da27, type: 3}
   mygray: {r: 0.6784314, g: 0.6784314, b: 0.6784314, a: 1}
@@ -21150,7 +21151,7 @@ MonoBehaviour:
     type: 3}
   floor_up: {fileID: 4617027568836188, guid: 0ef367dbaba194c0089866b6209f28ae, type: 3}
   floor_down: {fileID: 4743772380178846, guid: 35e7ab7d71a764f809772c2e81ae0e27, type: 3}
-  floor_fragile: {fileID: 4824537435032696, guid: b8a92c3b6f9514b8eae5212f26a83cc3,
+  floor_fragile: {fileID: 7296722159183165653, guid: f56b3cd2f14534c838b228ef0f05eeb5,
     type: 3}
   floor_quicksand: {fileID: 4299053572363106, guid: caa0c1578de39465481e43f4762d71f5,
     type: 3}
@@ -21180,6 +21181,7 @@ MonoBehaviour:
   topDownCam: {fileID: 0}
   shaker: {fileID: 1286500512}
   screenText: {fileID: 1040518192}
+  gameModeBackground: {fileID: 0}
 --- !u!114 &1286500512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34811,6 +34813,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Main Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 114301578352000216, guid: 8ecd96c7205334f31b95efeff6702572,
+        type: 3}
+      propertyPath: txt
+      value: 
+      objectReference: {fileID: 1040518192}
+    - target: {fileID: 114301578352000216, guid: 8ecd96c7205334f31b95efeff6702572,
+        type: 3}
+      propertyPath: txt2
+      value: 
+      objectReference: {fileID: 662910872}
     - target: {fileID: 224319233866134012, guid: 8ecd96c7205334f31b95efeff6702572,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -34916,16 +34928,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114301578352000216, guid: 8ecd96c7205334f31b95efeff6702572,
-        type: 3}
-      propertyPath: txt
-      value: 
-      objectReference: {fileID: 1040518192}
-    - target: {fileID: 114301578352000216, guid: 8ecd96c7205334f31b95efeff6702572,
-        type: 3}
-      propertyPath: txt2
-      value: 
-      objectReference: {fileID: 662910872}
     - target: {fileID: 114090958055011722, guid: 8ecd96c7205334f31b95efeff6702572,
         type: 3}
       propertyPath: m_BlockingMask.m_Bits

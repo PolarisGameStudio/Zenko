@@ -111,11 +111,14 @@ public class PlayerMovement : MonoBehaviour {
 			TurnBehaviour.turn = 1;
 			menuButton.GetComponent<Image>().sprite = menuButton.GetComponent<ImageHolder>().imagetwo;
 			hintButton.GetComponent<Image>().sprite = hintButton.GetComponent<ImageHolder>().imagetwo;
+			
+			LevelBuilder.ChangeBackground("Color_A7A46709", new Color(154f/255f,53f/255f,53f/255f,0),.3f);
 		}
 		if (TurnBehaviour.turn == 1 && transform.position == startingposition) {
 			TurnBehaviour.turn = 0; 
 			menuButton.GetComponent<Image>().sprite = menuButton.GetComponent<ImageHolder>().imageone;
 			hintButton.GetComponent<Image>().sprite = hintButton.GetComponent<ImageHolder>().imageone;
+			// LevelBuilder.ChangeBackground("Color_A7A46709",new Color(0,0,0,0), .3f);		
 		}
 		// if(Vector3.Distance(currenttile, transform.position) <.5f && !boop && 
 		// 	transform.position != startingposition && nextaction != "Goal_Action" && nextaction != "Hole_Action"){

@@ -66,6 +66,7 @@
      <Compile Include="Assets\FragileBehaviour.cs" />
      <Compile Include="Assets\GameManager.cs" />
      <Compile Include="Assets\GameModeHandler.cs" />
+     <Compile Include="Assets\GPGSIds.cs" />
      <Compile Include="Assets\HueModifier.cs" />
      <Compile Include="Assets\ImageHolder.cs" />
      <Compile Include="Assets\ImageSwitch.cs" />
@@ -81,6 +82,7 @@
      <Compile Include="Assets\PieceHolders.cs" />
      <Compile Include="Assets\PlayerAnimation.cs" />
      <Compile Include="Assets\PlayerFollower.cs" />
+     <Compile Include="Assets\PlayServices.cs" />
      <Compile Include="Assets\ProgressBar.cs" />
      <Compile Include="Assets\Scripts\AssignCamera.cs" />
      <Compile Include="Assets\Scripts\AssignCanvasAndButton.cs" />
