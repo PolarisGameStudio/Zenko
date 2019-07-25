@@ -199,12 +199,12 @@ public class CameraShake : MonoBehaviour
 
     	if(PlayerMovement.boop == true){
 //                        Debug.Log(CameraShakeTarget.Position);
-            Add(.3f, 5.0f, .1f, CameraShakeTarget.Position, CameraShakeAmplitudeCurve.FadeInOut75);  
+            Add(.14f, 5.0f, .05f, CameraShakeTarget.Position, CameraShakeAmplitudeCurve.FadeInOut75);  
             PlayerMovement.boop = false;   
             //Debug.Log("ADD");          		
     	}
     	if(PlayerMovement.boopout == true){
-            Add(1.0f, 1.0f, 1.5f, CameraShakeTarget.Position, CameraShakeAmplitudeCurve.FadeInOut25);
+            Add(0.5f, 1.0f, .7f, CameraShakeTarget.Position, CameraShakeAmplitudeCurve.FadeInOut25);
 			PlayerMovement.boopout = false;               		
     	}
         /*if (Input.GetKeyDown(KeyCode.F))
