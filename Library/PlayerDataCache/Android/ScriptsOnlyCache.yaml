@@ -44,14 +44,8 @@ ScriptsOnlyBuild:
     - UnityEngine.Rendering.LWRP.ForwardRendererData
     - UnityEngine.Rendering.LWRP.LightweightRenderPipelineAsset
     - UnityEngine.Rendering.LWRP.LightweightRenderPipelineEditorResources
-    UnityEditor.Graphs.dll:
-    - UnityEditor.Graphs.AnimationBlendTree.Graph
-    - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
-    - UnityEditor.Graphs.AnimationStateMachine.Graph
-    - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.StateNode
-    - UnityEditor.Graphs.AnimatorControllerTool
+    UnityEditor.TestRunner.dll:
+    - UnityEditor.TestTools.TestRunner.TestListCacheData
     UnityEngine.UI.dll:
     - UnityEngine.EventSystems.EventSystem
     - UnityEngine.EventSystems.EventTrigger
@@ -197,13 +191,13 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12276}
     - Class: 114
-      Script: {instanceID: 28202}
+      Script: {instanceID: 33316}
     - Class: 114
-      Script: {instanceID: 28206}
+      Script: {instanceID: 33320}
     - Class: 114
-      Script: {instanceID: 28210}
+      Script: {instanceID: 33324}
     - Class: 114
-      Script: {instanceID: 28214}
+      Script: {instanceID: 33328}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -1602,8 +1596,14 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GoalBehaviour
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: GooglePlayGames.OurUtils
+    className: PlayGamesHelperObject
   platform: 13
   scenePathNames:
   - Assets/WorldSelect.unity
   - Assets/Level.unity
-  playerPath: /Users/bernardolimonvillarreal/Desktop/ZenkoBetaAPK/Zenko18.aab
+  playerPath: /Users/bernardolimonvillarreal/Desktop/ZenkoBetaAPK/Zenko19gpgsbutnotimplemented.aab
