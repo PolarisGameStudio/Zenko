@@ -340,9 +340,6 @@
  <Reference Include="UnityEditor.Android.Extensions">
  <HintPath>/Applications/Unity/Hub/Editor/2019.1.12f1/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll</HintPath>
  </Reference>
- <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
- <HintPath>/Applications/Visual Studio.app/Contents/Resources/lib/monodevelop/AddIns/MonoDevelop.Unity/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
- </Reference>
  <Reference Include="Google.IOSResolver_v1.2.105.0">
  <HintPath>/Users/bernardolimon/Documents/GitHub/Zenko/Assets/PlayServicesResolver/Editor/Google.IOSResolver_v1.2.105.0.dll</HintPath>
  </Reference>

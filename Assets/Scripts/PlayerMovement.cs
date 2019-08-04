@@ -378,10 +378,14 @@ public class PlayerMovement : MonoBehaviour {
 			Swiping.mydirection = "Null";
 		}
 	}
+	void SpawnStatue(){
+		LevelBuilder.starttransform.transform.GetChild(0).gameObject.SetActive(true);
+	}
 	void Count(){
 		if(firstmove == true && canmove == true){
 			if(TurnCounter.turncount == 0){
-				LevelBuilder.starttransform.GetComponentInChildren<Animator>().SetInteger("Phase",1);
+				//LevelBuilder.starttransform.GetComponentInChildren<Animator>().SetInteger("Phase",1);
+				SpawnStatue();
 			}
 			TurnCounter.turncount++;
 			TG.TakeTurn(TurnCounter.turncount);

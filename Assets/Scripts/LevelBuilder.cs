@@ -780,6 +780,7 @@ public class LevelBuilder : MonoBehaviour {
 				if(tiles[myx,myy+1].type != "Wall" && tiles[myx,myy+1].type != "Goal"){
 					Debug.Log("Down");
 					playertransform.eulerAngles = new Vector3(0f,270f,0f);
+					starttransform.eulerAngles = new Vector3(0f,270f,0f);
 					playerInitialRotation = 270;
 					return;
 				}
@@ -791,6 +792,7 @@ public class LevelBuilder : MonoBehaviour {
 				if(tiles[myx,myy-1].type != "Wall" && tiles[myx,myy-1].type != "Goal"){
 					Debug.Log("Up");
 					playertransform.eulerAngles = new Vector3(0f,90f,0f);
+					starttransform.eulerAngles = new Vector3(0f,90f,0f);
 					playerInitialRotation = 90;
 					return;				
 				}
@@ -803,6 +805,7 @@ public class LevelBuilder : MonoBehaviour {
 				if(tiles[myx+1,myy].type != "Wall"  && tiles[myx+1,myy].type != "Goal"){
 					Debug.Log("Right");
 					playertransform.eulerAngles = new Vector3(0f,180f,0f);
+					starttransform.eulerAngles = new Vector3(0f,180f,0f);
 					playerInitialRotation = 180;
 					return;
 				}
@@ -813,6 +816,7 @@ public class LevelBuilder : MonoBehaviour {
 			if (component.tag == "Tile"|| component.tag == "Fragile"){
 				if(tiles[myx-1,myy].type != "Wall" && tiles[myx-1,myy].type != "Goal"){
 					playertransform.eulerAngles = new Vector3(0f,0f,0f);
+					starttransform.eulerAngles = new Vector3(0f,0f,0f);
 					playerInitialRotation = 0;
 					Debug.Log("Left");
 					return;
@@ -1323,13 +1327,18 @@ public class LevelBuilder : MonoBehaviour {
 			SpawnPlayer(startpos);
 			resetting = false;
 			GoalBehaviour.active = true;
-			if(starttransform != null){
-				Destroy(starttransform.gameObject)/*.SetActive(false)*/;
-				SpawnStart(startpos);
-			}
-
+			// if(starttransform != null){
+			// 	Destroy(starttransform.gameObject)/*.SetActive(false)*/;
+			// 	SpawnStart(startpos);
+			// }
+			DisappearStatue();
 
 	}
+
+	void DisappearStatue(){
+		LevelBuilder.starttransform.transform.GetChild(0).gameObject.SetActive(false);
+	}
+
 	public void SpawnStart(Vector2 thevector){
 		int x = (int)thevector.x;
 		int y = (int)thevector.y;
