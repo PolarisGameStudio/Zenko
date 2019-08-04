@@ -28,7 +28,7 @@ public class SceneLoading : MonoBehaviour {
 //			Debug.Log(levelnum + "level");
 			Debug.Log(LevelManager.levelnum);
 			if(LevelManager.levelnum == 0 || LevelManager.levelnum ==null){
-			LevelManager.levelnum = 1;				
+			LevelManager.levelnum = 103;				
 			}
 			Debug.Log("sceneloadingstuff");
 			//MusicHandler.PlayInitialLoop();

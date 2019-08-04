@@ -11,6 +11,8 @@ TagManager:
   - Tile
   - Turn
   - RatingText
+  - Pedro
+  - PedroSeed
   layers:
   - Default
   - TransparentFX

@@ -45,6 +45,14 @@ ScriptsOnlyBuild:
     - UnityEngine.Rendering.LWRP.ForwardRendererData
     - UnityEngine.Rendering.LWRP.LightweightRenderPipelineAsset
     - UnityEngine.Rendering.LWRP.LightweightRenderPipelineEditorResources
+    UnityEditor.Graphs.dll:
+    - UnityEditor.Graphs.AnimationBlendTree.Graph
+    - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
+    - UnityEditor.Graphs.AnimationStateMachine.Graph
+    - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.StateNode
+    - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.TestListCacheData
     UnityEngine.UI.dll:
@@ -193,13 +201,13 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12756}
     - Class: 114
-      Script: {instanceID: 23982}
+      Script: {instanceID: 25454}
     - Class: 114
-      Script: {instanceID: 23986}
+      Script: {instanceID: 25628}
     - Class: 114
-      Script: {instanceID: 23990}
+      Script: {instanceID: 25632}
     - Class: 114
-      Script: {instanceID: 23994}
+      Script: {instanceID: 25636}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -1616,4 +1624,4 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/WorldSelect.unity
   - Assets/Level.unity
-  playerPath: /Users/bernardolimon/Desktop/ZenkoApk/Zenko27.aab
+  playerPath: /Users/bernardolimon/Desktop/ZenkoApk/Zenko29.aab

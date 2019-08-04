@@ -44,15 +44,17 @@ public class PlayerMovement : MonoBehaviour {
 	public static bool longgoal;
 	GameObject menuButton;
 	GameObject hintButton;
+	bool hasstopped;
+	GameObject wallToHit;
 	//public KeySimulator mykeysimulator;
 	// Use this for initialization
 	void Start () {
 		//current tile works as a target to move to
+		hasstopped = false;
 		animationController = GetComponent<PlayerAnimation>();
 		startingposition = transform.position;
 		currenttile = transform.position;
 		cantakeinput = true;
-		//canmove = true;
 		nextaction = null;
 		beingdragged = false;
 		lastFragile = null;
@@ -69,9 +71,6 @@ public class PlayerMovement : MonoBehaviour {
 			LevelLostBoard.SetActive (false);
 
 		}
-		//Debug.Log(LevelLostBoard);
-		//LevelLostBoard.SetActive (false);
-//		Debug.Log ("TURNEDTOFF");
 		outofmap = false;
 		hasmoved = false;
 		TG = GameObject.Find("ProgressBar").GetComponent<ProgressBar>();
@@ -86,15 +85,12 @@ public class PlayerMovement : MonoBehaviour {
 
 		}
 		if(!canmove && !GoalBehaviour.goaling){
-			//Debug.Log("SETTING");
 			this.transform.GetChild(0).GetComponent<Animator>().SetInteger("Phase", 1);
 		}
 		if (Input.GetKeyDown (KeyCode.G)){
 			Debug.Log(LevelBuilder.tiles[0,0].isTaken);
 		}
 		myswipe = Swiping.mydirection;
-//		Debug.Log(Swiping.mydirection);
-		//Debug.Log (levelWonBoard);
 		if (levelWonBoard == null) {
 			levelWonBoard = SceneLoading.gamewon;
 			levelWonBoard.SetActive(false);
@@ -103,11 +99,8 @@ public class PlayerMovement : MonoBehaviour {
 			LevelLostBoard = SceneLoading.gamelost;
 			LevelLostBoard.SetActive (false);
 		}
-//		Debug.Log (TurnBehaviour.turn + "BEHAV");
 		if (transform.position != startingposition && TurnBehaviour.turn == 0) {
-			foreach (Dragger piece in PieceHolders.placedpieces){
-				piece.gameObject.transform.GetComponent<BoxCollider>().enabled = false;
-			}
+
 			TurnBehaviour.turn = 1;
 			menuButton.GetComponent<Image>().sprite = menuButton.GetComponent<ImageHolder>().imagetwo;
 			hintButton.GetComponent<Image>().sprite = hintButton.GetComponent<ImageHolder>().imagetwo;
@@ -118,90 +111,41 @@ public class PlayerMovement : MonoBehaviour {
 			TurnBehaviour.turn = 0; 
 			menuButton.GetComponent<Image>().sprite = menuButton.GetComponent<ImageHolder>().imageone;
 			hintButton.GetComponent<Image>().sprite = hintButton.GetComponent<ImageHolder>().imageone;
-			// LevelBuilder.ChangeBackground("Color_A7A46709",new Color(0,0,0,0), .3f);		
+	
 		}
-		// if(Vector3.Distance(currenttile, transform.position) <.5f && !boop && 
-		// 	transform.position != startingposition && nextaction != "Goal_Action" && nextaction != "Hole_Action"){
-		// 	if(lastFragile != null && Vector3.Distance(lastFragile.transform.position,transform.position) <.5f){
 
-		// 	}
-		// 	else{
-		// 		Debug.Log(lastbooped + " " + currenttile);
-		// 		Debug.Log(boop);
-		// 		if(lastbooped != currenttile){
-		// 			boop = true;
-		// 			lastbooped = currenttile;
-		// 			Debug.Log("booped");
-		// 		}
-		// 		Debug.Log("stopped");				
-		// 	}
-		// }
 		if(Vector3.Distance(currenttile, transform.position) <.6f && !boop && 
 			transform.position != startingposition && nextaction !="Goal_Action"){
-//			Debug.Log(lastbooped + " " + currenttile);
-//			Debug.Log(boop);
 			if(lastbooped != currenttile){
 				boop = true;
 				lastbooped = currenttile;
-				//Debug.Log("booped");
 				AssignShakeOrientation(character_direction);
 			}
-			//Debug.Log("stopped");				
 		}
-		// if(Vector3.Distance(currenttile, transform.position) <.6f && !boopout && 
-		// 	transform.position != startingposition && nextaction == "Goal_Action"){
-		// 	//StartCoroutine(ShakeOut());
-		// 	Debug.Log(lastbooped + " " + currenttile);
-		// 	Debug.Log(boop);
-		// 	if(lastbooped != currenttile){
-		// 		boopout = true;
-		// 		lastbooped = currenttile;
-		// 		Debug.Log("booped");
-		// 	}
-		// 	Debug.Log("stopped");	
-		// }
-		// if(Vector3.Distance(currenttile, transform.position) <.5f && !boopout && 
-		// 	transform.position != startingposition && 
-		// 	(nextaction == "Hole_Action" || (lastFragile != null && Vector3.Distance(lastFragile.transform.position,transform.position) <.5f))){
-		// 	if(nextaction == "Left_Action" || nextaction == "Right_Action" || nextaction == "Down_Action" || nextaction == "Up_Action"){
-
-		// 	}
-		// 	else{
-		// 		Debug.Log(lastbooped + " " + currenttile);
-		// 		Debug.Log(boop);
-		// 		if(lastbooped != currenttile){
-		// 			boopout = true;
-		// 			lastbooped = currenttile;
-		// 			Debug.Log("booped");
-		// 		}
-		// 		Debug.Log("stopped");				
-		// 	}
-		// }
-		if (currenttile == transform.position) {//do this when reached currenttile
-
+		if(Vector3.Distance(currenttile, transform.position) <.8f && !boop && 
+			transform.position != startingposition && nextaction !="Goal_Action"){
+			if(wallToHit!= null){
+				wallToHit.GetComponent<Animator>().SetTrigger("Hit");
+				wallToHit = null;				
+			}
+		}		
+		if (currenttile == transform.position && !hasstopped) {//do this when reached currenttile
+			Debug.Log("On tile");
 			GoalBehaviour.isstatic = true;
-//			Debug.Log(nextaction);
-			//Debug.Log (tilescript.myTaker.tag);
 			if (lastFragile != null && lastFragile.transform.position == transform.position && nextaction== null) {
 				Debug.Log ("UNUL");
-				//this.enabled = false;
-
-				//int nextlevel = LevelManager.levelnum;
-				//LevelManager.NextLevel (nextlevel);
-
 				this.enabled=false;
-
 				Debug.Log("Hole");
 				StartCoroutine(PopLose());
 				StartCoroutine(animationController.Disappear(.3f));
-
 			}
 
 			else if (nextaction == null) {
-//				Debug.Log("Null");
+				Debug.Log("Null");
 				cantakeinput = true;
 				canmove = true;
 				isspeeding = false;
+				hasstopped = true;
 			}  
 			else if (nextaction == "Goal_Action") {
 				RatingPopUp.GiveRating ();
@@ -210,17 +154,10 @@ public class PlayerMovement : MonoBehaviour {
 				StartCoroutine(PopWin());
 			}			
 			else if (nextaction == "Hole_Action") {
-
 				this.enabled=false;
 				Debug.Log("Hole");
 				StartCoroutine(PopLose());
 				StartCoroutine(animationController.Disappear(.3f));
-
-
-				//int nextlevel = LevelManager.levelnum;
-				//LevelManager.NextLevel (nextlevel);
-				//here popup "Gameover" try again
-
 			}
 			else if (nextaction == "Left_Action") {
 				Debug.Log(nextaction);
@@ -286,20 +223,16 @@ public class PlayerMovement : MonoBehaviour {
 					nextaction = null;
 				}
 			}
+			if(wallToHit != null){
+				wallToHit.GetComponent<Animator>().SetTrigger("Hit");
+				wallToHit = null;
+				hasstopped = true;
+
+			}
 		}
 			Movement ();
 	}
-	// IEnumerator ShakeOut(){
-	// 	yield return new WaitForSeconds(.1f);
-	// 	Debug.Log(lastbooped + " " + currenttile);
-	// 	Debug.Log(boop);
-	// 	if(lastbooped != currenttile){
-	// 		boopout = true;
-	// 		lastbooped = currenttile;
-	// 		Debug.Log("booped");
-	// 	}
-	// 	Debug.Log("stopped");				
-	// }
+
 	public void AssignShakeOrientation(string shakeDirection){
 		if(shakeDirection == "Up"){
 			shakeNoise = new Vector3(0,0,-.5f);
@@ -332,6 +265,7 @@ public class PlayerMovement : MonoBehaviour {
 				tiletotest = currenttile;
 //				Debug.Log(tiletotest);
 				if (canmove == true) {
+					hasstopped = false;
 					firstmove = true;
 					boop = false;
 					MenuButton.CloseMenu();
@@ -350,6 +284,8 @@ public class PlayerMovement : MonoBehaviour {
 			if (Input.GetKeyDown (KeyCode.A)|| Input.GetKeyDown(KeyCode.LeftArrow) || myswipe == "Left" /*|| mykeysimulator.A*/) {
 				tiletotest = currenttile;
 				if (canmove == true) {
+					hasstopped = false;
+
 					firstmove = true;
 					boop = false;
 					MenuButton.CloseMenu();
@@ -370,6 +306,7 @@ public class PlayerMovement : MonoBehaviour {
 			if (Input.GetKeyDown (KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow) || myswipe == "Down" /*|| mykeysimulator.S */) {
 				tiletotest = currenttile;
 				if (canmove == true) {
+					hasstopped = false;
 					firstmove = true;
 					boop = false;
 					MenuButton.CloseMenu();
@@ -388,6 +325,7 @@ public class PlayerMovement : MonoBehaviour {
 			if (Input.GetKeyDown (KeyCode.D)|| Input.GetKeyDown(KeyCode.RightArrow) || myswipe == "Right" /*|| mykeysimulator.D*/) {
 				tiletotest = currenttile;
 				if (canmove == true) {
+					hasstopped = false;
 					firstmove = true;
 					boop = false;
 					MenuButton.CloseMenu();
@@ -406,55 +344,20 @@ public class PlayerMovement : MonoBehaviour {
 		}
 		
 	}
-	/*void FindTileTag(){
-		Collider2D[] colliders = Physics2D.OverlapCircleAll(tiletotest, .1f); ///Presuming the object you are testing also has a collider 0 otherwise{
-		if(colliders.Length == 0){
-				istiletaken = true;
-				outofmap = true;
-		}
-		else{
-			foreach (Collider2D component in colliders) {
-				if (component.tag == "Ground") {
-					tileobject = component.gameObject;
-					tilescript = tileobject.GetComponent<TileHandler> ();
-					istiletaken = tilescript.isTaken;
-				} 
-			}
-		}
-	}*/
+
 	void FindTileTag(){
-//		Debug.Log("FINDING TAG");
-	//Collider2D[] colliders = Physics2D.OverlapCircleAll(tiletotest, .1f); ///Presuming the object you are testing also has a collider 0 otherwise{
-		
-//		Debug.Log((int)tiletotest.x + "+" + -(int)tiletotest.z);
-		//Debug.Log(LevelBuilder.tiles[-2,5]);
-		//tilescript = LevelBuilder.tiles[(int)tiletotest.x,-(int)tiletotest.z];
-//		Debug.Log(tilescript.type);
-//		Debug.Log(tilescript.type);
+
 		if(inside()){
 				tilescript = LevelBuilder.tiles[(int)tiletotest.x,-(int)tiletotest.z];
-				/*
-				foreach (Collider2D component in colliders) {
-					if (component.tag == "Ground") {
-						tileobject = component.gameObject;
-						tilescript = tileobject.GetComponent<TileHandler> ();
-						istiletaken = tilescript.isTaken;
-					} */
-				//tileobject = LevelBuilder.tiles[(int)tiletotest.x, (int)tiletotest.z].tileObj;	
-				//istiletaken = LevelBuilder.tiles[(int)tiletotest.x, (int)tiletotest.z].isTaken;
 				istiletaken = tilescript.isTaken;			
 		}
 		else{
-				//Debug.Log("square null");
 				istiletaken = true;
 				outofmap = true;
-				//Debug.Log("no collider");
 		}
 		
 	}
 	public bool inside(){
-//		Debug.Log(tiletotest.x);
-//		Debug.Log(tiletotest.z);
 		if((int)tiletotest.x>=0 && (int)tiletotest.x <= LevelBuilder.totaldimension && 
 			-(int)tiletotest.z>=0 && -(int)tiletotest.z <= LevelBuilder.totaldimension){
 			return true;
@@ -469,7 +372,6 @@ public class PlayerMovement : MonoBehaviour {
 		}
 		//if the desired tile is not the place you're standing in it moves there
 		if (currenttile != transform.position && beingdragged == false) {
-			//Debug.Log("move");
 			GoalBehaviour.readytomove = true;
 			transform.position = Vector3.MoveTowards (transform.position, currenttile, Time.deltaTime * speed); 
 			cantakeinput = false;
@@ -479,11 +381,9 @@ public class PlayerMovement : MonoBehaviour {
 	void Count(){
 		if(firstmove == true && canmove == true){
 			if(TurnCounter.turncount == 0){
-//				Debug.Log("Anim");
 				LevelBuilder.starttransform.GetComponentInChildren<Animator>().SetInteger("Phase",1);
 			}
 			TurnCounter.turncount++;
-//			Debug.Log (TurnCounter.turncount);
 			TG.TakeTurn(TurnCounter.turncount);
 			DotHandler.TakeTurn(TurnCounter.turncount);
 		}
@@ -553,15 +453,10 @@ public class PlayerMovement : MonoBehaviour {
 		lastSeed.GetComponent<Dragger>().playert = this.gameObject.transform;
 	}
 	//Individual Behaviours to be stored in the following.
+
+
 	void ActOnTile(){
 		Swiping.mydirection = "Null";
-		/*if (istiletaken == false) {
-			//move and keep moving i	f theres nothing but ice
-			Count ();
-			currenttile = tiletotest;
-		} */
-
-//			Debug.Log(tilescript.type);
 			if(outofmap == true){
 				canmove = false;
 				outofmap = false;
@@ -572,8 +467,23 @@ public class PlayerMovement : MonoBehaviour {
 				currenttile = tiletotest;				
 			}
 			else if (tilescript.type == "Wall" || tilescript.type == "Start") {
-				//the desired tile is the previous one and u stop looking for next tiles.
-				//Swiping.mydirection = "Null";
+				Vector3 overlapV3 = tiletotest;	
+				Debug.Log(tiletotest);
+				Collider[] colliders = Physics.OverlapSphere(overlapV3, .5f);
+				Debug.Log("LF PEDRO");
+				foreach (Collider component in colliders) {
+					if (component.tag == "Pedro") {
+						Debug.Log("Pedro");
+						wallToHit = component.gameObject;
+						wallToHit.GetComponent<Animator>().ResetTrigger("Hit");
+					} 
+					if (component.tag == "PedroSeed") {
+						Debug.Log("PedroSeed");
+						wallToHit = component.transform.GetChild(0).gameObject;
+						wallToHit.GetComponent<Animator>().ResetTrigger("Hit");
+					} 
+				}
+
 				canmove = false;
 				Debug.Log("canmove is false now");
 				Count ();
@@ -583,8 +493,8 @@ public class PlayerMovement : MonoBehaviour {
 				if (TurnCounter.turncount == 0) {
 					Debug.Log("0 turns");
 					canmove = false;
-				} else {
-//					Debug.Log("THE POSITION IS" + transform.position + " + " + currenttile);
+				} 
+				else {
 					if(transform.position == currenttile){
 						longgoal = false;
 					}
@@ -592,12 +502,11 @@ public class PlayerMovement : MonoBehaviour {
 						longgoal = true;
 					}
 					if(tilenumber == 0){
-					GoalBehaviour.goaling = true;
-					this.transform.GetChild(0).GetComponent<Animator>().SetInteger("Phase", 2);
-					StartCoroutine(animationController.Disappear(.4f));
-					speed = 3;
+						GoalBehaviour.goaling = true;
+						this.transform.GetChild(0).GetComponent<Animator>().SetInteger("Phase", 2);
+						StartCoroutine(animationController.Disappear(.4f));
+						speed = 3;
 					}
-
 					Count ();
 					currenttile = tiletotest;
 					canmove = false;
@@ -615,11 +524,7 @@ public class PlayerMovement : MonoBehaviour {
 			} else if (tilescript.type == "Wood") {
 				Count ();
 				currenttile = tiletotest;
-				//Debug.Log ("Pink");
-				//canmove = true;
 				if(tilescript.isSideways!= null){
-					//Count ();
-					//currenttile = tiletotest;
 					canmove = false;
 					nextaction = tilescript.isSideways+ "_Action";
 					Debug.Log(nextaction);
@@ -632,59 +537,37 @@ public class PlayerMovement : MonoBehaviour {
 					canmove = false;
 					nextaction = "Left_Action";
 					isspeeding = true;
-
-			
-				
 			} else if (tilescript.type == "Right") {
-
 					Count ();
 					currenttile = tiletotest;
 					canmove = false;
 					nextaction = "Right_Action";
 					isspeeding = true;
-
 			} else if (tilescript.type == "Up") {
-
 					Count ();
 					currenttile = tiletotest;
 					canmove = false;
 					nextaction = "Up_Action";
 					isspeeding = true;
-	
-
 			} else if (tilescript.type == "Down") {
-
 					Count ();
 					currenttile = tiletotest;
 					canmove = false;
 					nextaction = "Down_Action";
 					isspeeding = true;
-
-
 			} else if (tilescript.type == "Fragile") {
 				Count ();
 				currenttile = tiletotest;
 				lastFragile = tilescript.tileObj;
 				Vector3 overlapV3 = new Vector3(currenttile.x, currenttile.y, currenttile.z);
-				//Debug.Log(overlapV3);
 				Collider[] colliders = Physics.OverlapSphere(overlapV3, .5f);
 				foreach (Collider component in colliders) {
 					if (component.tag == "Fragile") {
-//						Debug.Log("Fragile");
-//						Debug.Log(component);
-						//tileobject = component.gameObject;
-						//MeshRenderer tilerenderer = tileobject.GetComponentInChildren<MeshRenderer> ();
-						//tilerenderer.material.color = fragilered;
 						component.GetComponent<FragileBehaviour>().readytolava = true;
 						component.GetComponent<FragileBehaviour>().player = this.gameObject;
-//						Debug.Log(component.GetComponent<FragileBehaviour>().player);	
-						//component.GetComponent<FragileProperties>().myred = fragilered;
-
 					} 
 				}
 				if(tilescript.isSideways!= null){
-					//Count ();
-					//currenttile = tiletotest;
 					canmove = false;
 					nextaction = tilescript.isSideways+ "_Action";
 					Debug.Log(nextaction);
@@ -710,48 +593,18 @@ public class PlayerMovement : MonoBehaviour {
 				currenttile = tiletotest;
 				lastSeed = tilescript.tileObj;
 				Debug.Log(tilescript.tileObj);
-				//Debug.Log("Check");
-				//tilescript.type = tilescript.seedType;
 				PopSeed(tilescript.seedType);
 				
 				if(tilescript.isSideways!= null){
-					//Count ();
-					//currenttile = tiletotest;
+
 					canmove = false;
 					nextaction = tilescript.isSideways+ "_Action";
 					Debug.Log(nextaction);
 					isspeeding = true;				
 				}
-				//tilescript.seedType = "SeededTile";
-				//Vector3 scale = lastSeed.GetComponent<Dragger>().myshrinker.transform.localScale;
-				//scale.Set(.33f,.33f,.33f);
-
-				//lastSeed.GetComponent<Dragger>().myshrinker.transform.localScale = scale;
-				
-				//Debug.Log(lastSeed.GetComponent<Dragger>().myshrinker.transform.localScale);//lastSeed.GetComponent<Transform>().localscale.y = 1;
-				//myseedbehaviour = lastSeed.GetComponent<Seed_Behaviour> ();
-				//myseedbehaviour.Unseed ();
-
-
 			} else if (tilescript.type == "Boss") {
 				currenttile = tiletotest;
 				canmove = false;
-				
-
-				/*if (character_direction == "Up") {
-					Boss_Behaviour.bosstile.y++;
-				}
-				if (character_direction == "Right") {
-					Boss_Behaviour.bosstile.x++;
-				}
-				if (character_direction == "Left") {
-					Boss_Behaviour.bosstile.x--;
-				}
-				if (character_direction == "Down") {
-					Boss_Behaviour.bosstile.y--;
-				}*/
-
-
 			}
 				else {
 				Debug.Log(tilescript.type);
@@ -760,6 +613,8 @@ public class PlayerMovement : MonoBehaviour {
 			}
 			Count ();
 	}
+
+
 	IEnumerator PopWin(){
 		if(longgoal){
 			yield return new WaitForSeconds(.6f);
@@ -775,9 +630,9 @@ public class PlayerMovement : MonoBehaviour {
 				MenuButton.CloseMenu();
 			}
 		}
-
-
 	}
+
+
 	IEnumerator PopLose(){
 		float fadetime = 1.5f;
 		float initpos = 0;
@@ -785,7 +640,6 @@ public class PlayerMovement : MonoBehaviour {
 		bool hasdowned = false;
 		for(float t = 0.0f; t<fadetime; t+= Time.deltaTime){
 			float normalizedTime = t/fadetime;
-			//Debug.Log(Mathf.Lerp(lowValue,highValue,normalizedTime));//kick
 			transform.position = new Vector3(transform.position.x, Mathf.Lerp(initpos,finalpos,normalizedTime), transform.position.z);
 			if(transform.position.y < -1.5f && !hasdowned && !LevelBuilder.resetting){
 				hasdowned = true;
@@ -796,10 +650,7 @@ public class PlayerMovement : MonoBehaviour {
 			}
 			yield return null;
 		}
-		//Debug.Log(highValue);
-		//dissolveMat.SetFloat("Vector1_B5CA3B27", highValue);
-		//yield return new WaitForSeconds(.5f);
-		//LevelLostBoard.SetActive (true);
 	}
+
 
 }
