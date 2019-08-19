@@ -148,7 +148,8 @@ public class PlayerMovement : MonoBehaviour {
 				hasstopped = true;
 			}  
 			else if (nextaction == "Goal_Action") {
-				RatingPopUp.GiveRating ();
+				RatingPopUp.GiveRating ();//stores to playerprefs
+				
  				SceneLoading.SetStars(RatingBehaviour.currentrating);
  				this.enabled = false;
 				StartCoroutine(PopWin());
@@ -621,14 +622,22 @@ public class PlayerMovement : MonoBehaviour {
 
 	IEnumerator PopWin(){
 		if(longgoal){
-			yield return new WaitForSeconds(.6f);
+			yield return new WaitForSeconds(.5f);
 			levelWonBoard.SetActive (true);
+			if(LevelManager.levelnum == 50){
+				PlayServices.UnlockWorldAchievement(1);
+				Debug.Log("long 50");
+			}
 			if(MenuButton.open){
 				MenuButton.CloseMenu();
 			}
 		}
 		else{
-			yield return new WaitForSeconds(.64f);	
+			yield return new WaitForSeconds(.62f);	
+			if(LevelManager.levelnum == 50){
+				PlayServices.UnlockWorldAchievement(1);
+				Debug.Log("short 50");
+			}
 			levelWonBoard.SetActive (true);
 			if(MenuButton.open){
 				MenuButton.CloseMenu();

@@ -251,6 +251,7 @@
      <Compile Include="Assets\LevelSaver.cs" />
      <Compile Include="Assets\LevelStorer.cs" />
      <Compile Include="Assets\LightController.cs" />
+     <Compile Include="Assets\ManagerScript.cs" />
      <Compile Include="Assets\MenuButton.cs" />
      <Compile Include="Assets\MouseDownTouch.cs" />
      <Compile Include="Assets\MouseEventsGenerator.cs" />

@@ -1,10 +1,11 @@
-﻿<Properties StartupConfiguration="{73CBBE16-9A1A-BB15-AB4F-D99B1B0D988B}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/PlayerMovement.cs">
+﻿<Properties>
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/PlayServices.cs">
     <Files>
       <File FileName="Assets/CameraShake.cs" Line="202" Column="19" />
       <File FileName="Assets/GooglePlayGames/Editor/GPGSUpgrader.cs" Line="114" Column="26" />
-      <File FileName="Assets/Scripts/LevelBuilder.cs" Line="1393" Column="77" />
-      <File FileName="Assets/Scripts/PlayerMovement.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/LevelBuilder.cs" Line="1393" Column="68" />
+      <File FileName="Assets/Scripts/PlayerMovement.cs" Line="377" Column="5" />
+      <File FileName="Assets/PlayServices.cs" Line="41" Column="27" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

@@ -11,8 +11,15 @@ public class LevelMenu : MonoBehaviour {
 	public SceneLoading sl;
 	int buttonnum;
 	public int currentfirst;
+	public static int highestLevelSolved;
+	public GameObject highestMarker;
+	public static LevelMenu Instance;
 
 	// Use this for initialization
+	// void Awake(){
+	// 	Instance = this;
+	// 	Debug.Log(LevelMenu.Instance);
+	// }
 	void Start () {
 		levels=20;
 		sl = mc.GetComponent<SceneLoading>();
@@ -21,7 +28,6 @@ public class LevelMenu : MonoBehaviour {
 
 		}
 		currentfirst = 1;*/
-		
 	}
 	
 	// Update is called once per frame
@@ -70,6 +76,7 @@ public class LevelMenu : MonoBehaviour {
 					curbutton.transform.GetChild(3).GetChild(1).GetChild(1).gameObject.SetActive(true);
 					curbutton.transform.GetChild(3).GetChild(1).GetChild(2).gameObject.SetActive(true);
 				}			
+
 		//}
 
 

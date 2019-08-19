@@ -44,6 +44,10 @@ public class SceneLoading : MonoBehaviour {
 		//GameObject.Find("CurrencyHolder").GetComponentInChildren<Text>().text = GameManager.mycurrency.ToString();
 		
 	}
+	public void ShowAchievementsUI(){
+		//PlayServices.ShowAchievementsUI();
+		PlayServices.UnlockWorldAchievement(1);
+	}
 	public void AssignLevelName(){
 		int world = Mathf.FloorToInt((LevelManager.levelnum-1)/50)  + 1;
 		int levelinworld = LevelManager.levelnum - ((world-1)*50);
@@ -307,14 +311,14 @@ public class SceneLoading : MonoBehaviour {
 	}
 	public void LoadLevel(int num){
 		//LevelManager.levelnum = 1;
-		//Debug.Log(LevelStorer.leveldic.Count);
-		//if(LevelStorer.leveldic[num].islocked == false || num==1 ){
+		Debug.Log(LevelStorer.leveldic[num].islocked);
+		if(LevelStorer.leveldic[num].islocked == false || num==1 ){
 
 			Debug.Log("Going to Level "+ num);
 			LevelManager.levelnum = num;
 			LoadScene(LevelManager.levelnum);
 			MusicHandler.PlayInitialLoop();
-		//}
+		}
 
 	}
 	public void Plus(){

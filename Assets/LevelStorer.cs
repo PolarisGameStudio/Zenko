@@ -50,31 +50,8 @@ public class LevelStorer : MonoBehaviour {
 	int reset;
 	StreamWriter normalmaps;
 
+	public static void PopulateLevelDictionary(){
 
-	// Use this for initialization
-	void Awake () {
-//		Debug.Log(instance);
-		if(instance == null){
-			instance = this;
-			DontDestroyOnLoad(this.gameObject);
-			//return;
-		}
-		else{
-			Destroy(this.gameObject);
-			Debug.Log("Destroyed LevelStorer");
-			return;
-		}
-		//PlayerPrefs.DeleteAll();
-/*		reset = PlayerPrefs.GetInt ("Reset");
-		if (reset == 0) {
-			PlayerPrefs.DeleteAll ();
-			PlayerPrefs.SetInt ("Reset", 1);
-		}*/
-		/*if (PlayerPrefs.HasKey ("Loaded")) {
-			Debug.Log ("Has playerpref");
-		} else {*/
-			//Load levels for the first time. Init values. only level 1 unlocked.
-		Debug.Log ("Giving loaded");
 		LevelStats lv1  = new LevelStats(1,2,false,0);
 		LevelStats lv2  = new LevelStats(2,3,true,0); 
 		LevelStats lv3  = new LevelStats(3,3,true,0); 
@@ -476,22 +453,35 @@ public class LevelStorer : MonoBehaviour {
 		leveldic.Add (198, lv198);
 		leveldic.Add (199, lv199);
 		leveldic.Add (200, lv200);
-//		Debug.Log(leveldic.Count); 
-		if (PlayerPrefs.HasKey ("Loaded")) {
-			Debug.Log ("Has playerpref");
-			PopulateRatings(); //takes old playerprefs and populates current ratings
-			GameManager.mycurrency = PlayerPrefs.GetInt("Currency");
-			Debug.Log(PlayerPrefs.GetInt("hintCurrency"));
+	}
 
-		} 
-		else {
-			PopulatePlayerPrefs();
-			PlayerPrefs.SetInt("CurrentFirst", 1);
-			GameManager.mycurrency = 0;
-			PlayerPrefs.SetInt("Currency", 0);
-			//PopulateRatings();
-			PlayerPrefs.SetInt("Loaded",1);
+
+	// Use this for initialization
+	void Awake () {
+//		Debug.Log(instance);
+		if(instance == null){
+			instance = this;
+			DontDestroyOnLoad(this.gameObject);
+			//return;
 		}
+		else{
+			Destroy(this.gameObject);
+			Debug.Log("Destroyed LevelStorer");
+			return;
+		}
+		//PlayerPrefs.DeleteAll();
+/*		reset = PlayerPrefs.GetInt ("Reset");
+		if (reset == 0) {
+			PlayerPrefs.DeleteAll ();
+			PlayerPrefs.SetInt ("Reset", 1);
+		}*/
+		/*if (PlayerPrefs.HasKey ("Loaded")) {
+			Debug.Log ("Has playerpref");
+		} else {*/
+			//Load levels for the first time. Init values. only level 1 unlocked.
+		Debug.Log ("Giving loaded");
+		
+
 		//PlayerPrefs.SetInt ("Loaded", 1);
 
 		//PlayerPrefs.DeleteAll();
@@ -536,7 +526,7 @@ public class LevelStorer : MonoBehaviour {
 		//normalmaps.Close();
 	}
 
-	public static void PopulatePlayerPrefs(){
+	public static void PopulatePlayerPrefs(){ //populates ratings
 		for(int i=1; i<leveldic.Count+1; i++){
 			string mystring = "Level"+i+"Rating";
 
@@ -548,6 +538,10 @@ public class LevelStorer : MonoBehaviour {
 
 
 		}		
+	}
+
+	public static void PopulateCloudData(){
+
 	}
 
 	public static void PopulateRatings(){
@@ -587,6 +581,7 @@ public class LevelStorer : MonoBehaviour {
 		int r = 0; //RatingBehaviour.rating;
 		LevelStats newvalue = new LevelStats(x,y,z,r); 
 		leveldic [x] = newvalue;*/
+		leveldic[levelnum].islocked = false;
 	}
 
 	public static void LockLevel(int levelnum){

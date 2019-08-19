@@ -62,6 +62,9 @@ public class RatingPopUp : MonoBehaviour {
 			starholder.transform.GetChild(1).transform.GetChild(0).gameObject.SetActive(true);
 			starholder.transform.GetChild(2).transform.GetChild(0).gameObject.SetActive(true);
 		}
+		PlayerPrefs.SetString("SaveFile",LevelManager.levelnum.ToString());
+		LevelMenu.highestLevelSolved = LevelManager.levelnum;
+		PlayServices.instance.SaveData();
 	}
 	public static void AddCurrency(int prevr, int newr){
 		Debug.Log("Givingc");
