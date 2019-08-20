@@ -34,12 +34,13 @@ public class PlayServices : MonoBehaviour
                     PlayerPrefs.SetString(SAVE_NAME, "0");
                 if(!PlayerPrefs.HasKey("IsFirstTime"))
                     PlayerPrefs.SetInt("IsFirstTime", 1);
-               
+                    
+                LoadLocal();              
                 if (PlayerPrefs.HasKey ("Loaded")) {
                     Debug.Log ("Has playerpref");
-                    LevelStorer.PopulateRatings(); //takes old playerprefs and populates current ratings
+                    LevelStorer.PopulateRatings(); //Playerprefs into leveldic.
                     Debug.Log(PlayerPrefs.GetInt("hintCurrency"));
-                    LoadLocal();
+
 
                 } 
                 else {
