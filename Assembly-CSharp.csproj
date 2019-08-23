@@ -332,6 +332,7 @@
      <None Include="Assets\StreamingAssets\Level72.txt" />
      <None Include="Assets\StreamingAssets\Level34.txt" />
      <None Include="Assets\4x4_1Icarus.txt" />
+     <None Include="Assets\ToonBasicOutline.shader" />
      <None Include="Assets\StreamingAssets\Level30.txt" />
      <None Include="Assets\StreamingAssets\Level98.txt" />
      <None Include="Assets\StreamingAssets\Ch4_allv1.txt" />
@@ -436,6 +437,7 @@
      <None Include="Assets\StreamingAssets\Level90.txt" />
      <None Include="Assets\StreamingAssets\RandomMaps.txt" />
      <None Include="Assets\StreamingAssets\Level66.txt" />
+     <None Include="Assets\SobelFilter.shader" />
      <None Include="Assets\StreamingAssets\Level5.txt" />
      <None Include="Assets\StreamingAssets\Level-14.txt" />
      <None Include="Assets\StreamingAssets\Level77.txt" />

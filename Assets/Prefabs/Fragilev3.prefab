@@ -88,6 +88,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -165,6 +166,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -283,7 +285,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: b0aadbd6fd75c416fbadee57733bbd43,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 16.5
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: b0aadbd6fd75c416fbadee57733bbd43,
         type: 3}
@@ -293,7 +295,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: b0aadbd6fd75c416fbadee57733bbd43,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 16.5
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: -6057140222963153312, guid: b0aadbd6fd75c416fbadee57733bbd43,
         type: 3}

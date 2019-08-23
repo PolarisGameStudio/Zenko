@@ -48,7 +48,7 @@ public class RatingPopUp : MonoBehaviour {
 		text1.text = "You got " + RatingBehaviour.rating + " Stars";
 		text2.text = "You finished level " + LevelManager.levelnum + "!";
 		PlayerPrefs.Save();
-		AddCurrency(previousrating, myrating);
+		//AddCurrency(previousrating, myrating);
 
 		//starholder = gameObject.transform.Find("Ribbon");
 		if(myrating == 1){
