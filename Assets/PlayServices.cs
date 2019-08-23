@@ -8,6 +8,7 @@ using System.Text;
 using GooglePlayGames.BasicApi.SavedGame;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Text.RegularExpressions;
 
 public class PlayServices : MonoBehaviour
 {
@@ -15,36 +16,45 @@ public class PlayServices : MonoBehaviour
     public GameObject teller2;
     public static PlayServices instance;
     const string SAVE_NAME = "SaveFile";
+    public static string mergedData;
+    public static string curCloudData;
+    public static string newMergedString;
     bool isSaving;
     bool isCloudDataLoaded = false;
+    string stringToShow;
+    //int dataString;
     //bool enableSaveGame = true;
     // Start is called before the first frame update
     void Awake()
     {
+        SceneLoading.adFree = false;
+        //PlayerPrefs.DeleteAll();
         Debug.Log(instance);
+        Debug.Log("cursavepref " + PlayerPrefs.GetString(SAVE_NAME));
         if(instance == null)
             {
                 instance = this;
                 DontDestroyOnLoad(this.gameObject);
 
-                Debug.Log("Doingit");
-                Debug.Log(instance);
-                LevelStorer.PopulateLevelDictionary(); //load level data
+                //Debug.Log("Doingit");
+                //Debug.Log(instance);
+                LevelStorer.PopulateLevelDictionary(); //load level data int levelstorer.leveldic
+               // Debug.Log(PlayerPrefs.GetString(SAVE_NAME));
                 if(!PlayerPrefs.HasKey(SAVE_NAME))
-                    PlayerPrefs.SetString(SAVE_NAME, "0");
+                    PlayerPrefs.SetString(SAVE_NAME, GameDataToString());
                 if(!PlayerPrefs.HasKey("IsFirstTime"))
                     PlayerPrefs.SetInt("IsFirstTime", 1);
                     
                 LoadLocal();              
                 if (PlayerPrefs.HasKey ("Loaded")) {
                     Debug.Log ("Has playerpref");
-                    LevelStorer.PopulateRatings(); //Playerprefs into leveldic.
+                    //LevelStorer.AddRatingsToDictionary(); //Playerprefs into leveldic.
                     Debug.Log(PlayerPrefs.GetInt("hintCurrency"));
 
 
                 } 
                 else {
-                    LevelStorer.PopulatePlayerPrefs();
+                    LevelStorer.PopulatePlayerPrefs(); //initializeprefs
                     PlayerPrefs.SetInt("CurrentFirst", 1);
                     GameManager.mycurrency = 0;
                     PlayerPrefs.SetInt("Currency", 0);
@@ -53,14 +63,46 @@ public class PlayServices : MonoBehaviour
                 }
                 InitializePGP();
                 SignIn();
-
+                //Debug.Log(int.Parse("1 1 1 1"));
+//                SplitString("1 2 3 4 5");
+                //byte[] dataToSave = Encoding.ASCII.GetBytes("1 23 4 5");
+                //Debug.Log(dataToSave[0]);
 
                 return;
             }
         Destroy(this.gameObject);
 
     }
+    public void Update(){
+        //GameObject.Find("highestsolved").GetComponent<Text>().text = dataArray[0];
+        //PlayerPrefs.DeleteAll();
+        //Debug.Log(LevelStorer.leveldic[10].rating);
+        //GameDataToString();
+    }
+    public string[] SplitString(string str){
 
+        //string[] strArray = Regex.Split(str, "");
+        string[] strArray = new string[str.Length];
+        for(int i=0; i<str.Length; i++){
+            strArray[i] = str[i].ToString();
+        }
+        Debug.Log(strArray.Length + " is the datasize");
+        Debug.Log(strArray[0]);
+        Debug.Log(strArray[1]);
+        return strArray;
+
+    }
+    // string InitializeSavePref(){
+    //     string stringToSave = "";
+    //     if(SceneLoading.adFree = true){
+    //         stringToSave = stringToSave + "1 ";
+    //     }
+    //     else{
+    //         stringToSave = stringToSave + "0 ";
+    //     }
+    //     for
+    //     return stringToSave;        
+    // }
     public void InitializePGP(){
         PlayGamesClientConfiguration.Builder builder = new PlayGamesClientConfiguration.Builder();
 
@@ -89,7 +131,6 @@ public class PlayServices : MonoBehaviour
             }
         });        
     }
-
     public void SignOut() 
     {
         if (Social.localUser.authenticated)
@@ -99,50 +140,131 @@ public class PlayServices : MonoBehaviour
     #region Saved Games
 
     string GameDataToString(){
+        string stringToSave = "";
+        if(SceneLoading.adFree = true){
+            stringToSave = stringToSave + "1";
+        }
+        else{
+            stringToSave = stringToSave + "0";
+        }
+        for(int i=1; i< LevelStorer.leveldic.Count+1; i++){
+            if(LevelStorer.leveldic[i].islocked == true && LevelStorer.leveldic[i].rating ==0){
+                stringToSave = stringToSave + "0";   
+            }
+            else{
+                
+                int rating = LevelStorer.leveldic[i].rating;
+                //Debug.Log("place " + i + " is " + (rating+1).ToString());
+                stringToSave = stringToSave + "" + (rating+1).ToString() + "";
+                //Debug.Log(stringToSave);
+            }
 
-        return LevelMenu.highestLevelSolved.ToString();
+        }
+        Debug.Log("GameData is " + stringToSave);
+        return stringToSave;
     }
+
+    // string StringWithValueAdded(string value){
+    //     string newString = value + 
+    // }
 
     void AssignData(string Data){
         if(Data == null){
             
             Data = "0";
         }
+        string[] dataArray = SplitString(Data);
+
+        //string[] dataValues = 
+
         Debug.Log(Data);
         Debug.Log("ASSIGNED");
-        LevelMenu.highestLevelSolved = int.Parse(Data);
-        int highestSolved = LevelMenu.highestLevelSolved;
-        //Debug.Log(LevelMenu.Instance);
-        GameObject.Find("highestsolved").GetComponent<Text>().text = Data;
-        //LevelMenu.Instance.highestMarker.GetComponent<Text>().text = Data;
+
+        //Debug.Log(LevelStorer.leveldic.Count);
+        // LevelMenu.highestLevelSolved = int.Parse(Data);
+        // int highestSolved = LevelMenu.highestLevelSolved;
+        Debug.Log(dataArray[0]);
+        if(int.Parse(dataArray[0])== 1){
+            SceneLoading.adFree = true;
+        }
+
+        GameObject.Find("highestsolved").GetComponent<Text>().text = dataArray[0]; //this currently displays 1 or 0 for paid or not
+        for(int i=1; i<dataArray.Length-1;i++){
+            int rating = int.Parse(dataArray[i]);
+            if(rating>1){
+            UpdateImportantValue(i, rating-1);
+            }
+        }
 
 
-        // for(int i=0; i<highestSolved; i++){
 
-        // }
     }
 
-    void StringToGameData(string cloudData, string localData){/////////////////
-        Debug.Log(cloudData + "cloud and local" + localData);
-        if (PlayerPrefs.GetInt("IsFirstTime") == 1){
-            PlayerPrefs.SetInt("IsFirstTime", 0);
-            if (int.Parse(cloudData) > int.Parse(localData)){
-                PlayerPrefs.SetString(SAVE_NAME, cloudData);
-                AssignData(cloudData);
-                //SaveDataLocally
-                //LOADFROMCLOUD
-            }
+    void UpdateImportantValue(int place, int value){ //grabs a value from datastring and places  it in leveldic
+        LevelStorer.leveldic[place].rating = value;
+        LevelStorer.leveldic[place].islocked = false;
+        if(place<LevelStorer.leveldic.Count){
+            LevelStorer.leveldic[place+1].islocked = false; 
         }
-        else{
-            if(int.Parse(localData) > int.Parse(cloudData)){
-                //uselocaldata
-                AssignData(localData);
 
-                isCloudDataLoaded = true;
-                SaveData();
-                return;
-            }
+    }
+    string GameData(){
+        return "";
+    }
+    string UpdateGameDataAtValue(){
+        return "";
+    }
+    string WriteData(){
+        return null;
+    }
+
+    string MergeData(string cloudData, string localData){
+        string[] cloudArray = SplitString(cloudData);
+        string[] localArray = SplitString(localData);
+        mergedData = "";
+        //string[] mergedArray = new String[localData.Length];
+        for(int i=0; i<localData.Length; i++){
+            if (cloudData[i] > localData[i])
+            mergedData = mergedData + "" +  cloudData[i] + "";
+            else
+            mergedData = mergedData + "" +  localData[i] + "";
         }
+        return mergedData;
+    }
+
+
+    void StringToGameData(string cloudData, string localData){/////////////////Merges both data strings and then assigns & saves to loud
+        Debug.Log(cloudData + "cloud and local" + localData);
+        mergedData = MergeData(cloudData, localData);
+        PlayerPrefs.SetString(SAVE_NAME, mergedData);
+        AssignData(mergedData);
+        isCloudDataLoaded = true;
+        SaveData();
+
+        // if (PlayerPrefs.GetInt("IsFirstTime") == 1){
+        //     PlayerPrefs.SetInt("IsFirstTime", 0);
+        //     if (int.Parse(cloudData) > int.Parse(localData)){
+        //         Debug.Log("StringTogameData goes cloud");
+        //         PlayerPrefs.SetString(SAVE_NAME, cloudData);
+        //         AssignData(cloudData);
+        //         //SaveDataLocally
+        //         //LOADFROMCLOUD
+        //     }
+        // }
+        // else{
+        //     if(int.Parse(localData) > int.Parse(cloudData)){
+        //         //uselocaldata
+        //         Debug.Log("StringTogameData goes local");
+        //         PlayerPrefs.SetString(SAVE_NAME, localData);
+        //         AssignData(localData);
+
+        //         isCloudDataLoaded = true;
+        //         SaveData();
+        //         return;
+        //     }
+        // }
+
+
         //useclouddata
         isCloudDataLoaded = true;
     }
@@ -161,6 +283,7 @@ public class PlayServices : MonoBehaviour
             isSaving = false;
             ((PlayGamesPlatform)Social.Active).SavedGame.OpenWithManualConflictResolution(SAVE_NAME, 
                 DataSource.ReadCacheOrNetwork, true, ResolveConflict, OnSavedGameOpened);
+            Debug.Log("LOADED DATA SUCCESFFULY");
         }
         else{
             LoadLocal();
@@ -178,6 +301,7 @@ public class PlayServices : MonoBehaviour
             return;
         }
         if(Social.localUser.authenticated){
+            Debug.Log("SAVINGTOCLOUD");
             isSaving = true;
             ((PlayGamesPlatform)Social.Active).SavedGame.OpenWithManualConflictResolution(SAVE_NAME, 
                 DataSource.ReadCacheOrNetwork, true, ResolveConflict, OnSavedGameOpened);
@@ -187,7 +311,7 @@ public class PlayServices : MonoBehaviour
         }
     }
 
-    private void SaveLocal(){
+    public void SaveLocal(){
         PlayerPrefs.SetString(SAVE_NAME, GameDataToString());
     }
 
@@ -223,8 +347,8 @@ public class PlayServices : MonoBehaviour
     }
 
     private void OnSavedGameOpened(SavedGameRequestStatus status, ISavedGameMetadata game){
-        Debug.Log(game + " "+ "game");
-        Debug.Log(status + " "+ "status");
+        //Debug.Log(game + " "+ "game");
+        //Debug.Log(status + " "+ "status");
         if (status == SavedGameRequestStatus.Success){
             if (!isSaving){
                 LoadGame(game);
@@ -246,34 +370,40 @@ public class PlayServices : MonoBehaviour
     }
 
     private void SaveGame(ISavedGameMetadata game){
-        string stringToSave = GameDataToString();
+        newMergedString = MergeData(curCloudData, GameDataToString());
+
         SaveLocal();
 
-        byte[] dataToSave = Encoding.ASCII.GetBytes(stringToSave);
+        byte[] dataToSave = Encoding.ASCII.GetBytes(newMergedString);//////////needtofixthis
 
         SavedGameMetadataUpdate update = new SavedGameMetadataUpdate.Builder().Build();
+
+        //Debug.Log("DataToSave length is " + dataToSave.Length);
 
         ((PlayGamesPlatform)Social.Active).SavedGame.CommitUpdate(game, update, dataToSave, OnSavedGameDataWritten);
 
     }
 
     private void OnSavedGameDataRead(SavedGameRequestStatus status, byte[] savedData){
+        Debug.Log("Saved Data byte is " + savedData.Length + " long, the first ones are " + savedData[0]);
         if(status == SavedGameRequestStatus.Success){
             string cloudDataString;
-            if(savedData.Length == 0)
-                cloudDataString = "0";
+            if(savedData.Length == 0 || savedData.Length == 1)
+                cloudDataString = GameDataToString();
             else
                 cloudDataString = Encoding.ASCII.GetString(savedData);
 
             string localDataString = PlayerPrefs.GetString(SAVE_NAME);
 
             StringToGameData(cloudDataString, localDataString);
+            curCloudData = cloudDataString;
+            //curCloudData = mergedData;
 
         }
     } 
 
     private void OnSavedGameDataWritten(SavedGameRequestStatus status, ISavedGameMetadata game){
-
+        curCloudData = newMergedString;
     }
 
     #endregion /Saved Games

@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 
 
 public class SceneLoading : MonoBehaviour {
+	public static bool adFree; //true if theyve paid for ad-free
 	public int num;
 	public static GameObject gamewon;
 	public static GameObject gamelost;
@@ -347,6 +348,7 @@ public class SceneLoading : MonoBehaviour {
 		transform.Find("Level_Box").Find("ButtonHolder").GetComponent<LevelMenu>().clearMenu();
 		transform.Find("Level_Box").Find("ButtonHolder").GetComponent<LevelMenu>().currentfirst = PlayerPrefs.GetInt("CurrentFirst");
 		transform.Find("Level_Box").Find("ButtonHolder").GetComponent<LevelMenu>().populateMenu();
+
 
 		GameModeHandler.TurnOff();
 		transform.Find("MenuHolder").Find("Menu").gameObject.SetActive(false);

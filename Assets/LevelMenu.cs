@@ -27,13 +27,15 @@ public class LevelMenu : MonoBehaviour {
 			createButton(i);
 
 		}
-		currentfirst = 1;*/
+		*/
+		//currentfirst = 1;
+		//Debug.Log("CURRENTFIRST" + currentfirst);
 	}
-	
+	void Update(){
+
+	}
 	// Update is called once per frame
-	void Update () {
-		
-	}
+
 	void createButton(int num){
 		GameObject curbutton = Instantiate(buttonprefab, new Vector3(0, 0, 0), Quaternion.identity);
 		curbutton.transform.parent = this.transform;	
@@ -64,6 +66,7 @@ public class LevelMenu : MonoBehaviour {
 			}
 		}
 		else{*/
+				Debug.Log(LevelStorer.leveldic[num].rating);
 				if(LevelStorer.leveldic[num].rating == 1){
 					curbutton.transform.GetChild(3).GetChild(1).GetChild(1).gameObject.SetActive(true);
 				}
@@ -109,6 +112,10 @@ public class LevelMenu : MonoBehaviour {
 		}
 	}
 	public void populateMenu(){
+		Debug.Log(currentfirst);
+		if(currentfirst==0 | currentfirst==null){
+			currentfirst = 1;
+		}
 		for (int i = currentfirst; i < currentfirst+20; i++){
 			createButton(i);
 		}		

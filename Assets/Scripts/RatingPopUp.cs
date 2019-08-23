@@ -41,6 +41,7 @@ public class RatingPopUp : MonoBehaviour {
 			//Debug.Log(PlayerPrefs.GetInt(prefname));
 			LevelStorer.leveldic[LevelManager.levelnum].rating = myrating;
 		}
+		//LevelStorer.leveldic[LevelManager.levelnum].islocked = false;
 		//PlayerPrefs.Save();
 		ready = true;
 		//Debug.Log ("GIVEN");
@@ -48,6 +49,7 @@ public class RatingPopUp : MonoBehaviour {
 		text2.text = "You finished level " + LevelManager.levelnum + "!";
 		PlayerPrefs.Save();
 		AddCurrency(previousrating, myrating);
+
 		//starholder = gameObject.transform.Find("Ribbon");
 		if(myrating == 1){
 			starholder.transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(true);
@@ -62,9 +64,16 @@ public class RatingPopUp : MonoBehaviour {
 			starholder.transform.GetChild(1).transform.GetChild(0).gameObject.SetActive(true);
 			starholder.transform.GetChild(2).transform.GetChild(0).gameObject.SetActive(true);
 		}
-		PlayerPrefs.SetString("SaveFile",LevelManager.levelnum.ToString());
-		LevelMenu.highestLevelSolved = LevelManager.levelnum;
+
+		//PlayerPrefs.SetString("SaveFile",LevelManager.levelnum.ToString());
+		if(LevelManager.levelnum > LevelMenu.highestLevelSolved){
+			LevelMenu.highestLevelSolved = LevelManager.levelnum;
+		}
+		
+		LevelStorer.UnlockLevel (LevelManager.levelnum+1);
+		PlayServices.instance.SaveLocal();
 		PlayServices.instance.SaveData();
+
 	}
 	public static void AddCurrency(int prevr, int newr){
 		Debug.Log("Givingc");

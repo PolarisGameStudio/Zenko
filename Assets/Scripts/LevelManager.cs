@@ -15,7 +15,6 @@ public class Hint{
 }
 
 public class LevelManager : MonoBehaviour {
-
 	public static bool newicarus;
 	public static int levelnum;
 	public static LevelBuilder levelselector;
@@ -56,7 +55,7 @@ public class LevelManager : MonoBehaviour {
 
 	void InitializePlayerPrefs(){
 		if (PlayerPrefs.HasKey ("CurrencyLoaded")) {
-			Debug.Log(PlayerPrefs.GetInt("hintCurrency"));
+			//Debug.Log(PlayerPrefs.GetInt("hintCurrency"));
 			LevelManager.hintCurrency = PlayerPrefs.GetInt("hintCurrency");
 		} 
 		else {
