@@ -9,6 +9,7 @@ using GooglePlayGames.BasicApi.SavedGame;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Text.RegularExpressions;
+//using GoogleMobileAds.Api;
 
 public class PlayServices : MonoBehaviour
 {
@@ -121,6 +122,7 @@ public class PlayServices : MonoBehaviour
                 Debug.Log("Login success");
                 teller.SetActive(true);
                 LoadData();
+                //MobileAds.Initialize("ca-app-pub-3301322474937909~4906291296");
             }
             else
             {

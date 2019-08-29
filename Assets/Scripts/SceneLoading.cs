@@ -101,9 +101,13 @@ public class SceneLoading : MonoBehaviour {
 	public void NextWon(){
 		if(LevelManager.ispotd){
 			Potd();
+			GoogleAds.Instance.ShowInterstitial();
+
 		}
 		if(!LevelManager.ispotd){
 			NextlevelButton();
+			GoogleAds.Instance.ShowInterstitial();
+
 		}
 	}
 	public void muteMusic(){
