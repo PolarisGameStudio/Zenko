@@ -195,13 +195,13 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 14552}
     - Class: 114
-      Script: {instanceID: 32864}
+      Script: {instanceID: 27168}
     - Class: 114
-      Script: {instanceID: 32868}
+      Script: {instanceID: 27172}
     - Class: 114
-      Script: {instanceID: 32872}
+      Script: {instanceID: 27176}
     - Class: 114
-      Script: {instanceID: 32876}
+      Script: {instanceID: 27180}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -472,7 +472,7 @@ ScriptsOnlyBuild:
     className: TMP_ScrollbarEventHandler
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: 254da7f311ce70b89f2c5dd64e6ee74f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GoogleAds
@@ -1464,4 +1464,4 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/WorldSelect.unity
   - Assets/Level.unity
-  playerPath: /Users/bernardolimon/Desktop/ZenkoApk/Zenko82_IterstitialReRequest.aab
+  playerPath: /Users/bernardolimon/Desktop/ZenkoApk/Zenko83_RewardTestToo.aab

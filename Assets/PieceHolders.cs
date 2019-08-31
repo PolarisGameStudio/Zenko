@@ -23,6 +23,7 @@ public class Holder{
 
 }
 public class PieceHolders : MonoBehaviour {
+	public static PieceHolders Instance;
 	public List<Holder> holders = new List<Holder>();
 	public int holdersNumber;
 	public GameObject pedroHolder;
@@ -54,6 +55,7 @@ public class PieceHolders : MonoBehaviour {
 	void Awake () {
 		initValues();
 		sl = GameObject.Find("Main Canvas").GetComponent<SceneLoading>();
+		Instance = this;
 	}
 	
 	// Update is called once per frame
@@ -576,7 +578,11 @@ public class PieceHolders : MonoBehaviour {
 		}
 	}
 	public void AssignHint(){
+		GoogleAds.Instance.UserOptToWatchAd();	
+	}
+	public void RewardHint(){
 		StartCoroutine(HintWrapper());
+
 	}
 	public IEnumerator HintWrapper(){
 		//make sure draggers are off and cant move fox.
