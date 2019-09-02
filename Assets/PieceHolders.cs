@@ -577,17 +577,48 @@ public class PieceHolders : MonoBehaviour {
 			downSeedHolder.transform.GetChild(0).transform.GetComponent<Text>().text = "DownSeed x" + downSeedNumber;
 		}
 	}
+
+
 	public void AssignHint(){
 		hinting = true;
 		LevelManager.isdragging = true;	
 		Swiping.canswipe = false;
 		//RewardHint();
+		if(HintAvailable())
 		GoogleAds.Instance.UserOptToWatchAd();	
+		else
+			AnnounceNoHintAvailable();
 	}
+
+
+	public void AnnounceNoHintAvailable(){
+		hinting = false;
+		LevelManager.isdragging = false;	
+		Swiping.canswipe = true;
+		LevelBuilder.hintboard.SetActive(false);
+	}
+
+
+	public bool HintAvailable(){
+		int rightones = 0;
+		for(int i = 0; i < placedpieces.Count; i++){//first pass, to confirm the ones in right place
+			if(PartofSolution(i)){//if placed in a correct solution, this is to find if any piece is in the right place.
+				rightones++;
+			}
+		} 	
+		if(rightones == placedpieces.Count){
+			Debug.Log("ALL IN RIGHT PLACE");
+			return false;
+		}
+		return true;
+	}
+
+
 	public void RewardHint(){
 		StartCoroutine(HintWrapper());
-
 	}
+
+
 	public IEnumerator HintWrapper(){
 		//make sure draggers are off and cant move fox.
 		//turn off draggers
@@ -601,6 +632,8 @@ public class PieceHolders : MonoBehaviour {
 		yield return new WaitForSeconds(.1f);
 		Hint();
 	}
+
+
 	public void Hint(){//right now works for one stored solution.
 		Debug.Log("CALLING HINT");
 		//LevelBuilder.hintboard.SetActive(false);
@@ -609,6 +642,7 @@ public class PieceHolders : MonoBehaviour {
 		GameObject piece;
 		string postype;
 		if(TurnBehaviour.turn == 0){
+			int rightones = 0;
 			for(int i = 0; i < placedpieces.Count; i++){//first pass, to confirm the ones in right place
 				//Debug.Log(placedpieces[i].myType + "" + placedpieces[i].transform.position.x + "" + -placedpieces[i].transform.position.z);
 				if(PartofSolution(i)){//if placed in a correct solution, this is to find if any piece is in the right place.
@@ -616,9 +650,14 @@ public class PieceHolders : MonoBehaviour {
 					Debug.Log("Piece in the right place");
 					//CrownPiece(Dragger placedpieces[i]);
 					placedpieces[i].transform.GetChild(1).GetComponent<Renderer>().material.color = Color.green;
+					rightones++;
 				}
 
-			} 
+			} 	
+			if(rightones == placedpieces.Count){
+				Debug.Log("ALL IN RIGHT PLACE");
+			}
+
 			for(int i = 0; i < placedpieces.Count; i++){//second pass, to correct the first one found in wrong place.
 				if(!PartofSolution(i)){
 					if(placedpieces[i].myType == "Seed"){
