@@ -578,6 +578,10 @@ public class PieceHolders : MonoBehaviour {
 		}
 	}
 	public void AssignHint(){
+		hinting = true;
+		LevelManager.isdragging = true;	
+		Swiping.canswipe = false;
+		//RewardHint();
 		GoogleAds.Instance.UserOptToWatchAd();	
 	}
 	public void RewardHint(){
@@ -588,8 +592,8 @@ public class PieceHolders : MonoBehaviour {
 		//make sure draggers are off and cant move fox.
 		//turn off draggers
 		//
-		hinting = true;
-		LevelManager.isdragging = true;
+		//yield return new WaitForSeconds(.1f);		
+		Debug.Log("CALLED WRAPPER");
 		for(int i = 0; i <placedpieces.Count; i++){
 			placedpieces[i].gameObject.GetComponent<BoxCollider>().enabled = false;
 		}
@@ -598,7 +602,8 @@ public class PieceHolders : MonoBehaviour {
 		Hint();
 	}
 	public void Hint(){//right now works for one stored solution.
-		LevelBuilder.hintboard.SetActive(false);
+		Debug.Log("CALLING HINT");
+		//LevelBuilder.hintboard.SetActive(false);
 		Debug.Log(placedpieces.Count + "Pieces placed");
 		Vector2 postogo;
 		GameObject piece;
@@ -625,8 +630,9 @@ public class PieceHolders : MonoBehaviour {
 					Debug.Log(placedpieces[i].myType);
 					//LookforPosition(placedpieces[i].myType);
 					postogo = LookforPosition(postype);
-					Debug.Log(postogo);
 					if(postogo != new Vector2(0,0)){
+						Debug.Log(postogo + "POSTOGO");
+
 						removePiece(new Vector2(placedpieces[i].transform.position.x, -placedpieces[i].transform.position.z), placedpieces[i].myType);
 						PlaceHint(placedpieces[i], postogo);
 						return;
@@ -635,17 +641,18 @@ public class PieceHolders : MonoBehaviour {
 				}
 			}
 			for(int i=0; i < holders.Count; i++){//if none on board can be moved to a good one (because a wrong is there), look through holders
-				if(holders[i].currentpieces > 0){
-					postogo = LookforPosition(holders[i].name);
-					//Debug.Log("Instantiate a "+ holders[i].name);
-					if(postogo!= new Vector2(0,0)){
-						piece = holders[i].mygameobject.GetComponent<UIMonster>().Spawnit();
-						PlaceHint(piece.GetComponent<Dragger>(), postogo);
-						updateValueDown(holders[i].name);
-						placedpieces.Add(piece.GetComponent<Dragger>());
-						return;
-					}
-				}
+				Debug.Log("CASE 3 DO NOT WANT, MEANS ALL GOOD OR MISSING PIECES");
+				// if(holders[i].currentpieces > 0){
+				// 	postogo = LookforPosition(holders[i].name);
+				// 	//Debug.Log("Instantiate a "+ holders[i].name);
+				// 	if(postogo!= new Vector2(0,0)){
+				// 		piece = holders[i].mygameobject.GetComponent<UIMonster>().Spawnit();
+				// 		PlaceHint(piece.GetComponent<Dragger>(), postogo);
+				// 		updateValueDown(holders[i].name);
+				// 		placedpieces.Add(piece.GetComponent<Dragger>());
+				// 		return;
+				// 	}
+				// }
 			}
 			// for(int i = 0; i < placedpieces.Count; i++){//second pass, to correct the first one found in wrong place.
 			// 	if(!PartofSolution(i)){
@@ -689,7 +696,7 @@ public class PieceHolders : MonoBehaviour {
 	}
 	public void HintMenu(){
 		LevelManager.isdragging = true;
-		hintText.text = "Hint x " + LevelManager.hintCurrency.ToString();
+		//hintText.text = "Hint x " + LevelManager.hintCurrency.ToString();
 		for(int i = 0; i <placedpieces.Count; i++){
 			placedpieces[i].gameObject.GetComponent<BoxCollider>().enabled = false;
 		}
@@ -705,9 +712,9 @@ public class PieceHolders : MonoBehaviour {
 
 	}
 	public void WatchAd(){
-		LevelManager.hintCurrency = LevelManager.hintCurrency+3;
-		PlayerPrefs.SetInt("hintCurrency", LevelManager.hintCurrency);
-		hintText.text = "Hint x " + LevelManager.hintCurrency.ToString();
+		// LevelManager.hintCurrency = LevelManager.hintCurrency+3;
+		// PlayerPrefs.SetInt("hintCurrency", LevelManager.hintCurrency);
+		// hintText.text = "Hint x " + LevelManager.hintCurrency.ToString();
 	}
 	public void HintOrRestart(){
 		if(TurnBehaviour.turn == 0&&!hinting){
@@ -731,9 +738,7 @@ public class PieceHolders : MonoBehaviour {
 		//dragger.transform.GetChild(1).gameObject.SetActive(true);
 		draggee = dragger;
 		dragger.GoToHint(new Vector3(position.x,0,-position.y));
-		LevelManager.hintCurrency--;
-		PlayerPrefs.SetInt("hintCurrency", LevelManager.hintCurrency);
-		hintText.text = "Hint x " + LevelManager.hintCurrency.ToString();
+		//hintText.text = "Hint x " + LevelManager.hintCurrency.ToString();
 		// if(dragger.myType == "Wall" || dragger.myType == "Seed"){
 		// 	placeNormal(position, dragger);
 		// }

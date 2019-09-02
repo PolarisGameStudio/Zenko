@@ -143,7 +143,7 @@ public class PlayServices : MonoBehaviour
 
     string GameDataToString(){
         string stringToSave = "";
-        if(SceneLoading.adFree = true){
+        if(PlayerPrefs.HasKey("AdFree")){
             stringToSave = stringToSave + "1";
         }
         else{

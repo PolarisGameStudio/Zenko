@@ -68,6 +68,11 @@ public class SceneLoading : MonoBehaviour {
 	public void LoadMenu(){
 		SceneManager.LoadScene(0);
 	}
+	public void RemoveAds(){
+		PlayerPrefs.SetInt("AdFree", 1);
+		SceneLoading.adFree = true;
+		
+	}
 	public void NextlevelButton(){
 		LevelBuilder.ChangeBackground("Color_A7A46709",new Color(0,0,0,0), .3f);
 		LevelManager.israndom = false;

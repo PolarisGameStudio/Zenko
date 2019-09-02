@@ -208,6 +208,7 @@ public class Dragger : MonoBehaviour {
         for(int i=0; i<PieceHolders.placedpieces.Count; i++){
         	PieceHolders.placedpieces[i].gameObject.GetComponent<BoxCollider>().enabled = true;
         }
+        GoogleAds.Instance.RequestRewardBasedVideo();
         yield break;
 
 	}
@@ -433,6 +434,7 @@ public void OnMouseDrag()
 		}
 		if(PlaneBehavior.readyToDrop){//from mouseoverer
 			PieceHolders.placedpieces.Add(this);
+			Debug.Log("ADDED " + this + " Back to pieceholders");
 			//transform.position = new Vector3(PlaneBehavior.tilex, 0, PlaneBehavior.tiley);
 			positiontogo = new Vector3(PlaneBehavior.tilex, 0, PlaneBehavior.tiley);
 			gototile = true;

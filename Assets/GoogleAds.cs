@@ -14,13 +14,22 @@ public class GoogleAds : MonoBehaviour
     private RewardBasedVideoAd rewardVideo;
 
     public int levelsInSession;
-    public int[] levelsToShowAd = new int[] {3,6,11,16,21,26,31,41,51,61,71,81,91};
+    public int[] levelsToShowAd = new int[] {3,6,11,16,21,26,31,41,51,61,71,81,91,101,111,121,131,141,151,161,171,181,191};
 
     // Start is called before the first frame update
     void Awake()
     {
         // Debug.Log("INITIALIZING MOBIELADS");
-        Instance = this;
+        if(Instance == null){
+            Instance = this;
+            DontDestroyOnLoad(this.gameObject);
+            //return;
+        }
+        else{
+            Destroy(this.gameObject);
+            Debug.Log("Destroyed LevelStorer");
+            return;
+        }
         MobileAds.Initialize("ca-app-pub-3301322474937909~4906291296");
         // Debug.Log("INITIALIZED MOBILEADS");
 
@@ -29,6 +38,8 @@ public class GoogleAds : MonoBehaviour
         RequestInterstitial();
         levelsInSession = 0;
         this.rewardVideo = RewardBasedVideoAd.Instance;
+
+        RequestFirstRewardBasedVideo();
     }
 
     private void RequestInterstitial()
@@ -72,7 +83,8 @@ public class GoogleAds : MonoBehaviour
     	return false;
     }	
 
-    private void RequestRewardBasedVideo(){
+    public void RequestFirstRewardBasedVideo(){
+        Debug.Log("REQUESTING");
         #if UNITY_ANDROID
             string adUnitId = "ca-app-pub-3940256099942544/5224354917";
         #elif UNITY_IPHONE
@@ -85,12 +97,32 @@ public class GoogleAds : MonoBehaviour
         AdRequest request = new AdRequest.Builder().Build();
         // Load the rewarded video ad with the request.
         this.rewardVideo.LoadAd(request, adUnitId);
+        
         this.rewardVideo.OnAdClosed += HandeOnRewardAdClosed;
     }
 
+
+    public void RequestRewardBasedVideo(){
+        Debug.Log("REQUESTING");
+        #if UNITY_ANDROID
+            string adUnitId = "ca-app-pub-3940256099942544/5224354917";
+        #elif UNITY_IPHONE
+            string adUnitId = "ca-app-pub-3940256099942544/1712485313";
+        #else
+            string adUnitId = "unexpected_platform";
+        #endif
+
+        // Create an empty ad request.
+        AdRequest request = new AdRequest.Builder().Build();
+        // Load the rewarded video ad with the request.
+        this.rewardVideo.LoadAd(request, adUnitId);
+    }
+
     private void HandeOnRewardAdClosed(object sender, EventArgs args){
-    	RequestRewardBasedVideo();
     	PieceHolders.Instance.RewardHint();
+
+        //RequestRewardBasedVideo();
+
       	//Call hint function
 
     }

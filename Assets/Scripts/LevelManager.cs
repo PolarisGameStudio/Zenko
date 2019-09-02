@@ -31,7 +31,7 @@ public class LevelManager : MonoBehaviour {
 	public static bool isdragging;
 	public static bool ispotd;
 	public static List<Hint> hints = new List<Hint>();
-	public static int hintCurrency;
+	//public static int hintCurrency;
 	//public static GameObject lastgoodtile;
 	//public static IceTileHandler myicehandler;
 
@@ -45,7 +45,7 @@ public class LevelManager : MonoBehaviour {
 		{
 			instance = this;
 			DontDestroyOnLoad(this.gameObject);
-			InitializePlayerPrefs();
+			//InitializePlayerPrefs();
 
 			return;
 		}
@@ -56,12 +56,12 @@ public class LevelManager : MonoBehaviour {
 	void InitializePlayerPrefs(){
 		if (PlayerPrefs.HasKey ("CurrencyLoaded")) {
 			//Debug.Log(PlayerPrefs.GetInt("hintCurrency"));
-			LevelManager.hintCurrency = PlayerPrefs.GetInt("hintCurrency");
+			//LevelManager.hintCurrency = PlayerPrefs.GetInt("hintCurrency");
 		} 
 		else {
-			LevelManager.hintCurrency = 0;
-			PlayerPrefs.SetInt("hintCurrency", 0);
-			PlayerPrefs.SetInt("CurrencyLoaded",1);
+			//LevelManager.hintCurrency = 0;
+			//PlayerPrefs.SetInt("hintCurrency", 0);
+			//PlayerPrefs.SetInt("CurrencyLoaded",1);
 		}
 	}
 
