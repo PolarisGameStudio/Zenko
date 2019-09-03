@@ -115,6 +115,9 @@ public class SceneLoading : MonoBehaviour {
 
 		}
 	}
+	public void CloseTryAgainScreen(){
+		GameObject.Find("TryAgainScreen").transform.GetChild(0).gameObject.SetActive(false);
+	}
 	public void muteMusic(){
 		AudioSource ms = GameObject.Find("Music Source").GetComponent<AudioSource>();
 		ms.mute = !ms.mute;

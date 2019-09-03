@@ -17,6 +17,7 @@ ScriptsOnlyBuild:
     - GameModeHandler
     - GoalBehaviour
     - GoogleAds
+    - GoogleMobileAds.Common.MobileAdsEventExecutor
     - HueModifier
     - ImageHolder
     - LevelBuilder
@@ -75,6 +76,7 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.Slider
     - UnityEngine.UI.Text
     com.unity.multiplayer-hlapi.Runtime.dll:
+    - UnityEngine.Networking.NetworkCallbacks
     - UnityEngine.Networking.NetworkIdentity
   sceneClasses:
     Assets/Level.unity:
@@ -195,13 +197,13 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 14552}
     - Class: 114
-      Script: {instanceID: 30848}
+      Script: {instanceID: 27206}
     - Class: 114
-      Script: {instanceID: 30852}
+      Script: {instanceID: 27210}
     - Class: 114
-      Script: {instanceID: 30856}
+      Script: {instanceID: 27214}
     - Class: 114
-      Script: {instanceID: 30860}
+      Script: {instanceID: 27218}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -1464,4 +1466,4 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/WorldSelect.unity
   - Assets/Level.unity
-  playerPath: /Users/bernardolimon/Desktop/ZenkoApk/Zenko96.aab
+  playerPath: /Users/bernardolimon/Desktop/ZenkoApk/Zenko98_tryagainagain.aab

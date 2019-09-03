@@ -131,6 +131,16 @@ public class GoogleAds : MonoBehaviour
         if (rewardVideo.IsLoaded()) {
             rewardVideo.Show();
         }
-}
+        else{
+            TryAgainScreen();
+        }
+    }
+
+    private void TryAgainScreen(){
+        Debug.Log("Try in a few seconds");
+        GameObject.Find("TryAgainScreen").transform.GetChild(0).gameObject.SetActive(true);
+        //Resources.FindObjectsOfTypeAll("TypeAgainScreen").gameObject.SetActive(true);
+
+    }
 
 }
