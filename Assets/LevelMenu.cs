@@ -30,11 +30,25 @@ public class LevelMenu : MonoBehaviour {
 		*/
 		//currentfirst = 1;
 		//Debug.Log("CURRENTFIRST" + currentfirst);
+		//LevelMenu.highestLevelSolved = FindHighestSolved();
+		//Debug.Log("CURHIGHEST IS"  + FindHighestSolved());
 	}
 	void Update(){
-
+		Debug.Log(LevelMenu.highestLevelSolved);	
 	}
 	// Update is called once per frame
+	public static int FindHighestSolved(){
+		int curHighest = 0;
+		int maxMaps = LevelStorer.leveldic.Count;
+		for(int i=1; i<maxMaps+1; i++){
+			string mystring = "Level"+i+"Rating";
+			//Debug.Log(PlayerPrefs.GetInt(mystring));
+			if(PlayerPrefs.GetInt(mystring)>0){
+				curHighest = i;
+			}	
+		}
+		return curHighest;	
+	}
 
 	void createButton(int num){
 		GameObject curbutton = Instantiate(buttonprefab, new Vector3(0, 0, 0), Quaternion.identity);
@@ -66,7 +80,7 @@ public class LevelMenu : MonoBehaviour {
 			}
 		}
 		else{*/
-				Debug.Log(LevelStorer.leveldic[num].rating);
+				//Debug.Log(LevelStorer.leveldic[num].rating);
 				if(LevelStorer.leveldic[num].rating == 1){
 					curbutton.transform.GetChild(3).GetChild(1).GetChild(1).gameObject.SetActive(true);
 				}

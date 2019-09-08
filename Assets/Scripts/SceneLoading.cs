@@ -4,10 +4,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using CompleteProject;
 
 
 public class SceneLoading : MonoBehaviour {
-	public static bool adFree; //true if theyve paid for ad-free
+	public static bool dFree; //true if theyve paid for ad-free
 	public int num;
 	public static GameObject gamewon;
 	public static GameObject gamelost;
@@ -16,8 +17,10 @@ public class SceneLoading : MonoBehaviour {
 	public Text txt2;
 	Dragger td;
 	Dragger td2;
+	public static SceneLoading Instance;
 //	public IceTileHandler myhandler;
 	void Start(){
+		Debug.Log("NEW SCENE LOADING");
 		string teststring = "WallSeed";
 		Debug.Log(teststring.Length);
 		Debug.Log(teststring.Substring(teststring.Length-4,4));
@@ -25,7 +28,7 @@ public class SceneLoading : MonoBehaviour {
 		if (txt2 == null){ //if loading menu, this is pointless and relies on bugs, try a public bool.
 			MusicHandler.PlayTitleTheme();
 		}
-		else{//if loading level scene
+		else{//if loading level scenew
 //			Debug.Log(levelnum + "level");
 			Debug.Log(LevelManager.levelnum);
 			if(LevelManager.levelnum == 0 || LevelManager.levelnum ==null){
@@ -69,8 +72,10 @@ public class SceneLoading : MonoBehaviour {
 		SceneManager.LoadScene(0);
 	}
 	public void RemoveAds(){
-		PlayerPrefs.SetInt("AdFree", 1);
-		SceneLoading.adFree = true;
+		Purchaser.Instance.BuyNoAds();
+		// PlayerPrefs.SetInt("AdFree", 1);
+		// SceneLoading.adFree = true;
+
 		
 	}
 	public void NextlevelButton(){
@@ -358,6 +363,8 @@ public class SceneLoading : MonoBehaviour {
 	public void adventureMode(){
 		transform.Find("Level_Box").gameObject.SetActive(true);
 		transform.Find("Level_Box").Find("ButtonHolder").GetComponent<LevelMenu>().clearMenu();
+		PlayerPrefs.SetInt("CurrentFirst", getCurFirst(LevelMenu.FindHighestSolved()));
+		PlayerPrefs.Save();
 		transform.Find("Level_Box").Find("ButtonHolder").GetComponent<LevelMenu>().currentfirst = PlayerPrefs.GetInt("CurrentFirst");
 		transform.Find("Level_Box").Find("ButtonHolder").GetComponent<LevelMenu>().populateMenu();
 
@@ -370,8 +377,21 @@ public class SceneLoading : MonoBehaviour {
 			MenuButton.open = false;
 		}
 		CameraController.Fade(.2f,1f);
-
-
+	}
+	public int getCurFirst(int highest){
+		int candidate = 1;
+		if (highest == 0 || highest == null || highest == 1){
+			return 1;
+		}
+		for (int i = 1; i<199; i+=20){
+			if(i<highest){
+				candidate = i;
+			}
+			else{
+				return candidate;
+			}
+		}
+		return candidate;
 	}
 	public void closeAdventureMode(){
 		transform.Find("Level_Box").gameObject.SetActive(false);

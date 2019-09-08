@@ -62,7 +62,9 @@ public class GoogleAds : MonoBehaviour
     }
     public void ShowInterstitial(){
     	levelsInSession++;
-
+        if(LevelManager.adFree){
+            return;
+        }
         if (this.interstitial.IsLoaded()) {
         	if(IsInList(levelsInSession)){
             this.interstitial.Show();

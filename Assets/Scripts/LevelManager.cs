@@ -31,19 +31,20 @@ public class LevelManager : MonoBehaviour {
 	public static bool isdragging;
 	public static bool ispotd;
 	public static List<Hint> hints = new List<Hint>();
+	public static bool adFree;
 	//public static int hintCurrency;
 	//public static GameObject lastgoodtile;
 	//public static IceTileHandler myicehandler;
 
 
-	private static LevelManager instance = null;
+	public static LevelManager Instance = null;
 
 
 
 	void Awake(){
-		if(instance == null)
+		if(Instance == null)
 		{
-			instance = this;
+			Instance = this;
 			DontDestroyOnLoad(this.gameObject);
 			//InitializePlayerPrefs();
 
@@ -52,7 +53,9 @@ public class LevelManager : MonoBehaviour {
 		Destroy(this.gameObject);
 
 	}
-
+	void Update(){
+		//Debug.Log(LevelManager.adFree);
+	}
 	void InitializePlayerPrefs(){
 		if (PlayerPrefs.HasKey ("CurrencyLoaded")) {
 			//Debug.Log(PlayerPrefs.GetInt("hintCurrency"));

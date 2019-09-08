@@ -28,12 +28,13 @@ public class PlayServices : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        SceneLoading.adFree = false;
         //PlayerPrefs.DeleteAll();
         Debug.Log(instance);
         Debug.Log("cursavepref " + PlayerPrefs.GetString(SAVE_NAME));
         if(instance == null)
             {
+                LevelManager.adFree = false;
+
                 instance = this;
                 DontDestroyOnLoad(this.gameObject);
 
@@ -186,9 +187,10 @@ public class PlayServices : MonoBehaviour
         // LevelMenu.highestLevelSolved = int.Parse(Data);
         // int highestSolved = LevelMenu.highestLevelSolved;
         Debug.Log(dataArray[0]);
-        if(int.Parse(dataArray[0])== 1){
-            SceneLoading.adFree = true;
-        }
+        if(int.Parse(dataArray[0])== 1)
+            LevelManager.adFree = true;
+        else
+            LevelManager.adFree = false;
 
         GameObject.Find("highestsolved").GetComponent<Text>().text = dataArray[0]; //this currently displays 1 or 0 for paid or not
         for(int i=1; i<dataArray.Length-1;i++){

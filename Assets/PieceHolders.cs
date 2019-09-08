@@ -584,8 +584,17 @@ public class PieceHolders : MonoBehaviour {
 		LevelManager.isdragging = true;	
 		Swiping.canswipe = false;
 		//RewardHint();
-		if(HintAvailable())
-		GoogleAds.Instance.UserOptToWatchAd();	
+		if(HintAvailable()){
+			if(LevelManager.adFree){
+				RewardHint();
+			}
+			
+			else{
+				GoogleAds.Instance.UserOptToWatchAd();	
+			}
+			
+
+		}
 		else
 			AnnounceNoHintAvailable();
 	}
@@ -757,7 +766,13 @@ public class PieceHolders : MonoBehaviour {
 	}
 	public void HintOrRestart(){
 		if(TurnBehaviour.turn == 0&&!hinting){
-			HintMenu();
+			if(LevelManager.adFree){
+				RewardHint();
+			}
+			else{
+				HintMenu();
+
+			}
 		}
 		if(TurnBehaviour.turn == 1){
 			sl.ResetLevelButton();

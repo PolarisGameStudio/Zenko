@@ -35,7 +35,7 @@ public class RatingPopUp : MonoBehaviour {
 		//Debug.Log(prefname);
 		//Debug.Log(previousrating);
 		//Debug.Log(PlayerPrefs.GetInt("Player1Rating"));
-		if (myrating > previousrating) {
+		if (myrating > previousrating && !LevelManager.ispotd) {
 			PlayerPrefs.SetInt (prefname, myrating);
 			//Debug.Log("gave "+ prefname + "rating" + myrating);
 			//Debug.Log(PlayerPrefs.GetInt(prefname));
@@ -66,11 +66,13 @@ public class RatingPopUp : MonoBehaviour {
 		}
 
 		//PlayerPrefs.SetString("SaveFile",LevelManager.levelnum.ToString());
-		if(LevelManager.levelnum > LevelMenu.highestLevelSolved){
+		if(LevelManager.levelnum > LevelMenu.highestLevelSolved && !LevelManager.ispotd){
 			LevelMenu.highestLevelSolved = LevelManager.levelnum;
 		}
-		
-		LevelStorer.UnlockLevel (LevelManager.levelnum+1);
+		if(!LevelManager.ispotd){
+			LevelStorer.UnlockLevel (LevelManager.levelnum+1);
+
+		}
 		PlayServices.instance.SaveLocal();
 		PlayServices.instance.SaveData();
 
