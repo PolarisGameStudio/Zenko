@@ -77,28 +77,18 @@ public class PlayerMovement : MonoBehaviour {
 		menuButton = GameObject.Find("Menu");
 		hintButton = GameObject.Find("Hint");
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		if(canmove){
-			this.transform.GetChild(0).GetComponent<Animator>().SetInteger("Phase", 0);
-
-		}
-		if(!canmove && !GoalBehaviour.goaling){
-			this.transform.GetChild(0).GetComponent<Animator>().SetInteger("Phase", 1);
-		}
-		if (Input.GetKeyDown (KeyCode.G)){
-			Debug.Log(LevelBuilder.tiles[0,0].isTaken);
-		}
-		myswipe = Swiping.mydirection;
+	void ResetBoards(){
 		if (levelWonBoard == null) {
 			levelWonBoard = SceneLoading.gamewon;
 			levelWonBoard.SetActive(false);
 		}
+
 		if (LevelLostBoard == null) {
 			LevelLostBoard = SceneLoading.gamelost;
 			LevelLostBoard.SetActive (false);
-		}
+		}		
+	}
+	void TurnChanger(){
 		if (transform.position != startingposition && TurnBehaviour.turn == 0) {
 
 			TurnBehaviour.turn = 1;
@@ -112,7 +102,23 @@ public class PlayerMovement : MonoBehaviour {
 			menuButton.GetComponent<Image>().sprite = menuButton.GetComponent<ImageHolder>().imageone;
 			hintButton.GetComponent<Image>().sprite = hintButton.GetComponent<ImageHolder>().imageone;
 	
+		}		
+	}
+	// Update is called once per frame
+	void Update () {
+		if(canmove){
+			this.transform.GetChild(0).GetComponent<Animator>().SetInteger("Phase", 0);
+
 		}
+		if(!canmove && !GoalBehaviour.goaling){
+			this.transform.GetChild(0).GetComponent<Animator>().SetInteger("Phase", 1);
+		}
+
+		myswipe = Swiping.mydirection;
+
+		ResetBoards();
+
+		TurnChanger();
 
 		if(Vector3.Distance(currenttile, transform.position) <.6f && !boop && 
 			transform.position != startingposition && nextaction !="Goal_Action"){
@@ -129,8 +135,11 @@ public class PlayerMovement : MonoBehaviour {
 				wallToHit = null;				
 			}
 		}		
-		if (currenttile == transform.position && !hasstopped) {//do this when reached currenttile
-			Debug.Log("On tile");
+
+
+		if (currenttile == transform.position /*&& !hasstopped*/) {//do this when reached currenttile
+			//Debug.Log("WHAT IS NEXTACTION BABY DONT " + nextaction + " ME");
+			//Debug.Log("On tile");
 			GoalBehaviour.isstatic = true;
 			if (lastFragile != null && lastFragile.transform.position == transform.position && nextaction== null) {
 				Debug.Log ("UNUL");
@@ -141,7 +150,7 @@ public class PlayerMovement : MonoBehaviour {
 			}
 
 			else if (nextaction == null) {
-				Debug.Log("Null");
+				//Debug.Log("NullNULLNULLNULL");
 				cantakeinput = true;
 				canmove = true;
 				isspeeding = false;
@@ -188,7 +197,9 @@ public class PlayerMovement : MonoBehaviour {
 					ActOnTile ();
 					isspeeding = true;
 				}
+				Debug.Log("CURRENT NEXT ACTION IS " + nextaction);
 				if (nextaction == "Right_Action") {
+					Debug.Log("MAKING NULL");
 					nextaction = null;
 				}
 			}

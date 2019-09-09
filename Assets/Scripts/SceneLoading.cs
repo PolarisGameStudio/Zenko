@@ -52,6 +52,9 @@ public class SceneLoading : MonoBehaviour {
 		//PlayServices.ShowAchievementsUI();
 		PlayServices.UnlockWorldAchievement(1);
 	}
+	public void RemoveAdFree(){
+		LevelManager.adFree = false;
+	}
 	public void AssignLevelName(){
 		int world = Mathf.FloorToInt((LevelManager.levelnum-1)/50)  + 1;
 		int levelinworld = LevelManager.levelnum - ((world-1)*50);
@@ -365,7 +368,7 @@ public class SceneLoading : MonoBehaviour {
 		transform.Find("Level_Box").Find("ButtonHolder").GetComponent<LevelMenu>().clearMenu();
 		PlayerPrefs.SetInt("CurrentFirst", getCurFirst(LevelMenu.FindHighestSolved()));
 		PlayerPrefs.Save();
-		transform.Find("Level_Box").Find("ButtonHolder").GetComponent<LevelMenu>().currentfirst = PlayerPrefs.GetInt("CurrentFirst");
+		transform.Find("Level_Box").Find("ButtonHolder").GetComponent<LevelMenu>().currentfirst = getCurFirst(LevelMenu.FindHighestSolved());
 		transform.Find("Level_Box").Find("ButtonHolder").GetComponent<LevelMenu>().populateMenu();
 
 
@@ -384,7 +387,7 @@ public class SceneLoading : MonoBehaviour {
 			return 1;
 		}
 		for (int i = 1; i<199; i+=20){
-			if(i<highest){
+			if(i<highest+1){
 				candidate = i;
 			}
 			else{

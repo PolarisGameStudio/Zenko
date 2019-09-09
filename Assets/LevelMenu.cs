@@ -47,7 +47,8 @@ public class LevelMenu : MonoBehaviour {
 				curHighest = i;
 			}	
 		}
-		return curHighest;	
+		Debug.Log(curHighest+1 + " IS CURHIGHEST");
+		return curHighest+1;	
 	}
 
 	void createButton(int num){
@@ -126,7 +127,7 @@ public class LevelMenu : MonoBehaviour {
 		}
 	}
 	public void populateMenu(){
-		Debug.Log(currentfirst);
+		Debug.Log(currentfirst + " is starting first");
 		if(currentfirst==0 | currentfirst==null){
 			currentfirst = 1;
 		}
