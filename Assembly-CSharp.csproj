@@ -62,6 +62,7 @@
      <Compile Include="Assets\CloudMovement.cs" />
      <Compile Include="Assets\ColorModulator.cs" />
      <Compile Include="Assets\CurrencyScript.cs" />
+     <Compile Include="Assets\DateChecker.cs" />
      <Compile Include="Assets\DotHandler.cs" />
      <Compile Include="Assets\FragileBehaviour.cs" />
      <Compile Include="Assets\GameManager.cs" />

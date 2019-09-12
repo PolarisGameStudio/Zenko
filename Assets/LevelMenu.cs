@@ -82,18 +82,22 @@ public class LevelMenu : MonoBehaviour {
 		}
 		else{*/
 				//Debug.Log(LevelStorer.leveldic[num].rating);
-				if(LevelStorer.leveldic[num].rating == 1){
-					curbutton.transform.GetChild(3).GetChild(1).GetChild(1).gameObject.SetActive(true);
-				}
-				if(LevelStorer.leveldic[num].rating == 2){
-					curbutton.transform.GetChild(3).GetChild(1).GetChild(0).gameObject.SetActive(true);
-					curbutton.transform.GetChild(3).GetChild(1).GetChild(2).gameObject.SetActive(true);
-				}
-				if(LevelStorer.leveldic[num].rating == 3){
-					curbutton.transform.GetChild(3).GetChild(1).GetChild(0).gameObject.SetActive(true);
-					curbutton.transform.GetChild(3).GetChild(1).GetChild(1).gameObject.SetActive(true);
-					curbutton.transform.GetChild(3).GetChild(1).GetChild(2).gameObject.SetActive(true);
-				}			
+		if(LevelStorer.leveldic[num].islocked == true && num != 0){
+			curbutton.transform.GetChild(1).gameObject.SetActive(true);	
+			curbutton.transform.GetChild(2).gameObject.SetActive(true);	
+		}
+		if(LevelStorer.leveldic[num].rating == 1){
+			curbutton.transform.GetChild(3).GetChild(1).GetChild(1).gameObject.SetActive(true);
+		}
+		if(LevelStorer.leveldic[num].rating == 2){
+			curbutton.transform.GetChild(3).GetChild(1).GetChild(0).gameObject.SetActive(true);
+			curbutton.transform.GetChild(3).GetChild(1).GetChild(2).gameObject.SetActive(true);
+		}
+		if(LevelStorer.leveldic[num].rating == 3){
+			curbutton.transform.GetChild(3).GetChild(1).GetChild(0).gameObject.SetActive(true);
+			curbutton.transform.GetChild(3).GetChild(1).GetChild(1).gameObject.SetActive(true);
+			curbutton.transform.GetChild(3).GetChild(1).GetChild(2).gameObject.SetActive(true);
+		}			
 
 		//}
 
