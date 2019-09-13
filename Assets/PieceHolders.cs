@@ -778,11 +778,22 @@ public class PieceHolders : MonoBehaviour {
 			sl.ResetLevelButton();
 		}
 	}
+
 	public void RestartAndHint(){
+		StartCoroutine(RestartWithHint());
+		//Debug.Log(placedpieces[0].gameObject.GetComponent<BoxCollider>().enabled);
+	}
+	public IEnumerator RestartWithHint(){
 		SceneLoading.gamelost.SetActive(false);
 		sl.ResetLevelButton();
-		HintMenu();
-		//Debug.Log(placedpieces[0].gameObject.GetComponent<BoxCollider>().enabled);
+		yield return new WaitForSeconds(1);
+		if(LevelManager.adFree){
+			RewardHint();
+		}
+		else{
+			HintMenu();
+
+		}
 	}
 	public IEnumerator HintTowards(Vector3 targetpos, Dragger dragger){
 		dragger.transform.position = new Vector3(targetpos.x,0,targetpos.y);	

@@ -352,6 +352,7 @@
      <None Include="Assets\StreamingAssets\Level-7.txt" />
      <None Include="Assets\StreamingAssets\Ch3_3piece.txt" />
      <None Include="Assets\StreamingAssets\Map.txt" />
+     <None Include="Assets\StreamingAssets\AdventureLevelsBackup.txt" />
      <None Include="Assets\StreamingAssets\Level7.txt" />
      <None Include="Assets\StreamingAssets\NotBoringLevels.txt" />
      <None Include="Assets\StreamingAssets\Level85.txt" />
