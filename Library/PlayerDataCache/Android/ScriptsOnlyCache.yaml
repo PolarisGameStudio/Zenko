@@ -201,13 +201,13 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 14758}
     - Class: 114
-      Script: {instanceID: 33190}
+      Script: {instanceID: 28614}
     - Class: 114
-      Script: {instanceID: 33194}
+      Script: {instanceID: 28786}
     - Class: 114
-      Script: {instanceID: 33198}
+      Script: {instanceID: 28790}
     - Class: 114
-      Script: {instanceID: 33202}
+      Script: {instanceID: 28794}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -1606,4 +1606,4 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/WorldSelect.unity
   - Assets/Level.unity
-  playerPath: /Users/bernardolimon/Desktop/ZenkoApk/Zenko109_34.aab
+  playerPath: /Users/bernardolimon/Desktop/ZenkoApk/Zenko110_34.aab
