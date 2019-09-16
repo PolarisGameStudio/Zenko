@@ -20777,14 +20777,13 @@ GameObject:
   - component: {fileID: 1235935068}
   - component: {fileID: 1235935067}
   - component: {fileID: 1235935066}
-  - component: {fileID: 1235935065}
   m_Layer: 5
-  m_Name: Restart
+  m_Name: CLocwise
   m_TagString: Canvas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1235935064
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20806,43 +20805,6 @@ RectTransform:
   m_AnchoredPosition: {x: -6.828125, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 1, y: 0}
---- !u!114 &1235935065
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1235935063}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f64a40eb5489841ceb8f88bcdc8c0c65, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  menuImage: {fileID: 21300018, guid: d82b995049b0f5f4ea767a8c8627d5ef, type: 3}
-  restartImage: {fileID: 21300046, guid: d82b995049b0f5f4ea767a8c8627d5ef, type: 3}
-  buttons:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  OnPress:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  OnHold:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  OnRelease:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  ConfigMenu: {fileID: 0}
-  levelText: {fileID: 0}
-  ringObject: {fileID: 0}
 --- !u!114 &1235935066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20887,8 +20849,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 909438774}
-        m_MethodName: ResetLevelButton
+      - m_Target: {fileID: 1270425626}
+        m_MethodName: RotateClockWise
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

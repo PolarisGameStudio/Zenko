@@ -335,6 +335,8 @@ public class LevelBuilder : MonoBehaviour {
 		ProgressBar.InitializeProgressBar(LevelStorer.efficientturns);
 		DotHandler.InitializeDots(LevelStorer.efficientturns);
 		playertransform.gameObject.GetComponent<PlayerMovement>().canmove = true;
+		// foreach (string nline in LevelSaver.currentmap)
+		// Debug.Log(nline);
 		//PopulationManager.readytobrain = true;
 	}
 	public void drawPotd(int num){
@@ -420,6 +422,7 @@ public class LevelBuilder : MonoBehaviour {
 
 		for (int i=0; i<totaldimension+1; i++){
 			lines[i] = levelsAdventure[startersAdventure[place]+1+i];
+			Debug.Log(lines[i]);
 			LevelSaver.currentmap.Add(lines[i]);
 		}
 
@@ -432,6 +435,7 @@ public class LevelBuilder : MonoBehaviour {
 			string[] stringsOfLine = Regex.Split (lines [i], " ");
 			levelBase [i] = stringsOfLine;
 		}
+		//Debug.Log(levelBase[5][6]);
 		return levelBase;
 	}
 	string[][] readPotd(int place){

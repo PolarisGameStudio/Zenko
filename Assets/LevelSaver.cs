@@ -1,14 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEngine;
 using System.IO;
 
 public class LevelSaver : MonoBehaviour {
 	StreamWriter sl;
 	public static List<string> currentmap = new List<string>();
+	public static List<string> newmap = new List<string>();
+	public static LevelSaver Instance;
+	public static string[][]oldMapCoords;
+	public static string oldHints;
+	public static string newHints;
+	public static string[][]newMapCoords;
+	public static int totaldimension;
 	//public static string[] currentmap;
 	// Use this for initialization
 	void Start () {
+		//Instance = this;
 		string path = Application.dataPath + "/exceptionalmaps.txt";
 		sl = File.CreateText(path);		
 	}
@@ -30,4 +39,93 @@ public class LevelSaver : MonoBehaviour {
 	void OnApplicationQuit(){
 		sl.Close();
 	}
+	public void RotateClockWise(){
+		oldMapCoords = Jaggy(currentmap);
+		newmap = new List<string>();
+		Debug.Log(oldMapCoords.Length);
+		Debug.Log(oldMapCoords[oldMapCoords.Length-2][0]);
+		for(int i=0; i<oldMapCoords.Length-1; i++){
+			string newLine = "";
+			for(int j = 0; j<oldMapCoords.Length-1;j++){
+				//Debug.Log("Position " + i + " "  + j);
+				//Debug.Log(oldMapCoords[i][j] + " are the coord");
+				if(oldMapCoords[i][j] != " " || oldMapCoords[i][j] != "")
+				newLine = newLine + " " + oldMapCoords[totaldimension-1-i][totaldimension-1-j].ToString();
+			}
+			//Debug.Log(newLine);
+
+			newmap.Add(newLine);
+		}
+		string[] hintArray = Regex.Split (oldHints, " ");
+		newHints = "";
+		foreach(string hint in hintArray){
+			if(hint.StartsWith("T")){
+				newHints =newHints + hint;
+			}
+			else{
+				Debug.Log(hint);
+				Debug.Log(RotateHintClockwise(hint));
+				newHints = newHints + RotateHintClockwise(hint) + " ";
+
+			}
+		}
+		WriteNew();
+	}
+	public string RotateHintClockwise(string Hint){
+		int x = int.Parse(Hint.Substring(1,1));
+		int y = int.Parse(Hint.Substring(2,1));
+		Debug.Log(x);
+		Debug.Log(y);
+		int newx = totaldimension-1-y;
+		int newy = x;
+		Debug.Log(newx);
+		Debug.Log(newy);
+		return Hint[0] + newx.ToString() + newy.ToString();
+	}
+	public void WriteNew(){
+		Debug.Log("CALLING WRITE NEW");
+		Debug.Log(newmap.Count);
+		foreach(string line in newmap){
+			Debug.Log(line);
+			sl.WriteLine(line);
+		}		
+		sl.WriteLine(newHints);
+		sl.WriteLine("");
+	}
+	string[][] Jaggy(List<string> map){
+		// newmap = new List<string>();
+		// string firstline = map[0];
+		// LevelSaver.currentmap.Add(firstline);
+
+		bool donescanning = false;
+		int linenumber = 1;
+		while(!donescanning){
+			if(map[linenumber] == ""){
+				donescanning = true;
+				totaldimension = linenumber-2;
+				Debug.Log(totaldimension);
+			}	
+			linenumber++;
+		}
+
+		string[] lines = new string[totaldimension];
+
+		for (int i=0; i<totaldimension; i++){
+			Debug.Log(map[1+i]);
+			lines[i] = map[1+i];
+		}
+
+		//Debug.Log(lines[lines.Length]);
+
+		string[][] levelBase = new string [totaldimension+1][];
+//		Debug.Log(lines);
+		for (int i = 0; i<totaldimension; i++){
+			string[] stringsOfLine = Regex.Split (lines [i], " ");
+			levelBase [i] = stringsOfLine;
+		}
+		oldHints = map[totaldimension+1];
+		Debug.Log(oldHints + " is oldhints");
+		return levelBase;
+	}
+
 }

@@ -48,6 +48,9 @@ public class SceneLoading : MonoBehaviour {
 		//GameObject.Find("CurrencyHolder").GetComponentInChildren<Text>().text = GameManager.mycurrency.ToString();
 		
 	}
+	public void RotateClockWise(){
+		
+	}
 	public void ShowAchievementsUI(){
 		//PlayServices.ShowAchievementsUI();
 		PlayServices.UnlockWorldAchievement(1);

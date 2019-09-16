@@ -34,7 +34,7 @@ public class LevelMenu : MonoBehaviour {
 		//Debug.Log("CURHIGHEST IS"  + FindHighestSolved());
 	}
 	void Update(){
-		Debug.Log(LevelMenu.highestLevelSolved);	
+		//Debug.Log(LevelMenu.highestLevelSolved);	
 	}
 	// Update is called once per frame
 	public static int FindHighestSolved(){
