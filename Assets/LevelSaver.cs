@@ -14,6 +14,7 @@ public class LevelSaver : MonoBehaviour {
 	public static string newHints;
 	public static string[][]newMapCoords;
 	public static int totaldimension;
+	public static string name;
 	//public static string[] currentmap;
 	// Use this for initialization
 	void Start () {
@@ -50,7 +51,7 @@ public class LevelSaver : MonoBehaviour {
 				//Debug.Log("Position " + i + " "  + j);
 				//Debug.Log(oldMapCoords[i][j] + " are the coord");
 				if(oldMapCoords[i][j] != " " || oldMapCoords[i][j] != "")
-				newLine = newLine + " " + oldMapCoords[totaldimension-1-i][totaldimension-1-j].ToString();
+				newLine = newLine + oldMapCoords[totaldimension-1-j][i].ToString() + " ";
 			}
 			//Debug.Log(newLine);
 
@@ -71,6 +72,70 @@ public class LevelSaver : MonoBehaviour {
 		}
 		WriteNew();
 	}
+	public void MirrorY(){
+		oldMapCoords = Jaggy(currentmap);
+		newmap = new List<string>();
+		Debug.Log(oldMapCoords.Length);
+		Debug.Log(oldMapCoords[oldMapCoords.Length-2][0]);
+		for(int i=0; i<oldMapCoords.Length-1; i++){
+			string newLine = "";
+			for(int j = 0; j<oldMapCoords.Length-1;j++){
+				//Debug.Log("Position " + i + " "  + j);
+				//Debug.Log(oldMapCoords[i][j] + " are the coord");
+				if(oldMapCoords[i][j] != " " || oldMapCoords[i][j] != "")
+				newLine = newLine + oldMapCoords[totaldimension-1-i][j].ToString() + " ";
+			}
+			//Debug.Log(newLine);
+
+			newmap.Add(newLine);
+		}
+		string[] hintArray = Regex.Split (oldHints, " ");
+		newHints = "";
+		foreach(string hint in hintArray){
+			if(hint.StartsWith("T")){
+				newHints =newHints + hint;
+			}
+			else{
+				//Debug.Log(hint);
+				//Debug.Log(RotateHintClockwise(hint));
+				newHints = newHints + MirrorHintY(hint) + " ";
+
+			}
+		}
+		WriteNew();		
+	}
+	public void MirrorX(){
+		oldMapCoords = Jaggy(currentmap);
+		newmap = new List<string>();
+		Debug.Log(oldMapCoords.Length);
+		Debug.Log(oldMapCoords[oldMapCoords.Length-2][0]);
+		for(int i=0; i<oldMapCoords.Length-1; i++){
+			string newLine = "";
+			for(int j = 0; j<oldMapCoords.Length-1;j++){
+				//Debug.Log("Position " + i + " "  + j);
+				//Debug.Log(oldMapCoords[i][j] + " are the coord");
+				if(oldMapCoords[i][j] != " " || oldMapCoords[i][j] != "")
+				newLine = newLine + oldMapCoords[i][totaldimension-1-j].ToString() + " ";
+			}
+			//Debug.Log(newLine);
+
+			newmap.Add(newLine);
+		}
+		string[] hintArray = Regex.Split (oldHints, " ");
+		newHints = "";
+		foreach(string hint in hintArray){
+			if(hint.StartsWith("T")){
+				newHints =newHints + hint;
+			}
+			else{
+				//Debug.Log(hint);
+				//Debug.Log(RotateHintClockwise(hint));
+				newHints = newHints + MirrorHintX(hint) + " ";
+
+			}
+		}
+		WriteNew();		
+	}
 	public string RotateHintClockwise(string Hint){
 		int x = int.Parse(Hint.Substring(1,1));
 		int y = int.Parse(Hint.Substring(2,1));
@@ -82,21 +147,50 @@ public class LevelSaver : MonoBehaviour {
 		Debug.Log(newy);
 		return Hint[0] + newx.ToString() + newy.ToString();
 	}
+	public string MirrorHintY(string Hint){
+		int x = int.Parse(Hint.Substring(1,1));
+		int y = int.Parse(Hint.Substring(2,1));
+		Debug.Log(x);
+		Debug.Log(y);
+		int newx = totaldimension-1-x;
+		int newy = y;
+		Debug.Log(newx);
+		Debug.Log(newy);
+		return Hint[0] + newx.ToString() + newy.ToString();
+	}
+	public string MirrorHintX(string Hint){
+		int x = int.Parse(Hint.Substring(1,1));
+		int y = int.Parse(Hint.Substring(2,1));
+		Debug.Log(x);
+		Debug.Log(y);
+		int newx = x;
+		int newy = totaldimension-1-y;
+		Debug.Log(newx);
+		Debug.Log(newy);
+		return Hint[0] + newx.ToString() + newy.ToString();
+	}
 	public void WriteNew(){
+		name = currentmap[0];
+		currentmap = new List<string>();
 		Debug.Log("CALLING WRITE NEW");
 		Debug.Log(newmap.Count);
+		sl.WriteLine(name);
+		currentmap.Add(name);
 		foreach(string line in newmap){
 			Debug.Log(line);
 			sl.WriteLine(line);
+			currentmap.Add(line);
 		}		
 		sl.WriteLine(newHints);
+		currentmap.Add(newHints);
 		sl.WriteLine("");
+		currentmap.Add("");
 	}
 	string[][] Jaggy(List<string> map){
 		// newmap = new List<string>();
 		// string firstline = map[0];
 		// LevelSaver.currentmap.Add(firstline);
-
+		Debug.Log("map size " + map.Count);
 		bool donescanning = false;
 		int linenumber = 1;
 		while(!donescanning){
