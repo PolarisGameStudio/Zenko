@@ -201,13 +201,13 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 14758}
     - Class: 114
-      Script: {instanceID: 30942}
+      Script: {instanceID: 28700}
     - Class: 114
-      Script: {instanceID: 30946}
+      Script: {instanceID: 28872}
     - Class: 114
-      Script: {instanceID: 30950}
+      Script: {instanceID: 28876}
     - Class: 114
-      Script: {instanceID: 30954}
+      Script: {instanceID: 28880}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -1606,4 +1606,4 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/WorldSelect.unity
   - Assets/Level.unity
-  playerPath: /Users/bernardolimon/Desktop/ZenkoApk/Zenko113_playtestch2.aab
+  playerPath: /Users/bernardolimon/Desktop/ZenkoApk/Zenkoch2_3rdpass.aab
