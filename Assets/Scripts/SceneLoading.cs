@@ -59,8 +59,8 @@ public class SceneLoading : MonoBehaviour {
 		LevelManager.adFree = false;
 	}
 	public void AssignLevelName(){
-		int world = Mathf.FloorToInt((LevelManager.levelnum-1)/50)  + 1;
-		int levelinworld = LevelManager.levelnum - ((world-1)*50);
+		int world = Mathf.FloorToInt((LevelManager.levelnum-1)/40)  + 1;
+		int levelinworld = LevelManager.levelnum - ((world-1)*40);
 		txt.text = "World " + world.ToString() + "-" + levelinworld.ToString();		
 	}
 	public void LoadScene(int num){

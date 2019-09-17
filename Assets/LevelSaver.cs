@@ -145,20 +145,43 @@ public class LevelSaver : MonoBehaviour {
 		int newy = x;
 		Debug.Log(newx);
 		Debug.Log(newy);
-		return Hint[0] + newx.ToString() + newy.ToString();
+		string pieceLetter ="";
+		switch(Hint.Substring(0,1)){
+		case "D":
+			pieceLetter = "L";
+			break;
+		case "d":
+			pieceLetter = "l";
+			break;
+		case "R":
+			pieceLetter = "D";
+			break;
+		case "r":
+			pieceLetter = "d";
+			break;
+		case "U":
+			pieceLetter = "R";
+			break;
+		case "u":
+			pieceLetter = "r";
+			break;
+		case "L":
+			pieceLetter = "U";
+			break;
+		case "l":	
+			pieceLetter = "u";
+			break;
+		case "P":
+			pieceLetter = "P";
+			break;
+		case "p":
+			pieceLetter = "p";
+			break;
+		}
+
+		return pieceLetter + newx.ToString() + newy.ToString();
 	}
 	public string MirrorHintY(string Hint){
-		int x = int.Parse(Hint.Substring(1,1));
-		int y = int.Parse(Hint.Substring(2,1));
-		Debug.Log(x);
-		Debug.Log(y);
-		int newx = totaldimension-1-x;
-		int newy = y;
-		Debug.Log(newx);
-		Debug.Log(newy);
-		return Hint[0] + newx.ToString() + newy.ToString();
-	}
-	public string MirrorHintX(string Hint){
 		int x = int.Parse(Hint.Substring(1,1));
 		int y = int.Parse(Hint.Substring(2,1));
 		Debug.Log(x);
@@ -167,7 +190,84 @@ public class LevelSaver : MonoBehaviour {
 		int newy = totaldimension-1-y;
 		Debug.Log(newx);
 		Debug.Log(newy);
-		return Hint[0] + newx.ToString() + newy.ToString();
+		string pieceLetter ="";
+		switch(Hint.Substring(0,1)){
+		case "D":
+			pieceLetter = "U";
+			break;
+		case "d":
+			pieceLetter = "u";
+			break;
+		case "R":
+			pieceLetter = "R";
+			break;
+		case "r":
+			pieceLetter = "r";
+			break;
+		case "U":
+			pieceLetter = "D";
+			break;
+		case "u":
+			pieceLetter = "d";
+			break;
+		case "L":
+			pieceLetter = "L";
+			break;
+		case "l":	
+			pieceLetter = "l";
+			break;
+		case "P":
+			pieceLetter = "P";
+			break;
+		case "p":
+			pieceLetter = "p";
+			break;
+		}
+		return pieceLetter + newx.ToString() + newy.ToString();
+	}
+	public string MirrorHintX(string Hint){
+		int x = int.Parse(Hint.Substring(1,1));
+		int y = int.Parse(Hint.Substring(2,1));
+		Debug.Log(x);
+		Debug.Log(y);
+		int newx = totaldimension-1-x;
+		int newy = y;
+		Debug.Log(newx);
+		Debug.Log(newy);
+		string pieceLetter="";
+		switch(Hint.Substring(0,1)){
+		case "D":
+			pieceLetter = "D";
+			break;
+		case "d":
+			pieceLetter = "d";
+			break;
+		case "R":
+			pieceLetter = "L";
+			break;
+		case "r":
+			pieceLetter = "l";
+			break;
+		case "U":
+			pieceLetter = "U";
+			break;
+		case "u":
+			pieceLetter = "u";
+			break;
+		case "L":
+			pieceLetter = "R";
+			break;
+		case "l":	
+			pieceLetter = "r";
+			break;
+		case "P":
+			pieceLetter = "P";
+			break;
+		case "p":
+			pieceLetter = "p";
+			break;
+		}
+		return pieceLetter + newx.ToString() + newy.ToString();
 	}
 	public void WriteNew(){
 		name = currentmap[0];
