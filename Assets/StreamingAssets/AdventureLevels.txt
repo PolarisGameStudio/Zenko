@@ -103,7 +103,7 @@ Level10
 1 1 1 0 0 0 1 1 
 1 1 0 0 0 0 1 1 
 1 1 0 0 0 0 G 1 
-1 S 0 0 H 0 1 1 
+1 S 0 0 0 H 1 1 
 1 1 1 1 1 1 1 1 
 1 1 1 1 1 1 1 1 
 P35 T7
@@ -161,7 +161,7 @@ Level15
 1 1 1 # H 1 1 1 
 1 1 1 0 0 S 1 1 
 1 1 1 1 1 1 1 1 
-P32 T9
+P32 T8
 
 Level16
 1 1 1 1 1 1 1 1 
@@ -194,7 +194,7 @@ Level18
 1 1 H 0 # 0 1 1 
 1 G 0 0 1 1 1 1 
 1 1 1 1 1 1 1 1 
-P53 P24 T5
+P53 P24 T6
 
 Level19
 1 1 1 1 1 1 1 1 
@@ -447,7 +447,7 @@ Level41////////////////////////////////////////////////// AQUI EMPIEZA CH2
 1 1 1 0 1 0 1 1 
 1 1 1 1 1 1 1 1 
 1 1 1 1 1 1 1 1 
-L44 T3
+L44 T1
 
 Level42
 1 1 1 1 1 1 1 1 
@@ -680,18 +680,7 @@ Level62//puedeirantes
 1 1 1 1 1 1 1 1 
 P26 L44 T5
 
-Level63//COULDGO y se puede ir
-1 1 1 1 1 1 1 1 
-1 # 0 1 H 0 1 1 
-G # 0 H 1 0 1 1 
-1 # 0 0 0 0 S 1 
-1 F 0 # 0 1 1 1 
-1 0 0 1 # F 1 1 
-1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 
-D23 T8
-
-Level64//puedeirdespues
+Level63//puedeirdespues
 1 1 1 1 1 1 1 1 
 1 1 1 1 1 1 1 1 
 1 1 1 1 1 0 0 1 
@@ -702,7 +691,7 @@ Level64//puedeirdespues
 1 1 1 1 1 1 1 1 
 P56 T9
 
-Level65
+Level64..couldgo
 1 1 1 1 1 1 1 1 
 1 1 1 1 G 1 1 1 
 1 # 0 0 0 F 1 1 
@@ -713,7 +702,7 @@ S 0 0 H 0 1 1 1
 1 1 1 1 1 1 1 1 
 D14 T9
 
-Level66
+Level65
 1 1 1 1 1 1 1 1 
 G 0 0 1 0 0 1 1 
 1 1 # F 0 F 1 1 
@@ -724,7 +713,7 @@ G 0 0 1 0 0 1 1
 1 1 1 1 1 1 1 1 
 P41 T7
 
-Level67
+Level66
 1 1 1 1 1 1 S 1 
 1 0 1 F F H 0 1 
 1 0 F 0 0 1 0 1 
@@ -735,7 +724,7 @@ Level67
 1 1 1 1 1 1 1 1 
 P11 P65 R33 T5
 
-Level68//earlier or bye
+Level67//earlier or bye
 1 1 1 1 1 1 1 1 
 1 1 1 1 S 1 1 1 
 1 0 F F F 0 1 1 
@@ -746,7 +735,7 @@ G 0 0 # # 0 1 1
 1 1 1 1 1 1 1 1 
 L52 P14 T7
 
-Level69//nonlrud
+Level68//nonlrud
 1 1 1 1 1 1 1 1 
 1 1 1 1 1 1 1 1 
 1 1 0 0 0 0 1 1 
@@ -757,7 +746,7 @@ Level69//nonlrud
 1 1 1 1 1 1 1 1 
 U25 T7
 
-Level70
+Level69
 1 1 1 1 1 1 1 1 
 1 1 1 1 1 1 1 1 
 1 1 0 # # 1 1 1 
@@ -768,7 +757,7 @@ Level70
 1 1 1 1 1 1 1 1 
 R34 D33 T4
 
-Level71
+Level70
 1 1 1 1 1 1 1 1 
 1 1 1 1 1 1 1 1 
 1 H 1 1 H F 0 1 
@@ -779,51 +768,7 @@ Level71
 1 1 1 1 1 1 1 1 
 D13 P62 U65 T4
 
-Level72//earlier y o bye
-1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 
-1 # 0 0 0 0 1 1 
-1 0 # 0 # # 1 1 
-S F 0 # 0 1 1 1 
-1 1 0 1 0 1 1 1 
-1 0 0 0 0 H 1 1 
-1 1 G 1 1 1 1 1 
-R32 T7
-
-Level73//good
-1 1 1 1 G 1 1 1 
-1 0 F # # 0 0 1 
-1 0 0 F 0 F 0 1 
-1 0 0 0 1 0 # 1 
-1 H 0 1 1 1 F 1 
-1 0 0 # F 0 F 1 
-1 0 0 0 F # 0 1 
-1 1 1 1 1 S 1 1 
-L62 P51 T10
-
-Level74
-1 1 1 1 1 1 1 1 
-1 0 F H 0 0 S 1 
-1 0 # 1 # F 1 1 
-1 # 0 0 0 # 1 1 
-1 0 0 F F 1 1 1 
-1 1 # H # 0 1 1 
-1 1 G 1 1 1 1 1 
-1 1 1 1 1 1 1 1 
-P11 D41 T6
-
-Level75//good
-1 1 1 S 1 1 1 1 
-1 1 0 0 0 H 1 1 
-1 1 H 0 0 1 0 1 
-1 1 # F 0 0 # 1 
-1 0 0 0 0 0 # 1 
-1 0 # # F F # 1 
-1 1 1 1 1 G 1 1 
-1 1 1 1 1 1 1 1 
-P43 P62 T7
-
-Level76/earlierobye
+Level71/earlierobye
 1 1 1 1 1 1 1 1 
 1 0 1 F # 0 G 1 
 1 # F 0 0 1 1 1 
@@ -834,7 +779,40 @@ S F 0 0 0 H 1 1
 1 1 1 1 1 1 1 1 
 P53 P34 R13 T4
 
-Level77//good
+Level72//good
+1 1 1 1 G 1 1 1 
+1 0 F # # 0 0 1 
+1 0 0 F 0 F 0 1 
+1 0 0 0 1 0 # 1 
+1 H 0 1 1 1 F 1 
+1 0 0 # F 0 F 1 
+1 0 0 0 F # 0 1 
+1 1 1 1 1 S 1 1 
+L62 P51 T9
+
+Level73
+1 1 1 1 1 1 1 1 
+1 0 F H 0 0 S 1 
+1 0 # 1 # F 1 1 
+1 # 0 0 0 # 1 1 
+1 0 0 F F 1 1 1 
+1 1 # H # 0 1 1 
+1 1 G 1 1 1 1 1 
+1 1 1 1 1 1 1 1 
+P11 D41 T6
+
+Level74//good
+1 1 1 S 1 1 1 1 
+1 1 0 0 0 H 1 1 
+1 1 H 0 0 1 0 1 
+1 1 # F 0 0 # 1 
+1 0 0 0 0 0 # 1 
+1 0 # # F F # 1 
+1 1 1 1 1 G 1 1 
+1 1 1 1 1 1 1 1 
+P43 P62 T7
+
+Level75//good
 1 1 1 1 1 S 1 1 
 1 H 0 1 0 0 F 1 
 1 # 1 0 0 0 F 1 
@@ -845,7 +823,7 @@ Level77//good
 1 1 G 1 1 1 1 1 
 P52 P66 D23 T8
 
-Level78//earlier
+Level76//earlier
 1 G 1 1 1 1 1 1 
 1 # # 1 1 F 0 1 
 1 F 0 H 0 0 F 1 
@@ -856,7 +834,7 @@ S 0 1 0 0 # 0 1
 1 1 1 1 1 1 1 1 
 L63 R24 T10
 
-Level79//dificilytricky
+Level77//dificilytricky
 1 S 1 1 1 1 1 1 
 1 F 0 0 0 1 0 1 
 1 # 0 0 F 0 F 1 
@@ -867,7 +845,7 @@ Level79//dificilytricky
 1 1 1 1 1 1 1 1 
 D32 L13 T9
 
-Level80
+Level78
 1 1 1 1 1 1 1 1 
 1 0 F 0 1 0 0 1 
 1 # 0 1 0 # 0 1 
@@ -878,7 +856,7 @@ Level80
 1 1 G 1 1 1 S 1 
 R11 U36 P64 T6
 
-Level81
+Level79
 1 1 1 1 1 1 1 1 
 1 1 1 1 1 1 1 1 
 1 1 1 0 0 0 1 1 
@@ -889,7 +867,7 @@ Level81
 1 1 S 1 G 1 1 1 
 R25 U55 T8
 
-Level82//good
+Level80//good
 1 1 S 1 1 1 1 1 
 1 1 0 # 0 0 F 1 
 1 1 F F 0 F H 1 
@@ -900,7 +878,7 @@ Level82//good
 1 1 1 1 1 1 1 1 
 P41 P55 U23 D51 T9
 
-Level83//newch
+Level81///////////newch
 1 1 1 1 1 1 1 1
 1 0 H 0 0 0 1 1
 1 0 H 0 0 0 1 1 
@@ -911,7 +889,7 @@ Level83//newch
 1 1 1 1 1 1 1 1 
 p14 T3
 
-Level84
+Level82
 1 1 1 1 1 1 1 1 
 1 1 1 1 1 1 1 1 
 1 1 0 0 0 0 1 1
@@ -922,40 +900,7 @@ Level84
 1 1 1 1 1 1 1 1 
 p32 T8
 
-Level85
-1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 
-1 1 0 0 0 0 1 1 
-1 1 0 1 F 0 1 1 
-1 S 0 F F 1 1 1 
-1 1 0 H 0 0 1 1 
-1 1 1 1 1 G 1 1 
-1 1 1 1 1 1 1 1 
-p32 U25 T6
-
-Level86
-1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 
-1 1 0 1 # 0 1 1 
-1 1 0 0 0 0 1 1 
-1 1 0 0 0 F 1 1 
-1 1 F 0 0 0 1 1 
-1 1 G 1 1 S 1 1 
-1 1 1 1 1 1 1 1 
-p43 T6
-
-Level87
-1 1 1 1 1 1 1 1 
-1 1 1 1 1 S 1 1 
-1 1 0 0 0 0 1 1 
-1 1 H 0 1 0 1 1 
-1 1 1 0 0 0 1 1 
-1 1 0 0 0 F G 1 
-1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 
-p42 P53 T5
-
-Level88//chole
+Level83//chole
 1 1 1 1 1 1 1 1 
 1 1 1 1 1 1 1 1 
 1 1 0 0 0 0 1 1 
@@ -966,75 +911,18 @@ Level88//chole
 1 1 1 1 1 1 1 1 
 p25 T6
 
-Level89
+Level84
 1 1 1 1 1 1 1 1 
 1 1 1 1 1 1 1 1 
 1 1 0 0 0 0 1 1 
-1 1 0 F 0 F S 1 
-1 1 0 0 H 0 1 1 
-1 G F 0 1 0 1 1 
+1 1 0 1 F 0 1 1 
+1 S 0 F F 1 1 1 
+1 1 0 H 0 0 1 1 
+1 1 1 1 1 G 1 1 
 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 
-p42 U54 T5
+p32 U25 T6
 
-Level90
-1 1 1 1 1 1 1 1 
-1 1 1 1 1 S 1 1 
-1 1 0 0 0 # 1 1 
-1 1 0 # F 0 1 1 
-1 1 1 F 0 # 1 1 
-1 1 # 0 H 0 1 1 
-1 1 1 G 1 1 1 1 
-1 1 1 1 1 1 1 1 
-p42 T5
-
-Level91//too easy
-1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 
-1 1 0 1 0 F 1 1 
-1 1 F 0 0 0 G 1 
-1 1 0 0 0 0 S 1 
-1 1 1 0 F 1 1 1 
-1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 
-p44 T4
-
-Level92
-1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 
-1 0 # 0 0 0 1 1 
-1 # H 0 1 0 1 1 
-S 0 1 # 0 0 1 1 
-1 F 0 0 1 0 1 1 
-1 0 0 F # # 1 1 
-1 1 1 G 1 1 1 1 
-p53 T7
-
-Level93
-1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 1 S 1 1 1 1 
-1 1 F F 0 0 # 1 1 1 
-1 1 F F # 0 # G 1 1 
-1 1 H # 0 F 0 1 1 1 
-1 1 1 0 F 0 1 1 1 1 
-1 1 0 1 0 0 # 1 1 1 
-1 1 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 1 1 
-p45 T5
-
-Level94
-1 1 1 1 1 1 1 1 
-1 1 S 1 1 1 1 1 
-1 1 0 1 0 0 0 1 
-1 1 0 0 0 0 # 1 
-1 G 0 0 0 # 0 1 
-1 1 F 0 0 # # 1 
-1 1 0 F 0 0 0 1 
-1 1 1 1 1 1 1 1 
-p43 T7
-
-Level95//Fixthis or put earlier
+Level85//earlier
 1 1 1 1 1 1 1 1 
 1 # 0 0 0 0 1 1 
 1 0 0 F 0 0 1 1 
@@ -1045,40 +933,18 @@ G F 0 1 F # 1 1
 1 1 1 1 1 1 1 1 
 p31 T5
 
-Level96//too easy
+Level86
 1 1 1 1 1 1 1 1 
 1 1 1 1 1 1 1 1 
-1 1 0 F 0 0 1 1 
-1 1 F 0 1 # 1 1 
+1 1 1 1 # 0 1 1 
 1 1 0 0 0 0 1 1 
-1 1 1 0 H 0 1 1 
+1 1 0 0 0 F 1 1 
+1 1 0 F 0 0 1 1 
 1 1 1 G 1 S 1 1 
 1 1 1 1 1 1 1 1 
-p55 P24 T4
+p43 T8
 
-Level97
-1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 
-1 0 0 F 0 F S 1 
-1 0 0 0 # # 1 1 
-1 # F 0 0 # 1 1 
-1 1 1 0 0 # 1 1 
-1 0 0 0 1 0 1 1 
-1 G 1 1 1 1 1 1 
-p34 T9
-
-Level98//meh
-1 1 1 1 1 1 1 1 
-1 1 0 0 0 1 F 1 
-1 1 0 0 0 0 0 1 
-1 1 F F # 0 0 1 
-1 1 # # 0 1 0 1 
-1 1 0 F # F # S 
-1 1 1 1 1 1 G 1 
-1 1 1 1 1 1 1 1 
-p42 T7
-
-Level99//good (no backandforth)
+Level90//good (no backandforth), earlier
 1 1 1 1 1 1 1 1 
 1 1 S 1 1 1 1 1 
 1 1 F 0 0 0 1 1 
@@ -1089,40 +955,128 @@ Level99//good (no backandforth)
 1 1 1 1 1 1 1 1 
 p23 P52 T5
 
-Level100
+Level89
+1 1 1 1 1 1 1 1 
+1 1 1 1 1 1 1 1 
+1 0 # 0 0 0 1 1 
+1 # H 0 1 0 1 1 
+S 0 1 # 0 0 1 1 
+1 F 0 0 1 0 1 1 
+1 0 0 F # # 1 1 
+1 1 1 G 1 1 1 1 
+p53 T7
+
+Level88
+1 1 1 1 1 1 1 1 
+1 1 1 1 1 S 1 1 
+1 1 0 # H # 1 1 
+1 1 0 0 0 0 1 1 
+1 1 1 0 0 # 1 1 
+1 1 # 0 F 0 1 1 
+1 1 1 1 G 1 1 1 
+1 1 1 1 1 1 1 1 
+p53 T8
+
+Level87//checar q no tenga solucion alterna
+1 1 1 1 1 1 1 1 
+1 1 1 1 1 1 1 1 
+1 1 0 0 0 0 1 1 
+1 G F 0 0 0 1 1 
+1 1 F F 0 F S 1 
+1 1 0 0 0 0 1 1 
+1 1 1 1 1 1 1 1 
+1 1 1 1 1 1 1 1 
+p42 U55 T7
+
+Level91//fix or leave or byebyebye,byebye
+1 1 1 1 1 1 1 1 
+1 1 S 1 1 1 1 1 
+1 1 0 1 0 0 0 1 
+1 1 0 0 0 0 # 1 
+1 G 0 0 0 # 0 1 
+1 1 F 0 0 # # 1 
+1 1 0 F 0 0 0 1 
+1 1 1 1 1 1 1 1 
+p43 T7
+
+Level92//earlier or bye
+1 1 1 1 1 1 1 1 
+1 1 1 1 1 1 1 1 
+1 1 0 F 0 0 1 1 
+1 1 F 0 1 # 1 1 
+1 1 0 0 0 0 1 1 
+1 1 1 0 H 0 1 1 
+1 1 1 G 1 S 1 1 
+1 1 1 1 1 1 1 1 
+p55 P24 T4
+
+Level93//fixable, dif tier1
+1 1 1 1 1 1 1 1 
+1 1 0 0 0 1 F 1 
+1 1 0 0 0 0 0 1 
+1 1 F F # 0 0 1 
+1 1 # # 0 1 0 1 
+1 1 0 F # F # S 
+1 1 1 1 1 1 G 1 
+1 1 1 1 1 1 1 1 
+p42 T7
+
+Level94
 1 1 1 1 1 1 1 1 
 1 1 1 G 1 1 1 1 
-1 1 0 0 0 F # 1 
+1 1 0 F 0 F # 1 
 1 1 # 0 F 0 F 1 
 1 1 0 0 F # 0 1 
 1 1 0 0 0 0 # 1 
 1 1 0 0 0 0 0 1 
 1 1 S 1 1 1 1 1 
-p26 T5
+p26 T6
 
-Level101//meh y adjacent
+Level95//dificil AQUI EMPIEZA DIFICIL
 1 1 1 1 1 1 1 1 
-1 1 1 1 S G 1 1 
-1 0 0 0 0 # 1 1 
+1 1 1 1 1 S 1 1 
+1 1 # 0 0 0 1 1 
+1 G 0 F 0 0 1 1 
+1 1 0 0 0 F 1 1 
+1 0 0 0 0 1 1 1 
+1 0 0 1 0 0 H 1 
+1 1 1 1 1 1 1 1 
+p42 P53 T8
+
+Level96
+1 1 1 1 1 1 1 1 
+1 0 0 F 0 0 S 1 
+1 0 0 1 # # 1 1 
+1 # F F 0 # # 1 
+1 1 1 0 0 # 0 1 
+1 0 0 0 1 0 # 1 
+1 G 1 1 1 1 1 1 
+1 1 1 1 1 1 1 1 
+p51 T12
+
+Level97//meh y byebyebye y bye o fix
+1 1 1 1 1 1 1 1 
+1 1 1 1 S 1 1 1 
+1 0 0 0 0 # G 1 
 1 F F 0 F # 1 1 
 1 0 0 0 0 H 1 1 
 1 1 1 0 0 H 1 1 
 1 F 0 H # 0 1 1 
 1 1 1 1 1 1 1 1 
-p44 T6
+p44 T5
 
-Level102
-1 1 1 G 1 1 1 1 
-1 H F F 0 0 1 1 
-1 0 0 0 0 1 1 1 
-1 F F 0 0 1 1 1 
+Level98//fixed
+1 1 1 1 1 1 1 1 
+1 0 0 F 0 1 1 1 
+1 0 F 0 0 0 1 1 
+G F 0 F 0 1 1 1 
 1 0 0 0 0 0 1 1 
 1 0 F 0 0 0 1 1 
 1 S 1 1 1 1 1 1 
 1 1 1 1 1 1 1 1 
-p44 P14 T6
+p44 P14 T8
 
-Level103/bien muy bien
+Level99/bien muy bien
 1 1 1 1 1 1 1 1 
 1 H F F 0 1 1 1 
 1 0 0 0 1 1 1 1 
@@ -1131,9 +1085,9 @@ Level103/bien muy bien
 1 0 F 0 0 # 1 1 
 1 S 1 1 1 1 1 1 
 1 1 1 1 1 1 1 1 
-p44 P13 R12 T8
+p35 P13 R12 T8
 
-Level104
+Level100//meh, fixable
 1 1 1 1 1 1 1 1 
 1 0 0 0 F 0 0 1 
 1 0 0 0 0 0 0 1 
@@ -1142,9 +1096,9 @@ Level104
 1 0 H F 1 H 0 1 
 1 0 H 0 0 0 0 1 
 1 G 1 1 S 1 1 1 
-p51 T10
+p32 T10
 
-Level105 //could be earlier
+Level101 //could be earlier
 1 1 1 1 1 1 1 1 
 1 0 0 0 0 # F 1 
 1 0 F F 0 0 0 S 
@@ -1155,7 +1109,7 @@ G # 0 0 0 1 0 1
 1 1 1 1 1 1 1 1 
 p41 P42 P35 T10
 
-Level106 //meh
+Level102 //meh, adjacent.
 1 1 1 1 1 1 1 1 
 1 1 1 1 1 1 1 1 
 1 1 0 F 0 1 1 1 
@@ -1166,7 +1120,7 @@ G 0 F F # 0 1 1
 1 1 1 1 1 1 1 1 
 p55 T8
 
-Level107//puedeestarmejor
+Level103//puedeestarmejor, buen truc
 1 1 1 1 1 1 1 1 
 1 0 0 0 0 0 0 1 
 1 # 0 H 1 0 0 1 
@@ -1177,18 +1131,18 @@ Level107//puedeestarmejor
 1 1 1 1 1 1 S 1 
 p55 p66 T6
 
-Level108//putearlier
+Level104//putearlier
 1 1 1 1 1 1 1 1 
 1 1 1 1 1 1 1 1 
 1 1 0 1 0 0 # G 
 1 1 # 0 0 0 H 1 
-1 1 H H 1 0 # 1 
+1 1 # H 1 0 # 1 
 1 1 0 0 0 0 1 1 
-1 1 0 0 # 0 # 1 
+1 1 # 0 # 0 # 1 
 1 1 S 1 1 1 1 1 
-p36 P25 T7
+p36 T8
 
-Level109//meh or out, end of phase1?, earlier
+Level105//meh or out, end of phase1?, earlier
 1 1 1 1 1 1 1 1 
 1 # 0 0 # F F 1 
 1 1 # 0 # 0 0 1 
@@ -1199,18 +1153,18 @@ S 0 0 1 # 0 0 G
 1 1 1 1 1 1 1 1 
 p23 T10
 
-Level110
+Level106//fixed
 1 1 1 1 1 1 1 1 
-1 0 1 0 H 0 H 1 
-1 0 # 0 # 0 0 1 
+1 F 1 1 0 0 0 1 
+1 0 # 0 # 0 F G 
 1 # 0 F 0 0 0 1 
-1 F F 0 0 0 F G 
+1 F F 0 0 0 F 1 
 1 F 0 H 0 1 1 1 
 1 0 F 0 0 # H 1 
 1 1 1 S 1 1 1 1 
-p43 P12 L46 T6
+p43 P12 L46 T8
 
-Level111//se puede jugar con p en otro lado
+Level107//se puede jugar con p en otro lado
 1 1 1 1 1 1 1 1 1 1 
 1 1 1 1 1 1 1 1 1 1 
 1 1 0 0 0 0 H 0 G 1 
@@ -1223,10 +1177,10 @@ Level111//se puede jugar con p en otro lado
 1 1 1 1 1 1 1 1 1 1 
 p24 L45 T10
 
-Level112//gud but earlierpls
+Level108//gud but earlierpls
 1 1 1 1 1 1 1 1 
 1 0 0 1 1 0 0 1 
-1 1 # 0 0 # F 1 
+1 1 # 0 0 # 0 1 
 1 0 F 0 1 1 0 1 
 1 F 1 F 0 1 0 1 
 1 0 0 0 0 0 # 1 
@@ -1234,7 +1188,7 @@ Level112//gud but earlierpls
 1 S 1 1 1 G 1 1 
 p45 P36 T6
 
-Level113//gud but earlier
+Level109//gud but earlier
 1 1 1 1 1 1 1 1 
 1 1 1 1 1 S 1 1 
 1 1 H 0 F 0 0 1 
@@ -1245,18 +1199,18 @@ Level113//gud but earlier
 1 1 G 1 1 1 1 1 
 p64 R46 T5
 
-Level114//mmm but earlier
+Level110//fixed
 1 1 1 1 1 1 1 1 
 1 # 0 0 0 0 1 1 
 1 0 # 0 H 0 S 1 
 1 H F 0 # 0 1 1 
-1 0 0 F F F G 1 
+1 0 0 F F F 1 1 
 1 0 0 0 0 F 1 1 
+1 0 F F 0 0 G 1 
 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 
-p31 P25 U53 T5
+p31 P25 U53 T7
 
-Level115
+Level111//tricky,easy
 1 1 1 1 1 1 1 1 
 1 1 1 1 1 1 1 1 
 1 1 1 # 0 0 1 1 
@@ -1267,29 +1221,18 @@ Level115
 1 1 S 1 G 1 1 1 
 p43 L66 T5
 
-Level116//switcheroo
+Level112//switcheroo/fixed
 1 1 1 1 1 1 1 1 
 1 0 0 0 # F # 1 
 1 F 0 0 0 H 0 1 
 1 0 # 0 0 0 1 1 
-1 0 # F 0 0 1 1 
+1 F # F 0 0 0 1 
 G 0 # 1 0 0 0 1 
 1 0 1 H 1 # # S 
 1 1 1 1 1 1 1 1 
-p31 T9
+p31 P64 T9
 
-Level116//switcheroo retry
-1 1 1 1 1 1 1 1 
-1 0 0 0 # F # 1 
-1 F 0 0 F 0 0 1 
-1 0 # 0 0 0 0 1 
-1 1 # F 0 0 0 1 
-1 0 # 1 0 0 1 1 
-1 0 1 1 # # # S 
-1 1 1 1 1 G 1 1 
-p31 T8
-
-Level117//morelikethis
+Level113//morelikethis/toptier
 1 1 1 1 1 S 1 1 
 G F 0 0 0 0 H 1 
 1 # H 0 F F 0 1 
@@ -1300,7 +1243,7 @@ G F 0 0 0 0 H 1
 1 1 1 1 1 1 1 1 
 p33 L63 T7
 
-Level118 //perhaps earlier
+Level114 //perhaps earlier
 1 1 1 1 1 1 1 1 
 1 1 1 1 1 S 1 1 
 1 1 0 F # 0 0 1 
@@ -1311,29 +1254,18 @@ Level118 //perhaps earlier
 1 1 1 1 1 1 1 1 
 p33 U55 T8
 
-Level119
+Level115 //could be earlier but great here
 1 1 1 1 1 1 1 1 
-1 0 0 0 0 0 0 1 
-1 1 0 0 0 0 F 1 
-1 0 0 1 0 0 0 1 
-1 0 # 0 0 0 0 1 
-G 0 0 0 0 1 0 1 
-S # 0 # # 0 # 1 
-1 1 1 1 1 1 1 1 
-p26 T8
-
-Level120 //could be earlier but great here
-1 1 1 1 1 1 1 1 
-1 0 1 0 0 1 1 1 
-1 H 0 0 0 0 S 1 
-1 0 0 0 0 0 1 1 
+G F 0 1 1 1 1 1 
+1 F 0 0 0 1 1 1 
+1 0 F 0 0 0 S 1 
+1 # 0 0 0 0 1 1 
 1 1 F 0 F 0 1 1 
-G 0 0 1 0 0 1 1 
+1 0 0 1 0 0 1 1 
 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 
-p33 P42 T8
+p34 P43 T8
 
-Level121//could be earlier
+Level116//could be earlier yes pls
 1 1 1 1 1 1 1 1 
 1 1 H 0 H H 0 1 
 1 G 0 0 0 0 0 1 
@@ -1344,7 +1276,7 @@ Level121//could be earlier
 1 1 1 1 1 1 1 1 
 p33 p44 T8
 
-Level122
+Level117
 1 1 1 1 1 1 1 1 
 1 0 1 0 0 # # 1 
 1 0 0 0 0 0 0 G 
@@ -1355,7 +1287,7 @@ Level122
 1 1 1 1 S 1 1 1 
 p34 T9
 
-Level123
+Level118
 1 1 1 1 G 1 1 1 
 1 1 0 # F 0 0 1 
 1 1 0 F F # F 1 
@@ -1366,7 +1298,7 @@ Level123
 1 1 1 1 1 1 1 1 
 p23 p35 T8
 
-Level124
+Level119
 1 1 1 1 1 1 1 1 
 1 1 0 F 0 0 0 1 
 1 1 0 0 H 0 F 1 
@@ -1377,7 +1309,7 @@ Level124
 1 1 1 1 1 1 1 1 
 p23 P64 T6
 
-Level125 //could be earlier and smaller, too easy for size
+Level120 //could be earlier and smaller, too easy for size
 1 1 1 1 1 1 1 1 1 1 
 1 1 S 1 1 1 1 1 1 1 
 1 1 0 H 0 # 0 0 0 1 
@@ -1390,7 +1322,7 @@ Level125 //could be earlier and smaller, too easy for size
 1 1 1 1 1 1 1 1 1 1 
 p36 P24 T7
 
-Level126//gr8
+Level121//gr8
 1 1 1 1 1 1 1 1 
 1 0 0 F 0 0 0 1 
 1 H 0 0 0 0 0 S 
@@ -1401,7 +1333,7 @@ G F 0 0 1 0 0 1
 1 1 1 1 1 1 1 1 
 p35 U23 T9
 
-Level127
+Level123
 1 1 1 1 1 1 1 1 
 1 1 1 1 1 1 1 1 
 1 1 0 0 0 0 H 1 
@@ -1412,7 +1344,7 @@ Level127
 1 1 1 1 1 G 1 1 
 p63 U44 T7
 
-Level128//gud
+Level124//gud
 1 1 1 1 1 1 1 1 1 1 
 1 1 1 1 1 1 S 1 1 1 
 1 1 0 0 # H 0 0 1 1 
@@ -1425,7 +1357,7 @@ Level128//gud
 1 1 1 1 1 1 1 1 1 1 
 p25 T8
 
-Level129//can be earlier, bit easy
+Level125//can be earlier, bit easy
 1 1 1 1 1 1 1 1 1 1 
 1 # 0 1 0 0 0 0 0 1 
 1 # 0 0 0 0 0 H 0 1 
@@ -1438,7 +1370,7 @@ S # 0 0 0 0 0 # 1 1
 1 1 1 1 1 1 1 1 1 1 
 p25 T8
 
-Level130
+Level126
 1 1 1 1 1 1 1 1 
 1 1 1 1 1 1 1 1 
 1 H F 0 0 F 1 1 
@@ -1449,7 +1381,7 @@ G F 0 0 0 0 1 1
 1 1 1 1 1 1 1 1 
 p44 p56 T7
 
-Level131
+Level127
 1 1 1 1 G 1 1 1 1 1 
 1 1 0 F F F # 0 0 1 
 1 1 F 1 0 0 0 0 0 1 
@@ -1462,7 +1394,7 @@ Level131
 1 1 1 1 1 1 1 1 1 1 
 p63 D25 T10
 
-Level132
+Level128
 1 1 1 1 1 1 1 1 
 1 1 0 0 0 F 1 1 
 1 1 0 0 0 0 0 1 
@@ -1473,7 +1405,7 @@ Level132
 1 1 1 1 1 1 1 1 
 p42 p33 T8
 
-Level133
+Level129
 1 1 1 1 1 1 1 1 1 1 
 1 1 1 1 1 G 1 1 1 1 
 1 1 0 0 0 0 0 F 1 1 
@@ -1486,7 +1418,7 @@ Level133
 1 1 1 1 1 1 1 1 1 1 
 p44 p57 T10
 
-Level134
+Level130
 1 1 1 1 1 1 1 1 
 1 0 1 0 # 1 1 1 
 S 0 # 0 H 0 0 1 
@@ -1497,7 +1429,7 @@ S 0 # 0 H 0 0 1
 1 1 1 1 1 1 1 1 
 p12 P32 p33 T8
 
-Level135//startsch4
+Level131//startsch4
 1 1 1 1 1 1 1 1 
 1 1 1 1 1 1 1 1 
 1 1 1 F H F 1 1 

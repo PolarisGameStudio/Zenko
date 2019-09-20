@@ -33,6 +33,7 @@ public class Dragger : MonoBehaviour {
 	public bool startedDragging;
 	public PieceHolders pieceHolder;
 	public Vector3 piecePosition;
+	public GameObject takenTile;
 	void Start(){
 		particle = GameObject.Find("Main Camera").GetComponent<LevelBuilder>().smoke_particle.gameObject;
 		restingpoint = transform.position;
@@ -306,11 +307,12 @@ public void OnMouseDrag()
  	if(LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].type == "Left" || 
  	LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].type == "Down" ||
  	LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].type == "Up" ||
- 	LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].type == "Right"){
- 		
+ 	LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].type == "Right")
+ 	{
+
  		LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].isSideways = LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].type;
  		
- 		}
+ 	}
 	
 	LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].type = myType;
 	LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].isTaken = true;
@@ -652,12 +654,15 @@ public void OnMouseDrag()
 			if(LevelBuilder.tiles[(int)target.x-1, -(int)target.z].type == type){
 				LevelBuilder.tiles[(int)target.x-1, -(int)target.z].type = "Ice";		
 				//LevelBuilder.tiles[(int)target.x-1, -(int)target.z].isTaken = false;	
-				LevelBuilder.tiles[(int)target.x-1, -(int)target.z].isSideways = null;					
+				LevelBuilder.tiles[(int)target.x-1, -(int)target.z].isSideways = null;	
+				KeepAdjacentIcari(new Vector2(target.x-1, target.z));				
 			}
 			else if(LevelBuilder.tiles[(int)target.x-1, -(int)target.z].isSideways == type){
 				LevelBuilder.tiles[(int)target.x-1, -(int)target.z].isSideways = null;
+				KeepAdjacentIcari(new Vector2(target.x-1, target.z));				
 
 			}
+
 
 
 		} 
@@ -665,37 +670,76 @@ public void OnMouseDrag()
 			if(LevelBuilder.tiles[(int)target.x+1, -(int)target.z].type == type){
 				LevelBuilder.tiles[(int)target.x+1, -(int)target.z].type = "Ice";		
 				//LevelBuilder.tiles[(int)target.x+1, -(int)target.z].isTaken = false;	
-				LevelBuilder.tiles[(int)target.x+1, -(int)target.z].isSideways = null;					
+				LevelBuilder.tiles[(int)target.x+1, -(int)target.z].isSideways = null;	
+				KeepAdjacentIcari(new Vector2(target.x+1, target.z));				
+				
 			}		
 			else if(LevelBuilder.tiles[(int)target.x+1, -(int)target.z].isSideways == type){
 				LevelBuilder.tiles[(int)target.x+1, -(int)target.z].isSideways = null;
-
+				KeepAdjacentIcari(new Vector2(target.x+1, target.z));				
 			}
 		}
 		if(type == "Up" ){	
 			if(LevelBuilder.tiles[(int)target.x, -(int)target.z-1].type == type){
 				LevelBuilder.tiles[(int)target.x, -(int)target.z-1].type = "Ice";		
 				//LevelBuilder.tiles[(int)target.x, -(int)target.z-1].isTaken = false;	
-				LevelBuilder.tiles[(int)target.x, -(int)target.z-1].isSideways = null;					
+				LevelBuilder.tiles[(int)target.x, -(int)target.z-1].isSideways = null;	
+				KeepAdjacentIcari(new Vector2(target.x, target.z-1));				
 			}	
 			else if(LevelBuilder.tiles[(int)target.x, -(int)target.z-1].isSideways == type){
 				LevelBuilder.tiles[(int)target.x, -(int)target.z-1].isSideways = null;
-
+				KeepAdjacentIcari(new Vector2(target.x, target.z-1));				
 			}	
 		}
 		if(type == "Down"){
 			if(LevelBuilder.tiles[(int)target.x, -(int)target.z+1].type == type){
 				LevelBuilder.tiles[(int)target.x, -(int)target.z+1].type = "Ice";		
 				//LevelBuilder.tiles[(int)target.x, -(int)target.z+1].isTaken = false;	
-				LevelBuilder.tiles[(int)target.x, -(int)target.z+1].isSideways = null;					
+				LevelBuilder.tiles[(int)target.x, -(int)target.z+1].isSideways = null;	
+				KeepAdjacentIcari(new Vector2(target.x, target.z+1));				
 			}
 			else if(LevelBuilder.tiles[(int)target.x, -(int)target.z+1].isSideways == type){
 				LevelBuilder.tiles[(int)target.x, -(int)target.z+1].isSideways = null;
-
+				KeepAdjacentIcari(new Vector2(target.x, target.z+1));				
 			}		
 		}
 	}
+	private void KeepAdjacentIcari(Vector2 target){
+		//Debug.Log("x " + target.x  + " y "  + target.y);
+		//List<Dragger> draggers = PopulateAdjacentIcari(target);
 
+
+		// if(LevelBuilder.tiles[(int)target.x, -(int)target.y+1].tileObj.tag == "Down")
+		// 	LevelBuilder.tiles[(int)target.x, -(int)target.y].type = "Down";
+		// if(LevelBuilder.tiles[(int)target.x, -(int)target.y-1].tileObj.tag == "Up")
+		// 	LevelBuilder.tiles[(int)target.x, -(int)target.y].type = "Up";
+		// if(LevelBuilder.tiles[(int)target.x-1, -(int)target.y].tileObj.tag == "Right")
+		// 	LevelBuilder.tiles[(int)target.x, -(int)target.y].type = "Right";
+		// if(LevelBuilder.tiles[(int)target.x+1, -(int)target.y].tileObj.tag == "Left")
+		// 	LevelBuilder.tiles[(int)target.x, -(int)target.y].type = "Left";
+	}
+	// private List<Dragger> PopulateAdjacentIcari(Vector2 target){
+	// 	// List<Dragger> temp = new List<Dragger>();
+	// 	// Vector3 overlapV3 = new vector3 
+	// 	// Collider[] colliders = Physics.OverlapSphere(overlapV3, .5f);
+	// 	// foreach (Collider component in colliders) {
+	// 	// 	if (component.tag == "Right") {
+
+	// 	// 	} 
+	// 	// 	if (component.tag == "Left") {
+	// 	// 		component.GetComponent<FragileBehaviour>().readytolava = true;
+	// 	// 		component.GetComponent<FragileBehaviour>().player = this.gameObject;
+	// 	// 	} 
+	// 	// 	if (component.tag == "Down") {
+	// 	// 		component.GetComponent<FragileBehaviour>().readytolava = true;
+	// 	// 		component.GetComponent<FragileBehaviour>().player = this.gameObject;
+	// 	// 	} 
+	// 	// 	if (component.tag == "Up") {
+	// 	// 		component.GetComponent<FragileBehaviour>().readytolava = true;
+	// 	// 		component.GetComponent<FragileBehaviour>().player = this.gameObject;
+	// 	// 	} 
+	// 	// }		
+	// }
 	public void toggleColliders(){
 		for(int i=0; i<LevelManager.piecetiles.Count; i++){
 			if(LevelManager.piecetiles[i].gameObject == this.gameObject){

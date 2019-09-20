@@ -416,6 +416,7 @@
      <None Include="Assets\StreamingAssets\SmallDoubleHitMaps1.txt" />
      <None Include="Assets\StreamingAssets\Level20.txt" />
      <None Include="Assets\StreamingAssets\Level67.txt" />
+     <None Include="Assets\RemovedDecentMaps.txt" />
      <None Include="Assets\StreamingAssets\Level-17.txt" />
      <None Include="Assets\GooglePlayGames\Plugins\Android\GooglePlayGamesManifest.plugin\AndroidManifest.xml" />
      <None Include="Assets\StreamingAssets\Level-106.txt" />

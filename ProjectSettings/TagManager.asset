@@ -13,6 +13,10 @@ TagManager:
   - RatingText
   - Pedro
   - PedroSeed
+  - Right
+  - Left
+  - Up
+  - Down
   layers:
   - Default
   - TransparentFX

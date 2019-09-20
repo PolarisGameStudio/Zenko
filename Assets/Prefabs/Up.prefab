@@ -553,6 +553,7 @@ SkinnedMeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -905,7 +906,7 @@ GameObject:
   - component: {fileID: 114791947997811372}
   m_Layer: 0
   m_Name: Up
-  m_TagString: Untagged
+  m_TagString: Up
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -987,6 +988,7 @@ MonoBehaviour:
   currenttile: {fileID: 0}
   pasttile: {fileID: 0}
   particle: {fileID: 0}
+  lastgoodtile: {fileID: 0}
   isinboard: 0
   startedDragging: 0
   pieceHolder: {fileID: 0}
