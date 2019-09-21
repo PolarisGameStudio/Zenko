@@ -19,7 +19,6 @@ ScriptsOnlyBuild:
     - GameModeHandler
     - GoalBehaviour
     - GoogleAds
-    - GoogleMobileAds.Common.MobileAdsEventExecutor
     - HueModifier
     - ImageHolder
     - LevelBuilder
@@ -59,7 +58,6 @@ ScriptsOnlyBuild:
     - UnityEngine.Rendering.LWRP.LightweightRenderPipelineEditorResources
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
-    - UnityEditor.TestTools.TestRunner.TestListCacheData
     UnityEngine.UI.dll:
     - UnityEngine.EventSystems.EventSystem
     - UnityEngine.EventSystems.EventTrigger
@@ -80,7 +78,6 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.Toggle
     - UnityEngine.UI.VerticalLayoutGroup
     com.unity.multiplayer-hlapi.Runtime.dll:
-    - UnityEngine.Networking.NetworkCallbacks
     - UnityEngine.Networking.NetworkIdentity
   sceneClasses:
     Assets/Level.unity:
@@ -201,13 +198,13 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 14758}
     - Class: 114
-      Script: {instanceID: 28670}
+      Script: {instanceID: 31028}
     - Class: 114
-      Script: {instanceID: 28838}
+      Script: {instanceID: 31032}
     - Class: 114
-      Script: {instanceID: 28842}
+      Script: {instanceID: 31036}
     - Class: 114
-      Script: {instanceID: 28846}
+      Script: {instanceID: 31040}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -1608,4 +1605,4 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/WorldSelect.unity
   - Assets/Level.unity
-  playerPath: /Users/bernardolimon/Desktop/ZenkoApk/Zenko116_ch3anotherpass.aab
+  playerPath: /Users/bernardolimon/Desktop/ZenkoApk/Zenko117.aab

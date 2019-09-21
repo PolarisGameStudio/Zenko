@@ -944,7 +944,7 @@ Level86
 1 1 1 1 1 1 1 1 
 p43 T8
 
-Level90//good (no backandforth), earlier
+Level87//good (no backandforth), earlier
 1 1 1 1 1 1 1 1 
 1 1 S 1 1 1 1 1 
 1 1 F 0 0 0 1 1 
@@ -955,7 +955,7 @@ Level90//good (no backandforth), earlier
 1 1 1 1 1 1 1 1 
 p23 P52 T5
 
-Level89
+Level88
 1 1 1 1 1 1 1 1 
 1 1 1 1 1 1 1 1 
 1 0 # 0 0 0 1 1 
@@ -966,7 +966,7 @@ S 0 1 # 0 0 1 1
 1 1 1 G 1 1 1 1 
 p53 T7
 
-Level88
+Level89
 1 1 1 1 1 1 1 1 
 1 1 1 1 1 S 1 1 
 1 1 0 # H # 1 1 
@@ -977,7 +977,7 @@ Level88
 1 1 1 1 1 1 1 1 
 p53 T8
 
-Level87//checar q no tenga solucion alterna
+Level90//checar q no tenga solucion alterna
 1 1 1 1 1 1 1 1 
 1 1 1 1 1 1 1 1 
 1 1 0 0 0 0 1 1 
@@ -1010,18 +1010,7 @@ Level92//earlier or bye
 1 1 1 1 1 1 1 1 
 p55 P24 T4
 
-Level93//fixable, dif tier1
-1 1 1 1 1 1 1 1 
-1 1 0 0 0 1 F 1 
-1 1 0 0 0 0 0 1 
-1 1 F F # 0 0 1 
-1 1 # # 0 1 0 1 
-1 1 0 F # F # S 
-1 1 1 1 1 1 G 1 
-1 1 1 1 1 1 1 1 
-p42 T7
-
-Level94
+Level93
 1 1 1 1 1 1 1 1 
 1 1 1 G 1 1 1 1 
 1 1 0 F 0 F # 1 
@@ -1031,6 +1020,17 @@ Level94
 1 1 0 0 0 0 0 1 
 1 1 S 1 1 1 1 1 
 p26 T6
+
+Level94//fixable, dif tier1
+1 1 1 1 1 1 1 1 
+1 1 0 0 0 1 1 1 
+1 1 0 0 0 0 # 1 
+1 1 F F # 0 0 1 
+1 1 # # F F 0 1 
+1 1 0 F # # # S 
+1 1 1 1 1 G 1 1 
+1 1 1 1 1 1 1 1 
+p42 T8
 
 Level95//dificil AQUI EMPIEZA DIFICIL
 1 1 1 1 1 1 1 1 
@@ -1054,18 +1054,7 @@ Level96
 1 1 1 1 1 1 1 1 
 p51 T12
 
-Level97//meh y byebyebye y bye o fix
-1 1 1 1 1 1 1 1 
-1 1 1 1 S 1 1 1 
-1 0 0 0 0 # G 1 
-1 F F 0 F # 1 1 
-1 0 0 0 0 H 1 1 
-1 1 1 0 0 H 1 1 
-1 F 0 H # 0 1 1 
-1 1 1 1 1 1 1 1 
-p44 T5
-
-Level98//fixed
+Level97//fixed
 1 1 1 1 1 1 1 1 
 1 0 0 F 0 1 1 1 
 1 0 F 0 0 0 1 1 
@@ -1076,29 +1065,40 @@ G F 0 F 0 1 1 1
 1 1 1 1 1 1 1 1 
 p44 P14 T8
 
-Level99/bien muy bien
+Level98//fixed, maybe later
 1 1 1 1 1 1 1 1 
-1 H F F 0 1 1 1 
-1 0 0 0 1 1 1 1 
+1 1 1 1 S 1 1 1 
+1 0 0 0 0 # # 1 
+1 F H 1 F # F 1 
+1 0 0 0 0 0 0 1 
+1 1 1 0 # F 0 1 
+1 F 0 H # F 0 1 
+1 1 1 1 1 G 1 1 
+p44 P65 T10
+
+Level99/fixed, maybe later
+1 1 1 1 1 1 1 1 
+1 1 1 0 0 F 0 1 
+1 H F 0 0 1 0 1 
+1 0 0 0 0 1 1 1 
 1 0 0 0 F # 1 1 
 1 0 H # F 0 G 1 
 1 0 F 0 0 # 1 1 
 1 S 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 
-p35 P13 R12 T8
+p36 P14 R13 T10
 
-Level100//meh, fixable
+Level100//veryplusgood. could be later.
 1 1 1 1 1 1 1 1 
 1 0 0 0 F 0 0 1 
 1 0 0 0 0 0 0 1 
-1 1 0 0 0 1 0 1 
-1 0 0 0 0 1 0 1 
-1 0 H F 1 H 0 1 
-1 0 H 0 0 0 0 1 
-1 G 1 1 S 1 1 1 
-p32 T10
+1 1 F 0 0 F 0 G 
+1 H 1 0 0 1 F 1 
+1 H H F 1 H F 1 
+1 H 1 0 0 0 0 1 
+1 1 1 1 S 1 1 1 
+p32 T11
 
-Level101 //could be earlier
+Level101 //could be earlier or fixed or bye'd, to fix give more liberty
 1 1 1 1 1 1 1 1 
 1 0 0 0 0 # F 1 
 1 0 F F 0 0 0 S 
@@ -1109,40 +1109,18 @@ G # 0 0 0 1 0 1
 1 1 1 1 1 1 1 1 
 p41 P42 P35 T10
 
-Level102 //meh, adjacent.
+Level102//gud
 1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 
-1 1 0 F 0 1 1 1 
-S F # 1 F 0 1 1 
-G 0 F F # 0 1 1 
-1 F 0 0 # 0 1 1 
-1 0 # 0 0 # 1 1 
-1 1 1 1 1 1 1 1 
-p55 T8
-
-Level103//puedeestarmejor, buen truc
-1 1 1 1 1 1 1 1 
-1 0 0 0 0 0 0 1 
-1 # 0 H 1 0 0 1 
-1 F 0 1 0 0 0 G 
-1 0 0 0 0 H # 1 
-1 0 1 0 0 0 0 1 
-1 0 1 F 0 0 0 1 
+1 1 0 0 0 0 # 1 
+1 # 0 H 1 0 F 1 
+1 F 0 1 0 F 0 G 
+1 0 F 0 0 1 # 1 
+1 0 0 # 0 0 0 1 
+1 0 0 F 0 0 0 1 
 1 1 1 1 1 1 S 1 
-p55 p66 T6
+p25 p66 T10
 
-Level104//putearlier
-1 1 1 1 1 1 1 1 
-1 1 1 1 1 1 1 1 
-1 1 0 1 0 0 # G 
-1 1 # 0 0 0 H 1 
-1 1 # H 1 0 # 1 
-1 1 0 0 0 0 1 1 
-1 1 # 0 # 0 # 1 
-1 1 S 1 1 1 1 1 
-p36 T8
-
-Level105//meh or out, end of phase1?, earlier
+Level104//meh or out, end of phase1?, earlier
 1 1 1 1 1 1 1 1 
 1 # 0 0 # F F 1 
 1 1 # 0 # 0 0 1 
@@ -1153,18 +1131,18 @@ S 0 0 1 # 0 0 G
 1 1 1 1 1 1 1 1 
 p23 T10
 
-Level106//fixed
+Level106//fixed, add liberty
 1 1 1 1 1 1 1 1 
-1 F 1 1 0 0 0 1 
-1 0 # 0 # 0 F G 
-1 # 0 F 0 0 0 1 
-1 F F 0 0 0 F 1 
+1 F 0 1 0 0 0 1 
+1 0 F 0 # 0 F G 
+1 0 0 F 0 0 0 1 
+1 0 F 0 0 0 F 1 
 1 F 0 H 0 1 1 1 
-1 0 F 0 0 # H 1 
+1 0 0 0 0 # H 1 
 1 1 1 S 1 1 1 1 
 p43 P12 L46 T8
 
-Level107//se puede jugar con p en otro lado
+Level107//se puede jugar con p en otro lado, pero probablemente bye
 1 1 1 1 1 1 1 1 1 1 
 1 1 1 1 1 1 1 1 1 1 
 1 1 0 0 0 0 H 0 G 1 
@@ -1177,18 +1155,7 @@ Level107//se puede jugar con p en otro lado
 1 1 1 1 1 1 1 1 1 1 
 p24 L45 T10
 
-Level108//gud but earlierpls
-1 1 1 1 1 1 1 1 
-1 0 0 1 1 0 0 1 
-1 1 # 0 0 # 0 1 
-1 0 F 0 1 1 0 1 
-1 F 1 F 0 1 0 1 
-1 0 0 0 0 0 # 1 
-1 0 0 0 0 F 0 1 
-1 S 1 1 1 G 1 1 
-p45 P36 T6
-
-Level109//gud but earlier
+Level109//gud but earlier, too ez
 1 1 1 1 1 1 1 1 
 1 1 1 1 1 S 1 1 
 1 1 H 0 F 0 0 1 
@@ -1199,7 +1166,7 @@ Level109//gud but earlier
 1 1 G 1 1 1 1 1 
 p64 R46 T5
 
-Level110//fixed
+Level110//fixed, ez, mas libertad taria weno
 1 1 1 1 1 1 1 1 
 1 # 0 0 0 0 1 1 
 1 0 # 0 H 0 S 1 
@@ -1210,7 +1177,7 @@ Level110//fixed
 1 1 1 1 1 1 1 1 
 p31 P25 U53 T7
 
-Level111//tricky,easy
+Level111//tricky,easy, early fix o bye
 1 1 1 1 1 1 1 1 
 1 1 1 1 1 1 1 1 
 1 1 1 # 0 0 1 1 
@@ -1221,7 +1188,18 @@ Level111//tricky,easy
 1 1 S 1 G 1 1 1 
 p43 L66 T5
 
-Level112//switcheroo/fixed
+Level108//doubleplusgud and fixed
+1 1 1 1 1 1 1 1 
+1 1 G 1 0 0 0 1 
+1 1 F 0 0 # 0 1 
+1 # 0 # 1 F F 1 
+1 F 0 F 1 0 0 1 
+1 0 0 0 F 0 F 1 
+1 # 0 # 0 0 # 1 
+1 S 1 1 1 1 1 1 
+P15 p56 p62 T9
+
+Level112//switcheroo/fixed, can play with p and maybe add D
 1 1 1 1 1 1 1 1 
 1 0 0 0 # F # 1 
 1 F 0 0 0 H 0 1 
@@ -1243,7 +1221,7 @@ G F 0 0 0 0 H 1
 1 1 1 1 1 1 1 1 
 p33 L63 T7
 
-Level114 //perhaps earlier
+Level114 //perhaps earlier or gonezo
 1 1 1 1 1 1 1 1 
 1 1 1 1 1 S 1 1 
 1 1 0 F # 0 0 1 
@@ -1276,7 +1254,7 @@ Level116//could be earlier yes pls
 1 1 1 1 1 1 1 1 
 p33 p44 T8
 
-Level117
+Level117//poeticc
 1 1 1 1 1 1 1 1 
 1 0 1 0 0 # # 1 
 1 0 0 0 0 0 0 G 
@@ -1287,7 +1265,7 @@ Level117
 1 1 1 1 S 1 1 1 
 p34 T9
 
-Level118
+Level118//gud but earlier
 1 1 1 1 G 1 1 1 
 1 1 0 # F 0 0 1 
 1 1 0 F F # F 1 
