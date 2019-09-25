@@ -52,3 +52,16 @@ Level108//gud but earlierpls, even fixable
 1 0 0 0 0 F 0 1 
 1 S 1 1 1 G 1 1 
 p45 P36 T6
+
+Level122//extragood, last one?
+1 1 1 1 G 1 1 1 1 1 
+1 1 0 F F F # 0 0 1 
+1 1 0 1 0 0 0 0 0 1 
+1 1 0 0 H 0 0 F F 1 
+1 1 # 0 0 0 0 1 0 1 
+1 1 0 0 0 F 0 F H 1 
+1 1 0 F 0 0 F 1 1 1 
+1 1 0 0 1 0 0 0 F 1 
+1 1 S 1 1 1 1 1 1 1 
+1 1 1 1 1 1 1 1 1 1 
+p63 D25 T10
