@@ -180,6 +180,7 @@ public class PlayerMovement : MonoBehaviour {
 					FindTileTag ();
 					ActOnTile ();
 					isspeeding = true;
+					SfxHandler.Instance.PlayIcarus();
 				}
 				if (nextaction == "Left_Action") {
 					nextaction = null;
@@ -196,6 +197,7 @@ public class PlayerMovement : MonoBehaviour {
 					FindTileTag ();
 					ActOnTile ();
 					isspeeding = true;
+					SfxHandler.Instance.PlayIcarus();
 				}
 				Debug.Log("CURRENT NEXT ACTION IS " + nextaction);
 				if (nextaction == "Right_Action") {
@@ -214,6 +216,7 @@ public class PlayerMovement : MonoBehaviour {
 					FindTileTag ();
 					ActOnTile ();
 					isspeeding = true;
+					SfxHandler.Instance.PlayIcarus();
 				}
 				if (nextaction == "Up_Action") {
 					nextaction = null;
@@ -230,6 +233,7 @@ public class PlayerMovement : MonoBehaviour {
 					FindTileTag ();
 					ActOnTile ();
 					isspeeding = true;
+					SfxHandler.Instance.PlayIcarus();
 				}
 				if (nextaction == "Down_Action") {
 					nextaction = null;
@@ -370,8 +374,10 @@ public class PlayerMovement : MonoBehaviour {
 		
 	}
 	public bool inside(){
-		if((int)tiletotest.x>=0 && (int)tiletotest.x <= LevelBuilder.totaldimension && 
-			-(int)tiletotest.z>=0 && -(int)tiletotest.z <= LevelBuilder.totaldimension){
+		Debug.Log("x is " + tiletotest.x + "y is" + tiletotest.z);
+		Debug.Log(LevelBuilder.totaldimension);
+		if((int)tiletotest.x>=0 && (int)tiletotest.x < LevelBuilder.totaldimension && 
+			-(int)tiletotest.z>=0 && -(int)tiletotest.z < LevelBuilder.totaldimension){
 			return true;
 		}
 		else 
@@ -409,6 +415,7 @@ public class PlayerMovement : MonoBehaviour {
 		RatingBehaviour.CalculateRating ();
 	}
 	void PopSeed(string type){
+		SpawnStatue();
 		Debug.Log(type);
 		Debug.Log(tilescript.seedType);
 		Debug.Log(tiletotest.x + " " + tiletotest.z);
@@ -610,6 +617,7 @@ public class PlayerMovement : MonoBehaviour {
 				lastSeed = tilescript.tileObj;
 				Debug.Log(tilescript.tileObj);
 				PopSeed(tilescript.seedType);
+				Count();
 				
 				if(tilescript.isSideways!= null){
 

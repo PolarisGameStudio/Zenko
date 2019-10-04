@@ -644,13 +644,29 @@ public class PieceHolders : MonoBehaviour {
 
 
 	public void Hint(){//right now works for one stored solution.
+
+
 		Debug.Log("CALLING HINT");
 		//LevelBuilder.hintboard.SetActive(false);
 		Debug.Log(placedpieces.Count + "Pieces placed");
 		Vector2 postogo;
 		GameObject piece;
 		string postype;
+
 		if(TurnBehaviour.turn == 0){
+		// for(int i = 0; i < placedpieces.Count; i++){
+		// 	Debug.Log(placedpieces.Count);
+		// 	Debug.Log("UNO");
+		// postype = placedpieces[i].myType;
+
+		// postogo = LookforPosition(postype);
+		// Debug.Log(postogo);
+
+		// removePiece(new Vector2(placedpieces[i].transform.position.x, -placedpieces[i].transform.position.z), placedpieces[i].myType);
+						
+		// PlaceHint(placedpieces[i], postogo);	
+		// }
+		// return;
 			int rightones = 0;
 			for(int i = 0; i < placedpieces.Count; i++){//first pass, to confirm the ones in right place
 				//Debug.Log(placedpieces[i].myType + "" + placedpieces[i].transform.position.x + "" + -placedpieces[i].transform.position.z);

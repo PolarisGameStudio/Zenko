@@ -117,7 +117,7 @@ public class Dragger : MonoBehaviour {
 		if (TurnBehaviour.turn == 0 || LevelBuilder.resetting) {
 			PlaneBehavior.readyToDrop = false;
 
-			PieceHolders.placedpieces.Remove(this);
+			//PieceHolders.placedpieces.Remove(this);
 			if(myType == "Wall"){
 				this.gameObject.GetComponent<Animator>().SetInteger("Phase", 1);
 			}
@@ -435,7 +435,7 @@ public void OnMouseDrag()
 
 		}
 		if(PlaneBehavior.readyToDrop){//from mouseoverer
-			PieceHolders.placedpieces.Add(this);
+			//PieceHolders.placedpieces.Add(this);
 			Debug.Log("ADDED " + this + " Back to pieceholders");
 			//transform.position = new Vector3(PlaneBehavior.tilex, 0, PlaneBehavior.tiley);
 			positiontogo = new Vector3(PlaneBehavior.tilex, 0, PlaneBehavior.tiley);
@@ -473,7 +473,7 @@ public void OnMouseDrag()
 			Debug.Log("Out but can go to " + lastgoodtile.transform.position);
 
 
-			PieceHolders.placedpieces.Add(this);
+			//PieceHolders.placedpieces.Add(this);
 			//transform.position = new Vector3(PlaneBehavior.tilex, 0, PlaneBehavior.tiley);
 			positiontogo = new Vector3(lastgoodtile.transform.position.x, 0, lastgoodtile.transform.position.z);
 			gototile = true;

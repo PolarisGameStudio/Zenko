@@ -347,6 +347,7 @@
      <Compile Include="Assets\Scripts\TurnCounter.cs" />
      <Compile Include="Assets\Scripts\TurnGraphics.cs" />
      <Compile Include="Assets\Scripts\XYPad.cs" />
+     <Compile Include="Assets\SfxHandler.cs" />
      <Compile Include="Assets\UIMonster.cs" />
      <Compile Include="Assets\VolumeSliders.cs" />
      <None Include="Assets\StreamingAssets\Level-7.txt" />

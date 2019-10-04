@@ -14,6 +14,7 @@ public class LevelMenu : MonoBehaviour {
 	public static int highestLevelSolved;
 	public GameObject highestMarker;
 	public static LevelMenu Instance;
+	public GameObject worldTextHolder;
 
 	// Use this for initialization
 	// void Awake(){
@@ -58,7 +59,10 @@ public class LevelMenu : MonoBehaviour {
 		Button btn = curbutton.GetComponent<Button>();
 		buttonnum = num;
 		btn.onClick.AddListener(delegate{sl.LoadLevel(num);});
-		curbutton.transform.GetChild(0).GetComponent<Text>().text = num.ToString();
+		int world = Mathf.FloorToInt((num-1)/40)  + 1;
+		int levelinworld = num - ((world-1)*40);
+		//txt.text = "World " + world.ToString() + "-" + levelinworld.ToString();		
+		curbutton.transform.GetChild(0).GetComponent<Text>().text =levelinworld.ToString();	
 		/*if(num != 1){
 			if(LevelStorer.leveldic[num-1].rating == 0){//previous level has no stars
 				curbutton.transform.GetChild(0).gameObject.SetActive(false);	
@@ -107,7 +111,11 @@ public class LevelMenu : MonoBehaviour {
 	}
 
 
+	public void AssignWorldText(int curfirst){
+		int world = Mathf.FloorToInt((curfirst-1)/40)  + 1;
+		worldTextHolder.GetComponent<Text>().text = "World " + world.ToString();	
 
+	}
 	void addFunction(){
 		sl.LoadLevel(buttonnum);
 	}
@@ -129,6 +137,7 @@ public class LevelMenu : MonoBehaviour {
 			}
 			currentfirst = currentfirst -20;	
 		}
+		AssignWorldText(currentfirst);
 	}
 	public void populateMenu(){
 		Debug.Log(currentfirst + " is starting first");
@@ -138,6 +147,7 @@ public class LevelMenu : MonoBehaviour {
 		for (int i = currentfirst; i < currentfirst+20; i++){
 			createButton(i);
 		}		
+		AssignWorldText(currentfirst);
 	}
 
 	public void populateMenuUp(){
@@ -149,5 +159,6 @@ public class LevelMenu : MonoBehaviour {
 			}
 			currentfirst = currentfirst + 20;	
 		}
+		AssignWorldText(currentfirst);
 	}
 }
