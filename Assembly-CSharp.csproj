@@ -323,7 +323,7 @@
      <Compile Include="Assets\Scripts\AssignCanvasAndButton.cs" />
      <Compile Include="Assets\Scripts\CanvasBehaviour.cs" />
      <Compile Include="Assets\Scripts\Dragger.cs" />
-     <Compile Include="Assets\Scripts\FragileBehaviour.cs" />
+     <Compile Include="Assets\Scripts\FragileBehaviour1.cs" />
      <Compile Include="Assets\Scripts\FragileProperties.cs" />
      <Compile Include="Assets\Scripts\Goal_Behaviour.cs" />
      <Compile Include="Assets\Scripts\GoalBehaviour.cs" />

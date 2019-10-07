@@ -24,7 +24,10 @@
 
 public static class GPGSIds
 {
+        public const string achievement_world_3_complete = "CgkIl8nVhZgLEAIQBg"; // <GPGSID>
         public const string achievement_world_1_complete = "CgkIl8nVhZgLEAIQAQ"; // <GPGSID>
+        public const string achievement_world_2_complete = "CgkIl8nVhZgLEAIQBQ"; // <GPGSID>
+        public const string achievement_world_4_complete = "CgkIl8nVhZgLEAIQBw"; // <GPGSID>
 
 }
 

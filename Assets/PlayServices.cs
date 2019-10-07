@@ -426,6 +426,15 @@ public class PlayServices : MonoBehaviour
             case 1:
                 IncrementAchievement("CgkIl8nVhZgLEAIQAQ", 50);
                 break;
+            case 2:
+                IncrementAchievement("CgkIl8nVhZgLEAIQBQ", 50);
+                break;
+            case 3:
+                IncrementAchievement("CgkIl8nVhZgLEAIQBg", 50);
+                break;
+            case 4:
+                IncrementAchievement("CgkIl8nVhZgLEAIQBw", 50);
+                break;
         }
     }
 

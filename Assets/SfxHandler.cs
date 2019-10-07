@@ -6,9 +6,13 @@ public class SfxHandler : MonoBehaviour
 {
 	public AudioSource source;
 	public AudioClip[] fragile;
-	public AudioClip boop;
     public AudioClip icarus_Blow;
     public AudioClip pedro_Hit;
+    public AudioClip hole_Sound;
+    public AudioClip victory_Sound;
+    public AudioClip seed_Pop;
+
+    public bool playingVictory;
 
     static public SfxHandler Instance;
     // Start is called before the first frame update
@@ -31,11 +35,37 @@ public class SfxHandler : MonoBehaviour
     {
         
     }
-
+    public void PlayWallHit(){
+        source.PlayOneShot(pedro_Hit, 1);
+    }
     public void PlayFragile(){
-        source.PlayOneShot(fragile[Random.Range(0,fragile.Length)], .6f);
+        source.PlayOneShot(fragile[Random.Range(0,fragile.Length)], .25f);
     }
     public void PlayIcarus(){
-        source.PlayOneShot(icarus_Blow, .6f);
+        source.PlayOneShot(icarus_Blow, .5f);
+    }
+    public void PlayHole(){
+        source.PlayOneShot(hole_Sound, .2f);
+
+        DuckMusic(1);
+    }
+    public void PlaySeedPop(){
+        source.PlayOneShot(seed_Pop, .7f);
+    }
+    public void PlayVictory(){
+        if(!playingVictory){
+            playingVictory = true;
+            source.PlayOneShot(victory_Sound,.4f);
+            StartCoroutine(Reseter());
+            DuckMusic(2);
+
+        }
+    }
+    private void DuckMusic(float time){
+
+    }
+    public IEnumerator Reseter(){
+        yield return new WaitForSeconds(2);
+        playingVictory = false;
     }
 }

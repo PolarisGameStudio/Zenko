@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 112000002, guid: 93060202f50d648f091c58bfe677f945,
     type: 2}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -10815,9 +10815,12 @@ MonoBehaviour:
   fragile:
   - {fileID: 8300000, guid: 9483ec7bdad8d442dad9af8f0bf77a6d, type: 3}
   - {fileID: 8300000, guid: ea9af3ca7cc704b6ca5de3e1f755b3b9, type: 3}
-  boop: {fileID: 0}
   icarus_Blow: {fileID: 8300000, guid: 24988212261bb491c838339d444d3753, type: 3}
   pedro_Hit: {fileID: 8300000, guid: c8b2b9e92a58f4c39a7fd6aaefb0a78d, type: 3}
+  hole_Sound: {fileID: 8300000, guid: b644da0efd54b4d35a62a5f7f85f6bc5, type: 3}
+  victory_Sound: {fileID: 8300000, guid: bb43685add89940378be59b8ac0ff465, type: 3}
+  seed_Pop: {fileID: 8300000, guid: 7d799576ed5c048528ce6bad0551cb1f, type: 3}
+  playingVictory: 0
 --- !u!82 &1208382692 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 796855563, guid: 21afbef644c6740df825b001b1e494b1,
@@ -15488,7 +15491,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 771130332, guid: 21afbef644c6740df825b001b1e494b1, type: 3}
       propertyPath: m_Volume
-      value: 1
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 4674758786240302, guid: 21afbef644c6740df825b001b1e494b1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -15564,7 +15567,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 771130333, guid: 21afbef644c6740df825b001b1e494b1, type: 3}
       propertyPath: m_Volume
-      value: 1
+      value: 0.4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21afbef644c6740df825b001b1e494b1, type: 3}

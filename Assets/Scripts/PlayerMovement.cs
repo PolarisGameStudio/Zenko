@@ -147,23 +147,26 @@ public class PlayerMovement : MonoBehaviour {
 				Debug.Log("Hole");
 				StartCoroutine(PopLose());
 				StartCoroutine(animationController.Disappear(.3f));
+				SfxHandler.Instance.PlayHole();
+
 			}
 
-			else if (nextaction == null) {
+			else if (nextaction == null && !canmove) {
 				//Debug.Log("NullNULLNULLNULL");
 				cantakeinput = true;
 				canmove = true;
 				isspeeding = false;
 				hasstopped = true;
+				SfxHandler.Instance.PlayWallHit();
 			}  
 			else if (nextaction == "Goal_Action") {
 				RatingPopUp.GiveRating ();//stores to playerprefs
-				
  				SceneLoading.SetStars(RatingBehaviour.currentrating);
  				this.enabled = false;
 				StartCoroutine(PopWin());
 			}			
 			else if (nextaction == "Hole_Action") {
+				SfxHandler.Instance.PlayHole();
 				this.enabled=false;
 				Debug.Log("Hole");
 				StartCoroutine(PopLose());
@@ -638,25 +641,31 @@ public class PlayerMovement : MonoBehaviour {
 			Count ();
 	}
 
-
+	public void CheckAchievement(){
+			if(LevelManager.levelnum == 40){
+				PlayServices.UnlockWorldAchievement(1);
+			}
+			if(LevelManager.levelnum == 80){
+				PlayServices.UnlockWorldAchievement(2);
+			}
+			if(LevelManager.levelnum == 120){
+				PlayServices.UnlockWorldAchievement(3);
+			}
+			if(LevelManager.levelnum == 160){
+				PlayServices.UnlockWorldAchievement(4);
+			}
+	}
 	IEnumerator PopWin(){
+		CheckAchievement();
 		if(longgoal){
 			yield return new WaitForSeconds(.5f);
 			levelWonBoard.SetActive (true);
-			if(LevelManager.levelnum == 50){
-				PlayServices.UnlockWorldAchievement(1);
-				Debug.Log("long 50");
-			}
 			if(MenuButton.open){
 				MenuButton.CloseMenu();
 			}
 		}
 		else{
 			yield return new WaitForSeconds(.62f);	
-			if(LevelManager.levelnum == 50){
-				PlayServices.UnlockWorldAchievement(1);
-				Debug.Log("short 50");
-			}
 			levelWonBoard.SetActive (true);
 			if(MenuButton.open){
 				MenuButton.CloseMenu();

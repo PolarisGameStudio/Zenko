@@ -67,6 +67,7 @@ public class Dragger : MonoBehaviour {
 				myshrinker.SetActive(false);
 				myBigger.SetActive(true);
 				myBigger.gameObject.GetComponent<Animator>().SetInteger("Phase", 2);
+				SfxHandler.Instance.PlaySeedPop();
 				convertWhenReady = false;
 
 			}

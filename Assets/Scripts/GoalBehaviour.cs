@@ -107,6 +107,8 @@ public class GoalBehaviour : MonoBehaviour {
 						//Debug.Log(ydif);
 						if(ydif<1.5){
 							if(-transform.position.z<newy){
+								SfxHandler.Instance.PlayVictory();
+
 								Debug.Log("Doing this");
 								goaling = true;
 								myanim.SetInteger("Phase",2);
@@ -134,6 +136,7 @@ public class GoalBehaviour : MonoBehaviour {
 								goaling = true;
 //								Debug.Log("Doing this too");
 								myanim.SetInteger("Phase",2);
+								SfxHandler.Instance.PlayVictory();
 								AnimateFoxGoal();
 								lastphase = 2;
 							}
@@ -188,6 +191,7 @@ public class GoalBehaviour : MonoBehaviour {
 							if(transform.position.x > newx){
 								goaling = true;
 								myanim.SetInteger("Phase",2);
+								SfxHandler.Instance.PlayVictory();
 								AnimateFoxGoal();
 								lastphase = 2;								
 							}
@@ -208,6 +212,7 @@ public class GoalBehaviour : MonoBehaviour {
 							if(transform.position.x < newx){
 								goaling = true;
 								myanim.SetInteger("Phase",2);
+								SfxHandler.Instance.PlayVictory();
 								AnimateFoxGoal();
 								lastphase = 2;								
 							}
