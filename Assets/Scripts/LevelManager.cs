@@ -32,6 +32,8 @@ public class LevelManager : MonoBehaviour {
 	public static bool ispotd;
 	public static List<Hint> hints = new List<Hint>();
 	public static bool adFree;
+	public static bool configging;
+	public static Transform playert;
 	//public static int hintCurrency;
 	//public static GameObject lastgoodtile;
 	//public static IceTileHandler myicehandler;

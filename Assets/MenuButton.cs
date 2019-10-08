@@ -126,8 +126,7 @@ public class MenuButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler{
         if(open){
             toggleMenu();
         }
-        LevelManager.isdragging = true;
-
+        LevelManager.configging = true;
         //set menu to back only.
     }
     public void closeConfigMenu(){
@@ -142,7 +141,7 @@ public class MenuButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler{
         else{
             Swiping.firstPressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
         }
-        LevelManager.isdragging = false;
+        LevelManager.configging = false;
 
     }
     public void CloseSettings(){

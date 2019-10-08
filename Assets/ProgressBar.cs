@@ -64,15 +64,16 @@ public class ProgressBar : MonoBehaviour {
 	public void TakeTurn(int number){
 		if(number <= LevelStorer.efficientturns){
 			//progressFluid.GetComponent<RectTransform>().sizeDelta = new Vector2(50, stepvalue*number);
-			StartCoroutine(IncreaseBar(.2f, number));
+			StartCoroutine(IncreaseBar(.1f, number));
 		}
 		else if(number<= LevelStorer.efficientturns*2){	
-			StartCoroutine(IncreaseBar2(.2f,number));
+			StartCoroutine(IncreaseBar2(.1f,number));
 		}
 		else if(number <= LevelStorer.efficientturns*3){
 
 		}	
 	}
+
 	public IEnumerator IncreaseBar(float fadetime, int step){
 		float startingHeight = (step-1)*stepvalue;
 		if(step == LevelStorer.efficientturns){

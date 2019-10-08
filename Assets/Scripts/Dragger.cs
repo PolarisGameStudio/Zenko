@@ -55,15 +55,14 @@ public class Dragger : MonoBehaviour {
 	void Update(){
 		//Debug.Log(Input.touchCount);
 		if(readyToPop){
-			Debug.Log(playert.position);
-			if(Vector3.Distance(playert.position, transform.position) < .7){
+			if(Vector3.Distance(LevelManager.playert.position, transform.position) < .7){///FIX THIS
 				convertWhenReady = true;
 				readyToPop = false;
 			}
 		}
 		if(convertWhenReady){
-			if(playert != null){			
-				if(Vector3.Distance(playert.position, transform.position) > .8){
+			if(LevelManager.playert != null){			
+				if(Vector3.Distance(LevelManager.playert.position, transform.position) > .8){
 				myshrinker.SetActive(false);
 				myBigger.SetActive(true);
 				myBigger.gameObject.GetComponent<Animator>().SetInteger("Phase", 2);
@@ -107,6 +106,7 @@ public class Dragger : MonoBehaviour {
 		StartCoroutine(HintMove(postogo));
 	}
 	 public void OnMouseDown() {
+	 	Debug.Log(TurnBehaviour.turn + " " + LevelBuilder.resetting + " " + LevelManager.isdragging);
 	 	//PieceHolders.placedpieces.Remove(this);
 		//transform.GetChild(1).gameObject.SetActive(false);
   	  //screenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position); // I removed this line to prevent centring 
@@ -115,7 +115,7 @@ public class Dragger : MonoBehaviour {
 //	 	Debug.Log(TurnBehaviour.turn);
 
 
-		if (TurnBehaviour.turn == 0 || LevelBuilder.resetting) {
+		if ((TurnBehaviour.turn == 0 || LevelBuilder.resetting) & !LevelManager.configging) {
 			PlaneBehavior.readyToDrop = false;
 
 			//PieceHolders.placedpieces.Remove(this);
@@ -252,7 +252,7 @@ public class Dragger : MonoBehaviour {
 	}
 public void OnMouseDrag()
 	{ 
-		if (TurnBehaviour.turn == 0 || LevelBuilder.resetting) {
+		if ((TurnBehaviour.turn == 0 || LevelBuilder.resetting) & !LevelManager.configging) {
 			Vector3 curScreenPoint = new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 15);
 			Vector3 curPosition = Camera.main.ScreenToWorldPoint (curScreenPoint) + offset;
 			// curPosition.x = _lockedYPosition;
@@ -419,7 +419,7 @@ public void OnMouseDrag()
 
  	Cursor.visible = true;
 
- 	if(TurnBehaviour.turn == 0)
+ 	if(TurnBehaviour.turn == 0 && !LevelManager.configging)
  	{
 		Debug.Log(PlaneBehavior.tilex);
 		Debug.Log(PlaneBehavior.tiley);

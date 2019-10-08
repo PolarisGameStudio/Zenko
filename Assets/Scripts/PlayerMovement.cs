@@ -50,6 +50,8 @@ public class PlayerMovement : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		//current tile works as a target to move to
+		LevelManager.playert = this.gameObject.transform;
+
 		hasstopped = false;
 		animationController = GetComponent<PlayerAnimation>();
 		startingposition = transform.position;
@@ -403,12 +405,14 @@ public class PlayerMovement : MonoBehaviour {
 		LevelBuilder.starttransform.transform.GetChild(0).gameObject.SetActive(true);
 	}
 	void Count(){
+		Debug.Log(canmove + "CANMOVE");
 		if(firstmove == true && canmove == true){
 			if(TurnCounter.turncount == 0){
 				//LevelBuilder.starttransform.GetComponentInChildren<Animator>().SetInteger("Phase",1);
 				SpawnStatue();
 			}
 			TurnCounter.turncount++;
+			Debug.Log("TURNINGTURNINGTURNING AHOOOOOOOGA");
 			TG.TakeTurn(TurnCounter.turncount);
 			DotHandler.TakeTurn(TurnCounter.turncount);
 		}

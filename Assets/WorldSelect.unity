@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 112000002, guid: 93060202f50d648f091c58bfe677f945,
     type: 2}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -10815,7 +10815,22 @@ MonoBehaviour:
   fragile:
   - {fileID: 8300000, guid: 9483ec7bdad8d442dad9af8f0bf77a6d, type: 3}
   - {fileID: 8300000, guid: ea9af3ca7cc704b6ca5de3e1f755b3b9, type: 3}
-  icarus_Blow: {fileID: 8300000, guid: 24988212261bb491c838339d444d3753, type: 3}
+  icarus_Blow:
+  - {fileID: 8300000, guid: 62ff1d01b6c54487a85ef5eb93c099cc, type: 3}
+  - {fileID: 8300000, guid: e87cbf9b88f7348deb0ba372113ec8ad, type: 3}
+  - {fileID: 8300000, guid: 44acfbc2d7a5c436c91d94bc2aacca4b, type: 3}
+  - {fileID: 8300000, guid: a3e9fcd74b1e043b6a28834efd44e2a0, type: 3}
+  - {fileID: 8300000, guid: 1cd9cc9a3e8d047ae91fadac32ab8250, type: 3}
+  - {fileID: 8300000, guid: fadbb60c1b55c47ebaeffbc656537a9e, type: 3}
+  - {fileID: 8300000, guid: b322a53e09c2847558899cf7ba5f4817, type: 3}
+  - {fileID: 8300000, guid: ab7500e053e924c9199fb007652ff828, type: 3}
+  - {fileID: 8300000, guid: 502639e289a0f4bcbbabf26f0030da7f, type: 3}
+  - {fileID: 8300000, guid: 81857f723751b4a53856258da17f5252, type: 3}
+  - {fileID: 8300000, guid: 1103f02a6b3c84657997c238fcc5d512, type: 3}
+  - {fileID: 8300000, guid: 38d8f213cd37f429594af83ea1059eb3, type: 3}
+  - {fileID: 8300000, guid: 406b4f741fee34e28b0bc4c757ce9cec, type: 3}
+  - {fileID: 8300000, guid: f8826ed6aa82b4d76b891d22c14d3d65, type: 3}
+  - {fileID: 8300000, guid: 3a017464fc3ef4ac598ba7ff1cc02ecc, type: 3}
   pedro_Hit: {fileID: 8300000, guid: c8b2b9e92a58f4c39a7fd6aaefb0a78d, type: 3}
   hole_Sound: {fileID: 8300000, guid: b644da0efd54b4d35a62a5f7f85f6bc5, type: 3}
   victory_Sound: {fileID: 8300000, guid: bb43685add89940378be59b8ac0ff465, type: 3}
