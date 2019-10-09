@@ -202,13 +202,13 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 14760}
     - Class: 114
-      Script: {instanceID: 28748}
+      Script: {instanceID: 28730}
     - Class: 114
-      Script: {instanceID: 28916}
+      Script: {instanceID: 28898}
     - Class: 114
-      Script: {instanceID: 28920}
+      Script: {instanceID: 28902}
     - Class: 114
-      Script: {instanceID: 28924}
+      Script: {instanceID: 28906}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -463,7 +463,7 @@ ScriptsOnlyBuild:
     className: TMP_SelectionCaret
   - hash:
       serializedVersion: 2
-      Hash: 0fc0907814636993bf03c3eaa4ea6622
+      Hash: f70524aecd15adb26ace680f9a33333b
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: SfxHandler
@@ -1611,4 +1611,4 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/WorldSelect.unity
   - Assets/Level.unity
-  playerPath: /Users/bernardolimon/Desktop/ZenkoApk/Zenko121_Sfxtest.aab
+  playerPath: /Users/bernardolimon/Desktop/ZenkoApk/Zenko122_ch4done.aab
