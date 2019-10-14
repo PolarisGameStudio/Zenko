@@ -15,7 +15,6 @@ public class Hint{
 }
 
 public class LevelManager : MonoBehaviour {
-
 	public static bool newicarus;
 	public static int levelnum;
 	public static LevelBuilder levelselector;
@@ -32,22 +31,45 @@ public class LevelManager : MonoBehaviour {
 	public static bool isdragging;
 	public static bool ispotd;
 	public static List<Hint> hints = new List<Hint>();
+	public static bool adFree;
+	public static bool configging;
+	public static Transform playert;
+	//public static int hintCurrency;
+	//public static GameObject lastgoodtile;
 	//public static IceTileHandler myicehandler;
 
 
-	//private static LevelManager instance = null;
+	public static LevelManager Instance = null;
 
 
 
-	/*void Awake(){
-		if(instance == null)
+	void Awake(){
+		if(Instance == null)
 		{
-			instance = this;
+			Instance = this;
 			DontDestroyOnLoad(this.gameObject);
+			//InitializePlayerPrefs();
+
 			return;
 		}
 		Destroy(this.gameObject);
-	}*/
+
+	}
+	void Update(){
+		//Debug.Log(LevelManager.adFree);
+	}
+	void InitializePlayerPrefs(){
+		if (PlayerPrefs.HasKey ("CurrencyLoaded")) {
+			//Debug.Log(PlayerPrefs.GetInt("hintCurrency"));
+			//LevelManager.hintCurrency = PlayerPrefs.GetInt("hintCurrency");
+		} 
+		else {
+			//LevelManager.hintCurrency = 0;
+			//PlayerPrefs.SetInt("hintCurrency", 0);
+			//PlayerPrefs.SetInt("CurrencyLoaded",1);
+		}
+	}
+
 	public static void PopulateLists(){
 
 	}
@@ -132,6 +154,7 @@ public class LevelManager : MonoBehaviour {
 			if(LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x-1, -(int)dragger.gameObject.transform.position.z].type == type){
 				LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x-1, -(int)dragger.gameObject.transform.position.z].type = "Ice";
 				LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x-1, -(int)dragger.gameObject.transform.position.z].isTaken = false;
+				LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x-1, -(int)dragger.gameObject.transform.position.z].isSideways = null;
 
 			}
 			else{
@@ -145,6 +168,7 @@ public class LevelManager : MonoBehaviour {
 			if(LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x+1, -(int)dragger.gameObject.transform.position.z].type == type){
 				LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x+1, -(int)dragger.gameObject.transform.position.z].type = "Ice";
 				LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x+1, -(int)dragger.gameObject.transform.position.z].isTaken = false;
+				LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x+1, -(int)dragger.gameObject.transform.position.z].isSideways = null;
 
 			}
 			else{
@@ -157,6 +181,7 @@ public class LevelManager : MonoBehaviour {
 			if(LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x, -(int)dragger.gameObject.transform.position.z-1].type == type){
 				LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x, -(int)dragger.gameObject.transform.position.z-1].type = "Ice";
 				LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x, -(int)dragger.gameObject.transform.position.z-1].isTaken = false;
+				LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x, -(int)dragger.gameObject.transform.position.z-1].isSideways = null;
 
 			}
 			else{
@@ -169,6 +194,7 @@ public class LevelManager : MonoBehaviour {
 			if(LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x, -(int)dragger.gameObject.transform.position.z+1].type == type){
 				LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x, -(int)dragger.gameObject.transform.position.z+1].type = "Ice";
 				LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x, -(int)dragger.gameObject.transform.position.z+1].isTaken = false;
+				LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x, -(int)dragger.gameObject.transform.position.z+1].isSideways = null;
 
 			}
 			else{
@@ -184,6 +210,7 @@ public class LevelManager : MonoBehaviour {
 				Debug.Log(dragger.mySeedType);
 				dragger.myshrinker.SetActive(true);
 				dragger.myBigger.SetActive(false);
+				dragger.convertWhenReady = false;
 				Debug.Log((int)dragger.gameObject.transform.position.x);
 				Debug.Log(-(int)dragger.gameObject.transform.position.z);
 				if(dragger.gameObject.transform.position.z > -LevelBuilder.totaldimension){//checks for pieces inside board
@@ -220,6 +247,5 @@ public class LevelManager : MonoBehaviour {
 		}
 
 	}
-	void Update(){
-	}
+
 }

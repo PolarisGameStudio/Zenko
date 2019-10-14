@@ -4,9 +4,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using CompleteProject;
 
 
 public class SceneLoading : MonoBehaviour {
+	public static bool dFree; //true if theyve paid for ad-free
 	public int num;
 	public static GameObject gamewon;
 	public static GameObject gamelost;
@@ -15,25 +17,51 @@ public class SceneLoading : MonoBehaviour {
 	public Text txt2;
 	Dragger td;
 	Dragger td2;
+	public static SceneLoading Instance;
 //	public IceTileHandler myhandler;
 	void Start(){
-		if (txt2 == null){ //if loading menu
+		Debug.Log("NEW SCENE LOADING");
+		string teststring = "WallSeed";
+		Debug.Log(teststring.Length);
+		Debug.Log(teststring.Substring(teststring.Length-4,4));
+		Application.targetFrameRate = 60;
+		if (txt2 == null){ //if loading menu, this is pointless and relies on bugs, try a public bool.
+			MusicHandler.PlayTitleTheme();
 		}
-		else{//if loading level scene
+		else{//if loading level scenew
 //			Debug.Log(levelnum + "level");
 			Debug.Log(LevelManager.levelnum);
 			if(LevelManager.levelnum == 0 || LevelManager.levelnum ==null){
-			LevelManager.levelnum = 1;				
+			LevelManager.levelnum = 103;				
 			}
 			Debug.Log("sceneloadingstuff");
-
+			//MusicHandler.PlayInitialLoop();
 			//LevelStorer.Lookfor(LevelManager.levelnum);
-			txt2.text = ("Efficient turns is " + LevelStorer.efficientturns);
-			txt.text = LevelManager.levelnum.ToString();
+			//txt2.text = ("Efficient turns is " + LevelStorer.efficientturns);
+			// int world = Mathf.FloorToInt(LevelManager.levelnum/50)  + 1;
+			// int levelinworld = LevelManager.levelnum - ((world-1)*50);
+			// txt.text = "World " + world.ToString() + "-" + levelinworld.ToString();
+			AssignLevelName();
+			RatingBehaviour.InitializeRating();
 //			Debug.Log(LevelManager.levelnum);
 		}
-		GameObject.Find("CurrencyHolder").GetComponentInChildren<Text>().text = GameManager.mycurrency.ToString();
+		//GameObject.Find("CurrencyHolder").GetComponentInChildren<Text>().text = GameManager.mycurrency.ToString();
 		
+	}
+	public void RotateClockWise(){
+		
+	}
+	public void ShowAchievementsUI(){
+		//PlayServices.ShowAchievementsUI();
+		PlayServices.UnlockWorldAchievement(1);
+	}
+	public void RemoveAdFree(){
+		LevelManager.adFree = false;
+	}
+	public void AssignLevelName(){
+		int world = Mathf.FloorToInt((LevelManager.levelnum-1)/40)  + 1;
+		int levelinworld = LevelManager.levelnum - ((world-1)*40);
+		txt.text = "World " + world.ToString() + "-" + levelinworld.ToString();		
 	}
 	public void LoadScene(int num){
 		Swiping.mydirection = "Null";
@@ -49,18 +77,29 @@ public class SceneLoading : MonoBehaviour {
 	public void LoadMenu(){
 		SceneManager.LoadScene(0);
 	}
+	public void RemoveAds(){
+		Purchaser.Instance.BuyNoAds();
+		// PlayerPrefs.SetInt("AdFree", 1);
+		// SceneLoading.adFree = true;
+
+		
+	}
 	public void NextlevelButton(){
+		LevelBuilder.ChangeBackground("Color_A7A46709",new Color(0,0,0,0), .3f);
 		LevelManager.israndom = false;
 		Debug.Log("Next button");
-		Swiping.mydirection = "Null";
+
 		LevelManager.levelnum++;
-		txt.text = LevelManager.levelnum.ToString();
+		// int world = Mathf.FloorToInt(LevelManager.levelnum/50)  + 1;
+		// int levelinworld = LevelManager.levelnum - ((world-1)*50);
+		// txt.text = "World " + world.ToString() + "-" + levelinworld.ToString();
+		AssignLevelName();
 		//txt2.text = ("Efficient turns is " + LevelStorer.efficientturns);
 		//LevelManager.levelnum = Random.Range(0,66);
 
 		LevelStorer.UnlockLevel (LevelManager.levelnum);
 		LevelStorer.Lookfor (LevelManager.levelnum);
-		txt2.text = ("Efficient turns is " + LevelStorer.efficientturns);
+		//txt2.text = ("Efficient turns is " + LevelStorer.efficientturns);
 
 		TurnCounter.turncount = 0;
 		//LevelManager.NextLevel (LevelManager.levelnum);
@@ -68,11 +107,27 @@ public class SceneLoading : MonoBehaviour {
 		LevelManager.NextLevel(LevelManager.levelnum);
 		TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
 		
-
+		Swiping.mydirection = "Null";
+		RatingBehaviour.RestartRating();
 		//TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
 
 
 		//myhandler.GiveIce();
+	}
+	public void NextWon(){
+		if(LevelManager.ispotd){
+			Potd();
+			GoogleAds.Instance.ShowInterstitial();
+
+		}
+		if(!LevelManager.ispotd){
+			NextlevelButton();
+			GoogleAds.Instance.ShowInterstitial();
+
+		}
+	}
+	public void CloseTryAgainScreen(){
+		GameObject.Find("TryAgainScreen").transform.GetChild(0).gameObject.SetActive(false);
 	}
 	public void muteMusic(){
 		AudioSource ms = GameObject.Find("Music Source").GetComponent<AudioSource>();
@@ -123,17 +178,25 @@ public class SceneLoading : MonoBehaviour {
 		TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
 	}
 	public void Potd(){
+		LevelBuilder.ChangeBackground("Color_A7A46709",new Color(0,0,0,0), .3f);
+
 		Swiping.mydirection = "Null";
 		txt.text = "RANDOM POTD";
 		TurnCounter.turncount = 0;
+		LevelManager.ispotd = true;
 		LevelManager.NextPotd();
 		TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
+		RatingBehaviour.RestartRating();
+		//MusicHandler.PlayInitialLoop();
+
 	}	
 	public void loadPotdMap(){
 		Swiping.mydirection = "Null";
 		TurnCounter.turncount = 0;
 		int num = Random.Range(0,10);
 		Debug.Log ("Going to Scene POTD at " + num);
+		MusicHandler.PlayInitialLoop();
+
 		//LevelStorer.Lookfor(num);
 		LevelManager.levelnum = num;
 		LevelManager.ispotd = true;
@@ -143,20 +206,25 @@ public class SceneLoading : MonoBehaviour {
 	public static void SetStars(int rating){
 
 		if(rating == 1){
-			RatingPopUp.starholder.transform.GetChild(1).transform.GetChild(0).gameObject.SetActive(true);
-			RatingPopUp.starholder.transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(false);
+			RatingPopUp.starholder.transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(true);
+			RatingPopUp.starholder.transform.GetChild(1).transform.GetChild(0).gameObject.SetActive(false);
 			RatingPopUp.starholder.transform.GetChild(2).transform.GetChild(0).gameObject.SetActive(false);
 		
 		}
 		else if(rating == 2){
 			RatingPopUp.starholder.transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(true);
-			RatingPopUp.starholder.transform.GetChild(2).transform.GetChild(0).gameObject.SetActive(true);
-			RatingPopUp.starholder.transform.GetChild(1).transform.GetChild(0).gameObject.SetActive(false);
+			RatingPopUp.starholder.transform.GetChild(1).transform.GetChild(0).gameObject.SetActive(true);
+			RatingPopUp.starholder.transform.GetChild(2).transform.GetChild(0).gameObject.SetActive(false);
 		}
 		else if(rating == 3){
 			RatingPopUp.starholder.transform.GetChild(1).transform.GetChild(0).gameObject.SetActive(true);
 			RatingPopUp.starholder.transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(true);
 			RatingPopUp.starholder.transform.GetChild(2).transform.GetChild(0).gameObject.SetActive(true);
+		}
+		else if (rating == 0){
+			RatingPopUp.starholder.transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(false);
+			RatingPopUp.starholder.transform.GetChild(1).transform.GetChild(0).gameObject.SetActive(false);
+			RatingPopUp.starholder.transform.GetChild(2).transform.GetChild(0).gameObject.SetActive(false);			
 		}
 	}
 	public void PlaceHint(){
@@ -201,9 +269,13 @@ public class SceneLoading : MonoBehaviour {
 
 	}
 	public void ResetLevelButton(){
-		txt.text = LevelManager.levelnum.ToString();
+		// int world = Mathf.FloorToInt(LevelManager.levelnum/50)  + 1;
+		// int levelinworld = LevelManager.levelnum - ((world-1)*50);
+		// txt.text = "World " + world.ToString() + "-" + levelinworld.ToString();
+		LevelBuilder.ChangeBackground("Color_A7A46709",new Color(0,0,0,0), .3f);
+		AssignLevelName();
 
-		Swiping.mydirection = "Null";
+
 		//LevelStorer.UnlockLevel (LevelManager.levelnum);
 		//LevelStorer.Lookfor (LevelManager.levelnum);
 		TurnCounter.turncount = 0;
@@ -212,13 +284,19 @@ public class SceneLoading : MonoBehaviour {
 		//TurnGraphics.ClearCounters();
 		//TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
 		ProgressBar.InitializeProgressBar(LevelStorer.efficientturns);
+		DotHandler.InitializeDots(LevelStorer.efficientturns);
 		//LevelManager.NextLevel (LevelManager.levelnum);
 		//myhandler.GiveIce();
+		Swiping.mydirection = "Null";
+		RatingBehaviour.RestartRating();
+		MenuButton.CloseMenu();
 	}
 	public void ResetAllButton(){
-		txt.text = LevelManager.levelnum.ToString();
+		// int world = Mathf.FloorToInt(LevelManager.levelnum/50)  + 1;
+		// int levelinworld = LevelManager.levelnum - ((world-1)*50);
+		// txt.text = "World " + world.ToString() + "-" + levelinworld.ToString();
+		AssignLevelName();
 
-		Swiping.mydirection = "Null";
 		//LevelStorer.UnlockLevel (LevelManager.levelnum);
 		//LevelStorer.Lookfor (LevelManager.levelnum);
 		TurnCounter.turncount = 0;
@@ -226,6 +304,8 @@ public class SceneLoading : MonoBehaviour {
 		LevelManager.NextLevel (LevelManager.levelnum);
 		TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
 		//myhandler.GiveIce();
+		Swiping.mydirection = "Null";
+		MenuButton.CloseMenu();
 	}
 	public void Testnum(int num){
 		//initializevalues
@@ -255,12 +335,14 @@ public class SceneLoading : MonoBehaviour {
 	}
 	public void LoadLevel(int num){
 		//LevelManager.levelnum = 1;
-		//Debug.Log(LevelStorer.leveldic.Count);
-		//if(LevelStorer.leveldic[num].islocked == false || num==1 ){
+		Debug.Log(LevelStorer.leveldic[num].islocked);
+		if(LevelStorer.leveldic[num].islocked == false || num==1 ){
+
 			Debug.Log("Going to Level "+ num);
 			LevelManager.levelnum = num;
 			LoadScene(LevelManager.levelnum);
-		//}
+			MusicHandler.PlayInitialLoop();
+		}
 
 	}
 	public void Plus(){
@@ -287,19 +369,35 @@ public class SceneLoading : MonoBehaviour {
 	public void adventureMode(){
 		transform.Find("Level_Box").gameObject.SetActive(true);
 		transform.Find("Level_Box").Find("ButtonHolder").GetComponent<LevelMenu>().clearMenu();
-		transform.Find("Level_Box").Find("ButtonHolder").GetComponent<LevelMenu>().currentfirst = PlayerPrefs.GetInt("CurrentFirst");
+		PlayerPrefs.SetInt("CurrentFirst", getCurFirst(LevelMenu.FindHighestSolved()));
+		PlayerPrefs.Save();
+		transform.Find("Level_Box").Find("ButtonHolder").GetComponent<LevelMenu>().currentfirst = getCurFirst(LevelMenu.FindHighestSolved());
 		transform.Find("Level_Box").Find("ButtonHolder").GetComponent<LevelMenu>().populateMenu();
 
+
+		GameModeHandler.TurnOff();
 		transform.Find("MenuHolder").Find("Menu").gameObject.SetActive(false);
 		transform.Find("MenuHolder").Find("CloseLevel_Box").gameObject.SetActive(true);
-		transform.Find("MenuHolder").Find("MusicToggle").gameObject.SetActive(false);
-		transform.Find("MenuHolder").Find("SfxToggle").gameObject.SetActive(false);
 		transform.Find("MenuHolder").Find("Config").gameObject.SetActive(false);
 		if(MenuButton.open){
 			MenuButton.open = false;
 		}
-
-
+		CameraController.Fade(.2f,1f);
+	}
+	public int getCurFirst(int highest){
+		int candidate = 1;
+		if (highest == 0 || highest == null || highest == 1){
+			return 1;
+		}
+		for (int i = 1; i<199; i+=20){
+			if(i<highest+1){
+				candidate = i;
+			}
+			else{
+				return candidate;
+			}
+		}
+		return candidate;
 	}
 	public void closeAdventureMode(){
 		transform.Find("Level_Box").gameObject.SetActive(false);
@@ -308,13 +406,13 @@ public class SceneLoading : MonoBehaviour {
 
 
 		transform.Find("MenuHolder").Find("Menu").gameObject.SetActive(true);
-		transform.Find("MenuHolder").Find("CloseLevel_Box").gameObject.SetActive(false);		
+		transform.Find("MenuHolder").Find("CloseLevel_Box").gameObject.SetActive(false);
+		GameModeHandler.TurnOn();		
+		CameraController.Fade(.2f,0.4f);
 	}
 	public void GoToWorldSelect(){
 			SceneManager.LoadScene (1);
-	}
-	void Update(){
-//		Debug.Log (gamewon);
+			MusicHandler.running = false;
 	}
 	public void placeIcarus(string type, Vector3 target){
 		if(type == "Left"){

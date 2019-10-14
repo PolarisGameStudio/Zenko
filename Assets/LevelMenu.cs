@@ -11,8 +11,16 @@ public class LevelMenu : MonoBehaviour {
 	public SceneLoading sl;
 	int buttonnum;
 	public int currentfirst;
+	public static int highestLevelSolved;
+	public GameObject highestMarker;
+	public static LevelMenu Instance;
+	public GameObject worldTextHolder;
 
 	// Use this for initialization
+	// void Awake(){
+	// 	Instance = this;
+	// 	Debug.Log(LevelMenu.Instance);
+	// }
 	void Start () {
 		levels=20;
 		sl = mc.GetComponent<SceneLoading>();
@@ -20,14 +28,30 @@ public class LevelMenu : MonoBehaviour {
 			createButton(i);
 
 		}
-		currentfirst = 1;*/
-		
+		*/
+		//currentfirst = 1;
+		//Debug.Log("CURRENTFIRST" + currentfirst);
+		//LevelMenu.highestLevelSolved = FindHighestSolved();
+		//Debug.Log("CURHIGHEST IS"  + FindHighestSolved());
 	}
-	
+	void Update(){
+		//Debug.Log(LevelMenu.highestLevelSolved);	
+	}
 	// Update is called once per frame
-	void Update () {
-		
+	public static int FindHighestSolved(){
+		int curHighest = 0;
+		int maxMaps = LevelStorer.leveldic.Count;
+		for(int i=1; i<maxMaps+1; i++){
+			string mystring = "Level"+i+"Rating";
+			//Debug.Log(PlayerPrefs.GetInt(mystring));
+			if(PlayerPrefs.GetInt(mystring)>0){
+				curHighest = i;
+			}	
+		}
+		Debug.Log(curHighest+1 + " IS CURHIGHEST");
+		return curHighest+1;	
 	}
+
 	void createButton(int num){
 		GameObject curbutton = Instantiate(buttonprefab, new Vector3(0, 0, 0), Quaternion.identity);
 		curbutton.transform.parent = this.transform;	
@@ -35,7 +59,10 @@ public class LevelMenu : MonoBehaviour {
 		Button btn = curbutton.GetComponent<Button>();
 		buttonnum = num;
 		btn.onClick.AddListener(delegate{sl.LoadLevel(num);});
-		curbutton.transform.GetChild(0).GetComponent<Text>().text = num.ToString();
+		int world = Mathf.FloorToInt((num-1)/40)  + 1;
+		int levelinworld = num - ((world-1)*40);
+		//txt.text = "World " + world.ToString() + "-" + levelinworld.ToString();		
+		curbutton.transform.GetChild(0).GetComponent<Text>().text =levelinworld.ToString();	
 		/*if(num != 1){
 			if(LevelStorer.leveldic[num-1].rating == 0){//previous level has no stars
 				curbutton.transform.GetChild(0).gameObject.SetActive(false);	
@@ -58,18 +85,24 @@ public class LevelMenu : MonoBehaviour {
 			}
 		}
 		else{*/
-				if(LevelStorer.leveldic[num].rating == 1){
-					curbutton.transform.GetChild(3).GetChild(1).GetChild(1).gameObject.SetActive(true);
-				}
-				if(LevelStorer.leveldic[num].rating == 2){
-					curbutton.transform.GetChild(3).GetChild(1).GetChild(0).gameObject.SetActive(true);
-					curbutton.transform.GetChild(3).GetChild(1).GetChild(2).gameObject.SetActive(true);
-				}
-				if(LevelStorer.leveldic[num].rating == 3){
-					curbutton.transform.GetChild(3).GetChild(1).GetChild(0).gameObject.SetActive(true);
-					curbutton.transform.GetChild(3).GetChild(1).GetChild(1).gameObject.SetActive(true);
-					curbutton.transform.GetChild(3).GetChild(1).GetChild(2).gameObject.SetActive(true);
-				}			
+				//Debug.Log(LevelStorer.leveldic[num].rating);
+		if(LevelStorer.leveldic[num].islocked == true && num != 0){
+			curbutton.transform.GetChild(1).gameObject.SetActive(true);	
+			curbutton.transform.GetChild(2).gameObject.SetActive(true);	
+		}
+		if(LevelStorer.leveldic[num].rating == 1){
+			curbutton.transform.GetChild(3).GetChild(1).GetChild(1).gameObject.SetActive(true);
+		}
+		if(LevelStorer.leveldic[num].rating == 2){
+			curbutton.transform.GetChild(3).GetChild(1).GetChild(0).gameObject.SetActive(true);
+			curbutton.transform.GetChild(3).GetChild(1).GetChild(2).gameObject.SetActive(true);
+		}
+		if(LevelStorer.leveldic[num].rating == 3){
+			curbutton.transform.GetChild(3).GetChild(1).GetChild(0).gameObject.SetActive(true);
+			curbutton.transform.GetChild(3).GetChild(1).GetChild(1).gameObject.SetActive(true);
+			curbutton.transform.GetChild(3).GetChild(1).GetChild(2).gameObject.SetActive(true);
+		}			
+
 		//}
 
 
@@ -78,7 +111,11 @@ public class LevelMenu : MonoBehaviour {
 	}
 
 
+	public void AssignWorldText(int curfirst){
+		int world = Mathf.FloorToInt((curfirst-1)/40)  + 1;
+		worldTextHolder.GetComponent<Text>().text = "World " + world.ToString();	
 
+	}
 	void addFunction(){
 		sl.LoadLevel(buttonnum);
 	}
@@ -100,11 +137,17 @@ public class LevelMenu : MonoBehaviour {
 			}
 			currentfirst = currentfirst -20;	
 		}
+		AssignWorldText(currentfirst);
 	}
 	public void populateMenu(){
+		Debug.Log(currentfirst + " is starting first");
+		if(currentfirst==0 | currentfirst==null){
+			currentfirst = 1;
+		}
 		for (int i = currentfirst; i < currentfirst+20; i++){
 			createButton(i);
 		}		
+		AssignWorldText(currentfirst);
 	}
 
 	public void populateMenuUp(){
@@ -116,5 +159,6 @@ public class LevelMenu : MonoBehaviour {
 			}
 			currentfirst = currentfirst + 20;	
 		}
+		AssignWorldText(currentfirst);
 	}
 }

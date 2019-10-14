@@ -22,6 +22,7 @@ public class FragileBehaviour : MonoBehaviour {
 			if(distance<0.98){
 				GetComponent<Animator>().SetInteger("Phase",1);
 				readytolava = false;
+				SfxHandler.Instance.PlayFragile();
 			}
 		}
 	}

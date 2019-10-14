@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,16 +13,18 @@ public class MouseOverer : MonoBehaviour {
 		renderer = GetComponent<MeshRenderer>();
 
 		canplace = true;
-		startcolor = renderer.material.color;
+		//startcolor = renderer.material.color;
 		//NEED TO MAKE A DIFF ONE FOR FRAGILE (has many renderers); 
 	}
 	
 	public void Enter(){
 		if(LevelManager.isdragging){
 			if(LevelBuilder.tiles[(int)transform.position.x, -(int)transform.position.z].isTaken){
+				//PlaneBehavior.readyToDrop = false;
 				//startcolor = renderer.material.color;
 			    //renderer.material.color = Color.red;
-
+			    PlaneBehavior.tilex = (int)transform.position.x;
+			    PlaneBehavior.tiley = (int)transform.position.z;
 			}
 			else{
 			  //  startcolor = renderer.material.color;
@@ -33,7 +35,7 @@ public class MouseOverer : MonoBehaviour {
 			}	
 		}
 		
-	    Debug.Log("Enter");
+//	    Debug.Log("Enter");
 	}
 	public void Leave(){
 		if(LevelBuilder.tiles[(int)transform.position.x, -(int)transform.position.z].isTaken){
@@ -46,6 +48,6 @@ public class MouseOverer : MonoBehaviour {
 		    PlaneBehavior.readyToDrop = false;
 		}
 	    //PlaneBehavior
-	    Debug.Log("Exit");
+//	    Debug.Log("Exit");
 	}
 }

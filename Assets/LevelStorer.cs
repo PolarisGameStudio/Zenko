@@ -41,6 +41,7 @@ public class Tile{
 	}
 }
 
+
 public class LevelStorer : MonoBehaviour {
 	public static int efficientturns;
 	public static Dictionary<int, LevelStats> leveldic = new Dictionary<int, LevelStats>();
@@ -49,32 +50,18 @@ public class LevelStorer : MonoBehaviour {
 	private static LevelStorer instance = null;
 	int reset;
 	StreamWriter normalmaps;
+	public static string importantValues;
 
+	public static void PopulateImportantValues(){
 
-	// Use this for initialization
-	void Awake () {
-//		Debug.Log(instance);
-		if(instance == null){
-			instance = this;
-			DontDestroyOnLoad(this.gameObject);
-			//return;
-		}
-		else{
-			Destroy(this.gameObject);
-			Debug.Log("Destroyed LevelStorer");
-			return;
-		}
-		//PlayerPrefs.DeleteAll();
-/*		reset = PlayerPrefs.GetInt ("Reset");
-		if (reset == 0) {
-			PlayerPrefs.DeleteAll ();
-			PlayerPrefs.SetInt ("Reset", 1);
-		}*/
-		/*if (PlayerPrefs.HasKey ("Loaded")) {
-			Debug.Log ("Has playerpref");
-		} else {*/
-			//Load levels for the first time. Init values. only level 1 unlocked.
-		Debug.Log ("Giving loaded");
+	}
+
+	public static void UpdateImportantValues(int place, int value){
+
+	}
+
+	public static void PopulateLevelDictionary(){
+
 		LevelStats lv1  = new LevelStats(1,2,false,0);
 		LevelStats lv2  = new LevelStats(2,3,true,0); 
 		LevelStats lv3  = new LevelStats(3,3,true,0); 
@@ -175,106 +162,106 @@ public class LevelStorer : MonoBehaviour {
 		LevelStats lv98 = new LevelStats(98,6,true,0); 
 		LevelStats lv99 = new LevelStats(99,3,true,0); 
 		LevelStats lv100= new LevelStats(100,7,true,0); 
-		LevelStats lv101  = new LevelStats(1,2,false,0);
-		LevelStats lv102  = new LevelStats(2,3,true,0); 
-		LevelStats lv103  = new LevelStats(3,3,true,0); 
-		LevelStats lv104  = new LevelStats(4,4,true,0); 
-		LevelStats lv105  = new LevelStats(5,2,true,0); 
-		LevelStats lv106  = new LevelStats(6,4,true,0); 
-		LevelStats lv107  = new LevelStats(7,4,true,0); 
-		LevelStats lv108  = new LevelStats(8,3,true,0); 
-		LevelStats lv109  = new LevelStats(9,4,true,0); 
-		LevelStats lv110 = new LevelStats(10,3,true,0); 
-		LevelStats lv111 = new LevelStats(11,5,true,0); //too hard, need to make an easier tile leveldic
-		LevelStats lv112 = new LevelStats(12,5,true,0); 
-		LevelStats lv113 = new LevelStats(13,4,true,0); 
-		LevelStats lv114 = new LevelStats(14,4,true,0); 
-		LevelStats lv115 = new LevelStats(15,3,true,0); 
-		LevelStats lv116 = new LevelStats(16,4,true,0); 
-		LevelStats lv117 = new LevelStats(17,5,true,0); 
-		LevelStats lv118 = new LevelStats(18,5,true,0); 
-		LevelStats lv119 = new LevelStats(19,4,true,0); 
-		LevelStats lv120 = new LevelStats(20,5,true,0); 
-		LevelStats lv121 = new LevelStats(21,5,true,0); 
-		LevelStats lv122 = new LevelStats(22,4,true,0); 
-		LevelStats lv123 = new LevelStats(23,6,true,0); 
-		LevelStats lv124 = new LevelStats(24,5,true,0); 
-		LevelStats lv125 = new LevelStats(25,6,true,0); 
-		LevelStats lv126 = new LevelStats(26,7,true,0); 
-		LevelStats lv127 = new LevelStats(27,7,true,0); 
-		LevelStats lv128 = new LevelStats(28,4,true,0); 
-		LevelStats lv129 = new LevelStats(29,8,true,0); 
-		LevelStats lv130 = new LevelStats(30,5,true,0); 
-		LevelStats lv131 = new LevelStats(31,5,true,0); 
-		LevelStats lv132 = new LevelStats(32,3,true,0); 
-		LevelStats lv133 = new LevelStats(33,1,true,0); 
-		LevelStats lv134 = new LevelStats(34,3,true,0); 
-		LevelStats lv135 = new LevelStats(35,4,true,0); 
-		LevelStats lv136 = new LevelStats(36,2,true,0); 
-		LevelStats lv137 = new LevelStats(37,5,true,0); 
-		LevelStats lv138 = new LevelStats(38,5,true,0); 
-		LevelStats lv139 = new LevelStats(39,7,true,0); 
-		LevelStats lv140 = new LevelStats(40,5,true,0); 
-		LevelStats lv141 = new LevelStats(41,3,true,0); 
-		LevelStats lv142 = new LevelStats(42,4,true,0); 
-		LevelStats lv143 = new LevelStats(43,5,true,0); 
-		LevelStats lv144 = new LevelStats(44,6,true,0); 
-		LevelStats lv145 = new LevelStats(45,4,true,0); 
-		LevelStats lv146 = new LevelStats(46,3,true,0); 
-		LevelStats lv147 = new LevelStats(47,3,true,0); 
-		LevelStats lv148 = new LevelStats(48,3,true,0); 
-		LevelStats lv149 = new LevelStats(49,4,true,0); 
-		LevelStats lv150 = new LevelStats(50,7,true,0); 
-		LevelStats lv151 = new LevelStats(51,5,true,0); 
-		LevelStats lv152 = new LevelStats(52,4,true,0); 
-		LevelStats lv153 = new LevelStats(53,7,true,0); 
-		LevelStats lv154 = new LevelStats(54,5,true,0); 
-		LevelStats lv155 = new LevelStats(55,4,true,0);  //save 1
-		LevelStats lv156 = new LevelStats(56,6,true,0); 
-		LevelStats lv157 = new LevelStats(57,7,true,0); 
-		LevelStats lv158 = new LevelStats(58,7,true,0); 
-		LevelStats lv159 = new LevelStats(59,9,true,0); 
-		LevelStats lv160 = new LevelStats(60,9,true,0); //swap with 62
-		LevelStats lv161 = new LevelStats(61,8,true,0); 
-		LevelStats lv162 = new LevelStats(62,9,true,0); 
-		LevelStats lv163 = new LevelStats(63,8,true,0); 
-		LevelStats lv164 = new LevelStats(64,7,true,0); 
-		LevelStats lv165 = new LevelStats(65,7,true,0); 
-		LevelStats lv166 = new LevelStats(66,7,true,0); 
-		LevelStats lv167 = new LevelStats(67,1,true,0); 
-		LevelStats lv168 = new LevelStats(68,7,true,0); 
-		LevelStats lv169 = new LevelStats(69,4,true,0); 
-		LevelStats lv170 = new LevelStats(70,4,true,0); 
-		LevelStats lv171 = new LevelStats(71,6,true,0); 
-		LevelStats lv172 = new LevelStats(72,6,true,0); 
-		LevelStats lv173 = new LevelStats(73,5,true,0); 
-		LevelStats lv174 = new LevelStats(74,6,true,0); 
-		LevelStats lv175 = new LevelStats(75,3,true,0); 
-		LevelStats lv176 = new LevelStats(76,7,true,0); 
-		LevelStats lv177 = new LevelStats(77,7,true,0); 
-		LevelStats lv178 = new LevelStats(78,2,true,0); 
-		LevelStats lv179 = new LevelStats(79,7,true,0); 
-		LevelStats lv180 = new LevelStats(80,5,true,0); 
-		LevelStats lv181 = new LevelStats(81,6,true,0); 
-		LevelStats lv182 = new LevelStats(82,5,true,0); 
-		LevelStats lv183 = new LevelStats(83,5,true,0); 
-		LevelStats lv184 = new LevelStats(84,6,true,0); 
-		LevelStats lv185 = new LevelStats(85,4,true,0); 
-		LevelStats lv186 = new LevelStats(86,4,true,0); //extra
-		LevelStats lv187 = new LevelStats(87,4,true,0); 
-		LevelStats lv188 = new LevelStats(88,7,true,0); 
-		LevelStats lv189 = new LevelStats(89,3,true,0); 
-		LevelStats lv190 = new LevelStats(90,4,true,0); 
-		LevelStats lv191 = new LevelStats(91,1,true,0); 
-		LevelStats lv192 = new LevelStats(92,7,true,0); 
-		LevelStats lv193 = new LevelStats(93,6,true,0); 
-		LevelStats lv194 = new LevelStats(94,6,true,0); 
-		LevelStats lv195 = new LevelStats(95,7,true,0); 
-		LevelStats lv196 = new LevelStats(96,7,true,0); 
-		LevelStats lv197 = new LevelStats(97,10,true,0); 
-		LevelStats lv198 = new LevelStats(98,6,true,0); 
-		LevelStats lv199 = new LevelStats(99,3,true,0); 
-		LevelStats lv200= new LevelStats(100,7,true,0); 
+		LevelStats lv101  = new LevelStats(101,2,true,0);
+		LevelStats lv102  = new LevelStats(102,3,true,0); 
+		LevelStats lv103  = new LevelStats(103,3,true,0); 
+		LevelStats lv104  = new LevelStats(104,4,true,0); 
+		LevelStats lv105  = new LevelStats(105,2,true,0); 
+		LevelStats lv106  = new LevelStats(106,4,true,0); 
+		LevelStats lv107  = new LevelStats(107,4,true,0); 
+		LevelStats lv108  = new LevelStats(108,3,true,0); 
+		LevelStats lv109  = new LevelStats(109,4,true,0); 
+		LevelStats lv110 = new LevelStats(110,3,true,0); 
+		LevelStats lv111 = new LevelStats(111,5,true,0); //too hard, need to make an easier tile leveldic
+		LevelStats lv112 = new LevelStats(112,5,true,0); 
+		LevelStats lv113 = new LevelStats(113,4,true,0); 
+		LevelStats lv114 = new LevelStats(114,4,true,0); 
+		LevelStats lv115 = new LevelStats(115,3,true,0); 
+		LevelStats lv116 = new LevelStats(116,4,true,0); 
+		LevelStats lv117 = new LevelStats(117,5,true,0); 
+		LevelStats lv118 = new LevelStats(118,5,true,0); 
+		LevelStats lv119 = new LevelStats(119,4,true,0); 
+		LevelStats lv120 = new LevelStats(120,5,true,0); 
+		LevelStats lv121 = new LevelStats(121,5,true,0); 
+		LevelStats lv122 = new LevelStats(122,4,true,0); 
+		LevelStats lv123 = new LevelStats(123,6,true,0); 
+		LevelStats lv124 = new LevelStats(124,5,true,0); 
+		LevelStats lv125 = new LevelStats(125,6,true,0); 
+		LevelStats lv126 = new LevelStats(126,7,true,0); 
+		LevelStats lv127 = new LevelStats(127,7,true,0); 
+		LevelStats lv128 = new LevelStats(128,4,true,0); 
+		LevelStats lv129 = new LevelStats(129,8,true,0); 
+		LevelStats lv130 = new LevelStats(130,5,true,0); 
+		LevelStats lv131 = new LevelStats(131,5,true,0); 
+		LevelStats lv132 = new LevelStats(132,3,true,0); 
+		LevelStats lv133 = new LevelStats(133,1,true,0); 
+		LevelStats lv134 = new LevelStats(134,3,true,0); 
+		LevelStats lv135 = new LevelStats(135,4,true,0); 
+		LevelStats lv136 = new LevelStats(136,2,true,0); 
+		LevelStats lv137 = new LevelStats(137,5,true,0); 
+		LevelStats lv138 = new LevelStats(138,5,true,0); 
+		LevelStats lv139 = new LevelStats(139,7,true,0); 
+		LevelStats lv140 = new LevelStats(140,5,true,0); 
+		LevelStats lv141 = new LevelStats(141,3,true,0); 
+		LevelStats lv142 = new LevelStats(142,4,true,0); 
+		LevelStats lv143 = new LevelStats(143,5,true,0); 
+		LevelStats lv144 = new LevelStats(144,6,true,0); 
+		LevelStats lv145 = new LevelStats(145,4,true,0); 
+		LevelStats lv146 = new LevelStats(146,3,true,0); 
+		LevelStats lv147 = new LevelStats(147,3,true,0); 
+		LevelStats lv148 = new LevelStats(148,3,true,0); 
+		LevelStats lv149 = new LevelStats(149,4,true,0); 
+		LevelStats lv150 = new LevelStats(150,7,true,0); 
+		LevelStats lv151 = new LevelStats(151,5,true,0); 
+		LevelStats lv152 = new LevelStats(152,4,true,0); 
+		LevelStats lv153 = new LevelStats(153,7,true,0); 
+		LevelStats lv154 = new LevelStats(154,5,true,0); 
+		LevelStats lv155 = new LevelStats(155,4,true,0);  //save 1
+		LevelStats lv156 = new LevelStats(156,6,true,0); 
+		LevelStats lv157 = new LevelStats(157,7,true,0); 
+		LevelStats lv158 = new LevelStats(158,7,true,0); 
+		LevelStats lv159 = new LevelStats(159,9,true,0); 
+		LevelStats lv160 = new LevelStats(160,9,true,0); //swap with 62
+		LevelStats lv161 = new LevelStats(161,8,true,0); 
+		LevelStats lv162 = new LevelStats(162,9,true,0); 
+		LevelStats lv163 = new LevelStats(163,8,true,0); 
+		LevelStats lv164 = new LevelStats(164,7,true,0); 
+		LevelStats lv165 = new LevelStats(165,7,true,0); 
+		LevelStats lv166 = new LevelStats(166,7,true,0); 
+		LevelStats lv167 = new LevelStats(167,1,true,0); 
+		LevelStats lv168 = new LevelStats(168,7,true,0); 
+		LevelStats lv169 = new LevelStats(169,4,true,0); 
+		LevelStats lv170 = new LevelStats(170,4,true,0); 
+		LevelStats lv171 = new LevelStats(171,6,true,0); 
+		LevelStats lv172 = new LevelStats(172,6,true,0); 
+		LevelStats lv173 = new LevelStats(173,5,true,0); 
+		LevelStats lv174 = new LevelStats(174,6,true,0); 
+		LevelStats lv175 = new LevelStats(175,3,true,0); 
+		LevelStats lv176 = new LevelStats(176,7,true,0); 
+		LevelStats lv177 = new LevelStats(177,7,true,0); 
+		LevelStats lv178 = new LevelStats(178,2,true,0); 
+		LevelStats lv179 = new LevelStats(179,7,true,0); 
+		LevelStats lv180 = new LevelStats(190,5,true,0); 
+		LevelStats lv181 = new LevelStats(181,6,true,0); 
+		LevelStats lv182 = new LevelStats(182,5,true,0); 
+		LevelStats lv183 = new LevelStats(183,5,true,0); 
+		LevelStats lv184 = new LevelStats(184,6,true,0); 
+		LevelStats lv185 = new LevelStats(185,4,true,0); 
+		LevelStats lv186 = new LevelStats(186,4,true,0); //extra
+		LevelStats lv187 = new LevelStats(187,4,true,0); 
+		LevelStats lv188 = new LevelStats(188,7,true,0); 
+		LevelStats lv189 = new LevelStats(189,3,true,0); 
+		LevelStats lv190 = new LevelStats(190,4,true,0); 
+		LevelStats lv191 = new LevelStats(191,1,true,0); 
+		LevelStats lv192 = new LevelStats(192,7,true,0); 
+		LevelStats lv193 = new LevelStats(193,6,true,0); 
+		LevelStats lv194 = new LevelStats(194,6,true,0); 
+		LevelStats lv195 = new LevelStats(195,7,true,0); 
+		LevelStats lv196 = new LevelStats(196,7,true,0); 
+		LevelStats lv197 = new LevelStats(197,10,true,0); 
+		LevelStats lv198 = new LevelStats(198,6,true,0); 
+		LevelStats lv199 = new LevelStats(199,3,true,0); 
+		LevelStats lv200= new LevelStats(200,7,true,0); 
 
 		leveldic.Add (1, lv1);
 		leveldic.Add (2, lv2);
@@ -476,26 +463,40 @@ public class LevelStorer : MonoBehaviour {
 		leveldic.Add (198, lv198);
 		leveldic.Add (199, lv199);
 		leveldic.Add (200, lv200);
-//		Debug.Log(leveldic.Count); 
-		if (PlayerPrefs.HasKey ("Loaded")) {
-			Debug.Log ("Has playerpref");
-			PopulateRatings(); //takes old playerprefs and populates current ratings
-			GameManager.mycurrency = PlayerPrefs.GetInt("Currency");
+	}
 
-		} 
-		else {
-			PopulatePlayerPrefs();
-			PlayerPrefs.SetInt("CurrentFirst", 1);
-			GameManager.mycurrency = 0;
-			PlayerPrefs.SetInt("Currency", 0);
-			//PopulateRatings();
-			PlayerPrefs.SetInt("Loaded",1);
+
+	// Use this for initialization
+	void Awake () {
+//		Debug.Log(instance);
+		if(instance == null){
+			instance = this;
+			DontDestroyOnLoad(this.gameObject);
+			//return;
 		}
+		else{
+			Destroy(this.gameObject);
+			Debug.Log("Destroyed LevelStorer");
+			return;
+		}
+		//PlayerPrefs.DeleteAll();
+/*		reset = PlayerPrefs.GetInt ("Reset");
+		if (reset == 0) {
+			PlayerPrefs.DeleteAll ();
+			PlayerPrefs.SetInt ("Reset", 1);
+		}*/
+		/*if (PlayerPrefs.HasKey ("Loaded")) {
+			Debug.Log ("Has playerpref");
+		} else {*/
+			//Load levels for the first time. Init values. only level 1 unlocked.
+		//Debug.Log ("Giving loaded");
+		
+
 		//PlayerPrefs.SetInt ("Loaded", 1);
 
 		//PlayerPrefs.DeleteAll();
 		//GameManager.mycurrency = PlayerPrefs.GetInt("Currency");
-		GameObject.Find("CurrencyHolder").GetComponentInChildren<Text>().text = GameManager.mycurrency.ToString();
+		//GameObject.Find("CurrencyHolder").GetComponentInChildren<Text>().text = GameManager.mycurrency.ToString();
 	}
 		//PlayerPrefs.DeleteAll();
 	//}
@@ -504,9 +505,7 @@ public class LevelStorer : MonoBehaviour {
 			 (LevelManager.levelnum);
 		}
 	}*/
-	void Update(){
-//		Debug.Log(PlayerPrefs.GetInt("Level1Rating"))	;
-	}
+
 	void Start(){
 		/*string path = Application.dataPath + "/NormalLevels.txt";
 		normalmaps = File.CreateText(path);
@@ -537,10 +536,10 @@ public class LevelStorer : MonoBehaviour {
 		//normalmaps.Close();
 	}
 
-	public static void PopulatePlayerPrefs(){
+	public static void PopulatePlayerPrefs(){ //populates ratings
 		for(int i=1; i<leveldic.Count+1; i++){
 			string mystring = "Level"+i+"Rating";
-
+			//Debug.Log(PlayerPrefs.GetInt(mystring));
 			if(PlayerPrefs.GetInt(mystring)>0){
 				//leveldic[i].islocked = false;
 				//leveldic[i+1].islocked = false;
@@ -551,7 +550,11 @@ public class LevelStorer : MonoBehaviour {
 		}		
 	}
 
-	public static void PopulateRatings(){
+	public static void PopulateCloudData(){
+
+	}
+
+	public static void AddRatingsToDictionary(){
 		for(int i=1; i<leveldic.Count+1; i++){
 			string mystring = "Level"+i+"Rating";
 
@@ -560,8 +563,6 @@ public class LevelStorer : MonoBehaviour {
 				leveldic[i+1].islocked = false;
 				leveldic[i].rating = PlayerPrefs.GetInt(mystring);
 			}
-
-
 		}
 	}
 
@@ -588,6 +589,7 @@ public class LevelStorer : MonoBehaviour {
 		int r = 0; //RatingBehaviour.rating;
 		LevelStats newvalue = new LevelStats(x,y,z,r); 
 		leveldic [x] = newvalue;*/
+		leveldic[levelnum].islocked = false;
 	}
 
 	public static void LockLevel(int levelnum){

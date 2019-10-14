@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 //using UnityEngine.Color;
 
 public class PlayerMovement : MonoBehaviour {
@@ -14,7 +15,7 @@ public class PlayerMovement : MonoBehaviour {
 	public GameObject tileobject;
 //	Tilehandler tilescript;
 	Vector3 tiletotest;
-	bool canmove;
+	public bool canmove;
 	GameObject tiletaker;
 	public string nextaction;
 	public bool beingdragged;
@@ -34,139 +35,184 @@ public class PlayerMovement : MonoBehaviour {
 	Color fragilered = new Color(253/255f,65/255f,65/255f,255/255f);
 	ProgressBar TG;
 	string type;
+	int tilenumber;
+	public PlayerAnimation animationController;
+	public static bool boop;
+	public Vector3 lastbooped;
+	public static bool boopout;
+	public static Vector3 shakeNoise;
+	public static bool longgoal;
+	GameObject menuButton;
+	GameObject hintButton;
+	bool hasstopped;
+	GameObject wallToHit;
 	//public KeySimulator mykeysimulator;
 	// Use this for initialization
 	void Start () {
 		//current tile works as a target to move to
+		LevelManager.playert = this.gameObject.transform;
+
+		hasstopped = false;
+		animationController = GetComponent<PlayerAnimation>();
 		startingposition = transform.position;
 		currenttile = transform.position;
 		cantakeinput = true;
-		canmove = true;
 		nextaction = null;
 		beingdragged = false;
 		lastFragile = null;
 		isspeeding = false;
-		levelWonBoard = GameObject.Find ("GameWon");
+		levelWonBoard = LevelBuilder.winboard;
 		if (levelWonBoard != null) {
 			SceneLoading.gamewon = levelWonBoard;
 			levelWonBoard.SetActive (false);
 
 		}
-		LevelLostBoard = GameObject.Find ("GameLost");
+		LevelLostBoard = LevelBuilder.loseboard;
 		if (LevelLostBoard != null) {
 			SceneLoading.gamelost = LevelLostBoard;
 			LevelLostBoard.SetActive (false);
 
 		}
-		//Debug.Log(LevelLostBoard);
-		//LevelLostBoard.SetActive (false);
-		Debug.Log ("TURNEDTOFF");
 		outofmap = false;
 		hasmoved = false;
 		TG = GameObject.Find("ProgressBar").GetComponent<ProgressBar>();
+		menuButton = GameObject.Find("Menu");
+		hintButton = GameObject.Find("Hint");
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		if(canmove){
-			this.transform.GetChild(3).GetComponent<Animator>().SetInteger("Phase", 0);
-
-		}
-		if(!canmove){
-			this.transform.GetChild(3).GetComponent<Animator>().SetInteger("Phase", 1);
-		}
-		if (Input.GetKeyDown (KeyCode.G)){
-			Debug.Log(LevelBuilder.tiles[0,0].isTaken);
-		}
-		myswipe = Swiping.mydirection;
-//		Debug.Log(Swiping.mydirection);
-		//Debug.Log (levelWonBoard);
+	void ResetBoards(){
 		if (levelWonBoard == null) {
 			levelWonBoard = SceneLoading.gamewon;
 			levelWonBoard.SetActive(false);
 		}
+
 		if (LevelLostBoard == null) {
 			LevelLostBoard = SceneLoading.gamelost;
 			LevelLostBoard.SetActive (false);
-		}
-//		Debug.Log (TurnBehaviour.turn + "BEHAV");
+		}		
+	}
+	void TurnChanger(){
 		if (transform.position != startingposition && TurnBehaviour.turn == 0) {
+
 			TurnBehaviour.turn = 1;
+			menuButton.GetComponent<Image>().sprite = menuButton.GetComponent<ImageHolder>().imagetwo;
+			hintButton.GetComponent<Image>().sprite = hintButton.GetComponent<ImageHolder>().imagetwo;
+			
+			LevelBuilder.ChangeBackground("Color_A7A46709", new Color(154f/255f,53f/255f,53f/255f,0),.3f);
 		}
 		if (TurnBehaviour.turn == 1 && transform.position == startingposition) {
 			TurnBehaviour.turn = 0; 
+			menuButton.GetComponent<Image>().sprite = menuButton.GetComponent<ImageHolder>().imageone;
+			hintButton.GetComponent<Image>().sprite = hintButton.GetComponent<ImageHolder>().imageone;
+	
+		}		
+	}
+	// Update is called once per frame
+	void Update () {
+		if(canmove){
+			this.transform.GetChild(0).GetComponent<Animator>().SetInteger("Phase", 0);
+
 		}
-		if (currenttile == transform.position) {//do this when reached currenttile
+		if(!canmove && !GoalBehaviour.goaling){
+			this.transform.GetChild(0).GetComponent<Animator>().SetInteger("Phase", 1);
+		}
+
+		myswipe = Swiping.mydirection;
+
+		ResetBoards();
+
+		TurnChanger();
+
+		if(Vector3.Distance(currenttile, transform.position) <.6f && !boop && 
+			transform.position != startingposition && nextaction !="Goal_Action"){
+			if(lastbooped != currenttile){
+				boop = true;
+				lastbooped = currenttile;
+				AssignShakeOrientation(character_direction);
+			}
+		}
+		if(Vector3.Distance(currenttile, transform.position) <.8f && !boop && 
+			transform.position != startingposition && nextaction !="Goal_Action"){
+			if(wallToHit!= null){
+				wallToHit.GetComponent<Animator>().SetTrigger("Hit");
+				wallToHit = null;				
+			}
+		}		
+
+
+		if (currenttile == transform.position /*&& !hasstopped*/) {//do this when reached currenttile
+			//Debug.Log("WHAT IS NEXTACTION BABY DONT " + nextaction + " ME");
+			//Debug.Log("On tile");
 			GoalBehaviour.isstatic = true;
-//			Debug.Log(nextaction);
-			//Debug.Log (tilescript.myTaker.tag);
 			if (lastFragile != null && lastFragile.transform.position == transform.position && nextaction== null) {
 				Debug.Log ("UNUL");
-				//this.enabled = false;
-
-				//int nextlevel = LevelManager.levelnum;
-				//LevelManager.NextLevel (nextlevel);
-
-				LevelLostBoard.SetActive (true);
 				this.enabled=false;
 				Debug.Log("Hole");
+				StartCoroutine(PopLose());
+				StartCoroutine(animationController.Disappear(.3f));
+				SfxHandler.Instance.PlayHole();
+
 			}
-			else if (nextaction == null) {
-//				Debug.Log("Null");
+
+			else if (nextaction == null && !canmove) {
+				//Debug.Log("NullNULLNULLNULL");
 				cantakeinput = true;
 				canmove = true;
 				isspeeding = false;
+				hasstopped = true;
+				SfxHandler.Instance.PlayWallHit();
 			}  
 			else if (nextaction == "Goal_Action") {
-				RatingPopUp.GiveRating ();
- 				SceneLoading.SetStars(RatingPopUp.myrating);
+				RatingPopUp.GiveRating ();//stores to playerprefs
+ 				SceneLoading.SetStars(RatingBehaviour.currentrating);
  				this.enabled = false;
 				StartCoroutine(PopWin());
 			}			
 			else if (nextaction == "Hole_Action") {
-				StartCoroutine(PopLose());
+				SfxHandler.Instance.PlayHole();
 				this.enabled=false;
 				Debug.Log("Hole");
-
-				//int nextlevel = LevelManager.levelnum;
-				//LevelManager.NextLevel (nextlevel);
-				//here popup "Gameover" try again
-
+				StartCoroutine(PopLose());
+				StartCoroutine(animationController.Disappear(.3f));
 			}
 			else if (nextaction == "Left_Action") {
 				Debug.Log(nextaction);
 				tiletotest = currenttile;
 				canmove = true;
 				while (canmove == true) {
+					character_direction = "Left";
 					tiletotest += Vector3.left;
 					this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0,0,0));
 					FindTileTag ();
 					ActOnTile ();
 					isspeeding = true;
+					SfxHandler.Instance.PlayIcarus();
 				}
 				if (nextaction == "Left_Action") {
 					nextaction = null;
 				}
 			}
 			else if (nextaction == "Right_Action") {
-								Debug.Log(nextaction);
-
+				Debug.Log(nextaction);
 				tiletotest = currenttile;
 				canmove = true;
 				while (canmove == true) {
+					character_direction = "Right";
 					tiletotest += Vector3.right;
 					this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0,180,0));
 					FindTileTag ();
 					ActOnTile ();
 					isspeeding = true;
+					SfxHandler.Instance.PlayIcarus();
 				}
+				Debug.Log("CURRENT NEXT ACTION IS " + nextaction);
 				if (nextaction == "Right_Action") {
+					Debug.Log("MAKING NULL");
 					nextaction = null;
 				}
 			}
 			else if (nextaction == "Up_Action") {
 								Debug.Log(nextaction);
-
+				character_direction = "Up";
 				tiletotest = currenttile;
 				canmove = true;
 				while (canmove == true) {
@@ -175,14 +221,15 @@ public class PlayerMovement : MonoBehaviour {
 					FindTileTag ();
 					ActOnTile ();
 					isspeeding = true;
+					SfxHandler.Instance.PlayIcarus();
 				}
 				if (nextaction == "Up_Action") {
 					nextaction = null;
 				}
 			}
 			else if (nextaction == "Down_Action") {
-								Debug.Log(nextaction);
-
+				Debug.Log(nextaction);
+				character_direction = "Down";
 				tiletotest = currenttile;
 				canmove = true;
 				while (canmove == true) {
@@ -191,120 +238,155 @@ public class PlayerMovement : MonoBehaviour {
 					FindTileTag ();
 					ActOnTile ();
 					isspeeding = true;
+					SfxHandler.Instance.PlayIcarus();
 				}
 				if (nextaction == "Down_Action") {
 					nextaction = null;
 				}
 			}
+			if(wallToHit != null){
+				wallToHit.GetComponent<Animator>().SetTrigger("Hit");
+				wallToHit = null;
+				hasstopped = true;
+
+			}
 		}
 			Movement ();
 	}
 
-	void QWERTYMove(){
-		if (Input.GetKeyDown (KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow) || myswipe == "Up" /*|| mykeysimulator.W*/ ) {
-			tiletotest = currenttile;
-			if (canmove == true) {
-				firstmove = true;
-			}
-			while (canmove == true) {
-				character_direction = "Up";
-				this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0,90,0));
-				tiletotest += Vector3.forward;
-				FindTileTag ();
-				ActOnTile ();
-			}
-			//mykeysimulator.W = false;
+	public void AssignShakeOrientation(string shakeDirection){
+		if(shakeDirection == "Up"){
+			shakeNoise = new Vector3(0,0,-.5f);
 		}
-		if (Input.GetKeyDown (KeyCode.A)|| Input.GetKeyDown(KeyCode.LeftArrow) || myswipe == "Left" /*|| mykeysimulator.A*/) {
-			tiletotest = currenttile;
-			if (canmove == true) {
-				firstmove = true;
-			}
-			while (canmove == true) {	
-				character_direction = "Left";
-				this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0,0,0));
-				tiletotest += Vector3.left;
-				FindTileTag ();
-				ActOnTile ();
-//				Debug.Log(canmove);
-
-			}
-			//mykeysimulator.A = false;
+		if(shakeDirection == "Down"){
+			shakeNoise = new Vector3(0,0,.5f);
 		}
-		if (Input.GetKeyDown (KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow) || myswipe == "Down" /*|| mykeysimulator.S */) {
-			tiletotest = currenttile;
-			if (canmove == true) {
-				firstmove = true;
-			}
-			while (canmove == true) {
-				character_direction = "Down";
-				this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0,270,0));
-				tiletotest += Vector3.back;
-				FindTileTag ();
-				ActOnTile ();
-			}
-			//mykeysimulator.S = false;
+		if(shakeDirection == "Left"){
+			shakeNoise = new Vector3(.5f,0,0);
 		}
-		if (Input.GetKeyDown (KeyCode.D)|| Input.GetKeyDown(KeyCode.RightArrow) || myswipe == "Right" /*|| mykeysimulator.D*/) {
-			tiletotest = currenttile;
-			if (canmove == true) {
-				firstmove = true;
-			}
-			while (canmove == true) {
-				character_direction = "Right";
-				this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0,180,0));
-				tiletotest += Vector3.right;
-				FindTileTag ();
-				ActOnTile ();
-			}
-			//mykeysimulator.D = false;
+		if(shakeDirection == "Right"){
+			shakeNoise = new Vector3(-.5f,0,0);
+		}
+		if(nextaction == "Up_Action"){
+			shakeNoise = new Vector3(0,0,-.5f);
+		}
+		if(nextaction == "Down_Action"){
+			shakeNoise = new Vector3(0,0,.5f);
+		}
+		if(nextaction == "Left_Action"){
+			shakeNoise = new Vector3(.5f,0,0);
+		}
+		if(nextaction == "Right_Action"){
+			shakeNoise = new Vector3(-.5f,0,0);
 		}
 	}
-	/*void FindTileTag(){
-		Collider2D[] colliders = Physics2D.OverlapCircleAll(tiletotest, .1f); ///Presuming the object you are testing also has a collider 0 otherwise{
-		if(colliders.Length == 0){
-				istiletaken = true;
-				outofmap = true;
-		}
-		else{
-			foreach (Collider2D component in colliders) {
-				if (component.tag == "Ground") {
-					tileobject = component.gameObject;
-					tilescript = tileobject.GetComponent<TileHandler> ();
-					istiletaken = tilescript.isTaken;
-				} 
+	void QWERTYMove(){
+		if(!LevelManager.isdragging){
+			if (Input.GetKeyDown (KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow) || myswipe == "Up" /*|| mykeysimulator.W*/ ) {
+				tiletotest = currenttile;
+//				Debug.Log(tiletotest);
+				if (canmove == true) {
+					hasstopped = false;
+					firstmove = true;
+					boop = false;
+					MenuButton.CloseMenu();
+				}
+				tilenumber = 0;
+				while (canmove == true) {
+					character_direction = "Up";
+					this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0,90,0));
+					tiletotest += Vector3.forward;
+					FindTileTag ();
+					ActOnTile ();
+					tilenumber++;
+				}
+				//mykeysimulator.W = false;
 			}
-		}
-	}*/
-	void FindTileTag(){
-		Debug.Log("FINDING TAG");
-		//Collider2D[] colliders = Physics2D.OverlapCircleAll(tiletotest, .1f); ///Presuming the object you are testing also has a collider 0 otherwise{
-		
-//		Debug.Log((int)tiletotest.x + "+" + -(int)tiletotest.z);
-		//Debug.Log(LevelBuilder.tiles[-2,5]);
-		tilescript = LevelBuilder.tiles[(int)tiletotest.x,-(int)tiletotest.z];
-		Debug.Log(tilescript.type);
-//		Debug.Log(tilescript.type);
-		if(tilescript == null){
-			Debug.Log("square null");
-				istiletaken = true;
-				outofmap = true;
-				Debug.Log("no collider");
+			if (Input.GetKeyDown (KeyCode.A)|| Input.GetKeyDown(KeyCode.LeftArrow) || myswipe == "Left" /*|| mykeysimulator.A*/) {
+				tiletotest = currenttile;
+				if (canmove == true) {
+					hasstopped = false;
 
+					firstmove = true;
+					boop = false;
+					MenuButton.CloseMenu();
+				}
+				tilenumber = 0;
+				while (canmove == true) {	
+					character_direction = "Left";
+					this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0,0,0));
+					tiletotest += Vector3.left;
+					FindTileTag ();
+					ActOnTile ();
+					tilenumber++;
+	//				Debug.Log(canmove);
+
+				}
+				//mykeysimulator.A = false;
+			}
+			if (Input.GetKeyDown (KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow) || myswipe == "Down" /*|| mykeysimulator.S */) {
+				tiletotest = currenttile;
+				if (canmove == true) {
+					hasstopped = false;
+					firstmove = true;
+					boop = false;
+					MenuButton.CloseMenu();
+				}
+				tilenumber =0;
+				while (canmove == true) {
+					character_direction = "Down";
+					this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0,270,0));
+					tiletotest += Vector3.back;
+					FindTileTag ();
+					ActOnTile ();
+					tilenumber++;
+				}
+				//mykeysimulator.S = false;
+			}
+			if (Input.GetKeyDown (KeyCode.D)|| Input.GetKeyDown(KeyCode.RightArrow) || myswipe == "Right" /*|| mykeysimulator.D*/) {
+				tiletotest = currenttile;
+				if (canmove == true) {
+					hasstopped = false;
+					firstmove = true;
+					boop = false;
+					MenuButton.CloseMenu();
+				}
+				tilenumber = 0;
+				while (canmove == true) {
+					character_direction = "Right";
+					this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0,180,0));
+					tiletotest += Vector3.right;
+					FindTileTag ();
+					ActOnTile ();
+					tilenumber++;
+				}
+				//mykeysimulator.D = false;
+			}			
+		}
+		
+	}
+
+	void FindTileTag(){
+
+		if(inside()){
+				tilescript = LevelBuilder.tiles[(int)tiletotest.x,-(int)tiletotest.z];
+				istiletaken = tilescript.isTaken;			
 		}
 		else{
-			/*
-			foreach (Collider2D component in colliders) {
-				if (component.tag == "Ground") {
-					tileobject = component.gameObject;
-					tilescript = tileobject.GetComponent<TileHandler> ();
-					istiletaken = tilescript.isTaken;
-				} */
-			//tileobject = LevelBuilder.tiles[(int)tiletotest.x, (int)tiletotest.z].tileObj;	
-			//istiletaken = LevelBuilder.tiles[(int)tiletotest.x, (int)tiletotest.z].isTaken;
-			istiletaken = tilescript.isTaken;
-			
+				istiletaken = true;
+				outofmap = true;
 		}
+		
+	}
+	public bool inside(){
+		Debug.Log("x is " + tiletotest.x + "y is" + tiletotest.z);
+		Debug.Log(LevelBuilder.totaldimension);
+		if((int)tiletotest.x>=0 && (int)tiletotest.x < LevelBuilder.totaldimension && 
+			-(int)tiletotest.z>=0 && -(int)tiletotest.z < LevelBuilder.totaldimension){
+			return true;
+		}
+		else 
+		return false;
 	}
 	void Movement(){  
 		//check for input when its your turn.
@@ -313,22 +395,26 @@ public class PlayerMovement : MonoBehaviour {
 		}
 		//if the desired tile is not the place you're standing in it moves there
 		if (currenttile != transform.position && beingdragged == false) {
-//			Debug.Log("move");
 			GoalBehaviour.readytomove = true;
 			transform.position = Vector3.MoveTowards (transform.position, currenttile, Time.deltaTime * speed); 
 			cantakeinput = false;
 			Swiping.mydirection = "Null";
 		}
 	}
+	void SpawnStatue(){
+		LevelBuilder.starttransform.transform.GetChild(0).gameObject.SetActive(true);
+	}
 	void Count(){
+		Debug.Log(canmove + "CANMOVE");
 		if(firstmove == true && canmove == true){
 			if(TurnCounter.turncount == 0){
-				Debug.Log("Anim");
-				LevelBuilder.starttransform.GetComponentInChildren<Animator>().SetInteger("Phase",1);
+				//LevelBuilder.starttransform.GetComponentInChildren<Animator>().SetInteger("Phase",1);
+				SpawnStatue();
 			}
 			TurnCounter.turncount++;
-//			Debug.Log (TurnCounter.turncount);
-			ProgressBar.TakeTurn(TurnCounter.turncount);
+			Debug.Log("TURNINGTURNINGTURNING AHOOOOOOOGA");
+			TG.TakeTurn(TurnCounter.turncount);
+			DotHandler.TakeTurn(TurnCounter.turncount);
 		}
 		if(firstmove == true){
 			firstmove = false;
@@ -336,6 +422,7 @@ public class PlayerMovement : MonoBehaviour {
 		RatingBehaviour.CalculateRating ();
 	}
 	void PopSeed(string type){
+		SpawnStatue();
 		Debug.Log(type);
 		Debug.Log(tilescript.seedType);
 		Debug.Log(tiletotest.x + " " + tiletotest.z);
@@ -396,24 +483,37 @@ public class PlayerMovement : MonoBehaviour {
 		lastSeed.GetComponent<Dragger>().playert = this.gameObject.transform;
 	}
 	//Individual Behaviours to be stored in the following.
-	void ActOnTile(){
-		/*if (istiletaken == false) {
-			//move and keep moving i	f theres nothing but ice
-			Count ();
-			currenttile = tiletotest;
-		} */
 
-//			Debug.Log(tilescript.type);
+
+	void ActOnTile(){
+		Swiping.mydirection = "Null";
 			if(outofmap == true){
 				canmove = false;
 				outofmap = false;
 			}
+
 			else if (tilescript.type == "Ice"){
 				Count ();
 				currenttile = tiletotest;				
 			}
 			else if (tilescript.type == "Wall" || tilescript.type == "Start") {
-				//the desired tile is the previous one and u stop looking for next tiles.
+				Vector3 overlapV3 = tiletotest;	
+				Debug.Log(tiletotest);
+				Collider[] colliders = Physics.OverlapSphere(overlapV3, .5f);
+				Debug.Log("LF PEDRO");
+				foreach (Collider component in colliders) {
+					if (component.tag == "Pedro") {
+						Debug.Log("Pedro");
+						wallToHit = component.gameObject;
+						wallToHit.GetComponent<Animator>().ResetTrigger("Hit");
+					} 
+					if (component.tag == "PedroSeed") {
+						Debug.Log("PedroSeed");
+						wallToHit = component.transform.GetChild(0).gameObject;
+						wallToHit.GetComponent<Animator>().ResetTrigger("Hit");
+					} 
+				}
+
 				canmove = false;
 				Debug.Log("canmove is false now");
 				Count ();
@@ -423,7 +523,20 @@ public class PlayerMovement : MonoBehaviour {
 				if (TurnCounter.turncount == 0) {
 					Debug.Log("0 turns");
 					canmove = false;
-				} else {
+				} 
+				else {
+					if(transform.position == currenttile){
+						longgoal = false;
+					}
+					else{
+						longgoal = true;
+					}
+					if(tilenumber == 0){
+						GoalBehaviour.goaling = true;
+						this.transform.GetChild(0).GetComponent<Animator>().SetInteger("Phase", 2);
+						StartCoroutine(animationController.Disappear(.4f));
+						speed = 3;
+					}
 					Count ();
 					currenttile = tiletotest;
 					canmove = false;
@@ -441,11 +554,7 @@ public class PlayerMovement : MonoBehaviour {
 			} else if (tilescript.type == "Wood") {
 				Count ();
 				currenttile = tiletotest;
-				//Debug.Log ("Pink");
-				//canmove = true;
 				if(tilescript.isSideways!= null){
-					//Count ();
-					//currenttile = tiletotest;
 					canmove = false;
 					nextaction = tilescript.isSideways+ "_Action";
 					Debug.Log(nextaction);
@@ -458,59 +567,37 @@ public class PlayerMovement : MonoBehaviour {
 					canmove = false;
 					nextaction = "Left_Action";
 					isspeeding = true;
-
-			
-				
 			} else if (tilescript.type == "Right") {
-
 					Count ();
 					currenttile = tiletotest;
 					canmove = false;
 					nextaction = "Right_Action";
 					isspeeding = true;
-
 			} else if (tilescript.type == "Up") {
-
 					Count ();
 					currenttile = tiletotest;
 					canmove = false;
 					nextaction = "Up_Action";
 					isspeeding = true;
-	
-
 			} else if (tilescript.type == "Down") {
-
 					Count ();
 					currenttile = tiletotest;
 					canmove = false;
 					nextaction = "Down_Action";
 					isspeeding = true;
-
-
 			} else if (tilescript.type == "Fragile") {
 				Count ();
 				currenttile = tiletotest;
 				lastFragile = tilescript.tileObj;
 				Vector3 overlapV3 = new Vector3(currenttile.x, currenttile.y, currenttile.z);
-				//Debug.Log(overlapV3);
 				Collider[] colliders = Physics.OverlapSphere(overlapV3, .5f);
 				foreach (Collider component in colliders) {
 					if (component.tag == "Fragile") {
-						Debug.Log("Fragile");
-						Debug.Log(component);
-						//tileobject = component.gameObject;
-						//MeshRenderer tilerenderer = tileobject.GetComponentInChildren<MeshRenderer> ();
-						//tilerenderer.material.color = fragilered;
 						component.GetComponent<FragileBehaviour>().readytolava = true;
 						component.GetComponent<FragileBehaviour>().player = this.gameObject;
-						Debug.Log(component.GetComponent<FragileBehaviour>().player);	
-						//component.GetComponent<FragileProperties>().myred = fragilered;
-
 					} 
 				}
 				if(tilescript.isSideways!= null){
-					//Count ();
-					//currenttile = tiletotest;
 					canmove = false;
 					nextaction = tilescript.isSideways+ "_Action";
 					Debug.Log(nextaction);
@@ -535,39 +622,20 @@ public class PlayerMovement : MonoBehaviour {
 			else if (tilescript.type == "Seed") {
 				currenttile = tiletotest;
 				lastSeed = tilescript.tileObj;
-				//Debug.Log("Check");
-				//tilescript.type = tilescript.seedType;
+				Debug.Log(tilescript.tileObj);
 				PopSeed(tilescript.seedType);
-				//tilescript.seedType = "SeededTile";
-				//Vector3 scale = lastSeed.GetComponent<Dragger>().myshrinker.transform.localScale;
-				//scale.Set(.33f,.33f,.33f);
-
-				//lastSeed.GetComponent<Dragger>().myshrinker.transform.localScale = scale;
+				Count();
 				
-				//Debug.Log(lastSeed.GetComponent<Dragger>().myshrinker.transform.localScale);//lastSeed.GetComponent<Transform>().localscale.y = 1;
-				//myseedbehaviour = lastSeed.GetComponent<Seed_Behaviour> ();
-				//myseedbehaviour.Unseed ();
+				if(tilescript.isSideways!= null){
 
-
+					canmove = false;
+					nextaction = tilescript.isSideways+ "_Action";
+					Debug.Log(nextaction);
+					isspeeding = true;				
+				}
 			} else if (tilescript.type == "Boss") {
 				currenttile = tiletotest;
 				canmove = false;
-				
-
-				/*if (character_direction == "Up") {
-					Boss_Behaviour.bosstile.y++;
-				}
-				if (character_direction == "Right") {
-					Boss_Behaviour.bosstile.x++;
-				}
-				if (character_direction == "Left") {
-					Boss_Behaviour.bosstile.x--;
-				}
-				if (character_direction == "Down") {
-					Boss_Behaviour.bosstile.y--;
-				}*/
-
-
 			}
 				else {
 				Debug.Log(tilescript.type);
@@ -576,15 +644,58 @@ public class PlayerMovement : MonoBehaviour {
 			}
 			Count ();
 	}
+
+	public void CheckAchievement(){
+			if(LevelManager.levelnum == 40){
+				PlayServices.UnlockWorldAchievement(1);
+			}
+			if(LevelManager.levelnum == 80){
+				PlayServices.UnlockWorldAchievement(2);
+			}
+			if(LevelManager.levelnum == 120){
+				PlayServices.UnlockWorldAchievement(3);
+			}
+			if(LevelManager.levelnum == 160){
+				PlayServices.UnlockWorldAchievement(4);
+			}
+	}
 	IEnumerator PopWin(){
-		yield return new WaitForSeconds(1);
-		levelWonBoard.SetActive (true);
-
-
+		CheckAchievement();
+		if(longgoal){
+			yield return new WaitForSeconds(.5f);
+			levelWonBoard.SetActive (true);
+			if(MenuButton.open){
+				MenuButton.CloseMenu();
+			}
+		}
+		else{
+			yield return new WaitForSeconds(.62f);	
+			levelWonBoard.SetActive (true);
+			if(MenuButton.open){
+				MenuButton.CloseMenu();
+			}
+		}
 	}
+
+
 	IEnumerator PopLose(){
-		yield return new WaitForSeconds(.4f);
-		LevelLostBoard.SetActive (true);
-
+		float fadetime = 1.5f;
+		float initpos = 0;
+		float finalpos = -4;
+		bool hasdowned = false;
+		for(float t = 0.0f; t<fadetime; t+= Time.deltaTime){
+			float normalizedTime = t/fadetime;
+			transform.position = new Vector3(transform.position.x, Mathf.Lerp(initpos,finalpos,normalizedTime), transform.position.z);
+			if(transform.position.y < -1.5f && !hasdowned && !LevelBuilder.resetting){
+				hasdowned = true;
+				LevelLostBoard.SetActive (true);
+				if(MenuButton.open){
+					MenuButton.CloseMenu();
+				}
+			}
+			yield return null;
+		}
 	}
+
+
 }
