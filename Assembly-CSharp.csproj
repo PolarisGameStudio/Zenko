@@ -348,6 +348,9 @@
      <Compile Include="Assets\Scripts\TurnGraphics.cs" />
      <Compile Include="Assets\Scripts\XYPad.cs" />
      <Compile Include="Assets\SfxHandler.cs" />
+     <Compile Include="Assets\TextModulator.cs" />
+     <Compile Include="Assets\Tutorial_Handler.cs" />
+     <Compile Include="Assets\TutorialHandler.cs" />
      <Compile Include="Assets\UIMonster.cs" />
      <Compile Include="Assets\VolumeSliders.cs" />
      <None Include="Assets\StreamingAssets\Level-7.txt" />
