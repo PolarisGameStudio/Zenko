@@ -351,6 +351,7 @@
      <Compile Include="Assets\TextModulator.cs" />
      <Compile Include="Assets\Tutorial_Handler.cs" />
      <Compile Include="Assets\TutorialHandler.cs" />
+     <Compile Include="Assets\UI stuff\zenko_PKT_v003\TutorialDictionary.cs" />
      <Compile Include="Assets\UIMonster.cs" />
      <Compile Include="Assets\VolumeSliders.cs" />
      <None Include="Assets\StreamingAssets\Level-7.txt" />
