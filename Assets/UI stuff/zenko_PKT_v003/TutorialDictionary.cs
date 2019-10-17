@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +6,7 @@ public class TutorialDictionary : MonoBehaviour
 {
 	public static TutorialDictionary Instance;
 	public static Dictionary<int,string[]> tutDic = new Dictionary<int,string[]>();
+	public static bool initialized;
 
 	string[] tut_1 = new string[]{"Hello there!, my name is Zenko, or is it?" , "Do this over there"};
 	string[] tut_2 = new string[]{"This is level 2"};
@@ -15,7 +16,9 @@ public class TutorialDictionary : MonoBehaviour
 
 	void Awake(){
 		Instance = this;
+		if (!initialized)
 		PopulateDictionary();
+		initialized = true;
 	}
 
 	public void PopulateDictionary(){

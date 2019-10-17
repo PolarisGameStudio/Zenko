@@ -265,6 +265,7 @@ public class LevelBuilder : MonoBehaviour {
 	}*/
 	public void drawNormal(int levelnumber){
 		Debug.Log(levelnumber);
+		TutorialHandler.Instance.TutorialCheck(levelnumber);
 		pieceHolder.reset();
 		LevelManager.piecetiles = new List<Transform>();
 		LevelManager.myhints = new List<Vector2>();
