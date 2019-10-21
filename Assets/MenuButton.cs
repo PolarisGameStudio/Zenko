@@ -52,10 +52,15 @@ public class MenuButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler{
                 buttons[i].SetActive(open);
             }
             if(MenuButton.open){
+                LevelManager.isdragging = false;
+
                 myrt.localPosition = new Vector3 (myrt.localPosition.x,-410,0);
                 StartCoroutine(RotateRing(-30, .2f));
             }
             else{
+                Swiping.canswipe = false;
+                LevelManager.configging = true;
+                LevelManager.isdragging = true;
                 myrt.localPosition = new Vector3 (myrt.localPosition.x,0,0);
                 StartCoroutine(RotateRing(30, .2f));
             }
@@ -121,15 +126,16 @@ public class MenuButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler{
             yield return null; // makes the loop wait until next frame to continue
     }
     public void toggleCongifMenu(){
+
         ConfigMenu.SetActive(true);
-        Swiping.canswipe = false;
         if(open){
             toggleMenu();
         }
-        LevelManager.configging = true;
         //set menu to back only.
     }
     public void closeConfigMenu(){
+        LevelManager.isdragging = false;
+
         ConfigMenu.SetActive(false);
         Swiping.canswipe = true;
         Swiping.mydirection = "Null";

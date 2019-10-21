@@ -382,7 +382,7 @@ public class SceneLoading : MonoBehaviour {
 		if(MenuButton.open){
 			MenuButton.open = false;
 		}
-		CameraController.Fade(.2f,1f);
+		CameraController.Fade(.2f,1f, LevelMenu.FindHighestSolved());
 	}
 	public int getCurFirst(int highest){
 		int candidate = 1;
@@ -408,7 +408,7 @@ public class SceneLoading : MonoBehaviour {
 		transform.Find("MenuHolder").Find("Menu").gameObject.SetActive(true);
 		transform.Find("MenuHolder").Find("CloseLevel_Box").gameObject.SetActive(false);
 		GameModeHandler.TurnOn();		
-		CameraController.Fade(.2f,0.4f);
+		CameraController.Fade(.2f,0.4f, LevelMenu.FindHighestSolved());
 	}
 	public void GoToWorldSelect(){
 			SceneManager.LoadScene (1);

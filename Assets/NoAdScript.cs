@@ -16,8 +16,11 @@ public class NoAdScript : MonoBehaviour
     {
        // Debug.Log(LevelManager.adFree);
         if(LevelManager.adFree){
+        
         	//this.gameObject.SetActive(false);
             this.GetComponent<Image>().color = Color.blue;
+            this.gameObject.SetActive(false);
+
         }
         if(LevelManager.adFree == false){
             this.GetComponent<Image>().color = Color.white;

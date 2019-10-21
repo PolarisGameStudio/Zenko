@@ -127,6 +127,8 @@ public class Dragger : MonoBehaviour {
 			}	
 	 		LevelManager.isdragging = true;
 			Cursor.visible = false;
+			Debug.Log("just onmouseupdcanswipeoff");
+
 			Swiping.canswipe = false;
 			offset = gameObject.transform.position - Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 15));
 			//Cursor.visible = false;
@@ -421,6 +423,10 @@ public void OnMouseDrag()
 
  	if(TurnBehaviour.turn == 0 && !LevelManager.configging)
  	{
+		Swiping.canswipe = true;
+ 		LevelManager.isdragging = false;
+
+		Debug.Log("just onmouseupdcanswipe");
 		Debug.Log(PlaneBehavior.tilex);
 		Debug.Log(PlaneBehavior.tiley);
 		GetComponent<BoxCollider>().enabled = true;
@@ -559,10 +565,9 @@ public void OnMouseDrag()
 		}
 		//save began touch 2d point
 		//Swiping.firstPressPos = new Vector2(t.position.x,t.position.y);
-		Swiping.canswipe = true;
+		//Swiping.canswipe = true;
 		currenttile = null;
 		pasttile = null;
- 		LevelManager.isdragging = false;
 
 		/*if (TurnBehaviour.turn == 0) {
    			 Cursor.visible = true;

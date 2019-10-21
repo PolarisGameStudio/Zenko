@@ -29,7 +29,7 @@ public class GameModeHandler : MonoBehaviour
 	        	foreach(GameObject go in initialObjects){
 	        		go.SetActive(false);
 	        	}
-                CameraController.Fade(.2f,.4f);
+                CameraController.Fade(.2f,.4f, 1);
 	        }        	
         }
     }

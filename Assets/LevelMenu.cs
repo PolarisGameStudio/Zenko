@@ -114,6 +114,7 @@ public class LevelMenu : MonoBehaviour {
 	public void AssignWorldText(int curfirst){
 		int world = Mathf.FloorToInt((curfirst-1)/40)  + 1;
 		worldTextHolder.GetComponent<Text>().text = "World " + world.ToString();	
+		CameraController.Fade(.2f,1f, curfirst);
 
 	}
 	void addFunction(){

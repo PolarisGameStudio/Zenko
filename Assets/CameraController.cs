@@ -14,6 +14,10 @@ public class CameraController : MonoBehaviour {
 	public Text screenText;
 	public static CameraController Instance;
 	public GameObject gameModeBackground;
+	public Sprite World1;
+	public Sprite World2;
+	public Sprite World3;
+	public Sprite World4;
 	// Use this for initialization
 	void Awake () {
 		topdown = false;
@@ -67,8 +71,32 @@ public class CameraController : MonoBehaviour {
 		tempColor.a = alphaPercentage;
 		image.color = tempColor;
 	}
-	public static void Fade(float time, float alphaPercentage){
+	public static void Fade(float time, float alphaPercentage, int place){
+		Instance.gameModeBackground.GetComponent<Image>().sprite = Instance.CheckBackground(place);
 		Instance.StartCoroutine(Instance.FadeBackgroundTo(time,alphaPercentage));
+
+	}
+	private Sprite CheckBackground(int place){
+		int world = Mathf.FloorToInt((place-1)/40)  + 1;
+		Debug.Log("Current World is " + world);
+		switch(world){
+			case 1:
+				return World1;
+			break;
+
+			case 2:
+				return World2;
+			break;
+
+			case 3:
+				return World3;
+			break;
+
+			case 4:
+				return World4;
+			break;
+		}
+		return World4;
 	}
 	public void ChangeResolution(){
 		Debug.Log(Screen.currentResolution);
