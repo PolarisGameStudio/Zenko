@@ -100,6 +100,10 @@ public class RatingBehaviour : MonoBehaviour {
 		}
 		currentrating = newrating;
 	}
+
+	static public void AssignWinMessage(){
+		
+	}
 	public IEnumerator ModulateColor(float fadetime, Color color){
 			for(float t = 0.0f; t<fadetime; t+= Time.deltaTime){
 				float normalizedTime = t/fadetime;

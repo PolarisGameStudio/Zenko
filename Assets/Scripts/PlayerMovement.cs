@@ -282,7 +282,7 @@ public class PlayerMovement : MonoBehaviour {
 		}
 	}
 	void QWERTYMove(){
-		Debug.Log(LevelManager.isdragging);
+		//Debug.Log(LevelManager.isdragging);
 		if(!LevelManager.isdragging){
 			if (Input.GetKeyDown (KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow) || myswipe == "Up" /*|| mykeysimulator.W*/ ) {
 				hasmoved = true;
@@ -667,6 +667,7 @@ public class PlayerMovement : MonoBehaviour {
 	}
 	IEnumerator PopWin(){
 		CheckAchievement();
+		int world = Mathf.FloorToInt((LevelManager.levelnum-1)/40)  + 1;
 		if(longgoal){
 			yield return new WaitForSeconds(.5f);
 			levelWonBoard.SetActive (true);
@@ -681,6 +682,8 @@ public class PlayerMovement : MonoBehaviour {
 				MenuButton.CloseMenu();
 			}
 		}
+		WinMessage.Instance.AssignMessage(world, RatingPopUp.myrating);
+
 	}
 
 

@@ -87,6 +87,9 @@ public class MusicHandler : MonoBehaviour
         thisMH.source1.loop = true;
     	thisMH.source1.Play();
     }
+    public static void FindNewTiTle(){
+        
+    }
     public static void PlayInitialLoop()
     {
         thisMH.source1.loop =false;

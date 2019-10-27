@@ -51,6 +51,8 @@ public class RatingPopUp : MonoBehaviour {
 		//AddCurrency(previousrating, myrating);
 
 		//starholder = gameObject.transform.Find("Ribbon");
+
+
 		if(myrating == 1){
 			starholder.transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(true);
 		}

@@ -9,8 +9,10 @@ public class TutorialDictionary : MonoBehaviour
 	public static bool initialized;
 
     string[] tut_1 = new string[]{"Hi!, My name is Zenko", "Help me get to that shiny flower by sliding your finger through the screen."};
-	string[] tut_2 = new string[]{"This place is a mess! I can't get to my goal like this", "Touch the pieces and arrange them on the board", "BEFORE moving me to the flower!"};
+	string[] tut_2 = new string[]{"That moving piece over there is Pedro", "Place him in the right place so I can use him as a wall", "BEFORE moving me to the flower!"};
+	//string[] tut_2 = new string[]{"This place is a mess! I can't get to my goal like this", "Touch the pieces and arrange them on the board", "BEFORE moving me to the flower!"};
 	string[] tut_3 = new string[]{"I wouldn't want to end in that hole over there!" };
+
 	string[] tut_6 = new string[]{"Those friendly cube like creatures are called Pedro by the way."};
 	string[] tut_12 = new string[]{"That yellow flower just started to grow!","That must mean a new spring perhaps isn't too far away", "Don't put anything over it!, better to preserve it"};
     string[] tut_41 = new string[]{"Those blue birds are called Icarus", "They send a strong air current in front of them", "If I go near I'll change my direction!"};
