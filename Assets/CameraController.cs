@@ -18,6 +18,11 @@ public class CameraController : MonoBehaviour {
 	public Sprite World2;
 	public Sprite World3;
 	public Sprite World4;
+	public Sprite[] WorldTitles;
+	public Sprite[] WorldNumber;
+	public Sprite[] WorldName;
+	public GameObject WorldTitle;
+	public GameObject World;
 	// Use this for initialization
 	void Awake () {
 		topdown = false;
@@ -72,12 +77,38 @@ public class CameraController : MonoBehaviour {
 		image.color = tempColor;
 	}
 	public static void Fade(float time, float alphaPercentage, int place){
-		Instance.gameModeBackground.GetComponent<Image>().sprite = Instance.CheckBackground(place);
+		int world = Mathf.FloorToInt((place-1)/40)  + 1;
+		Instance.gameModeBackground.GetComponent<Image>().sprite = Instance.CheckBackground(world);
+		Instance.WorldTitle.GetComponent<Image>().sprite = Instance.CheckWorldName(world);
+		Instance.World.GetComponent<Image>().sprite = Instance.CheckWorldSprite(world);
+		Instance.World.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = Instance.CheckWorldNumber(world);
 		Instance.StartCoroutine(Instance.FadeBackgroundTo(time,alphaPercentage));
 
 	}
-	private Sprite CheckBackground(int place){
-		int world = Mathf.FloorToInt((place-1)/40)  + 1;
+	public static void Fade(float time, float alphaPercentage){
+		Instance.StartCoroutine(Instance.FadeBackgroundTo(time,alphaPercentage));
+
+	}
+	private Sprite CheckWorldNumber(int world){
+		if(world>4){
+			return WorldNumber[3];
+		}
+		return WorldNumber[world-1];		
+	}	
+	private Sprite CheckWorldSprite(int world){
+		if(world>4){
+			return WorldName[3];
+		}
+		return WorldName[world-1];		
+	}
+	private Sprite CheckWorldName(int world){
+		Debug.Log("Current World is " + world);
+		if(world>4){
+			return WorldTitles[3];
+		}
+		return WorldTitles[world-1];
+	}
+	private Sprite CheckBackground(int world){
 		Debug.Log("Current World is " + world);
 		switch(world){
 			case 1:

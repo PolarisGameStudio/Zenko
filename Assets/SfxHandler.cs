@@ -11,7 +11,7 @@ public class SfxHandler : MonoBehaviour
     public AudioClip hole_Sound;
     public AudioClip victory_Sound;
     public AudioClip seed_Pop;
-
+    static AudioSource[] MusicSource;
     public bool playingVictory;
 
     static public SfxHandler Instance;
@@ -21,6 +21,7 @@ public class SfxHandler : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(this.gameObject);
+            MusicSource = GameObject.Find("Music Source").GetComponents<AudioSource>();
             return;
         }
         Destroy(this.gameObject);
@@ -54,18 +55,35 @@ public class SfxHandler : MonoBehaviour
     }
     public void PlayVictory(){
         if(!playingVictory){
-            playingVictory = true;
-            source.PlayOneShot(victory_Sound,.2f);
-            StartCoroutine(Reseter());
             DuckMusic(2);
-
+            source.PlayOneShot(victory_Sound,.3f);
+            playingVictory = true;
+            StartCoroutine(Reseter());
         }
     }
     private void DuckMusic(float time){
-
+        StartCoroutine(Duck(2,4));
+    }
+    private IEnumerator Duck(float fadeouttime, float fadeintime){
+        float initvalue = MusicSource[0].volume;
+        for(float i=0; i<fadeouttime; i+=Time.deltaTime){
+            MusicSource[0].volume = Mathf.Lerp(initvalue, 0, i/fadeouttime);
+            MusicSource[1].volume = Mathf.Lerp(initvalue, 0, i/fadeouttime);
+            yield return null;
+        }
+        MusicSource[0].volume = 0;
+        MusicSource[1].volume = 0;
+        for(float i = 0; i<fadeintime; i+= Time.deltaTime){
+            MusicSource[0].volume = Mathf.Lerp(0, initvalue, i/fadeintime);
+            MusicSource[1].volume = Mathf.Lerp(0, initvalue, i/fadeintime);  
+            yield return null;          
+        }
+            MusicSource[0].volume = initvalue;
+            MusicSource[1].volume = initvalue;         
+        yield return null;
     }
     public IEnumerator Reseter(){
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(6);
         playingVictory = false;
     }
 }

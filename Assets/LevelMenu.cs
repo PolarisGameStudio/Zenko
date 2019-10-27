@@ -15,12 +15,13 @@ public class LevelMenu : MonoBehaviour {
 	public GameObject highestMarker;
 	public static LevelMenu Instance;
 	public GameObject worldTextHolder;
-
+	public GameObject buttonBack;
+	public GameObject buttonForward;
 	// Use this for initialization
-	// void Awake(){
-	// 	Instance = this;
-	// 	Debug.Log(LevelMenu.Instance);
-	// }
+	void Awake(){
+		Instance = this;
+		//Debug.Log(LevelMenu.Instance);
+	}
 	void Start () {
 		levels=20;
 		sl = mc.GetComponent<SceneLoading>();
@@ -110,11 +111,25 @@ public class LevelMenu : MonoBehaviour {
 		levelbuttons.Add(curbutton);
 	}
 
+	public void CheckDownUpButtons(int curfirst){
+		Debug.Log(curfirst);
+		if(curfirst == 1){
+			buttonBack.SetActive(false);
+			buttonForward.SetActive(true);
+		}
+		else if(curfirst == 141){
+			buttonBack.SetActive(true);
+			buttonForward.SetActive(false);
+		}
+		else{
+			buttonBack.SetActive(true);
+			buttonForward.SetActive(true);
+		}
+	}
 
 	public void AssignWorldText(int curfirst){
-		int world = Mathf.FloorToInt((curfirst-1)/40)  + 1;
-		worldTextHolder.GetComponent<Text>().text = "World " + world.ToString();	
 		CameraController.Fade(.2f,1f, curfirst);
+		CheckDownUpButtons(curfirst);
 
 	}
 	void addFunction(){

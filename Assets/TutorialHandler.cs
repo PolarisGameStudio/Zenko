@@ -23,8 +23,8 @@ public class TutorialHandler : MonoBehaviour
 
     }
     public void PrepareTutorial(string[] lineBank, int curLine){
-        LevelManager.isdragging = true;
         Swiping.canswipe = false;
+        LevelManager.isdragging = true;
         LevelManager.configging = true;
         Debug.Log("PREPARING TUTORIAL");
         this.gameObject.transform.GetChild(0).gameObject.SetActive(true);
@@ -60,10 +60,11 @@ public class TutorialHandler : MonoBehaviour
     public void TutorialClosebutton(){
         LevelManager.configging = false;
         LevelManager.isdragging = false;
-        Swiping.canswipe = true;
         this.gameObject.transform.GetChild(0).gameObject.SetActive(false);
         this.gameObject.transform.GetChild(1).gameObject.SetActive(false);
         CloseButton.SetActive(false);
         NextButton.SetActive(false);
+        Swiping.canswipe = true;
+        Swiping.mydirection = "Null";
     }
 }

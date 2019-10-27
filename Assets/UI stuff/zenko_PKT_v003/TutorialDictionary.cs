@@ -9,10 +9,10 @@ public class TutorialDictionary : MonoBehaviour
 	public static bool initialized;
 
     string[] tut_1 = new string[]{"Hi!, My name is Zenko", "Help me get to that shiny flower by sliding your finger through the screen."};
-	string[] tut_2 = new string[]{"This place is a mess!", "Touch the pieces and arrange them on the board", "BEFORE moving me to the flower!"};
+	string[] tut_2 = new string[]{"This place is a mess! I can't get to my goal like this", "Touch the pieces and arrange them on the board", "BEFORE moving me to the flower!"};
 	string[] tut_3 = new string[]{"I wouldn't want to end in that hole over there!" };
-	string[] tut_4 = new string[]{"Those cubes are called Pedro by the way."};
-	string[] tut_12 = new string[]{"Awww, that little flower just started to grow", "Don't put anything over it!"};
+	string[] tut_6 = new string[]{"Those friendly cube like creatures are called Pedro by the way."};
+	string[] tut_12 = new string[]{"That yellow flower just started to grow!","That must mean a new spring perhaps isn't too far away", "Don't put anything over it!, better to preserve it"};
     string[] tut_41 = new string[]{"Those blue birds are called Icarus", "They send a strong air current in front of them", "If I go near I'll change my direction!"};
     string[] tut_50 = new string[]{"If I stop over those fragile tiles, I'll fall!"};
     string[] tut_59 = new string[]{"I think the air is faster than the fragile tiles..."};
@@ -32,7 +32,7 @@ public class TutorialDictionary : MonoBehaviour
 		tutDic.Add(1,tut_1);
 		tutDic.Add(2,tut_2);
 		tutDic.Add(3,tut_3);
-		tutDic.Add(4,tut_4);
+		tutDic.Add(6,tut_6);
 		tutDic.Add(12,tut_12);
 		tutDic.Add(41,tut_41);
 		tutDic.Add(50,tut_50);
@@ -41,6 +41,7 @@ public class TutorialDictionary : MonoBehaviour
 		tutDic.Add(81,tut_81);
 		tutDic.Add(121,tut_121);
 		tutDic.Add(122,tut_122);
+		tutDic.Add(160,tut_160);
 	}
 
 }

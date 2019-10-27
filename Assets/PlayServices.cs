@@ -192,7 +192,7 @@ public class PlayServices : MonoBehaviour
         else
             LevelManager.adFree = false;
 
-        GameObject.Find("highestsolved").GetComponent<Text>().text = dataArray[0]; //this currently displays 1 or 0 for paid or not
+        //GameObject.Find("highestsolved").GetComponent<Text>().text = dataArray[0]; //this currently displays 1 or 0 for paid or not
         for(int i=1; i<dataArray.Length-1;i++){
             int rating = int.Parse(dataArray[i]);
             if(rating>1){

@@ -44,25 +44,30 @@ public class MenuButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler{
 
 	public void toggleMenu(){
         Debug.Log("menu");
-            MenuButton.open = !MenuButton.open;
             Debug.Log(levelText.GetComponent<RectTransform>());
             RectTransform myrt = levelText.GetComponent<RectTransform>();
             
-            for(int i=0; i<buttons.Count; i++){
-                buttons[i].SetActive(open);
-            }
+
             if(MenuButton.open){
                 LevelManager.isdragging = false;
+                Swiping.canswipe = true;
+                LevelManager.configging = false;
+                LevelManager.isdragging = false;
 
+                myrt.localPosition = new Vector3 (myrt.localPosition.x,0,0);
+                StartCoroutine(RotateRing(30, .2f));
+            }
+            else{
+                //Swiping.canswipe = false;
+               // LevelManager.configging = true;
+                //LevelManager.isdragging = true;
                 myrt.localPosition = new Vector3 (myrt.localPosition.x,-410,0);
                 StartCoroutine(RotateRing(-30, .2f));
             }
-            else{
-                Swiping.canswipe = false;
-                LevelManager.configging = true;
-                LevelManager.isdragging = true;
-                myrt.localPosition = new Vector3 (myrt.localPosition.x,0,0);
-                StartCoroutine(RotateRing(30, .2f));
+            MenuButton.open = !MenuButton.open;
+
+            for(int i=0; i<buttons.Count; i++){
+                buttons[i].SetActive(open);
             }
 	}
 	public void toggleMenuWorld(){

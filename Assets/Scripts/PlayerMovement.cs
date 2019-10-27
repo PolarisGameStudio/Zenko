@@ -159,6 +159,7 @@ public class PlayerMovement : MonoBehaviour {
 				canmove = true;
 				isspeeding = false;
 				hasstopped = true;
+				if(hasmoved)
 				SfxHandler.Instance.PlayWallHit();
 			}  
 			else if (nextaction == "Goal_Action") {
@@ -281,8 +282,10 @@ public class PlayerMovement : MonoBehaviour {
 		}
 	}
 	void QWERTYMove(){
+		Debug.Log(LevelManager.isdragging);
 		if(!LevelManager.isdragging){
 			if (Input.GetKeyDown (KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow) || myswipe == "Up" /*|| mykeysimulator.W*/ ) {
+				hasmoved = true;
 				tiletotest = currenttile;
 //				Debug.Log(tiletotest);
 				if (canmove == true) {
@@ -303,6 +306,7 @@ public class PlayerMovement : MonoBehaviour {
 				//mykeysimulator.W = false;
 			}
 			if (Input.GetKeyDown (KeyCode.A)|| Input.GetKeyDown(KeyCode.LeftArrow) || myswipe == "Left" /*|| mykeysimulator.A*/) {
+				hasmoved = true;
 				tiletotest = currenttile;
 				if (canmove == true) {
 					hasstopped = false;
@@ -325,6 +329,7 @@ public class PlayerMovement : MonoBehaviour {
 				//mykeysimulator.A = false;
 			}
 			if (Input.GetKeyDown (KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow) || myswipe == "Down" /*|| mykeysimulator.S */) {
+				hasmoved = true;
 				tiletotest = currenttile;
 				if (canmove == true) {
 					hasstopped = false;
@@ -344,6 +349,7 @@ public class PlayerMovement : MonoBehaviour {
 				//mykeysimulator.S = false;
 			}
 			if (Input.GetKeyDown (KeyCode.D)|| Input.GetKeyDown(KeyCode.RightArrow) || myswipe == "Right" /*|| mykeysimulator.D*/) {
+				hasmoved = true;
 				tiletotest = currenttile;
 				if (canmove == true) {
 					hasstopped = false;

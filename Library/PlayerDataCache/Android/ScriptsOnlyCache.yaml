@@ -209,13 +209,13 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 14768}
     - Class: 114
-      Script: {instanceID: 32638}
+      Script: {instanceID: 35466}
     - Class: 114
-      Script: {instanceID: 32806}
+      Script: {instanceID: 35470}
     - Class: 114
-      Script: {instanceID: 32810}
+      Script: {instanceID: 35474}
     - Class: 114
-      Script: {instanceID: 32814}
+      Script: {instanceID: 35478}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -580,7 +580,7 @@ ScriptsOnlyBuild:
     className: TutorialHandler
   - hash:
       serializedVersion: 2
-      Hash: 42c80c7a33443db94b124c4b708b7e3d
+      Hash: bcb057f6577dc4f53a18a79951154e8c
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: CameraController
@@ -1644,4 +1644,4 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/WorldSelect.unity
   - Assets/Level.unity
-  playerPath: /Users/bernardolimon/Desktop/ZenkoApk/Zenko124.aab
+  playerPath: /Users/bernardolimon/Desktop/ZenkoApk/Zenko125.aab
