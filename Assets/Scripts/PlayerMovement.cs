@@ -607,7 +607,8 @@ public class PlayerMovement : MonoBehaviour {
 					canmove = false;
 					nextaction = tilescript.isSideways+ "_Action";
 					Debug.Log(nextaction);
-					isspeeding = true;				
+					isspeeding = true;			
+	
 				}
 				else{
 

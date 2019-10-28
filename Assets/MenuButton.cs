@@ -44,22 +44,23 @@ public class MenuButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler{
 
 	public void toggleMenu(){
         Debug.Log("menu");
+        if(Swiping.canswipe){
             Debug.Log(levelText.GetComponent<RectTransform>());
             RectTransform myrt = levelText.GetComponent<RectTransform>();
-            
-
             if(MenuButton.open){
-                LevelManager.isdragging = false;
-                Swiping.canswipe = true;
-                LevelManager.configging = false;
-                LevelManager.isdragging = false;
+                if(!LevelManager.configging){
+                    LevelManager.isdragging = false;
+                    Swiping.canswipe = true;
+                    LevelManager.configging = false;
+                    LevelManager.isdragging = false;                   
+                }
+
 
                 myrt.localPosition = new Vector3 (myrt.localPosition.x,0,0);
                 StartCoroutine(RotateRing(30, .2f));
             }
             else{
                 //Swiping.canswipe = false;
-               // LevelManager.configging = true;
                 //LevelManager.isdragging = true;
                 myrt.localPosition = new Vector3 (myrt.localPosition.x,-410,0);
                 StartCoroutine(RotateRing(-30, .2f));
@@ -68,8 +69,11 @@ public class MenuButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler{
 
             for(int i=0; i<buttons.Count; i++){
                 buttons[i].SetActive(open);
-            }
+            }            
+        }
+            
 	}
+
 	public void toggleMenuWorld(){
             MenuButton.open = !MenuButton.open;
             for(int i=0; i<buttons.Count; i++){
@@ -85,7 +89,10 @@ public class MenuButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler{
         ringObject.GetComponent<RectTransform>().eulerAngles = new Vector3(0, 0, target);
     }
     public void closeMenu(){
-
+        open = false;
+        for(int i=0; i<buttons.Count; i++){
+            buttons[i].SetActive(open);
+        }       
     }
 /*	public IENumerator buttonAction(){
 
@@ -133,6 +140,10 @@ public class MenuButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler{
     public void toggleCongifMenu(){
 
         ConfigMenu.SetActive(true);
+        LevelManager.configging = true;
+        Swiping.canswipe = false;
+        LevelManager.isdragging = true;
+
         if(open){
             toggleMenu();
         }

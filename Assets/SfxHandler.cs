@@ -37,32 +37,33 @@ public class SfxHandler : MonoBehaviour
         
     }
     public void PlayWallHit(){
-        source.PlayOneShot(pedro_Hit, .7f);
+        source.PlayOneShot(pedro_Hit, 1f);
     }
     public void PlayFragile(){
         source.PlayOneShot(fragile[Random.Range(0,fragile.Length)], .2f);
     }
     public void PlayIcarus(){
+        //Debug.Log("ICARIRIRI");
         source.PlayOneShot(icarus_Blow[Random.Range(0,icarus_Blow.Length)], 1);
     }
     public void PlayHole(){
-        source.PlayOneShot(hole_Sound, .2f);
+        source.PlayOneShot(hole_Sound, .4f);
 
-        DuckMusic(1);
+        StartCoroutine(Duck(.5f, 1f));
     }
     public void PlaySeedPop(){
-        source.PlayOneShot(seed_Pop, .4f);
+        source.PlayOneShot(seed_Pop, .8f);
     }
     public void PlayVictory(){
         if(!playingVictory){
             DuckMusic(2);
-            source.PlayOneShot(victory_Sound,.3f);
+            source.PlayOneShot(victory_Sound,.9f);
             playingVictory = true;
             StartCoroutine(Reseter());
         }
     }
     private void DuckMusic(float time){
-        StartCoroutine(Duck(2,4));
+        StartCoroutine(Duck(time,time*2));
     }
     private IEnumerator Duck(float fadeouttime, float fadeintime){
         float initvalue = MusicSource[0].volume;

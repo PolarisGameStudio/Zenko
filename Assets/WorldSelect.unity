@@ -6328,7 +6328,7 @@ PrefabInstance:
     - target: {fileID: 4655859050310922485, guid: 95f28b1b2b021423fa5eebc072e890ac,
         type: 3}
       propertyPath: buttons.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4655859050310922485, guid: 95f28b1b2b021423fa5eebc072e890ac,
         type: 3}
@@ -17289,7 +17289,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300000, guid: 4e76e684bf5c94a1c8d9435113b6b497, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1

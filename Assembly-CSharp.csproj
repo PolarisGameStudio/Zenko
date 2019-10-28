@@ -348,6 +348,8 @@
      <Compile Include="Assets\Scripts\TurnGraphics.cs" />
      <Compile Include="Assets\Scripts\XYPad.cs" />
      <Compile Include="Assets\SfxHandler.cs" />
+     <Compile Include="Assets\SizeModulator.cs" />
+     <Compile Include="Assets\StarModulator.cs" />
      <Compile Include="Assets\TextModulator.cs" />
      <Compile Include="Assets\Timer.cs" />
      <Compile Include="Assets\Tutorial_Handler.cs" />
@@ -355,6 +357,7 @@
      <Compile Include="Assets\UI stuff\zenko_PKT_v003\TutorialDictionary.cs" />
      <Compile Include="Assets\UIMonster.cs" />
      <Compile Include="Assets\VolumeSliders.cs" />
+     <Compile Include="Assets\WinMessage.cs" />
      <None Include="Assets\StreamingAssets\Level-7.txt" />
      <None Include="Assets\StreamingAssets\Ch3_3piece.txt" />
      <None Include="Assets\StreamingAssets\Map.txt" />

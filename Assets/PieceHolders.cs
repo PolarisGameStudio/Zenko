@@ -632,14 +632,17 @@ public class PieceHolders : MonoBehaviour {
 		//make sure draggers are off and cant move fox.
 		//turn off draggers
 		//
-		//yield return new WaitForSeconds(.1f);		
-		Debug.Log("CALLED WRAPPER");
-		for(int i = 0; i <placedpieces.Count; i++){
-			placedpieces[i].gameObject.GetComponent<BoxCollider>().enabled = false;
-		}
-		LevelBuilder.hintboard.SetActive(false);
-		yield return new WaitForSeconds(.1f);
-		Hint();
+		//yield return new WaitForSeconds(.1f);
+		if(!LevelManager.configging)	{
+			Debug.Log("CALLED WRAPPER");
+			for(int i = 0; i <placedpieces.Count; i++){
+				placedpieces[i].gameObject.GetComponent<BoxCollider>().enabled = false;
+			}
+			LevelBuilder.hintboard.SetActive(false);
+			yield return new WaitForSeconds(.1f);
+			Hint();			
+		}	
+
 	}
 
 

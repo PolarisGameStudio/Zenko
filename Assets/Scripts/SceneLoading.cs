@@ -380,7 +380,8 @@ public class SceneLoading : MonoBehaviour {
 		transform.Find("MenuHolder").Find("CloseLevel_Box").gameObject.SetActive(true);
 		transform.Find("MenuHolder").Find("Config").gameObject.SetActive(false);
 		if(MenuButton.open){
-			MenuButton.open = false;
+			MenuButton.thisMB.closeMenu();
+
 		}
 		CameraController.Fade(.2f,1f, LevelMenu.FindHighestSolved());
 		LevelMenu.Instance.CheckDownUpButtons(getCurFirst(LevelMenu.FindHighestSolved()));

@@ -86,8 +86,10 @@ public class MusicHandler : MonoBehaviour
         thisMH.source1.clip = thisMH.titleTheme;
         thisMH.source1.loop = true;
     	thisMH.source1.Play();
+        running = false;
     }
     public static void FindNewTiTle(){
+
         
     }
     public static void PlayInitialLoop()
@@ -95,10 +97,10 @@ public class MusicHandler : MonoBehaviour
         thisMH.source1.loop =false;
         thisMH.source1.Stop();
         thisMH.source2.Stop();
-    	thisMH.source1.clip = thisMH.levelLoops[0];
+        currentLoop = Random.Range(0,3);
+    	thisMH.source1.clip = thisMH.levelLoops[currentLoop];
         thisMH.source1.Play();
         lastBeginning = AudioSettings.dspTime;
-        currentLoop = 1;
         thisMH.FindNewLoopAndTime();
         running = true;
     }

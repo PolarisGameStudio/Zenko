@@ -13,7 +13,7 @@ public class TextModulator : MonoBehaviour
     void Start()
     {
        	s = 23;
-       	v = 69;
+       	v = 82;
     }
 
     // Update is called once per frame
