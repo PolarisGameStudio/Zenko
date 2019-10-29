@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 5466976}
   - component: {fileID: 5466975}
   - component: {fileID: 5466974}
+  - component: {fileID: 5466977}
   m_Layer: 8
   m_Name: TapToStart
   m_TagString: Untagged
@@ -152,7 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.6463366, g: 0.82, b: 0.6314, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -161,7 +162,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 80
+    m_FontSize: 90
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -198,8 +199,23 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -152.49}
-  m_SizeDelta: {x: 2133, y: 100}
+  m_SizeDelta: {x: 2133, y: 165}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &5466977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5466973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b80175479f614d98a1fa1e358378a9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  s: 0
+  v: 0
+  text: {fileID: 5466974}
 --- !u!1 &47276210
 GameObject:
   m_ObjectHideFlags: 0
@@ -685,7 +701,7 @@ MonoBehaviour:
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 125, y: 125}
-  m_Spacing: {x: 120, y: 40}
+  m_Spacing: {x: 120, y: 60}
   m_Constraint: 1
   m_ConstraintCount: 5
 --- !u!114 &79962979
@@ -5070,6 +5086,7 @@ GameObject:
   - component: {fileID: 654711554}
   - component: {fileID: 654711553}
   - component: {fileID: 654711555}
+  - component: {fileID: 654711556}
   m_Layer: 0
   m_Name: Adventure Mode
   m_TagString: Untagged
@@ -5194,6 +5211,21 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &654711556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 654711551}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b80175479f614d98a1fa1e358378a9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  s: 0
+  v: 0
+  text: {fileID: 654711553}
 --- !u!1001 &685322663
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10838,6 +10870,7 @@ GameObject:
   - component: {fileID: 1202152261}
   - component: {fileID: 1202152260}
   - component: {fileID: 1202152262}
+  - component: {fileID: 1202152263}
   m_Layer: 0
   m_Name: Puzzle of the Day
   m_TagString: Untagged
@@ -10962,6 +10995,21 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &1202152263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1202152258}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b80175479f614d98a1fa1e358378a9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  s: 0
+  v: 0
+  text: {fileID: 1202152260}
 --- !u!1 &1208382690 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 796855561, guid: 21afbef644c6740df825b001b1e494b1,
@@ -11005,6 +11053,9 @@ MonoBehaviour:
   victory_Sound: {fileID: 8300000, guid: bb43685add89940378be59b8ac0ff465, type: 3}
   seed_Pop: {fileID: 8300000, guid: 7d799576ed5c048528ce6bad0551cb1f, type: 3}
   playingVictory: 0
+  grabSound: {fileID: 0}
+  dropSound: {fileID: 0}
+  draggingSound: {fileID: 0}
 --- !u!82 &1208382692 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 796855563, guid: 21afbef644c6740df825b001b1e494b1,
@@ -17260,6 +17311,7 @@ GameObject:
   - component: {fileID: 2129494518}
   - component: {fileID: 2129494517}
   - component: {fileID: 2129494516}
+  - component: {fileID: 2129494519}
   m_Layer: 0
   m_Name: ZenkoTitleImage
   m_TagString: Untagged
@@ -17324,6 +17376,18 @@ RectTransform:
   m_AnchoredPosition: {x: 510, y: 200}
   m_SizeDelta: {x: 1280, y: 719}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2129494519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2129494515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f71ffcbb005ff41fb96ff0748519d9a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2145333532
 GameObject:
   m_ObjectHideFlags: 0

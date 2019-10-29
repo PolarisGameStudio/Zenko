@@ -21,7 +21,7 @@ public class Rotator : MonoBehaviour
     void FixedUpdate()
     {
         timer += Time.deltaTime;
-		this.GetComponent<RectTransform>().sizeDelta = new Vector2 (rotation + oscillate(timer,5, 1), 719);        
+		this.GetComponent<RectTransform>().eulerAngles = new Vector3(0,rotation + oscillate(timer,3, 12), 0);        
     }
     float oscillate(float time, float speed, float scale)
     {

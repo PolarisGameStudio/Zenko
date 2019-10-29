@@ -319,6 +319,7 @@
      <Compile Include="Assets\PlayServices.cs" />
      <Compile Include="Assets\ProgressBar.cs" />
      <Compile Include="Assets\Purchaser.cs" />
+     <Compile Include="Assets\Rotator.cs" />
      <Compile Include="Assets\Scripts\AssignCamera.cs" />
      <Compile Include="Assets\Scripts\AssignCanvasAndButton.cs" />
      <Compile Include="Assets\Scripts\CanvasBehaviour.cs" />

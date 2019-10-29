@@ -13,6 +13,9 @@ public class SfxHandler : MonoBehaviour
     public AudioClip seed_Pop;
     static AudioSource[] MusicSource;
     public bool playingVictory;
+    public AudioClip grabSound;
+    public AudioClip dropSound;
+    public AudioClip draggingSound;
 
     static public SfxHandler Instance;
     // Start is called before the first frame update
@@ -47,9 +50,9 @@ public class SfxHandler : MonoBehaviour
         source.PlayOneShot(icarus_Blow[Random.Range(0,icarus_Blow.Length)], 1);
     }
     public void PlayHole(){
-        source.PlayOneShot(hole_Sound, .4f);
+        source.PlayOneShot(hole_Sound, .3f);
 
-        StartCoroutine(Duck(.5f, 1f));
+        //StartCoroutine(Duck(.1f, 1f));
     }
     public void PlaySeedPop(){
         source.PlayOneShot(seed_Pop, .8f);
