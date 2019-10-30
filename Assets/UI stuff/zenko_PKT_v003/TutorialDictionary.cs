@@ -7,6 +7,7 @@ public class TutorialDictionary : MonoBehaviour
 	public static TutorialDictionary Instance;
 	public static Dictionary<int,string[]> tutDic = new Dictionary<int,string[]>();
 	public static bool initialized;
+	public static Dictionary<int,string[]> randomTutDic = new Dictionary<int,string[]>();
 
     string[] tut_1 = new string[]{"Hi!, My name is Zenko", "Help me get to that shiny flower by sliding your finger through the screen."};
 	string[] tut_2 = new string[]{"That moving piece over there is Pedro", "Drag him into the right place so I can use him as a wall", "BEFORE moving me to the flower!"};
@@ -24,6 +25,18 @@ public class TutorialDictionary : MonoBehaviour
     string[] tut_121 = new string[]{"That bag with the arrow has an Icarus sleeping inside!", "I'll wake it once I go over it."};
     string[] tut_122 = new string[]{"You can tell by the arrow in the bag, the direction it'll blow when it wakes!"};
 	string[] tut_160 = new string[]{"This is the end of our adventure for now", "Be sure to come back soon for more levels and new friends!"};
+	
+    //Choose one of the dialogs to happen after 30s of innactivity
+
+    string[] random1 = new string[] {"Focus! You can do it!"};
+    string[] random2 = new string[] {"If you have trouble arranging the pieces, press that button with a bulb over there!"};
+    string[] random3 = new string[] {"If you're stuck, Restart!"};
+    //Choose one of the dialogs to happen after 5 consecutive deaths
+    string[] random4 = new string[] {"You can restart the level and ask for a hint once I'm back in my starting position"};
+    string[] random5 = new string[] {"We almost made it! Keep trying!"};
+    string[] random6 = new string[] {"This time we'll make it, I'm sure!"};
+
+
 	void Awake(){
 		Instance = this;
 		if (!initialized)

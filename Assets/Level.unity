@@ -510,6 +510,7 @@ GameObject:
   - component: {fileID: 79215299}
   - component: {fileID: 79215298}
   - component: {fileID: 79215301}
+  - component: {fileID: 79215302}
   m_Layer: 5
   m_Name: MessageHolder
   m_TagString: Canvas
@@ -621,6 +622,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 292cedef6e836444caea4958ee7024a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &79215302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 79215296}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 233388900c86f4262a87c417869e643e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  s: 20
+  v: 80
+  image: {fileID: 79215299}
 --- !u!1 &131400723
 GameObject:
   m_ObjectHideFlags: 0
