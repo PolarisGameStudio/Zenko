@@ -38,7 +38,7 @@ public class PlaneBehavior : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		if(!PieceHolders.hinting){
 			if(LevelManager.isdragging){
 				PlaneRay();
@@ -135,7 +135,7 @@ public class PlaneBehavior : MonoBehaviour {
 		if(currenty > LevelBuilder.totaldimension-1){
 			currenty = LevelBuilder.totaldimension-1;
 		}
-		Debug.Log(currentx + " currents " + currenty);
+		//Debug.Log(currentx + " currents " + currenty);
 		//Debug.Log("0" + "0");
 		int i = 1;
 		while(hoverCandidates.Count ==0){
@@ -202,21 +202,21 @@ public class PlaneBehavior : MonoBehaviour {
 		int checkingx = currentx+xtocheck;
 		int checkingy = currenty + ytocheck;
 		if(checkingx < 0 || checkingx >= LevelBuilder.totaldimension){
-			Debug.Log("out of place at " + checkingx + "x");
+			//Debug.Log("out of place at " + checkingx + "x");
 			return;
 		}
 		if(checkingy < 0 || checkingy >= LevelBuilder.totaldimension){
-			Debug.Log("out of place at " + checkingy + "y");
+			//Debug.Log("out of place at " + checkingy + "y");
 			return;
 		}
 		//Debug.Log("good to go at " + checkingx + "" + checkingy); 
 		if(LevelBuilder.tiles[checkingx, checkingy].isTaken == false){
-			Debug.Log("Possible Tile at " + checkingx + " " + checkingy);
+			//Debug.Log("Possible Tile at " + checkingx + " " + checkingy);
 			MeasureAndStore(checkingx,checkingy);
 			//Measure and Add to List<Distances> or something
 		}
 		else{
-			Debug.Log("The tile at " + checkingx + " " + checkingy + " is taken");
+			//Debug.Log("The tile at " + checkingx + " " + checkingy + " is taken");
 		}
 		//PlaneBehavior.planePos
 	}

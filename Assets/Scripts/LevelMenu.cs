@@ -47,13 +47,13 @@ public class LevelMenu : MonoBehaviour {
 				curHighest = i;
 			}	
 		}
-		Debug.Log(curHighest+1 + " IS CURHIGHEST");
+		//Debug.Log(curHighest+1 + " IS CURHIGHEST");
 		return curHighest+1;	
 	}
 
 	void createButton(int num){
 		GameObject curbutton = Instantiate(buttonprefab, new Vector3(0, 0, 0), Quaternion.identity);
-		curbutton.transform.parent = this.transform;	
+		curbutton.transform.SetParent(this.transform, false);
 		curbutton.transform.localScale = new Vector3(1,1,1);
 		Button btn = curbutton.GetComponent<Button>();
 		buttonnum = num;
@@ -110,10 +110,11 @@ public class LevelMenu : MonoBehaviour {
 	}
 
 	public void CheckDownUpButtons(int curfirst){
-		Debug.Log(curfirst);
+		//Debug.Log(curfirst);
 		if(curfirst == 1){
 			buttonBack.SetActive(false);
 			buttonForward.SetActive(true);
+			return;
 		}
 		else if(curfirst == 141){
 			buttonBack.SetActive(true);
@@ -154,7 +155,7 @@ public class LevelMenu : MonoBehaviour {
 		AssignWorldText(currentfirst);
 	}
 	public void populateMenu(){
-		Debug.Log(currentfirst + " is starting first");
+		//Debug.Log(currentfirst + " is starting first");
 		if(currentfirst==0 | currentfirst==null){
 			currentfirst = 1;
 		}

@@ -24,7 +24,7 @@ public class RatingBehaviour : MonoBehaviour {
 		if(instance == null)
 		{
 			instance = this;
-			DontDestroyOnLoad(this.gameObject);
+			//DontDestroyOnLoad(this.gameObject);
 			return;
 		}
 		Destroy(this.gameObject);

@@ -52,7 +52,7 @@ public class Dragger : MonoBehaviour {
 		}
 	}
 
-	void Update(){
+	void FixedUpdate(){
 		//Debug.Log(Input.touchCount);
 		if(readyToPop){
 			if(Vector3.Distance(LevelManager.playert.position, transform.position) < .7){///FIX THIS
@@ -325,7 +325,7 @@ public void OnMouseDrag()
  }
 
  void CheckAvailableTile(Vector3 position){
- 	Debug.Log("Checkingavail at " + position);
+ 	//Debug.Log("Checkingavail at " + position);
  	Collider[] colliders = Physics.OverlapSphere(new Vector3(position.x,0,position.z), .5f);	
 	foreach (Collider component in colliders) {
 		if(component.tag == "Tile"){
@@ -355,7 +355,7 @@ public void OnMouseDrag()
 
 		pasttile = currenttile;
 		particle.SetActive(true);
-		Debug.Log("lastgoodtile is" + lastgoodtile.transform.position);
+		//Debug.Log("lastgoodtile is" + lastgoodtile.transform.position);
 		particle.transform.position = new Vector3(lastgoodtile.transform.position.x, particle.transform.position.y, lastgoodtile.transform.position.z);//change this
 
 		if(myType == "Wall" || myType == "Up" ||myType == "Down" ||myType == "Right" ||myType == "Left" ){
@@ -403,7 +403,7 @@ public void OnMouseDrag()
 		pasttile = null;
 		PlaneBehavior.ClosestTile();
 		lastgoodtile = PlaneBehavior.highlightedTile;
-		Debug.Log(particle.transform.position + " + " + lastgoodtile.transform.position);
+		//Debug.Log(particle.transform.position + " + " + lastgoodtile.transform.position);
 		if(particle.transform.position.x != lastgoodtile.transform.position.x || particle.transform.position.z != lastgoodtile.transform.position.z ){
 		SfxHandler.Instance.Drag();
 		particle.transform.position = new Vector3(lastgoodtile.transform.position.x, particle.transform.position.y, lastgoodtile.transform.position.z);//change this

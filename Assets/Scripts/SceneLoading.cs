@@ -24,7 +24,7 @@ public class SceneLoading : MonoBehaviour {
 		string teststring = "WallSeed";
 		Debug.Log(teststring.Length);
 		Debug.Log(teststring.Substring(teststring.Length-4,4));
-		Application.targetFrameRate = 30;
+		//Application.targetFrameRate = 30;
 		if (!level){ //if loading menu, this is pointless and relies on bugs, try a public bool.
 			MusicHandler.PlayTitleTheme();
 		}

@@ -32,7 +32,7 @@ public class CameraController : MonoBehaviour {
 		Instance = this;
 	}
 	void Start(){
-		Application.targetFrameRate = 30;
+		//Application.targetFrameRate = 30;
 
 	}
 	
@@ -102,14 +102,14 @@ public class CameraController : MonoBehaviour {
 		return WorldName[world-1];		
 	}
 	private Sprite CheckWorldName(int world){
-		Debug.Log("Current World is " + world);
+		//Debug.Log("Current World is " + world);
 		if(world>4){
 			return WorldTitles[3];
 		}
 		return WorldTitles[world-1];
 	}
 	private Sprite CheckBackground(int world){
-		Debug.Log("Current World is " + world);
+		//Debug.Log("Current World is " + world);
 		switch(world){
 			case 1:
 				return World1;

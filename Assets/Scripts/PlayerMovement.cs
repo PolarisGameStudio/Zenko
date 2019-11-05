@@ -389,8 +389,8 @@ public class PlayerMovement : MonoBehaviour {
 		
 	}
 	public bool inside(){
-		Debug.Log("x is " + tiletotest.x + "y is" + tiletotest.z);
-		Debug.Log(LevelBuilder.totaldimension);
+		//Debug.Log("x is " + tiletotest.x + "y is" + tiletotest.z);
+		//Debug.Log(LevelBuilder.totaldimension);
 		if((int)tiletotest.x>=0 && (int)tiletotest.x < LevelBuilder.totaldimension && 
 			-(int)tiletotest.z>=0 && -(int)tiletotest.z < LevelBuilder.totaldimension){
 			return true;
@@ -415,7 +415,7 @@ public class PlayerMovement : MonoBehaviour {
 		LevelBuilder.starttransform.transform.GetChild(0).gameObject.SetActive(true);
 	}
 	void Count(){
-		Debug.Log(canmove + "CANMOVE");
+		//Debug.Log(canmove + "CANMOVE");
 		if(firstmove == true && canmove == true){
 			if(TurnCounter.turncount == 0){
 				//LevelBuilder.starttransform.GetComponentInChildren<Animator>().SetInteger("Phase",1);
