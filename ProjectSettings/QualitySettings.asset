@@ -4,7 +4,7 @@
 QualitySettings:
   m_ObjectHideFlags: 0
   serializedVersion: 5
-  m_CurrentQuality: 5
+  m_CurrentQuality: 0
   m_QualitySettings:
   - serializedVersion: 2
     name: Very Low
@@ -75,7 +75,8 @@ QualitySettings:
     asyncUploadBufferSize: 4
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
-    excludedTargetPlatforms: []
+    excludedTargetPlatforms:
+    - Android
   - serializedVersion: 2
     name: Medium
     pixelLightCount: 1
@@ -110,7 +111,8 @@ QualitySettings:
     asyncUploadBufferSize: 4
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
-    excludedTargetPlatforms: []
+    excludedTargetPlatforms:
+    - Android
   - serializedVersion: 2
     name: High
     pixelLightCount: 2
@@ -150,6 +152,7 @@ QualitySettings:
     - WebGL
     - Tizen
     - tvOS
+    - Android
   - serializedVersion: 2
     name: Very High
     pixelLightCount: 3
@@ -165,7 +168,7 @@ QualitySettings:
     skinWeights: 4
     textureQuality: 0
     anisotropicTextures: 2
-    antiAliasing: 2
+    antiAliasing: 0
     softParticles: 1
     softVegetation: 1
     realtimeReflectionProbes: 1
@@ -190,6 +193,7 @@ QualitySettings:
     - Tizen
     - Samsung TV
     - iPhone
+    - Android
   - serializedVersion: 2
     name: Ultra
     pixelLightCount: 4
@@ -230,6 +234,7 @@ QualitySettings:
     - Tizen
     - tvOS
     - iPhone
+    - Android
   m_PerPlatformDefaultQuality:
     Android: 0
     Samsung TV: 0

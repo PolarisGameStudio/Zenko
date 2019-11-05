@@ -107,7 +107,7 @@ public class PlayerMovement : MonoBehaviour {
 		}		
 	}
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		if(canmove){
 			this.transform.GetChild(0).GetComponent<Animator>().SetInteger("Phase", 0);
 
@@ -149,6 +149,7 @@ public class PlayerMovement : MonoBehaviour {
 				Debug.Log("Hole");
 				StartCoroutine(PopLose());
 				StartCoroutine(animationController.Disappear(.3f));
+				SfxHandler.Instance.StopSlide();
 				SfxHandler.Instance.PlayHole();
 
 			}
@@ -159,8 +160,10 @@ public class PlayerMovement : MonoBehaviour {
 				canmove = true;
 				isspeeding = false;
 				hasstopped = true;
-				if(hasmoved)
+				if(hasmoved){
 				SfxHandler.Instance.PlayWallHit();
+				SfxHandler.Instance.StopSlide();					
+				}
 			}  
 			else if (nextaction == "Goal_Action") {
 				RatingPopUp.GiveRating ();//stores to playerprefs
@@ -169,6 +172,7 @@ public class PlayerMovement : MonoBehaviour {
 				StartCoroutine(PopWin());
 			}			
 			else if (nextaction == "Hole_Action") {
+				SfxHandler.Instance.StopSlide();
 				SfxHandler.Instance.PlayHole();
 				this.enabled=false;
 				Debug.Log("Hole");
@@ -417,6 +421,7 @@ public class PlayerMovement : MonoBehaviour {
 				//LevelBuilder.starttransform.GetComponentInChildren<Animator>().SetInteger("Phase",1);
 				SpawnStatue();
 			}
+			SfxHandler.Instance.PlaySlide();
 			TurnCounter.turncount++;
 			Debug.Log("TURNINGTURNINGTURNING AHOOOOOOOGA");
 			TG.TakeTurn(TurnCounter.turncount);
@@ -552,6 +557,7 @@ public class PlayerMovement : MonoBehaviour {
 				}
 			} else if (tilescript.type == "Hole") {
 				//you'll stop in the tile you checked and stop moving.
+				Count();
 				currenttile = tiletotest;
 				canmove = false;
 
@@ -702,6 +708,7 @@ public class PlayerMovement : MonoBehaviour {
 				if(MenuButton.open){
 					MenuButton.CloseMenu();
 				}
+				LoseMessage.Instance.AssignLoseSprite(Mathf.FloorToInt((LevelManager.levelnum-1)/40)  + 1);
 			}
 			yield return null;
 		}

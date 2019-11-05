@@ -116,6 +116,7 @@ public class Dragger : MonoBehaviour {
 
 
 		if ((TurnBehaviour.turn == 0 || LevelBuilder.resetting) & !LevelManager.configging) {
+			SfxHandler.Instance.PickUp();
 			PlaneBehavior.readyToDrop = false;
 
 			//PieceHolders.placedpieces.Remove(this);
@@ -347,6 +348,8 @@ public void OnMouseDrag()
 			transform.GetChild(1).gameObject.SetActive(true);	
 			if(PlaneBehavior.readyToDrop){
 				lastgoodtile = currenttile;	
+				SfxHandler.Instance.Drag();
+
 			}	
 		}
 
@@ -362,6 +365,7 @@ public void OnMouseDrag()
 
 		if(LevelBuilder.tiles[(int)position.x, -(int)position.z].isTaken){
 			PlaneBehavior.ClosestTile();
+			//SfxHandler.Instance.Drag();
 			lastgoodtile = PlaneBehavior.highlightedTile;	
 			particle.transform.position = new Vector3(lastgoodtile.transform.position.x, particle.transform.position.y, lastgoodtile.transform.position.z);//change this
 		
@@ -388,17 +392,26 @@ public void OnMouseDrag()
 		// particle.transform.GetChild(1).GetComponent<Renderer>().enabled = false;
 		// particle.transform.GetChild(2).GetComponent<Renderer>().enabled = false;
 		particle.transform.GetChild(0).gameObject.SetActive(true);;
+		//GameObject cur = pasttile;
+		//Debug.Log(cur);
 		if(pasttile!= null){
 			pasttile.GetComponent<MouseOverer>().Leave();
 
 		}
+
 		currenttile = null;
 		pasttile = null;
 		PlaneBehavior.ClosestTile();
 		lastgoodtile = PlaneBehavior.highlightedTile;
+		Debug.Log(particle.transform.position + " + " + lastgoodtile.transform.position);
+		if(particle.transform.position.x != lastgoodtile.transform.position.x || particle.transform.position.z != lastgoodtile.transform.position.z ){
+		SfxHandler.Instance.Drag();
+		particle.transform.position = new Vector3(lastgoodtile.transform.position.x, particle.transform.position.y, lastgoodtile.transform.position.z);//change this
+
+		}
+
 		// lastgoodtile = ClosestTile(position);
 		//ClosestTile(position);
-		particle.transform.position = new Vector3(lastgoodtile.transform.position.x, particle.transform.position.y, lastgoodtile.transform.position.z);//change this
 
 		//particle.transform.position = new Vector3(PlaneBehavior.planePos.x, particle.transform.position.y, PlaneBehavior.planePos.z);
 
@@ -423,6 +436,7 @@ public void OnMouseDrag()
 
  	if(TurnBehaviour.turn == 0 && !LevelManager.configging)
  	{
+ 		SfxHandler.Instance.Drop();
 		Swiping.canswipe = true;
  		LevelManager.isdragging = false;
 

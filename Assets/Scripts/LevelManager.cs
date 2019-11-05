@@ -55,9 +55,7 @@ public class LevelManager : MonoBehaviour {
 		Destroy(this.gameObject);
 
 	}
-	void Update(){
-		//Debug.Log(LevelManager.adFree);
-	}
+
 	void InitializePlayerPrefs(){
 		if (PlayerPrefs.HasKey ("CurrencyLoaded")) {
 			//Debug.Log(PlayerPrefs.GetInt("hintCurrency"));

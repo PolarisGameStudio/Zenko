@@ -37,7 +37,7 @@ public class GoalBehaviour : MonoBehaviour {
 		goaling = false;
 	}
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		//if(myplayer.GetComponent<PlayerMovement>().currenttile != myplayer.transform.position){
 		//	Debug.Log("Moving");
 		//}
@@ -107,6 +107,7 @@ public class GoalBehaviour : MonoBehaviour {
 						//Debug.Log(ydif);
 						if(ydif<1.5){
 							if(-transform.position.z<newy){
+								SfxHandler.Instance.StopSlideVictory();
 								SfxHandler.Instance.PlayVictory();
 
 								Debug.Log("Doing this");
@@ -136,6 +137,7 @@ public class GoalBehaviour : MonoBehaviour {
 								goaling = true;
 //								Debug.Log("Doing this too");
 								myanim.SetInteger("Phase",2);
+								SfxHandler.Instance.StopSlideVictory();
 								SfxHandler.Instance.PlayVictory();
 								AnimateFoxGoal();
 								lastphase = 2;
@@ -191,6 +193,7 @@ public class GoalBehaviour : MonoBehaviour {
 							if(transform.position.x > newx){
 								goaling = true;
 								myanim.SetInteger("Phase",2);
+								SfxHandler.Instance.StopSlideVictory();
 								SfxHandler.Instance.PlayVictory();
 								AnimateFoxGoal();
 								lastphase = 2;								
@@ -212,6 +215,7 @@ public class GoalBehaviour : MonoBehaviour {
 							if(transform.position.x < newx){
 								goaling = true;
 								myanim.SetInteger("Phase",2);
+								SfxHandler.Instance.StopSlideVictory();
 								SfxHandler.Instance.PlayVictory();
 								AnimateFoxGoal();
 								lastphase = 2;								

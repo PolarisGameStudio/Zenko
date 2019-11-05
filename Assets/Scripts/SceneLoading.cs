@@ -13,19 +13,19 @@ public class SceneLoading : MonoBehaviour {
 	public static GameObject gamewon;
 	public static GameObject gamelost;
 	public int testnum;
-	public Text txt;
-	public Text txt2;
+	public GameObject textHolder;
 	Dragger td;
 	Dragger td2;
 	public static SceneLoading Instance;
+	public bool level;
 //	public IceTileHandler myhandler;
 	void Start(){
 		Debug.Log("NEW SCENE LOADING");
 		string teststring = "WallSeed";
 		Debug.Log(teststring.Length);
 		Debug.Log(teststring.Substring(teststring.Length-4,4));
-		Application.targetFrameRate = 60;
-		if (txt2 == null){ //if loading menu, this is pointless and relies on bugs, try a public bool.
+		Application.targetFrameRate = 30;
+		if (!level){ //if loading menu, this is pointless and relies on bugs, try a public bool.
 			MusicHandler.PlayTitleTheme();
 		}
 		else{//if loading level scenew
@@ -45,6 +45,8 @@ public class SceneLoading : MonoBehaviour {
 			RatingBehaviour.InitializeRating();
 //			Debug.Log(LevelManager.levelnum);
 		}
+		//#if Unity_Editor
+		//#endif
 		//GameObject.Find("CurrencyHolder").GetComponentInChildren<Text>().text = GameManager.mycurrency.ToString();
 		
 	}
@@ -61,7 +63,8 @@ public class SceneLoading : MonoBehaviour {
 	public void AssignLevelName(){
 		int world = Mathf.FloorToInt((LevelManager.levelnum-1)/40)  + 1;
 		int levelinworld = LevelManager.levelnum - ((world-1)*40);
-		txt.text = "World " + world.ToString() + "-" + levelinworld.ToString();		
+		WorldName.Instance.AssignLevelName(world, levelinworld);
+		//txt.text = "World " + world.ToString() + "-" + levelinworld.ToString();		
 	}
 	public void LoadScene(int num){
 		Swiping.mydirection = "Null";
@@ -90,26 +93,17 @@ public class SceneLoading : MonoBehaviour {
 		Debug.Log("Next button");
 
 		LevelManager.levelnum++;
-		// int world = Mathf.FloorToInt(LevelManager.levelnum/50)  + 1;
-		// int levelinworld = LevelManager.levelnum - ((world-1)*50);
-		// txt.text = "World " + world.ToString() + "-" + levelinworld.ToString();
 		AssignLevelName();
-		//txt2.text = ("Efficient turns is " + LevelStorer.efficientturns);
-		//LevelManager.levelnum = Random.Range(0,66);
 
 		LevelStorer.UnlockLevel (LevelManager.levelnum);
 		LevelStorer.Lookfor (LevelManager.levelnum);
-		//txt2.text = ("Efficient turns is " + LevelStorer.efficientturns);
 
 		TurnCounter.turncount = 0;
-		//LevelManager.NextLevel (LevelManager.levelnum);
-		//LevelManager.levelnum = Random.Range(0,66);
 		LevelManager.NextLevel(LevelManager.levelnum);
 		TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
 		
 		Swiping.mydirection = "Null";
 		RatingBehaviour.RestartRating();
-		//TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
 
 
 		//myhandler.GiveIce();
@@ -161,7 +155,7 @@ public class SceneLoading : MonoBehaviour {
 		LevelManager.israndom = true;
 		LevelManager.levelnum = Random.Range(1100,1800);
 		Debug.Log(LevelManager.levelnum);
-		txt.text = LevelManager.levelnum.ToString();
+		//txt.text = LevelManager.levelnum.ToString();
 		TurnCounter.turncount = 0;
 		LevelManager.NextRandomLevel();
 		TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
@@ -172,7 +166,7 @@ public class SceneLoading : MonoBehaviour {
 		LevelManager.israndom = true;
 		LevelManager.levelnum = Random.Range(0,50);
 		Debug.Log(LevelManager.levelnum);
-		txt.text = LevelManager.levelnum.ToString();
+		//txt.text = LevelManager.levelnum.ToString();
 		TurnCounter.turncount = 0;
 		LevelManager.NextRandomLevel2();
 		TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
@@ -181,7 +175,7 @@ public class SceneLoading : MonoBehaviour {
 		LevelBuilder.ChangeBackground("Color_A7A46709",new Color(0,0,0,0), .3f);
 
 		Swiping.mydirection = "Null";
-		txt.text = "RANDOM POTD";
+		//txt.text = "RANDOM POTD";
 		TurnCounter.turncount = 0;
 		LevelManager.ispotd = true;
 		LevelManager.NextPotd();
@@ -347,13 +341,13 @@ public class SceneLoading : MonoBehaviour {
 	}
 	public void Plus(){
 		LevelManager.levelnum ++;
-		txt.text = LevelManager.levelnum.ToString();
+		//txt.text = LevelManager.levelnum.ToString();
 
 
 	}
 	public void Minus(){
 		LevelManager.levelnum--;
-		txt.text = LevelManager.levelnum.ToString();
+		//txt.text = LevelManager.levelnum.ToString();
 
 	}
 
