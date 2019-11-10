@@ -43,18 +43,18 @@ public class RatingBehaviour : MonoBehaviour {
 		turnratio = curturns / totturns;
 		if (turnratio <= 1) {
 			rating = 3;
-		} else if (turnratio <= 1.5) {
+		} else if (turnratio < 2) {
 			rating = 2;
-		} else if (turnratio<2){
+		} /*else if (turnratio<2){
 			if(totturns>2){
 				rating = 1;
 			}
-		}
-		else if(turnratio == 2 && totturns<=2){
+		}*/
+		else if(turnratio == 2){
 			rating = 1;
-		}
+		 }
 		else{
-			rating = 0;
+			rating = 1;
 		}
 		if(rating<currentrating){
 			ChangeRating(rating);
@@ -85,6 +85,8 @@ public class RatingBehaviour : MonoBehaviour {
 		if(newrating == 1){
 			star3.GetComponent<Image>().sprite = instance.Rnotstar;
 			star2.GetComponent<Image>().sprite = instance.Mnotstar;
+				instance.StartCoroutine(instance.ModulateColor(.2f, new Color(1,76/255f,76/255f,1)));
+
 		}
 		if(newrating == 0){
 			star1.GetComponent<Image>().sprite = instance.Lnotstar;

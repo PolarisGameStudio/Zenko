@@ -35,9 +35,28 @@ public class SfxHandler : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    public void PlayWallHit(){
+    public void PlayWallHit(int x, int y){
+        Debug.Log(x + " " + y);
         source.PlayOneShot(pedro_Hit, 1f);
+
+        string typeOfWall = FindType(x,y);
+        Debug.Log(typeOfWall);
+
+
     }
+
+    string FindType(int x, int y){
+        return LevelManager.placedPieces[x,y];
+        // for(int i = 0; i<LevelManager.hints.Count; i++){
+        //     Debug.Log(LevelManager.hints[i].x  + " " + LevelManager.hints[i].y);
+        //     if(LevelManager.hints[i].x == x && LevelManager.hints[i].y == y){
+        //         return LevelManager.hints[i].type;
+        //     }
+        // }
+        //return "Empty";
+    }
+
+
     public void PlayFragile(){
         source.PlayOneShot(fragile[Random.Range(0,fragile.Length)], .7f);
     }

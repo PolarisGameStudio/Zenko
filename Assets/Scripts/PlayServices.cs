@@ -44,6 +44,8 @@ public class PlayServices : MonoBehaviour
                 //Debug.Log(instance);
                 LevelStorer.PopulateLevelDictionary(); //load level data int levelstorer.leveldic
                // Debug.Log(PlayerPrefs.GetString(SAVE_NAME));
+                if(!PlayerPrefs.HasKey("PoTD"))
+                    PlayerPrefs.SetInt("PoTD", 0);
                 if(!PlayerPrefs.HasKey(SAVE_NAME))
                     PlayerPrefs.SetString(SAVE_NAME, GameDataToString());
                 if(!PlayerPrefs.HasKey("IsFirstTime"))

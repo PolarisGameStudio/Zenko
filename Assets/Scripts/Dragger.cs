@@ -135,11 +135,12 @@ public class Dragger : MonoBehaviour {
 			//Cursor.visible = false;
 			//Debug.Log (-transform.position.z);
 			//Debug.Log(transform.position.x);
-			Debug.Log(transform.position.x + "" + transform.position.z + "totaldimension" + LevelBuilder.totaldimension);//HERES WHERE THE PROBLEM BE
+			//Debug.Log(transform.position.x + "" + transform.position.z + "totaldimension" + LevelBuilder.totaldimension);//HERES WHERE THE PROBLEM BE
 			//Fix this to avoid untaking wrong tiles when clicking on the 3d object but the planepos somewhere else.
 			if(transform.position.x<LevelBuilder.totaldimension && transform.position.x>0 && -transform.position.z<LevelBuilder.totaldimension && transform.position.z<0){
 				mytile = LevelBuilder.tiles[(int)gameObject.transform.position.x, -(int)gameObject.transform.position.z];
 				mytile.type = "Ice";
+				LevelManager.placedPieces[(int)gameObject.transform.position.x, -(int)gameObject.transform.position.z] = null;
 				Debug.Log("UNTAKING IT at" + (int)gameObject.transform.position.x + -(int)gameObject.transform.position.z + "Type "+ myType);
 				mytile.isTaken = false;
 				//Debug.Log(LevelBuilder.tiles[(int)gameObject.transform.position.x, -(int)gameObject.transform.position.z-1].isTaken);
@@ -307,7 +308,16 @@ public void OnMouseDrag()
 		}
 
 	}
- void placeNormal(){
+ void placeNormal(string t, string sT){
+ 	Debug.Log(t + " " + sT);
+ 	if(t != "Seed"){
+ 	LevelManager.placedPieces[(int)positiontogo.x,-(int)positiontogo.z] = t;
+
+ 	}
+ 	else
+ 	LevelManager.placedPieces[(int)positiontogo.x,-(int)positiontogo.z] = sT;
+
+
  	if(LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].type == "Left" || 
  	LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].type == "Down" ||
  	LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].type == "Up" ||
@@ -466,7 +476,7 @@ public void OnMouseDrag()
 
 			}
 			else{
-				placeNormal();
+				placeNormal(myType, mySeedType);
 				/*LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].type = myType;
 				LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].isTaken = true;
 				LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].tileObj = this.gameObject;*/				
@@ -503,7 +513,7 @@ public void OnMouseDrag()
 
 			}
 			else{
-				placeNormal();
+				placeNormal(myType, mySeedType);
 				/*LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].type = myType;
 				LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].isTaken = true;
 				LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].tileObj = this.gameObject;*/				
@@ -606,6 +616,10 @@ public void OnMouseDrag()
 
 	} 
 	public void placeIcarus(string type, Vector3 target){
+		Vector2 smallPos = new Vector2(target.x, -target.z);
+		Debug.Log(smallPos);
+		LevelManager.placedPieces[(int)smallPos.x,(int)smallPos.y] = type;
+		Debug.Log(LevelManager.placedPieces[(int)smallPos.x,(int)smallPos.y]);
 		if(type == "Left"){
 			LevelBuilder.tiles[(int)target.x, -(int)target.z].type = "Wall";
 			LevelBuilder.tiles[(int)target.x, -(int)target.z].isTaken = true;

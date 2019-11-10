@@ -107,7 +107,7 @@ public class PlayerMovement : MonoBehaviour {
 		}		
 	}
 	// Update is called once per frame
-	void FixedUpdate () {
+	void Update () {
 		if(canmove){
 			this.transform.GetChild(0).GetComponent<Animator>().SetInteger("Phase", 0);
 
@@ -161,7 +161,8 @@ public class PlayerMovement : MonoBehaviour {
 				isspeeding = false;
 				hasstopped = true;
 				if(hasmoved){
-				SfxHandler.Instance.PlayWallHit();
+				Debug.Log(tiletotest);
+				SfxHandler.Instance.PlayWallHit((int)tiletotest.x, (int)-tiletotest.z);
 				SfxHandler.Instance.StopSlide();					
 				}
 			}  

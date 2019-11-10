@@ -22,6 +22,7 @@ public class LevelManager : MonoBehaviour {
 	public static bool readytodraw;
 	public static int worldnum;
 	public static int myefficientturns;
+	public static string[,] placedPieces = new string[10,10];
 	public static List<Vector2> myhints = new List<Vector2>();
 	public static List<string> mypieces = new List<string>();
 	public static List<Transform> piecetiles = new List<Transform>();
@@ -127,7 +128,9 @@ public class LevelManager : MonoBehaviour {
 		hintsgiven = new List<int>();
 		Debug.Log("GONNAGETICE");
 		levelselector.DestroyAllExceptCamera ();
-		levelselector.drawPotd(Random.Range(0,LevelBuilder.startersPotd.Count));
+		//PlayerPrefs.GetInt("PoTD");
+		PlayerPrefs.SetInt("PoTD", PlayerPrefs.GetInt("PoTD") + 1);
+		levelselector.drawPotd(PlayerPrefs.GetInt("PoTD"));
 	}
 
 	public static void ResetLevel(){

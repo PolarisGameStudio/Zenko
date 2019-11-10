@@ -159,7 +159,8 @@ public class LevelBuilder : MonoBehaviour {
 		}
 		levelsPotd = (string[])lines.Clone();
 		if(LevelManager.ispotd){
-			drawPotd(LevelManager.levelnum);
+			Debug.Log(LevelManager.levelnum + " LEVELNUM " );
+			drawPotd(PlayerPrefs.GetInt("PoTD"));
 		}
 	}
 	public IEnumerator initAdventure(){ //feeds Adventure string array from textfile.
@@ -1391,12 +1392,14 @@ public class LevelBuilder : MonoBehaviour {
 		Vector2 tileplace = new Vector2(iceTiles[randomplace].x, iceTiles[randomplace].y);//vector 2 for 2d placement in tiles group
 		Vector3 pieceplace = new Vector3(iceTiles[randomplace].x, 0, -iceTiles[randomplace].y);//vector 3 for gameworld position
 		Tile currenttile = tiles[(int)tileplace.x,(int)tileplace.y];
-
+		if(creaturetype != "Seed")
+			LevelManager.placedPieces[(int)tileplace.x,(int)tileplace.y] = creaturetype;
 		string myseedtype = "Not";
 		if(creaturetype.Length>5){
 			myseedtype = creaturetype.Substring(0,creaturetype.Length-4);
 			creaturetype = creaturetype.Substring(creaturetype.Length-4,4);	
 			Debug.Log("seedtype is " + myseedtype);
+			LevelManager.placedPieces[(int)tileplace.x,(int)tileplace.y] = myseedtype;
 
 		}
 		switch(creaturetype){

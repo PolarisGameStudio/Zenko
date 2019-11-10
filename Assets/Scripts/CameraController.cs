@@ -134,7 +134,7 @@ public class CameraController : MonoBehaviour {
 		//Debug.Log(Screen.currentResolution.x);
 		Debug.Log(Screen.height);
 		Debug.Log(Screen.width);
-		screenText.text = Screen.currentResolution.ToString();
+		//screenText.text = Screen.currentResolution.ToString();
 		Screen.SetResolution(1280,720,true);
 		/*if(Screen.height == 720 || Screen.width == 720){
 			Screen.SetResolution(1280,720,false);
