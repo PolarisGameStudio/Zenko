@@ -17,6 +17,9 @@ public class LevelMenu : MonoBehaviour {
 	public GameObject worldTextHolder;
 	public GameObject buttonBack;
 	public GameObject buttonForward;
+
+	public Image monthSprite;
+	public Image yearSprite;
 	// Use this for initialization
 	void Awake(){
 		Instance = this;
@@ -50,6 +53,66 @@ public class LevelMenu : MonoBehaviour {
 		//Debug.Log(curHighest+1 + " IS CURHIGHEST");
 		return curHighest+1;	
 	}
+	void createPotdButton(int num){
+		GameObject curbutton = Instantiate(buttonprefab, new Vector3(0, 0, 0), Quaternion.identity);
+		curbutton.transform.SetParent(this.transform, false);
+		curbutton.transform.localScale = new Vector3(1,1,1);
+		Button btn = curbutton.GetComponent<Button>();
+		buttonnum = num;
+
+		//HAY QUE CAMBIAR ESTA FUNCION
+
+
+		int world = int.Parse(DateChecker.Instance.mmyyyy);
+		//int levelinworld = num;
+		//txt.text = "World " + world.ToString() + "-" + levelinworld.ToString();		
+		curbutton.transform.GetChild(0).GetComponent<Text>().text = (num+1).ToString();	
+
+		//Debug.Log(LevelManager.adFree + "IS ADFREE");
+		//if(ShouldShowPotd());
+		//Debug.Log(DateChecker.Instance.dayInMonth + " " + num);
+		//LevelManager.adFree = false;
+		if(LevelManager.adFree){
+			if(num+1 <= DateChecker.Instance.dayInMonth || DateChecker.currentMonthIndex<DateChecker.todayMonthIndex){
+				btn.onClick.AddListener(delegate{sl.LoadPotdMap(num + 
+				PotdHolder.monthBank[DateChecker.currentMonthIndex][0]);}); 
+			}
+			else{
+				curbutton.transform.GetChild(1).gameObject.SetActive(true);	
+			 	curbutton.transform.GetChild(2).gameObject.SetActive(true);	
+			}
+		}
+
+		else{
+			if(num+1 == DateChecker.Instance.dayInMonth){
+				btn.onClick.AddListener(delegate{sl.LoadPotdMap(num + 
+				PotdHolder.monthBank[DateChecker.currentMonthIndex][0]);}); 
+			}
+			else{
+				curbutton.transform.GetChild(1).gameObject.SetActive(true);	
+			 	curbutton.transform.GetChild(2).gameObject.SetActive(true);	
+			}
+		}
+
+		// if(num+1 <= DateChecker.Instance.dayInMonth || DateChecker.currentMonthIndex<DateChecker.todayMonthIndex){
+
+		// 	if(LevelManager.adFree  || num+1 == DateChecker.Instance.dayInMonth)
+		// 		btn.onClick.AddListener(delegate{sl.LoadPotdMap(num + 
+		// 		PotdHolder.monthBank[DateChecker.currentMonthIndex][0]);}); 
+		// 	else{
+		// 		curbutton.transform.GetChild(1).gameObject.SetActive(true);	
+		// 	 	curbutton.transform.GetChild(2).gameObject.SetActive(true);					
+		// 	}
+		// }
+
+		// else{
+		//  	curbutton.transform.GetChild(1).gameObject.SetActive(true);	
+		//  	curbutton.transform.GetChild(2).gameObject.SetActive(true);	
+		// }
+		
+
+		levelbuttons.Add(curbutton);
+	}
 
 	void createButton(int num){
 		GameObject curbutton = Instantiate(buttonprefab, new Vector3(0, 0, 0), Quaternion.identity);
@@ -62,29 +125,7 @@ public class LevelMenu : MonoBehaviour {
 		int levelinworld = num - ((world-1)*40);
 		//txt.text = "World " + world.ToString() + "-" + levelinworld.ToString();		
 		curbutton.transform.GetChild(0).GetComponent<Text>().text =levelinworld.ToString();	
-		/*if(num != 1){
-			if(LevelStorer.leveldic[num-1].rating == 0){//previous level has no stars
-				curbutton.transform.GetChild(0).gameObject.SetActive(false);	
-				curbutton.transform.GetChild(1).gameObject.SetActive(true);			
 
-			}
-			else {
-				if(LevelStorer.leveldic[num].rating == 1){
-					curbutton.transform.GetChild(3).GetChild(1).GetChild(1).gameObject.SetActive(true);
-				}
-				if(LevelStorer.leveldic[num].rating == 2){
-					curbutton.transform.GetChild(3).GetChild(1).GetChild(0).gameObject.SetActive(true);
-					curbutton.transform.GetChild(3).GetChild(1).GetChild(2).gameObject.SetActive(true);
-				}
-				if(LevelStorer.leveldic[num].rating == 3){
-					curbutton.transform.GetChild(3).GetChild(1).GetChild(0).gameObject.SetActive(true);
-					curbutton.transform.GetChild(3).GetChild(1).GetChild(1).gameObject.SetActive(true);
-					curbutton.transform.GetChild(3).GetChild(1).GetChild(2).gameObject.SetActive(true);
-				}
-			}
-		}
-		else{*/
-				//Debug.Log(LevelStorer.leveldic[num].rating);
 		if(LevelStorer.leveldic[num].islocked == true && num != 0){
 			curbutton.transform.GetChild(1).gameObject.SetActive(true);	
 			curbutton.transform.GetChild(2).gameObject.SetActive(true);	
@@ -102,10 +143,6 @@ public class LevelMenu : MonoBehaviour {
 			curbutton.transform.GetChild(3).GetChild(1).GetChild(2).gameObject.SetActive(true);
 		}			
 
-		//}
-
-
-		//curbutton
 		levelbuttons.Add(curbutton);
 	}
 
@@ -165,6 +202,24 @@ public class LevelMenu : MonoBehaviour {
 		AssignWorldText(currentfirst);
 	}
 
+	public void CheckPotdUpDown(){
+		if(DateChecker.todayMonthIndex>0){
+			buttonBack.SetActive(true);
+			buttonForward.SetActive(false);
+		}
+		if(DateChecker.currentMonthIndex<DateChecker.todayMonthIndex){
+			buttonForward.SetActive(true);
+			buttonBack.SetActive(false);
+			if(DateChecker.currentMonthIndex>0)
+			buttonBack.SetActive(true);
+		}
+		if(DateChecker.todayMonthIndex == 0){
+			buttonBack.SetActive(false);
+			buttonForward.SetActive(false);
+		}
+	}
+
+
 	public void populateMenuUp(){
 		if(currentfirst <181){
 			clearMenu();
@@ -175,5 +230,50 @@ public class LevelMenu : MonoBehaviour {
 			currentfirst = currentfirst + 20;	
 		}
 		AssignWorldText(currentfirst);
+	}
+
+	public void AssignMonthText(){
+		int monthnum = (DateChecker.currentMonthIndex+10) % 12;
+		Debug.Log((int)11/12);
+		monthSprite.sprite = PotdHolder.Instance.monthSprites[monthnum];
+		yearSprite.sprite = PotdHolder.Instance.yearSprites[(int)(DateChecker.currentMonthIndex+10)/12];
+	}
+
+	public void populatePotdMenu(){
+		DateChecker.currentMonthIndex = DateChecker.todayMonthIndex;
+		int potdFirst = PotdHolder.monthBank[DateChecker.todayMonthIndex][0];
+		int numberOfLevels = PotdHolder.monthBank[DateChecker.todayMonthIndex][1];
+
+		for(int i = 0; i<numberOfLevels; i++){
+			createPotdButton(i);
+		}
+		AssignMonthText();
+		CheckPotdUpDown();
+	}
+
+	public void populatePotdUp(){
+		clearMenu();
+		DateChecker.currentMonthIndex ++;
+		//int potdFirst = PotdHolder.monthBank[DateChecker.currentMonthIndex][0]
+		int numberOfLevels = PotdHolder.monthBank[DateChecker.currentMonthIndex][1];
+
+		for(int i = 0; i<numberOfLevels;i++){
+			createPotdButton(i);
+		}
+		AssignMonthText();
+		CheckPotdUpDown();
+	}
+
+	public void populatePotdDown(){
+		clearMenu();
+		DateChecker.currentMonthIndex --;
+		//int potdFirst = PotdHolder.monthBank[DateChecker.currentMonthIndex][0]
+		int numberOfLevels = PotdHolder.monthBank[DateChecker.currentMonthIndex][1];
+
+		for(int i = 0; i<numberOfLevels;i++){
+			createPotdButton(i);
+		}
+		AssignMonthText();
+		CheckPotdUpDown();
 	}
 }

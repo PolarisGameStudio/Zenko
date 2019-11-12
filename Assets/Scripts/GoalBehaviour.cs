@@ -28,6 +28,7 @@ public class GoalBehaviour : MonoBehaviour {
 		isstatic =true;
 		goaling = false;
 		active = true;
+		SfxHandler.isFlowerOpen = false;
 //		Debug.Log(transform.rotation.y);
 //		Debug.Log(newx);
 	}
@@ -35,6 +36,7 @@ public class GoalBehaviour : MonoBehaviour {
 		readytomove = false;
 		isstatic =true;
 		goaling = false;
+		SfxHandler.isFlowerOpen = false;
 	}
 	// Update is called once per frame
 	void FixedUpdate () {
@@ -77,12 +79,14 @@ public class GoalBehaviour : MonoBehaviour {
 							myanim.SetInteger("Phase",1);
 			//				Debug.Log("orthis");
 							lastphase = 1;
+							SfxHandler.Instance.PlayFlowerOpen();
 						}							
 					}
 
 					if (transform.position.x<newx){//getting away since im at its left.
 						myanim.SetInteger("Phase",0);
 						lastphase = 0;
+						SfxHandler.Instance.PlayFlowerClose();
 					}
 
 				}
@@ -92,11 +96,13 @@ public class GoalBehaviour : MonoBehaviour {
 							myanim.SetInteger("Phase",1);
 //							Debug.Log("this");
 							lastphase = 1;
+							SfxHandler.Instance.PlayFlowerOpen();
 						}								
 					}
 					if (transform.position.x>newx){//getting away since im at its right
 						myanim.SetInteger("Phase",0);
 						lastphase = 0;
+						SfxHandler.Instance.PlayFlowerClose();
 					}					
 			
 					
@@ -123,6 +129,7 @@ public class GoalBehaviour : MonoBehaviour {
 								myanim.SetInteger("Phase",1);
 								//Debug.Log("orthis");
 								lastphase = 1;
+								SfxHandler.Instance.PlayFlowerOpen();
 							}							
 						}
 						
@@ -148,6 +155,7 @@ public class GoalBehaviour : MonoBehaviour {
 								myanim.SetInteger("Phase",1);
 								//Debug.Log("orthis");
 								lastphase = 1;
+								SfxHandler.Instance.PlayFlowerOpen();
 							}							
 						}
 						
@@ -163,12 +171,14 @@ public class GoalBehaviour : MonoBehaviour {
 							myanim.SetInteger("Phase",1);
 							//Debug.Log("orthis");
 							lastphase = 1;
+							SfxHandler.Instance.PlayFlowerOpen();
 						}							
 						
 					}
 						if (-transform.position.z<newy){//getting away
 							myanim.SetInteger("Phase",0);
-							lastphase = 0;					
+							lastphase = 0;
+							SfxHandler.Instance.PlayFlowerClose();					
 					}
 
 
@@ -179,11 +189,13 @@ public class GoalBehaviour : MonoBehaviour {
 							myanim.SetInteger("Phase",1);
 							//Debug.Log("this");
 							lastphase = 1;
+							SfxHandler.Instance.PlayFlowerOpen();
 						}								
 					}
 						if (-transform.position.z>newy){//getting away
 							myanim.SetInteger("Phase",0);
 							lastphase = 0;
+							SfxHandler.Instance.PlayFlowerClose();
 						}							
 
 				}
@@ -204,6 +216,7 @@ public class GoalBehaviour : MonoBehaviour {
 								myanim.SetInteger("Phase",1);
 							//	Debug.Log("orthis");
 								lastphase = 1;
+								SfxHandler.Instance.PlayFlowerOpen();
 							}							
 						}
 						
@@ -225,6 +238,7 @@ public class GoalBehaviour : MonoBehaviour {
 							if (-transform.position.z>newy){
 								Debug.Log("orthis");
 								lastphase = 1;
+								SfxHandler.Instance.PlayFlowerOpen();
 							}							
 						}
 						

@@ -8,7 +8,7 @@ using CompleteProject;
 
 
 public class SceneLoading : MonoBehaviour {
-	public static bool dFree; //true if theyve paid for ad-free
+	public static bool adFree; //true if theyve paid for ad-free
 	public int num;
 	public static GameObject gamewon;
 	public static GameObject gamelost;
@@ -184,15 +184,16 @@ public class SceneLoading : MonoBehaviour {
 		//MusicHandler.PlayInitialLoop();
 
 	}	
-	public void loadPotdMap(){
+	public void LoadPotdMap(int index){
 		Swiping.mydirection = "Null";
 		TurnCounter.turncount = 0;
-		int num = Random.Range(0,10);
+		//int num = Random.Range(0,10);
+		PlayerPrefs.SetInt("PoTD", index);
 		Debug.Log ("Going to Scene POTD at " + num);
 		MusicHandler.PlayInitialLoop();
 
 		//LevelStorer.Lookfor(num);
-		LevelManager.levelnum = num;
+		//LevelManager.levelnum = num;
 		LevelManager.ispotd = true;
 		SceneManager.LoadScene(1);
 	}
@@ -339,6 +340,18 @@ public class SceneLoading : MonoBehaviour {
 		}
 
 	}
+	public void LoadPotd(int index){
+
+		Swiping.mydirection = "Null";
+
+		TurnCounter.turncount = 0;
+		LevelManager.ispotd = true;
+
+		LevelManager.NextPotd();
+		TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
+		RatingBehaviour.RestartRating();		
+
+	}
 	public void Plus(){
 		LevelManager.levelnum ++;
 		//txt.text = LevelManager.levelnum.ToString();
@@ -394,13 +407,12 @@ public class SceneLoading : MonoBehaviour {
 
 		//GET DATE
 		//USE DATE
-		transform.Find("Level_Box").Find("ButtonHolder").GetComponent<LevelMenu>().currentfirst = getCurFirst(LevelMenu.FindHighestSolved());
-		transform.Find("Level_Box").Find("ButtonHolder").GetComponent<LevelMenu>().populateMenu();
+		transform.Find("PoTD_Box").Find("ButtonHolder").GetComponent<LevelMenu>().populatePotdMenu();
 
 
 		GameModeHandler.TurnOff();
 		transform.Find("MenuHolder").Find("Menu").gameObject.SetActive(false);
-		transform.Find("MenuHolder").Find("CloseLevel_Box").gameObject.SetActive(true);
+		transform.Find("MenuHolder").Find("ClosePotd_Box").gameObject.SetActive(true);
 		transform.Find("MenuHolder").Find("Config").gameObject.SetActive(false);
 
 		
@@ -409,7 +421,7 @@ public class SceneLoading : MonoBehaviour {
 
 		}
 		CameraController.Fade(.2f,1f, 1);
-		LevelMenu.Instance.CheckDownUpButtons(getCurFirst(LevelMenu.FindHighestSolved()));		
+		//LevelMenu.Instance.CheckDownUpButtons(getCurFirst(LevelMenu.FindHighestSolved()));		
 	}
 	public int getCurFirst(int highest){
 		int candidate = 1;
@@ -426,6 +438,19 @@ public class SceneLoading : MonoBehaviour {
 		}
 		return candidate;
 	}
+
+	public void ClosePotdMode(){
+		transform.Find("PoTD_Box").gameObject.SetActive(false);
+		//remove curbuttons
+		transform.Find("PoTD_Box").Find("ButtonHolder").GetComponent<LevelMenu>().currentfirst = PlayerPrefs.GetInt("CurrentFirst");
+
+
+		transform.Find("MenuHolder").Find("Menu").gameObject.SetActive(true);
+		transform.Find("MenuHolder").Find("ClosePotd_Box").gameObject.SetActive(false);
+		GameModeHandler.TurnOn();		
+		CameraController.Fade(.2f,0.4f);
+	}
+
 	public void closeAdventureMode(){
 		transform.Find("Level_Box").gameObject.SetActive(false);
 		//remove curbuttons

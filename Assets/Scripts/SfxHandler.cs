@@ -21,6 +21,10 @@ public class SfxHandler : MonoBehaviour
     public AudioClip dropSound;
     public AudioClip draggingSound;
     public AudioClip[] slideSounds;
+    public AudioClip[] flowerOpen;
+    public AudioClip[] flowerClose;
+
+    public static bool isFlowerOpen;
 
     static public SfxHandler Instance;
     // Start is called before the first frame update
@@ -30,6 +34,7 @@ public class SfxHandler : MonoBehaviour
             Instance = this;
             //DontDestroyOnLoad(this.gameObject);
             MusicSource = GameObject.Find("Music Source").GetComponents<AudioSource>();
+            isFlowerOpen = false;
             return;
         }
         Destroy(this.gameObject);
@@ -56,7 +61,23 @@ public class SfxHandler : MonoBehaviour
         //return "Empty";
     }
 
-
+    public void PlayFlowerOpen(){
+        if(!isFlowerOpen){
+        source.PlayOneShot(flowerOpen[Random.Range(0,flowerOpen.Length)], .6f);
+        isFlowerOpen = true;
+        //StartCoroutine(OpenTimer());            
+        }
+        //Debug.Log("Open");
+    }
+    public void PlayFlowerClose(){
+        if(isFlowerOpen){
+            source.PlayOneShot(flowerClose[Random.Range(0,flowerClose.Length)], .6f);
+            isFlowerOpen = false;
+           //StartCoroutine(CloseTimer());
+        }
+        //Debug.Log("Close");
+    
+    }
     public void PlayFragile(){
         source.PlayOneShot(fragile[Random.Range(0,fragile.Length)], .7f);
     }
@@ -73,6 +94,15 @@ public class SfxHandler : MonoBehaviour
         source.PlayOneShot(seed_Pop, .8f);
     }
 
+    // private IEnumerator CloseTimer(){
+    //     yield return new WaitForSeconds(.2f);
+    //     playingClose = false;
+    // }
+
+    // private IEnumerator OpenTimer(){
+    //     yield return new WaitForSeconds(.2f);
+    //     playingOpen = false;
+    // }
 
     public void PlayVictory(){
         if(!playingVictory){

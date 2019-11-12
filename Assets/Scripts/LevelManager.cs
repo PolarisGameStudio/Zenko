@@ -133,6 +133,8 @@ public class LevelManager : MonoBehaviour {
 		levelselector.drawPotd(PlayerPrefs.GetInt("PoTD"));
 	}
 
+
+
 	public static void ResetLevel(){
 		levelselector.ResetPlayer();
 	}

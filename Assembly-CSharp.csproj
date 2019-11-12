@@ -338,6 +338,7 @@
      <Compile Include="Assets\Scripts\PlayerFollower.cs" />
      <Compile Include="Assets\Scripts\PlayerMovement.cs" />
      <Compile Include="Assets\Scripts\PlayServices.cs" />
+     <Compile Include="Assets\Scripts\PotdHolder.cs" />
      <Compile Include="Assets\Scripts\ProgressBar.cs" />
      <Compile Include="Assets\Scripts\Purchaser.cs" />
      <Compile Include="Assets\Scripts\RatingBehaviour.cs" />
