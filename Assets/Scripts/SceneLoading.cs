@@ -18,6 +18,7 @@ public class SceneLoading : MonoBehaviour {
 	Dragger td2;
 	public static SceneLoading Instance;
 	public bool level;
+
 //	public IceTileHandler myhandler;
 	void Start(){
 		Debug.Log("NEW SCENE LOADING");
@@ -41,7 +42,10 @@ public class SceneLoading : MonoBehaviour {
 			// int world = Mathf.FloorToInt(LevelManager.levelnum/50)  + 1;
 			// int levelinworld = LevelManager.levelnum - ((world-1)*50);
 			// txt.text = "World " + world.ToString() + "-" + levelinworld.ToString();
+			if(!LevelManager.ispotd)
 			AssignLevelName();
+			else
+			AssignPotdName();
 			RatingBehaviour.InitializeRating();
 //			Debug.Log(LevelManager.levelnum);
 		}
@@ -64,6 +68,11 @@ public class SceneLoading : MonoBehaviour {
 		int world = Mathf.FloorToInt((LevelManager.levelnum-1)/40)  + 1;
 		int levelinworld = LevelManager.levelnum - ((world-1)*40);
 		WorldName.Instance.AssignLevelName(world, levelinworld);
+		//txt.text = "World " + world.ToString() + "-" + levelinworld.ToString();		
+	}
+	public void AssignPotdName(){
+		WorldName.Instance.AssignPotdDate(DateChecker.Instance.currentIndex);
+		
 		//txt.text = "World " + world.ToString() + "-" + levelinworld.ToString();		
 	}
 	public void LoadScene(int num){
@@ -181,6 +190,7 @@ public class SceneLoading : MonoBehaviour {
 		LevelManager.NextPotd();
 		TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
 		RatingBehaviour.RestartRating();
+		AssignPotdName();
 		//MusicHandler.PlayInitialLoop();
 
 	}	
@@ -189,11 +199,13 @@ public class SceneLoading : MonoBehaviour {
 		TurnCounter.turncount = 0;
 		//int num = Random.Range(0,10);
 		PlayerPrefs.SetInt("PoTD", index);
+		DateChecker.Instance.currentIndex = index;
 		Debug.Log ("Going to Scene POTD at " + num);
 		MusicHandler.PlayInitialLoop();
 
 		//LevelStorer.Lookfor(num);
 		//LevelManager.levelnum = num;
+		//AssignPotdName();
 		LevelManager.ispotd = true;
 		SceneManager.LoadScene(1);
 	}

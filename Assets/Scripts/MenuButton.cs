@@ -56,13 +56,13 @@ public class MenuButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler{
                 }
 
 
-                myrt.localPosition = new Vector3 (myrt.localPosition.x,0,0);
+                //myrt.localPosition = new Vector3 (myrt.localPosition.x,0,0);
                 StartCoroutine(RotateRing(30, .2f));
             }
             else{
                 //Swiping.canswipe = false;
                 //LevelManager.isdragging = true;
-                myrt.localPosition = new Vector3 (myrt.localPosition.x,-450,0);
+                //myrt.localPosition = new Vector3 (myrt.localPosition.x,-450,0);
                 StartCoroutine(RotateRing(-30, .2f));
             }
             MenuButton.open = !MenuButton.open;

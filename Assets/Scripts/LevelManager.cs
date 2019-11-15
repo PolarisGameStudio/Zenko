@@ -130,6 +130,7 @@ public class LevelManager : MonoBehaviour {
 		levelselector.DestroyAllExceptCamera ();
 		//PlayerPrefs.GetInt("PoTD");
 		PlayerPrefs.SetInt("PoTD", PlayerPrefs.GetInt("PoTD") + 1);
+		DateChecker.Instance.currentIndex = PlayerPrefs.GetInt("PoTD");
 		levelselector.drawPotd(PlayerPrefs.GetInt("PoTD"));
 	}
 

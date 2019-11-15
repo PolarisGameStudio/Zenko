@@ -25,6 +25,12 @@ public class DateChecker : MonoBehaviour
 
 	public int yyyy;
 
+	public int todayIndex;
+
+	public int currentIndex;
+
+	public string firstDate = "2019-11-01";
+
 
 	void Start(){
 		Instance = this;
@@ -55,6 +61,14 @@ public class DateChecker : MonoBehaviour
 
 			mm = System.DateTime.Now.Month;
 			yyyy=System.DateTime.Now.Year;
+			string firstDate = "2019-11-01";
+			string secondDate = System.DateTime.Now.ToString("yyyy-MM-dd");
+			System.DateTime date = System.DateTime.Parse(firstDate);
+			System.DateTime now = System.DateTime.Parse(secondDate);
+			System.TimeSpan diff = now - date;
+			Debug.Log((int)diff.Days);	
+			todayIndex = diff.Days;
+			currentIndex = diff.Days;
 		}
 		else{
 
@@ -66,7 +80,14 @@ public class DateChecker : MonoBehaviour
 			currentMonthIndex = PotdHolder.monthTranslator[mmyyyy];
 			mm = int.Parse(text.Substring(5,2));
 			yyyy= int.Parse(text.Substring(0,4));
-			
+			string firstDate = "2019-11-01";
+			string secondDate = System.DateTime.Now.ToString("yyyy-MM-dd");
+			System.DateTime date = System.DateTime.Parse(firstDate);
+			System.DateTime now = System.DateTime.Parse(secondDate);
+			System.TimeSpan diff = now - date;
+			Debug.Log((int)diff.Days);	
+			todayIndex = diff.Days;
+			currentIndex = diff.Days;		
 			//Test();
 
 
@@ -78,6 +99,19 @@ public class DateChecker : MonoBehaviour
 			//Debug.Log(PotdHolder.monthBank[mmyyyy][1]);
 
 		}
+	}
+
+	public int[] ArrayDate(string date){
+		int[] newArray = new int[8];
+		newArray[0] = int.Parse(date.Substring(0,1));
+		newArray[1] = int.Parse(date.Substring(1,1));
+		newArray[2] = int.Parse(date.Substring(3,1));
+		newArray[3] = int.Parse(date.Substring(4,1));
+		newArray[4] = int.Parse(date.Substring(6,1));
+		newArray[5] = int.Parse(date.Substring(7,1));
+		newArray[6] = int.Parse(date.Substring(8,1));
+		newArray[7] = int.Parse(date.Substring(9,1));
+		return newArray;
 	}
 
 	public void Test(){

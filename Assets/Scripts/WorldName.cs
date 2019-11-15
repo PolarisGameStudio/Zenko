@@ -19,6 +19,10 @@ public class WorldName : MonoBehaviour
 	public Sprite[] num9;
 	public List<Sprite[]> numbers = new List<Sprite[]>();
 	public GameObject[] AdvHolder;
+
+    public GameObject[] PotdHolder;
+
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -39,7 +43,9 @@ public class WorldName : MonoBehaviour
     // Update is called once per frame
 
     public void AssignLevelName(int worldnum, int level){
+        Debug.Log("ASSIGNEDLEVELNAME");
     	AssignAdventureTag(worldnum, level);
+
     }
     public void AssignAdventureTag(int worldnum, int level){
     	AdvHolder[0].GetComponent<Image>().sprite = world[worldnum-1];
@@ -76,5 +82,24 @@ public class WorldName : MonoBehaviour
     	else{
     		return new Vector3((int)(level/100), (level -(int)(level/100)*100)/10, level%10);
     	}
+    }
+    public void AssignPotdDate(int index){
+        this.transform.GetChild(0).gameObject.SetActive(false);
+        this.transform.GetChild(1).gameObject.SetActive(true);
+        string firstDate = "2019-11-01";
+        System.DateTime date = System.DateTime.Parse(firstDate);
+        
+        System.DateTime levelDate = date.AddDays(index);
+
+        string dateString = levelDate.ToString("ddMMyyyy");
+        Debug.Log(dateString + "IS THE STRING");
+        PotdHolder[0].GetComponent<Image>().sprite = numbers[int.Parse(dateString.Substring(0,1))][0];
+        PotdHolder[1].GetComponent<Image>().sprite = numbers[int.Parse(dateString.Substring(1,1))][0];
+        PotdHolder[2].GetComponent<Image>().sprite = numbers[int.Parse(dateString.Substring(2,1))][0];
+        PotdHolder[3].GetComponent<Image>().sprite = numbers[int.Parse(dateString.Substring(3,1))][0];
+        PotdHolder[4].GetComponent<Image>().sprite = numbers[int.Parse(dateString.Substring(4,1))][0];
+        PotdHolder[5].GetComponent<Image>().sprite = numbers[int.Parse(dateString.Substring(5,1))][0];
+        PotdHolder[6].GetComponent<Image>().sprite = numbers[int.Parse(dateString.Substring(6,1))][0];
+        PotdHolder[7].GetComponent<Image>().sprite = numbers[int.Parse(dateString.Substring(7,1))][0];
     }
 }
