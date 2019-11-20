@@ -72,10 +72,13 @@ public class LevelMenu : MonoBehaviour {
 		//if(ShouldShowPotd());
 		//Debug.Log(DateChecker.Instance.dayInMonth + " " + num);
 		//LevelManager.adFree = false;
+
+
 		if(LevelManager.adFree){
 			if(num+1 <= DateChecker.Instance.dayInMonth || DateChecker.currentMonthIndex<DateChecker.todayMonthIndex){
 				btn.onClick.AddListener(delegate{sl.LoadPotdMap(num + 
 				PotdHolder.monthBank[DateChecker.currentMonthIndex][0]);}); 
+				//AssignStarsToPotd(num);
 			}
 			else{
 				curbutton.transform.GetChild(1).gameObject.SetActive(true);	
@@ -93,6 +96,19 @@ public class LevelMenu : MonoBehaviour {
 			 	curbutton.transform.GetChild(2).gameObject.SetActive(true);	
 			}
 		}
+
+		if(LevelStorer.potdDic[num].rating == 1){
+			curbutton.transform.GetChild(3).GetChild(1).GetChild(1).gameObject.SetActive(true);
+		}
+		if(LevelStorer.potdDic[num].rating == 2){
+			curbutton.transform.GetChild(3).GetChild(1).GetChild(0).gameObject.SetActive(true);
+			curbutton.transform.GetChild(3).GetChild(1).GetChild(2).gameObject.SetActive(true);
+		}
+		if(LevelStorer.potdDic[num].rating == 3){
+			curbutton.transform.GetChild(3).GetChild(1).GetChild(0).gameObject.SetActive(true);
+			curbutton.transform.GetChild(3).GetChild(1).GetChild(1).gameObject.SetActive(true);
+			curbutton.transform.GetChild(3).GetChild(1).GetChild(2).gameObject.SetActive(true);
+		}		
 
 		// if(num+1 <= DateChecker.Instance.dayInMonth || DateChecker.currentMonthIndex<DateChecker.todayMonthIndex){
 
@@ -130,6 +146,9 @@ public class LevelMenu : MonoBehaviour {
 			curbutton.transform.GetChild(1).gameObject.SetActive(true);	
 			curbutton.transform.GetChild(2).gameObject.SetActive(true);	
 		}
+		// if(!LevelStorer.leveldic[num].islocked){
+		// 	//Debug.Log("NOT LOCKED");
+		// }
 		if(LevelStorer.leveldic[num].rating == 1){
 			curbutton.transform.GetChild(3).GetChild(1).GetChild(1).gameObject.SetActive(true);
 		}

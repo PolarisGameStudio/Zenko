@@ -268,6 +268,7 @@ MonoBehaviour:
   ConfigMenu: {fileID: 0}
   levelText: {fileID: 0}
   ringObject: {fileID: 0}
+  settingsSprite: {fileID: 0}
 --- !u!114 &9106771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2252,6 +2253,7 @@ MonoBehaviour:
   ConfigMenu: {fileID: 0}
   levelText: {fileID: 0}
   ringObject: {fileID: 0}
+  settingsSprite: {fileID: 0}
 --- !u!114 &360300456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11037,6 +11039,7 @@ MonoBehaviour:
   ConfigMenu: {fileID: 0}
   levelText: {fileID: 0}
   ringObject: {fileID: 0}
+  settingsSprite: {fileID: 0}
 --- !u!114 &951400847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19505,12 +19508,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2124765250}
   m_CullTransparentMesh: 0
---- !u!1 &2126615538 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8323361378219414755, guid: cb0309c8331d24b80b7d6404fba54f6b,
-    type: 3}
-  m_PrefabInstance: {fileID: 8323361379918071569}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &2126615539 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8323361378219414754, guid: cb0309c8331d24b80b7d6404fba54f6b,
@@ -19794,7 +19791,7 @@ PrefabInstance:
     - target: {fileID: 1055796744582711235, guid: 46d5c316ee8cd4291b72edfe298dccd9,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: NextWon
+      value: TutorialButton
       objectReference: {fileID: 0}
     - target: {fileID: 1055796744582711235, guid: 46d5c316ee8cd4291b72edfe298dccd9,
         type: 3}
@@ -19975,8 +19972,35 @@ PrefabInstance:
       propertyPath: source2
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3166223240580864634, guid: 69a1c5e1f5cfa42079b71a21a698a957,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1612545039100369281, guid: 69a1c5e1f5cfa42079b71a21a698a957,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1612545037574518230, guid: 69a1c5e1f5cfa42079b71a21a698a957,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 69a1c5e1f5cfa42079b71a21a698a957, type: 3}
+--- !u!114 &3166223241615601626 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1612545038623782054, guid: 69a1c5e1f5cfa42079b71a21a698a957,
+    type: 3}
+  m_PrefabInstance: {fileID: 3166223241615601625}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4655859048789177963
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20101,6 +20125,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4655859050310922485, guid: 95f28b1b2b021423fa5eebc072e890ac,
         type: 3}
+      propertyPath: buttons.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4655859050310922485, guid: 95f28b1b2b021423fa5eebc072e890ac,
+        type: 3}
       propertyPath: buttons.Array.data[0]
       value: 
       objectReference: {fileID: 1046336960}
@@ -20113,7 +20142,7 @@ PrefabInstance:
         type: 3}
       propertyPath: buttons.Array.data[2]
       value: 
-      objectReference: {fileID: 2126615538}
+      objectReference: {fileID: 1177126900}
     - target: {fileID: 4655859050310922485, guid: 95f28b1b2b021423fa5eebc072e890ac,
         type: 3}
       propertyPath: buttons.Array.data[3]
@@ -20134,6 +20163,11 @@ PrefabInstance:
       propertyPath: ringObject
       value: 
       objectReference: {fileID: 937682437}
+    - target: {fileID: 4655859050310922485, guid: 95f28b1b2b021423fa5eebc072e890ac,
+        type: 3}
+      propertyPath: settingsSprite
+      value: 
+      objectReference: {fileID: 3166223241615601626}
     - target: {fileID: 4655859050310922486, guid: 95f28b1b2b021423fa5eebc072e890ac,
         type: 3}
       propertyPath: m_CullTransparentMesh

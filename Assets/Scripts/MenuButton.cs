@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class MenuButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler{
 	public Sprite menuImage;
@@ -19,6 +20,7 @@ public class MenuButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler{
     public GameObject levelText;
     public GameObject ringObject;
     public static MenuButton thisMB;
+    public Image settingsSprite;
 
 
     void Awake()
@@ -143,6 +145,8 @@ public class MenuButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler{
         LevelManager.configging = true;
         Swiping.canswipe = false;
         LevelManager.isdragging = true;
+
+        //AssignSettingsSprite
 
         if(open){
             toggleMenu();

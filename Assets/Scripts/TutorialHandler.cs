@@ -17,6 +17,13 @@ public class TutorialHandler : MonoBehaviour
     {
     	Instance = this;
     }
+    public void HelpButton(){
+        Swiping.canswipe = false;
+        LevelManager.isdragging = true;
+        LevelManager.configging = true;
+        PrepareTutorial(TutorialDictionary.tutDic[0], 0);
+
+    }
     public void TutorialCheck(int levelnumber){
         if (TutorialDictionary.tutDic.ContainsKey(levelnumber))
             PrepareTutorial(TutorialDictionary.tutDic[levelnumber], 0);

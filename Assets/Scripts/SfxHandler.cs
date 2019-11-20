@@ -122,7 +122,7 @@ public class SfxHandler : MonoBehaviour
         //StartCoroutine(Duck(.1f, 1f));
     }
     public void PlaySeedPop(){
-        source.PlayOneShot(seed_Pop, .8f);
+        source.PlayOneShot(seed_Pop, .6f);
     }
 
     // private IEnumerator CloseTimer(){

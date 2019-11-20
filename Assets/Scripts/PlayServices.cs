@@ -33,7 +33,6 @@ public class PlayServices : MonoBehaviour
         Debug.Log("cursavepref " + PlayerPrefs.GetString(SAVE_NAME));
         if(instance == null)
             {
-        //PlayerPrefs.DeleteAll();
                 instance = this;
                 DontDestroyOnLoad(this.gameObject);
 
@@ -45,17 +44,20 @@ public class PlayServices : MonoBehaviour
                // Debug.Log(PlayerPrefs.GetString(SAVE_NAME));
                 if(!PlayerPrefs.HasKey("PoTD"))
                     PlayerPrefs.SetInt("PoTD", 0);
+
                 if(!PlayerPrefs.HasKey(SAVE_NAME))
                     PlayerPrefs.SetString(SAVE_NAME, GameDataToString());
-                //ifsavenamesmallerdatgamedatatostring
-                    //addtostring;
-                if(PlayerPrefs.GetString(SAVE_NAME).Length < GameDataToString().Length)
-                    Debug.Log("NEW MAPS ARE IN EXTRA EXTRA NEW MAPS ARE IN");
+
 
                 if(!PlayerPrefs.HasKey("IsFirstTime"))
                     PlayerPrefs.SetInt("IsFirstTime", 1);
                     
                 LoadLocal();              
+
+                //Debug.Log()
+                if(PlayerPrefs.GetString(SAVE_NAME).Length < GameDataToString().Length){
+                    Debug.Log("NEW MAPS ARE IN EXTRA EXTRA NEW MAPS ARE IN");
+                }
 
                 //checks for first4chapters
                 if (PlayerPrefs.HasKey ("Loaded")) {
@@ -73,13 +75,19 @@ public class PlayServices : MonoBehaviour
                     //PopulateRatings();
                     PlayerPrefs.SetInt("Loaded",1);
                 }
+
+                // if(PlayerPrefs.HasKey "LoadedPotd"){
+                // 	LevelStorer.PopulatePotdPrefs();
+                // }
+                // else{
+
+                // }
                 InitializePGP();
                 SignIn();
                 //Debug.Log(int.Parse("1 1 1 1"));
 //                SplitString("1 2 3 4 5");
                 //byte[] dataToSave = Encoding.ASCII.GetBytes("1 23 4 5");
                 //Debug.Log(dataToSave[0]);
-
                 return;
             }
         Destroy(this.gameObject);
@@ -159,9 +167,15 @@ public class PlayServices : MonoBehaviour
         //200 from 4 chapters
 
         //feeds string with first four chapters
-        for(int i=1; i< 200+1; i++){
-            if(LevelStorer.leveldic[i].islocked == true && LevelStorer.leveldic[i].rating ==0){
-                stringToSave = stringToSave + "0";   
+        for(int i=1; i< 160+1; i++){
+            if(LevelStorer.leveldic[i].rating ==0){
+            	if(LevelStorer.leveldic[i].islocked == true){
+            	stringToSave = stringToSave + "0";  
+            	}
+            	else{
+            	stringToSave = stringToSave + "1"; 	
+            	}
+                 
             }
             else{
                 
@@ -173,10 +187,18 @@ public class PlayServices : MonoBehaviour
 
         }
 
-        //for(int i = 0; i<1000; i++)
-
+        for(int i=0; i<1000; i++){
+        	if(LevelStorer.potdDic[i].islocked == true){
+        			stringToSave = stringToSave + "0";
+        	}
+        	else{
+        		int rating = LevelStorer.potdDic[i].rating;
+        		stringToSave = stringToSave + "" + (rating+1).ToString() + "";
+        	}
+        }
 
         Debug.Log("GameData is " + stringToSave);
+        Debug.Log("GD SIZE IS " + stringToSave.Length);
 
 
 
@@ -222,20 +244,39 @@ public class PlayServices : MonoBehaviour
         //     }
         // }
         AssignFirstFourChapters(dataArray);
-        //AssignPotdData();
+        AssignPotdData(dataArray);
 
     }
 
     void AssignFirstFourChapters(string[] dataArray){
-        for(int i=1; i<200;i++){
+        for(int i=1; i<160;i++){
             int rating = int.Parse(dataArray[i]);
+            if(rating == 1){
+        		LevelStorer.leveldic[i].rating = 0;
+       			LevelStorer.leveldic[i].islocked = false;   	
+            }
             if(rating>1){
             UpdateImportantValue(i, rating-1);
             }
         }
     }
-    void AssignPotdData(){
+    void AssignPotdData(string[] dataArray){
+    	for(int i=0; i<1000; i++){
+    		int rating = int.Parse(dataArray[i+161]);
+    		if(rating == 0){
+    			LevelStorer.potdDic[i].rating = 0;
+    			LevelStorer.potdDic[i].islocked = true;
+    		}
+    		if(rating==1){
+    			LevelStorer.potdDic[i].rating = 0;
+    			LevelStorer.potdDic[i].islocked = false;
+    		}
+    		if(rating>1){
+    			LevelStorer.potdDic[i].rating = rating-1;
+    			LevelStorer.potdDic[i].islocked = false;
+    		}
 
+    	}
     }
 
     void UpdateImportantValue(int place, int value){ //grabs a value from datastring and places  it in leveldic
@@ -262,10 +303,16 @@ public class PlayServices : MonoBehaviour
         mergedData = "";
         //string[] mergedArray = new String[localData.Length];
         for(int i=0; i<localData.Length; i++){
-            if (cloudData[i] > localData[i])
-            mergedData = mergedData + "" +  cloudData[i] + "";
-            else
-            mergedData = mergedData + "" +  localData[i] + "";
+        	if(i<cloudData.Length){
+	            if (cloudData[i] > localData[i])
+	            	mergedData = mergedData + "" +  cloudData[i] + "";
+	            else
+	            	mergedData = mergedData + "" +  localData[i] + "";        		
+	        }
+	        else{
+	        	mergedData = mergedData + "" + localData[i] + "";
+	        }
+
         }
         return mergedData;
     }

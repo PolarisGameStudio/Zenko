@@ -21,6 +21,7 @@ public class SceneLoading : MonoBehaviour {
 
 //	public IceTileHandler myhandler;
 	void Start(){
+
 		Debug.Log("NEW SCENE LOADING");
 		string teststring = "WallSeed";
 		Debug.Log(teststring.Length);
@@ -31,6 +32,8 @@ public class SceneLoading : MonoBehaviour {
 		}
 		else{//if loading level scenew
 //			Debug.Log(levelnum + "level");
+			PlayServices.instance.SaveLocal();
+			PlayServices.instance.SaveData();
 			Debug.Log(LevelManager.levelnum);
 			if(LevelManager.levelnum == 0 || LevelManager.levelnum ==null){
 			LevelManager.levelnum = 103;				
@@ -117,6 +120,9 @@ public class SceneLoading : MonoBehaviour {
 
 		//myhandler.GiveIce();
 	}
+	public void TutorialButton(){
+		TutorialHandler.Instance.HelpButton();
+	}
 	public void NextWon(){
 		if(LevelManager.ispotd){
 			Potd();
@@ -200,6 +206,7 @@ public class SceneLoading : MonoBehaviour {
 		//int num = Random.Range(0,10);
 		PlayerPrefs.SetInt("PoTD", index);
 		DateChecker.Instance.currentIndex = index;
+		LevelStorer.potdDic[DateChecker.Instance.currentIndex].islocked = false;
 		Debug.Log ("Going to Scene POTD at " + num);
 
 		//LevelStorer.Lookfor(num);

@@ -524,7 +524,7 @@ public class LevelStorer : MonoBehaviour {
 		//normalmaps.Close();
 	}
 
-	public static void PopulatePlayerPrefs(){ //populates ratings
+	public static void PopulatePlayerPrefs(){ //populates ratings for first 160
 		for(int i=1; i<leveldic.Count+1; i++){
 			string mystring = "Level"+i+"Rating";
 
@@ -535,6 +535,16 @@ public class LevelStorer : MonoBehaviour {
 
 
 		}		
+	}
+
+	public static void PopulatePotdPrefs(){
+		for(int i =0; i<1000; i++){
+			string mystring = "Potd" +i;
+
+			//if(PlayerPrefs.GetInt(mystring)> 0){
+				PlayerPrefs.SetInt(mystring, 0);
+			//}
+		}
 	}
 
 	public static void PopulateCloudData(){
@@ -569,7 +579,7 @@ public class LevelStorer : MonoBehaviour {
 
 		leveldic[levelnum].islocked = false;
 	}
-
+	
 	public static void LockLevel(int levelnum){
 		int x = leveldic [levelnum].levelnum;
 		int y = leveldic [levelnum].turns;

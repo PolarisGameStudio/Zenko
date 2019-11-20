@@ -359,7 +359,6 @@
      <Compile Include="Assets\Scripts\TurnBehaviour.cs" />
      <Compile Include="Assets\Scripts\TurnCounter.cs" />
      <Compile Include="Assets\Scripts\TurnGraphics.cs" />
-     <Compile Include="Assets\Scripts\Tutorial_Handler.cs" />
      <Compile Include="Assets\Scripts\TutorialHandler.cs" />
      <Compile Include="Assets\Scripts\UIMonster.cs" />
      <Compile Include="Assets\Scripts\VolumeSliders.cs" />
