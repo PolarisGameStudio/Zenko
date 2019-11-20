@@ -62,7 +62,7 @@ public class MusicHandler : MonoBehaviour
 
         time  = AudioSettings.dspTime;
 
-        if(time +1.0f > nextEventTime){
+        if(time +1.0f> nextEventTime){
             if(flip == 0){
                 source2.clip = levelLoops[nextLoop-1];
                 source2.PlayScheduled(nextEventTime);
@@ -100,8 +100,8 @@ public class MusicHandler : MonoBehaviour
         thisMH.source1.loop =false;
         thisMH.source1.Stop();
         thisMH.source2.Stop();
-        currentLoop = Random.Range(0,3);
-    	thisMH.source1.clip = thisMH.levelLoops[currentLoop];
+        currentLoop = Random.Range(1,4);
+    	thisMH.source1.clip = thisMH.levelLoops[currentLoop-1];
         thisMH.source1.Play();
         lastBeginning = AudioSettings.dspTime;
         thisMH.FindNewLoopAndTime();

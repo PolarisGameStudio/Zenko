@@ -56,6 +56,12 @@ public class GameModeHandler : MonoBehaviour
         Instance.menuButton.SetActive(true);
 
     }
+
+    public static void Return(){
+        Instance.transform.GetChild(0).gameObject.SetActive(true);
+        //Instance.addButton.SetActive(true);
+        //Instance.menuButton.SetActive(true);        
+    }
     public int nextInCycle(int curPlace){
     	if(curPlace < Modes.Length-1){
     		return curPlace+1;

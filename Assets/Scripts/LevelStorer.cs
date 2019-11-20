@@ -18,6 +18,20 @@ public class LevelStats {
 		rating = newrating;
 	}
 }
+public class PotdStats{
+	public bool islocked;
+	public int rating;
+
+	public PotdStats(){
+	islocked = true;
+	rating = 0;
+	}
+
+	public PotdStats(bool newIsLocked, int newRating){
+		islocked = newIsLocked;
+		rating = newRating;
+	}
+}
 
 public class Tile{
 	public GameObject tileObj;
@@ -45,6 +59,7 @@ public class Tile{
 public class LevelStorer : MonoBehaviour {
 	public static int efficientturns;
 	public static Dictionary<int, LevelStats> leveldic = new Dictionary<int, LevelStats>();
+	public static Dictionary<int, PotdStats> potdDic = new Dictionary<int, PotdStats>();
 	static public int maxlevels;
 	bool hasinitd;
 	private static LevelStorer instance = null;
@@ -52,15 +67,8 @@ public class LevelStorer : MonoBehaviour {
 	StreamWriter normalmaps;
 	public static string importantValues;
 
-	public static void PopulateImportantValues(){
 
-	}
-
-	public static void UpdateImportantValues(int place, int value){
-
-	}
-
-	public static void PopulateLevelDictionary(){
+	public static void PopulateFourChapters(){
 
 		LevelStats lv1  = new LevelStats(1,2,false,0);
 		LevelStats lv2  = new LevelStats(2,3,true,0); 
@@ -465,6 +473,11 @@ public class LevelStorer : MonoBehaviour {
 		leveldic.Add (200, lv200);
 	}
 
+	public static void PopulatePotd1000(){
+		for(int i = 0; i<1000; i++){
+			potdDic.Add(i, new PotdStats());
+		}
+	}
 
 	// Use this for initialization
 	void Awake () {
@@ -514,10 +527,9 @@ public class LevelStorer : MonoBehaviour {
 	public static void PopulatePlayerPrefs(){ //populates ratings
 		for(int i=1; i<leveldic.Count+1; i++){
 			string mystring = "Level"+i+"Rating";
-			//Debug.Log(PlayerPrefs.GetInt(mystring));
+
 			if(PlayerPrefs.GetInt(mystring)>0){
-				//leveldic[i].islocked = false;
-				//leveldic[i+1].islocked = false;
+
 				PlayerPrefs.SetInt(mystring, 0);
 			}
 
@@ -543,27 +555,18 @@ public class LevelStorer : MonoBehaviour {
 
 	public static void Lookfor(int levelnum){ //unlocks and locks according to save file.
 		maxlevels = leveldic.Count ;
-//		Debug.Log(leveldic.Count);
-	//	Debug.Log ("maxcount" + ma8levels);
+
 		if (levelnum <= maxlevels && levelnum >= 0) {
 			efficientturns = leveldic [levelnum].turns;
-		//	Debug.Log ("The number of turns for level " + levelnum + " is " + efficientturns);
 		} 
-		//else if(levelnum < 0){
-			//efficientturns
-		//}
+
 		else {
 		Debug.Log ("No turn number stored" + levelnum + efficientturns);
 
 		}
 	}
 	public static void UnlockLevel(int levelnum){
-		/*int x = leveldic [levelnum].levelnum;
-		int y = leveldic [levelnum].turns;
-		bool z = false;
-		int r = 0; //RatingBehaviour.rating;
-		LevelStats newvalue = new LevelStats(x,y,z,r); 
-		leveldic [x] = newvalue;*/
+
 		leveldic[levelnum].islocked = false;
 	}
 

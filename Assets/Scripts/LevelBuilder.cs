@@ -129,7 +129,7 @@ public class LevelBuilder : MonoBehaviour {
 		startersPotd = new List<int>();
 		string file = "FilteredMaps.txt";
 		filePath = System.IO.Path.Combine(Application.streamingAssetsPath, file);
-		Debug.Log (filePath + "FILEPAPAPATH");
+		Debug.Log (filePath + "FILEPAPAPATHASDASDASDASDASDASDASDASDASD");
 		result = " ";
 		if (filePath.Contains ("://") || filePath.Contains(":///"))  {
 			UnityWebRequest www = UnityWebRequest.Get (filePath);
@@ -157,6 +157,7 @@ public class LevelBuilder : MonoBehaviour {
 			}			
 			i = i + mapsize + 2;
 		}
+		Debug.Log(startersPotd.Count + " number of maps filtered");
 		levelsPotd = (string[])lines.Clone();
 		if(LevelManager.ispotd){
 			Debug.Log(LevelManager.levelnum + " LEVELNUM " );
@@ -273,6 +274,7 @@ public class LevelBuilder : MonoBehaviour {
 		LevelManager.hintnum = 0;
 		LevelManager.hints = new List<Hint>();
 		PieceHolders.placedpieces = new List<Dragger>();
+		LevelManager.placedPieces = new string[10,10];
 		//PopulationManager.readytobrain = false;
 		string leveltext = ("Level" + levelnumber.ToString() + ".txt");
 		string levelname = ("Level" + levelnumber.ToString ());
@@ -359,6 +361,7 @@ public class LevelBuilder : MonoBehaviour {
 		LevelManager.hintnum = 0;
 		LevelManager.hints = new List<Hint>();
 		PieceHolders.placedpieces = new List<Dragger>();
+		LevelManager.placedPieces = new string[10,10];
 		piecenums = 0;
 		for (int y = 0; y < totaldimension; y++) {
 //			Debug.Log(y);

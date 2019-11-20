@@ -70,9 +70,21 @@ public class WinMessage : MonoBehaviour
         return Mathf.Sin(time * speed / Mathf.PI) * scale;
     }
     public void CheckNext(){
-        if(LevelManager.levelnum == 160){
+        if(LevelManager.levelnum == 160 && !LevelManager.ispotd){
             Next.SetActive(false);
             Home.SetActive(true);
+            return;
+        }
+        if(LevelManager.ispotd){
+            if(LevelManager.adFree && DateChecker.Instance.currentIndex < 
+            DateChecker.Instance.todayIndex){
+
+            }
+            else{
+                Next.SetActive(false);
+                Home.SetActive(true);
+                return;                
+            }
         }
     }
 }

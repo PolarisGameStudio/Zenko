@@ -5,10 +5,9 @@ using UnityEngine.UI;
 
 public class TextModulator : MonoBehaviour
 {
-	int hue;
-	public int s;
-	public int v;
-	public Text text;
+	public static int hue;
+	public static int s;
+	public static int v;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,7 +23,5 @@ public class TextModulator : MonoBehaviour
 		if(hue>359){
 			hue = 0;
 		}
-		text.color = Color.HSVToRGB((float)hue/359,(float)s/99, (float)v/99);
-
     }
 }

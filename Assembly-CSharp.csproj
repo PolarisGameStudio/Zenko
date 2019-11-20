@@ -285,6 +285,7 @@
      <Compile Include="Assets\GooglePlayGames\Platforms\PlayGamesClientFactory.cs" />
      <Compile Include="Assets\GooglePlayGames\Platforms\TokenClient.cs" />
      <Compile Include="Assets\GooglePlayGames\PluginVersion.cs" />
+     <Compile Include="Assets\ModulateImage.cs" />
      <Compile Include="Assets\NokobotUIPack\Demo\Scripts\GoToNextScene.cs" />
      <Compile Include="Assets\PotdMenu.cs" />
      <Compile Include="Assets\Scripts\AssignCamera.cs" />
@@ -325,6 +326,7 @@
      <Compile Include="Assets\Scripts\LoseMessage.cs" />
      <Compile Include="Assets\Scripts\ManagerScript.cs" />
      <Compile Include="Assets\Scripts\MenuButton.cs" />
+     <Compile Include="Assets\Scripts\ModulateThis.cs" />
      <Compile Include="Assets\Scripts\MonsterPanel.cs" />
      <Compile Include="Assets\Scripts\MouseDownTouch.cs" />
      <Compile Include="Assets\Scripts\MouseEventsGenerator.cs" />

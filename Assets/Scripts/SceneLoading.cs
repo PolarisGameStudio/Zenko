@@ -201,13 +201,13 @@ public class SceneLoading : MonoBehaviour {
 		PlayerPrefs.SetInt("PoTD", index);
 		DateChecker.Instance.currentIndex = index;
 		Debug.Log ("Going to Scene POTD at " + num);
-		MusicHandler.PlayInitialLoop();
 
 		//LevelStorer.Lookfor(num);
 		//LevelManager.levelnum = num;
 		//AssignPotdName();
 		LevelManager.ispotd = true;
 		SceneManager.LoadScene(1);
+		MusicHandler.PlayInitialLoop();
 	}
 
 	public static void SetStars(int rating){
@@ -459,7 +459,7 @@ public class SceneLoading : MonoBehaviour {
 
 		transform.Find("MenuHolder").Find("Menu").gameObject.SetActive(true);
 		transform.Find("MenuHolder").Find("ClosePotd_Box").gameObject.SetActive(false);
-		GameModeHandler.TurnOn();		
+		GameModeHandler.Return();		
 		CameraController.Fade(.2f,0.4f);
 	}
 
@@ -471,7 +471,7 @@ public class SceneLoading : MonoBehaviour {
 
 		transform.Find("MenuHolder").Find("Menu").gameObject.SetActive(true);
 		transform.Find("MenuHolder").Find("CloseLevel_Box").gameObject.SetActive(false);
-		GameModeHandler.TurnOn();		
+		GameModeHandler.Return();		
 		CameraController.Fade(.2f,0.4f);
 	}
 	public void GoToWorldSelect(){

@@ -9,6 +9,8 @@ public class SfxHandler : MonoBehaviour
 	public AudioClip[] fragile;
     public AudioClip[] icarus_Blow;
     public AudioClip pedro_Hit;
+    public AudioClip[] wall_Hit;
+    public AudioClip[] icarus_Sound;
     public AudioClip hole_Sound;
     public AudioClip victory_Sound;
     public AudioClip vicotry_Short;
@@ -42,23 +44,52 @@ public class SfxHandler : MonoBehaviour
 
     public void PlayWallHit(int x, int y){
         Debug.Log(x + " " + y);
-        source.PlayOneShot(pedro_Hit, 1f);
+        //source.PlayOneShot(pedro_Hit, 1f);
 
         string typeOfWall = FindType(x,y);
-        Debug.Log(typeOfWall);
+        Debug.Log(typeOfWall + " IS THE HIT");
+        switch(typeOfWall){
+            case "Wall":
+                source.PlayOneShot(pedro_Hit, 1f);
+                break;
+            case null:
+                Debug.Log("NULL");
+                source.PlayOneShot(wall_Hit[Random.Range(0,wall_Hit.Length)], .5f);
+                break;
+            case "Right":
+                if(Random.Range(0,10) > 7){
+                    source.PlayOneShot(icarus_Sound[Random.Range(0,icarus_Sound.Length)], 1f);    
+                }
+                source.PlayOneShot(pedro_Hit, 1f);
+                
+                break;
+            case "Left":
+                if(Random.Range(0,10) > 7){
+                    source.PlayOneShot(icarus_Sound[Random.Range(0,icarus_Sound.Length)], 1f);    
+                }
+                source.PlayOneShot(pedro_Hit, 1f);
+                break;
+            case "Up":
+                if(Random.Range(0,10) > 7){
+                    source.PlayOneShot(icarus_Sound[Random.Range(0,icarus_Sound.Length)], 1f);    
+                }
+                source.PlayOneShot(pedro_Hit, 1f);
+                break;
+            case "Down":
+                if(Random.Range(0,10) > 7){
+                    source.PlayOneShot(icarus_Sound[Random.Range(0,icarus_Sound.Length)], 1f);    
+                }
+                source.PlayOneShot(pedro_Hit, 1f);
+                break;
+
+        }
 
 
     }
 
     string FindType(int x, int y){
+        //Debug.Log(LevelManager.placedPieces[x])
         return LevelManager.placedPieces[x,y];
-        // for(int i = 0; i<LevelManager.hints.Count; i++){
-        //     Debug.Log(LevelManager.hints[i].x  + " " + LevelManager.hints[i].y);
-        //     if(LevelManager.hints[i].x == x && LevelManager.hints[i].y == y){
-        //         return LevelManager.hints[i].type;
-        //     }
-        // }
-        //return "Empty";
     }
 
     public void PlayFlowerOpen(){

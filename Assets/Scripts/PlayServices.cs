@@ -34,24 +34,30 @@ public class PlayServices : MonoBehaviour
         if(instance == null)
             {
         //PlayerPrefs.DeleteAll();
-
-                LevelManager.adFree = false;
-
                 instance = this;
                 DontDestroyOnLoad(this.gameObject);
 
                 //Debug.Log("Doingit");
                 //Debug.Log(instance);
-                LevelStorer.PopulateLevelDictionary(); //load level data int levelstorer.leveldic
+                LevelStorer.PopulateFourChapters(); //load level data (200) int levelstorer.leveldic
+                LevelStorer.PopulatePotd1000(); //
+
                // Debug.Log(PlayerPrefs.GetString(SAVE_NAME));
                 if(!PlayerPrefs.HasKey("PoTD"))
                     PlayerPrefs.SetInt("PoTD", 0);
                 if(!PlayerPrefs.HasKey(SAVE_NAME))
                     PlayerPrefs.SetString(SAVE_NAME, GameDataToString());
+                //ifsavenamesmallerdatgamedatatostring
+                    //addtostring;
+                if(PlayerPrefs.GetString(SAVE_NAME).Length < GameDataToString().Length)
+                    Debug.Log("NEW MAPS ARE IN EXTRA EXTRA NEW MAPS ARE IN");
+
                 if(!PlayerPrefs.HasKey("IsFirstTime"))
                     PlayerPrefs.SetInt("IsFirstTime", 1);
                     
                 LoadLocal();              
+
+                //checks for first4chapters
                 if (PlayerPrefs.HasKey ("Loaded")) {
                     Debug.Log ("Has playerpref");
                     //LevelStorer.AddRatingsToDictionary(); //Playerprefs into leveldic.
@@ -149,7 +155,11 @@ public class PlayServices : MonoBehaviour
         else{
             stringToSave = stringToSave + "0";
         }
-        for(int i=1; i< LevelStorer.leveldic.Count+1; i++){
+        Debug.Log(LevelStorer.leveldic.Count+ " LEVELDIC COUNT");
+        //200 from 4 chapters
+
+        //feeds string with first four chapters
+        for(int i=1; i< 200+1; i++){
             if(LevelStorer.leveldic[i].islocked == true && LevelStorer.leveldic[i].rating ==0){
                 stringToSave = stringToSave + "0";   
             }
@@ -162,7 +172,16 @@ public class PlayServices : MonoBehaviour
             }
 
         }
+
+        //for(int i = 0; i<1000; i++)
+
+
         Debug.Log("GameData is " + stringToSave);
+
+
+
+
+
         return stringToSave;
     }
 
@@ -177,29 +196,45 @@ public class PlayServices : MonoBehaviour
         }
         string[] dataArray = SplitString(Data);
 
-        //string[] dataValues = 
+        // //string[] dataValues = 
 
-        Debug.Log(Data);
-        Debug.Log("ASSIGNED");
+        // Debug.Log(Data);
+        // Debug.Log("ASSIGNED");
 
-        //Debug.Log(LevelStorer.leveldic.Count);
-        // LevelMenu.highestLevelSolved = int.Parse(Data);
-        // int highestSolved = LevelMenu.highestLevelSolved;
-        Debug.Log(dataArray[0]);
+        // //Debug.Log(LevelStorer.leveldic.Count);
+        // // LevelMenu.highestLevelSolved = int.Parse(Data);
+        // // int highestSolved = LevelMenu.highestLevelSolved;
+        // Debug.Log(dataArray[0]);
+
+
+        //assigns adfree with first digit
         if(int.Parse(dataArray[0])== 1)
             LevelManager.adFree = true;
         else
             LevelManager.adFree = false;
 
+        Debug.Log(dataArray.Length + " IS THE LENGTH");
         //GameObject.Find("highestsolved").GetComponent<Text>().text = dataArray[0]; //this currently displays 1 or 0 for paid or not
-        for(int i=1; i<dataArray.Length-1;i++){
+        // for(int i=1; i<dataArray.Length-1;i++){
+        //     int rating = int.Parse(dataArray[i]);
+        //     if(rating>1){
+        //     UpdateImportantValue(i, rating-1);
+        //     }
+        // }
+        AssignFirstFourChapters(dataArray);
+        //AssignPotdData();
+
+    }
+
+    void AssignFirstFourChapters(string[] dataArray){
+        for(int i=1; i<200;i++){
             int rating = int.Parse(dataArray[i]);
             if(rating>1){
             UpdateImportantValue(i, rating-1);
             }
         }
-
-
+    }
+    void AssignPotdData(){
 
     }
 
@@ -243,33 +278,6 @@ public class PlayServices : MonoBehaviour
         AssignData(mergedData);
         isCloudDataLoaded = true;
         SaveData();
-
-        // if (PlayerPrefs.GetInt("IsFirstTime") == 1){
-        //     PlayerPrefs.SetInt("IsFirstTime", 0);
-        //     if (int.Parse(cloudData) > int.Parse(localData)){
-        //         Debug.Log("StringTogameData goes cloud");
-        //         PlayerPrefs.SetString(SAVE_NAME, cloudData);
-        //         AssignData(cloudData);
-        //         //SaveDataLocally
-        //         //LOADFROMCLOUD
-        //     }
-        // }
-        // else{
-        //     if(int.Parse(localData) > int.Parse(cloudData)){
-        //         //uselocaldata
-        //         Debug.Log("StringTogameData goes local");
-        //         PlayerPrefs.SetString(SAVE_NAME, localData);
-        //         AssignData(localData);
-
-        //         isCloudDataLoaded = true;
-        //         SaveData();
-        //         return;
-        //     }
-        // }
-
-
-        //useclouddata
-        isCloudDataLoaded = true;
     }
 
     void StringToGameData(string localData){
@@ -278,7 +286,6 @@ public class PlayServices : MonoBehaviour
             localData = "0";
         }
         AssignData(localData);
-        //uselocaldata
     }
 
     public void LoadData(){
