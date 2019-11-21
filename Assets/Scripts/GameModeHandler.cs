@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameModeHandler : MonoBehaviour
 {
@@ -35,15 +36,20 @@ public class GameModeHandler : MonoBehaviour
         }
     }
     public void NextMode(){
+        Instance.transform.GetChild(0).GetChild(4).GetComponent<Text>().color = Color.HSVToRGB((float)TextModulator.hue/359,(float)TextModulator.s/99, (float)TextModulator.v/99);
+        Instance.transform.GetChild(0).GetChild(5).GetComponent<Text>().color = Color.HSVToRGB((float)TextModulator.hue/359,(float)TextModulator.s/99, (float)TextModulator.v/99);
     	Modes[currentMode].SetActive(false);
     	Modes[nextInCycle(currentMode)].SetActive(true);
     	currentMode=nextInCycle(currentMode);
-
+    
     }
     public void PreviousMode(){
+        Instance.transform.GetChild(0).GetChild(4).GetComponent<Text>().color = Color.HSVToRGB((float)TextModulator.hue/359,(float)TextModulator.s/99, (float)TextModulator.v/99);
+        Instance.transform.GetChild(0).GetChild(5).GetComponent<Text>().color = Color.HSVToRGB((float)TextModulator.hue/359,(float)TextModulator.s/99, (float)TextModulator.v/99);
     	Modes[currentMode].SetActive(false);
     	Modes[previousInCycle(currentMode)].SetActive(true);
     	currentMode=previousInCycle(currentMode);
+
     }
     public static void TurnOff(){
     	Instance.transform.GetChild(0).gameObject.SetActive(false);
@@ -54,6 +60,8 @@ public class GameModeHandler : MonoBehaviour
     	Instance.transform.GetChild(0).gameObject.SetActive(true);
     	Instance.addButton.SetActive(true);
         Instance.menuButton.SetActive(true);
+        Instance.transform.GetChild(0).GetChild(4).GetComponent<Text>().color = Color.HSVToRGB((float)TextModulator.hue/359,(float)TextModulator.s/99, (float)TextModulator.v/99);
+
 
     }
 

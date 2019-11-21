@@ -40,7 +40,11 @@ public class WinMessage : MonoBehaviour
 
     public void AssignMessage(int world, int stars){
         mystars = stars;
-    	Sprite cursprite = worldMessageStorer[world-1][stars];
+        Sprite cursprite;
+        if(LevelManager.ispotd)
+        cursprite = worldMessageStorer[0][stars];
+        else
+    	cursprite = worldMessageStorer[world-1][stars];
     	this.GetComponent<Image>().sprite = cursprite;
     	this.GetComponent<RectTransform>().sizeDelta = new Vector2 (cursprite.bounds.size.x*50 , 100);
     	size = cursprite.bounds.size.x*50;

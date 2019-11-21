@@ -163,7 +163,7 @@ public class PlayServices : MonoBehaviour
         else{
             stringToSave = stringToSave + "0";
         }
-        Debug.Log(LevelStorer.leveldic.Count+ " LEVELDIC COUNT");
+//        Debug.Log(LevelStorer.leveldic.Count+ " LEVELDIC COUNT");
         //200 from 4 chapters
 
         //feeds string with first four chapters

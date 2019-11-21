@@ -20,6 +20,7 @@ public class GoalBehaviour : MonoBehaviour {
 	public static int lastphase;
 	public static bool goaling;
 	public static bool active;
+	bool chomping;
 
 	// Use this for initialization
 	void Start () {
@@ -119,6 +120,7 @@ public class GoalBehaviour : MonoBehaviour {
 								Debug.Log("Doing this");
 								goaling = true;
 								myanim.SetInteger("Phase",2);
+								StartCoroutine(PlayChompAfterDelay());
 								AnimateFoxGoal();
 								lastphase = 2;								
 							}
@@ -144,6 +146,7 @@ public class GoalBehaviour : MonoBehaviour {
 								goaling = true;
 //								Debug.Log("Doing this too");
 								myanim.SetInteger("Phase",2);
+								StartCoroutine(PlayChompAfterDelay());
 								SfxHandler.Instance.StopSlideVictory();
 								SfxHandler.Instance.PlayVictory();
 								AnimateFoxGoal();
@@ -205,6 +208,7 @@ public class GoalBehaviour : MonoBehaviour {
 							if(transform.position.x > newx){
 								goaling = true;
 								myanim.SetInteger("Phase",2);
+								StartCoroutine(PlayChompAfterDelay());
 								SfxHandler.Instance.StopSlideVictory();
 								SfxHandler.Instance.PlayVictory();
 								AnimateFoxGoal();
@@ -228,6 +232,7 @@ public class GoalBehaviour : MonoBehaviour {
 							if(transform.position.x < newx){
 								goaling = true;
 								myanim.SetInteger("Phase",2);
+								StartCoroutine(PlayChompAfterDelay());
 								SfxHandler.Instance.StopSlideVictory();
 								SfxHandler.Instance.PlayVictory();
 								AnimateFoxGoal();
@@ -254,6 +259,18 @@ public class GoalBehaviour : MonoBehaviour {
 		//	isstatic = true;
 		//}
 //		Debug.Log("Is vertical" + isvertical);
+	}
+	IEnumerator PlayChompAfterDelay(){
+		Debug.Log("PLAYING CHOMP");
+		if(!chomping){
+		chomping = true;
+		yield return new WaitForSeconds(.66f);
+		SfxHandler.Instance.PlayChomp();	
+		yield return new WaitForSeconds(.4f);
+		chomping = false;		
+		}
+
+
 	}
 
 	void OpenFlower(){

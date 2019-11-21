@@ -13,7 +13,7 @@ public class SfxHandler : MonoBehaviour
     public AudioClip[] icarus_Sound;
     public AudioClip hole_Sound;
     public AudioClip victory_Sound;
-    public AudioClip vicotry_Short;
+    public AudioClip victory_Short;
     public AudioClip seed_Pop;
     static AudioSource[] MusicSource;
     public bool playingVictory;
@@ -25,6 +25,7 @@ public class SfxHandler : MonoBehaviour
     public AudioClip[] slideSounds;
     public AudioClip[] flowerOpen;
     public AudioClip[] flowerClose;
+    public AudioClip[] flowerChomp;
 
     public static bool isFlowerOpen;
 
@@ -54,7 +55,7 @@ public class SfxHandler : MonoBehaviour
                 break;
             case null:
                 Debug.Log("NULL");
-                source.PlayOneShot(wall_Hit[Random.Range(0,wall_Hit.Length)], .5f);
+                source.PlayOneShot(wall_Hit[Random.Range(0,wall_Hit.Length)], .65f);
                 break;
             case "Right":
                 if(Random.Range(0,10) > 7){
@@ -121,6 +122,9 @@ public class SfxHandler : MonoBehaviour
 
         //StartCoroutine(Duck(.1f, 1f));
     }
+    public void PlayChomp(){
+        source.PlayOneShot(flowerChomp[Random.Range(0 , flowerChomp.Length)], 1f);
+    }
     public void PlaySeedPop(){
         source.PlayOneShot(seed_Pop, .6f);
     }
@@ -141,8 +145,11 @@ public class SfxHandler : MonoBehaviour
             // source.PlayOneShot(vicotry_Short,1f);
             // playingVictory = true;
             // StartCoroutine(Reseter(2));
-            DuckMusic(2);
-            source.PlayOneShot(victory_Sound,.7f);
+            DuckMusic(1);
+            if(Random.Range(0,10) > 8)
+            source.PlayOneShot(victory_Sound,.6f);
+            else
+            source.PlayOneShot(victory_Short,1f);
             playingVictory = true;
             StartCoroutine(Reseter(6));
             inIt = true;
@@ -150,7 +157,7 @@ public class SfxHandler : MonoBehaviour
             return;
         }
         else if(!playingVictory2 && !inIt){
-            source.PlayOneShot(vicotry_Short,.8f);
+            source.PlayOneShot(victory_Short,1f);
             playingVictory2 = true;
             StartCoroutine(Reseter2(2));
         }
@@ -201,15 +208,15 @@ public class SfxHandler : MonoBehaviour
         //yield return new WaitForSeconds(.4f);
         float initvalue = MusicSource[0].volume;
         for(float i=0; i<fadeouttime; i+=Time.deltaTime){
-            MusicSource[0].volume = Mathf.Lerp(initvalue, .3f*initvalue, i/fadeouttime);
-            MusicSource[1].volume = Mathf.Lerp(initvalue, .3f*initvalue, i/fadeouttime);
+            MusicSource[0].volume = Mathf.Lerp(initvalue, .7f*initvalue, i/fadeouttime);
+            MusicSource[1].volume = Mathf.Lerp(initvalue, .7f*initvalue, i/fadeouttime);
             yield return null;
         }
         MusicSource[0].volume = 0;
         MusicSource[1].volume = 0;
         for(float i = 0; i<fadeintime; i+= Time.deltaTime){
-            MusicSource[0].volume = Mathf.Lerp(.3f*initvalue, initvalue, i/fadeintime);
-            MusicSource[1].volume = Mathf.Lerp(.3f*initvalue, initvalue, i/fadeintime);  
+            MusicSource[0].volume = Mathf.Lerp(.7f*initvalue, initvalue, i/fadeintime);
+            MusicSource[1].volume = Mathf.Lerp(.7f*initvalue, initvalue, i/fadeintime);  
             yield return null;          
         }
             MusicSource[0].volume = initvalue;

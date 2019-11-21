@@ -17,6 +17,7 @@ public class LevelMenu : MonoBehaviour {
 	public GameObject worldTextHolder;
 	public GameObject buttonBack;
 	public GameObject buttonForward;
+	public Sprite[] snowSprites;
 
 	public Image monthSprite;
 	public Image yearSprite;
@@ -139,6 +140,7 @@ public class LevelMenu : MonoBehaviour {
 		btn.onClick.AddListener(delegate{sl.LoadLevel(num);});
 		int world = Mathf.FloorToInt((num-1)/40)  + 1;
 		int levelinworld = num - ((world-1)*40);
+		curbutton.transform.GetChild(4).GetComponent<Image>().sprite = snowSprites[world-1];
 		//txt.text = "World " + world.ToString() + "-" + levelinworld.ToString();		
 		curbutton.transform.GetChild(0).GetComponent<Text>().text =levelinworld.ToString();	
 

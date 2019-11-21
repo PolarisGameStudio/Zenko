@@ -122,6 +122,7 @@ public class SceneLoading : MonoBehaviour {
 	}
 	public void TutorialButton(){
 		TutorialHandler.Instance.HelpButton();
+		MenuButton.thisMB.closeMenu();
 	}
 	public void NextWon(){
 		if(LevelManager.ispotd){

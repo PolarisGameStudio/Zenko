@@ -17,6 +17,7 @@ public class WorldName : MonoBehaviour
 	public Sprite[] num7;
 	public Sprite[] num8;
 	public Sprite[] num9;
+    public Sprite[] slash;
 	public List<Sprite[]> numbers = new List<Sprite[]>();
 	public GameObject[] AdvHolder;
 

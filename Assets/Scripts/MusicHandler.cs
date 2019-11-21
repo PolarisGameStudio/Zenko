@@ -29,8 +29,8 @@ public class MusicHandler : MonoBehaviour
 		{
 			thisMH = this;
 			//DontDestroyOnLoad(this.gameObject);
-            source1.volume = source1.volume*.38f;
-            source2.volume = source2.volume*.38f;
+            source1.volume = source1.volume*.3f;
+            source2.volume = source2.volume*.3f;
 			return;  
 		}
 		Destroy(this.gameObject);

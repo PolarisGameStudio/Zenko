@@ -147,7 +147,7 @@ public class MenuButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler{
         LevelManager.isdragging = true;
 
         //AssignSettingsSprite
-
+        closeMenu();
         if(open){
             toggleMenu();
         }

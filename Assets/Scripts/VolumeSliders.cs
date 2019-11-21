@@ -17,8 +17,8 @@ public class VolumeSliders : MonoBehaviour {
 		Soundslider = GameObject.Find("SoundSlider").GetComponent<Slider>();
 		Musicslider = GameObject.Find("MusicSlider").GetComponent<Slider>();
 		//MusicSlider = GameObject.Find("Musicslider").GetComponent<Slider
-		Soundslider.value = SoundSource[0].volume/.38f;
-		Musicslider.value = MusicSource[0].volume/.38f;
+		Soundslider.value = SoundSource[0].volume/.3f;
+		Musicslider.value = MusicSource[0].volume/.3f;
 	}
 	
 	// Update is called once per frame
@@ -29,7 +29,7 @@ public class VolumeSliders : MonoBehaviour {
 		SoundSource[1].volume = Soundslider.value;
 	}
 	public void SlideMusic(){
-		MusicSource[0].volume = Musicslider.value*.38f;
-		MusicSource[1].volume = Musicslider.value*.38f;
+		MusicSource[0].volume = Musicslider.value*.3f;
+		MusicSource[1].volume = Musicslider.value*.3f;
 	}
 }
