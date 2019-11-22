@@ -11,6 +11,7 @@ public class TutorialHandler : MonoBehaviour
     public GameObject CloseButton;
 	bool readyToClose;
 	string[] levelLineBank;
+    public Text text;
 
     // Start is called before the first frame update
     void Awake()
@@ -34,6 +35,7 @@ public class TutorialHandler : MonoBehaviour
         LevelManager.isdragging = true;
         LevelManager.configging = true;
         Debug.Log("PREPARING TUTORIAL");
+        text.color = Color.HSVToRGB((float)TextModulator.hue/359,(float)TextModulator.s/99, (float)TextModulator.v/99);
         this.gameObject.transform.GetChild(0).gameObject.SetActive(true);
         this.gameObject.transform.GetChild(1).gameObject.SetActive(true);
     	levelLineBank = lineBank;

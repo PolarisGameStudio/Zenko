@@ -35,6 +35,8 @@ public class LevelManager : MonoBehaviour {
 	public static bool adFree;
 	public static bool configging;
 	public static Transform playert;
+
+	public bool freeIt;
 	//public static int hintCurrency;
 	//public static GameObject lastgoodtile;
 	//public static IceTileHandler myicehandler;
@@ -57,6 +59,11 @@ public class LevelManager : MonoBehaviour {
 
 	}
 
+	void Update(){
+		if(LevelManager.adFree && freeIt){
+			LevelManager.adFree = false;
+		}
+	}
 	void InitializePlayerPrefs(){
 		if (PlayerPrefs.HasKey ("CurrencyLoaded")) {
 			//Debug.Log(PlayerPrefs.GetInt("hintCurrency"));

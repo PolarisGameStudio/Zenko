@@ -77,6 +77,7 @@ public class LevelMenu : MonoBehaviour {
 
 		if(LevelManager.adFree){
 			if(num+1 <= DateChecker.Instance.dayInMonth || DateChecker.currentMonthIndex<DateChecker.todayMonthIndex){
+				LevelStorer.potdDic[num].islocked = false;
 				btn.onClick.AddListener(delegate{sl.LoadPotdMap(num + 
 				PotdHolder.monthBank[DateChecker.currentMonthIndex][0]);}); 
 				//AssignStarsToPotd(num);
@@ -88,7 +89,9 @@ public class LevelMenu : MonoBehaviour {
 		}
 
 		else{
-			if(num+1 == DateChecker.Instance.dayInMonth){
+
+			if(num+1 == DateChecker.Instance.dayInMonth || !LevelStorer.potdDic[num].islocked){
+				LevelStorer.potdDic[num].islocked = false;
 				btn.onClick.AddListener(delegate{sl.LoadPotdMap(num + 
 				PotdHolder.monthBank[DateChecker.currentMonthIndex][0]);}); 
 			}
@@ -96,6 +99,7 @@ public class LevelMenu : MonoBehaviour {
 				curbutton.transform.GetChild(1).gameObject.SetActive(true);	
 			 	curbutton.transform.GetChild(2).gameObject.SetActive(true);	
 			}
+
 		}
 
 		if(LevelStorer.potdDic[num].rating == 1){
@@ -268,6 +272,8 @@ public class LevelMenu : MonoBehaviour {
 		for(int i = 0; i<numberOfLevels; i++){
 			createPotdButton(i);
 		}
+		PlayServices.instance.SaveLocal();
+		PlayServices.instance.SaveData();
 		AssignMonthText();
 		CheckPotdUpDown();
 	}

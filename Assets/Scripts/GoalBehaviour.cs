@@ -261,13 +261,14 @@ public class GoalBehaviour : MonoBehaviour {
 //		Debug.Log("Is vertical" + isvertical);
 	}
 	IEnumerator PlayChompAfterDelay(){
-		Debug.Log("PLAYING CHOMP");
 		if(!chomping){
-		chomping = true;
-		yield return new WaitForSeconds(.66f);
-		SfxHandler.Instance.PlayChomp();	
-		yield return new WaitForSeconds(.4f);
-		chomping = false;		
+			Debug.Log("PLAYING CHOMP");
+
+			chomping = true;
+			yield return new WaitForSeconds(.66f);
+			SfxHandler.Instance.PlayChomp();	
+			yield return new WaitForSeconds(.4f);
+			chomping = false;		
 		}
 
 

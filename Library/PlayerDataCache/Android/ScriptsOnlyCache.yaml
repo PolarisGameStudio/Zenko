@@ -18,6 +18,7 @@ ScriptsOnlyBuild:
     - GameModeHandler
     - GoalBehaviour
     - GoogleAds
+    - GoogleMobileAds.Common.MobileAdsEventExecutor
     - HueModifier
     - ImageColorModulator
     - ImageHolder
@@ -70,8 +71,16 @@ ScriptsOnlyBuild:
     - UnityEngine.Rendering.LWRP.LWRPAdditionalCameraData
     - UnityEngine.Rendering.LWRP.LightweightRenderPipelineAsset
     - UnityEngine.Rendering.LWRP.LightweightRenderPipelineEditorResources
+    UnityEditor.Graphs.dll:
+    - UnityEditor.Graphs.AnimationBlendTree.Graph
+    - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
+    - UnityEditor.Graphs.AnimationStateMachine.Graph
+    - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
+    - UnityEditor.TestTools.TestRunner.TestListCacheData
     UnityEngine.UI.dll:
     - UnityEngine.EventSystems.EventSystem
     - UnityEngine.EventSystems.EventTrigger
@@ -92,6 +101,7 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.Toggle
     - UnityEngine.UI.VerticalLayoutGroup
     com.unity.multiplayer-hlapi.Runtime.dll:
+    - UnityEngine.Networking.NetworkCallbacks
     - UnityEngine.Networking.NetworkIdentity
   sceneClasses:
     Assets/Level.unity:
@@ -605,7 +615,7 @@ ScriptsOnlyBuild:
     className: GroupTrack
   - hash:
       serializedVersion: 2
-      Hash: 325d3769948c188bcc516bef77daffe9
+      Hash: 2a625a9603723e6c91db762244b1bd06
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: TutorialHandler
@@ -701,7 +711,7 @@ ScriptsOnlyBuild:
     className: PlaneBehavior
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: c0329cd68858691ba43cee8dfe5da7a5
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: VolumeSliders
@@ -723,18 +733,6 @@ ScriptsOnlyBuild:
     assemblyName: com.unity.multiplayer-hlapi.Runtime.dll
     namespaceName: UnityEngine.Networking
     className: NetworkTransform
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: UnityEngine.Advertisements.dll
-    namespaceName: UnityEngine.Advertisements
-    className: CallbackExecutor
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: UnityEngine.Advertisements.dll
-    namespaceName: UnityEngine.Advertisements.Editor
-    className: Placeholder
   - hash:
       serializedVersion: 2
       Hash: cd0ecdca0166232906c6f2df9dddc3d3
@@ -1469,7 +1467,7 @@ ScriptsOnlyBuild:
     className: TextMeshProUGUI
   - hash:
       serializedVersion: 2
-      Hash: 910d61ee8c1599e8a8950e539dfdc42c
+      Hash: bd7b791e69bdb3121b35da3509df0579
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MenuButton
@@ -1511,7 +1509,7 @@ ScriptsOnlyBuild:
     className: ColorModulator
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: 4a27ae7a79aa9c9ab3a6cbccdaa06e07
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: LevelManager
@@ -1753,4 +1751,4 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/WorldSelect.unity
   - Assets/Level.unity
-  playerPath: /Users/bernardolimon/Desktop/ZenkoApk/zenko147.aab
+  playerPath: /Users/bernardolimon/Desktop/ZenkoApk/zenko148.aab

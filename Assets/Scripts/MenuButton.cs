@@ -22,6 +22,7 @@ public class MenuButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler{
     public static MenuButton thisMB;
     public Image settingsSprite;
 
+    public GameObject[] settingsToColor;
 
     void Awake()
     {
@@ -145,6 +146,7 @@ public class MenuButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler{
         LevelManager.configging = true;
         Swiping.canswipe = false;
         LevelManager.isdragging = true;
+        VolumeSliders.ColorStuff();
 
         //AssignSettingsSprite
         closeMenu();

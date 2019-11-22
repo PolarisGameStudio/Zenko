@@ -45,9 +45,9 @@ public class GoogleAds : MonoBehaviour
     private void RequestInterstitial()
     {
         #if UNITY_ANDROID
-            string adUnitId = "ca-app-pub-3940256099942544/1033173712";
+            string adUnitId = "ca-app-pub-3301322474937909/8967775483";
         #elif UNITY_IPHONE
-            string adUnitId = "ca-app-pub-3940256099942544/4411468910";
+            string adUnitId = "ca-app-pub-3301322474937909/8967775483";
         #else
             string adUnitId = "unexpected_platform";
         #endif
@@ -88,9 +88,9 @@ public class GoogleAds : MonoBehaviour
     public void RequestFirstRewardBasedVideo(){
         Debug.Log("REQUESTING");
         #if UNITY_ANDROID
-            string adUnitId = "ca-app-pub-3940256099942544/5224354917";
+            string adUnitId = "ca-app-pub-3301322474937909/3389088666";
         #elif UNITY_IPHONE
-            string adUnitId = "ca-app-pub-3940256099942544/1712485313";
+            string adUnitId = "ca-app-pub-3301322474937909/3389088666";
         #else
             string adUnitId = "unexpected_platform";
         #endif
