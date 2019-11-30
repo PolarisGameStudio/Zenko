@@ -67,7 +67,7 @@ public class LevelMenu : MonoBehaviour {
 		int world = int.Parse(DateChecker.Instance.mmyyyy);
 		//int levelinworld = num;
 		//txt.text = "World " + world.ToString() + "-" + levelinworld.ToString();		
-		curbutton.transform.GetChild(0).GetComponent<Text>().text = (num+1).ToString();	
+		curbutton.transform.GetChild(2).GetComponent<Text>().text = (num+1).ToString();	
 
 		//Debug.Log(LevelManager.adFree + "IS ADFREE");
 		//if(ShouldShowPotd());
@@ -83,8 +83,8 @@ public class LevelMenu : MonoBehaviour {
 				//AssignStarsToPotd(num);
 			}
 			else{
-				curbutton.transform.GetChild(1).gameObject.SetActive(true);	
-			 	curbutton.transform.GetChild(2).gameObject.SetActive(true);	
+				curbutton.transform.GetChild(3).gameObject.SetActive(true);	
+			 	curbutton.transform.GetChild(4).gameObject.SetActive(true);	
 			}
 		}
 
@@ -96,23 +96,23 @@ public class LevelMenu : MonoBehaviour {
 				PotdHolder.monthBank[DateChecker.currentMonthIndex][0]);}); 
 			}
 			else{
-				curbutton.transform.GetChild(1).gameObject.SetActive(true);	
-			 	curbutton.transform.GetChild(2).gameObject.SetActive(true);	
+				curbutton.transform.GetChild(3).gameObject.SetActive(true);	
+			 	curbutton.transform.GetChild(4).gameObject.SetActive(true);	
 			}
 
 		}
 
 		if(LevelStorer.potdDic[num].rating == 1){
-			curbutton.transform.GetChild(3).GetChild(1).GetChild(1).gameObject.SetActive(true);
+			curbutton.transform.GetChild(5).GetChild(1).GetChild(1).gameObject.SetActive(true);
 		}
 		if(LevelStorer.potdDic[num].rating == 2){
-			curbutton.transform.GetChild(3).GetChild(1).GetChild(0).gameObject.SetActive(true);
-			curbutton.transform.GetChild(3).GetChild(1).GetChild(2).gameObject.SetActive(true);
+			curbutton.transform.GetChild(5).GetChild(1).GetChild(0).gameObject.SetActive(true);
+			curbutton.transform.GetChild(5).GetChild(1).GetChild(2).gameObject.SetActive(true);
 		}
 		if(LevelStorer.potdDic[num].rating == 3){
-			curbutton.transform.GetChild(3).GetChild(1).GetChild(0).gameObject.SetActive(true);
-			curbutton.transform.GetChild(3).GetChild(1).GetChild(1).gameObject.SetActive(true);
-			curbutton.transform.GetChild(3).GetChild(1).GetChild(2).gameObject.SetActive(true);
+			curbutton.transform.GetChild(5).GetChild(1).GetChild(0).gameObject.SetActive(true);
+			curbutton.transform.GetChild(5).GetChild(1).GetChild(1).gameObject.SetActive(true);
+			curbutton.transform.GetChild(5).GetChild(1).GetChild(2).gameObject.SetActive(true);
 		}		
 
 		// if(num+1 <= DateChecker.Instance.dayInMonth || DateChecker.currentMonthIndex<DateChecker.todayMonthIndex){
@@ -144,28 +144,28 @@ public class LevelMenu : MonoBehaviour {
 		btn.onClick.AddListener(delegate{sl.LoadLevel(num);});
 		int world = Mathf.FloorToInt((num-1)/40)  + 1;
 		int levelinworld = num - ((world-1)*40);
-		curbutton.transform.GetChild(4).GetComponent<Image>().sprite = snowSprites[world-1];
+		curbutton.transform.GetChild(6).GetComponent<Image>().sprite = snowSprites[world-1];
 		//txt.text = "World " + world.ToString() + "-" + levelinworld.ToString();		
-		curbutton.transform.GetChild(0).GetComponent<Text>().text =levelinworld.ToString();	
+		curbutton.transform.GetChild(2).GetComponent<Text>().text =levelinworld.ToString();	
 
 		if(LevelStorer.leveldic[num].islocked == true && num != 0){
-			curbutton.transform.GetChild(1).gameObject.SetActive(true);	
-			curbutton.transform.GetChild(2).gameObject.SetActive(true);	
+			curbutton.transform.GetChild(3).gameObject.SetActive(true);	
+			curbutton.transform.GetChild(4).gameObject.SetActive(true);	
 		}
 		// if(!LevelStorer.leveldic[num].islocked){
 		// 	//Debug.Log("NOT LOCKED");
 		// }
 		if(LevelStorer.leveldic[num].rating == 1){
-			curbutton.transform.GetChild(3).GetChild(1).GetChild(1).gameObject.SetActive(true);
+			curbutton.transform.GetChild(5).GetChild(1).GetChild(1).gameObject.SetActive(true);
 		}
 		if(LevelStorer.leveldic[num].rating == 2){
-			curbutton.transform.GetChild(3).GetChild(1).GetChild(0).gameObject.SetActive(true);
-			curbutton.transform.GetChild(3).GetChild(1).GetChild(2).gameObject.SetActive(true);
+			curbutton.transform.GetChild(5).GetChild(1).GetChild(0).gameObject.SetActive(true);
+			curbutton.transform.GetChild(5).GetChild(1).GetChild(2).gameObject.SetActive(true);
 		}
 		if(LevelStorer.leveldic[num].rating == 3){
-			curbutton.transform.GetChild(3).GetChild(1).GetChild(0).gameObject.SetActive(true);
-			curbutton.transform.GetChild(3).GetChild(1).GetChild(1).gameObject.SetActive(true);
-			curbutton.transform.GetChild(3).GetChild(1).GetChild(2).gameObject.SetActive(true);
+			curbutton.transform.GetChild(5).GetChild(1).GetChild(0).gameObject.SetActive(true);
+			curbutton.transform.GetChild(5).GetChild(1).GetChild(1).gameObject.SetActive(true);
+			curbutton.transform.GetChild(5).GetChild(1).GetChild(2).gameObject.SetActive(true);
 		}			
 
 		levelbuttons.Add(curbutton);

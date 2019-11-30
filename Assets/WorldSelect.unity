@@ -5914,21 +5914,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 114174625286903274, guid: 6a34e0e9b16514027b123d2d93c6ae38,
-        type: 3}
-      propertyPath: m_RaycastTarget
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114522946545272702, guid: 6a34e0e9b16514027b123d2d93c6ae38,
-        type: 3}
-      propertyPath: m_RaycastTarget
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114775446346821016, guid: 6a34e0e9b16514027b123d2d93c6ae38,
-        type: 3}
-      propertyPath: m_RaycastTarget
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a34e0e9b16514027b123d2d93c6ae38, type: 3}
 --- !u!1 &1669609285

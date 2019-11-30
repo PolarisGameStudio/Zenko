@@ -89,8 +89,14 @@ public class SfxHandler : MonoBehaviour
     }
 
     string FindType(int x, int y){
-        //Debug.Log(LevelManager.placedPieces[x])
-        return LevelManager.placedPieces[x,y];
+
+        if(x>=0 && x <LevelBuilder.totaldimension && 
+            y>=0 && y < LevelBuilder.totaldimension){
+            return LevelManager.placedPieces[x,y];
+        }
+
+        else
+        return null;
     }
 
     public void PlayFlowerOpen(){
