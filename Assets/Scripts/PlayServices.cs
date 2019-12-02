@@ -31,6 +31,7 @@ public class PlayServices : MonoBehaviour
         //PlayerPrefs.DeleteAll();
         //Debug.Log(instance);
         Debug.Log("cursavepref " + PlayerPrefs.GetString(SAVE_NAME));
+        //Debug.Log("curcloudsave " + )
         if(instance == null)
             {
                 instance = this;
@@ -103,7 +104,7 @@ public class PlayServices : MonoBehaviour
         }
         Debug.Log(strArray.Length + " is the datasize");
         Debug.Log(strArray[0]);
-        Debug.Log(strArray[1]);
+        //Debug.Log(strArray[1]);
         return strArray;
 
     }
@@ -301,6 +302,7 @@ public class PlayServices : MonoBehaviour
     string MergeData(string cloudData, string localData){
         string[] cloudArray = SplitString(cloudData);
         string[] localArray = SplitString(localData);
+        Debug.Log("DATA TO MERGE IS " + cloudData + "which is cloud, and local is "+ localData);
         mergedData = "";
         //string[] mergedArray = new String[localData.Length];
         for(int i=0; i<localData.Length; i++){
@@ -324,8 +326,8 @@ public class PlayServices : MonoBehaviour
         mergedData = MergeData(cloudData, localData);
         PlayerPrefs.SetString(SAVE_NAME, mergedData);
         Debug.Log("GONNA ASSIGN DATA FROM MERGE");
-        AssignData(mergedData);
         isCloudDataLoaded = true;
+        AssignData(mergedData);
         SaveData();
     }
 
@@ -344,6 +346,7 @@ public class PlayServices : MonoBehaviour
             ((PlayGamesPlatform)Social.Active).SavedGame.OpenWithManualConflictResolution(SAVE_NAME, 
                 DataSource.ReadCacheOrNetwork, true, ResolveConflict, OnSavedGameOpened);
             Debug.Log("LOADED DATA SUCCESFFULY");
+
         }
         else{
             LoadLocal();
@@ -357,8 +360,10 @@ public class PlayServices : MonoBehaviour
 
     public void SaveData(){
         if(!isCloudDataLoaded){
-            SaveLocal();
-            return;
+            curCloudData = "0";
+            isCloudDataLoaded = true;
+            //SaveLocal();
+            //return;
         }
         if(Social.localUser.authenticated){
             Debug.Log("SAVINGTOCLOUD");
@@ -409,6 +414,8 @@ public class PlayServices : MonoBehaviour
     private void OnSavedGameOpened(SavedGameRequestStatus status, ISavedGameMetadata game){
         //Debug.Log(game + " "+ "game");
         //Debug.Log(status + " "+ "status");
+        Debug.Log("ISSAVING IS " + isSaving);
+        //Debug.Log("THE STATUS IS " + SavedGameRequestStatus);
         if (status == SavedGameRequestStatus.Success){
             if (!isSaving){
                 LoadGame(game);
@@ -426,10 +433,13 @@ public class PlayServices : MonoBehaviour
     }
 
     private void LoadGame(ISavedGameMetadata game){
+        Debug.Log("Gonna load game");
         ((PlayGamesPlatform)Social.Active).SavedGame.ReadBinaryData(game, OnSavedGameDataRead);
+
     }
 
     private void SaveGame(ISavedGameMetadata game){
+        Debug.Log("GONNA SAVE DATA TO CLOUD");
         newMergedString = MergeData(curCloudData, GameDataToString());
 
         SaveLocal();
@@ -457,6 +467,7 @@ public class PlayServices : MonoBehaviour
 
             StringToGameData(cloudDataString, localDataString);
             curCloudData = cloudDataString;
+            //isCloudDataLoaded = true;
             //curCloudData = mergedData;
 
         }
@@ -464,6 +475,7 @@ public class PlayServices : MonoBehaviour
 
     private void OnSavedGameDataWritten(SavedGameRequestStatus status, ISavedGameMetadata game){
         curCloudData = newMergedString;
+        Debug.Log("New cloud data is " + curCloudData);
     }
 
     #endregion /Saved Games
