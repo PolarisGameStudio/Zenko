@@ -79,6 +79,7 @@ public class RatingPopUp : MonoBehaviour {
 
 		if(LevelManager.ispotd){
 			Debug.Log( " CURRENT INDEX WON IS " + DateChecker.Instance.currentIndex);
+			//Debug.Log("CURRENT")
 			LevelStorer.potdDic[DateChecker.Instance.currentIndex].rating = myrating;
 			LevelStorer.potdDic[DateChecker.Instance.currentIndex].islocked = false;
 		}

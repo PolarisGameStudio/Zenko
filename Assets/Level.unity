@@ -20124,6 +20124,21 @@ PrefabInstance:
       propertyPath: spritesToColor.Array.data[3]
       value: 
       objectReference: {fileID: 3166223241615601631}
+    - target: {fileID: 4436123046088172803, guid: 69a1c5e1f5cfa42079b71a21a698a957,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 4436123046088172803, guid: 69a1c5e1f5cfa42079b71a21a698a957,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 185.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4436123046019211325, guid: 69a1c5e1f5cfa42079b71a21a698a957,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 55
+      objectReference: {fileID: 0}
     - target: {fileID: 3166223240580864634, guid: 69a1c5e1f5cfa42079b71a21a698a957,
         type: 3}
       propertyPath: m_Color.a

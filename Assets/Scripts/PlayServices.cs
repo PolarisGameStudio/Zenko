@@ -212,6 +212,7 @@ public class PlayServices : MonoBehaviour
     // }
 
     void AssignData(string Data){
+        Debug.Log("ASSIGNING DATA WITH STRING: " + Data);
         if(Data == null){
             
             Data = "0";
@@ -322,13 +323,15 @@ public class PlayServices : MonoBehaviour
         Debug.Log(cloudData + "cloud and local" + localData);
         mergedData = MergeData(cloudData, localData);
         PlayerPrefs.SetString(SAVE_NAME, mergedData);
+        Debug.Log("GONNA ASSIGN DATA FROM MERGE");
         AssignData(mergedData);
         isCloudDataLoaded = true;
         SaveData();
     }
 
     void StringToGameData(string localData){
-        Debug.Log(localData);
+        Debug.Log("GONNA ASSIGN DATA FROM LOCAL");
+        //Debug.Log(localData);
         if(localData == null){
             localData = "0";
         }

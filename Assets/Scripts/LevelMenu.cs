@@ -21,6 +21,8 @@ public class LevelMenu : MonoBehaviour {
 
 	public Image monthSprite;
 	public Image yearSprite;
+
+	public int potdFirst;
 	// Use this for initialization
 	void Awake(){
 		Instance = this;
@@ -77,9 +79,9 @@ public class LevelMenu : MonoBehaviour {
 
 		if(LevelManager.adFree){
 			if(num+1 <= DateChecker.Instance.dayInMonth || DateChecker.currentMonthIndex<DateChecker.todayMonthIndex){
-				LevelStorer.potdDic[num].islocked = false;
+				LevelStorer.potdDic[num+potdFirst].islocked = false;
 				btn.onClick.AddListener(delegate{sl.LoadPotdMap(num + 
-				PotdHolder.monthBank[DateChecker.currentMonthIndex][0]);}); 
+				potdFirst);}); 
 				//AssignStarsToPotd(num);
 			}
 			else{
@@ -90,8 +92,10 @@ public class LevelMenu : MonoBehaviour {
 
 		else{
 
-			if(num+1 == DateChecker.Instance.dayInMonth || !LevelStorer.potdDic[num].islocked){
-				LevelStorer.potdDic[num].islocked = false;
+			if((num+1 == DateChecker.Instance.dayInMonth && DateChecker.currentMonthIndex == DateChecker.todayMonthIndex) 
+				|| !LevelStorer.potdDic[num+potdFirst].islocked){
+				Debug.Log("UNLOCKING " + num + " in month " + DateChecker.currentMonthIndex );
+				LevelStorer.potdDic[num+potdFirst].islocked = false;
 				btn.onClick.AddListener(delegate{sl.LoadPotdMap(num + 
 				PotdHolder.monthBank[DateChecker.currentMonthIndex][0]);}); 
 			}
@@ -102,14 +106,14 @@ public class LevelMenu : MonoBehaviour {
 
 		}
 
-		if(LevelStorer.potdDic[num].rating == 1){
+		if(LevelStorer.potdDic[num+potdFirst].rating == 1){
 			curbutton.transform.GetChild(5).GetChild(1).GetChild(1).gameObject.SetActive(true);
 		}
-		if(LevelStorer.potdDic[num].rating == 2){
+		if(LevelStorer.potdDic[num+potdFirst].rating == 2){
 			curbutton.transform.GetChild(5).GetChild(1).GetChild(0).gameObject.SetActive(true);
 			curbutton.transform.GetChild(5).GetChild(1).GetChild(2).gameObject.SetActive(true);
 		}
-		if(LevelStorer.potdDic[num].rating == 3){
+		if(LevelStorer.potdDic[num+potdFirst].rating == 3){
 			curbutton.transform.GetChild(5).GetChild(1).GetChild(0).gameObject.SetActive(true);
 			curbutton.transform.GetChild(5).GetChild(1).GetChild(1).gameObject.SetActive(true);
 			curbutton.transform.GetChild(5).GetChild(1).GetChild(2).gameObject.SetActive(true);
@@ -266,7 +270,7 @@ public class LevelMenu : MonoBehaviour {
 
 	public void populatePotdMenu(){
 		DateChecker.currentMonthIndex = DateChecker.todayMonthIndex;
-		int potdFirst = PotdHolder.monthBank[DateChecker.todayMonthIndex][0];
+		potdFirst = PotdHolder.monthBank[DateChecker.todayMonthIndex][0];
 		int numberOfLevels = PotdHolder.monthBank[DateChecker.todayMonthIndex][1];
 
 		for(int i = 0; i<numberOfLevels; i++){
@@ -281,7 +285,7 @@ public class LevelMenu : MonoBehaviour {
 	public void populatePotdUp(){
 		clearMenu();
 		DateChecker.currentMonthIndex ++;
-		//int potdFirst = PotdHolder.monthBank[DateChecker.currentMonthIndex][0]
+		potdFirst = PotdHolder.monthBank[DateChecker.currentMonthIndex][0];
 		int numberOfLevels = PotdHolder.monthBank[DateChecker.currentMonthIndex][1];
 
 		for(int i = 0; i<numberOfLevels;i++){
@@ -294,7 +298,7 @@ public class LevelMenu : MonoBehaviour {
 	public void populatePotdDown(){
 		clearMenu();
 		DateChecker.currentMonthIndex --;
-		//int potdFirst = PotdHolder.monthBank[DateChecker.currentMonthIndex][0]
+		potdFirst = PotdHolder.monthBank[DateChecker.currentMonthIndex][0];
 		int numberOfLevels = PotdHolder.monthBank[DateChecker.currentMonthIndex][1];
 
 		for(int i = 0; i<numberOfLevels;i++){
