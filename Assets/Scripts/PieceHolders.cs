@@ -622,6 +622,7 @@ public class PieceHolders : MonoBehaviour {
 
 
 	public void RewardHint(){
+		Swiping.mydirection = "Null";
 		StartCoroutine(HintWrapper());
 	}
 
@@ -637,7 +638,8 @@ public class PieceHolders : MonoBehaviour {
 				placedpieces[i].gameObject.GetComponent<BoxCollider>().enabled = false;
 			}
 			LevelBuilder.hintboard.SetActive(false);
-			yield return new WaitForSeconds(.1f);
+			yield return new WaitForSeconds(.2f);
+			Swiping.mydirection = "Null";
 			Hint();			
 		}	
 
@@ -682,6 +684,7 @@ public class PieceHolders : MonoBehaviour {
 			} 	
 			if(rightones == placedpieces.Count){
 				Debug.Log("ALL IN RIGHT PLACE");
+
 			}
 
 			for(int i = 0; i < placedpieces.Count; i++){//second pass, to correct the first one found in wrong place.
@@ -699,6 +702,7 @@ public class PieceHolders : MonoBehaviour {
 						Debug.Log(postogo + "POSTOGO");
 
 						removePiece(new Vector2(placedpieces[i].transform.position.x, -placedpieces[i].transform.position.z), placedpieces[i].myType);
+						Swiping.mydirection = "Null";
 						PlaceHint(placedpieces[i], postogo);
 						return;
 
@@ -774,6 +778,8 @@ public class PieceHolders : MonoBehaviour {
         	placedpieces[i].gameObject.GetComponent<BoxCollider>().enabled = true;
         }
         LevelManager.isdragging = false;
+        Swiping.canswipe = true;
+        Swiping.mydirection = "Null";
 
 	}
 	public void WatchAd(){
@@ -819,6 +825,7 @@ public class PieceHolders : MonoBehaviour {
 	public void PlaceHint(Dragger dragger, Vector2 position){
 		//dragger.transform.GetChild(1).gameObject.SetActive(true);
 		draggee = dragger;
+		Swiping.mydirection = "Null";
 		dragger.GoToHint(new Vector3(position.x,0,-position.y));
 		//hintText.text = "Hint x " + LevelManager.hintCurrency.ToString();
 		// if(dragger.myType == "Wall" || dragger.myType == "Seed"){

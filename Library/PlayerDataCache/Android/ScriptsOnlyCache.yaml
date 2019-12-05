@@ -6,6 +6,7 @@ ScriptsOnlyBuild:
     - AssignCamera
     - AuroraModulator
     - BoxPad
+    - BuyMenu
     - CameraController
     - CameraShake
     - CanvasBehaviour
@@ -209,31 +210,33 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12896}
     - Class: 114
-      Script: {instanceID: 13634}
+      Script: {instanceID: 13418}
     - Class: 114
-      Script: {instanceID: 13778}
+      Script: {instanceID: 13636}
     - Class: 114
-      Script: {instanceID: 13886}
+      Script: {instanceID: 13780}
     - Class: 114
-      Script: {instanceID: 13906}
+      Script: {instanceID: 13888}
     - Class: 114
-      Script: {instanceID: 13986}
+      Script: {instanceID: 13908}
     - Class: 114
-      Script: {instanceID: 14220}
+      Script: {instanceID: 13988}
     - Class: 114
-      Script: {instanceID: 14568}
+      Script: {instanceID: 14222}
     - Class: 114
-      Script: {instanceID: 14660}
+      Script: {instanceID: 14570}
     - Class: 114
-      Script: {instanceID: 14666}
+      Script: {instanceID: 14662}
     - Class: 114
-      Script: {instanceID: 14730}
+      Script: {instanceID: 14668}
     - Class: 114
-      Script: {instanceID: 14770}
+      Script: {instanceID: 14732}
     - Class: 114
-      Script: {instanceID: 14824}
+      Script: {instanceID: 14772}
     - Class: 114
-      Script: {instanceID: 14838}
+      Script: {instanceID: 14826}
+    - Class: 114
+      Script: {instanceID: 14840}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -380,33 +383,35 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13406}
     - Class: 114
-      Script: {instanceID: 13578}
+      Script: {instanceID: 13418}
     - Class: 114
-      Script: {instanceID: 13634}
+      Script: {instanceID: 13580}
     - Class: 114
-      Script: {instanceID: 13722}
+      Script: {instanceID: 13636}
     - Class: 114
-      Script: {instanceID: 13778}
+      Script: {instanceID: 13724}
     - Class: 114
-      Script: {instanceID: 13832}
+      Script: {instanceID: 13780}
     - Class: 114
-      Script: {instanceID: 13848}
+      Script: {instanceID: 13834}
     - Class: 114
-      Script: {instanceID: 13906}
+      Script: {instanceID: 13850}
     - Class: 114
-      Script: {instanceID: 14016}
+      Script: {instanceID: 13908}
     - Class: 114
-      Script: {instanceID: 14220}
+      Script: {instanceID: 14018}
     - Class: 114
-      Script: {instanceID: 14628}
+      Script: {instanceID: 14222}
     - Class: 114
-      Script: {instanceID: 14666}
+      Script: {instanceID: 14630}
     - Class: 114
-      Script: {instanceID: 14690}
+      Script: {instanceID: 14668}
     - Class: 114
-      Script: {instanceID: 14722}
+      Script: {instanceID: 14692}
     - Class: 114
-      Script: {instanceID: 14730}
+      Script: {instanceID: 14724}
+    - Class: 114
+      Script: {instanceID: 14732}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -1094,7 +1099,7 @@ ScriptsOnlyBuild:
     className: DateChecker
   - hash:
       serializedVersion: 2
-      Hash: ac3a374c949608d7290c7c2f1ee3a2c9
+      Hash: 6e0c50199faa368d003f4ccf3d13f0fb
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: SceneLoading
@@ -1398,6 +1403,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityStore.dll
     namespaceName: UnityEngine.Store
     className: MainThreadDispatcher
+  - hash:
+      serializedVersion: 2
+      Hash: e84119b21ca75da96876a126090b038d
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: BuyMenu
   - hash:
       serializedVersion: 2
       Hash: 23b81d05a0ad0499613fc3e1a4a0501b
@@ -1744,4 +1755,4 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/WorldSelect.unity
   - Assets/Level.unity
-  playerPath: /Users/bernardolimon/Desktop/ZenkoApk/Zenko_158.aab
+  playerPath: /Users/bernardolimon/Desktop/ZenkoApk/Zenko_161.aab

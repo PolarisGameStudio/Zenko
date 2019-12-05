@@ -137,6 +137,7 @@ public class Dragger : MonoBehaviour {
 			//Debug.Log(transform.position.x);
 			//Debug.Log(transform.position.x + "" + transform.position.z + "totaldimension" + LevelBuilder.totaldimension);//HERES WHERE THE PROBLEM BE
 			//Fix this to avoid untaking wrong tiles when clicking on the 3d object but the planepos somewhere else.
+			
 			if(transform.position.x<LevelBuilder.totaldimension && transform.position.x>0 && -transform.position.z<LevelBuilder.totaldimension && transform.position.z<0){
 				mytile = LevelBuilder.tiles[(int)gameObject.transform.position.x, -(int)gameObject.transform.position.z];
 				mytile.type = "Ice";
@@ -159,7 +160,9 @@ public class Dragger : MonoBehaviour {
 				Debug.Log("out");
 				//gotosky = true;
 
-			}
+			}				
+			
+
 			// positiontogo = PlaneBehavior.planePos;	
 
 			// positiontogo = new Vector3(Mathf.RoundToInt(PlaneBehavior.planePos.x), PlaneBehavior.planePos.y, Mathf.RoundToInt(PlaneBehavior.planePos.z));	
@@ -175,6 +178,7 @@ public class Dragger : MonoBehaviour {
 			//notmoving =	 	false;	
  }
   	public IEnumerator HintMove(Vector3 postogo){ 
+  		Swiping.mydirection = "Null";
   		OnMouseDown();
   		//float fadetime = 2;
   		Vector3 initialPosition = transform.position;
@@ -196,6 +200,7 @@ public class Dragger : MonoBehaviour {
 		PlaneBehavior.simulatedMouse = postogo;
         //while(transform.position != postogo){
         OnMouseDrag();
+        yield return new WaitForSeconds(.1f);
         //}
         OnMouseUp();
         Vector3 position = new Vector2 (postogo.x, -postogo.z);

@@ -83,7 +83,13 @@ namespace CompleteProject
             BuyProductID(NO_ADS);
         }
 
-
+        public float PriceOfNoAds(){
+            if(IsInitialized()){
+                Product product = m_StoreController.products.WithID(NO_ADS);
+                return (float)product.metadata.localizedPrice;
+            }
+            return 40f;
+        }
 
 
         void BuyProductID(string productId)

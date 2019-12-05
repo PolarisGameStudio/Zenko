@@ -18,6 +18,7 @@ public class SceneLoading : MonoBehaviour {
 	Dragger td2;
 	public static SceneLoading Instance;
 	public bool level;
+	public GameObject buyMenu;
 
 //	public IceTileHandler myhandler;
 	void Start(){
@@ -92,6 +93,12 @@ public class SceneLoading : MonoBehaviour {
 	public void LoadMenu(){
 		SceneManager.LoadScene(0);
 	}
+	public void OpenRemoveAdsMenu(){
+		buyMenu.SetActive(true);
+	}
+	public void CloseRemoveAdsMenu(){
+		buyMenu.SetActive(false);
+	}
 	public void RemoveAds(){
 		Purchaser.Instance.BuyNoAds();
 		// PlayerPrefs.SetInt("AdFree", 1);
@@ -100,6 +107,7 @@ public class SceneLoading : MonoBehaviour {
 		
 	}
 	public void NextlevelButton(){
+		Swiping.mydirection = "Null";
 		LevelBuilder.ChangeBackground("Color_A7A46709",new Color(0,0,0,0), .3f);
 		LevelManager.israndom = false;
 		Debug.Log("Next button");
@@ -125,6 +133,7 @@ public class SceneLoading : MonoBehaviour {
 		MenuButton.thisMB.closeMenu();
 	}
 	public void NextWon(){
+		Swiping.mydirection = "Null";
 		if(LevelManager.ispotd){
 			Potd();
 			GoogleAds.Instance.ShowInterstitial();
@@ -138,6 +147,7 @@ public class SceneLoading : MonoBehaviour {
 	}
 	public void CloseTryAgainScreen(){
 		GameObject.Find("TryAgainScreen").transform.GetChild(0).gameObject.SetActive(false);
+		
 	}
 	public void muteMusic(){
 		AudioSource ms = GameObject.Find("Music Source").GetComponent<AudioSource>();

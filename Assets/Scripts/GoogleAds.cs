@@ -121,7 +121,9 @@ public class GoogleAds : MonoBehaviour
     }
 
     private void HandeOnRewardAdClosed(object sender, EventArgs args){
+        
     	PieceHolders.Instance.RewardHint();
+
 
         //RequestRewardBasedVideo();
 
@@ -135,6 +137,7 @@ public class GoogleAds : MonoBehaviour
         }
         else{
             TryAgainScreen();
+            RequestRewardBasedVideo();
         }
     }
 
