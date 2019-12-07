@@ -5196,16 +5196,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 8669939907048993654, guid: 0f6eccdd0f11e456aa227ecee3b6bc49,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 936.64
-      objectReference: {fileID: 0}
-    - target: {fileID: 8669939907048993654, guid: 0f6eccdd0f11e456aa227ecee3b6bc49,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 20.7
-      objectReference: {fileID: 0}
     - target: {fileID: 4727819114927590305, guid: 0f6eccdd0f11e456aa227ecee3b6bc49,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -5225,6 +5215,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: RemoveAds
+      objectReference: {fileID: 0}
+    - target: {fileID: 8669939907048993654, guid: 0f6eccdd0f11e456aa227ecee3b6bc49,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 936.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 8669939907048993654, guid: 0f6eccdd0f11e456aa227ecee3b6bc49,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 20.7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f6eccdd0f11e456aa227ecee3b6bc49, type: 3}
@@ -13637,7 +13637,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.92156863, g: 0.9411765, b: 0.9411765, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

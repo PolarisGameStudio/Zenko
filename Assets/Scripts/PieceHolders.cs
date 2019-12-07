@@ -770,6 +770,11 @@ public class PieceHolders : MonoBehaviour {
 			placedpieces[i].gameObject.GetComponent<BoxCollider>().enabled = false;
 		}
 		LevelBuilder.hintboard.SetActive(true);
+
+		
+
+
+
 	}
 	public void CloseHintMenu(){
 		LevelBuilder.hintboard.SetActive(false);

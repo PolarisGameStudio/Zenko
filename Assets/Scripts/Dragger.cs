@@ -139,10 +139,11 @@ public class Dragger : MonoBehaviour {
 			//Fix this to avoid untaking wrong tiles when clicking on the 3d object but the planepos somewhere else.
 			
 			if(transform.position.x<LevelBuilder.totaldimension && transform.position.x>0 && -transform.position.z<LevelBuilder.totaldimension && transform.position.z<0){
-				mytile = LevelBuilder.tiles[(int)gameObject.transform.position.x, -(int)gameObject.transform.position.z];
+				mytile = LevelBuilder.tiles[Mathf.RoundToInt(gameObject.transform.position.x), -Mathf.RoundToInt(gameObject.transform.position.z)];
 				mytile.type = "Ice";
-				LevelManager.placedPieces[(int)gameObject.transform.position.x, -(int)gameObject.transform.position.z] = null;
-				Debug.Log("UNTAKING IT at" + (int)gameObject.transform.position.x + -(int)gameObject.transform.position.z + "Type "+ myType);
+				LevelManager.placedPieces[Mathf.RoundToInt(gameObject.transform.position.x), -Mathf.RoundToInt(gameObject.transform.position.z)] = null;
+				//Debug.Log("UNTAKING IT at" + (int)gameObject.transform.position.x + -(int)gameObject.transform.position.z + "Type "+ myType);
+				//Debug.Log("UNTOOK AT" + gameObject.transform.position.x + -gameObject.transform.position.z);
 				mytile.isTaken = false;
 				//Debug.Log(LevelBuilder.tiles[(int)gameObject.transform.position.x, -(int)gameObject.transform.position.z-1].isTaken);
 				Debug.Log(mytile.isSideways);
