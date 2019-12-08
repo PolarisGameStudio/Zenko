@@ -60,11 +60,11 @@ public class PieceHolders : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	public void Update(){
-		Debug.Log(Swiping.canswipe +"" + LevelManager.isdragging + LevelManager.configging);
-        // Debug.Log(LevelManager.isdragging);
-        // Debug.Log(LevelManager.configging);
-	}
+// 	public void Update(){
+// //		Debug.Log(Swiping.canswipe +"" + LevelManager.isdragging + LevelManager.configging);
+//         // Debug.Log(LevelManager.isdragging);
+//         // Debug.Log(LevelManager.configging);
+// 	}
 	public void initSize(){
 		RectTransform rt = GetComponent<RectTransform>();
 		rt.sizeDelta = new Vector2(holdersNumber*150, 150);
@@ -587,27 +587,27 @@ public class PieceHolders : MonoBehaviour {
 		LevelManager.isdragging = true;	
 		Swiping.canswipe = false;
 		//RewardHint();
-		if(HintAvailable()){
-			if(LevelManager.adFree){
-				RewardHint();
-			}
-			
-			else{
-				GoogleAds.Instance.UserOptToWatchAd();	
-			}
+		// if(HintAvailable()){
+		if(LevelManager.adFree){
+			RewardHint();
+		}
+		
+		else{
+			GoogleAds.Instance.UserOptToWatchAd();	
+		}
 			
 
-		}
-		else
-			AnnounceNoHintAvailable();
+		// }
+		// else
+		// 	TutorialHandler.Instance.AnnouncePiecesNeedSwap();
 	}
 
 
 	public void AnnounceNoHintAvailable(){
-		hinting = false;
-		LevelManager.isdragging = false;	
-		Swiping.canswipe = true;
-		LevelBuilder.hintboard.SetActive(false);
+		// hinting = false;
+		// LevelManager.isdragging = false;	
+		// Swiping.canswipe = true;
+		// LevelBuilder.hintboard.SetActive(false);
 	}
 
 
@@ -650,6 +650,9 @@ public class PieceHolders : MonoBehaviour {
 
 	}
 
+	public void OpenAllGood(){
+		TutorialHandler.Instance.AnnouncePiecesInRightPlaces();
+	}
 
 	public void Hint(){//right now works for one stored solution.
 
@@ -662,19 +665,7 @@ public class PieceHolders : MonoBehaviour {
 		string postype;
 
 		if(TurnBehaviour.turn == 0){
-		// for(int i = 0; i < placedpieces.Count; i++){
-		// 	Debug.Log(placedpieces.Count);
-		// 	Debug.Log("UNO");
-		// postype = placedpieces[i].myType;
 
-		// postogo = LookforPosition(postype);
-		// Debug.Log(postogo);
-
-		// removePiece(new Vector2(placedpieces[i].transform.position.x, -placedpieces[i].transform.position.z), placedpieces[i].myType);
-						
-		// PlaceHint(placedpieces[i], postogo);	
-		// }
-		// return;
 			int rightones = 0;
 			for(int i = 0; i < placedpieces.Count; i++){//first pass, to confirm the ones in right place
 				//Debug.Log(placedpieces[i].myType + "" + placedpieces[i].transform.position.x + "" + -placedpieces[i].transform.position.z);
@@ -689,6 +680,7 @@ public class PieceHolders : MonoBehaviour {
 			} 	
 			if(rightones == placedpieces.Count){
 				Debug.Log("ALL IN RIGHT PLACE");
+				OpenAllGood();
 
 			}
 
@@ -706,7 +698,7 @@ public class PieceHolders : MonoBehaviour {
 					if(postogo != new Vector2(0,0)){
 						Debug.Log(postogo + "POSTOGO");
 
-						removePiece(new Vector2(placedpieces[i].transform.position.x, -placedpieces[i].transform.position.z), placedpieces[i].myType);
+						removePiece(new Vector2(Mathf.RoundToInt(placedpieces[i].transform.position.x), -Mathf.RoundToInt(placedpieces[i].transform.position.z)), placedpieces[i].myType);
 						Swiping.mydirection = "Null";
 						PlaceHint(placedpieces[i], postogo);
 						return;
@@ -716,44 +708,34 @@ public class PieceHolders : MonoBehaviour {
 			}
 			for(int i=0; i < holders.Count; i++){//if none on board can be moved to a good one (because a wrong is there), look through holders
 				Debug.Log("CASE 3 DO NOT WANT, MEANS ALL GOOD OR MISSING PIECES");
-				// if(holders[i].currentpieces > 0){
-				// 	postogo = LookforPosition(holders[i].name);
-				// 	//Debug.Log("Instantiate a "+ holders[i].name);
-				// 	if(postogo!= new Vector2(0,0)){
-				// 		piece = holders[i].mygameobject.GetComponent<UIMonster>().Spawnit();
-				// 		PlaceHint(piece.GetComponent<Dragger>(), postogo);
-				// 		updateValueDown(holders[i].name);
-				// 		placedpieces.Add(piece.GetComponent<Dragger>());
-				// 		return;
-				// 	}
-				// }
+				TutorialHandler.Instance.AnnouncePiecesNeedSwap();
 			}
-			// for(int i = 0; i < placedpieces.Count; i++){//second pass, to correct the first one found in wrong place.
-			// 	if(!PartofSolution(i)){
-			// 		if(placedpieces[i].myType == "Seed"){
-			// 			postype =placedpieces[i].mySeedType + placedpieces[i].myType;
-			// 		}
-			// 		else{
-			// 			postype = placedpieces[i].myType;
-			// 		}
-			// 		Debug.Log(placedpieces[i].myType);
-			// 		//LookforPosition(placedpieces[i].myType);
-			// 		postogo = LookforPosition(postype);
-			// 		Debug.Log(postogo);
-			// 		if(postogo == new Vector2(0,0)){
-			// 			//Swap(i);
-			// 			return;
+			for(int i = 0; i < placedpieces.Count; i++){//second pass, to correct the first one found in wrong place.
+				if(!PartofSolution(i)){
+					if(placedpieces[i].myType == "Seed"){
+						postype =placedpieces[i].mySeedType + placedpieces[i].myType;
+					}
+					else{
+						postype = placedpieces[i].myType;
+					}
+					Debug.Log(placedpieces[i].myType);
+					//LookforPosition(placedpieces[i].myType);
+					postogo = LookforPosition(postype);
+					Debug.Log(postogo);
+					if(postogo == new Vector2(0,0)){
+						//Swap(i);
+						TutorialHandler.Instance.AnnouncePiecesNeedSwap();
 
-			// 		}
-			// 	}				
-			// }
+					}
+				}				
+			}
 		}
 		Debug.Log("End hint");
 		hinting = false;
         for(int i=0; i<placedpieces.Count; i++){
         	placedpieces[i].gameObject.GetComponent<BoxCollider>().enabled = true;
         }
-        LevelManager.isdragging = false;
+        //LevelManager.isdragging = false;
 	}
 	/*public void Swap(int place){
 		for(int i =0; i<LevelManager.hints.Count; i++){

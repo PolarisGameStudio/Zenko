@@ -63,6 +63,14 @@ public class LevelManager : MonoBehaviour {
 		if(LevelManager.adFree && freeIt){
 			LevelManager.adFree = false;
 		}
+		if(Input.GetKeyDown(KeyCode.M)){
+			Cursor.visible = false;
+
+		}
+		if(Input.GetKeyDown(KeyCode.N)){
+			Cursor.visible = true;
+
+		}
 	}
 	void InitializePlayerPrefs(){
 		if (PlayerPrefs.HasKey ("CurrencyLoaded")) {

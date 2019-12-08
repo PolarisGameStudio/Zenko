@@ -18,6 +18,9 @@ public class TutorialHandler : MonoBehaviour
     {
     	Instance = this;
     }
+    void Update(){
+        Debug.Log(Swiping.canswipe + " " + LevelManager.isdragging + " " + LevelManager.configging);
+    }
     public void HelpButton(){
         Swiping.canswipe = false;
         LevelManager.isdragging = true;
@@ -25,6 +28,33 @@ public class TutorialHandler : MonoBehaviour
         PrepareTutorial(TutorialDictionary.tutDic[0], 0);
 
     }
+
+    public void AnnouncePiecesInRightPlaces(){
+        Swiping.canswipe = false;
+        LevelManager.isdragging = true;
+        LevelManager.configging = true;
+        Debug.Log("PREPARING All GOOD");
+        text.color = Color.HSVToRGB((float)TextModulator.hue/359,(float)TextModulator.s/99, (float)TextModulator.v/99);
+        this.gameObject.transform.GetChild(0).gameObject.SetActive(true);
+        this.gameObject.transform.GetChild(1).gameObject.SetActive(true);
+        ShowTutorialText("All pieces are in the right place, now slide!");
+        NextButton.SetActive(false);
+        CloseButton.SetActive(true);       
+    }
+
+    public void AnnouncePiecesNeedSwap(){
+        Swiping.canswipe = false;
+        LevelManager.isdragging = true;
+        LevelManager.configging = true;
+        Debug.Log("PREPARING All GOOD");
+        text.color = Color.HSVToRGB((float)TextModulator.hue/359,(float)TextModulator.s/99, (float)TextModulator.v/99);
+        this.gameObject.transform.GetChild(0).gameObject.SetActive(true);
+        this.gameObject.transform.GetChild(1).gameObject.SetActive(true);
+        ShowTutorialText("Pieces are in the right tiles but in the wrong order, try swapping them!");
+        NextButton.SetActive(false);
+        CloseButton.SetActive(true);       
+    }
+
     public void TutorialCheck(int levelnumber){
         if (TutorialDictionary.tutDic.ContainsKey(levelnumber))
             PrepareTutorial(TutorialDictionary.tutDic[levelnumber], 0);
@@ -67,6 +97,7 @@ public class TutorialHandler : MonoBehaviour
         PrepareTutorial(levelLineBank, indexNumber);
     }
     public void TutorialClosebutton(){
+        Debug.Log("TUTCLOSE");
         LevelManager.configging = false;
         LevelManager.isdragging = false;
         this.gameObject.transform.GetChild(0).gameObject.SetActive(false);

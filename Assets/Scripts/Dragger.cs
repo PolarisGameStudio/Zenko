@@ -138,7 +138,7 @@ public class Dragger : MonoBehaviour {
 			//Debug.Log(transform.position.x + "" + transform.position.z + "totaldimension" + LevelBuilder.totaldimension);//HERES WHERE THE PROBLEM BE
 			//Fix this to avoid untaking wrong tiles when clicking on the 3d object but the planepos somewhere else.
 			
-			if(transform.position.x<LevelBuilder.totaldimension && transform.position.x>0 && -transform.position.z<LevelBuilder.totaldimension && transform.position.z<0){
+			if(Mathf.RoundToInt(transform.position.x)<LevelBuilder.totaldimension && Mathf.RoundToInt(transform.position.x)>0 && -Mathf.RoundToInt(transform.position.z)<LevelBuilder.totaldimension && Mathf.RoundToInt(transform.position.z)<0){
 				mytile = LevelBuilder.tiles[Mathf.RoundToInt(gameObject.transform.position.x), -Mathf.RoundToInt(gameObject.transform.position.z)];
 				mytile.type = "Ice";
 				LevelManager.placedPieces[Mathf.RoundToInt(gameObject.transform.position.x), -Mathf.RoundToInt(gameObject.transform.position.z)] = null;
