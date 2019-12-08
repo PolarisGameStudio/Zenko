@@ -51,6 +51,7 @@ public class PieceHolders : MonoBehaviour {
 	public static List<Dragger> placedpieces = new List<Dragger>();
 	SceneLoading sl;
 	public Text hintText;
+	public static bool hintMenuOpen;
 	// Use this for initialization
 	void Awake () {
 		initValues();
@@ -59,7 +60,11 @@ public class PieceHolders : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-
+	public void Update(){
+		Debug.Log(Swiping.canswipe +"" + LevelManager.isdragging + LevelManager.configging);
+        // Debug.Log(LevelManager.isdragging);
+        // Debug.Log(LevelManager.configging);
+	}
 	public void initSize(){
 		RectTransform rt = GetComponent<RectTransform>();
 		rt.sizeDelta = new Vector2(holdersNumber*150, 150);
@@ -765,13 +770,14 @@ public class PieceHolders : MonoBehaviour {
 	}
 	public void HintMenu(){
 		LevelManager.isdragging = true;
+
 		//hintText.text = "Hint x " + LevelManager.hintCurrency.ToString();
 		for(int i = 0; i <placedpieces.Count; i++){
 			placedpieces[i].gameObject.GetComponent<BoxCollider>().enabled = false;
 		}
 		LevelBuilder.hintboard.SetActive(true);
 
-		
+		hintMenuOpen = true;
 
 
 
@@ -785,6 +791,7 @@ public class PieceHolders : MonoBehaviour {
         LevelManager.isdragging = false;
         Swiping.canswipe = true;
         Swiping.mydirection = "Null";
+        hintMenuOpen = false;
 
 	}
 	public void WatchAd(){

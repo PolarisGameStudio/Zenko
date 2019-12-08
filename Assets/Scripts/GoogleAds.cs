@@ -30,9 +30,21 @@ public class GoogleAds : MonoBehaviour
             Debug.Log("Destroyed LevelStorer");
             return;
         }
+
         MobileAds.Initialize("ca-app-pub-3301322474937909~4906291296");
         // Debug.Log("INITIALIZED MOBILEADS");
 
+        #if UNITY_EDITOR
+        	Debug.Log("UNITY EDITOR,UNITY EDITOR,UNITY EDITOR,UNITY EDITOR,UNITY EDITOR,UNITY EDITOR,UNITY EDITOR,UNITY EDITOR");
+        #endif
+
+    	#if UNITY_IOS
+        MobileAds.Initialize("ca-app-pub-3301322474937909~4906291296");
+        #endif
+
+        #if UNITY_ANDROID
+        MobileAds.Initialize("ca-app-pub-3301322474937909~4906291296");
+        #endif
     }
     void Start(){
         RequestInterstitial();
@@ -46,7 +58,7 @@ public class GoogleAds : MonoBehaviour
     {
         #if UNITY_ANDROID
             string adUnitId = "ca-app-pub-3301322474937909/8967775483";
-        #elif UNITY_IPHONE
+        #elif UNITY_IOS
             string adUnitId = "ca-app-pub-3301322474937909/8967775483";
         #else
             string adUnitId = "unexpected_platform";
@@ -63,10 +75,16 @@ public class GoogleAds : MonoBehaviour
     public void ShowInterstitial(){
     	levelsInSession++;
         if(LevelManager.adFree){
+ 
             return;
         }
         if (this.interstitial.IsLoaded()) {
         	if(IsInList(levelsInSession)){
+                if(levelsInSession == 6){
+                //DISABLEADSMENU
+                SceneLoading.Instance.buyMenu.SetActive(true);
+                LevelManager.isdragging = true;
+                }
             this.interstitial.Show();
        		
         	}

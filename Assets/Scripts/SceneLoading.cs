@@ -22,7 +22,7 @@ public class SceneLoading : MonoBehaviour {
 
 //	public IceTileHandler myhandler;
 	void Start(){
-
+		Instance = this;
 		Debug.Log("NEW SCENE LOADING");
 		string teststring = "WallSeed";
 		Debug.Log(teststring.Length);
@@ -98,6 +98,9 @@ public class SceneLoading : MonoBehaviour {
 	}
 	public void CloseRemoveAdsMenu(){
 		buyMenu.SetActive(false);
+		if(!PieceHolders.hintMenuOpen){
+			LevelManager.isdragging = false;
+		}
 	}
 	public void RemoveAds(){
 		Purchaser.Instance.BuyNoAds();

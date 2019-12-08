@@ -999,8 +999,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 3, y: 35.5}
-  m_SizeDelta: {x: 898.5, y: 369.5}
+  m_AnchoredPosition: {x: 20.7, y: 35.5}
+  m_SizeDelta: {x: 936.64, y: 369.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8669939907048993648
 CanvasRenderer:
@@ -1049,7 +1049,7 @@ MonoBehaviour:
 
     -Unlocks puzzle of the day Archive
 
-    -Support the developers'
+    -Supports the developers'
 --- !u!1 &8938748092021811393
 GameObject:
   m_ObjectHideFlags: 0
