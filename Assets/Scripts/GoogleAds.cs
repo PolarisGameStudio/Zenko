@@ -30,9 +30,10 @@ public class GoogleAds : MonoBehaviour
             Debug.Log("Destroyed LevelStorer");
             return;
         }
-
+        #if UNITY_ANDROID || UNITY_IOS
         MobileAds.Initialize("ca-app-pub-3301322474937909~4906291296");
         // Debug.Log("INITIALIZED MOBILEADS");
+        #endif
 
         #if UNITY_EDITOR
         	Debug.Log("UNITY EDITOR,UNITY EDITOR,UNITY EDITOR,UNITY EDITOR,UNITY EDITOR,UNITY EDITOR,UNITY EDITOR,UNITY EDITOR");
@@ -47,11 +48,12 @@ public class GoogleAds : MonoBehaviour
         #endif
     }
     void Start(){
+        #if UNITY_ANDROID || UNITY_IOS
         RequestInterstitial();
         levelsInSession = 0;
         this.rewardVideo = RewardBasedVideoAd.Instance;
-
         RequestFirstRewardBasedVideo();
+        #endif
     }
 
     private void RequestInterstitial()
@@ -80,19 +82,19 @@ public class GoogleAds : MonoBehaviour
         }
         if (this.interstitial.IsLoaded()) {
         	if(IsInList(levelsInSession)){
-                if(levelsInSession == 6){
-                //DISABLEADSMENU
-                SceneLoading.Instance.buyMenu.SetActive(true);
-                LevelManager.isdragging = true;
-                }
-            this.interstitial.Show();
-       		
+                this.interstitial.Show();   		
         	}
         }
+
     }
     private void HandleOnAdClosed(object sender, EventArgs args){
         this.interstitial.Destroy();
         RequestInterstitial();
+        if(levelsInSession == 6){
+            //DISABLEADSMENU
+            SceneLoading.Instance.buyMenu.SetActive(true);
+            LevelManager.isdragging = true;
+        }    
     }
     private bool IsInList(int num){
     	foreach(int x in levelsToShowAd){
@@ -150,6 +152,7 @@ public class GoogleAds : MonoBehaviour
     }
     public void UserOptToWatchAd()
     {
+        #if UNITY_ANDROID || UNITY_IOS
         if (rewardVideo.IsLoaded()) {
             rewardVideo.Show();
         }
@@ -157,6 +160,11 @@ public class GoogleAds : MonoBehaviour
             TryAgainScreen();
             RequestRewardBasedVideo();
         }
+        #endif
+
+        #if UNITY_STANDALONE_OSX || UNITY_STANDALONE_WIN
+            PieceHolders.Instance.RewardHint();
+        #endif
     }
 
     private void TryAgainScreen(){

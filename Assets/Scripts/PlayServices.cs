@@ -83,8 +83,10 @@ public class PlayServices : MonoBehaviour
                 // else{
 
                 // }
+                #if UNITY_ANDROID || UNITY_IOS
                 InitializePGP();
                 SignIn();
+                #endif
                 //Debug.Log(int.Parse("1 1 1 1"));
 //                SplitString("1 2 3 4 5");
                 //byte[] dataToSave = Encoding.ASCII.GetBytes("1 23 4 5");
@@ -359,6 +361,7 @@ public class PlayServices : MonoBehaviour
     }
 
     public void SaveData(){
+        #if UNITY_ANDROID
         if(!isCloudDataLoaded){
             curCloudData = "0";
             isCloudDataLoaded = true;
@@ -374,6 +377,7 @@ public class PlayServices : MonoBehaviour
         else{
             SaveLocal();
         }
+        #endif
     }
 
     public void SaveLocal(){
