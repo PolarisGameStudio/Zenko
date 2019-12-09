@@ -473,8 +473,8 @@ public class LevelStorer : MonoBehaviour {
 		leveldic.Add (200, lv200);
 	}
 
-	public static void PopulatePotd1000(){
-		for(int i = 0; i<1000; i++){
+	public static void PopulatePotd500(){
+		for(int i = 0; i<500; i++){
 			potdDic.Add(i, new PotdStats());
 		}
 	}
@@ -538,7 +538,7 @@ public class LevelStorer : MonoBehaviour {
 	}
 
 	public static void PopulatePotdPrefs(){
-		for(int i =0; i<1000; i++){
+		for(int i =0; i<500; i++){
 			string mystring = "Potd" +i;
 
 			//if(PlayerPrefs.GetInt(mystring)> 0){

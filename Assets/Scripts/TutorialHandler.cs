@@ -18,9 +18,9 @@ public class TutorialHandler : MonoBehaviour
     {
     	Instance = this;
     }
-    void Update(){
-        Debug.Log(Swiping.canswipe + " " + LevelManager.isdragging + " " + LevelManager.configging);
-    }
+    // void Update(){
+    //     Debug.Log(Swiping.canswipe + " " + LevelManager.isdragging + " " + LevelManager.configging);
+    // }
     public void HelpButton(){
         Swiping.canswipe = false;
         LevelManager.isdragging = true;

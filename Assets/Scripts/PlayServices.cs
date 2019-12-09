@@ -28,6 +28,10 @@ public class PlayServices : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        //Debug.Log(int.Parse("??"));
+        //  int num;
+        // Debug.Log(int.TryParse("1211212121212121212".Substring(0,4), out num));
+        //  Debug.Log(num);
         //PlayerPrefs.DeleteAll();
         //Debug.Log(instance);
         Debug.Log("cursavepref " + PlayerPrefs.GetString(SAVE_NAME));
@@ -40,7 +44,7 @@ public class PlayServices : MonoBehaviour
                 //Debug.Log("Doingit");
                 //Debug.Log(instance);
                 LevelStorer.PopulateFourChapters(); //load level data (200) int levelstorer.leveldic
-                LevelStorer.PopulatePotd1000(); //
+                LevelStorer.PopulatePotd500(); //
 
                // Debug.Log(PlayerPrefs.GetString(SAVE_NAME));
                 if(!PlayerPrefs.HasKey("PoTD"))
@@ -195,7 +199,7 @@ public class PlayServices : MonoBehaviour
 
         }
 
-        for(int i=0; i<1000; i++){
+        for(int i=0; i<500; i++){
         	if(LevelStorer.potdDic[i].islocked == true){
         			stringToSave = stringToSave + "0";
         	}
@@ -270,7 +274,7 @@ public class PlayServices : MonoBehaviour
         }
     }
     void AssignPotdData(string[] dataArray){
-    	for(int i=0; i<1000; i++){
+    	for(int i=0; i<500; i++){
     		int rating = int.Parse(dataArray[i+161]);
     		if(rating == 0){
     			LevelStorer.potdDic[i].rating = 0;
@@ -393,7 +397,9 @@ public class PlayServices : MonoBehaviour
 
     private void ResolveConflict(IConflictResolver resolver, ISavedGameMetadata original, byte[] originalData, 
         ISavedGameMetadata unmerged, byte[] unmergedData){
-        Debug.Log(originalData + "Orig" + unmergedData + "unmerged");
+        //Debug.Log(Encoding.ASCII.GetString(originalData)  +  " is original data");
+        //Debug.Log(Encoding.ASCII.GetString(unmergedData) + " is UNMERGED DATA");
+        //Debug.Log(originalData + "Orig" + unmergedData + "unmerged");
         if(originalData == null){
             Debug.Log("Chossing unmerged in conflict");
             resolver.ChooseMetadata(unmerged);
@@ -403,11 +409,28 @@ public class PlayServices : MonoBehaviour
             resolver.ChooseMetadata(original);
         }
         else{
+
+            Debug.Log("Trynna stringize the byte");
+            Debug.Log(originalData.Length + " OG LENGTH");
+            Debug.Log(unmergedData.Length + " Unmerged LENGTH");
             string originalStr = Encoding.ASCII.GetString(originalData);
             string unmergedStr = Encoding.ASCII.GetString(unmergedData);
+            Debug.Log(originalStr.Length);
+            Debug.Log(unmergedStr.Length);
+            Debug.Log(originalStr);
+            Debug.Log(unmergedStr);
 
-            int originalNum = int.Parse(originalStr);
-            int unmergedNum = int.Parse(unmergedStr);
+
+
+            Debug.Log("TRynna parse");
+            int originalNum;
+            int unmergedNum;
+            // if(int.TryParse(originalStr.SubString(0,4), out originalNum)){
+
+            // }
+            int.TryParse(originalStr.Substring(0,4), out originalNum);
+            int.TryParse(unmergedStr.Substring(0,4), out unmergedNum);
+
 
             if (originalNum > unmergedNum){
 
@@ -470,6 +493,15 @@ public class PlayServices : MonoBehaviour
 
     private void OnSavedGameDataRead(SavedGameRequestStatus status, byte[] savedData){
         Debug.Log("Saved Data byte is " + savedData.Length + " long, the first ones are " + savedData[0]);
+        Debug.Log(Encoding.ASCII.GetString(savedData) + " IS THE DATA READ");
+        int parsed;
+        //int.TryParse(Encoding.ASCII.GetString(savedData), out parsed);
+        //Debug.Log(parsed + " IS PARSED");
+        if(!int.TryParse(Encoding.ASCII.GetString(savedData).Substring(0,4), out parsed)){
+            savedData = Encoding.ASCII.GetBytes("0");
+        }
+        Debug.Log(parsed + " is parsed");
+
         if(status == SavedGameRequestStatus.Success){
             string cloudDataString;
             if(savedData.Length == 0 || savedData.Length == 1)
@@ -478,7 +510,7 @@ public class PlayServices : MonoBehaviour
                 cloudDataString = Encoding.ASCII.GetString(savedData);
 
             string localDataString = PlayerPrefs.GetString(SAVE_NAME);
-
+            Debug.Log("STRING FROM GAME DATA POST PROCESSING IS " + cloudDataString);
             StringToGameData(cloudDataString, localDataString);
             curCloudData = cloudDataString;
             //isCloudDataLoaded = true;

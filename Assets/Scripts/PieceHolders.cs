@@ -638,6 +638,9 @@ public class PieceHolders : MonoBehaviour {
 		//
 		//yield return new WaitForSeconds(.1f);
 		if(!LevelManager.configging)	{
+			hinting = true;
+			LevelManager.isdragging = true;	
+			Swiping.canswipe = false;
 			Debug.Log("CALLED WRAPPER");
 			for(int i = 0; i <placedpieces.Count; i++){
 				placedpieces[i].gameObject.GetComponent<BoxCollider>().enabled = false;
@@ -787,6 +790,7 @@ public class PieceHolders : MonoBehaviour {
 				RewardHint();
 			}
 			else{
+				if(!LevelManager.isdragging)
 				HintMenu();
 
 			}

@@ -126,7 +126,7 @@ public class GoogleAds : MonoBehaviour
     }
 
 
-    public void equestRewardBasedVideo(){
+    public void RequestRewardBasedVideo(){
         Debug.Log("REQUESTING");
         #if UNITY_ANDROID
             string adUnitId = "ca-app-pub-3940256099942544/5224354917";
