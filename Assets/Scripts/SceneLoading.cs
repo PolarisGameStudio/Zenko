@@ -103,7 +103,9 @@ public class SceneLoading : MonoBehaviour {
 		}
 	}
 	public void RemoveAds(){
+		#if UNITY_ANDROID || UNITY_IOS
 		Purchaser.Instance.BuyNoAds();
+		#endif
 		// PlayerPrefs.SetInt("AdFree", 1);
 		// SceneLoading.adFree = true;
 

@@ -30,8 +30,8 @@ public class GoogleAds : MonoBehaviour
             Debug.Log("Destroyed LevelStorer");
             return;
         }
-        #if UNITY_ANDROID || UNITY_IOS
-        MobileAds.Initialize("ca-app-pub-3301322474937909~4906291296");
+        #if UNITY_ANDROID
+            MobileAds.Initialize("ca-app-pub-3301322474937909~4906291296");
         // Debug.Log("INITIALIZED MOBILEADS");
         #endif
 
@@ -40,7 +40,7 @@ public class GoogleAds : MonoBehaviour
         #endif
 
     	#if UNITY_IOS
-        MobileAds.Initialize("ca-app-pub-3301322474937909~4906291296");
+        //MobileAds.Initialize("ca-app-pub-3301322474937909~4906291296");
         #endif
 
         #if UNITY_ANDROID
@@ -48,7 +48,7 @@ public class GoogleAds : MonoBehaviour
         #endif
     }
     void Start(){
-        #if UNITY_ANDROID || UNITY_IOS
+        #if UNITY_ANDROID //|| UNITY_IOS
         RequestInterstitial();
         levelsInSession = 0;
         this.rewardVideo = RewardBasedVideoAd.Instance;
@@ -76,6 +76,7 @@ public class GoogleAds : MonoBehaviour
     }
     public void ShowInterstitial(){
     	levelsInSession++;
+        #if UNITY_ANDROID
         if(LevelManager.adFree){
  
             return;
@@ -85,6 +86,7 @@ public class GoogleAds : MonoBehaviour
                 this.interstitial.Show();   		
         	}
         }
+        #endif
 
     }
     private void HandleOnAdClosed(object sender, EventArgs args){
@@ -109,7 +111,7 @@ public class GoogleAds : MonoBehaviour
         Debug.Log("REQUESTING");
         #if UNITY_ANDROID
             string adUnitId = "ca-app-pub-3301322474937909/3389088666";
-        #elif UNITY_IPHONE
+        #elif UNITY_IOS
             string adUnitId = "ca-app-pub-3301322474937909/3389088666";
         #else
             string adUnitId = "unexpected_platform";
@@ -124,11 +126,11 @@ public class GoogleAds : MonoBehaviour
     }
 
 
-    public void RequestRewardBasedVideo(){
+    public void equestRewardBasedVideo(){
         Debug.Log("REQUESTING");
         #if UNITY_ANDROID
             string adUnitId = "ca-app-pub-3940256099942544/5224354917";
-        #elif UNITY_IPHONE
+        #elif UNITY_IOS
             string adUnitId = "ca-app-pub-3940256099942544/1712485313";
         #else
             string adUnitId = "unexpected_platform";
@@ -152,7 +154,7 @@ public class GoogleAds : MonoBehaviour
     }
     public void UserOptToWatchAd()
     {
-        #if UNITY_ANDROID || UNITY_IOS
+        #if UNITY_ANDROID
         if (rewardVideo.IsLoaded()) {
             rewardVideo.Show();
         }
