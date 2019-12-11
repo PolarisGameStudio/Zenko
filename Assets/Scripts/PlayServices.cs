@@ -46,6 +46,7 @@ public class PlayServices : MonoBehaviour
                 LevelStorer.PopulateFourChapters(); //load level data (200) int levelstorer.leveldic
                 LevelStorer.PopulatePotd500(); //
 
+
                // Debug.Log(PlayerPrefs.GetString(SAVE_NAME));
                 if(!PlayerPrefs.HasKey("PoTD"))
                     PlayerPrefs.SetInt("PoTD", 0);
@@ -180,7 +181,10 @@ public class PlayServices : MonoBehaviour
 
         //feeds string with first four chapters
         for(int i=1; i< 160+1; i++){
-            if(LevelStorer.leveldic[i].rating ==0){
+            if(i == 160){
+                Debug.Log("160 is happening and " + LevelStorer.leveldic[i].rating + " is its rating");
+            }
+            if(LevelStorer.leveldic[i].rating == 0){
             	if(LevelStorer.leveldic[i].islocked == true){
             	stringToSave = stringToSave + "0";  
             	}
@@ -262,7 +266,7 @@ public class PlayServices : MonoBehaviour
     }
 
     void AssignFirstFourChapters(string[] dataArray){
-        for(int i=1; i<160;i++){
+        for(int i=1; i<161;i++){
             int rating = int.Parse(dataArray[i]);
             if(rating == 1){
         		LevelStorer.leveldic[i].rating = 0;

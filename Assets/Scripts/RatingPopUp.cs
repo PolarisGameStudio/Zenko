@@ -35,7 +35,8 @@ public class RatingPopUp : MonoBehaviour {
 		//Debug.Log(prefname);
 		//Debug.Log(previousrating);
 		//Debug.Log(PlayerPrefs.GetInt("Player1Rating"));
-		if (myrating > previousrating && !LevelManager.ispotd) {
+		if ((myrating > previousrating || myrating == 3) && !LevelManager.ispotd) {
+			Debug.Log("ADDING TO PLAYERPREFS " + prefname + myrating);
 			PlayerPrefs.SetInt (prefname, myrating);
 			//Debug.Log("gave "+ prefname + "rating" + myrating);
 			//Debug.Log(PlayerPrefs.GetInt(prefname));
