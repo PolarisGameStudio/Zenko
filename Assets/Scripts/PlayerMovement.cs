@@ -108,6 +108,9 @@ public class PlayerMovement : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void Update () {
+//		Debug.Log(PieceHolders.placedpieces.Count);
+//		Debug.Log(PieceHolders.placedpieces[0].transform.position);
+//		Debug.Log(PieceHolders.placedpieces[1].transform.position);
 		if(canmove){
 			this.transform.GetChild(0).GetComponent<Animator>().SetInteger("Phase", 0);
 

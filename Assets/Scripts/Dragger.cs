@@ -690,66 +690,95 @@ public void OnMouseDrag()
 	}
 
 	public void removeIcarus(string type, Vector3 target){
-		Debug.Log("ICARUS IS BEING REMOVED");
-		Debug.Log(type);
+		//Debug.Log("ICARUS IS BEING REMOVED");
+		//Debug.Log(type);
 		if(type == "Left"){
 			if(LevelBuilder.tiles[(int)target.x-1, -(int)target.z].type == type){
 				LevelBuilder.tiles[(int)target.x-1, -(int)target.z].type = "Ice";		
 				//LevelBuilder.tiles[(int)target.x-1, -(int)target.z].isTaken = false;	
-				LevelBuilder.tiles[(int)target.x-1, -(int)target.z].isSideways = null;	
-				KeepAdjacentIcari(new Vector2(target.x-1, target.z));				
+				LevelBuilder.tiles[(int)target.x-1, -(int)target.z].isSideways = null;					
 			}
 			else if(LevelBuilder.tiles[(int)target.x-1, -(int)target.z].isSideways == type){
 				LevelBuilder.tiles[(int)target.x-1, -(int)target.z].isSideways = null;
-				KeepAdjacentIcari(new Vector2(target.x-1, target.z));				
-
 			}
-
-
-
+			KeepAdjacentIcari(new Vector2(target.x-1, target.z));	
 		} 
+
 		if(type =="Right"){
 			if(LevelBuilder.tiles[(int)target.x+1, -(int)target.z].type == type){
 				LevelBuilder.tiles[(int)target.x+1, -(int)target.z].type = "Ice";		
-				//LevelBuilder.tiles[(int)target.x+1, -(int)target.z].isTaken = false;	
-				LevelBuilder.tiles[(int)target.x+1, -(int)target.z].isSideways = null;	
-				KeepAdjacentIcari(new Vector2(target.x+1, target.z));				
-				
+				LevelBuilder.tiles[(int)target.x+1, -(int)target.z].isSideways = null;									
 			}		
 			else if(LevelBuilder.tiles[(int)target.x+1, -(int)target.z].isSideways == type){
 				LevelBuilder.tiles[(int)target.x+1, -(int)target.z].isSideways = null;
-				KeepAdjacentIcari(new Vector2(target.x+1, target.z));				
 			}
+			KeepAdjacentIcari(new Vector2(target.x+1, target.z));
 		}
+
 		if(type == "Up" ){	
 			if(LevelBuilder.tiles[(int)target.x, -(int)target.z-1].type == type){
 				LevelBuilder.tiles[(int)target.x, -(int)target.z-1].type = "Ice";		
-				//LevelBuilder.tiles[(int)target.x, -(int)target.z-1].isTaken = false;	
 				LevelBuilder.tiles[(int)target.x, -(int)target.z-1].isSideways = null;	
-				KeepAdjacentIcari(new Vector2(target.x, target.z-1));				
 			}	
 			else if(LevelBuilder.tiles[(int)target.x, -(int)target.z-1].isSideways == type){
 				LevelBuilder.tiles[(int)target.x, -(int)target.z-1].isSideways = null;
-				KeepAdjacentIcari(new Vector2(target.x, target.z-1));				
 			}	
+			KeepAdjacentIcari(new Vector2(target.x, target.z+1));				
 		}
+
 		if(type == "Down"){
 			if(LevelBuilder.tiles[(int)target.x, -(int)target.z+1].type == type){
 				LevelBuilder.tiles[(int)target.x, -(int)target.z+1].type = "Ice";		
-				//LevelBuilder.tiles[(int)target.x, -(int)target.z+1].isTaken = false;	
 				LevelBuilder.tiles[(int)target.x, -(int)target.z+1].isSideways = null;	
-				KeepAdjacentIcari(new Vector2(target.x, target.z+1));				
 			}
 			else if(LevelBuilder.tiles[(int)target.x, -(int)target.z+1].isSideways == type){
-				LevelBuilder.tiles[(int)target.x, -(int)target.z+1].isSideways = null;
-				KeepAdjacentIcari(new Vector2(target.x, target.z+1));				
+				LevelBuilder.tiles[(int)target.x, -(int)target.z+1].isSideways = null;				
 			}		
+			KeepAdjacentIcari(new Vector2(target.x, target.z-1));
 		}
+
 	}
 	private void KeepAdjacentIcari(Vector2 target){
-		//Debug.Log("x " + target.x  + " y "  + target.y);
+		Debug.Log("x " + target.x  + " y "  + target.y);
 		//List<Dragger> draggers = PopulateAdjacentIcari(target);
+		for(int i=0; i<PieceHolders.placedpieces.Count; i++){
+			Dragger curDragger = PieceHolders.placedpieces[i];
+			Vector2 draggerPost = new Vector2(curDragger.transform.position.x, curDragger.transform.position.z);
+			string direction = null;
+			if(curDragger!=this){
+				Debug.Log("draggertocheck x " + draggerPost.x + " " + draggerPost.y);
 
+				string curtype = curDragger.myType;
+				if(curtype == "Left" && draggerPost.x == target.x+1 &&
+					draggerPost.y == target.y){
+					direction = "Left";
+				}
+				if(curtype == "Right" && draggerPost.x == target.x-1 &&
+					draggerPost.y == target.y){
+					direction = "Right";
+				}
+				if(curtype == "Up" && draggerPost.x == target.x &&
+					draggerPost.y == target.y-1){
+					direction = "Up";
+				}
+				if(curtype == "Down" && draggerPost.x == target.x &&
+					draggerPost.y == target.y+1){
+					direction = "Down";
+				}	
+				if(direction != null){
+					if(LevelBuilder.tiles[(int)target.x, -(int)target.y].type == "Ice"){
+						LevelBuilder.tiles[(int)target.x, -(int)target.y].type = direction;
+					}
+					else{
+						LevelBuilder.tiles[(int)target.x, -(int)target.y].isSideways = direction;
+					}					
+				}
+
+			}
+			
+
+
+		}
 
 		// if(LevelBuilder.tiles[(int)target.x, -(int)target.y+1].tileObj.tag == "Down")
 		// 	LevelBuilder.tiles[(int)target.x, -(int)target.y].type = "Down";
@@ -760,6 +789,7 @@ public void OnMouseDrag()
 		// if(LevelBuilder.tiles[(int)target.x+1, -(int)target.y].tileObj.tag == "Left")
 		// 	LevelBuilder.tiles[(int)target.x, -(int)target.y].type = "Left";
 	}
+
 	// private List<Dragger> PopulateAdjacentIcari(Vector2 target){
 	// 	// List<Dragger> temp = new List<Dragger>();
 	// 	// Vector3 overlapV3 = new vector3 
