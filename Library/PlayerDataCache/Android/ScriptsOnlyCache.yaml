@@ -19,7 +19,6 @@ ScriptsOnlyBuild:
     - GameModeHandler
     - GoalBehaviour
     - GoogleAds
-    - GoogleMobileAds.Common.MobileAdsEventExecutor
     - HueModifier
     - ImageColorModulator
     - ImageHolder
@@ -74,7 +73,6 @@ ScriptsOnlyBuild:
     - UnityEngine.Rendering.LWRP.LightweightRenderPipelineEditorResources
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
-    - UnityEditor.TestTools.TestRunner.TestListCacheData
     UnityEngine.UI.dll:
     - UnityEngine.EventSystems.EventSystem
     - UnityEngine.EventSystems.EventTrigger
@@ -95,7 +93,6 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.Toggle
     - UnityEngine.UI.VerticalLayoutGroup
     com.unity.multiplayer-hlapi.Runtime.dll:
-    - UnityEngine.Networking.NetworkCallbacks
     - UnityEngine.Networking.NetworkIdentity
   sceneClasses:
     Assets/Level.unity:
@@ -1755,4 +1752,4 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/WorldSelect.unity
   - Assets/Level.unity
-  playerPath: /Users/bernardolimon/Desktop/ZenkoApk/Zenko_178.aab
+  playerPath: /Users/bernardolimon/Desktop/ZenkoApk/Zenko_186.aab

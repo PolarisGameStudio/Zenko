@@ -139,6 +139,12 @@ public class Dragger : MonoBehaviour {
 			//Fix this to avoid untaking wrong tiles when clicking on the 3d object but the planepos somewhere else.
 			
 			if(Mathf.RoundToInt(transform.position.x)<LevelBuilder.totaldimension && Mathf.RoundToInt(transform.position.x)>0 && -Mathf.RoundToInt(transform.position.z)<LevelBuilder.totaldimension && Mathf.RoundToInt(transform.position.z)<0){
+				Debug.Log(transform.position);
+				Debug.Log(positiontogo);
+				if(positiontogo.x == 0 && positiontogo.y ==0 && positiontogo.z == 0){
+					positiontogo = transform.position;
+				}
+				Debug.Log(positiontogo);
 				mytile = LevelBuilder.tiles[Mathf.RoundToInt(gameObject.transform.position.x), -Mathf.RoundToInt(gameObject.transform.position.z)];
 				mytile.type = "Ice";
 				LevelManager.placedPieces[Mathf.RoundToInt(gameObject.transform.position.x), -Mathf.RoundToInt(gameObject.transform.position.z)] = null;
@@ -158,7 +164,9 @@ public class Dragger : MonoBehaviour {
 				}					
 			}		
 			else{
+				Debug.Log(positiontogo + "is postogo");
 				Debug.Log("out");
+				//mytile = LevelBuilder.tiles[]
 				//gotosky = true;
 
 			}				
@@ -186,11 +194,11 @@ public class Dragger : MonoBehaviour {
   		initialPosition.y = .23f;
   		postogo.y = .23f;
   		Vector3 direction = postogo-initialPosition;
-  		Debug.Log(direction);
+  		//Debug.Log(direction);
   		float distance = Vector3.Distance(postogo, initialPosition);
   		float fadetime = .3f*distance;
-  		Debug.Log(distance);
-  		Debug.Log(postogo + "postogo");
+  		//Debug.Log(distance);
+  		//Debug.Log(postogo + "postogo");
   		PlaneBehavior.RoboRay(initialPosition);
         for(float t = 0.0f; t<fadetime; t+= Time.deltaTime){
         	float normalizedTime = t/fadetime;
@@ -205,7 +213,7 @@ public class Dragger : MonoBehaviour {
         //}
         OnMouseUp();
         Vector3 position = new Vector2 (postogo.x, -postogo.z);
-        Debug.Log(position);
+        //Debug.Log(position);
 		if(myType == "Wall" || myType == "Seed"){
 			pieceHolder.placeNormal(position, this);
 		}
@@ -220,9 +228,9 @@ public class Dragger : MonoBehaviour {
         for(int i=0; i<PieceHolders.placedpieces.Count; i++){
         	PieceHolders.placedpieces[i].gameObject.GetComponent<BoxCollider>().enabled = true;
         }
-        #if UNITY_ANDROID
+
         GoogleAds.Instance.RequestRewardBasedVideo();
-        #endif
+
         yield break;
 
 	}

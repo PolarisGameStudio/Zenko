@@ -43,17 +43,15 @@ public class GoogleAds : MonoBehaviour
         //MobileAds.Initialize("ca-app-pub-3301322474937909~4906291296");
         #endif
 
-        #if UNITY_ANDROID
-        MobileAds.Initialize("ca-app-pub-3301322474937909~4906291296");
-        #endif
+        // #if UNITY_ANDROID
+        // MobileAds.Initialize("ca-app-pub-3301322474937909~4906291296");
+        // #endif
     }
     void Start(){
-        #if UNITY_ANDROID //|| UNITY_IOS
         RequestInterstitial();
         levelsInSession = 0;
         this.rewardVideo = RewardBasedVideoAd.Instance;
         RequestFirstRewardBasedVideo();
-        #endif
     }
 
     private void RequestInterstitial()
@@ -154,7 +152,6 @@ public class GoogleAds : MonoBehaviour
     }
     public void UserOptToWatchAd()
     {
-        #if UNITY_ANDROID
         if (rewardVideo.IsLoaded()) {
             rewardVideo.Show();
         }
@@ -162,11 +159,8 @@ public class GoogleAds : MonoBehaviour
             TryAgainScreen();
             RequestRewardBasedVideo();
         }
-        #endif
 
-        #if UNITY_STANDALONE_OSX || UNITY_STANDALONE_WIN
             PieceHolders.Instance.RewardHint();
-        #endif
     }
 
     private void TryAgainScreen(){
