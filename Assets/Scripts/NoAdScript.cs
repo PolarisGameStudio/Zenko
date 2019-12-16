@@ -9,7 +9,13 @@ public class NoAdScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if(!LevelManager.adFree){
+            this.transform.GetComponent<Image>().enabled = true;
+        }
+        else{
+            this.gameObject.SetActive(false);
+            givenAdFree = true;
+        }
     }
 
     // Update is called once per frame

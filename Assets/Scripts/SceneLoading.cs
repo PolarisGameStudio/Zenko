@@ -19,9 +19,11 @@ public class SceneLoading : MonoBehaviour {
 	public static SceneLoading Instance;
 	public bool level;
 	public GameObject buyMenu;
+	bool canOpen;
 
 //	public IceTileHandler myhandler;
 	void Start(){
+		canOpen = true;
 		Instance = this;
 		Debug.Log("NEW SCENE LOADING");
 		string teststring = "WallSeed";
@@ -407,53 +409,62 @@ public class SceneLoading : MonoBehaviour {
 		}
 	}
 	public void adventureMode(){
-		transform.Find("Level_Box").gameObject.SetActive(true);
+		if(canOpen){
+
+			transform.Find("Level_Box").gameObject.SetActive(true);
 
 
-		transform.Find("Level_Box").Find("ButtonHolder").GetComponent<LevelMenu>().clearMenu();
-		PlayerPrefs.SetInt("CurrentFirst", getCurFirst(LevelMenu.FindHighestSolved()));
-		PlayerPrefs.Save();
-		transform.Find("Level_Box").Find("ButtonHolder").GetComponent<LevelMenu>().currentfirst = getCurFirst(LevelMenu.FindHighestSolved());
-		transform.Find("Level_Box").Find("ButtonHolder").GetComponent<LevelMenu>().populateMenu();
+			transform.Find("Level_Box").Find("ButtonHolder").GetComponent<LevelMenu>().clearMenu();
+			PlayerPrefs.SetInt("CurrentFirst", getCurFirst(LevelMenu.FindHighestSolved()));
+			PlayerPrefs.Save();
+			transform.Find("Level_Box").Find("ButtonHolder").GetComponent<LevelMenu>().currentfirst = getCurFirst(LevelMenu.FindHighestSolved());
+			transform.Find("Level_Box").Find("ButtonHolder").GetComponent<LevelMenu>().populateMenu();
 
 
-		GameModeHandler.TurnOff();
-		transform.Find("MenuHolder").Find("Menu").gameObject.SetActive(false);
-		transform.Find("MenuHolder").Find("CloseLevel_Box").gameObject.SetActive(true);
-		transform.Find("MenuHolder").Find("Config").gameObject.SetActive(false);
+			GameModeHandler.TurnOff();
+			transform.Find("MenuHolder").Find("Menu").gameObject.SetActive(false);
+			transform.Find("MenuHolder").Find("CloseLevel_Box").gameObject.SetActive(true);
+			transform.Find("MenuHolder").Find("Config").gameObject.SetActive(false);
 
 
-		if(MenuButton.open){
-			MenuButton.thisMB.closeMenu();
+			if(MenuButton.open){
+				MenuButton.thisMB.closeMenu();
 
+			}
+			CameraController.Fade(.2f,1f, LevelMenu.FindHighestSolved());
+			LevelMenu.Instance.CheckDownUpButtons(getCurFirst(LevelMenu.FindHighestSolved()));
+			canOpen = false;
 		}
-		CameraController.Fade(.2f,1f, LevelMenu.FindHighestSolved());
-		LevelMenu.Instance.CheckDownUpButtons(getCurFirst(LevelMenu.FindHighestSolved()));
 	}
 	public void PuzzleOfTheDayMenu(){
-		transform.Find("PoTD_Box").gameObject.SetActive(true);
+		if(canOpen){
+			transform.Find("PoTD_Box").gameObject.SetActive(true);
 
 
-		transform.Find("PoTD_Box").Find("ButtonHolder").GetComponent<LevelMenu>().clearMenu();
-		//PlayerPrefs.SetInt("CurrentFirst", getCurFirst(LevelMenu.FindHighestSolved()));
-		//PlayerPrefs.Save();
+			transform.Find("PoTD_Box").Find("ButtonHolder").GetComponent<LevelMenu>().clearMenu();
+			//PlayerPrefs.SetInt("CurrentFirst", getCurFirst(LevelMenu.FindHighestSolved()));
+			//PlayerPrefs.Save();
 
-		//GET DATE
-		//USE DATE
-		transform.Find("PoTD_Box").Find("ButtonHolder").GetComponent<LevelMenu>().populatePotdMenu();
+			//GET DATE
+			//USE DATE
+			transform.Find("PoTD_Box").Find("ButtonHolder").GetComponent<LevelMenu>().populatePotdMenu();
 
 
-		GameModeHandler.TurnOff();
-		transform.Find("MenuHolder").Find("Menu").gameObject.SetActive(false);
-		transform.Find("MenuHolder").Find("ClosePotd_Box").gameObject.SetActive(true);
-		transform.Find("MenuHolder").Find("Config").gameObject.SetActive(false);
+			GameModeHandler.TurnOff();
+			transform.Find("MenuHolder").Find("Menu").gameObject.SetActive(false);
+			transform.Find("MenuHolder").Find("ClosePotd_Box").gameObject.SetActive(true);
+			transform.Find("MenuHolder").Find("Config").gameObject.SetActive(false);
+			canOpen = false;			
+			
 
-		
-		if(MenuButton.open){
-			MenuButton.thisMB.closeMenu();
 
+			
+			if(MenuButton.open){
+				MenuButton.thisMB.closeMenu();
+
+			}
+			CameraController.Fade(.2f,1f, 1);
 		}
-		CameraController.Fade(.2f,1f, 1);
 		//LevelMenu.Instance.CheckDownUpButtons(getCurFirst(LevelMenu.FindHighestSolved()));		
 	}
 	public int getCurFirst(int highest){
@@ -482,6 +493,7 @@ public class SceneLoading : MonoBehaviour {
 		transform.Find("MenuHolder").Find("ClosePotd_Box").gameObject.SetActive(false);
 		GameModeHandler.Return();		
 		CameraController.Fade(.2f,0.4f);
+		canOpen = true;
 	}
 
 	public void closeAdventureMode(){
@@ -494,6 +506,7 @@ public class SceneLoading : MonoBehaviour {
 		transform.Find("MenuHolder").Find("CloseLevel_Box").gameObject.SetActive(false);
 		GameModeHandler.Return();		
 		CameraController.Fade(.2f,0.4f);
+		canOpen = true;
 	}
 	public void GoToWorldSelect(){
 			SceneManager.LoadScene (1);

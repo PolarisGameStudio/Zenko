@@ -366,6 +366,7 @@
      <Compile Include="Assets\Scripts\WinMessage.cs" />
      <Compile Include="Assets\Scripts\WorldName.cs" />
      <Compile Include="Assets\Scripts\XYPad.cs" />
+     <Compile Include="Assets\ToggleForEditor.cs" />
      <Compile Include="Assets\UI stuff\zenko_PKT_v003\TutorialDictionary.cs" />
      <None Include="Assets\StreamingAssets\Level-7.txt" />
      <None Include="Assets\StreamingAssets\Ch3_3piece.txt" />
