@@ -138,16 +138,16 @@ public class Dragger : MonoBehaviour {
 			//Debug.Log(transform.position.x + "" + transform.position.z + "totaldimension" + LevelBuilder.totaldimension);//HERES WHERE THE PROBLEM BE
 			//Fix this to avoid untaking wrong tiles when clicking on the 3d object but the planepos somewhere else.
 			
-			if(Mathf.RoundToInt(transform.position.x)<LevelBuilder.totaldimension && Mathf.RoundToInt(transform.position.x)>0 && -Mathf.RoundToInt(transform.position.z)<LevelBuilder.totaldimension && Mathf.RoundToInt(transform.position.z)<0){
+			//if(Mathf.RoundToInt(transform.position.x)<LevelBuilder.totaldimension && Mathf.RoundToInt(transform.position.x)>0 && -Mathf.RoundToInt(transform.position.z)<LevelBuilder.totaldimension && Mathf.RoundToInt(transform.position.z)<0){
 				Debug.Log(transform.position);
 				Debug.Log(positiontogo);
 				if(positiontogo.x == 0 && positiontogo.y ==0 && positiontogo.z == 0){
 					positiontogo = transform.position;
 				}
 				Debug.Log(positiontogo);
-				mytile = LevelBuilder.tiles[Mathf.RoundToInt(gameObject.transform.position.x), -Mathf.RoundToInt(gameObject.transform.position.z)];
+				mytile = LevelBuilder.tiles[Mathf.RoundToInt(positiontogo.x), -Mathf.RoundToInt(positiontogo.z)];
 				mytile.type = "Ice";
-				LevelManager.placedPieces[Mathf.RoundToInt(gameObject.transform.position.x), -Mathf.RoundToInt(gameObject.transform.position.z)] = null;
+				LevelManager.placedPieces[Mathf.RoundToInt(positiontogo.x), -Mathf.RoundToInt(positiontogo.z)] = null;
 				//Debug.Log("UNTAKING IT at" + (int)gameObject.transform.position.x + -(int)gameObject.transform.position.z + "Type "+ myType);
 				//Debug.Log("UNTOOK AT" + gameObject.transform.position.x + -gameObject.transform.position.z);
 				mytile.isTaken = false;
@@ -162,14 +162,14 @@ public class Dragger : MonoBehaviour {
 					Debug.Log("Removing ice");
 					removeIcarus(myType, new Vector3((int)gameObject.transform.position.x,(int)gameObject.transform.position.y,(int)gameObject.transform.position.z));
 				}					
-			}		
-			else{
-				Debug.Log(positiontogo + "is postogo");
-				Debug.Log("out");
+			//}		
+			//else{
+				//Debug.Log(positiontogo + "is postogo");
+				//Debug.Log("out");
 				//mytile = LevelBuilder.tiles[]
 				//gotosky = true;
 
-			}				
+			//}				
 			
 
 			// positiontogo = PlaneBehavior.planePos;	
