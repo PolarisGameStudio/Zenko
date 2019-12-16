@@ -88,8 +88,10 @@ public class PlayServices : MonoBehaviour
                 // else{
 
                 // }
+                #if UNITY_ANDROID
                 InitializePGP();
                 SignIn();
+                #endif
                 //Debug.Log(int.Parse("1 1 1 1"));
 //                SplitString("1 2 3 4 5");
                 //byte[] dataToSave = Encoding.ASCII.GetBytes("1 23 4 5");
@@ -126,13 +128,13 @@ public class PlayServices : MonoBehaviour
     // }
    
     public void InitializePGP(){
-
+        #if UNITY_ANDROID
         PlayGamesClientConfiguration.Builder builder = new PlayGamesClientConfiguration.Builder();
         builder.EnableSavedGames();
         PlayGamesPlatform.InitializeInstance(builder.Build());
         PlayGamesPlatform.DebugLogEnabled = true;
         PlayGamesPlatform.Activate();    
-
+        #endif
     }
 
     public void SignIn(){
@@ -154,8 +156,10 @@ public class PlayServices : MonoBehaviour
     }
     public void SignOut() 
     {
+        #if UNITY_ANDROID
         if (Social.localUser.authenticated)
             PlayGamesPlatform.Instance.SignOut();
+        #endif
     }
 
     #region Saved Games
@@ -349,6 +353,7 @@ public class PlayServices : MonoBehaviour
     }
 
     public void LoadData(){
+        #if UNITY_ANDROID
         if (Social.localUser.authenticated){
             isSaving = false;
             ((PlayGamesPlatform)Social.Active).SavedGame.OpenWithManualConflictResolution(SAVE_NAME, 
@@ -359,6 +364,7 @@ public class PlayServices : MonoBehaviour
         else{
             LoadLocal();
         }
+        #endif
     }
 
     private void LoadLocal(){
@@ -367,6 +373,7 @@ public class PlayServices : MonoBehaviour
     }
 
     public void SaveData(){
+        #if UNITY_ANDROID
         if(!isCloudDataLoaded){
             curCloudData = "0";
             isCloudDataLoaded = true;
@@ -382,6 +389,7 @@ public class PlayServices : MonoBehaviour
         else{
             SaveLocal();
         }
+        #endif
     }
 
     public void SaveLocal(){
@@ -460,11 +468,14 @@ public class PlayServices : MonoBehaviour
     }
 
     private void LoadGame(ISavedGameMetadata game){
+        #if UNITY_ANDROID
         Debug.Log("Gonna load game");
         ((PlayGamesPlatform)Social.Active).SavedGame.ReadBinaryData(game, OnSavedGameDataRead);
+        #endif
     }
 
     private void SaveGame(ISavedGameMetadata game){
+        #if UNITY_ANDROID
         Debug.Log("GONNA SAVE DATA TO CLOUD");
         newMergedString = MergeData(curCloudData, GameDataToString());
 
@@ -477,7 +488,7 @@ public class PlayServices : MonoBehaviour
         //Debug.Log("DataToSave length is " + dataToSave.Length);
 
         ((PlayGamesPlatform)Social.Active).SavedGame.CommitUpdate(game, update, dataToSave, OnSavedGameDataWritten);
-
+        #endif
     }
 
     private void OnSavedGameDataRead(SavedGameRequestStatus status, byte[] savedData){
@@ -543,7 +554,9 @@ public class PlayServices : MonoBehaviour
 
     public static void IncrementAchievement(string id, int stepsToIncrement) 
     {
+        #if UNITY_ANDROID
         PlayGamesPlatform.Instance.IncrementAchievement(id, stepsToIncrement, success => { });
+        #endif
     }
 
     public static void ShowAchievementsUI()

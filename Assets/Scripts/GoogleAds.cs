@@ -43,15 +43,20 @@ public class GoogleAds : MonoBehaviour
         //MobileAds.Initialize("ca-app-pub-3301322474937909~4906291296");
         #endif
 
+        #if UNITY_STANDALONE
+            LevelManager.adFree = true;
+        #endif 
         // #if UNITY_ANDROID
         // MobileAds.Initialize("ca-app-pub-3301322474937909~4906291296");
         // #endif
     }
     void Start(){
+        #if UNITY_ANDROID
         RequestInterstitial();
         levelsInSession = 0;
         this.rewardVideo = RewardBasedVideoAd.Instance;
         RequestFirstRewardBasedVideo();
+        #endif
     }
 
     private void RequestInterstitial()

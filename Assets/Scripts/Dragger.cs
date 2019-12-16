@@ -228,9 +228,10 @@ public class Dragger : MonoBehaviour {
         for(int i=0; i<PieceHolders.placedpieces.Count; i++){
         	PieceHolders.placedpieces[i].gameObject.GetComponent<BoxCollider>().enabled = true;
         }
-
+        #if UNITY_ANDROID
         GoogleAds.Instance.RequestRewardBasedVideo();
-
+        #endif
+        
         yield break;
 
 	}

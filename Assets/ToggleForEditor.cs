@@ -7,7 +7,7 @@ public class ToggleForEditor : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        #if UNITY_EDITOR
+        #if UNITY_EDITOR || UNITY_STANDALONE
     		this.transform.GetComponent<Image>().enabled = true;
     	#else
     		this.gameObject.SetActive(false);

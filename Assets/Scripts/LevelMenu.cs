@@ -67,22 +67,13 @@ public class LevelMenu : MonoBehaviour {
 
 
 		int world = int.Parse(DateChecker.Instance.mmyyyy);
-		//int levelinworld = num;
-		//txt.text = "World " + world.ToString() + "-" + levelinworld.ToString();		
 		curbutton.transform.GetChild(2).GetComponent<Text>().text = (num+1).ToString();	
-
-		//Debug.Log(LevelManager.adFree + "IS ADFREE");
-		//if(ShouldShowPotd());
-		//Debug.Log(DateChecker.Instance.dayInMonth + " " + num);
-		//LevelManager.adFree = false;
-
 
 		if(LevelManager.adFree){
 			if(num+1 <= DateChecker.Instance.dayInMonth || DateChecker.currentMonthIndex<DateChecker.todayMonthIndex){
 				LevelStorer.potdDic[num+potdFirst].islocked = false;
 				btn.onClick.AddListener(delegate{sl.LoadPotdMap(num + 
 				potdFirst);}); 
-				//AssignStarsToPotd(num);
 			}
 			else{
 				curbutton.transform.GetChild(3).gameObject.SetActive(true);	
@@ -109,33 +100,16 @@ public class LevelMenu : MonoBehaviour {
 		if(LevelStorer.potdDic[num+potdFirst].rating == 1){
 			curbutton.transform.GetChild(5).GetChild(1).GetChild(1).gameObject.SetActive(true);
 		}
-		if(LevelStorer.potdDic[num+potdFirst].rating == 2){
+		else if(LevelStorer.potdDic[num+potdFirst].rating == 2){
 			curbutton.transform.GetChild(5).GetChild(1).GetChild(0).gameObject.SetActive(true);
 			curbutton.transform.GetChild(5).GetChild(1).GetChild(2).gameObject.SetActive(true);
 		}
-		if(LevelStorer.potdDic[num+potdFirst].rating == 3){
+		else if(LevelStorer.potdDic[num+potdFirst].rating == 3){
 			curbutton.transform.GetChild(5).GetChild(1).GetChild(0).gameObject.SetActive(true);
 			curbutton.transform.GetChild(5).GetChild(1).GetChild(1).gameObject.SetActive(true);
 			curbutton.transform.GetChild(5).GetChild(1).GetChild(2).gameObject.SetActive(true);
 		}		
-
-		// if(num+1 <= DateChecker.Instance.dayInMonth || DateChecker.currentMonthIndex<DateChecker.todayMonthIndex){
-
-		// 	if(LevelManager.adFree  || num+1 == DateChecker.Instance.dayInMonth)
-		// 		btn.onClick.AddListener(delegate{sl.LoadPotdMap(num + 
-		// 		PotdHolder.monthBank[DateChecker.currentMonthIndex][0]);}); 
-		// 	else{
-		// 		curbutton.transform.GetChild(1).gameObject.SetActive(true);	
-		// 	 	curbutton.transform.GetChild(2).gameObject.SetActive(true);					
-		// 	}
-		// }
-
-		// else{
-		//  	curbutton.transform.GetChild(1).gameObject.SetActive(true);	
-		//  	curbutton.transform.GetChild(2).gameObject.SetActive(true);	
-		// }
 		
-
 		levelbuttons.Add(curbutton);
 	}
 

@@ -85,8 +85,9 @@ public class RatingPopUp : MonoBehaviour {
 			LevelStorer.potdDic[DateChecker.Instance.currentIndex].islocked = false;
 		}
 		PlayServices.instance.SaveLocal();
+		#if UNITY_ANDROID
 		PlayServices.instance.SaveData();
-
+		#endif
 	}
 	public static void AddCurrency(int prevr, int newr){
 		Debug.Log("Givingc");
