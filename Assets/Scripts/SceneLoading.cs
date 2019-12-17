@@ -456,17 +456,32 @@ public class SceneLoading : MonoBehaviour {
 			transform.Find("MenuHolder").Find("Config").gameObject.SetActive(false);
 			canOpen = false;			
 			
-
-
-			
 			if(MenuButton.open){
 				MenuButton.thisMB.closeMenu();
 
 			}
 			CameraController.Fade(.2f,1f, 1);
+
+			if(LevelManager.adFree){
+
+			}
+			else{
+				if(HasUnlocked()){
+					//transform.Find("
+				}
+			}
+
+
+
 		}
 		//LevelMenu.Instance.CheckDownUpButtons(getCurFirst(LevelMenu.FindHighestSolved()));		
 	}
+
+	bool HasUnlocked(){
+
+		return true;
+	}
+
 	public int getCurFirst(int highest){
 		int candidate = 1;
 		if (highest == 0 || highest == null || highest == 1){
