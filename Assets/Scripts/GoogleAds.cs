@@ -76,7 +76,8 @@ public class GoogleAds : MonoBehaviour
         // Initialize an InterstitialAd.
         this.interstitial = new InterstitialAd(adUnitId);
         // Create an empty ad request.
-        AdRequest request = new AdRequest.Builder().AddTestDevice("7B4A528D487015EA780FDA9E0F1541EB").Build();
+        AdRequest request = new AdRequest.Builder().Build();
+        //.AddTestDevice("7B4A528D487015EA780FDA9E0F1541EB").
         // Load the interstitial with the request.
         this.interstitial.LoadAd(request);
         this.interstitial.OnAdClosed += HandleOnAdClosed;
@@ -124,7 +125,7 @@ public class GoogleAds : MonoBehaviour
         #endif
 
         // Create an empty ad request.
-        AdRequest request = new AdRequest.Builder().AddTestDevice("7B4A528D487015EA780FDA9E0F1541EB").Build();
+        AdRequest request = new AdRequest.Builder().Build();
         // Load the rewarded video ad with the request.
         this.potdVideo.LoadAd(request, adUnitId);
         
@@ -141,7 +142,7 @@ public class GoogleAds : MonoBehaviour
         #endif
 
         // Create an empty ad request.
-        AdRequest request = new AdRequest.Builder().AddTestDevice("7B4A528D487015EA780FDA9E0F1541EB").Build();
+        AdRequest request = new AdRequest.Builder().Build();
         // Load the rewarded video ad with the request.
         this.potdVideo.LoadAd(request, adUnitId);
         
@@ -157,7 +158,7 @@ public class GoogleAds : MonoBehaviour
         #endif
 
         // Create an empty ad request.
-        AdRequest request = new AdRequest.Builder().AddTestDevice("7B4A528D487015EA780FDA9E0F1541EB").Build();
+        AdRequest request = new AdRequest.Builder().Build();
         // Load the rewarded video ad with the request.
         this.rewardVideo.LoadAd(request, adUnitId);
         
@@ -176,7 +177,7 @@ public class GoogleAds : MonoBehaviour
         #endif
 
         // Create an empty ad request.
-        AdRequest request = new AdRequest.Builder().AddTestDevice("7B4A528D487015EA780FDA9E0F1541EB").Build();
+        AdRequest request = new AdRequest.Builder().Build();
         // Load the rewarded video ad with the request.
         this.rewardVideo.LoadAd(request, adUnitId);
     }
