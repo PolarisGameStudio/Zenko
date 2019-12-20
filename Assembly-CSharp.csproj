@@ -289,6 +289,7 @@
      <Compile Include="Assets\ModulateImage.cs" />
      <Compile Include="Assets\NokobotUIPack\Demo\Scripts\GoToNextScene.cs" />
      <Compile Include="Assets\PotdMenu.cs" />
+     <Compile Include="Assets\PotdUnlocker.cs" />
      <Compile Include="Assets\Scripts\AssignCamera.cs" />
      <Compile Include="Assets\Scripts\AssignCanvasAndButton.cs" />
      <Compile Include="Assets\Scripts\AuroraModulator.cs" />
@@ -367,6 +368,7 @@
      <Compile Include="Assets\Scripts\WorldName.cs" />
      <Compile Include="Assets\Scripts\XYPad.cs" />
      <Compile Include="Assets\ToggleForEditor.cs" />
+     <Compile Include="Assets\TurnOffIfAdFree.cs" />
      <Compile Include="Assets\UI stuff\zenko_PKT_v003\TutorialDictionary.cs" />
      <None Include="Assets\StreamingAssets\Level-7.txt" />
      <None Include="Assets\StreamingAssets\Ch3_3piece.txt" />

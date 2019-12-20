@@ -58,6 +58,7 @@ public class GoogleAds : MonoBehaviour
         #if UNITY_ANDROID
         RequestInterstitial();
         this.rewardVideo = RewardBasedVideoAd.Instance;
+        this.potdVideo = RewardBasedVideoAd.Instance;
         RequestFirstRewardBasedVideo();
         RequestFirstPotdAd();
         #endif

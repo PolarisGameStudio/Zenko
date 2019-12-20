@@ -14,6 +14,7 @@ public class DateChecker : MonoBehaviour
 	public static int currentMonthIndex;
 
 	//public Text txt;
+	public static string todayDate;
 
 	readonly string date = "http://worldclockapi.com/api/json/est/now";
 
@@ -32,10 +33,15 @@ public class DateChecker : MonoBehaviour
 	public string firstDate = "2019-11-01";
 
 
-	void Start(){
-		Instance = this;
+	void Awake(){
+		if(Instance == null){
+			PopulateDate();
+			Instance = this;
+		}
+		
 		//StartCoroutine(SimpleGetRequest());
-		PopulateDate();
+
+		
 
 	}
 
@@ -69,6 +75,7 @@ public class DateChecker : MonoBehaviour
 			Debug.Log((int)diff.Days);	
 			todayIndex = diff.Days;
 			currentIndex = diff.Days;
+			todayDate = System.DateTime.Now.ToString("yyyy-MM-dd");
 		}
 		else{
 
@@ -87,18 +94,12 @@ public class DateChecker : MonoBehaviour
 			System.TimeSpan diff = now - date;
 			Debug.Log((int)diff.Days);	
 			todayIndex = diff.Days;
-			currentIndex = diff.Days;		
-			//Test();
+			currentIndex = diff.Days;	
+			todayDate = System.DateTime.Now.ToString("yyyy-MM-dd");
 
-
-
-			//first in array is first index in month
-			//Debug.Log(PotdHolder.monthBank[mmyyyy][0]);
-			
-			//second in array is amount of days in month
-			//Debug.Log(PotdHolder.monthBank[mmyyyy][1]);
 
 		}
+		PotdUnlocker.Instance.Initiate();
 	}
 
 	public int[] ArrayDate(string date){
