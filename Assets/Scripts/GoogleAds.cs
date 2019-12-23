@@ -17,6 +17,7 @@ public class GoogleAds : MonoBehaviour
 
     public int levelsInSession;
     public int[] levelsToShowAd = new int[] {3,6,11,16,21,26,31,41,51,61,71,81,91,101,111,121,131,141,151,161,171,181,191};
+    public int potdNum;
 
     // Start is called before the first frame update
     void Awake()
@@ -126,7 +127,7 @@ public class GoogleAds : MonoBehaviour
         #endif
 
         // Create an empty ad request.
-        AdRequest request = new AdRequest.Builder().Build();
+        AdRequest request = new AdRequest.Builder().AddTestDevice("7B4A528D487015EA780FDA9E0F1541EB").Build();
         // Load the rewarded video ad with the request.
         this.potdVideo.LoadAd(request, adUnitId);
         
@@ -143,7 +144,7 @@ public class GoogleAds : MonoBehaviour
         #endif
 
         // Create an empty ad request.
-        AdRequest request = new AdRequest.Builder().Build();
+        AdRequest request = new AdRequest.Builder().AddTestDevice("7B4A528D487015EA780FDA9E0F1541EB").Build();
         // Load the rewarded video ad with the request.
         this.potdVideo.LoadAd(request, adUnitId);
         
@@ -195,8 +196,8 @@ public class GoogleAds : MonoBehaviour
     }
 
     private void HandleOnPotdAdClosed(object sender, EventArgs args){
-        
-        
+        //RequestPotdAd();
+        LevelMenu.UnlockPotdLevel(potdNum);
         
 
         //RequestRewardBasedVideo();
@@ -205,9 +206,23 @@ public class GoogleAds : MonoBehaviour
 
     }
 
-    public void UserOptToOpenPotd(){
-        
+    public void UserOptToOpenPotd(int num){
+        potdNum = num;
+        #if UNITY_ANDROID
+        if (potdVideo.IsLoaded()) {
+            potdVideo.Show();
+        }
+        else{
+            //TryAgainScreen();
+            RequestPotdAd();
+        }
+        #endif
+        #if UNITY_EDITOR
+        LevelMenu.UnlockPotdLevel(potdNum);
+        #endif
     }
+
+    
 
     public void UserOptToWatchAd()
     {

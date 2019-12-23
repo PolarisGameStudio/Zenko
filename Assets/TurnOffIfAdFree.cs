@@ -9,13 +9,15 @@ public class TurnOffIfAdFree : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log(LevelManager.adFree);
         if(LevelManager.adFree){
-        	image.enabled = false;
-        	text.enabled = false;
+        	this.gameObject.SetActive(false);
+            text.gameObject.SetActive(false);
         }
         else{
-        	this.gameObject.SetActive(false);
-        	text.gameObject.SetActive(false);
+            image.enabled = true;
+            text.enabled = true;
+        	
         }
     }
 

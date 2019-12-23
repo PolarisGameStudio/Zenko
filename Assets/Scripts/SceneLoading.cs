@@ -499,7 +499,9 @@ public class SceneLoading : MonoBehaviour {
 	}
 
 	public void ClosePotdMode(){
+		transform.Find("PoTD_Box").Find("ButtonHolder").GetComponent<LevelMenu>().CloseUnlockMenu();
 		transform.Find("PoTD_Box").gameObject.SetActive(false);
+
 		//remove curbuttons
 		transform.Find("PoTD_Box").Find("ButtonHolder").GetComponent<LevelMenu>().currentfirst = PlayerPrefs.GetInt("CurrentFirst");
 
@@ -507,6 +509,7 @@ public class SceneLoading : MonoBehaviour {
 		transform.Find("MenuHolder").Find("Menu").gameObject.SetActive(true);
 		transform.Find("MenuHolder").Find("ClosePotd_Box").gameObject.SetActive(false);
 		GameModeHandler.Return();		
+
 		CameraController.Fade(.2f,0.4f);
 		canOpen = true;
 	}

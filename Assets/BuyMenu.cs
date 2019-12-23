@@ -6,9 +6,12 @@ using CompleteProject;
 public class BuyMenu : MonoBehaviour
 {
 	public Text priceString;
+    public Text title;
+    public static BuyMenu Instance;
     // Start is called before the first frame update
     void Start()
     {
+        Instance = this;
         AssignPriceMessage();
     }
 
@@ -23,4 +26,7 @@ public class BuyMenu : MonoBehaviour
     	priceString.text = "$" + price.ToString();
     }
 
+    public void AssignTitle(string newTitle){
+        title.text = newTitle;
+    }
 }

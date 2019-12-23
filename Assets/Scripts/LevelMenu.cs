@@ -25,6 +25,8 @@ public class LevelMenu : MonoBehaviour {
 	public int potdFirst;
 
 	public int lowestLocked;
+	public GameObject UnlockMenu;
+	public GameObject buyMenu;
 	// Use this for initialization
 	void Awake(){
 		Instance = this;
@@ -58,6 +60,36 @@ public class LevelMenu : MonoBehaviour {
 		//Debug.Log(curHighest+1 + " IS CURHIGHEST");
 		return curHighest+1;	
 	}
+	public static void UnlockPotdLevel(int num){
+		PotdUnlocker.Instance.keysAvailable--;
+		PlayerPrefs.SetInt("KeysAvailable", PotdUnlocker.Instance.keysAvailable);	
+		SceneLoading.Instance.LoadPotdMap(num);
+	}
+	public void OpenUnlockMenu(int num, int starter){
+		UnlockMenu.transform.Find("Title").GetComponent<Text>().text = "UNLOCK LEVEL " + (num+1).ToString() + "?";
+		UnlockMenu.transform.Find("UnlockAdButton").transform.Find("contador").GetComponent<Text>().text = "x " + PotdUnlocker.Instance.keysAvailable.ToString();
+		//GameObject.Find()
+		buyMenu.GetComponent<BuyMenu>().AssignTitle("Unlock Archive?");
+		if(PotdUnlocker.Instance.keysAvailable>0){
+			UnlockMenu.transform.Find("UnlockAdButton").GetComponent<Button>().onClick.AddListener(delegate{GoogleAds.Instance.UserOptToOpenPotd(num+starter);});
+			
+		}
+		else{
+			UnlockMenu.transform.Find("UnlockAdButton").transform.Find("Text").GetComponent<Text>().text = "COME BACK TOMORROW";
+			UnlockMenu.transform.Find("UnlockAdButton").GetComponent<Button>().interactable = false;
+
+		}
+		UnlockMenu.SetActive(true);
+		GoogleAds.Instance.RequestPotdAd();
+
+	}
+
+	public void CloseUnlockMenu(){
+		UnlockMenu.SetActive(false);
+		buyMenu.GetComponent<BuyMenu>().AssignTitle("Disable Ads?");
+	}
+
+
 	void createPotdButton(int num){
 		GameObject curbutton = Instantiate(buttonprefab, new Vector3(0, 0, 0), Quaternion.identity);
 		curbutton.transform.SetParent(this.transform, false);
@@ -86,7 +118,7 @@ public class LevelMenu : MonoBehaviour {
 		}
 
 		else{
-			Debug.Log(num + " num plus " + DateChecker.Instance.dayInMonth + DateChecker.currentMonthIndex +DateChecker.todayMonthIndex + potdFirst );
+			//Debug.Log(num + " num plus " + DateChecker.Instance.dayInMonth + DateChecker.currentMonthIndex +DateChecker.todayMonthIndex + potdFirst );
 			if((num+1 == DateChecker.Instance.dayInMonth && DateChecker.currentMonthIndex == DateChecker.todayMonthIndex) 
 				|| !LevelStorer.potdDic[num+potdFirst].islocked){
 				Debug.Log("UNLOCKING " + num + " in month " + DateChecker.currentMonthIndex );
@@ -101,6 +133,7 @@ public class LevelMenu : MonoBehaviour {
 			 	if(num+1 <= DateChecker.Instance.dayInMonth || DateChecker.currentMonthIndex<DateChecker.todayMonthIndex){
 		 			curbutton.transform.GetChild(7).gameObject.SetActive(true);	
 		 			curbutton.transform.GetChild(6).gameObject.SetActive(false);
+		 			btn.onClick.AddListener(delegate{OpenUnlockMenu(num,potdFirst);});
 			 	}
 			 		
 			}
