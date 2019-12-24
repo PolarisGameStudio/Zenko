@@ -32,7 +32,9 @@ public class PlayServices : MonoBehaviour
         //  int num;
         // Debug.Log(int.TryParse("1211212121212121212".Substring(0,4), out num));
         //  Debug.Log(num);
+        #if UNITY_EDITOR
         //PlayerPrefs.DeleteAll();
+        #endif
         //Debug.Log(instance);
         Debug.Log("cursavepref " + PlayerPrefs.GetString(SAVE_NAME));
         //Debug.Log("curcloudsave " + )

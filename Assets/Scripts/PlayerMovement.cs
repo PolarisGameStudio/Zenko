@@ -663,6 +663,7 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	public void CheckAchievement(){
+		if(!LevelManager.ispotd){
 			if(LevelManager.levelnum == 40){
 				PlayServices.UnlockWorldAchievement(1);
 			}
@@ -674,7 +675,8 @@ public class PlayerMovement : MonoBehaviour {
 			}
 			if(LevelManager.levelnum == 160){
 				PlayServices.UnlockWorldAchievement(4);
-			}
+			}			
+		}
 	}
 	IEnumerator PopWin(){
 		CheckAchievement();

@@ -400,6 +400,8 @@ public class LevelBuilder : MonoBehaviour {
 		ProgressBar.InitializeProgressBar(LevelStorer.efficientturns);
 		DotHandler.InitializeDots(LevelStorer.efficientturns);
 		playertransform.gameObject.GetComponent<PlayerMovement>().canmove = true;
+		if (!GoogleAds.Instance.rewardVideo.IsLoaded())
+		GoogleAds.Instance.RequestRewardBasedVideo();
 
 	}
 	string[][] readAdventure(int place){

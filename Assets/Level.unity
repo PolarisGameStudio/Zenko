@@ -553,22 +553,22 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 3d612ac8d935b4c5b936dfa913a0c3ec, type: 3}
   - {fileID: 21300000, guid: 4eb476bf45f564314919a1464776e068, type: 3}
   - {fileID: 21300000, guid: 81a2614ea180e4e6a8459685cf092538, type: 3}
-  - {fileID: 21300000, guid: 759e563d96d9f43809228af5859f7f0d, type: 3}
+  - {fileID: 21300000, guid: 2d921c97ef568470aa5210355beac64f, type: 3}
   World2Messages:
   - {fileID: 21300000, guid: 1916a5f429e874c8b97e9349126b6db5, type: 3}
   - {fileID: 21300000, guid: 90fec4601bf8944c199c6f90ed1cf625, type: 3}
   - {fileID: 21300000, guid: 02b6a9e78b5da4c40a58fa23c76ec0c6, type: 3}
-  - {fileID: 21300000, guid: 1a6993ca8b7614334a0083e58cbb9c37, type: 3}
+  - {fileID: 21300000, guid: aa1a50b82872e40b5b8093d0aa8affe2, type: 3}
   World3Messages:
   - {fileID: 21300000, guid: d2439cd42640d4bc88c912c03233e69b, type: 3}
   - {fileID: 21300000, guid: 552724b7198ca40e0b60b762d0381753, type: 3}
   - {fileID: 21300000, guid: c8574e5407470404791add09f1ebb0e0, type: 3}
-  - {fileID: 21300000, guid: c923921441fbb40f3aac936d2343077d, type: 3}
+  - {fileID: 21300000, guid: a0c75bd3e35f64e57bc742ac955f0196, type: 3}
   World4Messages:
   - {fileID: 21300000, guid: 8b40502e92361407d87ee974283d8072, type: 3}
   - {fileID: 21300000, guid: 1388aeca8536a42b59d72b142d913109, type: 3}
   - {fileID: 21300000, guid: a77bd0ef2effe4ff48d71542150e5719, type: 3}
-  - {fileID: 21300000, guid: 7e6fe2353b63d4bfab23a301e278e554, type: 3}
+  - {fileID: 21300000, guid: 97172c55207c34908a6579fa11e0644d, type: 3}
   Next: {fileID: 223452740}
   Home: {fileID: 1077167013}
   movingUpwards: 0
@@ -5204,6 +5204,17 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 909438774}
+    - target: {fileID: 8669939907048993655, guid: 0f6eccdd0f11e456aa227ecee3b6bc49,
+        type: 3}
+      propertyPath: m_Text
+      value: '-One-time payment
+
+        -Removes all ads
+
+        -Unlimited hints
+
+        -Unlocks past Puzzles of the Day'
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f6eccdd0f11e456aa227ecee3b6bc49, type: 3}
 --- !u!1 &768741101 stripped
