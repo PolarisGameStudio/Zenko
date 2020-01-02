@@ -11,9 +11,9 @@ public class GoogleAds : MonoBehaviour
 
     private InterstitialAd interstitial;
 
-    public RewardBasedVideoAd rewardVideo;
+    public RewardedAd rewardVideo;
 
-    public RewardBasedVideoAd potdVideo;
+    public RewardedAd potdVideo;
 
     public int levelsInSession;
     public int[] levelsToShowAd = new int[] {3,6,11,16,21,26,31,41,51,61,71,81,91,101,111,121,131,141,151,161,171,181,191};
@@ -48,7 +48,8 @@ public class GoogleAds : MonoBehaviour
         #endif
 
         #if UNITY_STANDALONE
-            LevelManager.adFree = true;
+            
+            //LevelManager.adFree = true;
         #endif 
         // #if UNITY_ANDROID
         // MobileAds.Initialize("ca-app-pub-3301322474937909~4906291296");
@@ -59,11 +60,65 @@ public class GoogleAds : MonoBehaviour
         
         #if UNITY_ANDROID
         RequestInterstitial();
-        this.rewardVideo = RewardBasedVideoAd.Instance;
-       // this.potdVideo = RewardBasedVideoAd.Instance;
-        RequestFirstRewardBasedVideo();
+        RequestHintAd();
+        RequestPotdAd();
+        //this.potdVideo = RewardBasedVideoAd.Instance;
+        //RequestFirstRewardBasedVideo();
         //RequestFirstPotdAd();
         #endif
+    }
+
+    public void RequestHintAd(){
+        #if UNITY_ANDROID
+            string adUnitId = "ca-app-pub-3301322474937909/3389088666";
+        #elif UNITY_IOS
+            string adUnitId = "ca-app-pub-3301322474937909/3389088666";
+        #else
+            string adUnitId = "unexpected_platform";
+        #endif
+
+        // Create an empty ad request.
+        // Load the rewarded video ad with the request.
+        this.rewardVideo = new RewardedAd(adUnitId);
+
+        AdRequest request = new AdRequest.Builder().AddTestDevice("7B4A528D487015EA780FDA9E0F1541EB").Build();
+        
+        this.rewardVideo.OnUserEarnedReward += HandleOnRewardAdClosed;
+
+        this.rewardVideo.OnAdClosed += HintClosedEarly;
+
+        this.rewardVideo.LoadAd(request);
+    }
+
+    public void RequestPotdAd(){
+        #if UNITY_ANDROID
+            string adUnitId = "ca-app-pub-3301322474937909/3389264645";
+        #elif UNITY_IOS
+            string adUnitId = "ca-app-pub-3301322474937909/3389264645";
+        #else
+            string adUnitId = "unexpected_platform";
+        #endif
+
+        this.potdVideo = new RewardedAd(adUnitId);
+        // Create an empty ad request.
+        AdRequest request = new AdRequest.Builder().AddTestDevice("7B4A528D487015EA780FDA9E0F1541EB").Build();
+        //AddTestDevice("7B4A528D487015EA780FDA9E0F1541EB").
+        // Load the rewarded video ad with the request.
+
+        this.potdVideo.OnUserEarnedReward += HandleOnRewardAdClosed;
+
+        this.potdVideo.OnAdClosed += PotdClosedEarly;
+
+        this.potdVideo.LoadAd(request);
+        
+    }
+
+    private void HintClosedEarly(object sender, EventArgs args){
+        RequestHintAd();
+    }
+
+    private void PotdClosedEarly(object sender, EventArgs args){
+        RequestPotdAd();
     }
 
     private void RequestInterstitial()
@@ -79,7 +134,7 @@ public class GoogleAds : MonoBehaviour
         // Initialize an InterstitialAd.
         this.interstitial = new InterstitialAd(adUnitId);
         // Create an empty ad request.
-        AdRequest request = new AdRequest.Builder().Build();
+        AdRequest request = new AdRequest.Builder().AddTestDevice("7B4A528D487015EA780FDA9E0F1541EB").Build();
         //.AddTestDevice("7B4A528D487015EA780FDA9E0F1541EB").
         // Load the interstitial with the request.
         this.interstitial.LoadAd(request);
@@ -118,73 +173,59 @@ public class GoogleAds : MonoBehaviour
     	return false;
     }	
 
-    private void RequestFirstPotdAd(){
-        #if UNITY_ANDROID
-            string adUnitId = "ca-app-pub-3301322474937909/3389264645";
-        #elif UNITY_IOS
-            string adUnitId = "ca-app-pub-3301322474937909/3389264645";
-        #else
-            string adUnitId = "unexpected_platform";
-        #endif
+    // private void RequestFirstPotdAd(){
+    //     #if UNITY_ANDROID
+    //         string adUnitId = "ca-app-pub-3301322474937909/3389264645";
+    //     #elif UNITY_IOS
+    //         string adUnitId = "ca-app-pub-3301322474937909/3389264645";
+    //     #else
+    //         string adUnitId = "unexpected_platform";
+    //     #endif
 
-        // Create an empty ad request.
-        AdRequest request = new AdRequest.Builder().Build();
-        // Load the rewarded video ad with the request.
-        this.potdVideo.LoadAd(request, adUnitId);
+    //     // Create an empty ad request.
+    //     AdRequest request = new AdRequest.Builder().Build();
+    //     // Load the rewarded video ad with the request.
+    //     this.potdVideo.LoadAd(request, adUnitId);
         
-        this.potdVideo.OnAdRewarded += HandleOnPotdAdClosed;        
-    }
+    //     this.potdVideo.OnAdRewarded += HandleOnPotdAdClosed;        
+    // }
 
-    public void RequestPotdAd(){
-        #if UNITY_ANDROID
-            string adUnitId = "ca-app-pub-3301322474937909/3389264645";
-        #elif UNITY_IOS
-            string adUnitId = "ca-app-pub-3301322474937909/3389264645";
-        #else
-            string adUnitId = "unexpected_platform";
-        #endif
 
-        // Create an empty ad request.
-        AdRequest request = new AdRequest.Builder().Build();
-        // Load the rewarded video ad with the request.
-        this.potdVideo.LoadAd(request, adUnitId);
+
+    // public void RequestFirstRewardBasedVideo(){
+    //     #if UNITY_ANDROID
+    //         string adUnitId = "ca-app-pub-3301322474937909/3389088666";
+    //     #elif UNITY_IOS
+    //         string adUnitId = "ca-app-pub-3301322474937909/3389088666";
+    //     #else
+    //         string adUnitId = "unexpected_platform";
+    //     #endif
+
+    //     // Create an empty ad request.
+    //     AdRequest request = new AdRequest.Builder().Build();
+    //     // Load the rewarded video ad with the request.
+    //     this.rewardVideo.LoadAd(request, adUnitId);
         
-    }
-
-    public void RequestFirstRewardBasedVideo(){
-        #if UNITY_ANDROID
-            string adUnitId = "ca-app-pub-3301322474937909/3389088666";
-        #elif UNITY_IOS
-            string adUnitId = "ca-app-pub-3301322474937909/3389088666";
-        #else
-            string adUnitId = "unexpected_platform";
-        #endif
-
-        // Create an empty ad request.
-        AdRequest request = new AdRequest.Builder().Build();
-        // Load the rewarded video ad with the request.
-        this.rewardVideo.LoadAd(request, adUnitId);
-        
-        this.rewardVideo.OnAdRewarded += HandleOnRewardAdClosed;
-    }
+    //     this.rewardVideo.OnAdRewarded += HandleOnRewardAdClosed;
+    // }
 
 
 
-    public void RequestRewardBasedVideo(){
-        #if UNITY_ANDROID
-            string adUnitId = "ca-app-pub-3301322474937909/3389088666";
-        #elif UNITY_IOS
-            string adUnitId = "ca-app-pub-3301322474937909/3389088666";
-        #else
-            string adUnitId = "unexpected_platform";
-        #endif
+    // public void RequestRewardBasedVideo(){
+    //     #if UNITY_ANDROID
+    //         string adUnitId = "ca-app-pub-3301322474937909/3389088666";
+    //     #elif UNITY_IOS
+    //         string adUnitId = "ca-app-pub-3301322474937909/3389088666";
+    //     #else
+    //         string adUnitId = "unexpected_platform";
+    //     #endif
 
-        // Create an empty ad request.
-        AdRequest request = new AdRequest.Builder().Build();
-        //.AddTestDevice("7B4A528D487015EA780FDA9E0F1541EB")
-        // Load the rewarded video ad with the request.
-        this.rewardVideo.LoadAd(request, adUnitId);
-    }
+    //     // Create an empty ad request.
+    //     AdRequest request = new AdRequest.Builder().Build();
+    //     //.AddTestDevice("7B4A528D487015EA780FDA9E0F1541EB")
+    //     // Load the rewarded video ad with the request.
+    //     this.rewardVideo.LoadAd(request, adUnitId);
+    // }
 
     private void HandleOnRewardAdClosed(object sender, EventArgs args){
         
@@ -225,12 +266,14 @@ public class GoogleAds : MonoBehaviour
     	isPotd = true;
         potdNum = LevelMenu.levelToUnlock;
         #if UNITY_ANDROID
-        if (rewardVideo.IsLoaded()) {
-            rewardVideo.Show();
+        if (potdVideo.IsLoaded()) {
+            potdVideo.Show();
         }
         else{
             //TryAgainScreen();
-            RequestRewardBasedVideo();
+            RequestPotdAd();
+            Swiping.mydirection = "Null";
+            LevelMenu.UnlockPotdLevel(potdNum);
         }
         #endif
 
@@ -245,22 +288,33 @@ public class GoogleAds : MonoBehaviour
     public void UserOptToWatchAd()
     {
     	isPotd = false;
+
         if (rewardVideo.IsLoaded()) {
             rewardVideo.Show();
         }
         else{
-            TryAgainScreen();
-            RequestRewardBasedVideo();
+
+            PieceHolders.Instance.RewardHint();
+            //TryAgainScreen();
+            RequestHintAd(); 
+
+
         }
+
 
             //PieceHolders.Instance.RewardHint();
     }
 
     private void TryAgainScreen(){
-        Debug.Log("Try in a few seconds");
-        GameObject.Find("TryAgainScreen").transform.GetChild(0).gameObject.SetActive(true);
+        if (!Social.localUser.authenticated){
+            GameObject.Find("TryAgainScreen").transform.GetChild(1).gameObject.SetActive(true);
+        
+        }
+        else{
+            GameObject.Find("TryAgainScreen").transform.GetChild(0).gameObject.SetActive(true);
+        
+        }
         //Resources.FindObjectsOfTypeAll("TypeAgainScreen").gameObject.SetActive(true);
 
     }
-
 }

@@ -69,6 +69,10 @@ public class PotdUnlocker : MonoBehaviour
 
     }
 
+    public void UnlockCurrent(){
+        GoogleAds.Instance.UserOptToOpenPotd();
+    }
+
     public void RemoveOneKey(){
     	if(keysAvailable!=0){
 	    	keysAvailable --;

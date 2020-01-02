@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -194,7 +194,7 @@ public class LevelMenu : MonoBehaviour {
 		//btn.onClick.AddListener(delegate{sl.LoadLevel(num);});
 		curbutton.GetComponent<LevelButton>().level = num;
 		curbutton.GetComponent<LevelButton>().type = "Adventure";
-		int world = Mathf.FloorToInt((num-1)/40)  + 1;
+		int world = Mathf.FloorToInt((num-1)/40)  + 1;                                                                                                                                           
 		int levelinworld = num - ((world-1)*40);
 		curbutton.transform.GetChild(5).GetComponent<Image>().sprite = snowSprites[world-1];
 		//txt.text = "World " + world.ToString() + "-" + levelinworld.ToString();		

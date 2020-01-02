@@ -207,64 +207,6 @@ public class LevelBuilder : MonoBehaviour {
 		}
 	}
 
-	/*public void drawAdventure(int levelnumber){
-		LevelManager.piecetiles = new List<Transform>();
-		LevelManager.myhints = new List<Vector2>();
-		LevelManager.hints = new List<Hint>();
-		LevelManager.hintnum = 0;
-		PieceHolders.placedpieces = new List<Dragger>();
-		//PopulationManager.readytobrain = false;
-		string leveltext = ("Level" + levelnumber.ToString() + ".txt");
-		string levelname = ("Level" + levelnumber.ToString ());
-//		Debug.Log("Bouttodraw" + levelnumber);
-		//StartCoroutine(checkAndroid (leveltext));
-		string filePath = System.IO.Path.Combine (Application.streamingAssetsPath, leveltext);
-		Debug.Log(filePath);
-		string[][] jagged = readFile (filePath);
-		//mysnowh;
-		//check dimension.
-
-		tiles = new Tile [totaldimension, totaldimension];
-		if(!iscreated){
-			CreateBase();
-
-		}
-		CreateOuterBase();
-		PlaceBase();
-		if(levelnumber < 0){
-			Debug.Log(LevelManager.levelnum);
-			jagged = readRandomFile(filePath, LevelManager.levelnum);
-			//Debug.Log(randomer);
-		}
-		piecenums = 0;
-		Debug.Log(jagged.Length);	
-		// create planes based on matrix
-		for (int y = 0; y < totaldimension+1; y++) {
-//			Debug.Log(y);
-			for (int x = 0; x < jagged [y].Length; x++) {
-				double zed = (-y) + (-0.8);
-				//Debug.Log(x + " + " + y);ww
-//				Debug.Log(jagged[y][x]);
-				placeOnWorld(jagged,y,x);
-							
-			}
-		} 
-		GoalDirection((int)goaltransform.position.x,-(int)goaltransform.position.z);
-		Debug.Log(LevelManager.myhints.Count);
-		Debug.Log(LevelStorer.efficientturns);
-		if(LevelBuilder.totaldimension == 10){
-			CameraController.changePosition(1,1);
-			//LightController.setLight(1,1);
-
-		}
-		else if (LevelBuilder.totaldimension < 10){
-			CameraController.changePosition(0,0);
-			//LightController.setLight(0,0);
-
-		}
-		ProgressBar.InitializeProgressBar(LevelStorer.efficientturns);
-		//PopulationManager.readytobrain = true;		
-	}*/
 	public void drawNormal(int levelnumber){
 		Debug.Log(levelnumber);
 		TutorialHandler.Instance.TutorialCheck(levelnumber);
@@ -400,8 +342,13 @@ public class LevelBuilder : MonoBehaviour {
 		ProgressBar.InitializeProgressBar(LevelStorer.efficientturns);
 		DotHandler.InitializeDots(LevelStorer.efficientturns);
 		playertransform.gameObject.GetComponent<PlayerMovement>().canmove = true;
-		if (!GoogleAds.Instance.rewardVideo.IsLoaded())
-		GoogleAds.Instance.RequestRewardBasedVideo();
+		#if UNITY_ANDROID
+		if(!LevelManager.adFree){
+			if (!GoogleAds.Instance.rewardVideo.IsLoaded())
+			GoogleAds.Instance.RequestHintAd();
+		}
+		
+		#endif
 
 	}
 	string[][] readAdventure(int place){
@@ -593,83 +540,12 @@ public class LevelBuilder : MonoBehaviour {
 		levelnum = LevelManager.levelnum;
 	}
 	
-	//LevelManager.levelnum = 65;
-	//levelnum = LevelManager.levelnum;
-	//LevelStorer.Lookfor (LevelManager.levelnum);//assigns efficient turn according to dictionary.
-	//DrawIce ();
-	//DrawNextLevel (levelnum);
-	//if(!LevelManager.ispotd){
-		//load potd maps
-		//drawNormal(LevelManager.levelnum);
-		/*string leveltext = ("Level" + LevelManager.levelnum + ".txt");	
-		string filePath = System.IO.Path.Combine (Application.streamingAssetsPath, leveltext);	
-		string[][] jagged = readFile (filePath);
-		Debug.Log(totaldimension);
-		CreateOuterBase();
-		CreateBase();
-		PlaceBase();
-		TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
-		DrawNextLevel(LevelManager.levelnum);*/
-
-	//}
-	//else{
-	//	drawPotd(LevelManager.levelnum);
-	//}
-
-	/*if(LevelManager.levelnum < 0){
-		LevelManager.levelnum = Random.Range(0,102);
-		Debug.Log(LevelManager.levelnum);
-		DrawNextLevel(-11);
-	}
-	else{
-	DrawNextLevel(LevelManager.levelnum);
-	}*/
-	//TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
-	//GameObject.Find("CurrencyHolder").GetComponentInChildren<Text>().text = GameManager.mycurrency.ToString();
-	//Debug.Log(readPotd(2));
-	//Debug.Log("MEH");
-	//GameObject objectp = GameObject.Find("TheCanvas");
-	//IceTileHandler myhandler = objectp.GetComponent<IceTileHandler>();
-	//Debug.Log(myhandler);
-	//myhandler.GiveIce();
-
 
 	}
-	/*void Update(){
-		if (Input.GetKeyDown(KeyCode.J)){
-			//DrawNextLevel(LevelManager.levelnum);
-			Debug.Log(tileBank.Count);
-		}
-	}*/
 
-
-		/*if (LevelManager.readytodraw) {
-			
-			Debug.Log ("OW");
-			DestroyAllExceptCamera ();
-			DrawIce ();
-			DrawNextLevel (levelnum);
-			LevelManager.readytodraw = false;
-		}*/
-	//}
-	/*public void DrawIce(){
-		string filePath = System.IO.Path.Combine (Application.streamingAssetsPath, "8by8ice.txt");
-		//checkAndroid ("8by8ice.txt");
-		//Debug.Log (filePath);
-		//string leveltext = ("Assets/Resources/8by8ice.txt");
-		string[][] jagged = readFile (filePath);
-
-		// create planes based on matrix
-		for (int y = 0; y < jagged.Length; y++) {
-			for (int x = 0; x < jagged [0].Length; x++) {
-				switch (jagged [y] [x]) {
-				case sfloor_ice:
-					Instantiate (floor_ice, new Vector3 (x, -y, 0), Quaternion.identity);
-					break;
-				}
-			}
-		} 
-	}*/
+	public void RePotd(){
+		StartCoroutine(initPotd());
+	}
 	public void CreateBase(){
 		iscreated = true;
 		//int numCopies = totaldimension*totaldimension;
@@ -703,22 +579,24 @@ public class LevelBuilder : MonoBehaviour {
 		}
 	}
 	public void CreateOuterBase(){
-		/*howfar = 0;
-		for(int x=1; x<13; x++){
+		howfar = 5;
+		for(int x=1; x<8; x++){
 			howfar++;
-			for(int y = 0; y<25;y++){
-				InstantiateRandomEnvironment(new Vector2(-x,y));
-				InstantiateRandomEnvironment(new Vector2(x+(totaldimension-1),y));
+			for(int y = 0; y<9;y++){
+				InstantiateRandomEnvironment(new Vector2(-x,y-(totaldimension/2)));
+				InstantiateRandomEnvironment(new Vector2(x+(totaldimension-1),y-(totaldimension/2)));
+				//InstantiateRandomEnvironment(new Vector2(-x,-y));
 				if(y!=0){
-					InstantiateRandomEnvironment(new Vector2(-x,-y));
-					InstantiateRandomEnvironment(new Vector2(x+(totaldimension-1),-y));					
+					InstantiateRandomEnvironment(new Vector2(-x,-y-(totaldimension/2)));
+					InstantiateRandomEnvironment(new Vector2(x+(totaldimension-1),-y-(totaldimension/2)));					
 				}
 			}
 		}	
-		howfar=3;
+		howfar=7;
 		for(int x=0;x<totaldimension;x++){
-			for(int y=1; y<25; y++){
+			for(int y=1; y<9; y++){
 				InstantiateRandomEnvironment(new Vector2(x,y));
+				InstantiateRandomEnvironment(new Vector2(x,-y-totaldimension+1));
 				InstantiateSnow(new Vector2(x,-y-(totaldimension-1)));				
 			}
 		}
@@ -726,7 +604,7 @@ public class LevelBuilder : MonoBehaviour {
 	public void InstantiateRandomEnvironment(Vector2 xy){
 		Instantiate (environment_ice, new Vector3 (xy.x, 0, xy.y), Quaternion.identity);
 		int randomizer = Random.Range(0,10);
-		float snowrandom = Random.Range(0f,.1f);
+		float snowrandom = Random.Range(0f,.04f);
 		//if(randomizer == 2){
 		Instantiate (floor_snow, new Vector3 (xy.x, -snowrandom, xy.y), Quaternion.identity);
 
@@ -750,20 +628,21 @@ public class LevelBuilder : MonoBehaviour {
 			//Instantiate (floor_ice, new Vector3 (-xy.x, 0, -xy.y), Quaternion.identity);
 			//mynum = Random.Range(0,6);
 			//Instantiate (floor_rocks[mynum], new Vector3 (-xy.x, 0, -xy.y), Quaternion.identity);			
-		//}
-/*		if(xy.x<8){
-			Instantiate (floor_ice, new Vector3 (xy.x, 0, xy.y), Quaternion.identity);
-			mynum = Random.Range(0,6);
-			Instantiate (floor_rocks[mynum], new Vector3 (xy.x, 0, xy.y), Quaternion.identity);				
-		}
-		if(xy.y ==0){
-			Instantiate (floor_ice, new Vector3 (xy.y, 0, xy.x), Quaternion.identity);
-			mynum = Random.Range(0,6);
-			Instantiate (floor_rocks[mynum], new Vector3 (xy.y, 0, xy.x), Quaternion.identity);					
-		}*/
+		// //}
+		// if(xy.x<8){
+		// 	Instantiate (floor_ice, new Vector3 (xy.x, 0, xy.y), Quaternion.identity);
+		// 	mynum = Random.Range(0,6);
+		// 	Instantiate (floor_rocks[mynum], new Vector3 (xy.x, 0, xy.y), Quaternion.identity);				
+		// }
+		// if(xy.y ==0){
+		// 	Instantiate (floor_ice, new Vector3 (xy.y, 0, xy.x), Quaternion.identity);
+		// 	mynum = Random.Range(0,6);
+		// 	Instantiate (floor_rocks[mynum], new Vector3 (xy.y, 0, xy.x), Quaternion.identity);					
+		// }
+	}	
 		
 
-	}
+	
 	public void InstantiateSnow(Vector2 xy){
 		Instantiate (environment_ice, new Vector3 (xy.x, 0, xy.y), Quaternion.identity);
 		int randomizer = Random.Range(0,10);
@@ -1039,12 +918,34 @@ public class LevelBuilder : MonoBehaviour {
 				break;
 			case sfloor_wall:
 				//Transform instantiator = floor_wall;
+			Debug.Log("x is " + x + "and y is " + y);
 				int numerator = Random.Range(0,6);
 				mysnowh = 0.04f;//Random.Range(0.05f,0.10f);
 				int[] validchoices = {0,90,180,270};
 				int randomint = validchoices[Random.Range(0,validchoices.Length)];
 				Instantiate (floor_snow, new Vector3 (x, -mysnowh, -y),  Quaternion.Euler(new Vector3(0,randomint,0)));
+				if(Random.Range(0,10) > 4){
+					if(y>2){
+						if(tiles[x,y-1].type != "Wood"){
+						int mynum2 = Random.Range(0,3);
+						Instantiate (floor_trees[mynum2], new Vector3 (x, 0, -y), Quaternion.identity);							
+						}
+						else{
+							Instantiate (floor_rocks[numerator], new Vector3 (x, 0, -y), Quaternion.identity);
+						}						
+					}
+					else{
+
+						int mynum2 = Random.Range(0,3);
+						Instantiate (floor_trees[mynum2], new Vector3 (x, 0, -y), Quaternion.identity);	
+					}	
+
+					
+				}
+				else{
 				Instantiate (floor_rocks[numerator], new Vector3 (x, 0, -y), Quaternion.identity);
+
+				}
 				//Instantiate (floor_wall, new Vector3 (x, 0, -y), Quaternion.identity);
 				tiles[x,y].type = "Wall";
 				tiles[x,y].isTaken = true;

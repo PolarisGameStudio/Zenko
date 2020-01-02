@@ -110,7 +110,7 @@ public class LevelStorer : MonoBehaviour {
 		LevelStats lv38 = new LevelStats(38,5,true,0); 
 		LevelStats lv39 = new LevelStats(39,7,true,0); 
 		LevelStats lv40 = new LevelStats(40,5,true,0); 
-		LevelStats lv41 = new LevelStats(41,3,true,0); 
+		LevelStats lv41 = new LevelStats(41,3,false,0); 
 		LevelStats lv42 = new LevelStats(42,4,true,0); 
 		LevelStats lv43 = new LevelStats(43,5,true,0); 
 		LevelStats lv44 = new LevelStats(44,6,true,0); 
@@ -150,7 +150,7 @@ public class LevelStorer : MonoBehaviour {
 		LevelStats lv78 = new LevelStats(78,2,true,0); 
 		LevelStats lv79 = new LevelStats(79,7,true,0); 
 		LevelStats lv80 = new LevelStats(80,5,true,0); 
-		LevelStats lv81 = new LevelStats(81,6,true,0); 
+		LevelStats lv81 = new LevelStats(81,6,false,0); 
 		LevelStats lv82 = new LevelStats(82,5,true,0); 
 		LevelStats lv83 = new LevelStats(83,5,true,0); 
 		LevelStats lv84 = new LevelStats(84,6,true,0); 
@@ -190,7 +190,7 @@ public class LevelStorer : MonoBehaviour {
 		LevelStats lv118 = new LevelStats(118,5,true,0); 
 		LevelStats lv119 = new LevelStats(119,4,true,0); 
 		LevelStats lv120 = new LevelStats(120,5,true,0); 
-		LevelStats lv121 = new LevelStats(121,5,true,0); 
+		LevelStats lv121 = new LevelStats(121,5,false,0); 
 		LevelStats lv122 = new LevelStats(122,4,true,0); 
 		LevelStats lv123 = new LevelStats(123,6,true,0); 
 		LevelStats lv124 = new LevelStats(124,5,true,0); 

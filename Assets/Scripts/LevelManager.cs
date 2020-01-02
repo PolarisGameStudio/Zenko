@@ -149,7 +149,17 @@ public class LevelManager : MonoBehaviour {
 		levelselector.drawPotd(PlayerPrefs.GetInt("PoTD"));
 	}
 
+	public static void RePotd(){
+		myhints = new List<Vector2>();
+		hintsgiven = new List<int>();
+		Debug.Log("GONNAGETICE");
+		levelselector.DestroyAllExceptCamera ();
+		//PlayerPrefs.GetInt("PoTD");
 
+		DateChecker.Instance.currentIndex = PlayerPrefs.GetInt("PoTD");
+		levelselector.RePotd();
+		//levelselector.drawPotd(PlayerPrefs.GetInt("PoTD"));
+	}
 
 	public static void ResetLevel(){
 		levelselector.ResetPlayer();

@@ -53,6 +53,10 @@ public class SceneLoading : MonoBehaviour {
 			else
 			AssignPotdName();
 			RatingBehaviour.InitializeRating();
+
+			if(!GoogleAds.Instance.potdVideo.IsLoaded()){
+				GoogleAds.Instance.RequestPotdAd();
+			}
 //			Debug.Log(LevelManager.levelnum);
 		}
 		//#if Unity_Editor
@@ -216,6 +220,19 @@ public class SceneLoading : MonoBehaviour {
 		//MusicHandler.PlayInitialLoop();
 
 	}	
+
+	public void ReBringCurrentPotd(){
+		LevelBuilder.ChangeBackground("Color_A7A46709",new Color(0,0,0,0), .3f);
+
+		Swiping.mydirection = "Null";
+		//txt.text = "RANDOM POTD";
+		TurnCounter.turncount = 0;
+		LevelManager.ispotd = true;
+		LevelManager.RePotd();
+		TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
+		RatingBehaviour.RestartRating();
+		AssignPotdName();		
+	}
 	public void LoadPotdMap(int index){
 		Swiping.mydirection = "Null";
 		TurnCounter.turncount = 0;

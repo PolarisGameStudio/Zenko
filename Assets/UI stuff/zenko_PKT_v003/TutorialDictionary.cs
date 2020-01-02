@@ -11,8 +11,8 @@ public class TutorialDictionary : MonoBehaviour
 
 	string[] tut_button = new string[]{"Rearrange the creature pieces to help me get to the green and red flower!", "Once I move, you can't change the pieces!", 
 	"If you're still stuck try asking for a hint after restarting the level"};
-    string[] tut_1 = new string[]{"Hi!, My name is Zenko", "Help me get to that shiny flower by sliding your finger through the screen."};
-	string[] tut_2 = new string[]{"That moving piece over there is Pedro", "Drag him into the right tile so I can use him as a wall", "BEFORE moving me to the flower!"};
+    string[] tut_1 = new string[]{"Hi!, My name is Zenko", "Help me get to that flower tunnel by sliding your finger through the screen."};
+	string[] tut_2 = new string[]{"That moving piece over there is Pedro", "Drag him into the right tile so I can use him as a wall", "drag him before moving me to the flower tunnel!"};
 	//string[] tut_2 = new string[]{"This place is a mess! I can't get to my goal like this", "Touch the pieces and arrange them on the board", "BEFORE moving me to the flower!"};
 	string[] tut_3 = new string[]{"I wouldn't want to end in that hole over there!" };
 	string[] tut_6 = new string[]{"Make sure both Pedros are on the right place for me to get to the flower"};

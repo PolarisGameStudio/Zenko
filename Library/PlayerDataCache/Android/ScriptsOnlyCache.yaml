@@ -20,6 +20,7 @@ ScriptsOnlyBuild:
     - GoalBehaviour
     - GoogleAds
     - GoogleMobileAds.Common.MobileAdsEventExecutor
+    - HintMenuHandler
     - HueModifier
     - ImageColorModulator
     - ImageHolder
@@ -79,8 +80,6 @@ ScriptsOnlyBuild:
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
-    UnityEditor.UI.dll:
-    - UnityEditor.UI.ButtonEditor
     UnityEngine.UI.dll:
     - UnityEngine.EventSystems.EventSystem
     - UnityEngine.EventSystems.EventTrigger
@@ -232,19 +231,21 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 14230}
     - Class: 114
-      Script: {instanceID: 14578}
+      Script: {instanceID: 14348}
     - Class: 114
-      Script: {instanceID: 14670}
+      Script: {instanceID: 14580}
     - Class: 114
-      Script: {instanceID: 14676}
+      Script: {instanceID: 14672}
     - Class: 114
-      Script: {instanceID: 14742}
+      Script: {instanceID: 14678}
     - Class: 114
-      Script: {instanceID: 14782}
+      Script: {instanceID: 14744}
     - Class: 114
-      Script: {instanceID: 14836}
+      Script: {instanceID: 14784}
     - Class: 114
-      Script: {instanceID: 14850}
+      Script: {instanceID: 14838}
+    - Class: 114
+      Script: {instanceID: 14852}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -415,17 +416,17 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 14230}
     - Class: 114
-      Script: {instanceID: 14638}
+      Script: {instanceID: 14640}
     - Class: 114
-      Script: {instanceID: 14676}
+      Script: {instanceID: 14678}
     - Class: 114
-      Script: {instanceID: 14700}
+      Script: {instanceID: 14702}
     - Class: 114
-      Script: {instanceID: 14712}
+      Script: {instanceID: 14714}
     - Class: 114
-      Script: {instanceID: 14734}
+      Script: {instanceID: 14736}
     - Class: 114
-      Script: {instanceID: 14742}
+      Script: {instanceID: 14744}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -1623,6 +1624,12 @@ ScriptsOnlyBuild:
     className: MouseEventsGenerator
   - hash:
       serializedVersion: 2
+      Hash: 0a4512872e7966a8866956d30ad05a52
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: HintMenuHandler
+  - hash:
+      serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Assembly-CSharp.dll
     namespaceName: GooglePlayGames.OurUtils
@@ -1799,4 +1806,4 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/WorldSelect.unity
   - Assets/Level.unity
-  playerPath: /Users/bernardolimon/Desktop/ZenkoApk/Zenko_202.aab
+  playerPath: /Users/bernardolimon/Desktop/ZenkoApk/Zenko_209.aab

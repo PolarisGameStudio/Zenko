@@ -588,14 +588,22 @@ public class PieceHolders : MonoBehaviour {
 		Swiping.canswipe = false;
 		//RewardHint();
 		// if(HintAvailable()){
+
+		#if UNITY_EDITOR || UNITY_STANDALONE
+			RewardHint();
+			return;
+		#endif
+
 		if(LevelManager.adFree){
 			RewardHint();
 		}
 		
+
+
 		else{
 			GoogleAds.Instance.UserOptToWatchAd();	
 		}
-			
+		
 
 		// }
 		// else
@@ -645,6 +653,10 @@ public class PieceHolders : MonoBehaviour {
 			for(int i = 0; i <placedpieces.Count; i++){
 				placedpieces[i].gameObject.GetComponent<BoxCollider>().enabled = false;
 			}
+			if(HintMenuHandler.hintsAvailable>0)
+			HintMenuHandler.hintsAvailable--;
+			PlayerPrefs.SetInt("HintsAvailable", HintMenuHandler.hintsAvailable);
+			Debug.Log("now have hints : " + HintMenuHandler.hintsAvailable);
 			LevelBuilder.hintboard.SetActive(false);
 			yield return new WaitForSeconds(.2f);
 			Swiping.mydirection = "Null";
@@ -760,7 +772,11 @@ public class PieceHolders : MonoBehaviour {
 		for(int i = 0; i <placedpieces.Count; i++){
 			placedpieces[i].gameObject.GetComponent<BoxCollider>().enabled = false;
 		}
+		LevelBuilder.hintboard.GetComponent<HintMenuHandler>().Initialize();
+
 		LevelBuilder.hintboard.SetActive(true);
+
+
 
 		hintMenuOpen = true;
 

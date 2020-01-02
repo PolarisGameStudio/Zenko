@@ -229,7 +229,7 @@ public class Dragger : MonoBehaviour {
         	PieceHolders.placedpieces[i].gameObject.GetComponent<BoxCollider>().enabled = true;
         }
         #if UNITY_ANDROID
-        GoogleAds.Instance.RequestRewardBasedVideo();
+        GoogleAds.Instance.RequestHintAd();
         #endif
         
         yield break;
