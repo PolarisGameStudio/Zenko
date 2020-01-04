@@ -27,8 +27,8 @@ public class RatingPopUp : MonoBehaviour {
 		
 		RatingBehaviour.CalculateRating ();
 		myrating = RatingBehaviour.rating;
-		Debug.Log("My rating is" + myrating);
-		Debug.Log("level "+ LevelManager.levelnum);
+//		Debug.Log("My rating is" + myrating);
+//		Debug.Log("level "+ LevelManager.levelnum);
 		string prefname = "Level" + LevelManager.levelnum + "Rating";
 		int previousrating = PlayerPrefs.GetInt (prefname);
 		Debug.Log("previousrating" + previousrating);

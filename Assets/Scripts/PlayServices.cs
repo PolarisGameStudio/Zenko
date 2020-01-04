@@ -211,8 +211,8 @@ public class PlayServices : MonoBehaviour
         	}
         }
 
-        Debug.Log("GameData is " + stringToSave);
-        Debug.Log("GD SIZE IS " + stringToSave.Length);
+//        Debug.Log("GameData is " + stringToSave);
+ //       Debug.Log("GD SIZE IS " + stringToSave.Length);
 
 
 

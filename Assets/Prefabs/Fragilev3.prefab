@@ -114,7 +114,7 @@ GameObject:
   - component: {fileID: 7899814549595947168}
   m_Layer: 0
   m_Name: Occupid_Sign (2)
-  m_TagString: Untagged
+  m_TagString: Canvas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -226,6 +226,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: Fragile
+      objectReference: {fileID: 0}
+    - target: {fileID: 1730367930622138632, guid: b0aadbd6fd75c416fbadee57733bbd43,
+        type: 3}
+      propertyPath: m_TagString
+      value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 1121063750183690423, guid: b0aadbd6fd75c416fbadee57733bbd43,
+        type: 3}
+      propertyPath: m_TagString
+      value: Canvas
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: b0aadbd6fd75c416fbadee57733bbd43,
         type: 3}
@@ -387,6 +397,126 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 880b4e462879141a5bed8b89ea199199, type: 2}
+    - target: {fileID: -4363506257703862410, guid: b0aadbd6fd75c416fbadee57733bbd43,
+        type: 3}
+      propertyPath: m_TagString
+      value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: -6952225830731885295, guid: b0aadbd6fd75c416fbadee57733bbd43,
+        type: 3}
+      propertyPath: m_TagString
+      value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6345826596403088740, guid: b0aadbd6fd75c416fbadee57733bbd43,
+        type: 3}
+      propertyPath: m_TagString
+      value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 4223774472732915486, guid: b0aadbd6fd75c416fbadee57733bbd43,
+        type: 3}
+      propertyPath: m_TagString
+      value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6923896743287638404, guid: b0aadbd6fd75c416fbadee57733bbd43,
+        type: 3}
+      propertyPath: m_TagString
+      value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 9087354981320702738, guid: b0aadbd6fd75c416fbadee57733bbd43,
+        type: 3}
+      propertyPath: m_TagString
+      value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 9130520066583475089, guid: b0aadbd6fd75c416fbadee57733bbd43,
+        type: 3}
+      propertyPath: m_TagString
+      value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 8957869591026802334, guid: b0aadbd6fd75c416fbadee57733bbd43,
+        type: 3}
+      propertyPath: m_TagString
+      value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 5792652519945247921, guid: b0aadbd6fd75c416fbadee57733bbd43,
+        type: 3}
+      propertyPath: m_TagString
+      value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6770049236403343543, guid: b0aadbd6fd75c416fbadee57733bbd43,
+        type: 3}
+      propertyPath: m_TagString
+      value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 8564497204808740738, guid: b0aadbd6fd75c416fbadee57733bbd43,
+        type: 3}
+      propertyPath: m_TagString
+      value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: -61808837635045733, guid: b0aadbd6fd75c416fbadee57733bbd43,
+        type: 3}
+      propertyPath: m_TagString
+      value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: -5906245631088908729, guid: b0aadbd6fd75c416fbadee57733bbd43,
+        type: 3}
+      propertyPath: m_TagString
+      value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: -8096665924974884323, guid: b0aadbd6fd75c416fbadee57733bbd43,
+        type: 3}
+      propertyPath: m_TagString
+      value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: -5972735829869073321, guid: b0aadbd6fd75c416fbadee57733bbd43,
+        type: 3}
+      propertyPath: m_TagString
+      value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 1546837811146144192, guid: b0aadbd6fd75c416fbadee57733bbd43,
+        type: 3}
+      propertyPath: m_TagString
+      value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 3927989900614409980, guid: b0aadbd6fd75c416fbadee57733bbd43,
+        type: 3}
+      propertyPath: m_TagString
+      value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 9002772640885548869, guid: b0aadbd6fd75c416fbadee57733bbd43,
+        type: 3}
+      propertyPath: m_TagString
+      value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 9203099962705630953, guid: b0aadbd6fd75c416fbadee57733bbd43,
+        type: 3}
+      propertyPath: m_TagString
+      value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 9140724288218068641, guid: b0aadbd6fd75c416fbadee57733bbd43,
+        type: 3}
+      propertyPath: m_TagString
+      value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: -5939598937508120242, guid: b0aadbd6fd75c416fbadee57733bbd43,
+        type: 3}
+      propertyPath: m_TagString
+      value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 4219880593056349945, guid: b0aadbd6fd75c416fbadee57733bbd43,
+        type: 3}
+      propertyPath: m_TagString
+      value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 758829016449040636, guid: b0aadbd6fd75c416fbadee57733bbd43,
+        type: 3}
+      propertyPath: m_TagString
+      value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: -9143235085708338649, guid: b0aadbd6fd75c416fbadee57733bbd43,
+        type: 3}
+      propertyPath: m_TagString
+      value: Canvas
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0aadbd6fd75c416fbadee57733bbd43, type: 3}
 --- !u!1 &2197803262407682971 stripped

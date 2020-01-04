@@ -35,28 +35,36 @@ public class SceneLoading : MonoBehaviour {
 		}
 		else{//if loading level scenew
 //			Debug.Log(levelnum + "level");
+
 			PlayServices.instance.SaveLocal();
 			PlayServices.instance.SaveData();
+
+			
 			Debug.Log(LevelManager.levelnum);
 			if(LevelManager.levelnum == 0 || LevelManager.levelnum ==null){
 			LevelManager.levelnum = 103;				
 			}
 			Debug.Log("sceneloadingstuff");
+
 			//MusicHandler.PlayInitialLoop();
 			//LevelStorer.Lookfor(LevelManager.levelnum);
 			//txt2.text = ("Efficient turns is " + LevelStorer.efficientturns);
 			// int world = Mathf.FloorToInt(LevelManager.levelnum/50)  + 1;
 			// int levelinworld = LevelManager.levelnum - ((world-1)*50);
 			// txt.text = "World " + world.ToString() + "-" + levelinworld.ToString();
+
 			if(!LevelManager.ispotd)
 			AssignLevelName();
 			else
 			AssignPotdName();
 			RatingBehaviour.InitializeRating();
 
-			if(!GoogleAds.Instance.potdVideo.IsLoaded()){
-				GoogleAds.Instance.RequestPotdAd();
-			}
+			// if(!GoogleAds.Instance.potdVideo.IsLoaded()){
+			// 	GoogleAds.Instance.RequestPotdAd();
+			// }
+
+
+
 //			Debug.Log(LevelManager.levelnum);
 		}
 		//#if Unity_Editor
@@ -119,7 +127,7 @@ public class SceneLoading : MonoBehaviour {
 		Swiping.mydirection = "Null";
 		LevelBuilder.ChangeBackground("Color_A7A46709",new Color(0,0,0,0), .3f);
 		LevelManager.israndom = false;
-		Debug.Log("Next button");
+		//Debug.Log("Next button");
 
 		LevelManager.levelnum++;
 		AssignLevelName();

@@ -90,10 +90,12 @@ public class LevelManager : MonoBehaviour {
 
 	public static void NextLevel(int mynum){
 		myhints = new List<Vector2>();
-		Debug.Log("GONNAGETICE");
+		//Debug.Log("GONNAGETICE");
 		LevelStorer.Lookfor (mynum);
 //		TurnCounter.turncount = 0;
 		levelselector.DestroyAllExceptCamera ();
+		TileKeeper.Instance.Shuffle();
+		TileKeeper.Instance.Reset();
 		if(!LevelBuilder.iscreated){
 			levelselector.CreateBase ();
 		}
@@ -143,6 +145,8 @@ public class LevelManager : MonoBehaviour {
 		hintsgiven = new List<int>();
 		Debug.Log("GONNAGETICE");
 		levelselector.DestroyAllExceptCamera ();
+		TileKeeper.Instance.Shuffle();
+		TileKeeper.Instance.Reset();
 		//PlayerPrefs.GetInt("PoTD");
 		PlayerPrefs.SetInt("PoTD", PlayerPrefs.GetInt("PoTD") + 1);
 		DateChecker.Instance.currentIndex = PlayerPrefs.GetInt("PoTD");
@@ -155,7 +159,8 @@ public class LevelManager : MonoBehaviour {
 		Debug.Log("GONNAGETICE");
 		levelselector.DestroyAllExceptCamera ();
 		//PlayerPrefs.GetInt("PoTD");
-
+		TileKeeper.Instance.Shuffle();
+		TileKeeper.Instance.Reset();
 		DateChecker.Instance.currentIndex = PlayerPrefs.GetInt("PoTD");
 		levelselector.RePotd();
 		//levelselector.drawPotd(PlayerPrefs.GetInt("PoTD"));

@@ -44,17 +44,17 @@ public class SfxHandler : MonoBehaviour
     }
 
     public void PlayWallHit(int x, int y){
-        Debug.Log(x + " " + y);
+//        Debug.Log(x + " " + y);
         //source.PlayOneShot(pedro_Hit, 1f);
 
         string typeOfWall = FindType(x,y);
-        Debug.Log(typeOfWall + " IS THE HIT");
+//        Debug.Log(typeOfWall + " IS THE HIT");
         switch(typeOfWall){
             case "Wall":
                 source.PlayOneShot(pedro_Hit, .8f);
                 break;
             case null:
-                Debug.Log("NULL");
+//                Debug.Log("NULL");
                 source.PlayOneShot(wall_Hit[Random.Range(0,wall_Hit.Length)], .65f);
                 break;
             case "Right":

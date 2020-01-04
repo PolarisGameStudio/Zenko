@@ -48,7 +48,7 @@ public class MenuButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler{
 	public void toggleMenu(){
         Debug.Log("menu");
         if(Swiping.canswipe){
-            Debug.Log(levelText.GetComponent<RectTransform>());
+            //Debug.Log(levelText.GetComponent<RectTransform>());
             RectTransform myrt = levelText.GetComponent<RectTransform>();
             if(MenuButton.open){
                 if(!LevelManager.configging){

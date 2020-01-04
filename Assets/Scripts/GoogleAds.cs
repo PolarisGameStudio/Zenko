@@ -81,7 +81,7 @@ public class GoogleAds : MonoBehaviour
         // Load the rewarded video ad with the request.
         this.rewardVideo = new RewardedAd(adUnitId);
 
-        AdRequest request = new AdRequest.Builder().AddTestDevice("7B4A528D487015EA780FDA9E0F1541EB").Build();
+        AdRequest request = new AdRequest.Builder().Build();
         
         this.rewardVideo.OnUserEarnedReward += HandleOnRewardAdClosed;
 
@@ -101,7 +101,7 @@ public class GoogleAds : MonoBehaviour
 
         this.potdVideo = new RewardedAd(adUnitId);
         // Create an empty ad request.
-        AdRequest request = new AdRequest.Builder().AddTestDevice("7B4A528D487015EA780FDA9E0F1541EB").Build();
+        AdRequest request = new AdRequest.Builder().Build();
         //AddTestDevice("7B4A528D487015EA780FDA9E0F1541EB").
         // Load the rewarded video ad with the request.
 
@@ -134,7 +134,7 @@ public class GoogleAds : MonoBehaviour
         // Initialize an InterstitialAd.
         this.interstitial = new InterstitialAd(adUnitId);
         // Create an empty ad request.
-        AdRequest request = new AdRequest.Builder().AddTestDevice("7B4A528D487015EA780FDA9E0F1541EB").Build();
+        AdRequest request = new AdRequest.Builder().Build();
         //.AddTestDevice("7B4A528D487015EA780FDA9E0F1541EB").
         // Load the interstitial with the request.
         this.interstitial.LoadAd(request);

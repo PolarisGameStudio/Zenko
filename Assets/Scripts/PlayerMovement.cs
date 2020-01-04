@@ -48,7 +48,7 @@ public class PlayerMovement : MonoBehaviour {
 	GameObject wallToHit;
 	//public KeySimulator mykeysimulator;
 	// Use this for initialization
-	void Start () {
+	public void Start () {
 		//current tile works as a target to move to
 		LevelManager.playert = this.gameObject.transform;
 
@@ -164,7 +164,7 @@ public class PlayerMovement : MonoBehaviour {
 				isspeeding = false;
 				hasstopped = true;
 				if(hasmoved){
-				Debug.Log(tiletotest);
+//				Debug.Log(tiletotest);
 				SfxHandler.Instance.PlayWallHit((int)tiletotest.x, (int)-tiletotest.z);
 				SfxHandler.Instance.StopSlide();					
 				}
@@ -427,7 +427,7 @@ public class PlayerMovement : MonoBehaviour {
 			}
 			SfxHandler.Instance.PlaySlide();
 			TurnCounter.turncount++;
-			Debug.Log("TURNINGTURNINGTURNING AHOOOOOOOGA");
+//			Debug.Log("TURNINGTURNINGTURNING AHOOOOOOOGA");
 			TG.TakeTurn(TurnCounter.turncount);
 			DotHandler.TakeTurn(TurnCounter.turncount);
 		}
@@ -513,9 +513,9 @@ public class PlayerMovement : MonoBehaviour {
 			}
 			else if (tilescript.type == "Wall" || tilescript.type == "Start") {
 				Vector3 overlapV3 = tiletotest;	
-				Debug.Log(tiletotest);
+//				Debug.Log(tiletotest);
 				Collider[] colliders = Physics.OverlapSphere(overlapV3, .5f);
-				Debug.Log("LF PEDRO");
+//				Debug.Log("LF PEDRO");
 				foreach (Collider component in colliders) {
 					if (component.tag == "Pedro") {
 						Debug.Log("Pedro");
@@ -530,7 +530,7 @@ public class PlayerMovement : MonoBehaviour {
 				}
 
 				canmove = false;
-				Debug.Log("canmove is false now");
+//				Debug.Log("canmove is false now");
 				Count ();
 
 			} else if (tilescript.type == "Goal") {
@@ -556,7 +556,7 @@ public class PlayerMovement : MonoBehaviour {
 					currenttile = tiletotest;
 					canmove = false;
 					//Qeue up an action when reaching the tile
-					Debug.Log("aqui?");
+//					Debug.Log("aqui?");
 					nextaction = "Goal_Action";
 				}
 			} else if (tilescript.type == "Hole") {

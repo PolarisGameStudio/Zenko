@@ -14,7 +14,8 @@ public class LevelBuilder : MonoBehaviour {
 	//public Brain brain;
 
 	public GameObject[] tile;
-	 List<GameObject> tileBank = new List<GameObject>();
+
+	Transform[] tileBank = new Transform[100];
 	//public static Transform icetile;
 
 	public static int rows = 10;
@@ -70,6 +71,7 @@ public class LevelBuilder : MonoBehaviour {
 	public static GameObject settingsBoard;
 	public static LevelBuilder Instance;
 
+
 	//public static List<Transform> piecetiles = new List<Transform>();
 
 	/*void ShuffleList(){
@@ -94,7 +96,7 @@ public class LevelBuilder : MonoBehaviour {
 	}
 	IEnumerator checkAndroid(string file){
 		filePath = System.IO.Path.Combine(Application.streamingAssetsPath, file);
-		Debug.Log (filePath + "FILEPAPAPATH");
+		//Debug.Log (filePath + "FILEPAPAPATH");
 		result = " ";
 		if (file.Contains ("://")) {
 			UnityWebRequest www = UnityWebRequest.Get (file);
@@ -104,8 +106,8 @@ public class LevelBuilder : MonoBehaviour {
 
 		} else
 			result = System.IO.File.ReadAllText (filePath);
-		Debug.Log (result);
-		Debug.Log (filePath);
+		//Debug.Log (result);
+		//Debug.Log (filePath);
 	}
 	public static void ChangeBackground(string colorVariable, Color newcolor, float fadetime){
 		Instance.StartCoroutine(Instance.ChangeColor(colorVariable, newcolor, fadetime));
@@ -129,13 +131,13 @@ public class LevelBuilder : MonoBehaviour {
 		startersPotd = new List<int>();
 		string file = "FilteredMaps.txt";
 		filePath = System.IO.Path.Combine(Application.streamingAssetsPath, file);
-		Debug.Log (filePath + "FILEPAPAPATHASDASDASDASDASDASDASDASDASD");
+		//Debug.Log (filePath + "FILEPAPAPATHASDASDASDASDASDASDASDASDASD");
 		result = " ";
 		if (filePath.Contains ("://") || filePath.Contains(":///"))  {
 			UnityWebRequest www = UnityWebRequest.Get (filePath);
 			yield return www.SendWebRequest ();
 			result = www.downloadHandler.text;
-			Debug.Log (result);
+			//Debug.Log (result);
 
 		} 
 		else{
@@ -160,7 +162,7 @@ public class LevelBuilder : MonoBehaviour {
 		Debug.Log(startersPotd.Count + " number of maps filtered");
 		levelsPotd = (string[])lines.Clone();
 		if(LevelManager.ispotd){
-			Debug.Log(LevelManager.levelnum + " LEVELNUM " );
+			//Debug.Log(LevelManager.levelnum + " LEVELNUM " );
 			drawPotd(PlayerPrefs.GetInt("PoTD"));
 		}
 	}
@@ -168,13 +170,13 @@ public class LevelBuilder : MonoBehaviour {
 		startersAdventure = new List<int>();
 		string file = "AdventureLevels.txt";
 		filePath = System.IO.Path.Combine(Application.streamingAssetsPath, file);
-		Debug.Log (filePath + "FILEPAPAPATH");
+		//Debug.Log (filePath + "FILEPAPAPATH");
 		result = " ";
 		if (filePath.Contains ("://") || filePath.Contains(":///"))  {
 			UnityWebRequest www = UnityWebRequest.Get (filePath);
 			yield return www.SendWebRequest ();
 			result = www.downloadHandler.text;
-			Debug.Log (result);
+			//Debug.Log (result);
 
 		} 
 		else{
@@ -184,7 +186,7 @@ public class LevelBuilder : MonoBehaviour {
 		//string text = System.IO.File.ReadAllText(System.IO.Path.Combine (Application.streamingAssetsPath, "AdventureLevels.txt"));
 		string[] lines = Regex.Split(text, "\r?\n");
 
-		Debug.Log(lines[0]);
+		//Debug.Log(lines[0]);
 		bool nextismap;
 		nextismap = true;
 		for(int i =0; i<lines.Length;i++){
@@ -208,7 +210,13 @@ public class LevelBuilder : MonoBehaviour {
 	}
 
 	public void drawNormal(int levelnumber){
-		Debug.Log(levelnumber);
+		wallIndex = 0;
+		holeIndex = 0;
+		flowerIndex = 0;
+		snowIndex = 0;
+		wallOnlyIndex = 0;
+		fragileIndex = 0;
+		//Debug.Log(levelnumber);
 		TutorialHandler.Instance.TutorialCheck(levelnumber);
 		pieceHolder.reset();
 		LevelManager.piecetiles = new List<Transform>();
@@ -223,7 +231,7 @@ public class LevelBuilder : MonoBehaviour {
 //		Debug.Log("Bouttodraw" + levelnumber);
 		//StartCoroutine(checkAndroid (leveltext));
 		//string filePath = System.IO.Path.Combine (Application.streamingAssetsPath, leveltext);
-		Debug.Log(filePath);
+		//Debug.Log(filePath);
 		string[][] jagged = readAdventure (levelnumber);
 		//mysnowh;
 		//check dimension.
@@ -232,15 +240,15 @@ public class LevelBuilder : MonoBehaviour {
 		if(!iscreated){
 			CreateBase();
 		}
-		CreateOuterBase();
+		//CreateOuterBase();
 		PlaceBase();
 		if(levelnumber < 0){
-			Debug.Log(LevelManager.levelnum);
+			//Debug.Log(LevelManager.levelnum);
 			jagged = readRandomFile(filePath, LevelManager.levelnum);
 			//Debug.Log(randomer);
 		}
 		piecenums = 0;
-		Debug.Log(jagged.Length);	
+		//Debug.Log(jagged.Length);	
 		// create planes based on matrix
 		for (int y = 0; y < totaldimension; y++) {
 //			Debug.Log(y);
@@ -264,8 +272,8 @@ public class LevelBuilder : MonoBehaviour {
 							
 			}
 		} 
-		Debug.Log(LevelManager.myhints.Count);
-		Debug.Log(LevelStorer.efficientturns);
+		//Debug.Log(LevelManager.myhints.Count);
+		//Debug.Log(LevelStorer.efficientturns);
 		if(LevelBuilder.totaldimension == 10){
 			CameraController.changePosition(1,1);
 			CameraController.changeFovAndRot((int)32,52.9f);
@@ -286,6 +294,12 @@ public class LevelBuilder : MonoBehaviour {
 		//PopulationManager.readytobrain = true;
 	}
 	public void drawPotd(int num){
+		wallIndex = 0;
+		holeIndex = 0;
+		flowerIndex = 0;
+		snowIndex = 0;
+		wallOnlyIndex = 0;
+		fragileIndex = 0;
 		pieceHolder.reset();
 		string[][] jagged = readPotd(num);
 		Debug.Log("TOTAL DIMENSION IS" + totaldimension);
@@ -296,7 +310,7 @@ public class LevelBuilder : MonoBehaviour {
 			CreateBase ();
 		}
 		//CreateBase();
-		CreateOuterBase();
+		//CreateOuterBase();
 		PlaceBase();
 		LevelManager.piecetiles = new List<Transform>();
 		LevelManager.myhints = new List<Vector2>();
@@ -358,16 +372,16 @@ public class LevelBuilder : MonoBehaviour {
 		string firstline = levelsAdventure[startersAdventure[place]];
 		LevelSaver.currentmap.Add(firstline);
 
-		Debug.Log("Firstline" + firstline);
+		//Debug.Log("Firstline" + firstline);
 		//totaldimension = int.Parse(firstline.Substring(3,1));
 		bool donescanning = false;
 		int linenumber = 1;
-		Debug.Log(levelsAdventure[startersAdventure[place]+linenumber]);
+		//Debug.Log(levelsAdventure[startersAdventure[place]+linenumber]);
 		while(!donescanning){
 			if(levelsAdventure[startersAdventure[place]+linenumber] == ""){
 				donescanning = true;
 				totaldimension = linenumber-2;
-				Debug.Log(totaldimension);
+				//Debug.Log(totaldimension);
 			}	
 			linenumber++;
 		}
@@ -376,12 +390,12 @@ public class LevelBuilder : MonoBehaviour {
 
 		for (int i=0; i<totaldimension+1; i++){
 			lines[i] = levelsAdventure[startersAdventure[place]+1+i];
-			Debug.Log(lines[i]);
+			//Debug.Log(lines[i]);
 			LevelSaver.currentmap.Add(lines[i]);
 		}
 
 		LevelSaver.currentmap.Add("");
-		Debug.Log(lines[lines.Length-1]);
+		//Debug.Log(lines[lines.Length-1]);
 
 		string[][] levelBase = new string [totaldimension+1][];
 //		Debug.Log(lines);
@@ -421,7 +435,7 @@ public class LevelBuilder : MonoBehaviour {
 		string text = System.IO.File.ReadAllText (file);
 		string[] lines = Regex.Split (text, "\n");
 		int rows = lines.Length;
-		Debug.Log(lines.Length);
+		//Debug.Log(lines.Length);
 		string[][] levelBase = new string[rows][];
 		for (int i = 0; i < lines.Length; i++) {
 //			Debug.Log(lines[i]);
@@ -429,7 +443,7 @@ public class LevelBuilder : MonoBehaviour {
 			levelBase [i] = stringsOfLine;
 		}
 		totaldimension = rows-1;
-		Debug.Log(levelBase);
+		//Debug.Log(levelBase);
 		return levelBase;
 	}
 
@@ -438,10 +452,10 @@ public class LevelBuilder : MonoBehaviour {
 		string text = System.IO.File.ReadAllText (file);
 		string[] lines = Regex.Split (text, "\n");
 		int rows = lines.Length;
-		Debug.Log(rows);
+		//Debug.Log(rows);
 		string[][] levelBase = new string[rows][];
 		int initialpos = 1 + 11*pos;
-		Debug.Log(lines[0]);
+		//Debug.Log(lines[0]);
 		for (int i = 0; i < 9; i++) {
 //			Debug.Log(lines[i]);
 			int currentpos = i+initialpos;
@@ -486,7 +500,12 @@ public class LevelBuilder : MonoBehaviour {
 	public Transform s_floor_down;
 	public Transform s_floor_rock;
 
-
+	int wallIndex;
+	int holeIndex;
+	int flowerIndex;
+	int snowIndex;
+	int wallOnlyIndex;
+	int fragileIndex;
 	
 	public static int levelnum;
 	//public bool readytodraw;
@@ -519,52 +538,65 @@ public class LevelBuilder : MonoBehaviour {
 
 
 	void Start() {
-	Swiping.mydirection = "Null";
-	pieceHolder = pieceHolderHolder.GetComponent<PieceHolders>();
-	//LevelManager.newicarus = true;
-	LevelManager.levelselector = this;
-	StartCoroutine(initPotd());
-	StartCoroutine(initAdventure());
-	//readAdventure(3);
-	//GameObject.Find("Menu").GetComponent<MenuButton>().ConfigMenu.SetActive(false);
+		wallIndex = 0;
+		holeIndex = 0;
+		flowerIndex = 0;
+		snowIndex = 0;
+		wallOnlyIndex = 0;
+		fragileIndex = 0;
+		Swiping.mydirection = "Null";
+		pieceHolder = pieceHolderHolder.GetComponent<PieceHolders>();
+		//LevelManager.newicarus = true;
+		LevelManager.levelselector = this;
+		StartCoroutine(initPotd());
+		StartCoroutine(initAdventure());
+		//readAdventure(3);
+		//GameObject.Find("Menu").GetComponent<MenuButton>().ConfigMenu.SetActive(false);
 
-	//LevelManager.levelnum = 1;
-	 
-	//Debug.Log(LevelManager.levelnum + "isthenum");
-	Debug.Log(LevelManager.levelnum); //number that was fed in before loading level scene.
-	if (LevelManager.levelnum == null || LevelManager.levelnum == 0) {
-		LevelManager.levelnum = 1;
-		levelnum =1;
-	}
-	else{
-		levelnum = LevelManager.levelnum;
-	}
-	
+		//LevelManager.levelnum = 1;
+		 
+		//Debug.Log(LevelManager.levelnum + "isthenum");
+		//Debug.Log(LevelManager.levelnum); //number that was fed in before loading level scene.
+		if (LevelManager.levelnum == null || LevelManager.levelnum == 0) {
+			LevelManager.levelnum = 1;
+			levelnum =1;
+		}
+		else{
+			levelnum = LevelManager.levelnum;
+		}
+		
 
-	}
+		}
 
 	public void RePotd(){
 		StartCoroutine(initPotd());
 	}
+
+
 	public void CreateBase(){
 		iscreated = true;
 		//int numCopies = totaldimension*totaldimension;
-		int numCopies = 100;
-		for (int i =0; i<numCopies;i++){
-			for(int j=0; j < tile.Length; j++){
-				GameObject o = (GameObject) Instantiate(tile[j],new Vector3(-10,-10,0), tile[j].transform.rotation);
-				o.SetActive(false);
-				tileBank.Add(o);
-			}
-		}	
+		// int numCopies = 100;
+		// for (int i =0; i<numCopies;i++){
+		// 	for(int j=0; j < tile.Length; j++){
+		// 		GameObject o = (GameObject) Instantiate(tile[j],new Vector3(-10,-10,0), tile[j].transform.rotation);
+		// 		o.SetActive(false);
+		// 		tileBank.Add(o);
+		// 	}
+		// }	
+
+		tileBank = TileKeeper.Instance.iceBank;
+		
+		//for(int i=0; i<)
+
 	}
 	public void PlaceBase(){
 		for (int r= 0; r< totaldimension; r++){
 			for (int c = 0; c<totaldimension; c++){
 				Vector3 tilePos = new Vector3(c,0,r);
 				//Debug.Log("TILEBANK SIZE IS" + tileBank.Count);
-				for (int n =0; n< tileBank.Count; n++){
-					GameObject o = tileBank[n];
+				for (int n =0; n< tileBank.Length; n++){
+					GameObject o = tileBank[n].gameObject;
 					if(!o.activeSelf){
 //						Debug.Log(tilePos);
 						o.transform.position = new Vector3(tilePos.x,tilePos.y,-tilePos.z);
@@ -572,12 +604,13 @@ public class LevelBuilder : MonoBehaviour {
 						o.transform.GetChild(0).gameObject.SetActive(true);
 						tiles[c,r] = new Tile(o, "Ice", false	);
 						//Debug.Log(tiles[c,r].type);
-						n = tileBank.Count + 1;
+						n = tileBank.Length + 1;
 					}
 				}
 			}
 		}
 	}
+
 	public void CreateOuterBase(){
 		howfar = 5;
 		for(int x=1; x<8; x++){
@@ -606,7 +639,10 @@ public class LevelBuilder : MonoBehaviour {
 		int randomizer = Random.Range(0,10);
 		float snowrandom = Random.Range(0f,.04f);
 		//if(randomizer == 2){
-		Instantiate (floor_snow, new Vector3 (xy.x, -snowrandom, xy.y), Quaternion.identity);
+		TileKeeper.Instance.snowBank[snowIndex].position = new Vector3 (xy.x, -snowrandom, xy.y);
+		TileKeeper.Instance.snowBank[snowIndex].rotation = Quaternion.identity;
+		snowIndex++;
+		//Instantiate (floor_snow, new Vector3 (xy.x, -snowrandom, xy.y), Quaternion.identity);
 
 		//}
 		//else{
@@ -647,9 +683,12 @@ public class LevelBuilder : MonoBehaviour {
 		Instantiate (environment_ice, new Vector3 (xy.x, 0, xy.y), Quaternion.identity);
 		int randomizer = Random.Range(0,10);
 		float snowrandom = Random.Range(0f,.06f);
-		Debug.Log(snowrandom);	
+		//Debug.Log(snowrandom);	
 		//if(randomizer == 2){
-		Instantiate (floor_snow, new Vector3 (xy.x, -snowrandom, xy.y), Quaternion.identity);		
+		TileKeeper.Instance.snowBank[snowIndex].position = new Vector3 (xy.x, -snowrandom, xy.y);
+		TileKeeper.Instance.snowBank[snowIndex].rotation = Quaternion.identity;
+		snowIndex++;
+		//Instantiate (floor_snow, new Vector3 (xy.x, -snowrandom, xy.y), Quaternion.identity);		
 	}
 
 
@@ -661,14 +700,14 @@ public class LevelBuilder : MonoBehaviour {
 		}
 	}
 	public void StartDirection(int myx, int myy){
-		Debug.Log("Directing");
-		Debug.Log(myx + " " + myy);
-		Debug.Log(tiles.Length);
+		//Debug.Log("Directing");
+		//Debug.Log(myx + " " + myy);
+		//Debug.Log(tiles.Length);
 		Collider[] colliders = Physics.OverlapSphere(new Vector3(myx,0,-(myy+1)), .5f);
 		foreach (Collider component in colliders) {
 			if (component.tag == "Tile" || component.tag == "Fragile"){
 				if(tiles[myx,myy+1].type != "Wall" && tiles[myx,myy+1].type != "Goal"){
-					Debug.Log("Down");
+					//Debug.Log("Down");
 					playertransform.eulerAngles = new Vector3(0f,270f,0f);
 					starttransform.eulerAngles = new Vector3(0f,270f,0f);
 					playerInitialRotation = 270;
@@ -680,7 +719,7 @@ public class LevelBuilder : MonoBehaviour {
 		foreach (Collider component in colliders) {
 			if (component.tag == "Tile"|| component.tag == "Fragile"){
 				if(tiles[myx,myy-1].type != "Wall" && tiles[myx,myy-1].type != "Goal"){
-					Debug.Log("Up");
+					//Debug.Log("Up");
 					playertransform.eulerAngles = new Vector3(0f,90f,0f);
 					starttransform.eulerAngles = new Vector3(0f,90f,0f);
 					playerInitialRotation = 90;
@@ -690,10 +729,10 @@ public class LevelBuilder : MonoBehaviour {
 		}
 		colliders = Physics.OverlapSphere(new Vector3(myx+1,0,-myy), .5f);
 		foreach (Collider component in colliders) {
-			Debug.Log(component.tag);
+			//Debug.Log(component.tag);
 			if (component.tag == "Tile"|| component.tag == "Fragile"){
 				if(tiles[myx+1,myy].type != "Wall"  && tiles[myx+1,myy].type != "Goal"){
-					Debug.Log("Right");
+					//Debug.Log("Right");
 					playertransform.eulerAngles = new Vector3(0f,180f,0f);
 					starttransform.eulerAngles = new Vector3(0f,180f,0f);
 					playerInitialRotation = 180;
@@ -708,7 +747,7 @@ public class LevelBuilder : MonoBehaviour {
 					playertransform.eulerAngles = new Vector3(0f,0f,0f);
 					starttransform.eulerAngles = new Vector3(0f,0f,0f);
 					playerInitialRotation = 0;
-					Debug.Log("Left");
+					//Debug.Log("Left");
 					return;
 				}
 			}
@@ -719,8 +758,8 @@ public class LevelBuilder : MonoBehaviour {
 //		if(tiles[0,11].type == null){
 //			Debug.Log("RURU");
 //		}
-		Debug.Log("Directing");
-		Debug.Log(myx + " " + myy);
+		//Debug.Log("Directing");
+		//Debug.Log(myx + " " + myy);
 		Collider[] colliders = Physics.OverlapSphere(new Vector3(myx,0,-(myy+1)), .5f);
 			foreach (Collider component in colliders) {
 				if (component.tag == "Tile"|| component.tag == "Fragile"){
@@ -821,6 +860,11 @@ public class LevelBuilder : MonoBehaviour {
 
 	}
 	public void DrawNextLevel(int levelnumber){
+		wallIndex = 0;
+		holeIndex = 0;
+		flowerIndex = 0;
+		snowIndex = 0;
+		wallOnlyIndex = 0;
 		LevelManager.piecetiles = new List<Transform>();
 		LevelManager.myhints = new List<Vector2>();
 		LevelManager.hintnum = 0;
@@ -830,16 +874,16 @@ public class LevelBuilder : MonoBehaviour {
 //		Debug.Log("Bouttodraw" + levelnumber);
 		StartCoroutine(checkAndroid (leveltext));
 		string filePath = System.IO.Path.Combine (Application.streamingAssetsPath, leveltext);
-		Debug.Log(filePath);
+		//Debug.Log(filePath);
 		string[][] jagged = readFile (filePath);
 		//mysnowh;
 		if(levelnumber < 0){
-			Debug.Log(LevelManager.levelnum);
+			//Debug.Log(LevelManager.levelnum);
 			jagged = readRandomFile(filePath, LevelManager.levelnum);
 			//Debug.Log(randomer);
 		}
 		piecenums = 0;
-		Debug.Log(jagged.Length);	
+		//Debug.Log(jagged.Length);	
 		// create planes based on matrix
 		for (int y = 0; y < 9; y++) {
 //			Debug.Log(y);
@@ -864,14 +908,17 @@ public class LevelBuilder : MonoBehaviour {
 			switch (jagged [y] [x]) {
 			case sstart:
 
-				starttransform = Instantiate (floor_start, new Vector3 (x, 0, -y), Quaternion.identity);
+				//starttransform = Instantiate (floor_start, new Vector3 (x, 0, -y), Quaternion.identity);
+				starttransform = TileKeeper.Instance.zenkoStatue;
+				starttransform.position = new Vector3(x,0,-y);
+				//starttransform.gameObject.SetActive(true);
 				//GameObject p = player;
 				//Instantiate (player, new Vector3 (x, 0, -y), Quaternion.identity);
 				mysnowh = Random.Range(0f,0.08f);
 				//Instantiate (floor_snow, new Vector3 (x, -mysnowh, -y), Quaternion.identity);
 
 
-				Debug.Log(x + "+" + y);
+				//Debug.Log(x + "+" + y);
 				tiles[x,y].tileObj = starttransform.gameObject;
 				tiles[x,y].type = "Start";
 				tiles[x,y].isTaken = true;
@@ -880,32 +927,56 @@ public class LevelBuilder : MonoBehaviour {
 					//FaceDown();
 					//p.transform.rotation.y = 270;
 					playertransform = Instantiate (player, new Vector3 (x, 0, -y), Quaternion.Euler(new Vector3(0,270,0)));
-					Debug.Log("Down");
+					// playertransform = TileKeeper.Instance.zenko;
+					// playertransform.position = new Vector3(x,0,-y);
+					// playertransform.rotation = Quaternion.Euler(new Vector3(0,270,0));
+					// playertransform.GetComponent<PlayerMovement>().Start();
+
+					// playertransform.gameObject.SetActive(true);
+					//Debug.Log("Down");
 					break;
 				}
 				if(y == totaldimension-1 || y==totaldimension-2 || y==totaldimension-3){
 					//FaceUp();
 					//p.transform.rotation.y = 90;
 					playertransform = Instantiate (player, new Vector3 (x, 0, -y), Quaternion.Euler(new Vector3(0,90,0)));
-					Debug.Log("Up");
+					// playertransform = TileKeeper.Instance.zenko;
+					// playertransform.position = new Vector3(x,0,-y);
+					// playertransform.rotation = Quaternion.Euler(new Vector3(0,90,0));
+					// playertransform.GetComponent<PlayerMovement>().Start();
+					// playertransform.gameObject.SetActive(true);
+					//Debug.Log("Up");
 					break;
 				}
 				if(x == 0 || x==1 || x==2){
 					//FaceRight();
 					//p.transform.rotation.y = 180;
 					playertransform = Instantiate (player, new Vector3 (x, 0, -y), Quaternion.Euler(new Vector3(0,180,0)));
-					Debug.Log("Right");
+					//playertransform = TileKeeper.Instance.zenko;
+					// playertransform.position = new Vector3(x,0,-y);
+					// playertransform.rotation = Quaternion.Euler(new Vector3(0,180,0));
+					// playertransform.GetComponent<PlayerMovement>().Start();
+					// playertransform.gameObject.SetActive(true);
+					//Debug.Log("Right");
 					break;
 				}
 				if(x==totaldimension-1 || x==totaldimension-2 || x==totaldimension-3){
 					//FaceLeft();
 					playertransform = Instantiate (player, new Vector3 (x, 0, -y), Quaternion.identity);
-					Debug.Log("Left");
+					// playertransform = TileKeeper.Instance.zenko;
+					// playertransform.position = new Vector3(x,0,-y);
+					// playertransform.rotation = Quaternion.identity;
+					// playertransform.GetComponent<PlayerMovement>().Start();
+					// playertransform.gameObject.SetActive(true);
+					//Debug.Log("Left");
 					break;
 				}
 				break;
 			case sgoal:
-				goaltransform = Instantiate (floor_goal, new Vector3 (x, 0.162f, -y), Quaternion.identity);
+				//goaltransform = Instantiate (floor_goal, new Vector3 (x, 0.162f, -y), Quaternion.identity);
+				goaltransform = TileKeeper.Instance.goal;
+				goaltransform.position = new Vector3 (x,0.162f,-y);
+				goaltransform.gameObject.SetActive(true);
 				tiles[x,y].type = "Goal";
 				tiles[x,y].isTaken = true;
 				tiles[x,y].tileObj = goaltransform.gameObject;
@@ -918,34 +989,51 @@ public class LevelBuilder : MonoBehaviour {
 				break;
 			case sfloor_wall:
 				//Transform instantiator = floor_wall;
-			Debug.Log("x is " + x + "and y is " + y);
+			//Debug.Log("x is " + x + "and y is " + y);
 				int numerator = Random.Range(0,6);
 				mysnowh = 0.04f;//Random.Range(0.05f,0.10f);
 				int[] validchoices = {0,90,180,270};
 				int randomint = validchoices[Random.Range(0,validchoices.Length)];
-				Instantiate (floor_snow, new Vector3 (x, -mysnowh, -y),  Quaternion.Euler(new Vector3(0,randomint,0)));
-				if(Random.Range(0,10) > 4){
+
+				TileKeeper.Instance.snowBank[snowIndex].position = new Vector3 (x, -mysnowh, -y);
+				TileKeeper.Instance.snowBank[snowIndex].rotation = Quaternion.Euler(new Vector3(0,randomint,0));
+				snowIndex++;
+				//Instantiate (floor_snow, new Vector3 (x, -mysnowh, -y),  Quaternion.Euler(new Vector3(0,randomint,0)));
+
+				//if(Random.Range(0,10) > 4){
 					if(y>2){
 						if(tiles[x,y-1].type != "Wood"){
 						int mynum2 = Random.Range(0,3);
-						Instantiate (floor_trees[mynum2], new Vector3 (x, 0, -y), Quaternion.identity);							
+						TileKeeper.Instance.wallBank[wallIndex].position = new Vector3 (x, 0, -y);
+						TileKeeper.Instance.wallBank[wallIndex].rotation = Quaternion.Euler(new Vector3(0,randomint,0));
+						wallIndex++;
+						//Instantiate (floor_trees[mynum2], new Vector3 (x, 0, -y), Quaternion.identity);							
 						}
 						else{
-							Instantiate (floor_rocks[numerator], new Vector3 (x, 0, -y), Quaternion.identity);
+							TileKeeper.Instance.wallOnly[wallOnlyIndex].position = new Vector3 (x, 0, -y);
+							TileKeeper.Instance.wallOnly[wallOnlyIndex].rotation = Quaternion.Euler(new Vector3(0,randomint,0));
+							wallOnlyIndex++;
+							//Instantiate (floor_rocks[numerator], new Vector3 (x, 0, -y), Quaternion.identity);
 						}						
 					}
 					else{
 
-						int mynum2 = Random.Range(0,3);
-						Instantiate (floor_trees[mynum2], new Vector3 (x, 0, -y), Quaternion.identity);	
+						//int mynum2 = Random.Range(0,3);
+						TileKeeper.Instance.wallBank[wallIndex].position = new Vector3 (x, 0, -y);
+						TileKeeper.Instance.wallBank[wallIndex].rotation = Quaternion.Euler(new Vector3(0,randomint,0));
+						wallIndex++;
+						//Instantiate (floor_trees[mynum2], new Vector3 (x, 0, -y), Quaternion.identity);	
 					}	
 
 					
-				}
-				else{
-				Instantiate (floor_rocks[numerator], new Vector3 (x, 0, -y), Quaternion.identity);
+				//}
 
-				}
+				// else{
+				// Instantiate (floor_rocks[numerator], new Vector3 (x, 0, -y), Quaternion.identity);
+
+				// }
+
+
 				//Instantiate (floor_wall, new Vector3 (x, 0, -y), Quaternion.identity);
 				tiles[x,y].type = "Wall";
 				tiles[x,y].isTaken = true;
@@ -966,13 +1054,16 @@ public class LevelBuilder : MonoBehaviour {
 			case sfloor_hole:
 				Collider[] colliders = Physics.OverlapSphere(new Vector3(x,0,-y), .5f);
 					foreach (Collider component in colliders) {
-						Debug.Log(component);
+						//Debug.Log(component);
 						if (component.tag == "Tile") {	
 							//Debug.Log(component.gameObject.transform.position);	
 							component.gameObject.SetActive(false);
 
-							Debug.Log(component.gameObject.activeSelf);
-							Instantiate (floor_hole, new Vector3 (x, 0, -y), Quaternion.identity);
+							//Debug.Log(component.gameObject.activeSelf);
+							//Instantiate (floor_hole, new Vector3 (x, 0, -y), Quaternion.identity);
+							TileKeeper.Instance.holeBank[holeIndex].position = new Vector3(x,0,-y);
+							TileKeeper.Instance.holeBank[holeIndex].gameObject.SetActive(true);
+							holeIndex++;
 							tiles[x,y].type = "Hole";
 							tiles[x,y].isTaken = true;
 							//Destroy(component.gameObject);
@@ -998,7 +1089,10 @@ public class LevelBuilder : MonoBehaviour {
 						//Debug.Log(component.gameObject.transform.position);	
 						//component.gameObject.SetActive(false);
 		//								Debug.Log(component.gameObject.activeSelf);
-						Instantiate (floor_wood, new Vector3 (x, 0, -y), Quaternion.identity);							
+						//Instantiate (floor_wood, new Vector3 (x, 0, -y), Quaternion.identity);							
+						
+						TileKeeper.Instance.flowerBank[flowerIndex].position = new Vector3(x,0,-y);
+						flowerIndex++;
 						tiles[x,y].type = "Wood";
 						tiles[x,y].isTaken = true;
 						//Destroy(component.gameObject);
@@ -1043,7 +1137,12 @@ public class LevelBuilder : MonoBehaviour {
 						//Debug.Log(component.gameObject.transform.position);	
 						component.gameObject.SetActive(false);
 		//								Debug.Log(component.gameObject.activeSelf);
-						Instantiate (floor_fragile, new Vector3 (x, 0, -y), Quaternion.identity);							
+						//Instantiate (floor_fragile, new Vector3 (x, 0, -y), Quaternion.identity);	
+
+						TileKeeper.Instance.fragileBank[fragileIndex].position = new Vector3(x,0,-y);
+						TileKeeper.Instance.fragileBank[fragileIndex].gameObject.SetActive(true);
+						fragileIndex++;
+
 						tiles[x,y].type = "Fragile";
 						tiles[x,y].isTaken = true;
 						//Destroy(component.gameObject);
@@ -1172,7 +1271,7 @@ public class LevelBuilder : MonoBehaviour {
 		}
 		if(jagged[y][x].Length ==2){	
 			LevelStorer.efficientturns = int.Parse(jagged[y][x].Substring(1,1));
-			Debug.Log("Assigned turns as " + LevelStorer.efficientturns);
+			//Debug.Log("Assigned turns as " + LevelStorer.efficientturns);
 		}
 	}
 
@@ -1187,7 +1286,8 @@ public class LevelBuilder : MonoBehaviour {
 
 		foreach (GameObject component in gameobjects)
 		{
-			if (component.tag != "MainCamera" && component.tag != "Canvas" && component.tag != "Tile") {
+			if (component.tag != "MainCamera" && component.tag != "Canvas" && component.tag != "Tile" && 
+				component.tag != "Fragile") {
 				component.SetActive(false);
 				Destroy (component);
 				//Debug.Log ("destroyed" + component);
@@ -1197,6 +1297,7 @@ public class LevelBuilder : MonoBehaviour {
 			}
 
 		}
+
 	}
 	public void ResetPlayer(){
 
@@ -1217,8 +1318,8 @@ public class LevelBuilder : MonoBehaviour {
 			goaltransform.gameObject.GetComponentInChildren<Animator>().SetInteger("Phase",0);
 			GoalBehaviour.restartGoal();
 			GoalBehaviour.goaling = false;
-			Debug.Log(goaltransform);
-			Debug.Log(goaltransform.gameObject.GetComponentInChildren<Animator>().GetInteger("Phase"));
+			//Debug.Log(goaltransform);
+			//Debug.Log(goaltransform.gameObject.GetComponentInChildren<Animator>().GetInteger("Phase"));
 			foreach (Dragger piece in PieceHolders.placedpieces){
 				piece.gameObject.GetComponent<BoxCollider>().enabled = true;
 			}		
@@ -1236,6 +1337,7 @@ public class LevelBuilder : MonoBehaviour {
 		}
 			ptransform.gameObject.GetComponent<PlayerAnimation>().dissolveMat.SetFloat("Vector1_B5CA3B27", highValue);
 			Destroy(playertransform.gameObject);
+			//ptransform.gameObject.SetActive(false);
 			SpawnPlayer(startpos);
 			resetting = false;
 			GoalBehaviour.active = true;
@@ -1260,12 +1362,19 @@ public class LevelBuilder : MonoBehaviour {
 	}
 
 	public void SpawnPlayer(Vector2 thevector){
-		Debug.Log(starttransform);
-		Debug.Log(playertransform);
+		//Debug.Log(starttransform);
+		//Debug.Log(playertransform);
 		int x = (int)thevector.x;
 		int y = (int)thevector.y;
 		playertransform = Instantiate (player, new Vector3 (x, 0, -y), Quaternion.Euler(new Vector3(0,0,0)));
 		playertransform.eulerAngles = new Vector3(0f,playerInitialRotation,0f);
+		// playertransform.position = new Vector3(x,0,-y);
+		// playertransform.GetComponent<PlayerMovement>().currenttile = new Vector3(x,0,-y);
+		// playertransform.rotation = Quaternion.Euler(new Vector3(0,0,0));
+		// playertransform.eulerAngles = new Vector3(0f,playerInitialRotation,0f);
+		// playertransform.gameObject.SetActive(true);
+		// playertransform.gameObject.GetComponent<PlayerAnimation>().dissolveMat.SetFloat("Vector1_B5CA3B27", -1);
+
 
 		//StartDirection((int)starttransform.position.x,-(int)starttransform.position.z);
 	}
@@ -1304,7 +1413,7 @@ public class LevelBuilder : MonoBehaviour {
 		if(creaturetype.Length>5){
 			myseedtype = creaturetype.Substring(0,creaturetype.Length-4);
 			creaturetype = creaturetype.Substring(creaturetype.Length-4,4);	
-			Debug.Log("seedtype is " + myseedtype);
+			//Debug.Log("seedtype is " + myseedtype);
 			LevelManager.placedPieces[(int)tileplace.x,(int)tileplace.y] = myseedtype;
 
 		}
@@ -1385,7 +1494,7 @@ public class LevelBuilder : MonoBehaviour {
 				PieceHolders.placedpieces.Add(seedpiece.gameObject.GetComponent<Dragger>());	
 			currenttile.isTaken = true;
 			currenttile.type = "Seed";
-			Debug.Log("Seed type is " + myseedtype);
+			//Debug.Log("Seed type is " + myseedtype);
 			currenttile.seedType = myseedtype;
 				break;
 			case "Left":
@@ -1394,7 +1503,7 @@ public class LevelBuilder : MonoBehaviour {
 				PieceHolders.placedpieces.Add(seedpiece.gameObject.GetComponent<Dragger>());
 			currenttile.isTaken = true;
 			currenttile.type = "Seed";
-			Debug.Log("Seed type is " + myseedtype);
+			//Debug.Log("Seed type is " + myseedtype);
 			currenttile.seedType = myseedtype;					
 				break;
 			case "Up":
@@ -1403,7 +1512,7 @@ public class LevelBuilder : MonoBehaviour {
 				PieceHolders.placedpieces.Add(seedpiece.gameObject.GetComponent<Dragger>());
 			currenttile.isTaken = true;
 			currenttile.type = "Seed";
-			Debug.Log("Seed type is " + myseedtype);
+			//Debug.Log("Seed type is " + myseedtype);
 			currenttile.seedType = myseedtype;
 				break;
 			case "Right":
@@ -1412,7 +1521,7 @@ public class LevelBuilder : MonoBehaviour {
 				PieceHolders.placedpieces.Add(seedpiece.gameObject.GetComponent<Dragger>());
 			currenttile.isTaken = true;
 			currenttile.type = "Seed";
-			Debug.Log("Seed type is " + myseedtype);
+			//Debug.Log("Seed type is " + myseedtype);
 			currenttile.seedType = myseedtype;
 				break;
 			case "Down":
@@ -1421,7 +1530,7 @@ public class LevelBuilder : MonoBehaviour {
 				PieceHolders.placedpieces.Add(seedpiece.gameObject.GetComponent<Dragger>());
 			currenttile.isTaken = true;
 			currenttile.type = "Seed";
-			Debug.Log("Seed type is " + myseedtype);
+			//Debug.Log("Seed type is " + myseedtype);
 			currenttile.seedType = myseedtype;
 				break;
 			}

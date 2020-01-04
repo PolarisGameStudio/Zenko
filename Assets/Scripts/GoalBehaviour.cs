@@ -262,7 +262,7 @@ public class GoalBehaviour : MonoBehaviour {
 	}
 	IEnumerator PlayChompAfterDelay(){
 		if(!chomping){
-			Debug.Log("PLAYING CHOMP");
+//			Debug.Log("PLAYING CHOMP");
 
 			chomping = true;
 			yield return new WaitForSeconds(.66f);

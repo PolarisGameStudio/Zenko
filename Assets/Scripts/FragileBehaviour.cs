@@ -5,6 +5,7 @@ using UnityEngine;
 public class FragileBehaviour : MonoBehaviour {
 	public bool readytolava;
 	public GameObject player;
+	public float distance;
 	// Use this for initialization
 	void Start () {
 		readytolava = false;
@@ -17,7 +18,7 @@ public class FragileBehaviour : MonoBehaviour {
 //		Debug.Log(distance);
 		if(readytolava){
 
-			float distance = Vector3.Distance(player.transform.position , this.transform.parent.transform.position);
+			distance = Vector3.Distance(player.transform.position , this.transform.parent.transform.position);
 //			Debug.Log(distance);
 			if(distance<0.98){
 				GetComponent<Animator>().SetInteger("Phase",1);

@@ -44,7 +44,7 @@ public class WorldName : MonoBehaviour
     // Update is called once per frame
 
     public void AssignLevelName(int worldnum, int level){
-        Debug.Log("ASSIGNEDLEVELNAME");
+        //Debug.Log("ASSIGNEDLEVELNAME");
     	AssignAdventureTag(worldnum, level);
 
     }

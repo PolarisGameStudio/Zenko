@@ -369,6 +369,7 @@
      <Compile Include="Assets\Scripts\WinMessage.cs" />
      <Compile Include="Assets\Scripts\WorldName.cs" />
      <Compile Include="Assets\Scripts\XYPad.cs" />
+     <Compile Include="Assets\TileKeeper.cs" />
      <Compile Include="Assets\ToggleForEditor.cs" />
      <Compile Include="Assets\TurnOffIfAdFree.cs" />
      <Compile Include="Assets\UI stuff\zenko_PKT_v003\TutorialDictionary.cs" />

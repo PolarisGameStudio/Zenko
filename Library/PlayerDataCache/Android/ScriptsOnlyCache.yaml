@@ -55,6 +55,7 @@ ScriptsOnlyBuild:
     - StarModulator
     - Swiping
     - TextModulator
+    - TileKeeper
     - Timer
     - ToggleForEditor
     - TurnGraphics
@@ -130,6 +131,10 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
+      Script: {instanceID: 0}
     - Class: 89
       Script: {instanceID: 0}
     - Class: 90
@@ -145,6 +150,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10146}
     - Class: 114
+      Script: {instanceID: 10206}
+    - Class: 114
       Script: {instanceID: 10278}
     - Class: 114
       Script: {instanceID: 10294}
@@ -152,6 +159,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 10306}
     - Class: 114
       Script: {instanceID: 10380}
+    - Class: 114
+      Script: {instanceID: 10432}
     - Class: 114
       Script: {instanceID: 10524}
     - Class: 114
@@ -189,7 +198,15 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11982}
     - Class: 114
+      Script: {instanceID: 12070}
+    - Class: 114
       Script: {instanceID: 12098}
+    - Class: 114
+      Script: {instanceID: 12172}
+    - Class: 114
+      Script: {instanceID: 12206}
+    - Class: 114
+      Script: {instanceID: 12242}
     - Class: 114
       Script: {instanceID: 12278}
     - Class: 114
@@ -209,6 +226,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12712}
     - Class: 114
+      Script: {instanceID: 12788}
+    - Class: 114
       Script: {instanceID: 12790}
     - Class: 114
       Script: {instanceID: 12876}
@@ -219,7 +238,11 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13642}
     - Class: 114
+      Script: {instanceID: 13730}
+    - Class: 114
       Script: {instanceID: 13786}
+    - Class: 114
+      Script: {instanceID: 13856}
     - Class: 114
       Script: {instanceID: 13880}
     - Class: 114
@@ -239,6 +262,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 14678}
     - Class: 114
+      Script: {instanceID: 14736}
+    - Class: 114
       Script: {instanceID: 14744}
     - Class: 114
       Script: {instanceID: 14784}
@@ -246,6 +271,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 14838}
     - Class: 114
       Script: {instanceID: 14852}
+    - Class: 114
+      Script: {instanceID: 298874}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -1802,8 +1829,14 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp-firstpass.dll
     namespaceName: 
     className: IAPDemo
+  - hash:
+      serializedVersion: 2
+      Hash: a7eb31ffca0ce2af7147834f75bafe2d
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: TileKeeper
   platform: 13
   scenePathNames:
   - Assets/WorldSelect.unity
   - Assets/Level.unity
-  playerPath: /Users/bernardolimon/Desktop/ZenkoApk/Zenko_209.aab
+  playerPath: /Users/bernardolimon/Desktop/ZenkoApk/Zenko_212.aab
