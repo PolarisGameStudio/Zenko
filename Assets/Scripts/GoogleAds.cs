@@ -16,7 +16,7 @@ public class GoogleAds : MonoBehaviour
     public RewardedAd potdVideo;
 
     public int levelsInSession;
-    public int[] levelsToShowAd = new int[] {7,16,21,41,61,81,101,141,161,191};
+    public int[] levelsToShowAd;
     public int potdNum;
     public bool isPotd;
 
@@ -26,6 +26,7 @@ public class GoogleAds : MonoBehaviour
         // Debug.Log("INITIALIZING MOBIELADS");
         if(Instance == null){
             Instance = this;
+            levelsToShowAd = new int[] {7,16,31,61,81,101,141,161,191};
             DontDestroyOnLoad(this.gameObject);
             //return;
         }
@@ -67,7 +68,9 @@ public class GoogleAds : MonoBehaviour
         //RequestFirstPotdAd();
         #endif
     }
-
+    void Update(){
+    	//Debug.Log(levelsToShowAd[0] + " " + levelsToShowAd[1] + " " + levelsToShowAd[2] + " " + levelsToShowAd[3] + " " + levelsToShowAd[4]);
+    }
     public void RequestHintAd(){
         #if UNITY_ANDROID
             string adUnitId = "ca-app-pub-3301322474937909/3389088666";
@@ -153,12 +156,15 @@ public class GoogleAds : MonoBehaviour
         	}
         }
         #endif
+        if(IsInList(levelsInSession)){
+        	Debug.Log("ISINLIST");
+        }
 
     }
     private void HandleOnAdClosed(object sender, EventArgs args){
         this.interstitial.Destroy();
         RequestInterstitial();
-        if(levelsInSession == 6){
+        if(levelsInSession == 7 || levelsInSession == 6){
             //DISABLEADSMENU
             SceneLoading.Instance.buyMenu.SetActive(true);
             LevelManager.isdragging = true;

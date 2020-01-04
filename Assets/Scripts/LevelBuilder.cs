@@ -976,6 +976,7 @@ public class LevelBuilder : MonoBehaviour {
 				//goaltransform = Instantiate (floor_goal, new Vector3 (x, 0.162f, -y), Quaternion.identity);
 				goaltransform = TileKeeper.Instance.goal;
 				goaltransform.position = new Vector3 (x,0.162f,-y);
+				GoalBehaviour.goaling = false;
 				goaltransform.gameObject.SetActive(true);
 				tiles[x,y].type = "Goal";
 				tiles[x,y].isTaken = true;
