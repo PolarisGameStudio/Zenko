@@ -1282,21 +1282,27 @@ public class LevelBuilder : MonoBehaviour {
 	public void DestroyAllExceptCamera(){
 //		TurnBehaviour.turn = 0;
 		//tileBank.Clear();
-		GameObject[] gameobjects = GameObject.FindObjectsOfType <GameObject>();
+		// GameObject[] gameobjects = GameObject.FindObjectsOfType <GameObject>();
 
-		foreach (GameObject component in gameobjects)
-		{
-			if (component.tag != "MainCamera" && component.tag != "Canvas" && component.tag != "Tile" && 
-				component.tag != "Fragile") {
-				component.SetActive(false);
-				Destroy (component);
-				//Debug.Log ("destroyed" + component);
-			}
-			if(component.tag == "Tile"){
-				component.SetActive(false);
-			}
+		// foreach (GameObject component in gameobjects)
+		// {
+		// 	if (component.tag != "MainCamera" && component.tag != "Canvas" && component.tag != "Tile" && 
+		// 		component.tag != "Fragile") {
+		// 		component.SetActive(false);
+		// 		Destroy (component);
+		// 		//Debug.Log ("destroyed" + component);
+		// 	}
+		// 	if(component.tag == "Tile"){
+		// 		component.SetActive(false);
+		// 	}
 
-		}
+		// }
+		playertransform.gameObject.SetActive(false);
+		Destroy(playertransform.gameObject);
+		foreach (Dragger piece in PieceHolders.placedpieces){
+			Destroy(piece.gameObject);
+		}		
+
 
 	}
 	public void ResetPlayer(){

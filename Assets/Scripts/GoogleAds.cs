@@ -16,7 +16,7 @@ public class GoogleAds : MonoBehaviour
     public RewardedAd potdVideo;
 
     public int levelsInSession;
-    public int[] levelsToShowAd = new int[] {3,6,11,16,21,26,31,41,51,61,71,81,91,101,111,121,131,141,151,161,171,181,191};
+    public int[] levelsToShowAd = new int[] {7,16,21,41,61,81,101,141,161,191};
     public int potdNum;
     public bool isPotd;
 
