@@ -24,14 +24,14 @@ public class TileKeeper : MonoBehaviour
     	Instance = this;
     	Shuffle();
     	
-    	flowerBank = new Transform[transform.GetChild(6).childCount];
+    	// wallBank = new Transform[transform.GetChild(2).childCount];
 
-    	int i = 0;
-    	foreach(Transform child in transform.GetChild(6)){
-    		//child.GetChild(0).gameObject.tag = "Canvas";
-    		flowerBank[i] = child;
-    		i++;
-    	}
+    	// int i = 0;
+    	// foreach(Transform child in transform.GetChild(2)){
+    	// 	//child.GetChild(0).gameObject.tag = "Canvas";
+    	// 	wallBank[i] = child;
+    	// 	i++;
+    	// }
 
 
     }

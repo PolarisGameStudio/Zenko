@@ -71,7 +71,17 @@ public class LevelBuilder : MonoBehaviour {
 	public static GameObject settingsBoard;
 	public static LevelBuilder Instance;
 
+	int wallIndex;
+	int holeIndex;
+	int flowerIndex;
+	int snowIndex;
+	int wallOnlyIndex;
+	int fragileIndex;
+	int snowEnvIndex;
+	int iceEnvIndex;
+	int environmentIndex;
 
+	Vector3 positionOutsidePlayer;
 	//public static List<Transform> piecetiles = new List<Transform>();
 
 	/*void ShuffleList(){
@@ -216,6 +226,9 @@ public class LevelBuilder : MonoBehaviour {
 		snowIndex = 0;
 		wallOnlyIndex = 0;
 		fragileIndex = 0;
+		snowEnvIndex = 0;
+		iceEnvIndex = 0;
+		environmentIndex = 0;
 		//Debug.Log(levelnumber);
 		TutorialHandler.Instance.TutorialCheck(levelnumber);
 		pieceHolder.reset();
@@ -240,7 +253,6 @@ public class LevelBuilder : MonoBehaviour {
 		if(!iscreated){
 			CreateBase();
 		}
-		//CreateOuterBase();
 		PlaceBase();
 		if(levelnumber < 0){
 			//Debug.Log(LevelManager.levelnum);
@@ -260,8 +272,10 @@ public class LevelBuilder : MonoBehaviour {
 							
 			}
 		} 
+		
 		GoalDirection((int)goaltransform.position.x,-(int)goaltransform.position.z);
 		StartDirection((int)starttransform.position.x,-(int)starttransform.position.z);
+		CreateOuterBase();
 		for (int y = totaldimension; y < totaldimension+1; y++) {
 //			Debug.Log(y);
 			for (int x = 0; x < jagged [y].Length; x++) {
@@ -300,6 +314,9 @@ public class LevelBuilder : MonoBehaviour {
 		snowIndex = 0;
 		wallOnlyIndex = 0;
 		fragileIndex = 0;
+		snowEnvIndex = 0;
+		iceEnvIndex = 0;
+		environmentIndex = 0;
 		pieceHolder.reset();
 		string[][] jagged = readPotd(num);
 		Debug.Log("TOTAL DIMENSION IS" + totaldimension);
@@ -310,8 +327,8 @@ public class LevelBuilder : MonoBehaviour {
 			CreateBase ();
 		}
 		//CreateBase();
-		//CreateOuterBase();
-		PlaceBase();
+		
+		//PlaceBase();
 		LevelManager.piecetiles = new List<Transform>();
 		LevelManager.myhints = new List<Vector2>();
 		LevelManager.hintnum = 0;
@@ -329,18 +346,20 @@ public class LevelBuilder : MonoBehaviour {
 							
 			}
 		} 
+
 		GoalDirection((int)goaltransform.position.x,-(int)goaltransform.position.z);
 		StartDirection((int)starttransform.position.x,-(int)starttransform.position.z);
-		for (int y = totaldimension; y < totaldimension+1; y++) {
-//			Debug.Log(y);
-			for (int x = 0; x < jagged [y].Length; x++) {
-				double zed = (-y) + (-0.8);
-				//Debug.Log(x + " + " + y);ww
-//				Debug.Log(jagged[y][x]);
-				placeOnWorld(jagged,y,x);
+		// for (int y = totaldimension; y < totaldimension+1; y++) {
+		// 	Debug.Log(y);
+		// 	for (int x = 0; x < jagged [y].Length; x++) {
+		// 		double zed = (-y) + (-0.8);
+		// 		//Debug.Log(x + " + " + y);ww
+		// 		Debug.Log(jagged[y][x]);
+		// 		placeOnWorld(jagged,y,x);
 							
-			}
-		} 
+		// 	}
+		// } 
+		CreateOuterBase();
 		if(LevelBuilder.totaldimension == 10){
 			CameraController.changePosition(1,1);
 			CameraController.changeFovAndRot((int)32,52.9f);
@@ -500,12 +519,6 @@ public class LevelBuilder : MonoBehaviour {
 	public Transform s_floor_down;
 	public Transform s_floor_rock;
 
-	int wallIndex;
-	int holeIndex;
-	int flowerIndex;
-	int snowIndex;
-	int wallOnlyIndex;
-	int fragileIndex;
 	
 	public static int levelnum;
 	//public bool readytodraw;
@@ -544,6 +557,9 @@ public class LevelBuilder : MonoBehaviour {
 		snowIndex = 0;
 		wallOnlyIndex = 0;
 		fragileIndex = 0;
+		snowEnvIndex = 0;
+		iceEnvIndex = 0;
+		environmentIndex = 0;
 		Swiping.mydirection = "Null";
 		pieceHolder = pieceHolderHolder.GetComponent<PieceHolders>();
 		//LevelManager.newicarus = true;
@@ -612,7 +628,7 @@ public class LevelBuilder : MonoBehaviour {
 	}
 
 	public void CreateOuterBase(){
-		howfar = 5;
+		howfar = 4;
 		for(int x=1; x<8; x++){
 			howfar++;
 			for(int y = 0; y<9;y++){
@@ -625,7 +641,7 @@ public class LevelBuilder : MonoBehaviour {
 				}
 			}
 		}	
-		howfar=7;
+		howfar=6;
 		for(int x=0;x<totaldimension;x++){
 			for(int y=1; y<9; y++){
 				InstantiateRandomEnvironment(new Vector2(x,y));
@@ -633,15 +649,23 @@ public class LevelBuilder : MonoBehaviour {
 				InstantiateSnow(new Vector2(x,-y-(totaldimension-1)));				
 			}
 		}
+		//BlockOutsidePlayer();
+	}
+	public void BlockOutsidePlayer(){
+
 	}
 	public void InstantiateRandomEnvironment(Vector2 xy){
-		Instantiate (environment_ice, new Vector3 (xy.x, 0, xy.y), Quaternion.identity);
+		//Instantiate (environment_ice, new Vector3 (xy.x, 0, xy.y), Quaternion.identity);
+		EnvironmentKeeper.Instance.iceBank[iceEnvIndex].position = new Vector3 (xy.x, 0, xy.y);
+		EnvironmentKeeper.Instance.iceBank[iceEnvIndex].rotation = Quaternion.identity;
+		iceEnvIndex++;
+
 		int randomizer = Random.Range(0,10);
 		float snowrandom = Random.Range(0f,.04f);
 		//if(randomizer == 2){
-		TileKeeper.Instance.snowBank[snowIndex].position = new Vector3 (xy.x, -snowrandom, xy.y);
-		TileKeeper.Instance.snowBank[snowIndex].rotation = Quaternion.identity;
-		snowIndex++;
+		EnvironmentKeeper.Instance.snowBank[snowEnvIndex].position = new Vector3 (xy.x, -snowrandom, xy.y);
+		EnvironmentKeeper.Instance.snowBank[snowEnvIndex].rotation = Quaternion.identity;
+		snowEnvIndex++;
 		//Instantiate (floor_snow, new Vector3 (xy.x, -snowrandom, xy.y), Quaternion.identity);
 
 		//}
@@ -649,16 +673,34 @@ public class LevelBuilder : MonoBehaviour {
 		//Instantiate (floor_snow, new Vector3 (xy.x, -snowrandom, xy.y), Quaternion.identity);
 
 		//}
+		//Debug.Log()
+		if(xy.x == positionOutsidePlayer.x && xy.y == positionOutsidePlayer.y){
+			Debug.Log(xy);
+			Debug.Log(positionOutsidePlayer);
+			Debug.Log("This is it at " + xy);
+			EnvironmentKeeper.Instance.environmentBank[environmentIndex].position = new Vector3 (xy.x, 0, xy.y);
+			EnvironmentKeeper.Instance.environmentBank[environmentIndex].rotation = Quaternion.identity;
+			environmentIndex++;	
+			return;
+		}
 
 		if(randomizer<1){
 		
-			int mynum = Random.Range(0,6);
-			Instantiate (floor_rocks[mynum], new Vector3 (xy.x, 0, xy.y), Quaternion.identity);			
+			//int mynum = Random.Range(0,6);
+			//Instantiate (floor_rocks[mynum], new Vector3 (xy.x, 0, xy.y), Quaternion.identity);	
+			EnvironmentKeeper.Instance.environmentBank[environmentIndex].position = new Vector3 (xy.x, 0, xy.y);
+			EnvironmentKeeper.Instance.environmentBank[environmentIndex].rotation = Quaternion.identity;
+			environmentIndex++;		
 		}
+		if (howfar>8)
+		howfar = 8;
 		if(randomizer>10-howfar){
 		
-			int mynum2 = Random.Range(0,4);
-			Instantiate (floor_trees[mynum2], new Vector3 (xy.x, 0, xy.y), Quaternion.identity);			
+			//int mynum2 = Random.Range(0,4);
+			//Instantiate (floor_trees[mynum2], new Vector3 (xy.x, 0, xy.y), Quaternion.identity);	
+			EnvironmentKeeper.Instance.environmentBank[environmentIndex].position = new Vector3 (xy.x, 0, xy.y);
+			EnvironmentKeeper.Instance.environmentBank[environmentIndex].rotation = Quaternion.identity;
+			environmentIndex++;			
 		}
 		//if(xy.y!= 0){
 			//Instantiate (floor_ice, new Vector3 (-xy.x, 0, -xy.y), Quaternion.identity);
@@ -680,14 +722,19 @@ public class LevelBuilder : MonoBehaviour {
 
 	
 	public void InstantiateSnow(Vector2 xy){
-		Instantiate (environment_ice, new Vector3 (xy.x, 0, xy.y), Quaternion.identity);
-		int randomizer = Random.Range(0,10);
+		//Instantiate (environment_ice, new Vector3 (xy.x, 0, xy.y), Quaternion.identity);
+		EnvironmentKeeper.Instance.iceBank[iceEnvIndex].position = new Vector3 (xy.x, 0, xy.y);
+		EnvironmentKeeper.Instance.iceBank[iceEnvIndex].rotation = Quaternion.identity;
+		iceEnvIndex++;
+
+		// int randomizer = Random.Range(0,10);
 		float snowrandom = Random.Range(0f,.06f);
 		//Debug.Log(snowrandom);	
 		//if(randomizer == 2){
-		TileKeeper.Instance.snowBank[snowIndex].position = new Vector3 (xy.x, -snowrandom, xy.y);
-		TileKeeper.Instance.snowBank[snowIndex].rotation = Quaternion.identity;
-		snowIndex++;
+
+		EnvironmentKeeper.Instance.snowBank[snowEnvIndex].position = new Vector3 (xy.x, -snowrandom, xy.y);
+		EnvironmentKeeper.Instance.snowBank[snowEnvIndex].rotation = Quaternion.identity;
+		snowEnvIndex++;
 		//Instantiate (floor_snow, new Vector3 (xy.x, -snowrandom, xy.y), Quaternion.identity);		
 	}
 
@@ -711,6 +758,9 @@ public class LevelBuilder : MonoBehaviour {
 					playertransform.eulerAngles = new Vector3(0f,270f,0f);
 					starttransform.eulerAngles = new Vector3(0f,270f,0f);
 					playerInitialRotation = 270;
+					Debug.Log("Looking Down");
+					positionOutsidePlayer = new Vector2(myx,-(myy-1));
+					//CheckAndPlaceEnvironment(myx,myy-1);
 					return;
 				}
 			}
@@ -723,6 +773,9 @@ public class LevelBuilder : MonoBehaviour {
 					playertransform.eulerAngles = new Vector3(0f,90f,0f);
 					starttransform.eulerAngles = new Vector3(0f,90f,0f);
 					playerInitialRotation = 90;
+					Debug.Log("Looking Up");
+					positionOutsidePlayer = new Vector2(myx,-(myy+1));
+					//CheckAndPlaceEnvironment(myx,myy+1);
 					return;				
 				}
 			}
@@ -736,6 +789,9 @@ public class LevelBuilder : MonoBehaviour {
 					playertransform.eulerAngles = new Vector3(0f,180f,0f);
 					starttransform.eulerAngles = new Vector3(0f,180f,0f);
 					playerInitialRotation = 180;
+					Debug.Log("Looking Right");
+					positionOutsidePlayer = new Vector2(myx-1,-myy);
+					//CheckAndPlaceEnvironment(myx-1,myy);
 					return;
 				}
 			}
@@ -747,11 +803,24 @@ public class LevelBuilder : MonoBehaviour {
 					playertransform.eulerAngles = new Vector3(0f,0f,0f);
 					starttransform.eulerAngles = new Vector3(0f,0f,0f);
 					playerInitialRotation = 0;
+					Debug.Log("Looking Left");
+					positionOutsidePlayer = new Vector2(myx+1,-myy);
+					//CheckAndPlaceEnvironment(myx+1,myy);
 					//Debug.Log("Left");
 					return;
 				}
 			}
 		}
+	}
+	public void CheckAndPlaceEnvironment(int x, int z){
+		Debug.Log(new Vector3(x,0,-z));
+		Collider[]	colliders = Physics.OverlapSphere(new Vector3(x,0,-z), .5f);
+		foreach (Collider component in colliders) {
+			if (component.tag == "Environment"){
+				Debug.Log("SOMETHING IN THERE ALREADY");
+			}
+		}
+
 	}
 	public void GoalDirection(int myx, int myy){
 		//Debug.Log(tiles[0,11].type);
@@ -865,6 +934,10 @@ public class LevelBuilder : MonoBehaviour {
 		flowerIndex = 0;
 		snowIndex = 0;
 		wallOnlyIndex = 0;
+		fragileIndex = 0;
+		snowEnvIndex = 0;
+		iceEnvIndex = 0;
+		environmentIndex = 0;
 		LevelManager.piecetiles = new List<Transform>();
 		LevelManager.myhints = new List<Vector2>();
 		LevelManager.hintnum = 0;
@@ -895,7 +968,9 @@ public class LevelBuilder : MonoBehaviour {
 							
 			}
 		} 
+		StartDirection((int)starttransform.position.x,-(int)starttransform.position.z);
 		GoalDirection((int)goaltransform.position.x,-(int)goaltransform.position.z);
+		CreateOuterBase();
 		Debug.Log(LevelManager.myhints.Count);
 		//PopulationManager.readytobrain = true;
 	}
@@ -1002,15 +1077,16 @@ public class LevelBuilder : MonoBehaviour {
 				//Instantiate (floor_snow, new Vector3 (x, -mysnowh, -y),  Quaternion.Euler(new Vector3(0,randomint,0)));
 
 				//if(Random.Range(0,10) > 4){
-					if(y>2){
+					if(y>1){
 						if(tiles[x,y-1].type != "Wood"){
-						int mynum2 = Random.Range(0,3);
+						//int mynum2 = Random.Range(0,3);
 						TileKeeper.Instance.wallBank[wallIndex].position = new Vector3 (x, 0, -y);
 						TileKeeper.Instance.wallBank[wallIndex].rotation = Quaternion.Euler(new Vector3(0,randomint,0));
 						wallIndex++;
 						//Instantiate (floor_trees[mynum2], new Vector3 (x, 0, -y), Quaternion.identity);							
 						}
 						else{
+							//Debug.Log("PLACING WALL ONLY IN " + new Vector3(x, 0 , -y));
 							TileKeeper.Instance.wallOnly[wallOnlyIndex].position = new Vector3 (x, 0, -y);
 							TileKeeper.Instance.wallOnly[wallOnlyIndex].rotation = Quaternion.Euler(new Vector3(0,randomint,0));
 							wallOnlyIndex++;
