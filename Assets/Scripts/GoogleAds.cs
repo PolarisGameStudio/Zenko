@@ -26,7 +26,7 @@ public class GoogleAds : MonoBehaviour
         // Debug.Log("INITIALIZING MOBIELADS");
         if(Instance == null){
             Instance = this;
-            levelsToShowAd = new int[] {7,16,31,61,81,101,141,161,191};
+            levelsToShowAd = new int[] {7,16,51,101,161,191};
             DontDestroyOnLoad(this.gameObject);
             //return;
         }
@@ -35,6 +35,9 @@ public class GoogleAds : MonoBehaviour
             Debug.Log("Destroyed LevelStorer");
             return;
         }
+
+        AddInitCounter();
+
         #if UNITY_ANDROID
             MobileAds.Initialize("ca-app-pub-3301322474937909~4906291296");
         // Debug.Log("INITIALIZED MOBILEADS");
@@ -55,6 +58,15 @@ public class GoogleAds : MonoBehaviour
         // #if UNITY_ANDROID
         // MobileAds.Initialize("ca-app-pub-3301322474937909~4906291296");
         // #endif
+    }
+    void AddInitCounter(){
+        if(!PlayerPrefs.HasKey("InitNum")){
+            PlayerPrefs.SetInt("InitNum", 0);
+        }
+        else{
+            PlayerPrefs.SetInt("InitNum", PlayerPrefs.GetInt("InitNum") + 1);
+        }
+        Debug.Log("COUNTER AT " + PlayerPrefs.GetInt("InitNum"));
     }
     void Start(){
         levelsInSession = 0;
@@ -158,6 +170,10 @@ public class GoogleAds : MonoBehaviour
         #endif
         if(IsInList(levelsInSession)){
         	Debug.Log("ISINLIST");
+        }
+        if(PlayerPrefs.GetInt("InitNum") == 5 || PlayerPrefs.GetInt("InitNum") == 12 || PlayerPrefs.GetInt("InitNum") == 20){
+            Application.OpenURL ("market://details?id=" + Application.identifier);
+            PlayerPrefs.SetInt("Initnum", PlayerPrefs.GetInt("Initnum") + 1);
         }
 
     }
