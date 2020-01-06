@@ -328,7 +328,7 @@ public class LevelBuilder : MonoBehaviour {
 		}
 		//CreateBase();
 		
-		//PlaceBase();
+		PlaceBase();
 		LevelManager.piecetiles = new List<Transform>();
 		LevelManager.myhints = new List<Vector2>();
 		LevelManager.hintnum = 0;
@@ -349,16 +349,16 @@ public class LevelBuilder : MonoBehaviour {
 
 		GoalDirection((int)goaltransform.position.x,-(int)goaltransform.position.z);
 		StartDirection((int)starttransform.position.x,-(int)starttransform.position.z);
-		// for (int y = totaldimension; y < totaldimension+1; y++) {
-		// 	Debug.Log(y);
-		// 	for (int x = 0; x < jagged [y].Length; x++) {
-		// 		double zed = (-y) + (-0.8);
-		// 		//Debug.Log(x + " + " + y);ww
-		// 		Debug.Log(jagged[y][x]);
-		// 		placeOnWorld(jagged,y,x);
+		for (int y = totaldimension; y < totaldimension+1; y++) {
+			Debug.Log(y);
+			for (int x = 0; x < jagged [y].Length; x++) {
+				double zed = (-y) + (-0.8);
+				//Debug.Log(x + " + " + y);ww
+				Debug.Log(jagged[y][x]);
+				placeOnWorld(jagged,y,x);
 							
-		// 	}
-		// } 
+			}
+		} 
 		CreateOuterBase();
 		if(LevelBuilder.totaldimension == 10){
 			CameraController.changePosition(1,1);
