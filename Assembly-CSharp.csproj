@@ -374,6 +374,7 @@
      <Compile Include="Assets\ToggleForEditor.cs" />
      <Compile Include="Assets\TurnOffIfAdFree.cs" />
      <Compile Include="Assets\UI stuff\zenko_PKT_v003\TutorialDictionary.cs" />
+     <Compile Include="Assets\UiOff.cs" />
      <None Include="Assets\StreamingAssets\Level-7.txt" />
      <None Include="Assets\StreamingAssets\Ch3_3piece.txt" />
      <None Include="Assets\StreamingAssets\Map.txt" />

@@ -79,7 +79,9 @@ public class LevelBuilder : MonoBehaviour {
 	int fragileIndex;
 	int snowEnvIndex;
 	int iceEnvIndex;
-	int environmentIndex;
+	int environmentRockIndex;
+	int environmentFlowerIndex;
+	int environmentTreeIndex;
 
 	Vector3 positionOutsidePlayer;
 	//public static List<Transform> piecetiles = new List<Transform>();
@@ -228,7 +230,9 @@ public class LevelBuilder : MonoBehaviour {
 		fragileIndex = 0;
 		snowEnvIndex = 0;
 		iceEnvIndex = 0;
-		environmentIndex = 0;
+		environmentRockIndex = 0;
+		environmentFlowerIndex = 0;
+		environmentTreeIndex = 0;
 		//Debug.Log(levelnumber);
 		TutorialHandler.Instance.TutorialCheck(levelnumber);
 		pieceHolder.reset();
@@ -316,7 +320,9 @@ public class LevelBuilder : MonoBehaviour {
 		fragileIndex = 0;
 		snowEnvIndex = 0;
 		iceEnvIndex = 0;
-		environmentIndex = 0;
+		environmentRockIndex = 0;
+		environmentFlowerIndex = 0;
+		environmentTreeIndex = 0;
 		pieceHolder.reset();
 		string[][] jagged = readPotd(num);
 		Debug.Log("TOTAL DIMENSION IS" + totaldimension);
@@ -559,7 +565,9 @@ public class LevelBuilder : MonoBehaviour {
 		fragileIndex = 0;
 		snowEnvIndex = 0;
 		iceEnvIndex = 0;
-		environmentIndex = 0;
+		environmentRockIndex = 0;
+		environmentFlowerIndex = 0;
+		environmentTreeIndex = 0;
 		Swiping.mydirection = "Null";
 		pieceHolder = pieceHolderHolder.GetComponent<PieceHolders>();
 		//LevelManager.newicarus = true;
@@ -658,6 +666,7 @@ public class LevelBuilder : MonoBehaviour {
 		//Instantiate (environment_ice, new Vector3 (xy.x, 0, xy.y), Quaternion.identity);
 		EnvironmentKeeper.Instance.iceBank[iceEnvIndex].position = new Vector3 (xy.x, 0, xy.y);
 		EnvironmentKeeper.Instance.iceBank[iceEnvIndex].rotation = Quaternion.identity;
+		EnvironmentKeeper.Instance.iceBank[iceEnvIndex].gameObject.SetActive(true);
 		iceEnvIndex++;
 
 		int randomizer = Random.Range(0,10);
@@ -665,6 +674,7 @@ public class LevelBuilder : MonoBehaviour {
 		//if(randomizer == 2){
 		EnvironmentKeeper.Instance.snowBank[snowEnvIndex].position = new Vector3 (xy.x, -snowrandom, xy.y);
 		EnvironmentKeeper.Instance.snowBank[snowEnvIndex].rotation = Quaternion.identity;
+		EnvironmentKeeper.Instance.snowBank[snowEnvIndex].gameObject.SetActive(true);
 		snowEnvIndex++;
 		//Instantiate (floor_snow, new Vector3 (xy.x, -snowrandom, xy.y), Quaternion.identity);
 
@@ -678,9 +688,18 @@ public class LevelBuilder : MonoBehaviour {
 			Debug.Log(xy);
 			Debug.Log(positionOutsidePlayer);
 			Debug.Log("This is it at " + xy);
-			EnvironmentKeeper.Instance.environmentBank[environmentIndex].position = new Vector3 (xy.x, 0, xy.y);
-			EnvironmentKeeper.Instance.environmentBank[environmentIndex].rotation = Quaternion.identity;
-			environmentIndex++;	
+			if (randomizer<4){
+			EnvironmentKeeper.Instance.treeBank[environmentTreeIndex].position = new Vector3 (xy.x, 0, xy.y);
+			EnvironmentKeeper.Instance.treeBank[environmentTreeIndex].rotation = Quaternion.identity;
+			EnvironmentKeeper.Instance.treeBank[environmentTreeIndex].gameObject.SetActive(true);
+			environmentTreeIndex++;				
+			}
+			else{
+				EnvironmentKeeper.Instance.rockBank[environmentRockIndex].position = new Vector3 (xy.x, 0, xy.y);
+				EnvironmentKeeper.Instance.rockBank[environmentRockIndex].rotation = Quaternion.identity;
+				EnvironmentKeeper.Instance.rockBank[environmentRockIndex].gameObject.SetActive(true);
+				environmentRockIndex++;	
+			}
 			return;
 		}
 
@@ -688,9 +707,10 @@ public class LevelBuilder : MonoBehaviour {
 		
 			//int mynum = Random.Range(0,6);
 			//Instantiate (floor_rocks[mynum], new Vector3 (xy.x, 0, xy.y), Quaternion.identity);	
-			EnvironmentKeeper.Instance.environmentBank[environmentIndex].position = new Vector3 (xy.x, 0, xy.y);
-			EnvironmentKeeper.Instance.environmentBank[environmentIndex].rotation = Quaternion.identity;
-			environmentIndex++;		
+			EnvironmentKeeper.Instance.rockBank[environmentRockIndex].position = new Vector3 (xy.x, 0, xy.y);
+			EnvironmentKeeper.Instance.rockBank[environmentRockIndex].rotation = Quaternion.identity;
+			EnvironmentKeeper.Instance.rockBank[environmentRockIndex].gameObject.SetActive(true);
+			environmentRockIndex++;		
 		}
 		if (howfar>8)
 		howfar = 8;
@@ -698,9 +718,20 @@ public class LevelBuilder : MonoBehaviour {
 		
 			//int mynum2 = Random.Range(0,4);
 			//Instantiate (floor_trees[mynum2], new Vector3 (xy.x, 0, xy.y), Quaternion.identity);	
-			EnvironmentKeeper.Instance.environmentBank[environmentIndex].position = new Vector3 (xy.x, 0, xy.y);
-			EnvironmentKeeper.Instance.environmentBank[environmentIndex].rotation = Quaternion.identity;
-			environmentIndex++;			
+			int newrandomizer = Random.Range(0,5);
+			if(newrandomizer <1){
+				EnvironmentKeeper.Instance.flowerBank[environmentFlowerIndex].position = new Vector3 (xy.x, 0, xy.y);
+				EnvironmentKeeper.Instance.flowerBank[environmentFlowerIndex].rotation = Quaternion.identity;
+				EnvironmentKeeper.Instance.flowerBank[environmentFlowerIndex].gameObject.SetActive(true);
+				environmentFlowerIndex++;
+			}
+			else{
+				EnvironmentKeeper.Instance.treeBank[environmentTreeIndex].position = new Vector3 (xy.x, 0, xy.y);
+				EnvironmentKeeper.Instance.treeBank[environmentTreeIndex].rotation = Quaternion.identity;
+				EnvironmentKeeper.Instance.treeBank[environmentTreeIndex].gameObject.SetActive(true);
+				environmentTreeIndex++;
+			}
+						
 		}
 		//if(xy.y!= 0){
 			//Instantiate (floor_ice, new Vector3 (-xy.x, 0, -xy.y), Quaternion.identity);
@@ -725,6 +756,7 @@ public class LevelBuilder : MonoBehaviour {
 		//Instantiate (environment_ice, new Vector3 (xy.x, 0, xy.y), Quaternion.identity);
 		EnvironmentKeeper.Instance.iceBank[iceEnvIndex].position = new Vector3 (xy.x, 0, xy.y);
 		EnvironmentKeeper.Instance.iceBank[iceEnvIndex].rotation = Quaternion.identity;
+		EnvironmentKeeper.Instance.iceBank[iceEnvIndex].gameObject.SetActive(true);
 		iceEnvIndex++;
 
 		// int randomizer = Random.Range(0,10);
@@ -734,6 +766,7 @@ public class LevelBuilder : MonoBehaviour {
 
 		EnvironmentKeeper.Instance.snowBank[snowEnvIndex].position = new Vector3 (xy.x, -snowrandom, xy.y);
 		EnvironmentKeeper.Instance.snowBank[snowEnvIndex].rotation = Quaternion.identity;
+		EnvironmentKeeper.Instance.snowBank[snowEnvIndex].gameObject.SetActive(true);
 		snowEnvIndex++;
 		//Instantiate (floor_snow, new Vector3 (xy.x, -snowrandom, xy.y), Quaternion.identity);		
 	}
@@ -937,7 +970,9 @@ public class LevelBuilder : MonoBehaviour {
 		fragileIndex = 0;
 		snowEnvIndex = 0;
 		iceEnvIndex = 0;
-		environmentIndex = 0;
+		environmentRockIndex = 0;
+		environmentFlowerIndex = 0;
+		environmentTreeIndex = 0;
 		LevelManager.piecetiles = new List<Transform>();
 		LevelManager.myhints = new List<Vector2>();
 		LevelManager.hintnum = 0;

@@ -139,8 +139,8 @@ public class Dragger : MonoBehaviour {
 			//Fix this to avoid untaking wrong tiles when clicking on the 3d object but the planepos somewhere else.
 			
 			//if(Mathf.RoundToInt(transform.position.x)<LevelBuilder.totaldimension && Mathf.RoundToInt(transform.position.x)>0 && -Mathf.RoundToInt(transform.position.z)<LevelBuilder.totaldimension && Mathf.RoundToInt(transform.position.z)<0){
-				Debug.Log(transform.position);
-				Debug.Log(positiontogo);
+//				Debug.Log(transform.position);
+//				Debug.Log(positiontogo);
 				if(positiontogo.x == 0 && positiontogo.y ==0 && positiontogo.z == 0){
 					positiontogo = transform.position;
 				}

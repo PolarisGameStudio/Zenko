@@ -157,6 +157,12 @@ public class GoogleAds : MonoBehaviour
     }
     public void ShowInterstitial(){
     	levelsInSession++;
+        if(PlayerPrefs.GetInt("InitNum") == 4 || PlayerPrefs.GetInt("InitNum") == 11 || PlayerPrefs.GetInt("InitNum") == 20 || PlayerPrefs.GetInt("InitNum") == 20){
+            //Debug Log, Do you wish to rate this app? Not now, Yes
+            PlayerPrefs.SetInt("Initnum", PlayerPrefs.GetInt("Initnum") + 1);
+            //Application.OpenURL ("market://details?id=" + Application.identifier);
+            
+        }
         #if UNITY_ANDROID
         if(LevelManager.adFree){
  
@@ -168,19 +174,16 @@ public class GoogleAds : MonoBehaviour
         	}
         }
         #endif
-        if(IsInList(levelsInSession)){
-        	Debug.Log("ISINLIST");
-        }
-        if(PlayerPrefs.GetInt("InitNum") == 5 || PlayerPrefs.GetInt("InitNum") == 12 || PlayerPrefs.GetInt("InitNum") == 20){
-            Application.OpenURL ("market://details?id=" + Application.identifier);
-            PlayerPrefs.SetInt("Initnum", PlayerPrefs.GetInt("Initnum") + 1);
-        }
+        // if(IsInList(levelsInSession)){
+        // 	Debug.Log("ISINLIST");
+        // }
+
 
     }
     private void HandleOnAdClosed(object sender, EventArgs args){
         this.interstitial.Destroy();
         RequestInterstitial();
-        if(levelsInSession == 7 || levelsInSession == 6){
+        if(levelsInSession == 16 || levelsInSession == 15){
             //DISABLEADSMENU
             SceneLoading.Instance.buyMenu.SetActive(true);
             LevelManager.isdragging = true;

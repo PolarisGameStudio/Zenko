@@ -859,7 +859,7 @@ public class PieceHolders : MonoBehaviour {
 			postype = placedpieces[position].myType;
 		}
 		for (int i = 0; i <LevelManager.hints.Count; i++){
-		Debug.Log(placedpieces[position].myType + "" + LevelManager.hints[i].type);
+//		Debug.Log(placedpieces[position].myType + "" + LevelManager.hints[i].type);
 
 			if(postype == LevelManager.hints[i].type && 
 				placedpieces[position].transform.position.x == LevelManager.hints[i].x &&
