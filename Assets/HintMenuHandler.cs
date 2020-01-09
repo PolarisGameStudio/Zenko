@@ -48,24 +48,24 @@ public class HintMenuHandler : MonoBehaviour
 		if(!PlayerPrefs.HasKey("HintsAvailable")){
         	Debug.Log("initing hints");
         	PlayerPrefs.SetInt("HintsAvailable", 3);
+            hintsAvailable = 3;
+            PlayerPrefs.SetString("LastHintDate", DateChecker.todayDate);
+            return;
         }
         if(PlayerPrefs.HasKey("HintsAvailable")){
-        	Debug.Log("haslastkeydate");
-        	lastDate = PlayerPrefs.GetString("LastKeyDate");
+        	//Debug.Log("haslastkeydate");
+        	lastDate = PlayerPrefs.GetString("LastHintDate");
         	if(lastDate == DateChecker.todayDate){
-        		Debug.Log("SAME DTE");
+        		//Debug.Log("SAME DTE");
         		hintsAvailable = PlayerPrefs.GetInt("HintsAvailable");
         	}
         	else{
         		Debug.Log("diff date than ppefs");
-        		PlayerPrefs.SetString("LastKeyDate", DateChecker.todayDate);
         		hintsAvailable = 3;
+                Debug.Log(hintsAvailable);
+                PlayerPrefs.SetInt("HintsAvailable", 3);
+                PlayerPrefs.SetString("LastHintDate", DateChecker.todayDate);
         	}
-        }
-        else{
-        	Debug.Log("no keydate in ppefs");
-        	PlayerPrefs.SetString("LastKeyDate", DateChecker.todayDate);
-        	hintsAvailable = 3;
         }
     }
 }

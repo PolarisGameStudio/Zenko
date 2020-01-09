@@ -640,7 +640,7 @@ public class PieceHolders : MonoBehaviour {
 	}
 
 
-	public IEnumerator HintWrapper(){
+	public IEnumerator HintWrapper(){	
 		//make sure draggers are off and cant move fox.
 		//turn off draggers
 		//
@@ -655,6 +655,7 @@ public class PieceHolders : MonoBehaviour {
 			}
 			if(HintMenuHandler.hintsAvailable>0)
 			HintMenuHandler.hintsAvailable--;
+			
 			PlayerPrefs.SetInt("HintsAvailable", HintMenuHandler.hintsAvailable);
 			Debug.Log("now have hints : " + HintMenuHandler.hintsAvailable);
 			LevelBuilder.hintboard.SetActive(false);

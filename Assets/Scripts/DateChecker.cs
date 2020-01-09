@@ -99,7 +99,11 @@ public class DateChecker : MonoBehaviour
 
 
 		}
+		// #if UNITY_EDITOR
+		// todayDate = "2019-01-13";
+		// #endif
 		PotdUnlocker.Instance.Initiate();
+
 	}
 
 	public int[] ArrayDate(string date){

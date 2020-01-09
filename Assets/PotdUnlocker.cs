@@ -33,6 +33,10 @@ public class PotdUnlocker : MonoBehaviour
         if(!PlayerPrefs.HasKey("KeysAvailable")){
         	Debug.Log("initing keys");
         	PlayerPrefs.SetInt("KeysAvailable", 3);
+            keysAvailable = 3;
+            PlayerPrefs.SetString("LastKeyDate", DateChecker.todayDate);
+            keysText.text = "x" + keysAvailable.ToString();
+            return;
         }
         if(PlayerPrefs.HasKey("LastKeyDate")){
         	Debug.Log("haslastkeydate");
@@ -45,12 +49,8 @@ public class PotdUnlocker : MonoBehaviour
         		Debug.Log("diff date than ppefs");
         		PlayerPrefs.SetString("LastKeyDate", DateChecker.todayDate);
         		keysAvailable = 3;
+                PlayerPrefs.SetInt("KeysAvailable", 3);
         	}
-        }
-        else{
-        	Debug.Log("no keydate in ppefs");
-        	PlayerPrefs.SetString("LastKeyDate", DateChecker.todayDate);
-        	keysAvailable = 3;
         }
         keysText.text = "x" + keysAvailable.ToString();
 
