@@ -289,6 +289,7 @@
      <Compile Include="Assets\GooglePlayGames\PluginVersion.cs" />
      <Compile Include="Assets\HintMenuHandler.cs" />
      <Compile Include="Assets\LevelButton.cs" />
+     <Compile Include="Assets\Loading.cs" />
      <Compile Include="Assets\ModulateImage.cs" />
      <Compile Include="Assets\NokobotUIPack\Demo\Scripts\GoToNextScene.cs" />
      <Compile Include="Assets\PotdMenu.cs" />

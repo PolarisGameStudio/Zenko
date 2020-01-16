@@ -32,6 +32,7 @@ ScriptsOnlyBuild:
     - LevelOrganizer
     - LevelSaver
     - LevelStorer
+    - Loading
     - LoseMessage
     - MenuButton
     - ModulateThis
@@ -200,61 +201,61 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12104}
     - Class: 114
-      Script: {instanceID: 12284}
+      Script: {instanceID: 12286}
     - Class: 114
-      Script: {instanceID: 12360}
+      Script: {instanceID: 12362}
     - Class: 114
-      Script: {instanceID: 12374}
+      Script: {instanceID: 12376}
     - Class: 114
-      Script: {instanceID: 12426}
+      Script: {instanceID: 12428}
     - Class: 114
-      Script: {instanceID: 12476}
+      Script: {instanceID: 12478}
     - Class: 114
-      Script: {instanceID: 12494}
+      Script: {instanceID: 12496}
     - Class: 114
-      Script: {instanceID: 12592}
+      Script: {instanceID: 12594}
     - Class: 114
-      Script: {instanceID: 12632}
+      Script: {instanceID: 12634}
     - Class: 114
-      Script: {instanceID: 12718}
+      Script: {instanceID: 12720}
     - Class: 114
-      Script: {instanceID: 12796}
+      Script: {instanceID: 12798}
     - Class: 114
-      Script: {instanceID: 12882}
+      Script: {instanceID: 12884}
     - Class: 114
-      Script: {instanceID: 12908}
+      Script: {instanceID: 12910}
     - Class: 114
-      Script: {instanceID: 13430}
+      Script: {instanceID: 13432}
     - Class: 114
-      Script: {instanceID: 13648}
+      Script: {instanceID: 13650}
     - Class: 114
-      Script: {instanceID: 13792}
+      Script: {instanceID: 13794}
     - Class: 114
-      Script: {instanceID: 13886}
+      Script: {instanceID: 13888}
     - Class: 114
-      Script: {instanceID: 13902}
+      Script: {instanceID: 13904}
     - Class: 114
-      Script: {instanceID: 13922}
+      Script: {instanceID: 13924}
     - Class: 114
-      Script: {instanceID: 14002}
+      Script: {instanceID: 14004}
     - Class: 114
-      Script: {instanceID: 14236}
+      Script: {instanceID: 14238}
     - Class: 114
-      Script: {instanceID: 14354}
+      Script: {instanceID: 14356}
     - Class: 114
-      Script: {instanceID: 14586}
+      Script: {instanceID: 14588}
     - Class: 114
-      Script: {instanceID: 14678}
+      Script: {instanceID: 14680}
     - Class: 114
-      Script: {instanceID: 14684}
+      Script: {instanceID: 14686}
     - Class: 114
-      Script: {instanceID: 14750}
+      Script: {instanceID: 14752}
     - Class: 114
-      Script: {instanceID: 14790}
+      Script: {instanceID: 14792}
     - Class: 114
-      Script: {instanceID: 14844}
+      Script: {instanceID: 14846}
     - Class: 114
-      Script: {instanceID: 14858}
+      Script: {instanceID: 14860}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -375,67 +376,69 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12122}
     - Class: 114
-      Script: {instanceID: 12178}
+      Script: {instanceID: 12164}
     - Class: 114
-      Script: {instanceID: 12212}
+      Script: {instanceID: 12180}
     - Class: 114
-      Script: {instanceID: 12230}
+      Script: {instanceID: 12214}
     - Class: 114
-      Script: {instanceID: 12248}
+      Script: {instanceID: 12232}
     - Class: 114
-      Script: {instanceID: 12284}
+      Script: {instanceID: 12250}
     - Class: 114
-      Script: {instanceID: 12360}
+      Script: {instanceID: 12286}
     - Class: 114
-      Script: {instanceID: 12600}
+      Script: {instanceID: 12362}
     - Class: 114
-      Script: {instanceID: 12632}
+      Script: {instanceID: 12602}
     - Class: 114
-      Script: {instanceID: 12644}
+      Script: {instanceID: 12634}
     - Class: 114
-      Script: {instanceID: 12718}
+      Script: {instanceID: 12646}
     - Class: 114
-      Script: {instanceID: 12794}
+      Script: {instanceID: 12720}
     - Class: 114
-      Script: {instanceID: 12918}
+      Script: {instanceID: 12796}
     - Class: 114
-      Script: {instanceID: 13156}
+      Script: {instanceID: 12920}
     - Class: 114
-      Script: {instanceID: 13190}
+      Script: {instanceID: 13158}
     - Class: 114
-      Script: {instanceID: 13418}
+      Script: {instanceID: 13192}
     - Class: 114
-      Script: {instanceID: 13430}
+      Script: {instanceID: 13420}
     - Class: 114
-      Script: {instanceID: 13592}
+      Script: {instanceID: 13432}
     - Class: 114
-      Script: {instanceID: 13648}
+      Script: {instanceID: 13594}
     - Class: 114
-      Script: {instanceID: 13736}
+      Script: {instanceID: 13650}
     - Class: 114
-      Script: {instanceID: 13792}
+      Script: {instanceID: 13738}
     - Class: 114
-      Script: {instanceID: 13846}
+      Script: {instanceID: 13794}
     - Class: 114
-      Script: {instanceID: 13862}
+      Script: {instanceID: 13848}
     - Class: 114
-      Script: {instanceID: 13922}
+      Script: {instanceID: 13864}
     - Class: 114
-      Script: {instanceID: 14032}
+      Script: {instanceID: 13924}
     - Class: 114
-      Script: {instanceID: 14236}
+      Script: {instanceID: 14034}
     - Class: 114
-      Script: {instanceID: 14646}
+      Script: {instanceID: 14238}
     - Class: 114
-      Script: {instanceID: 14684}
+      Script: {instanceID: 14648}
     - Class: 114
-      Script: {instanceID: 14708}
+      Script: {instanceID: 14686}
     - Class: 114
-      Script: {instanceID: 14720}
+      Script: {instanceID: 14710}
     - Class: 114
-      Script: {instanceID: 14742}
+      Script: {instanceID: 14722}
     - Class: 114
-      Script: {instanceID: 14750}
+      Script: {instanceID: 14744}
+    - Class: 114
+      Script: {instanceID: 14752}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -1127,6 +1130,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Goal_Behaviour
+  - hash:
+      serializedVersion: 2
+      Hash: bf4978bdb7fa61077742659f623f11d3
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Loading
   - hash:
       serializedVersion: 2
       Hash: b3ab2106268377ffe25dd18ac23dca28
@@ -1833,4 +1842,4 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/WorldSelect.unity
   - Assets/Level.unity
-  playerPath: /Users/bernardolimon/Desktop/ZenkoApk/Zenko_225.aab
+  playerPath: /Users/bernardolimon/Desktop/ZenkoApk/Zenko_229.aab

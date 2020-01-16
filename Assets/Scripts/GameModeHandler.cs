@@ -35,6 +35,9 @@ public class GameModeHandler : MonoBehaviour
 	        }        	
         }
     }
+    public static void TurnMeOn(){
+        GameObject.Find("GameModeSelection").GetComponent<GameModeHandler>().enabled = true;
+    }
     public void NextMode(){
         Instance.transform.GetChild(0).GetChild(4).GetComponent<Text>().color = Color.HSVToRGB((float)TextModulator.hue/359,(float)TextModulator.s/99, (float)TextModulator.v/99);
         Instance.transform.GetChild(0).GetChild(5).GetComponent<Text>().color = Color.HSVToRGB((float)TextModulator.hue/359,(float)TextModulator.s/99, (float)TextModulator.v/99);

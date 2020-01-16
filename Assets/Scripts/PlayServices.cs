@@ -23,11 +23,13 @@ public class PlayServices : MonoBehaviour
     bool isSaving;
     bool isCloudDataLoaded = false;
     string stringToShow;
+    bool finishedLoading;
     //int dataString;
     //bool enableSaveGame = true;
     // Start is called before the first frame update
     void Awake()
     {
+        finishedLoading = false;
         //Debug.Log(int.Parse("??"));
         //  int num;
         // Debug.Log(int.TryParse("1211212121212121212".Substring(0,4), out num));
@@ -91,6 +93,7 @@ public class PlayServices : MonoBehaviour
 
                 // }
                 #if UNITY_ANDROID
+                
                 InitializePGP();
                 SignIn();
                 #endif
@@ -117,17 +120,7 @@ public class PlayServices : MonoBehaviour
         return strArray;
 
     }
-    // string InitializeSavePref(){
-    //     string stringToSave = "";
-    //     if(SceneLoading.adFree = true){
-    //         stringToSave = stringToSave + "1 ";
-    //     }
-    //     else{
-    //         stringToSave = stringToSave + "0 ";
-    //     }
-    //     for
-    //     return stringToSave;        
-    // }
+
    
     public void InitializePGP(){
         #if UNITY_ANDROID
@@ -146,13 +139,17 @@ public class PlayServices : MonoBehaviour
                 //teller.SetActive(true);
                 LoadData();
                 //MobileAds.Initialize("ca-app-pub-3301322474937909~4906291296");
+                //Loading.Loaded();
+                finishedLoading = true;
             }
             else
             {
                 //teller2.SetActive(true);
                 Debug.Log("Login failed");
                 Debug.Log("Error : " + err);
-
+                finishedLoading = true;
+                Loading.Loaded();
+                //finishedLoading = true;
             }
         });        
     }
@@ -233,15 +230,6 @@ public class PlayServices : MonoBehaviour
         }
         string[] dataArray = SplitString(Data);
 
-        // //string[] dataValues = 
-
-        // Debug.Log(Data);
-        // Debug.Log("ASSIGNED");
-
-        // //Debug.Log(LevelStorer.leveldic.Count);
-        // // LevelMenu.highestLevelSolved = int.Parse(Data);
-        // // int highestSolved = LevelMenu.highestLevelSolved;
-        // Debug.Log(dataArray[0]);
 
 
         //assigns adfree with first digit
@@ -251,15 +239,11 @@ public class PlayServices : MonoBehaviour
             LevelManager.adFree = false;
 
         Debug.Log(dataArray.Length + " IS THE LENGTH");
-        //GameObject.Find("highestsolved").GetComponent<Text>().text = dataArray[0]; //this currently displays 1 or 0 for paid or not
-        // for(int i=1; i<dataArray.Length-1;i++){
-        //     int rating = int.Parse(dataArray[i]);
-        //     if(rating>1){
-        //     UpdateImportantValue(i, rating-1);
-        //     }
-        // }
+
         AssignFirstFourChapters(dataArray);
         AssignPotdData(dataArray);
+        if(finishedLoading)
+        Loading.Loaded();
 
 
     }
@@ -343,6 +327,7 @@ public class PlayServices : MonoBehaviour
         isCloudDataLoaded = true;
         AssignData(mergedData);
         SaveData();
+        Loading.Loaded();
     }
 
     void StringToGameData(string localData){
@@ -413,24 +398,17 @@ public class PlayServices : MonoBehaviour
         }
         else{
 
-            // Debug.Log("Trynna stringize the byte");
-            // Debug.Log(originalData.Length + " OG LENGTH");
-            // Debug.Log(unmergedData.Length + " Unmerged LENGTH");
+
             string originalStr = Encoding.ASCII.GetString(originalData);
             string unmergedStr = Encoding.ASCII.GetString(unmergedData);
-            // Debug.Log(originalStr.Length);
-            // Debug.Log(unmergedStr.Length);
-            // Debug.Log(originalStr);
-            // Debug.Log(unmergedStr);
+
 
 
 
             // Debug.Log("TRynna parse");
             int originalNum;
             int unmergedNum;
-            // if(int.TryParse(originalStr.SubString(0,4), out originalNum)){
 
-            // }
             int.TryParse(originalStr.Substring(0,4), out originalNum);
             int.TryParse(unmergedStr.Substring(0,4), out unmergedNum);
 
@@ -449,10 +427,9 @@ public class PlayServices : MonoBehaviour
     }
 
     private void OnSavedGameOpened(SavedGameRequestStatus status, ISavedGameMetadata game){
-        //Debug.Log(game + " "+ "game");
-        //Debug.Log(status + " "+ "status");
+
         Debug.Log("ISSAVING IS " + isSaving);
-        //Debug.Log("THE STATUS IS " + SavedGameRequestStatus);
+        
         if (status == SavedGameRequestStatus.Success){
             if (!isSaving){
                 LoadGame(game);
