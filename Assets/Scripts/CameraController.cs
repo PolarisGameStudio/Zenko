@@ -29,7 +29,8 @@ public class CameraController : MonoBehaviour {
 		cameraposition = transform.localPosition;
 		eulerangles = transform.localEulerAngles;
 		cameraorigin = new Vector3(Camera.main.gameObject.transform.position.x, Camera.main.gameObject.transform.position.y, Camera.main.gameObject.transform.position.z);
-		Instance = this;
+		
+		Instance = GameObject.Find("Main Canvas").GetComponent<CameraController>();
 	}
 	void Start(){
 		//Application.targetFrameRate = 30;
@@ -77,6 +78,10 @@ public class CameraController : MonoBehaviour {
 		image.color = tempColor;
 	}
 	public static void Fade(float time, float alphaPercentage, int place){
+		if(Instance == null)
+		Instance = GameObject.Find("Main Canvas").GetComponent<CameraController>();
+		//Debug.Log(GameObject.Find("Main Canvas").GetComponent<CameraController>());
+		Debug.Log(Instance + "IS THE INSTANCE OF CAMERACONTROLLER");
 		int world = Mathf.FloorToInt((place-1)/40)  + 1;
 		Instance.gameModeBackground.GetComponent<Image>().sprite = Instance.CheckBackground(world);
 		Instance.WorldTitle.GetComponent<Image>().sprite = Instance.CheckWorldName(world);

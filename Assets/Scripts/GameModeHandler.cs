@@ -23,20 +23,29 @@ public class GameModeHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!initialized){
-	        if(Input.GetMouseButtonDown(0)){
-                Debug.Log("INITIALIZED");
-	        	TurnOn();
-	        	initialized = true;
-	        	foreach(GameObject go in initialObjects){
-	        		go.SetActive(false);
-	        	}
-                CameraController.Fade(.2f,.4f, 1);
-	        }        	
-        }
+        // if(!initialized){
+	       //  if(Input.GetMouseButtonDown(0)){
+        //         Debug.Log("INITIALIZED");
+	       //  	TurnOn();
+	       //  	initialized = true;
+	       //  	foreach(GameObject go in initialObjects){
+	       //  		go.SetActive(false);
+	       //  	}
+        //         CameraController.Fade(.2f,.4f, 1);
+	       //  }        	
+        // }
     }
     public static void TurnMeOn(){
         GameObject.Find("GameModeSelection").GetComponent<GameModeHandler>().enabled = true;
+        GameObject.Find("GameModeSelection").GetComponent<GameModeHandler>().Activate();
+    }
+    public void Activate(){
+        TurnOn();
+        initialized = true;
+        foreach(GameObject go in initialObjects){
+            go.SetActive(false);
+        }
+        //CameraController.Fade(.2f,.4f, 1);
     }
     public void NextMode(){
         Instance.transform.GetChild(0).GetChild(4).GetComponent<Text>().color = Color.HSVToRGB((float)TextModulator.hue/359,(float)TextModulator.s/99, (float)TextModulator.v/99);
@@ -60,10 +69,10 @@ public class GameModeHandler : MonoBehaviour
         //Instance.menuButton.SetActive(false);
     }
     public static void TurnOn(){
-    	Instance.transform.GetChild(0).gameObject.SetActive(true);
-    	Instance.addButton.SetActive(true);
-        Instance.menuButton.SetActive(true);
-        Instance.transform.GetChild(0).GetChild(4).GetComponent<Text>().color = Color.HSVToRGB((float)TextModulator.hue/359,(float)TextModulator.s/99, (float)TextModulator.v/99);
+    	// Instance.transform.GetChild(0).gameObject.SetActive(true);
+    	// Instance.addButton.SetActive(true);
+     //    Instance.menuButton.SetActive(true);
+     //    Instance.transform.GetChild(0).GetChild(4).GetComponent<Text>().color = Color.HSVToRGB((float)TextModulator.hue/359,(float)TextModulator.s/99, (float)TextModulator.v/99);
 
 
     }

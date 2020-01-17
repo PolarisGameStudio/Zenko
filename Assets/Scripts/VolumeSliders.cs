@@ -38,13 +38,13 @@ public class VolumeSliders : MonoBehaviour {
 		MusicSource[1].volume = Musicslider.value*.3f;
 	}
 	public static void ColorStuff(){
-        foreach(GameObject holder in Instance.spritesToColor){
+        // foreach(GameObject holder in Instance.spritesToColor){
 
-            holder.GetComponent<Image>().color = Color.HSVToRGB((float)TextModulator.hue/359,(float)TextModulator.s/99, (float)TextModulator.v/99);
-        }
-        foreach(GameObject holder in Instance.textsToColor){
+        //     holder.GetComponent<Image>().color = Color.HSVToRGB((float)TextModulator.hue/359,(float)TextModulator.s/99, (float)TextModulator.v/99);
+        // }
+        // foreach(GameObject holder in Instance.textsToColor){
 
-            holder.GetComponent<Text>().color = Color.HSVToRGB((float)TextModulator.hue/359,(float)TextModulator.s/99, (float)TextModulator.v/99);
-        }
+        //     holder.GetComponent<Text>().color = Color.HSVToRGB((float)TextModulator.hue/359,(float)TextModulator.s/99, (float)TextModulator.v/99);
+        // }
 	}
 }

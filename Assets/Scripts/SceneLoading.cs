@@ -535,7 +535,7 @@ public class SceneLoading : MonoBehaviour {
 		transform.Find("MenuHolder").Find("ClosePotd_Box").gameObject.SetActive(false);
 		GameModeHandler.Return();		
 
-		CameraController.Fade(.2f,0.4f);
+		CameraController.Fade(.2f,0f);
 		canOpen = true;
 	}
 
@@ -548,7 +548,7 @@ public class SceneLoading : MonoBehaviour {
 		transform.Find("MenuHolder").Find("Menu").gameObject.SetActive(true);
 		transform.Find("MenuHolder").Find("CloseLevel_Box").gameObject.SetActive(false);
 		GameModeHandler.Return();		
-		CameraController.Fade(.2f,0.4f);
+		CameraController.Fade(.2f,0f);
 		canOpen = true;
 	}
 	public void GoToWorldSelect(){
