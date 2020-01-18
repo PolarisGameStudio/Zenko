@@ -295,6 +295,7 @@
      <Compile Include="Assets\NokobotUIPack\Demo\Scripts\GoToNextScene.cs" />
      <Compile Include="Assets\PotdMenu.cs" />
      <Compile Include="Assets\PotdUnlocker.cs" />
+     <Compile Include="Assets\RotatingLogo.cs" />
      <Compile Include="Assets\Scripts\AssignCamera.cs" />
      <Compile Include="Assets\Scripts\AssignCanvasAndButton.cs" />
      <Compile Include="Assets\Scripts\AuroraModulator.cs" />

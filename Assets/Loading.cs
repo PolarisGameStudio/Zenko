@@ -15,6 +15,8 @@ public class Loading : MonoBehaviour
 
 	public Text text;
 
+	public Image rotatingImage;
+
 	bool loaded;
 
 	void Awake(){
@@ -44,12 +46,14 @@ public class Loading : MonoBehaviour
     	Instance.image.enabled = false;
     	Instance.text.enabled = false;
     	Instance.loaded = true;
+    	Instance.rotatingImage.enabled = false;
     }
 
     private void TurnOn(){
     	Debug.Log("turnt");
     	image.enabled = true;
     	text.enabled = true;
+    	rotatingImage.enabled = true;
 
     }
 }

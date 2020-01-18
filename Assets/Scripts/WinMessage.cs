@@ -34,8 +34,8 @@ public class WinMessage : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        timer += Time.deltaTime;
-		this.GetComponent<RectTransform>().sizeDelta = new Vector2 (size + oscillate(timer,7,(25-((25/3)*(3-mystars)))), 70);
+        //timer += Time.deltaTime;
+		//this.GetComponent<RectTransform>().sizeDelta = new Vector2 (size + oscillate(timer,7,(25-((25/3)*(3-mystars)))), 70);
     }
 
     public void AssignMessage(int world, int stars){

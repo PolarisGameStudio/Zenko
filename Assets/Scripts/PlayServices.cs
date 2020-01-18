@@ -137,10 +137,11 @@ public class PlayServices : MonoBehaviour
             if(success){
                 Debug.Log("Login success");
                 //teller.SetActive(true);
+                finishedLoading = true;
                 LoadData();
                 //MobileAds.Initialize("ca-app-pub-3301322474937909~4906291296");
                 //Loading.Loaded();
-                finishedLoading = true;
+                
             }
             else
             {
@@ -350,6 +351,8 @@ public class PlayServices : MonoBehaviour
         }
         else{
             LoadLocal();
+            
+
         }
         #endif
     }
