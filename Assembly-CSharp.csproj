@@ -288,6 +288,7 @@
      <Compile Include="Assets\GooglePlayGames\Platforms\TokenClient.cs" />
      <Compile Include="Assets\GooglePlayGames\PluginVersion.cs" />
      <Compile Include="Assets\HintMenuHandler.cs" />
+     <Compile Include="Assets\KeyLogoSwitcher.cs" />
      <Compile Include="Assets\LevelButton.cs" />
      <Compile Include="Assets\Loading.cs" />
      <Compile Include="Assets\LoadingTextAnimator.cs" />
@@ -451,6 +452,7 @@
      <None Include="Assets\StreamingAssets\Level-106.txt" />
      <None Include="Assets\StreamingAssets\Level9.txt" />
      <None Include="Assets\StreamingAssets\DoubleHitMaps2.txt" />
+     <None Include="Assets\FilteredRemoved.txt" />
      <None Include="Assets\StreamingAssets\Level10.txt" />
      <None Include="Assets\StreamingAssets\Level76.txt" />
      <None Include="Assets\StreamingAssets\newnewpotd.txt" />

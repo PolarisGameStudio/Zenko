@@ -25,6 +25,7 @@ ScriptsOnlyBuild:
     - HueModifier
     - ImageColorModulator
     - ImageHolder
+    - KeyLogoSwitcher
     - LevelBuilder
     - LevelButton
     - LevelManager
@@ -241,23 +242,23 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 14008}
     - Class: 114
-      Script: {instanceID: 14242}
+      Script: {instanceID: 14244}
     - Class: 114
-      Script: {instanceID: 14360}
+      Script: {instanceID: 14362}
     - Class: 114
-      Script: {instanceID: 14592}
+      Script: {instanceID: 14594}
     - Class: 114
-      Script: {instanceID: 14684}
+      Script: {instanceID: 14686}
     - Class: 114
-      Script: {instanceID: 14690}
+      Script: {instanceID: 14692}
     - Class: 114
-      Script: {instanceID: 14756}
+      Script: {instanceID: 14758}
     - Class: 114
-      Script: {instanceID: 14796}
+      Script: {instanceID: 14798}
     - Class: 114
-      Script: {instanceID: 14850}
+      Script: {instanceID: 14852}
     - Class: 114
-      Script: {instanceID: 14864}
+      Script: {instanceID: 14866}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -432,19 +433,21 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 14038}
     - Class: 114
-      Script: {instanceID: 14242}
+      Script: {instanceID: 14126}
     - Class: 114
-      Script: {instanceID: 14652}
+      Script: {instanceID: 14244}
     - Class: 114
-      Script: {instanceID: 14690}
+      Script: {instanceID: 14654}
     - Class: 114
-      Script: {instanceID: 14714}
+      Script: {instanceID: 14692}
     - Class: 114
-      Script: {instanceID: 14726}
+      Script: {instanceID: 14716}
     - Class: 114
-      Script: {instanceID: 14748}
+      Script: {instanceID: 14728}
     - Class: 114
-      Script: {instanceID: 14756}
+      Script: {instanceID: 14750}
+    - Class: 114
+      Script: {instanceID: 14758}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -1144,7 +1147,7 @@ ScriptsOnlyBuild:
     className: Goal_Behaviour
   - hash:
       serializedVersion: 2
-      Hash: 8fbfc76d63bc33ca2ca975def3c9202d
+      Hash: 39e20585bc37feb65b16e112604f2833
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Loading
@@ -1648,6 +1651,12 @@ ScriptsOnlyBuild:
     className: SwingArmModel
   - hash:
       serializedVersion: 2
+      Hash: eab18917fd62da06f0efae7d4041364a
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: KeyLogoSwitcher
+  - hash:
+      serializedVersion: 2
       Hash: c3d3430df9e3ea95e3e3d587961390fb
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
@@ -1860,4 +1869,4 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/WorldSelect.unity
   - Assets/Level.unity
-  playerPath: /Users/bernardolimon/Desktop/ZenkoApk/Zenko_233.aab
+  playerPath: /Users/bernardolimon/Desktop/ZenkoApk/Zenko_245.aab

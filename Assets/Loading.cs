@@ -17,7 +17,12 @@ public class Loading : MonoBehaviour
 
 	public Image rotatingImage;
 
+	public Text publicText;
+
 	bool loaded;
+
+	float time;
+	bool finished;
 
 	void Awake(){
 		if(Instance == null ){
@@ -34,26 +39,50 @@ public class Loading : MonoBehaviour
 
 		GameModeHandler.TurnMeOn();
 
-
 		//Destroy(this.gameObject);
 
 		}
 
-    public static void Loaded(){
-    	if(Instance == null)
-    	Instance = GameObject.Find("Handler").GetComponent<Loading>();
+	void FixedUpdate(){
+		if(!finished){
+			time = time + Time.fixedDeltaTime;
+			Debug.Log(time);
+			if (time>10){
+				if(!loaded)
+					Loaded();	
+				finished = true;		
+			}
+
+		}
+
+	}
+	// void Update(){
+	// 	//if()
+	// }
+
+    public void Loaded(){
+    	// if(Instance == null)
+    	// Instance = GameObject.Find("Handler").GetComponent<Loading>();
     	GameModeHandler.TurnMeOn();
-    	Instance.image.enabled = false;
-    	Instance.text.enabled = false;
-    	Instance.loaded = true;
-    	Instance.rotatingImage.enabled = false;
+    	image.enabled = false;
+    	text.enabled = false;
+    	loaded = true;
+    	publicText.enabled = false;
+    	rotatingImage.enabled = false;
     }
 
-    private void TurnOn(){
+    public void TurnOn(){
     	Debug.Log("turnt");
     	image.enabled = true;
     	text.enabled = true;
     	rotatingImage.enabled = true;
-
+    	Debug.Log(rotatingImage);
+    	Debug.Log(publicText);
+    	publicText.enabled = true;
     }
+
+   	public void DaDebug(string line){
+   		if(publicText != null)
+   			publicText.text = line;
+   	}
 }

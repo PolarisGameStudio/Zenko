@@ -24,11 +24,14 @@ public class PlayServices : MonoBehaviour
     bool isCloudDataLoaded = false;
     string stringToShow;
     bool finishedLoading;
+    Loading loader;
+    int read;
     //int dataString;
     //bool enableSaveGame = true;
     // Start is called before the first frame update
     void Awake()
     {
+        read = 0;
         finishedLoading = false;
         //Debug.Log(int.Parse("??"));
         //  int num;
@@ -42,6 +45,7 @@ public class PlayServices : MonoBehaviour
         //Debug.Log("curcloudsave " + )
         if(instance == null)
             {
+                loader = GameObject.Find("Handler").GetComponent<Loading>();
                 instance = this;
                 DontDestroyOnLoad(this.gameObject);
 
@@ -92,21 +96,32 @@ public class PlayServices : MonoBehaviour
                 // else{
 
                 // }
-                #if UNITY_ANDROID
-                
-                InitializePGP();
-                SignIn();
-                #endif
+
+                //StartCoroutine(LoadIn(10));
                 //Debug.Log(int.Parse("1 1 1 1"));
 //                SplitString("1 2 3 4 5");
                 //byte[] dataToSave = Encoding.ASCII.GetBytes("1 23 4 5");
                 //Debug.Log(dataToSave[0]);
+                
+                loader.DaDebug("prepgp");
+                //LoadIn(10);
+
                 return;
             }
         Destroy(this.gameObject);
 
     }
+    void Start(){
+        #if UNITY_ANDROID
 
+        InitializePGP();
+        SignIn();
+        #endif        
+    }
+    IEnumerator LoadIn(int seconds){
+        yield return new WaitForSeconds(seconds);
+        loader.Loaded();
+    }
     public string[] SplitString(string str){
 
         //string[] strArray = Regex.Split(str, "");
@@ -123,12 +138,14 @@ public class PlayServices : MonoBehaviour
 
    
     public void InitializePGP(){
+
         #if UNITY_ANDROID
         PlayGamesClientConfiguration.Builder builder = new PlayGamesClientConfiguration.Builder();
         builder.EnableSavedGames();
         PlayGamesPlatform.InitializeInstance(builder.Build());
-        PlayGamesPlatform.DebugLogEnabled = true;
+        //PlayGamesPlatform.DebugLogEnabled = true;
         PlayGamesPlatform.Activate();    
+        loader.DaDebug("postpgp");
         #endif
     }
 
@@ -136,6 +153,7 @@ public class PlayServices : MonoBehaviour
         Social.localUser.Authenticate((bool success, string err) => {
             if(success){
                 Debug.Log("Login success");
+                loader.DaDebug("Login Success");
                 //teller.SetActive(true);
                 finishedLoading = true;
                 LoadData();
@@ -148,8 +166,10 @@ public class PlayServices : MonoBehaviour
                 //teller2.SetActive(true);
                 Debug.Log("Login failed");
                 Debug.Log("Error : " + err);
+                loader.DaDebug("Error : " + err);
                 finishedLoading = true;
-                Loading.Loaded();
+                loader.Loaded();
+
                 //finishedLoading = true;
             }
         });        
@@ -244,7 +264,7 @@ public class PlayServices : MonoBehaviour
         AssignFirstFourChapters(dataArray);
         AssignPotdData(dataArray);
         if(finishedLoading)
-        Loading.Loaded();
+        loader.Loaded();
 
 
     }
@@ -327,8 +347,10 @@ public class PlayServices : MonoBehaviour
         Debug.Log("GONNA ASSIGN DATA FROM MERGE");
         isCloudDataLoaded = true;
         AssignData(mergedData);
+        loader.DaDebug("stringtogamedata2");
         SaveData();
-        Loading.Loaded();
+        
+        //Loading.Loaded();
     }
 
     void StringToGameData(string localData){
@@ -338,6 +360,7 @@ public class PlayServices : MonoBehaviour
             localData = "0";
         }
         AssignData(localData);
+        loader.DaDebug("stringtogamedata1");
     }
 
     public void LoadData(){
@@ -360,6 +383,7 @@ public class PlayServices : MonoBehaviour
     private void LoadLocal(){
         Debug.Log("LoadingLocal");
         StringToGameData(PlayerPrefs.GetString(SAVE_NAME));
+
     }
 
     public void SaveData(){
@@ -430,11 +454,13 @@ public class PlayServices : MonoBehaviour
     }
 
     private void OnSavedGameOpened(SavedGameRequestStatus status, ISavedGameMetadata game){
-
+        read++;
         Debug.Log("ISSAVING IS " + isSaving);
-        
+        loader.DaDebug("SavedGameOpened + " + isSaving  + " + "+ SavedGameRequestStatus.Success + " + " + read);
+
         if (status == SavedGameRequestStatus.Success){
             if (!isSaving){
+
                 LoadGame(game);
             }
             else{
@@ -452,6 +478,7 @@ public class PlayServices : MonoBehaviour
     private void LoadGame(ISavedGameMetadata game){
         #if UNITY_ANDROID
         Debug.Log("Gonna load game");
+        loader.DaDebug("loadgame" + game.IsOpen);
         ((PlayGamesPlatform)Social.Active).SavedGame.ReadBinaryData(game, OnSavedGameDataRead);
         #endif
     }
@@ -476,6 +503,7 @@ public class PlayServices : MonoBehaviour
     private void OnSavedGameDataRead(SavedGameRequestStatus status, byte[] savedData){
         Debug.Log("Saved Data byte is " + savedData.Length + " long, the first ones are " + savedData[0]);
         Debug.Log(Encoding.ASCII.GetString(savedData) + " IS THE DATA READ");
+        loader.DaDebug("SavedGameDataRead");
         int parsed;
         //int.TryParse(Encoding.ASCII.GetString(savedData), out parsed);
         //Debug.Log(parsed + " IS PARSED");
@@ -493,8 +521,9 @@ public class PlayServices : MonoBehaviour
 
             string localDataString = PlayerPrefs.GetString(SAVE_NAME);
             Debug.Log("STRING FROM GAME DATA POST PROCESSING IS " + cloudDataString);
-            StringToGameData(cloudDataString, localDataString);
             curCloudData = cloudDataString;
+            StringToGameData(cloudDataString, localDataString);
+            
             //isCloudDataLoaded = true;
             //curCloudData = mergedData;
 
