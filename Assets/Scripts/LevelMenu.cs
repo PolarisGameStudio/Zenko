@@ -56,8 +56,10 @@ public class LevelMenu : MonoBehaviour {
 
 	// Update is called once per frame
 	public static int FindHighestSolved(){
+
 		int curHighest = 0;
 		int maxMaps = LevelStorer.leveldic.Count;
+		Debug.Log(maxMaps + "Is max maps");
 		for(int i=1; i<maxMaps+1; i++){
 			string mystring = "Level"+i+"Rating";
 			//Debug.Log(PlayerPrefs.GetInt(mystring));
@@ -65,7 +67,7 @@ public class LevelMenu : MonoBehaviour {
 				curHighest = i;
 			}	
 		}
-		//Debug.Log(curHighest+1 + " IS CURHIGHEST");
+		Debug.Log(curHighest+1 + " IS CURHIGHEST");
 		return curHighest+1;	
 	}
 	public static void UnlockPotdLevel(int num){
@@ -78,6 +80,7 @@ public class LevelMenu : MonoBehaviour {
 		}
 		else{
 			SceneLoading.Instance.PotdSpecific(num);
+
 		}
 	}
 	public void OpenUnlockMenu(int num, int starter){

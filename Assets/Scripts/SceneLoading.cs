@@ -22,6 +22,7 @@ public class SceneLoading : MonoBehaviour {
 	bool canOpen;
 	public static string menuState;
 	public bool isMenu;
+	public GameObject PotdShortcut;
 //	public IceTileHandler myhandler;
 	void Start(){
 		menuState = "Start";
@@ -512,6 +513,7 @@ public class SceneLoading : MonoBehaviour {
 					}
 
 					CameraController.Fade(.2f,1f, 1);
+					PotdShortcut.SetActive(false);
 
 				}
 				if(!isMenu){
@@ -527,6 +529,7 @@ public class SceneLoading : MonoBehaviour {
 
 					}
 					CameraController.Fade(.2f,1f, 1);
+					transform.Find("NOADS").gameObject.SetActive(true);
 
 				}
 							
@@ -574,6 +577,7 @@ public class SceneLoading : MonoBehaviour {
 						//transform.Find("
 					}
 				}
+				PotdShortcut.SetActive(false);
 			}
 		}
 		
@@ -614,7 +618,8 @@ public class SceneLoading : MonoBehaviour {
 			transform.Find("MenuHolder").Find("ClosePotd_Box").gameObject.SetActive(false);
 			GameModeHandler.Return();		
 
-			CameraController.Fade(.2f,0f);			
+			CameraController.Fade(.2f,0f);
+			PotdShortcut.SetActive(true);			
 		}
 		else{
 			transform.Find("PoTD_Box").Find("ButtonHolder").GetComponent<LevelMenu>().currentfirst = PlayerPrefs.GetInt("CurrentFirst");
@@ -633,6 +638,7 @@ public class SceneLoading : MonoBehaviour {
 	        else{
 	            Swiping.firstPressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
 	        }
+	        transform.Find("NOADS").gameObject.SetActive(false);
 
 		}
 		//remove curbuttons

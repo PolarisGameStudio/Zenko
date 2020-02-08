@@ -3118,7 +3118,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -120, y: 120}
+  m_AnchoredPosition: {x: -120, y: 104.43}
   m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &456712561
@@ -16621,6 +16621,7 @@ MonoBehaviour:
   level: 0
   buyMenu: {fileID: 4165062227003059599}
   isMenu: 0
+  PotdShortcut: {fileID: 714105826}
 --- !u!224 &1853592978
 RectTransform:
   m_ObjectHideFlags: 0

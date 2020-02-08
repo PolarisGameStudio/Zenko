@@ -1,2 +1,0 @@
-com.BrightLights.Zenko.resources
-xml my_backup_rules

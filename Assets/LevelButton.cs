@@ -24,7 +24,7 @@ public class LevelButton : MonoBehaviour
         else{
             if(type == "Potd"){
                 SceneLoading.Instance.PotdSpecific(level);
-                SceneLoading.Instance.ClosePotdMode();
+                
             }
             else if(type == "PotdUnlock"){
                 LevelMenu.Instance.OpenUnlockMenu(level, potdFirst);

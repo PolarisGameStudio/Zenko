@@ -71,6 +71,8 @@ public class LevelBuilder : MonoBehaviour {
 	public static GameObject settingsBoard;
 	public static LevelBuilder Instance;
 
+	public GameObject loadingGO;
+
 	int wallIndex;
 	int holeIndex;
 	int flowerIndex;
@@ -310,6 +312,7 @@ public class LevelBuilder : MonoBehaviour {
 		// foreach (string nline in LevelSaver.currentmap)
 		// Debug.Log(nline);
 		//PopulationManager.readytobrain = true;
+		StartCoroutine(CloseLoading());
 	}
 	public void drawPotd(int num){
 		wallIndex = 0;
@@ -389,6 +392,13 @@ public class LevelBuilder : MonoBehaviour {
 		
 		#endif
 
+		StartCoroutine(CloseLoading());
+
+	}
+	IEnumerator CloseLoading(){
+		yield return new WaitForSeconds(1);
+		Debug.Log("GONNA CLOSE LOADING");
+		loadingGO.SetActive(false);
 	}
 	string[][] readAdventure(int place){
 		place = place-1;

@@ -130,6 +130,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 48
       Script: {instanceID: 0}
+    - Class: 61
+      Script: {instanceID: 0}
     - Class: 64
       Script: {instanceID: 0}
     - Class: 65
@@ -159,6 +161,10 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10306}
     - Class: 114
+      Script: {instanceID: 10330}
+    - Class: 114
+      Script: {instanceID: 10372}
+    - Class: 114
       Script: {instanceID: 10380}
     - Class: 114
       Script: {instanceID: 10524}
@@ -185,11 +191,17 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10904}
     - Class: 114
+      Script: {instanceID: 11018}
+    - Class: 114
       Script: {instanceID: 11108}
+    - Class: 114
+      Script: {instanceID: 11176}
     - Class: 114
       Script: {instanceID: 11398}
     - Class: 114
       Script: {instanceID: 11402}
+    - Class: 114
+      Script: {instanceID: 11522}
     - Class: 114
       Script: {instanceID: 11536}
     - Class: 114
@@ -201,15 +213,23 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11780}
     - Class: 114
+      Script: {instanceID: 11802}
+    - Class: 114
+      Script: {instanceID: 11914}
+    - Class: 114
       Script: {instanceID: 11990}
     - Class: 114
       Script: {instanceID: 12106}
+    - Class: 114
+      Script: {instanceID: 12124}
     - Class: 114
       Script: {instanceID: 12288}
     - Class: 114
       Script: {instanceID: 12364}
     - Class: 114
       Script: {instanceID: 12378}
+    - Class: 114
+      Script: {instanceID: 12430}
     - Class: 114
       Script: {instanceID: 12432}
     - Class: 114
@@ -231,6 +251,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13436}
     - Class: 114
+      Script: {instanceID: 13460}
+    - Class: 114
       Script: {instanceID: 13656}
     - Class: 114
       Script: {instanceID: 13800}
@@ -243,6 +265,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 14010}
     - Class: 114
+      Script: {instanceID: 14128}
+    - Class: 114
       Script: {instanceID: 14246}
     - Class: 114
       Script: {instanceID: 14364}
@@ -252,6 +276,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 14688}
     - Class: 114
       Script: {instanceID: 14694}
+    - Class: 114
+      Script: {instanceID: 14730}
     - Class: 114
       Script: {instanceID: 14760}
     - Class: 114
@@ -1186,7 +1212,7 @@ ScriptsOnlyBuild:
     className: DateChecker
   - hash:
       serializedVersion: 2
-      Hash: 6e0c50199faa368d003f4ccf3d13f0fb
+      Hash: 4b89c5aed43ca45345a839ee22ec65c4
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: SceneLoading
@@ -1234,7 +1260,7 @@ ScriptsOnlyBuild:
     className: LoadingTextAnimator
   - hash:
       serializedVersion: 2
-      Hash: 5ba10f75751e7d42515e8225c768fcd2
+      Hash: 6fd8fc142bb5be54a2e7cefa45fe06d8
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: LevelBuilder
@@ -1878,4 +1904,4 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/WorldSelect.unity
   - Assets/Level.unity
-  playerPath: /Users/bernardolimon/Desktop/ZenkoApk/Zenko_246_Potdshortcut.aab
+  playerPath: /Users/bernardolimon/Desktop/ZenkoApk/Zenko_250.aab
