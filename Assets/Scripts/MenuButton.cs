@@ -153,6 +153,7 @@ public class MenuButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler{
         if(open){
             toggleMenu();
         }
+        
         //set menu to back only.
     }
     public void closeConfigMenu(){

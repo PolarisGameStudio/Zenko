@@ -20,9 +20,11 @@ public class SceneLoading : MonoBehaviour {
 	public bool level;
 	public GameObject buyMenu;
 	bool canOpen;
-
+	public static string menuState;
+	public bool isMenu;
 //	public IceTileHandler myhandler;
 	void Start(){
+		menuState = "Start";
 		canOpen = true;
 		Instance = this;
 		Debug.Log("NEW SCENE LOADING");
@@ -32,10 +34,11 @@ public class SceneLoading : MonoBehaviour {
 		//Application.targetFrameRate = 30;
 		if (!level){ //if loading menu, this is pointless and relies on bugs, try a public bool.
 			MusicHandler.PlayTitleTheme();
+			isMenu = true;
 		}
 		else{//if loading level scenew
 //			Debug.Log(levelnum + "level");
-
+			isMenu = false;
 			PlayServices.instance.SaveLocal();
 			PlayServices.instance.SaveData();
 
@@ -228,7 +231,29 @@ public class SceneLoading : MonoBehaviour {
 		//MusicHandler.PlayInitialLoop();
 
 	}	
+	public void PotdSpecific(int num){
+		LevelBuilder.ChangeBackground("Color_A7A46709",new Color(0,0,0,0), .3f);
 
+		Swiping.mydirection = "Null";
+		//txt.text = "RANDOM POTD";
+		TurnCounter.turncount = 0;
+		LevelManager.ispotd = true;
+		PlayerPrefs.SetInt("PoTD", num);
+		DateChecker.Instance.currentIndex = num;
+		LevelStorer.potdDic[DateChecker.Instance.currentIndex].islocked = false;
+		LevelManager.SpecificPotd(num);
+		TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
+		RatingBehaviour.RestartRating();
+		AssignPotdName();
+		ClosePotdMode();
+		ChangeSprites();
+
+		//MusicHandler.PlayInitialLoop();
+
+	}	
+	public void ChangeSprites(){
+		//transform.Find("Level_Box").Find("ButtonHolder").GetComponent<LevelMenu>().clearMenu();
+	}
 	public void ReBringCurrentPotd(){
 		LevelBuilder.ChangeBackground("Color_A7A46709",new Color(0,0,0,0), .3f);
 
@@ -435,7 +460,7 @@ public class SceneLoading : MonoBehaviour {
 	}
 	public void adventureMode(){
 		if(canOpen){
-
+			menuState = "Adventure";
 			transform.Find("Level_Box").gameObject.SetActive(true);
 
 
@@ -462,43 +487,96 @@ public class SceneLoading : MonoBehaviour {
 		}
 	}
 	public void PuzzleOfTheDayMenu(){
-		if(canOpen){
-			transform.Find("PoTD_Box").gameObject.SetActive(true);
+		if(menuState == "Start"){
+			if(canOpen){
+				menuState = "Potd";
+				transform.Find("PoTD_Box").gameObject.SetActive(true);
 
 
-			transform.Find("PoTD_Box").Find("ButtonHolder").GetComponent<LevelMenu>().clearMenu();
-			//PlayerPrefs.SetInt("CurrentFirst", getCurFirst(LevelMenu.FindHighestSolved()));
-			//PlayerPrefs.Save();
+				transform.Find("PoTD_Box").Find("ButtonHolder").GetComponent<LevelMenu>().clearMenu();
+				//PlayerPrefs.SetInt("CurrentFirst", getCurFirst(LevelMenu.FindHighestSolved()));
+				//PlayerPrefs.Save();
 
-			//GET DATE
-			//USE DATE
-			transform.Find("PoTD_Box").Find("ButtonHolder").GetComponent<LevelMenu>().populatePotdMenu();
+				//GET DATE
+				//USE DATE
+				transform.Find("PoTD_Box").Find("ButtonHolder").GetComponent<LevelMenu>().populatePotdMenu();
+				canOpen = false;
+				if(isMenu){
+					GameModeHandler.TurnOff();
+					transform.Find("MenuHolder").Find("Menu").gameObject.SetActive(false);
+					transform.Find("MenuHolder").Find("ClosePotd_Box").gameObject.SetActive(true);
+					transform.Find("MenuHolder").Find("Config").gameObject.SetActive(false);
+					if(MenuButton.open){
+						MenuButton.thisMB.closeMenu();
 
+					}
 
-			GameModeHandler.TurnOff();
-			transform.Find("MenuHolder").Find("Menu").gameObject.SetActive(false);
-			transform.Find("MenuHolder").Find("ClosePotd_Box").gameObject.SetActive(true);
-			transform.Find("MenuHolder").Find("Config").gameObject.SetActive(false);
-			canOpen = false;			
-			
-			if(MenuButton.open){
-				MenuButton.thisMB.closeMenu();
+					CameraController.Fade(.2f,1f, 1);
 
-			}
-			CameraController.Fade(.2f,1f, 1);
-
-			if(LevelManager.adFree){
-
-			}
-			else{
-				if(HasUnlocked()){
-					//transform.Find("
 				}
-			}
+				if(!isMenu){
+					LevelManager.configging = true;
+        			Swiping.canswipe = false;
+
+					transform.Find("MenuHolder").Find("Menu").gameObject.SetActive(false);
+					transform.Find("MenuHolder").Find("Config").gameObject.SetActive(false);
+					transform.Find("MenuHolder").Find("ClosePotd_Box").gameObject.SetActive(true);
+					
+					if(MenuButton.open){
+						MenuButton.thisMB.closeMenu();
+
+					}
+					CameraController.Fade(.2f,1f, 1);
+
+				}
+							
+				
 
 
+			}	
+		}
+		else if(menuState == "Potd"){
 
 		}
+		else if(menuState == "Adventure"){
+			closeAdventureMode();
+			if(canOpen){
+				menuState = "Potd";
+				transform.Find("PoTD_Box").gameObject.SetActive(true);
+
+
+				transform.Find("PoTD_Box").Find("ButtonHolder").GetComponent<LevelMenu>().clearMenu();
+				//PlayerPrefs.SetInt("CurrentFirst", getCurFirst(LevelMenu.FindHighestSolved()));
+				//PlayerPrefs.Save();
+
+				//GET DATE
+				//USE DATE
+				transform.Find("PoTD_Box").Find("ButtonHolder").GetComponent<LevelMenu>().populatePotdMenu();
+
+
+				GameModeHandler.TurnOff();
+				transform.Find("MenuHolder").Find("Menu").gameObject.SetActive(false);
+				transform.Find("MenuHolder").Find("ClosePotd_Box").gameObject.SetActive(true);
+				transform.Find("MenuHolder").Find("Config").gameObject.SetActive(false);
+				canOpen = false;			
+				
+				if(MenuButton.open){
+					MenuButton.thisMB.closeMenu();
+
+				}
+				CameraController.Fade(.2f,1f, 1);
+
+				if(LevelManager.adFree){
+
+				}
+				else{
+					if(HasUnlocked()){
+						//transform.Find("
+					}
+				}
+			}
+		}
+		
 		//LevelMenu.Instance.CheckDownUpButtons(getCurFirst(LevelMenu.FindHighestSolved()));		
 	}
 
@@ -524,31 +602,58 @@ public class SceneLoading : MonoBehaviour {
 	}
 
 	public void ClosePotdMode(){
+		menuState = "Start";
 		transform.Find("PoTD_Box").Find("ButtonHolder").GetComponent<LevelMenu>().CloseUnlockMenu();
 		transform.Find("PoTD_Box").gameObject.SetActive(false);
 
+		if(isMenu){
+			transform.Find("PoTD_Box").Find("ButtonHolder").GetComponent<LevelMenu>().currentfirst = PlayerPrefs.GetInt("CurrentFirst");
+
+
+			transform.Find("MenuHolder").Find("Menu").gameObject.SetActive(true);
+			transform.Find("MenuHolder").Find("ClosePotd_Box").gameObject.SetActive(false);
+			GameModeHandler.Return();		
+
+			CameraController.Fade(.2f,0f);			
+		}
+		else{
+			transform.Find("PoTD_Box").Find("ButtonHolder").GetComponent<LevelMenu>().currentfirst = PlayerPrefs.GetInt("CurrentFirst");
+			transform.Find("MenuHolder").Find("Menu").gameObject.SetActive(true);
+			transform.Find("MenuHolder").Find("ClosePotd_Box").gameObject.SetActive(false);
+			CameraController.Fade(.2f,0f);	
+			LevelManager.configging = false;
+        	Swiping.canswipe = true;
+        	Swiping.mydirection = "Null";
+        	TutorialHandler.Instance.TutorialClosebutton();
+	        if(Input.touchCount>0){
+	            Touch t = Input.GetTouch(0);
+	            Swiping.firstPressPos = new Vector2(t.position.x,t.position.y);
+
+	        }
+	        else{
+	            Swiping.firstPressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+	        }
+
+		}
 		//remove curbuttons
-		transform.Find("PoTD_Box").Find("ButtonHolder").GetComponent<LevelMenu>().currentfirst = PlayerPrefs.GetInt("CurrentFirst");
 
-
-		transform.Find("MenuHolder").Find("Menu").gameObject.SetActive(true);
-		transform.Find("MenuHolder").Find("ClosePotd_Box").gameObject.SetActive(false);
-		GameModeHandler.Return();		
-
-		CameraController.Fade(.2f,0f);
 		canOpen = true;
 	}
 
 	public void closeAdventureMode(){
+		menuState = "Start";
 		transform.Find("Level_Box").gameObject.SetActive(false);
 		//remove curbuttons
 		transform.Find("Level_Box").Find("ButtonHolder").GetComponent<LevelMenu>().currentfirst = PlayerPrefs.GetInt("CurrentFirst");
 
-
+		if(isMenu){
 		transform.Find("MenuHolder").Find("Menu").gameObject.SetActive(true);
 		transform.Find("MenuHolder").Find("CloseLevel_Box").gameObject.SetActive(false);
 		GameModeHandler.Return();		
-		CameraController.Fade(.2f,0f);
+		CameraController.Fade(.2f,0f);	
+		}
+
+		
 		canOpen = true;
 	}
 	public void GoToWorldSelect(){

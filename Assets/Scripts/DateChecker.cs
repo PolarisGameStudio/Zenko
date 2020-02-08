@@ -103,6 +103,7 @@ public class DateChecker : MonoBehaviour
 		// todayDate = "2019-01-13";
 		// #endif
 		PotdUnlocker.Instance.Initiate();
+		PotdShortcut.Instance.AssignPotdShortcutAssets(PotdUnlocker.Instance.keysAvailable);
 
 	}
 

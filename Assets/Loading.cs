@@ -46,7 +46,7 @@ public class Loading : MonoBehaviour
 	void FixedUpdate(){
 		if(!finished){
 			time = time + Time.fixedDeltaTime;
-			Debug.Log(time);
+			//Debug.Log(time);
 			if (time>10){
 				if(!loaded)
 					Loaded();	

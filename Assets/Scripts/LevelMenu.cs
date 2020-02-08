@@ -73,7 +73,12 @@ public class LevelMenu : MonoBehaviour {
 		PotdUnlocker.Instance.keysAvailable--;
 		Debug.Log(PotdUnlocker.Instance.keysAvailable);
 		PlayerPrefs.SetInt("KeysAvailable", PotdUnlocker.Instance.keysAvailable);	
-		SceneLoading.Instance.LoadPotdMap(num);
+		if(SceneLoading.Instance.isMenu){
+			SceneLoading.Instance.LoadPotdMap(num);
+		}
+		else{
+			SceneLoading.Instance.PotdSpecific(num);
+		}
 	}
 	public void OpenUnlockMenu(int num, int starter){
 		//UnlockMenu = GameObject.Find("UnlockPotdMenu");

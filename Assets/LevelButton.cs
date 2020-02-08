@@ -10,14 +10,25 @@ public class LevelButton : MonoBehaviour
     // Start is called before the first frame update
 
     public void Click(){
-    	if(type == "Adventure"){
-    		SceneLoading.Instance.LoadLevel(level);
-    	}
-    	else if(type == "Potd"){
-    		SceneLoading.Instance.LoadPotdMap(level);
-    	}
-    	else if(type == "PotdUnlock"){
-    		LevelMenu.Instance.OpenUnlockMenu(level, potdFirst);
-    	}
+        if(SceneLoading.Instance.isMenu){
+            if(type == "Adventure"){
+                SceneLoading.Instance.LoadLevel(level);
+            }
+            else if(type == "Potd"){
+                SceneLoading.Instance.LoadPotdMap(level);
+            }
+            else if(type == "PotdUnlock"){
+                LevelMenu.Instance.OpenUnlockMenu(level, potdFirst);
+            }
+        }
+        else{
+            if(type == "Potd"){
+                SceneLoading.Instance.PotdSpecific(level);
+                SceneLoading.Instance.ClosePotdMode();
+            }
+            else if(type == "PotdUnlock"){
+                LevelMenu.Instance.OpenUnlockMenu(level, potdFirst);
+            }
+        }
     }
 }

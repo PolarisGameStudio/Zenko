@@ -33,6 +33,7 @@ public class CameraController : MonoBehaviour {
 		Instance = GameObject.Find("Main Canvas").GetComponent<CameraController>();
 	}
 	void Start(){
+		Instance = GameObject.Find("Main Canvas").GetComponent<CameraController>();
 		//Application.targetFrameRate = 30;
 
 	}
@@ -78,15 +79,20 @@ public class CameraController : MonoBehaviour {
 		image.color = tempColor;
 	}
 	public static void Fade(float time, float alphaPercentage, int place){
+		Debug.Log(Instance + "IS INSTANCE");
 		if(Instance == null)
 		Instance = GameObject.Find("Main Canvas").GetComponent<CameraController>();
 		//Debug.Log(GameObject.Find("Main Canvas").GetComponent<CameraController>());
 		Debug.Log(Instance + "IS THE INSTANCE OF CAMERACONTROLLER");
 		int world = Mathf.FloorToInt((place-1)/40)  + 1;
 		Instance.gameModeBackground.GetComponent<Image>().sprite = Instance.CheckBackground(world);
-		Instance.WorldTitle.GetComponent<Image>().sprite = Instance.CheckWorldName(world);
-		Instance.World.GetComponent<Image>().sprite = Instance.CheckWorldSprite(world);
-		Instance.World.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = Instance.CheckWorldNumber(world);
+		if(SceneLoading.Instance.isMenu){
+			Instance.WorldTitle.GetComponent<Image>().sprite = Instance.CheckWorldName(world);
+			Instance.World.GetComponent<Image>().sprite = Instance.CheckWorldSprite(world);
+			Instance.World.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = Instance.CheckWorldNumber(world);
+
+		}
+		Instance.gameModeBackground.GetComponent<Image>().enabled = true;
 		Instance.StartCoroutine(Instance.FadeBackgroundTo(time,alphaPercentage));
 
 	}

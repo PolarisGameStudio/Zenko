@@ -47,6 +47,7 @@ ScriptsOnlyBuild:
     - PlayerAnimation
     - PlayerMovement
     - PotdHolder
+    - PotdShortcut
     - PotdUnlocker
     - ProgressBar
     - RatingBehaviour
@@ -230,35 +231,35 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13436}
     - Class: 114
-      Script: {instanceID: 13654}
+      Script: {instanceID: 13656}
     - Class: 114
-      Script: {instanceID: 13798}
+      Script: {instanceID: 13800}
     - Class: 114
-      Script: {instanceID: 13892}
+      Script: {instanceID: 13894}
     - Class: 114
-      Script: {instanceID: 13908}
+      Script: {instanceID: 13910}
     - Class: 114
-      Script: {instanceID: 13928}
+      Script: {instanceID: 13930}
     - Class: 114
-      Script: {instanceID: 14008}
+      Script: {instanceID: 14010}
     - Class: 114
-      Script: {instanceID: 14244}
+      Script: {instanceID: 14246}
     - Class: 114
-      Script: {instanceID: 14362}
+      Script: {instanceID: 14364}
     - Class: 114
-      Script: {instanceID: 14594}
+      Script: {instanceID: 14596}
     - Class: 114
-      Script: {instanceID: 14686}
+      Script: {instanceID: 14688}
     - Class: 114
-      Script: {instanceID: 14692}
+      Script: {instanceID: 14694}
     - Class: 114
-      Script: {instanceID: 14758}
+      Script: {instanceID: 14760}
     - Class: 114
-      Script: {instanceID: 14798}
+      Script: {instanceID: 14800}
     - Class: 114
-      Script: {instanceID: 14852}
+      Script: {instanceID: 14854}
     - Class: 114
-      Script: {instanceID: 14866}
+      Script: {instanceID: 14868}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -417,37 +418,39 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13436}
     - Class: 114
-      Script: {instanceID: 13598}
+      Script: {instanceID: 13460}
     - Class: 114
-      Script: {instanceID: 13654}
+      Script: {instanceID: 13600}
     - Class: 114
-      Script: {instanceID: 13742}
+      Script: {instanceID: 13656}
     - Class: 114
-      Script: {instanceID: 13798}
+      Script: {instanceID: 13744}
     - Class: 114
-      Script: {instanceID: 13852}
+      Script: {instanceID: 13800}
     - Class: 114
-      Script: {instanceID: 13868}
+      Script: {instanceID: 13854}
     - Class: 114
-      Script: {instanceID: 13928}
+      Script: {instanceID: 13870}
     - Class: 114
-      Script: {instanceID: 14038}
+      Script: {instanceID: 13930}
     - Class: 114
-      Script: {instanceID: 14126}
+      Script: {instanceID: 14040}
     - Class: 114
-      Script: {instanceID: 14244}
+      Script: {instanceID: 14128}
     - Class: 114
-      Script: {instanceID: 14654}
+      Script: {instanceID: 14246}
     - Class: 114
-      Script: {instanceID: 14692}
+      Script: {instanceID: 14656}
     - Class: 114
-      Script: {instanceID: 14716}
+      Script: {instanceID: 14694}
     - Class: 114
-      Script: {instanceID: 14728}
+      Script: {instanceID: 14718}
     - Class: 114
-      Script: {instanceID: 14750}
+      Script: {instanceID: 14730}
     - Class: 114
-      Script: {instanceID: 14758}
+      Script: {instanceID: 14752}
+    - Class: 114
+      Script: {instanceID: 14760}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -1501,6 +1504,12 @@ ScriptsOnlyBuild:
     className: BuyMenu
   - hash:
       serializedVersion: 2
+      Hash: 1823793ccfeb6c78be14985fc2972157
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PotdShortcut
+  - hash:
+      serializedVersion: 2
       Hash: 23b81d05a0ad0499613fc3e1a4a0501b
     assemblyName: Unity.RenderPipelines.Lightweight.Runtime.dll
     namespaceName: UnityEngine.Rendering.LWRP
@@ -1869,4 +1878,4 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/WorldSelect.unity
   - Assets/Level.unity
-  playerPath: /Users/bernardolimon/Desktop/ZenkoApk/Zenko_245.aab
+  playerPath: /Users/bernardolimon/Desktop/ZenkoApk/Zenko_246_Potdshortcut.aab
