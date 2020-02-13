@@ -14,6 +14,7 @@ public class NoAdScript : MonoBehaviour
             this.transform.GetComponent<Image>().enabled = true;
         }
         else{
+            this.transform.GetComponent<Image>().enabled = false;
             this.gameObject.SetActive(false);
             givenAdFree = true;
         }

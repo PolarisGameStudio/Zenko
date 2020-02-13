@@ -21,15 +21,22 @@ public class LevelStats {
 public class PotdStats{
 	public bool islocked;
 	public int rating;
+	public bool isNew;
 
 	public PotdStats(){
 	islocked = true;
 	rating = 0;
+	isNew = true;
 	}
 
 	public PotdStats(bool newIsLocked, int newRating){
 		islocked = newIsLocked;
 		rating = newRating;
+		if(rating!=0)
+		isNew = true;
+		else{
+		isNew = false;
+		}
 	}
 }
 

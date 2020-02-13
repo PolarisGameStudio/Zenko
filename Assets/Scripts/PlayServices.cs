@@ -296,7 +296,6 @@ public class PlayServices : MonoBehaviour
     			LevelStorer.potdDic[i].rating = rating-1;
     			LevelStorer.potdDic[i].islocked = false;
     		}
-
     	}
     }
 

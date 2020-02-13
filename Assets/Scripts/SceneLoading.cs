@@ -241,7 +241,9 @@ public class SceneLoading : MonoBehaviour {
 		LevelManager.ispotd = true;
 		PlayerPrefs.SetInt("PoTD", num);
 		DateChecker.Instance.currentIndex = num;
-		LevelStorer.potdDic[DateChecker.Instance.currentIndex].islocked = false;
+		LevelStorer.potdDic[num].islocked = false;
+		LevelStorer.potdDic[num].isNew = false;
+		PotdShortcut.GetComponent<PotdShortcut>().AssignPotdShortcutAssets(PotdUnlocker.Instance.keysAvailable);
 		LevelManager.SpecificPotd(num);
 		TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
 		RatingBehaviour.RestartRating();
@@ -274,6 +276,7 @@ public class SceneLoading : MonoBehaviour {
 		PlayerPrefs.SetInt("PoTD", index);
 		DateChecker.Instance.currentIndex = index;
 		LevelStorer.potdDic[DateChecker.Instance.currentIndex].islocked = false;
+		LevelStorer.potdDic[DateChecker.Instance.currentIndex].isNew = false;
 		Debug.Log ("Going to Scene POTD at " + num);
 
 		//LevelStorer.Lookfor(num);
@@ -502,11 +505,13 @@ public class SceneLoading : MonoBehaviour {
 				//USE DATE
 				transform.Find("PoTD_Box").Find("ButtonHolder").GetComponent<LevelMenu>().populatePotdMenu();
 				canOpen = false;
+				TurnOffIfAdFree.Instance.SetImages();
 				if(isMenu){
 					GameModeHandler.TurnOff();
 					transform.Find("MenuHolder").Find("Menu").gameObject.SetActive(false);
 					transform.Find("MenuHolder").Find("ClosePotd_Box").gameObject.SetActive(true);
 					transform.Find("MenuHolder").Find("Config").gameObject.SetActive(false);
+
 					if(MenuButton.open){
 						MenuButton.thisMB.closeMenu();
 
