@@ -136,6 +136,8 @@ namespace CompleteProject
             PlayerPrefs.Save();
             PlayServices.instance.SaveLocal();
             PlayServices.instance.SaveData();
+            //Close buymenu
+            //Refresh if potd menu open.
         }
 
         // Restore purchases previously made by this customer. Some platforms automatically restore purchases, like Google. 

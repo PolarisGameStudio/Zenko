@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,10 +19,12 @@ public class PotdShortcut : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        Debug.Log(LevelStorer.potdDic[DateChecker.Instance.todayIndex].isNew + " " + LevelStorer.potdDic[DateChecker.Instance.todayIndex].islocked + " " + LevelStorer.potdDic[DateChecker.Instance.todayIndex].rating);
-    }
+    // void Update()
+    // {
+    //     // Debug.Log(LevelStorer.potdDic[DateChecker.Instance.todayIndex].isNew + " " +
+    //     //  LevelStorer.potdDic[DateChecker.Instance.todayIndex].islocked + " " + 
+    //     //  LevelStorer.potdDic[DateChecker.Instance.todayIndex].rating);
+    // }
 
     bool IsTodayNew(){
     	return true;
