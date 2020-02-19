@@ -23,6 +23,7 @@ public class SceneLoading : MonoBehaviour {
 	public static string menuState;
 	public bool isMenu;
 	public GameObject PotdShortcut;
+	//public bool isPotdOpen;
 //	public IceTileHandler myhandler;
 	void Start(){
 		menuState = "Start";
@@ -531,16 +532,11 @@ public class SceneLoading : MonoBehaviour {
 					
 					if(MenuButton.open){
 						MenuButton.thisMB.closeMenu();
-
 					}
+
 					CameraController.Fade(.2f,1f, 1);
 					transform.Find("NOADS").gameObject.SetActive(true);
-
 				}
-							
-				
-
-
 			}	
 		}
 		else if(menuState == "Potd"){

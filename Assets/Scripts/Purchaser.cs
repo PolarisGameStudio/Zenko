@@ -136,8 +136,17 @@ namespace CompleteProject
             PlayerPrefs.Save();
             PlayServices.instance.SaveLocal();
             PlayServices.instance.SaveData();
+            GameObject.Find("BuyMenu").SetActive(false);
+            if(SceneLoading.menuState == "Potd"){
+                SceneLoading.Instance.ClosePotdMode();
+                SceneLoading.Instance.PuzzleOfTheDayMenu();   
+            }
+            PotdShortcut.Instance.AssignPotdShortcutAssets(PotdUnlocker.Instance.keysAvailable);
+
+
             //Close buymenu
             //Refresh if potd menu open.
+            //Remove Keys on button
         }
 
         // Restore purchases previously made by this customer. Some platforms automatically restore purchases, like Google. 

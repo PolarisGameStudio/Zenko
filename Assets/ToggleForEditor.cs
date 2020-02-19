@@ -15,8 +15,7 @@ public class ToggleForEditor : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
+    public void DeletePlayerPrefs(){
+        PlayerPrefs.DeleteAll();
     }
 }
