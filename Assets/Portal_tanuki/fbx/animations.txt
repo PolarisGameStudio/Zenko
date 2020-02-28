@@ -1,0 +1,16 @@
+Tanuki
+
+Idle
+11-49
+
+Enter Portal
+61-80
+
+Exit Portal
+91-110
+
+Idle Air
+120-131
+
+Landing
+140-155

@@ -549,6 +549,7 @@
      <None Include="Assets\StreamingAssets\Level11.txt" />
      <None Include="Assets\StreamingAssets\Ch2_5x5_Candidates.txt" />
      <None Include="Assets\StreamingAssets\Level-5.txt" />
+     <None Include="Assets\Portal_tanuki\fbx\animations.txt" />
      <None Include="Assets\StreamingAssets\Level-15.txt" />
      <None Include="Assets\StreamingAssets\Level-18.txt" />
      <None Include="Assets\StreamingAssets\Ch4notboring2.txt" />

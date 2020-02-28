@@ -528,12 +528,14 @@ public class LevelBuilder : MonoBehaviour {
 	public Transform floor_fragile;
 	public Transform floor_quicksand;
 	public Transform floor_boss;
+	public Transform floor_portal;
 
 	public Transform s_floor_left;
 	public Transform s_floor_right;
 	public Transform s_floor_up;
 	public Transform s_floor_down;
 	public Transform s_floor_rock;
+
 
 	
 	public static int levelnum;
@@ -559,6 +561,11 @@ public class LevelBuilder : MonoBehaviour {
 	public const string ssfloor_up = "u";
 	public const string ssfloor_down = "d";
 	public const string ssfloor_rock = "p";
+
+	public const string sfloor_portalleft = "PL";
+	public const string sfloor_portalright = "PR";
+	public const string sfloor_portalup = "PU";
+	public const string sfloor_portaldown = "PD";
 
 	float mysnowh;
 	int piecenums;
@@ -1391,6 +1398,49 @@ public class LevelBuilder : MonoBehaviour {
 			}
 			
 		}
+		if(jagged[y][x].Length ==4){
+			Debug.Log("LENGTH 4");
+			populateIce();
+		//					Debug.Log(jagged[y][x].Substring(0,1));
+			int hintx = int.Parse(jagged[y][x].Substring(2,1));
+			int hinty = int.Parse(jagged[y][x].Substring(3,1));
+			Debug.Log("HINT AT " + hintx + hinty);
+
+				switch(jagged[y][x].Substring(0,2)){
+
+				case sfloor_portalleft:
+					//LevelManager.piecetiles.Add (Instantiate	(floor_left, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,270,0))));
+					//LevelManager.myhints.Add(new Vector2 (hintx,hinty));
+					LevelManager.hints.Add(new Hint("PortalLeft", hintx,hinty));
+					//pieceHolder.AddPiece("Left");
+					PlaceCreature("PortalLeft");
+					break;
+				case sfloor_portalright:
+				Debug.Log("PORTAL RIGHT");
+					//LevelManager.piecetiles.Add (Instantiate	(floor_right, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,90,0))));
+					//LevelManager.myhints.Add(new Vector2 (hintx,hinty));
+					//pieceHolder.AddPiece("Right");
+					LevelManager.hints.Add(new Hint("PortalRight", hintx,hinty));
+					PlaceCreature("PortalRight");
+					break;
+				case sfloor_portalup:
+				Debug.Log("PORTAL UP");
+					//LevelManager.piecetiles.Add (Instantiate	(floor_up, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,0,0))));
+					//LevelManager.myhints.Add(new Vector2 (hintx,hinty));
+					//pieceHolder.AddPiece("Up");
+					LevelManager.hints.Add(new Hint("PortalUp", hintx,hinty));
+					PlaceCreature("PortalUp");
+					break;
+				case sfloor_portaldown:
+					//LevelManager.piecetiles.Add (Instantiate	(floor_down, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,180,0))));
+					//LevelManager.myhints.Add(new Vector2 (hintx,hinty));
+					//pieceHolder.AddPiece("Down");
+					LevelManager.hints.Add(new Hint("PortalDown", hintx,hinty));
+					PlaceCreature("PortalDown");
+					break;
+				}
+				piecenums++;				
+		}
 		if(jagged[y][x].Length ==2){	
 			LevelStorer.efficientturns = int.Parse(jagged[y][x].Substring(1,1));
 			//Debug.Log("Assigned turns as " + LevelStorer.efficientturns);
@@ -1539,11 +1589,16 @@ public class LevelBuilder : MonoBehaviour {
 			LevelManager.placedPieces[(int)tileplace.x,(int)tileplace.y] = creaturetype;
 		string myseedtype = "Not";
 		if(creaturetype.Length>5){
-			myseedtype = creaturetype.Substring(0,creaturetype.Length-4);
-			creaturetype = creaturetype.Substring(creaturetype.Length-4,4);	
-			//Debug.Log("seedtype is " + myseedtype);
-			LevelManager.placedPieces[(int)tileplace.x,(int)tileplace.y] = myseedtype;
-
+			if(creaturetype.Substring(creaturetype.Length-4,4) == "Seed"){
+				myseedtype = creaturetype.Substring(0,creaturetype.Length-4);
+				creaturetype = creaturetype.Substring(creaturetype.Length-4,4);	
+				//Debug.Log("seedtype is " + myseedtype);
+				LevelManager.placedPieces[(int)tileplace.x,(int)tileplace.y] = myseedtype;	
+				//Debug.Log("SEEDSPLITTEXT");
+			}
+			else{
+				LevelManager.placedPieces[(int)tileplace.x,(int)tileplace.y] = creaturetype;
+			}
 		}
 		switch(creaturetype){
 		case "Wall":
@@ -1613,6 +1668,44 @@ public class LevelBuilder : MonoBehaviour {
 			}
 			PieceHolders.placedpieces.Add(downpiece.gameObject.GetComponent<Dragger>());
 			break;
+
+		case "PortalLeft":
+
+			Transform portalleftpiece = Instantiate (floor_portal, pieceplace, Quaternion.Euler(new Vector3(0,270,0)));
+			//leftpiece.gameObject.GetComponentInChildren<Animator>().SetInteger("Phase",2);
+			currenttile.isTaken = true;
+			currenttile.type = "Wall";
+			currenttile.tileObj = portalleftpiece.gameObject;
+			PieceHolders.placedpieces.Add(portalleftpiece.gameObject.GetComponent<Dragger>());
+			break;
+		case "PortalUp":
+			Debug.Log("PU");
+			Debug.Log("PIECEPLACE ISS " + pieceplace);
+			Transform portaluppiece = Instantiate (floor_portal, pieceplace, Quaternion.Euler(new Vector3(0,0,0)));
+			//portaluppiece.gameObject.GetComponentInChildren<Animator>().SetInteger("Phase",2);
+			currenttile.isTaken = true;
+			currenttile.type = "Wall";
+			currenttile.tileObj = portaluppiece.gameObject;
+			PieceHolders.placedpieces.Add(portaluppiece.gameObject.GetComponent<Dragger>());
+			break;
+		case "PortalRight":
+			Debug.Log("PR");
+			Transform portalrightpiece = Instantiate (floor_portal, pieceplace, Quaternion.Euler(new Vector3(0,90,0)));
+			//portalrightpiece.gameObject.GetComponentInChildren<Animator>().SetInteger("Phase",2);
+			currenttile.isTaken = true;
+			currenttile.type = "Wall";
+			currenttile.tileObj = portalrightpiece.gameObject;
+			PieceHolders.placedpieces.Add(portalrightpiece.gameObject.GetComponent<Dragger>());
+			break;
+		case "PortalDown":
+			Transform portaldownpiece = Instantiate (floor_portal, pieceplace, Quaternion.Euler(new Vector3(0,180,0)));
+			//downpiece.gameObject.GetComponentInChildren<Animator>().SetInteger("Phase",2);				
+			currenttile.isTaken = true;
+			currenttile.type = "Wall";
+			currenttile.tileObj = portaldownpiece.gameObject;
+			PieceHolders.placedpieces.Add(portaldownpiece.gameObject.GetComponent<Dragger>());
+			break;
+
 		case "Seed":
 			Transform seedpiece;
 			switch(myseedtype){
@@ -1620,46 +1713,46 @@ public class LevelBuilder : MonoBehaviour {
 				seedpiece = Instantiate (s_floor_rock, pieceplace, Quaternion.identity);
 				currenttile.tileObj = seedpiece.gameObject;	
 				PieceHolders.placedpieces.Add(seedpiece.gameObject.GetComponent<Dragger>());	
-			currenttile.isTaken = true;
-			currenttile.type = "Seed";
-			//Debug.Log("Seed type is " + myseedtype);
-			currenttile.seedType = myseedtype;
+				currenttile.isTaken = true;
+				currenttile.type = "Seed";
+				//Debug.Log("Seed type is " + myseedtype);
+				currenttile.seedType = myseedtype;
 				break;
 			case "Left":
 				seedpiece = Instantiate (s_floor_left, pieceplace, Quaternion.Euler(new Vector3(0,270,0)));
 				currenttile.tileObj = seedpiece.gameObject;	
 				PieceHolders.placedpieces.Add(seedpiece.gameObject.GetComponent<Dragger>());
-			currenttile.isTaken = true;
-			currenttile.type = "Seed";
-			//Debug.Log("Seed type is " + myseedtype);
-			currenttile.seedType = myseedtype;					
+				currenttile.isTaken = true;
+				currenttile.type = "Seed";
+				//Debug.Log("Seed type is " + myseedtype);
+				currenttile.seedType = myseedtype;					
 				break;
 			case "Up":
 				seedpiece = Instantiate (s_floor_up, pieceplace, Quaternion.Euler(new Vector3(0,0,0)));
 				currenttile.tileObj = seedpiece.gameObject;	
 				PieceHolders.placedpieces.Add(seedpiece.gameObject.GetComponent<Dragger>());
-			currenttile.isTaken = true;
-			currenttile.type = "Seed";
-			//Debug.Log("Seed type is " + myseedtype);
-			currenttile.seedType = myseedtype;
+				currenttile.isTaken = true;
+				currenttile.type = "Seed";
+				//Debug.Log("Seed type is " + myseedtype);
+				currenttile.seedType = myseedtype;
 				break;
 			case "Right":
 				seedpiece = Instantiate (s_floor_right, pieceplace, Quaternion.Euler(new Vector3(0,90,0)));
 				currenttile.tileObj = seedpiece.gameObject;	
 				PieceHolders.placedpieces.Add(seedpiece.gameObject.GetComponent<Dragger>());
-			currenttile.isTaken = true;
-			currenttile.type = "Seed";
-			//Debug.Log("Seed type is " + myseedtype);
-			currenttile.seedType = myseedtype;
+				currenttile.isTaken = true;
+				currenttile.type = "Seed";
+				//Debug.Log("Seed type is " + myseedtype);
+				currenttile.seedType = myseedtype;
 				break;
 			case "Down":
 				seedpiece = Instantiate (s_floor_down, pieceplace, Quaternion.Euler(new Vector3(0,180,0)));
 				currenttile.tileObj = seedpiece.gameObject;	
 				PieceHolders.placedpieces.Add(seedpiece.gameObject.GetComponent<Dragger>());
-			currenttile.isTaken = true;
-			currenttile.type = "Seed";
-			//Debug.Log("Seed type is " + myseedtype);
-			currenttile.seedType = myseedtype;
+				currenttile.isTaken = true;
+				currenttile.type = "Seed";
+				//Debug.Log("Seed type is " + myseedtype);
+				currenttile.seedType = myseedtype;
 				break;
 			}
 			//seedpiece.gameObject.GetComponentInChildren<Animator>().SetInteger("Phase",2);				

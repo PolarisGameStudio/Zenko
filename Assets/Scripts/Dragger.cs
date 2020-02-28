@@ -53,6 +53,8 @@ public class Dragger : MonoBehaviour {
 	}
 
 	void FixedUpdate(){
+		//Debug.Log(transform.position);
+		//Debug.Log(mytile + "tiltype: " + mytile.type + " isitaken " + mytile.isTaken);
 		//Debug.Log(Input.touchCount);
 		if(readyToPop){
 			if(Vector3.Distance(LevelManager.playert.position, transform.position) < .7){///FIX THIS
@@ -144,9 +146,12 @@ public class Dragger : MonoBehaviour {
 				if(positiontogo.x == 0 && positiontogo.y ==0 && positiontogo.z == 0){
 					positiontogo = transform.position;
 				}
-				Debug.Log(positiontogo);
+				Debug.Log(transform.position);
+				Debug.Log(positiontogo + " " + Mathf.RoundToInt(positiontogo.x) + -Mathf.RoundToInt(positiontogo.z));
 				mytile = LevelBuilder.tiles[Mathf.RoundToInt(positiontogo.x), -Mathf.RoundToInt(positiontogo.z)];
+				Debug.Log(mytile);
 				mytile.type = "Ice";
+				Debug.Log(mytile  + "tiltype: " + mytile.type +  " isitaken " + mytile.isTaken);
 				LevelManager.placedPieces[Mathf.RoundToInt(positiontogo.x), -Mathf.RoundToInt(positiontogo.z)] = null;
 				//Debug.Log("UNTAKING IT at" + (int)gameObject.transform.position.x + -(int)gameObject.transform.position.z + "Type "+ myType);
 				//Debug.Log("UNTOOK AT" + gameObject.transform.position.x + -gameObject.transform.position.z);
@@ -282,10 +287,9 @@ public void OnMouseDrag()
 			positiontogo = PlaneBehavior.planePos;	
 			piecePosition = new Vector3(PlaneBehavior.planePos.x, PlaneBehavior.planePos.y, PlaneBehavior.planePos.z);
 			positiontogo = new Vector3(Mathf.RoundToInt(PlaneBehavior.planePos.x), PlaneBehavior.planePos.y, Mathf.RoundToInt(PlaneBehavior.planePos.z));	
-//			Debug.Log("positiontogo" + positiontogo);
+			Debug.Log("positiontogo" + positiontogo);
 //			Debug.Log("value of test" + LevelBuilder.tiles[2,1].isTaken);
 //			Debug.Log("isreadytodrop" + PlaneBehavior.readyToDrop);
-
 			if(lastposition != positiontogo || currenttile == null){
 				//Debug.Log("Change");	
 				CheckAvailableTile(positiontogo);
@@ -372,7 +376,7 @@ public void OnMouseDrag()
 		}
 		if(currenttile!= null && currenttile != pasttile){
 			currenttile.GetComponent<MouseOverer>().Enter();
-			transform.GetChild(1).gameObject.SetActive(true);	
+			//transform.GetChild(1).gameObject.SetActive(true);	
 			if(PlaneBehavior.readyToDrop){
 				lastgoodtile = currenttile;	
 				SfxHandler.Instance.Drag();

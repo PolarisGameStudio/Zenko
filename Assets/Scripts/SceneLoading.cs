@@ -154,6 +154,25 @@ public class SceneLoading : MonoBehaviour {
 		TutorialHandler.Instance.HelpButton();
 		MenuButton.thisMB.closeMenu();
 	}
+	public void TestLevel(){
+		Swiping.mydirection = "Null";
+		LevelBuilder.ChangeBackground("Color_A7A46709",new Color(0,0,0,0), .3f);
+		LevelManager.israndom = false;
+		//Debug.Log("Next button");
+
+		LevelManager.levelnum++;
+		AssignLevelName();
+
+		//LevelStorer.UnlockLevel (LevelManager.levelnum);
+		//LevelStorer.Lookfor (LevelManager.levelnum);
+
+		TurnCounter.turncount = 0;
+		LevelManager.NextLevel(161);
+		TurnGraphics.SetTurnCounter(161);
+		
+		Swiping.mydirection = "Null";
+		RatingBehaviour.RestartRating();
+	}
 	public void NextWon(){
 		Swiping.mydirection = "Null";
 		if(LevelManager.ispotd){

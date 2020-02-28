@@ -18,6 +18,7 @@ TagManager:
   - Up
   - Down
   - Environment
+  - Portal
   layers:
   - Default
   - TransparentFX
