@@ -913,6 +913,7 @@ public class PieceHolders : MonoBehaviour {
 		LevelBuilder.tiles[(int)positiontogo.x, (int)positiontogo.y].type = td.myType;
 		LevelBuilder.tiles[(int)positiontogo.x, (int)positiontogo.y].isTaken = true;
 		LevelBuilder.tiles[(int)positiontogo.x, (int)positiontogo.y].tileObj = td.gameObject;	
+		LevelBuilder.tiles[(int)positiontogo.x, (int)positiontogo.y].portalType = td.portalType;
 		if(td.myType == "Seed"){
 			LevelBuilder.tiles[(int)positiontogo.x, (int)positiontogo.y].seedType = td.mySeedType;
 		}

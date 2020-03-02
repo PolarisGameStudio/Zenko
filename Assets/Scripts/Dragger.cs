@@ -16,6 +16,7 @@ public class Dragger : MonoBehaviour {
 	public string myType;
 	Tile mytile;
 	public string mySeedType;
+	public string portalType;
 	public GameObject myshrinker;
 	public GameObject myBigger;
 	public bool readyToPop;
@@ -34,6 +35,7 @@ public class Dragger : MonoBehaviour {
 	public PieceHolders pieceHolder;
 	public Vector3 piecePosition;
 	public GameObject takenTile;
+
 	void Start(){
 		particle = GameObject.Find("Main Camera").GetComponent<LevelBuilder>().smoke_particle.gameObject;
 		restingpoint = transform.position;
@@ -151,6 +153,7 @@ public class Dragger : MonoBehaviour {
 				mytile = LevelBuilder.tiles[Mathf.RoundToInt(positiontogo.x), -Mathf.RoundToInt(positiontogo.z)];
 				Debug.Log(mytile);
 				mytile.type = "Ice";
+				mytile.portalType = null;
 				Debug.Log(mytile  + "tiltype: " + mytile.type +  " isitaken " + mytile.isTaken);
 				LevelManager.placedPieces[Mathf.RoundToInt(positiontogo.x), -Mathf.RoundToInt(positiontogo.z)] = null;
 				//Debug.Log("UNTAKING IT at" + (int)gameObject.transform.position.x + -(int)gameObject.transform.position.z + "Type "+ myType);
@@ -219,9 +222,10 @@ public class Dragger : MonoBehaviour {
         OnMouseUp();
         Vector3 position = new Vector2 (postogo.x, -postogo.z);
         //Debug.Log(position);
-		if(myType == "Wall" || myType == "Seed"){
+		if(myType == "Wall" || myType == "Seed" || myType == "Portal"){
 			pieceHolder.placeNormal(position, this);
 		}
+
 		if(myType == "Left" || myType == "Up" || myType == "Down" || myType == "Right"){
 			pieceHolder.placeIcarus(position,this);
 		}
@@ -352,7 +356,7 @@ public void OnMouseDrag()
 	LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].type = myType;
 	LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].isTaken = true;
 	LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].tileObj = this.gameObject;	
-	
+	LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].portalType = portalType;
  }
 
  void CheckAvailableTile(Vector3 position){

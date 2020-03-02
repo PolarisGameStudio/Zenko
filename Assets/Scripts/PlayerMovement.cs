@@ -46,6 +46,7 @@ public class PlayerMovement : MonoBehaviour {
 	GameObject hintButton;
 	bool hasstopped;
 	GameObject wallToHit;
+
 	//public KeySimulator mykeysimulator;
 	// Use this for initialization
 	public void Start () {
@@ -145,124 +146,197 @@ public class PlayerMovement : MonoBehaviour {
 		if (currenttile == transform.position /*&& !hasstopped*/) {//do this when reached currenttile
 			//Debug.Log("WHAT IS NEXTACTION BABY DONT " + nextaction + " ME");
 			//Debug.Log("On tile");
-			GoalBehaviour.isstatic = true;
-			if (lastFragile != null && lastFragile.transform.position == transform.position && nextaction== null) {
-				Debug.Log ("UNUL");
-				this.enabled=false;
-				Debug.Log("Hole");
-				StartCoroutine(PopLose());
-				StartCoroutine(animationController.Disappear(.3f));
-				SfxHandler.Instance.StopSlide();
-				SfxHandler.Instance.PlayHole();
+			Debug.Log("GOT TO TILE");
+			ActOnStopped();
+		}
+			Movement ();
+	}
+	void ActOnStopped(){
+		GoalBehaviour.isstatic = true;
+		if (lastFragile != null && lastFragile.transform.position == transform.position && nextaction== null) {
+			Debug.Log ("UNUL");
+			this.enabled=false;
+			Debug.Log("Hole");
+			StartCoroutine(PopLose());
+			StartCoroutine(animationController.Disappear(.3f));
+			SfxHandler.Instance.StopSlide();
+			SfxHandler.Instance.PlayHole();
 
-			}
+		}
 
-			else if (nextaction == null && !canmove) {
-				//Debug.Log("NullNULLNULLNULL");
-				cantakeinput = true;
-				canmove = true;
-				isspeeding = false;
-				hasstopped = true;
-				if(hasmoved){
+		else if (nextaction == null && !canmove) {
+			//Debug.Log("NullNULLNULLNULL");
+			cantakeinput = true;
+			canmove = true;
+			isspeeding = false;
+			hasstopped = true;
+			if(hasmoved){
 //				Debug.Log(tiletotest);
-				SfxHandler.Instance.PlayWallHit((int)tiletotest.x, (int)-tiletotest.z);
-				SfxHandler.Instance.StopSlide();					
-				}
-			}  
-			else if (nextaction == "Goal_Action") {
-				RatingPopUp.GiveRating ();//stores to playerprefs
- 				SceneLoading.SetStars(RatingBehaviour.currentrating);
- 				this.enabled = false;
-				StartCoroutine(PopWin());
-			}			
-			else if (nextaction == "Hole_Action") {
-				SfxHandler.Instance.StopSlide();
-				SfxHandler.Instance.PlayHole();
-				this.enabled=false;
-				Debug.Log("Hole");
-				StartCoroutine(PopLose());
-				StartCoroutine(animationController.Disappear(.3f));
+			SfxHandler.Instance.PlayWallHit((int)tiletotest.x, (int)-tiletotest.z);
+			SfxHandler.Instance.StopSlide();					
 			}
-			else if (nextaction == "Left_Action") {
-				Debug.Log(nextaction);
-				tiletotest = currenttile;
-				canmove = true;
-				while (canmove == true) {
-					character_direction = "Left";
-					tiletotest += Vector3.left;
-					this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0,0,0));
-					FindTileTag ();
-					ActOnTile ();
-					isspeeding = true;
-					SfxHandler.Instance.PlayIcarus();
-				}
-				if (nextaction == "Left_Action") {
-					nextaction = null;
-				}
+		}  
+		else if (nextaction == "Goal_Action") {
+			RatingPopUp.GiveRating ();//stores to playerprefs
+				SceneLoading.SetStars(RatingBehaviour.currentrating);
+				this.enabled = false;
+			StartCoroutine(PopWin());
+		}			
+		else if (nextaction == "Hole_Action") {
+			SfxHandler.Instance.StopSlide();
+			SfxHandler.Instance.PlayHole();
+			this.enabled=false;
+			Debug.Log("Hole");
+			StartCoroutine(PopLose());
+			StartCoroutine(animationController.Disappear(.3f));
+		}
+		else if (nextaction == "Left_Action") {
+			Debug.Log(nextaction);
+			tiletotest = currenttile;
+			canmove = true;
+			while (canmove == true) {
+				character_direction = "Left";
+				tiletotest += Vector3.left;
+				this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0,0,0));
+				FindTileTag ();
+				ActOnTile ();
+				isspeeding = true;
+				SfxHandler.Instance.PlayIcarus();
 			}
-			else if (nextaction == "Right_Action") {
-				Debug.Log(nextaction);
-				tiletotest = currenttile;
-				canmove = true;
-				while (canmove == true) {
-					character_direction = "Right";
-					tiletotest += Vector3.right;
-					this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0,180,0));
-					FindTileTag ();
-					ActOnTile ();
-					isspeeding = true;
-					SfxHandler.Instance.PlayIcarus();
-				}
-				Debug.Log("CURRENT NEXT ACTION IS " + nextaction);
-				if (nextaction == "Right_Action") {
-					Debug.Log("MAKING NULL");
-					nextaction = null;
-				}
+			if (nextaction == "Left_Action") {
+				nextaction = null;
 			}
-			else if (nextaction == "Up_Action") {
-								Debug.Log(nextaction);
-				character_direction = "Up";
-				tiletotest = currenttile;
-				canmove = true;
+		}
+		else if (nextaction == "Right_Action") {
+			Debug.Log(nextaction);
+			tiletotest = currenttile;
+			canmove = true;
+			while (canmove == true) {
+				character_direction = "Right";
+				tiletotest += Vector3.right;
+				this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0,180,0));
+				FindTileTag ();
+				ActOnTile ();
+				isspeeding = true;
+				SfxHandler.Instance.PlayIcarus();
+			}
+			Debug.Log("CURRENT NEXT ACTION IS " + nextaction);
+			if (nextaction == "Right_Action") {
+				Debug.Log("MAKING NULL");
+				nextaction = null;
+			}
+		}
+		else if (nextaction == "Up_Action") {
+							Debug.Log(nextaction);
+			character_direction = "Up";
+			tiletotest = currenttile;
+			canmove = true;
+			while (canmove == true) {
+				this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0,90,0));
+				tiletotest += Vector3.forward;
+				FindTileTag ();
+				ActOnTile ();
+				isspeeding = true;
+				SfxHandler.Instance.PlayIcarus();
+			}
+			if (nextaction == "Up_Action") {
+				nextaction = null;
+			}
+		}
+		else if (nextaction == "Down_Action") {
+			Debug.Log(nextaction);
+			character_direction = "Down";
+			tiletotest = currenttile;
+			canmove = true;
+			while (canmove == true) {
+				this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0,270,0));
+				tiletotest += Vector3.back;
+				FindTileTag ();
+				ActOnTile ();
+				isspeeding = true;
+				SfxHandler.Instance.PlayIcarus();
+			}
+			if (nextaction == "Down_Action") {
+				nextaction = null;
+			}
+		}
+		else if (nextaction == "Portal_Action")
+		{
+			Debug.Log("TRIGGERING PORTAL ACTION");
+			GameObject newPortal = GetMatchingPortal();
+			Vector3 newPosition = newPortal.transform.position;
+			transform.position = newPosition;
+			tiletotest = transform.position;
+			currenttile = tiletotest;
+			Debug.Log("tiletotest is " + tiletotest);
+			string newDirection = newPortal.GetComponent<Dragger>().portalType;
+			character_direction = newDirection;
+			canmove = true;
+			
+			NewPortalStart(character_direction);
+
+		}
+		if(wallToHit != null){
+			wallToHit.GetComponent<Animator>().SetTrigger("Hit");
+			wallToHit = null;
+			hasstopped = true;
+
+		}
+	}
+	GameObject GetMatchingPortal(){
+		foreach(GameObject portal in LevelBuilder.Portals)
+		{
+			if(portal.transform.position.x == transform.position.x && portal.transform.position.y == transform.position.y){
+
+			}
+			else{
+				Debug.Log("Portal selected type is " + portal.GetComponent<Dragger>().portalType);
+				return portal;
+			}
+		}
+		return null;
+
+	}
+
+	void NewPortalStart(string direction){
+		nextaction = null;
+		Debug.Log(transform.position + " " + direction + currenttile + tiletotest);
+		switch(direction){
+			case "Up":
 				while (canmove == true) {
 					this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0,90,0));
 					tiletotest += Vector3.forward;
 					FindTileTag ();
 					ActOnTile ();
-					isspeeding = true;
-					SfxHandler.Instance.PlayIcarus();
 				}
-				if (nextaction == "Up_Action") {
-					nextaction = null;
-				}
-			}
-			else if (nextaction == "Down_Action") {
-				Debug.Log(nextaction);
-				character_direction = "Down";
-				tiletotest = currenttile;
-				canmove = true;
+				break;
+			case "Down":
 				while (canmove == true) {
 					this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0,270,0));
 					tiletotest += Vector3.back;
 					FindTileTag ();
 					ActOnTile ();
-					isspeeding = true;
-					SfxHandler.Instance.PlayIcarus();
 				}
-				if (nextaction == "Down_Action") {
-					nextaction = null;
+				break;
+			case "Right":
+				while (canmove == true) {
+					this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0,180,0));
+					tiletotest += Vector3.right;
+					FindTileTag ();
+					ActOnTile ();
 				}
-			}
-			if(wallToHit != null){
-				wallToHit.GetComponent<Animator>().SetTrigger("Hit");
-				wallToHit = null;
-				hasstopped = true;
-
-			}
+				break;
+			case "Left":
+				while (canmove == true) {
+					this.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0,0,0));
+					tiletotest += Vector3.left;
+					FindTileTag ();
+					ActOnTile ();
+				}
+				break;
 		}
-			Movement ();
-	}
 
+	}
 	public void AssignShakeOrientation(string shakeDirection){
 		if(shakeDirection == "Up"){
 			shakeNoise = new Vector3(0,0,-.5f);
@@ -501,167 +575,236 @@ public class PlayerMovement : MonoBehaviour {
 
 
 	void ActOnTile(){
+		Debug.Log(tilescript.type);
 		Swiping.mydirection = "Null";
-			if(outofmap == true){
-				canmove = false;
-				outofmap = false;
-			}
+		if(outofmap == true)
+		{
+			canmove = false;
+			outofmap = false;
+		}
 
-			else if (tilescript.type == "Ice"){
-				Count ();
-				currenttile = tiletotest;				
-			}
-			else if (tilescript.type == "Wall" || tilescript.type == "Start") {
-				Vector3 overlapV3 = tiletotest;	
-//				Debug.Log(tiletotest);
-				Collider[] colliders = Physics.OverlapSphere(overlapV3, .5f);
-//				Debug.Log("LF PEDRO");
-				foreach (Collider component in colliders) {
-					if (component.tag == "Pedro") {
-						Debug.Log("Pedro");
-						wallToHit = component.gameObject;
-						wallToHit.GetComponent<Animator>().ResetTrigger("Hit");
-					} 
-					if (component.tag == "PedroSeed") {
-						Debug.Log("PedroSeed");
-						wallToHit = component.transform.GetChild(0).gameObject;
-						wallToHit.GetComponent<Animator>().ResetTrigger("Hit");
-					} 
-				}
-
-				canmove = false;
-//				Debug.Log("canmove is false now");
-				Count ();
-
-			} else if (tilescript.type == "Goal") {
-				//you'll stop in the tile you checked and stop moving.
-				if (TurnCounter.turncount == 0) {
-					Debug.Log("0 turns");
-					canmove = false;
-				} 
-				else {
-					if(transform.position == currenttile){
-						longgoal = false;
-					}
-					else{
-						longgoal = true;
-					}
-					if(tilenumber == 0){
-						GoalBehaviour.goaling = true;
-						this.transform.GetChild(0).GetComponent<Animator>().SetInteger("Phase", 2);
-						StartCoroutine(animationController.Disappear(.4f));
-						speed = 3;
-					}
-					Count ();
-					currenttile = tiletotest;
-					canmove = false;
-					//Qeue up an action when reaching the tile
-//					Debug.Log("aqui?");
-					nextaction = "Goal_Action";
-				}
-			} else if (tilescript.type == "Hole") {
-				//you'll stop in the tile you checked and stop moving.
-				Count();
-				currenttile = tiletotest;
-				canmove = false;
-
-				//Qeue up an action when reaching the tile
-				nextaction = "Hole_Action";
-			} else if (tilescript.type == "Wood") {
-				Count ();
-				currenttile = tiletotest;
-				if(tilescript.isSideways!= null){
-					canmove = false;
-					nextaction = tilescript.isSideways+ "_Action";
-					Debug.Log(nextaction);
-					isspeeding = true;				
-				}
-			} else if (tilescript.type == "Left") {
-
-					Count ();
-					currenttile = tiletotest;
-					canmove = false;
-					nextaction = "Left_Action";
-					isspeeding = true;
-			} else if (tilescript.type == "Right") {
-					Count ();
-					currenttile = tiletotest;
-					canmove = false;
-					nextaction = "Right_Action";
-					isspeeding = true;
-			} else if (tilescript.type == "Up") {
-					Count ();
-					currenttile = tiletotest;
-					canmove = false;
-					nextaction = "Up_Action";
-					isspeeding = true;
-			} else if (tilescript.type == "Down") {
-					Count ();
-					currenttile = tiletotest;
-					canmove = false;
-					nextaction = "Down_Action";
-					isspeeding = true;
-			} else if (tilescript.type == "Fragile") {
-				Count ();
-				currenttile = tiletotest;
-				lastFragile = tilescript.tileObj;
-				Vector3 overlapV3 = new Vector3(currenttile.x, currenttile.y, currenttile.z);
-				Collider[] colliders = Physics.OverlapSphere(overlapV3, .5f);
-				foreach (Collider component in colliders) {
-					if (component.tag == "Fragile") {
-						component.GetComponent<FragileBehaviour>().readytolava = true;
-						component.GetComponent<FragileBehaviour>().player = this.gameObject;
-					} 
-				}
-				if(tilescript.isSideways!= null){
-					canmove = false;
-					nextaction = tilescript.isSideways+ "_Action";
-					Debug.Log(nextaction);
-					isspeeding = true;			
-	
-				}
-				else{
-
-				}
-				tilescript.type = "Hole";
-		
-			} else if (tilescript.type == "Quicksand") {
-				currenttile = tiletotest;
-				lastFragile = tilescript.tileObj;
-				Count ();
-				if (isspeeding == false) {
-					currenttile = tiletotest;
-					canmove = false;
-					nextaction = "Hole_action";
-				}
-
-			}
-			else if (tilescript.type == "Seed") {
-				currenttile = tiletotest;
-				lastSeed = tilescript.tileObj;
-				Debug.Log(tilescript.tileObj);
-				PopSeed(tilescript.seedType);
-				Count();
-				
-				if(tilescript.isSideways!= null){
-
-					canmove = false;
-					nextaction = tilescript.isSideways+ "_Action";
-					Debug.Log(nextaction);
-					isspeeding = true;				
-				}
-			} else if (tilescript.type == "Boss") {
-				currenttile = tiletotest;
-				canmove = false;
-			}
-				else {
-				Debug.Log(tilescript.type);
-				Debug.Log ("Dong");
-				canmove = false;
-			}
+		else if (tilescript.type == "Ice")
+		{
 			Count ();
-	}
+			currenttile = tiletotest;				
+		}
+		else if (tilescript.type == "Wall" || tilescript.type == "Start") 
+		{
+			Vector3 overlapV3 = tiletotest;	
+//				Debug.Log(tiletotest);
+			Collider[] colliders = Physics.OverlapSphere(overlapV3, .5f);
+//				Debug.Log("LF PEDRO");
+			foreach (Collider component in colliders) 
+			{
+				if (component.tag == "Pedro") 
+				{
+					Debug.Log("Pedro");
+					wallToHit = component.gameObject;
+					wallToHit.GetComponent<Animator>().ResetTrigger("Hit");
+				} 
+				if (component.tag == "PedroSeed") 
+				{
+					Debug.Log("PedroSeed");
+					wallToHit = component.transform.GetChild(0).gameObject;
+					wallToHit.GetComponent<Animator>().ResetTrigger("Hit");
+				} 
+			}
 
+			canmove = false;
+//				Debug.Log("canmove is false now");
+			Count ();
+		} 
+		else if (tilescript.type == "Goal") 
+		{
+			//you'll stop in the tile you checked and stop moving.
+			if (TurnCounter.turncount == 0) 
+			{
+				Debug.Log("0 turns");
+				canmove = false;
+			} 
+			else 
+			{
+				if(transform.position == currenttile)
+				{
+					longgoal = false;
+				}
+				else
+				{
+					longgoal = true;
+				}
+				if(tilenumber == 0)
+				{
+					GoalBehaviour.goaling = true;
+					this.transform.GetChild(0).GetComponent<Animator>().SetInteger("Phase", 2);
+					StartCoroutine(animationController.Disappear(.4f));
+					speed = 3;
+				}
+				Count ();
+				currenttile = tiletotest;
+				canmove = false;
+				//Qeue up an action when reaching the tile
+//					Debug.Log("aqui?");
+				nextaction = "Goal_Action";
+			}
+		} 
+		else if (tilescript.type == "Hole") 
+		{
+			//you'll stop in the tile you checked and stop moving.
+			Count();
+			currenttile = tiletotest;
+			canmove = false;
+
+			//Qeue up an action when reaching the tile
+			nextaction = "Hole_Action";
+		} 
+		else if (tilescript.type == "Wood") 
+		{
+			Count ();
+			currenttile = tiletotest;
+			if(tilescript.isSideways!= null)
+			{
+				canmove = false;
+				nextaction = tilescript.isSideways+ "_Action";
+				Debug.Log(nextaction);
+				isspeeding = true;				
+			}
+		} 
+		else if (tilescript.type == "Left") 
+		{
+
+				Count ();
+				currenttile = tiletotest;
+				canmove = false;
+				nextaction = "Left_Action";
+				isspeeding = true;
+		} 
+		else if (tilescript.type == "Right") 
+		{
+				Count ();
+				currenttile = tiletotest;
+				canmove = false;
+				nextaction = "Right_Action";
+				isspeeding = true;
+		} 
+		else if (tilescript.type == "Up") 
+		{
+				Count ();
+				currenttile = tiletotest;
+				canmove = false;
+				nextaction = "Up_Action";
+				isspeeding = true;
+		} 
+		else if (tilescript.type == "Down") 
+		{
+				Count ();
+				currenttile = tiletotest;
+				canmove = false;
+				nextaction = "Down_Action";
+				isspeeding = true;
+		} 
+		else if (tilescript.type == "Fragile") 
+		{
+			Count ();
+			currenttile = tiletotest;
+			lastFragile = tilescript.tileObj;
+			Vector3 overlapV3 = new Vector3(currenttile.x, currenttile.y, currenttile.z);
+			Collider[] colliders = Physics.OverlapSphere(overlapV3, .5f);
+			foreach (Collider component in colliders) 
+			{
+				if (component.tag == "Fragile") 
+				{
+					component.GetComponent<FragileBehaviour>().readytolava = true;
+					component.GetComponent<FragileBehaviour>().player = this.gameObject;
+				} 
+			}
+			if(tilescript.isSideways!= null)
+			{
+				canmove = false;
+				nextaction = tilescript.isSideways+ "_Action";
+				Debug.Log(nextaction);
+				isspeeding = true;			
+
+			}
+			else
+			{
+
+			}
+			tilescript.type = "Hole";
+	
+		} 
+		else if (tilescript.type == "Quicksand") 
+		{
+			currenttile = tiletotest;
+			lastFragile = tilescript.tileObj;
+			Count ();
+			if (isspeeding == false) 
+			{
+				currenttile = tiletotest;
+				canmove = false;
+				nextaction = "Hole_action";
+			}
+
+		}
+		else if (tilescript.type == "Seed") 
+		{
+			currenttile = tiletotest;
+			lastSeed = tilescript.tileObj;
+			Debug.Log(tilescript.tileObj);
+			PopSeed(tilescript.seedType);
+			Count();
+			
+			if(tilescript.isSideways!= null)
+			{
+
+				canmove = false;
+				nextaction = tilescript.isSideways+ "_Action";
+				Debug.Log(nextaction);
+				isspeeding = true;				
+			}
+		} 
+		else if (tilescript.type == "Boss") 
+		{
+			currenttile = tiletotest;
+			canmove = false;
+		}
+		else if(tilescript.type == "Portal")
+		{
+			Debug.Log(character_direction +"." + tilescript.portalType);
+			if(Opposite(character_direction, tilescript.portalType) && !PathBlocked())
+			{
+				Count ();
+				Debug.Log("ACtedonportaltileportalstyle");
+				currenttile = tiletotest;
+				canmove = false;
+				nextaction = "Portal_Action";
+				
+			}
+			else{
+				canmove = false;
+				Count ();
+			}
+			
+		}
+		else 
+		{
+			Debug.Log(tilescript.type);
+			Debug.Log ("Dong");
+			canmove = false;
+		}
+		Count ();
+	}
+	bool PathBlocked()
+	{
+		return false;
+	}
+	bool Opposite(string d1, string d2){
+		if((d1 == "Left" && d2 == "Right") || (d1 == "Right" && d2 == "Left") ||
+			(d1 == "Up" && d2 == "Down") || (d1 == "Down" && d2 == "Up")){
+			return true;
+		}
+		else 
+			return false;
+	}
 	public void CheckAchievement(){
 		if(!LevelManager.ispotd){
 			if(LevelManager.levelnum == 40){

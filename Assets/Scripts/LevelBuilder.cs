@@ -71,6 +71,8 @@ public class LevelBuilder : MonoBehaviour {
 	public static GameObject settingsBoard;
 	public static LevelBuilder Instance;
 
+	public static List<GameObject> Portals = new List<GameObject>();
+
 	public GameObject loadingGO;
 
 	int wallIndex;
@@ -244,6 +246,7 @@ public class LevelBuilder : MonoBehaviour {
 		LevelManager.hints = new List<Hint>();
 		PieceHolders.placedpieces = new List<Dragger>();
 		LevelManager.placedPieces = new string[10,10];
+		Portals = new List<GameObject>();
 		//PopulationManager.readytobrain = false;
 		string leveltext = ("Level" + levelnumber.ToString() + ".txt");
 		string levelname = ("Level" + levelnumber.ToString ());
@@ -344,6 +347,7 @@ public class LevelBuilder : MonoBehaviour {
 		LevelManager.hints = new List<Hint>();
 		PieceHolders.placedpieces = new List<Dragger>();
 		LevelManager.placedPieces = new string[10,10];
+		Portals = new List<GameObject>();
 		piecenums = 0;
 		for (int y = 0; y < totaldimension; y++) {
 //			Debug.Log(y);
@@ -993,6 +997,7 @@ public class LevelBuilder : MonoBehaviour {
 		LevelManager.piecetiles = new List<Transform>();
 		LevelManager.myhints = new List<Vector2>();
 		LevelManager.hintnum = 0;
+		Portals = new List<GameObject>();
 		//PopulationManager.readytobrain = false;
 		string leveltext = ("Level" + levelnumber.ToString() + ".txt");
 		string levelname = ("Level" + levelnumber.ToString ());
@@ -1674,36 +1679,48 @@ public class LevelBuilder : MonoBehaviour {
 			Transform portalleftpiece = Instantiate (floor_portal, pieceplace, Quaternion.Euler(new Vector3(0,270,0)));
 			//leftpiece.gameObject.GetComponentInChildren<Animator>().SetInteger("Phase",2);
 			currenttile.isTaken = true;
-			currenttile.type = "Wall";
+			currenttile.type = "Portal";
 			currenttile.tileObj = portalleftpiece.gameObject;
+			currenttile.portalType = "Left";
+			portalleftpiece.gameObject.GetComponent<Dragger>().portalType = "Left";
 			PieceHolders.placedpieces.Add(portalleftpiece.gameObject.GetComponent<Dragger>());
+			Portals.Add(portalleftpiece.gameObject);
 			break;
 		case "PortalUp":
-			Debug.Log("PU");
-			Debug.Log("PIECEPLACE ISS " + pieceplace);
+			//Debug.Log("PU");
+			//Debug.Log("PIECEPLACE ISS " + pieceplace);
 			Transform portaluppiece = Instantiate (floor_portal, pieceplace, Quaternion.Euler(new Vector3(0,0,0)));
 			//portaluppiece.gameObject.GetComponentInChildren<Animator>().SetInteger("Phase",2);
 			currenttile.isTaken = true;
-			currenttile.type = "Wall";
+			currenttile.type = "Portal";
+			currenttile.portalType = "Up";
 			currenttile.tileObj = portaluppiece.gameObject;
+			portaluppiece.gameObject.GetComponent<Dragger>().portalType = "Up";
 			PieceHolders.placedpieces.Add(portaluppiece.gameObject.GetComponent<Dragger>());
+			Portals.Add(portaluppiece.gameObject);
 			break;
 		case "PortalRight":
-			Debug.Log("PR");
+			//Debug.Log("PR");
 			Transform portalrightpiece = Instantiate (floor_portal, pieceplace, Quaternion.Euler(new Vector3(0,90,0)));
 			//portalrightpiece.gameObject.GetComponentInChildren<Animator>().SetInteger("Phase",2);
 			currenttile.isTaken = true;
-			currenttile.type = "Wall";
+			currenttile.type = "Portal";
 			currenttile.tileObj = portalrightpiece.gameObject;
+			currenttile.portalType = "Right";
+			portalrightpiece.gameObject.GetComponent<Dragger>().portalType = "Right";
 			PieceHolders.placedpieces.Add(portalrightpiece.gameObject.GetComponent<Dragger>());
+			Portals.Add(portalrightpiece.gameObject);
 			break;
 		case "PortalDown":
 			Transform portaldownpiece = Instantiate (floor_portal, pieceplace, Quaternion.Euler(new Vector3(0,180,0)));
 			//downpiece.gameObject.GetComponentInChildren<Animator>().SetInteger("Phase",2);				
 			currenttile.isTaken = true;
-			currenttile.type = "Wall";
+			currenttile.type = "Portal";
+			currenttile.portalType = "Down";
 			currenttile.tileObj = portaldownpiece.gameObject;
+			portaldownpiece.gameObject.GetComponent<Dragger>().portalType = "Down";
 			PieceHolders.placedpieces.Add(portaldownpiece.gameObject.GetComponent<Dragger>());
+			Portals.Add(portaldownpiece.gameObject);
 			break;
 
 		case "Seed":

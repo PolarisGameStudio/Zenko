@@ -46,12 +46,14 @@ public class Tile{
 	public bool isTaken;
 	public string seedType;
 	public string isSideways;
+	public string portalType;
 	public Tile(GameObject obj, string t, bool it, string seed){
 		tileObj = obj;
 		type = t;
 		isTaken = it;
 		seedType = seed;
 		isSideways = null;
+		portalType = null;
 	}
 	public Tile(GameObject obj, string t, bool it){
 		tileObj = obj;
@@ -59,7 +61,9 @@ public class Tile{
 		isTaken = it;
 		seedType = null;
 		isSideways = null;
+		portalType = null;
 	}
+
 }
 
 

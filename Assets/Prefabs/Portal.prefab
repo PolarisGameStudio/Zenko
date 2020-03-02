@@ -49,7 +49,7 @@ MonoBehaviour:
   tentativetile: {fileID: 0}
   needtooccupy: 0
   newtile: {fileID: 0}
-  myType: Wall
+  myType: Portal
   mySeedType: None
   myshrinker: {fileID: 0}
   myBigger: {fileID: 0}
