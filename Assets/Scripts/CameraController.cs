@@ -21,6 +21,8 @@ public class CameraController : MonoBehaviour {
 	public Sprite[] WorldTitles;
 	public Sprite[] WorldNumber;
 	public Sprite[] WorldName;
+	public Sprite[] WorldTitlesSpanish;
+	public Sprite[] WorldNameSpanish;
 	public GameObject WorldTitle;
 	public GameObject World;
 	// Use this for initialization
@@ -108,16 +110,27 @@ public class CameraController : MonoBehaviour {
 	}	
 	private Sprite CheckWorldSprite(int world){
 		if(world>4){
+			if(LanguageHandler.IsEnglish())
 			return WorldName[3];
+			else
+			return WorldNameSpanish[3];
 		}
+		if(LanguageHandler.IsEnglish())
 		return WorldName[world-1];		
+		else return WorldNameSpanish[world-1];
 	}
 	private Sprite CheckWorldName(int world){
 		//Debug.Log("Current World is " + world);
 		if(world>4){
+			if(LanguageHandler.IsEnglish())
 			return WorldTitles[3];
+			else
+			return WorldTitlesSpanish[3];
 		}
+		if(LanguageHandler.IsEnglish())
 		return WorldTitles[world-1];
+		else
+		return WorldTitlesSpanish[world-1];
 	}
 	private Sprite CheckBackground(int world){
 		//Debug.Log("Current World is " + world);

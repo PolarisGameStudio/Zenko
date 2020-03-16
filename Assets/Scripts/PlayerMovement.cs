@@ -146,7 +146,7 @@ public class PlayerMovement : MonoBehaviour {
 		if (currenttile == transform.position /*&& !hasstopped*/) {//do this when reached currenttile
 			//Debug.Log("WHAT IS NEXTACTION BABY DONT " + nextaction + " ME");
 			//Debug.Log("On tile");
-			Debug.Log("GOT TO TILE");
+			//Debug.Log("GOT TO TILE");
 			ActOnStopped();
 		}
 			Movement ();
@@ -263,7 +263,7 @@ public class PlayerMovement : MonoBehaviour {
 		else if (nextaction == "Portal_Action")
 		{
 			Debug.Log("TRIGGERING PORTAL ACTION");
-			GameObject newPortal = GetMatchingPortal();
+			GameObject newPortal = GetMatchingPortal(transform.position);
 			Vector3 newPosition = newPortal.transform.position;
 			transform.position = newPosition;
 			tiletotest = transform.position;
@@ -283,10 +283,11 @@ public class PlayerMovement : MonoBehaviour {
 
 		}
 	}
-	GameObject GetMatchingPortal(){
+	GameObject GetMatchingPortal(Vector3 entrancePosition){
 		foreach(GameObject portal in LevelBuilder.Portals)
 		{
-			if(portal.transform.position.x == transform.position.x && portal.transform.position.y == transform.position.y){
+			//Debug.Log(portal.transform.position + " " + entrancePosition);
+			if(portal.transform.position.x == entrancePosition.x && portal.transform.position.z == entrancePosition.z){
 
 			}
 			else{
@@ -770,7 +771,7 @@ public class PlayerMovement : MonoBehaviour {
 		else if(tilescript.type == "Portal")
 		{
 			Debug.Log(character_direction +"." + tilescript.portalType);
-			if(Opposite(character_direction, tilescript.portalType) && !PathBlocked())
+			if(Opposite(character_direction, tilescript.portalType) && !PathBlocked(tiletotest))
 			{
 				Count ();
 				Debug.Log("ACtedonportaltileportalstyle");
@@ -793,9 +794,56 @@ public class PlayerMovement : MonoBehaviour {
 		}
 		Count ();
 	}
-	bool PathBlocked()
+	bool PathBlocked(Vector3 portalEntrancePosition)
 	{
-		return false;
+		GameObject exitPortal = GetMatchingPortal(portalEntrancePosition);
+		string exitDirection = exitPortal.GetComponent<Dragger>().portalType;
+		Vector3 nextTilePos = NextTilePosition(exitPortal.transform.position,exitDirection );
+
+		Tile NextTile = LevelBuilder.tiles[(int)nextTilePos.x,-(int)nextTilePos.z];
+
+		if(Walkable(NextTile, exitDirection)){
+			return false;
+		}
+		else{
+			return true;
+		}
+	}
+	bool Walkable(Tile tiletoscan, string direction){
+		switch(tiletoscan.type){
+			case "Wall":
+				return false;
+			break;
+			case "Portal":
+				if(Opposite(tiletoscan.portalType, direction))
+					return true;
+				else
+					return false;
+				break;
+			case "Start":
+				return false;
+				break;
+			//case ""
+		}
+		return true;
+	}
+	Vector3 NextTilePosition(Vector3 pos, string direction){
+
+		switch(direction){
+			case "Up":
+				return pos+ Vector3.forward;
+				break;
+			case "Down":
+				return pos+ Vector3.back;
+				break;
+			case "Left":
+				return pos+ Vector3.left;
+				break;
+			case "Right":
+				return pos+ Vector3.right;
+				break;
+		}
+		return pos;
 	}
 	bool Opposite(string d1, string d2){
 		if((d1 == "Left" && d2 == "Right") || (d1 == "Right" && d2 == "Left") ||

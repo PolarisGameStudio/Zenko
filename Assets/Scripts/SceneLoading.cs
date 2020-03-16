@@ -25,6 +25,9 @@ public class SceneLoading : MonoBehaviour {
 	public GameObject PotdShortcut;
 	//public bool isPotdOpen;
 //	public IceTileHandler myhandler;
+	void Awake(){
+		Instance = this;
+	}
 	void Start(){
 		menuState = "Start";
 		canOpen = true;

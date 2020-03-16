@@ -55,6 +55,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\AwakeSprite.cs" />
+     <Compile Include="Assets\AwakeText.cs" />
      <Compile Include="Assets\BuyMenu.cs" />
      <Compile Include="Assets\EnvironmentKeeper.cs" />
      <Compile Include="Assets\GameManager.cs" />
@@ -289,6 +291,9 @@
      <Compile Include="Assets\GooglePlayGames\PluginVersion.cs" />
      <Compile Include="Assets\HintMenuHandler.cs" />
      <Compile Include="Assets\KeyLogoSwitcher.cs" />
+     <Compile Include="Assets\LanguageHandler.cs" />
+     <Compile Include="Assets\Languages\Scripts\TutorialDictionary_v002.cs" />
+     <Compile Include="Assets\LanguageWrapper.cs" />
      <Compile Include="Assets\LevelButton.cs" />
      <Compile Include="Assets\Loading.cs" />
      <Compile Include="Assets\LoadingTextAnimator.cs" />
@@ -375,6 +380,7 @@
      <Compile Include="Assets\Scripts\WinMessage.cs" />
      <Compile Include="Assets\Scripts\WorldName.cs" />
      <Compile Include="Assets\Scripts\XYPad.cs" />
+     <Compile Include="Assets\SpriteSwitcher.cs" />
      <Compile Include="Assets\TileKeeper.cs" />
      <Compile Include="Assets\ToggleForEditor.cs" />
      <Compile Include="Assets\TurnOffIfAdFree.cs" />

@@ -6,6 +6,7 @@ public class WorldName : MonoBehaviour
 {
 	public static WorldName Instance;
 	public Sprite[] world;
+    public Sprite[] worldSpanish;
 	public Sprite[] dash;
 	public Sprite[] num0;
 	public Sprite[] num1;
@@ -49,7 +50,22 @@ public class WorldName : MonoBehaviour
 
     }
     public void AssignAdventureTag(int worldnum, int level){
-    	AdvHolder[0].GetComponent<Image>().sprite = world[worldnum-1];
+        RectTransform rt = AdvHolder[0].GetComponent<RectTransform>();
+        if(worldnum >4)
+        worldnum = 4;
+        if(LanguageHandler.IsEnglish()){
+            AdvHolder[0].GetComponent<Image>().sprite = world[worldnum-1];
+            rt.sizeDelta = new Vector2((float)254.5, rt.sizeDelta.y);
+            rt.localPosition = new Vector3((float)-64.2,0,0);
+        }
+    	
+        else
+        {
+            AdvHolder[0].GetComponent<Image>().sprite = worldSpanish[worldnum-1];
+            rt.sizeDelta = new Vector2((float)322, rt.sizeDelta.y);
+            rt.localPosition = new Vector3((float)-91,0,0);
+        }
+        
     	AdvHolder[1].GetComponent<Image>().sprite = numbers[worldnum][worldnum-1];
     	AdvHolder[2].GetComponent<Image>().sprite = dash[worldnum-1];
 

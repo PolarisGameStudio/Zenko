@@ -17,6 +17,7 @@ public class HintMenuHandler : MonoBehaviour
     void Start()
     {
         Initialize();
+        this.GetComponent<AwakeText>().SelectLanguage();
 
     }
 

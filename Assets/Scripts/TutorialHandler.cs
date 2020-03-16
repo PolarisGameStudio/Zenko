@@ -25,7 +25,10 @@ public class TutorialHandler : MonoBehaviour
         Swiping.canswipe = false;
         LevelManager.isdragging = true;
         LevelManager.configging = true;
+        if(LanguageHandler.IsEnglish())
         PrepareTutorial(TutorialDictionary.tutDic[0], 0);
+        else
+        PrepareTutorial(TutorialDictionary.tutDicSpanish[0],0);
 
     }
 
@@ -37,7 +40,11 @@ public class TutorialHandler : MonoBehaviour
         text.color = Color.HSVToRGB((float)TextModulator.hue/359,(float)TextModulator.s/99, (float)TextModulator.v/99);
         this.gameObject.transform.GetChild(0).gameObject.SetActive(true);
         this.gameObject.transform.GetChild(1).gameObject.SetActive(true);
+        if(LanguageHandler.IsEnglish())
         ShowTutorialText("All pieces are in the right place, now slide!");
+        else
+        ShowTutorialText("Todas las piezas estan en su lugar, deslizate!");
+        
         NextButton.SetActive(false);
         CloseButton.SetActive(true);       
     }
@@ -50,14 +57,22 @@ public class TutorialHandler : MonoBehaviour
         text.color = Color.HSVToRGB((float)TextModulator.hue/359,(float)TextModulator.s/99, (float)TextModulator.v/99);
         this.gameObject.transform.GetChild(0).gameObject.SetActive(true);
         this.gameObject.transform.GetChild(1).gameObject.SetActive(true);
+        if(LanguageHandler.IsEnglish())
         ShowTutorialText("Pieces are in the right tiles but in the wrong order, try swapping them!");
+        else
+        ShowTutorialText("Las piezas estan en los lugares correctos, pero en orden incorrecto, intenta cambiarlas");
         NextButton.SetActive(false);
         CloseButton.SetActive(true);       
     }
 
     public void TutorialCheck(int levelnumber){
         if (TutorialDictionary.tutDic.ContainsKey(levelnumber))
+        {
+            if(LanguageHandler.IsEnglish())
             PrepareTutorial(TutorialDictionary.tutDic[levelnumber], 0);
+            else
+            PrepareTutorial(TutorialDictionary.tutDicSpanish[levelnumber], 0);
+        }
 
     }
     public void PrepareTutorial(string[] lineBank, int curLine){

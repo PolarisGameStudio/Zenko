@@ -9,10 +9,17 @@ public class WinMessage : MonoBehaviour
 	public Sprite[] World2Messages;
 	public Sprite[] World3Messages;
 	public Sprite[] World4Messages;
+
+    public Sprite[] World1MessagesSprite;
+    public Sprite[] World2MessagesSprite;
+    public Sprite[] World4MessagesSprite;
+    public Sprite[] World3MessagesSprite;
+
     public GameObject Next;
     public GameObject Home;
 	public static WinMessage Instance;
 	public static List<Sprite[]> worldMessageStorer = new List<Sprite[]>();
+    public static List<Sprite[]> worldMessageStorerSpanish = new List<Sprite[]>();
 	public static float size;
 	public bool movingUpwards;
 	private float timer;
@@ -25,6 +32,11 @@ public class WinMessage : MonoBehaviour
         worldMessageStorer.Add(World2Messages);
         worldMessageStorer.Add(World3Messages);
         worldMessageStorer.Add(World4Messages);
+
+        worldMessageStorerSpanish.Add(World1MessagesSprite);
+        worldMessageStorerSpanish.Add(World2MessagesSprite);
+        worldMessageStorerSpanish.Add(World3MessagesSprite);
+        worldMessageStorerSpanish.Add(World4MessagesSprite);
         Debug.Log("SizeSIZESZIEZIZISISISIDISDIAISDIASIDIASDIAISDIASIDIASDIASA " + size);
         movingUpwards = true;
         timer = 0;
@@ -39,12 +51,24 @@ public class WinMessage : MonoBehaviour
     }
 
     public void AssignMessage(int world, int stars){
+        if(world >4)
+        world = 4;
         mystars = stars;
         Sprite cursprite;
-        if(LevelManager.ispotd)
-        cursprite = worldMessageStorer[0][stars];
+        if(LanguageHandler.IsEnglish())
+        {
+            if(LevelManager.ispotd)
+                cursprite = worldMessageStorer[0][stars];
+            else
+                cursprite = worldMessageStorer[world-1][stars];
+        }
         else
-    	cursprite = worldMessageStorer[world-1][stars];
+        {
+            if(LevelManager.ispotd)
+                cursprite = worldMessageStorerSpanish[0][stars];
+            else
+                cursprite = worldMessageStorerSpanish[world-1][stars];
+        }
     	this.GetComponent<Image>().sprite = cursprite;
     	this.GetComponent<RectTransform>().sizeDelta = new Vector2 (cursprite.bounds.size.x*50 , 100);
     	size = cursprite.bounds.size.x*50;

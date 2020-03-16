@@ -85,7 +85,10 @@ public class LevelMenu : MonoBehaviour {
 	}
 	public void OpenUnlockMenu(int num, int starter){
 		//UnlockMenu = GameObject.Find("UnlockPotdMenu");
+		if(LanguageHandler.IsEnglish())
 		UnlockMenu.transform.Find("Title").GetComponent<Text>().text = "UNLOCK LEVEL " + (num+1).ToString() + "?";
+		else
+		UnlockMenu.transform.Find("Title").GetComponent<Text>().text = "ABRIR NIVEL " + (num+1).ToString() + "?";
 		UnlockMenu.transform.Find("UnlockAdButton").transform.Find("contador").GetComponent<Text>().text = "x " + PotdUnlocker.Instance.keysAvailable.ToString();
 		//GameObject.Find()
 		//buyMenu = GameObject.Find("")
@@ -331,8 +334,19 @@ public class LevelMenu : MonoBehaviour {
 	public void AssignMonthText(){
 		int monthnum = (DateChecker.currentMonthIndex+10) % 12;
 		//Debug.Log((int)11/12);
-		monthSprite.sprite = PotdHolder.Instance.monthSprites[monthnum];
+		if(LanguageHandler.IsEnglish())
+		{
+			monthSprite.sprite = PotdHolder.Instance.monthSprites[monthnum];
+		}
+		else
+		{
+			monthSprite.sprite = PotdHolder.Instance.monthSpritesSpanish[monthnum];
+		}
 		yearSprite.sprite = PotdHolder.Instance.yearSprites[(int)(DateChecker.currentMonthIndex+10)/12];
+
+		
+
+
 	}
 
 	public void populatePotdMenu(){
