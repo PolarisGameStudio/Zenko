@@ -9,6 +9,7 @@ public class AwakeText : MonoBehaviour
 	public enum TextSection{BuyMenu, Options, Tutorial, Hint, UnlockPotd};
 	public TextSection mySection;
     LanguageHandler.Language currentLanguage;
+    public bool scanOnUpdate;
     // Start is called before the first frame update
     void OnEnable()
     {

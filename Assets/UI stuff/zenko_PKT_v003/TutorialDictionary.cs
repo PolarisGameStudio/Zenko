@@ -45,8 +45,8 @@ public class TutorialDictionary : MonoBehaviour
 	public string[] music = new string[] {"Music"};
 	public string[] sfx = new string[] {"SFX"};
 
-	public string[] buyMenu = new string[]{"Disable Ads?", "NO, Thanks" , "YES, Please", "-One-time payment\n-Removes all ads\n-Unlimited hints\n-Unlocks past Puzzles of the Day"};
-	public string[] hint = new string[]{"Hint", "Watch an Ad\nto get a hint", "No Ads +\ninfinite hints"};
+	public string[] buyMenu = new string[]{"Disable Ads?", "No" , "Yes", "-One-time payment\n-Removes all ads\n-Unlimited hints\n-Unlocks past Puzzles of the Day"};
+	public string[] hint = new string[]{"Hint", "Watch an Ad\nto get a hint", "No Ads +\nUnlinmited hints"};
 //Spanish Assets SP
 
 	public string[] tut_button_sp = new string[]{"¡Acomoda las criaturas y ayúdame a llegar a la flor roja!", "Una vez que me muevo, ¡no podrás cambiar las piezas de lugar!", "Si no logras resolver el nivel, pide una pista después de reiniciarlo"};
@@ -80,9 +80,9 @@ public class TutorialDictionary : MonoBehaviour
 	public string[] music_sp = new string[] {"Música"};
 	public string[] sfx_sp = new string[] {"Efectos de sonido"};
 
-	public string[] buyMenu_sp = new string[]{"Desactivar Anuncios?", "SI, gracias", "NO, gracias", "-Paga solo una vez\n-No mas anuncios\n-Pistas ilimitadas\n-Desbloquea niveles diarios pasados"};
+	public string[] buyMenu_sp = new string[]{"Desactivar Anuncios?", "No", "Si", "-Paga solo una vez\n-No mas anuncios\n-Pistas ilimitadas\n-Desbloquea niveles diarios pasados"};
 	
-	public string[] hint_sp = new string[]{"Pista", "Ver anuncio para\npedir una pista", "No anuncios +\npistas infinitas"};
+	public string[] hint_sp = new string[]{"Pista", "Ver anuncio para\npedir una pista", "No anuncios +\npistas ilimitadas"};
 	//yo lo dejaria como sfx
 	//string[] sfx_sp = new string[] {"SFX"};
 

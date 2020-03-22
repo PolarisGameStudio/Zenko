@@ -219,6 +219,7 @@ public class LevelBuilder : MonoBehaviour {
 			//i = i + mapsize + 2;
 		}
 		levelsAdventure = (string[])lines.Clone();
+		//if(LevelManager.levelnum)
 		if(!LevelManager.ispotd){
 			//load potd maps
 			drawNormal(LevelManager.levelnum);
@@ -405,7 +406,9 @@ public class LevelBuilder : MonoBehaviour {
 		loadingGO.SetActive(false);
 	}
 	string[][] readAdventure(int place){
+		if(place>0)
 		place = place-1;
+		//Debug.Log("place is" + place);
 		LevelSaver.currentmap = new List<string>();
 		//string text = System.IO.File.ReadAllText(System.IO.Path.Combine (Application.streamingAssetsPath, "AdventureLevels.txt"));
 		string firstline = levelsAdventure[startersAdventure[place]];

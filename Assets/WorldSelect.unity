@@ -722,6 +722,7 @@ MonoBehaviour:
   - {fileID: 838239752}
   - {fileID: 759598638}
   mySection: 4
+  scanOnUpdate: 0
 --- !u!1 &75909531
 GameObject:
   m_ObjectHideFlags: 0
@@ -1056,6 +1057,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: f6e648e23ca1d431a909268e5d010055, type: 3}
   - {fileID: 21300000, guid: 002464c96214746b69ac86566cae7b18, type: 3}
   - {fileID: 21300000, guid: 3581da85fcb874cb0bbca1cfcd5d6f28, type: 3}
+  - {fileID: 21300000, guid: 925385cc70ef449d2b4c4d9cb5b911b8, type: 3}
+  - {fileID: 21300000, guid: 925385cc70ef449d2b4c4d9cb5b911b8, type: 3}
+  - {fileID: 21300000, guid: 925385cc70ef449d2b4c4d9cb5b911b8, type: 3}
   - {fileID: 21300000, guid: 925385cc70ef449d2b4c4d9cb5b911b8, type: 3}
   monthSprite: {fileID: 0}
   yearSprite: {fileID: 0}
@@ -3402,7 +3406,7 @@ GameObject:
   - component: {fileID: 466578342}
   - component: {fileID: 466578341}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: English
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3470,8 +3474,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1971866400600957}
-        m_MethodName: GetEnglish
+      - m_Target: {fileID: 1206074113}
+        m_MethodName: SetEnglish
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8177,8 +8181,8 @@ MonoBehaviour:
   - SFX
   buyMenu:
   - Disable Ads?
-  - NO, Thanks
-  - YES, Please
+  - No
+  - Yes
   - '-One-time payment
 
     -Removes all ads
@@ -8193,7 +8197,7 @@ MonoBehaviour:
     to get a hint'
   - 'No Ads +
 
-    infinite hints'
+    Unlinmited hints'
   tut_button_sp:
   - "\xA1Acomoda las criaturas y ay\xFAdame a llegar a la flor roja!"
   - "Una vez que me muevo, \xA1no podr\xE1s cambiar las piezas de lugar!"
@@ -8263,9 +8267,9 @@ MonoBehaviour:
   - Efectos de sonido
   buyMenu_sp:
   - Desactivar Anuncios?
-  - SI, gracias
-  - NO, gracias
-  - '-Paga una vez
+  - No
+  - Si
+  - '-Paga solo una vez
 
     -No mas anuncios
 
@@ -8279,7 +8283,7 @@ MonoBehaviour:
     pedir una pista'
   - 'No anuncios +
 
-    pistas infinitas'
+    pistas ilimitadas'
 --- !u!114 &843121563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11779,8 +11783,9 @@ GameObject:
   - component: {fileID: 1206074112}
   - component: {fileID: 1206074111}
   - component: {fileID: 1206074110}
+  - component: {fileID: 1206074113}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Spanish
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11848,8 +11853,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1971866400600957}
-        m_MethodName: GetSpanish
+      - m_Target: {fileID: 1206074113}
+        m_MethodName: SetSpanish
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11895,6 +11900,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1206074108}
   m_CullTransparentMesh: 0
+--- !u!114 &1206074113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1206074108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0d66cffd3575422c9dc91caa2bb1028, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1215079690
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14942,7 +14959,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1529254032}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: f01662d9a647a4ba48c5bd23c0de18d7,
     type: 2}
@@ -15039,7 +15056,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1529254032}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: f01662d9a647a4ba48c5bd23c0de18d7,
     type: 2}
@@ -21766,7 +21783,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4e76e684bf5c94a1c8d9435113b6b497, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1f944e925b71f480c80cedafbfaf2cc0, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -21973,6 +21990,7 @@ MonoBehaviour:
   - {fileID: 561695216}
   - {fileID: 77082303}
   mySection: 1
+  scanOnUpdate: 0
 --- !u!1 &4165062227003059599 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4727819116571422467, guid: 0f6eccdd0f11e456aa227ecee3b6bc49,
@@ -21997,6 +22015,7 @@ MonoBehaviour:
   - {fileID: 1007542585}
   - {fileID: 548342917}
   mySection: 0
+  scanOnUpdate: 0
 --- !u!224 &4165062227003059696 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4727819116571422588, guid: 0f6eccdd0f11e456aa227ecee3b6bc49,

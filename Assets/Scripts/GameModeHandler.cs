@@ -36,8 +36,11 @@ public class GameModeHandler : MonoBehaviour
         // }
     }
     public static void TurnMeOn(){
-        GameObject.Find("GameModeSelection").GetComponent<GameModeHandler>().enabled = true;
-        GameObject.Find("GameModeSelection").GetComponent<GameModeHandler>().Activate();
+        if(GameObject.Find("GameModeSelection")!=null){
+            GameObject.Find("GameModeSelection").GetComponent<GameModeHandler>().enabled = true;
+            GameObject.Find("GameModeSelection").GetComponent<GameModeHandler>().Activate();    
+        }
+        
     }
     public void Activate(){
         TurnOn();

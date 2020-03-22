@@ -482,6 +482,8 @@ public class LevelStorer : MonoBehaviour {
 		leveldic.Add (198, lv198);
 		leveldic.Add (199, lv199);
 		leveldic.Add (200, lv200);
+		for(int i=0; i<300; i++)
+		leveldic.Add(201+i, lv200);
 	}
 
 	public static void PopulatePotd500(){
@@ -589,7 +591,6 @@ public class LevelStorer : MonoBehaviour {
 		}
 	}
 	public static void UnlockLevel(int levelnum){
-
 		leveldic[levelnum].islocked = false;
 	}
 	

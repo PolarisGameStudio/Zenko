@@ -705,6 +705,10 @@ public class PieceHolders : MonoBehaviour {
 					if(placedpieces[i].myType == "Seed"){
 						postype =placedpieces[i].mySeedType + placedpieces[i].myType;
 					}
+					else if(placedpieces[i].myType == "Portal")
+					{
+						postype = placedpieces[i].myType + placedpieces[i].portalType;
+					}
 					else{
 						postype = placedpieces[i].myType;
 					}
