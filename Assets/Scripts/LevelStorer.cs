@@ -241,7 +241,7 @@ public class LevelStorer : MonoBehaviour {
 		LevelStats lv158 = new LevelStats(158,7,true,0); 
 		LevelStats lv159 = new LevelStats(159,9,true,0); 
 		LevelStats lv160 = new LevelStats(160,9,true,0); //swap with 62
-		LevelStats lv161 = new LevelStats(161,8,true,0); 
+		LevelStats lv161 = new LevelStats(161,8,false,0); 
 		LevelStats lv162 = new LevelStats(162,9,true,0); 
 		LevelStats lv163 = new LevelStats(163,8,true,0); 
 		LevelStats lv164 = new LevelStats(164,7,true,0); 

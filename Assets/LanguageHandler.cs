@@ -19,7 +19,26 @@ public class LanguageHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+    	if(PlayerPrefs.HasKey("Language")){
+			if(PlayerPrefs.GetString("Language") == "Spanish")
+	        {
+	        	GetSpanish();
+	        }
+	        else
+	        {
+	        	GetEnglish();
+	        }	
+    	}
         
+    	else{
+    		if(Application.systemLanguage == SystemLanguage.Spanish){
+    			GetSpanish();
+    		}
+    		else
+    		{
+    			GetEnglish();
+    		}
+    	}
     }
 
     // Update is called once per frame
@@ -42,6 +61,7 @@ public class LanguageHandler : MonoBehaviour
         {
 
         }
+        PlayerPrefs.SetString("Language", "Spanish");
     }
     public void GetEnglish()
     {
@@ -57,6 +77,7 @@ public class LanguageHandler : MonoBehaviour
         {
 
         }
+        PlayerPrefs.SetString("Language", "English");
     }
     public void WriteTexts()
     {

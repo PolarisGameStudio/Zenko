@@ -316,6 +316,7 @@
      <Compile Include="Assets\Loading.cs" />
      <Compile Include="Assets\LoadingTextAnimator.cs" />
      <Compile Include="Assets\ModulateImage.cs" />
+     <Compile Include="Assets\MovementLeft.cs" />
      <Compile Include="Assets\NokobotUIPack\Demo\Scripts\GoToNextScene.cs" />
      <Compile Include="Assets\PotdMenu.cs" />
      <Compile Include="Assets\PotdShortcut.cs" />
@@ -425,6 +426,7 @@
      <None Include="Assets\StreamingAssets\Level-101.txt" />
      <None Include="Assets\StreamingAssets\Level89.txt" />
      <None Include="Assets\StreamingAssets\Level42.txt" />
+     <None Include="Assets\StreamingAssets\Adventure5.txt" />
      <None Include="Assets\StreamingAssets\Level62.txt" />
      <None Include="Assets\StreamingAssets\Ch1 5x5 candidates.txt" />
      <None Include="Assets\StreamingAssets\Level52.txt" />
@@ -476,6 +478,7 @@
      <None Include="Assets\GooglePlayGames\Plugins\Android\GooglePlayGamesManifest.plugin\AndroidManifest.xml" />
      <None Include="Assets\StreamingAssets\Level-106.txt" />
      <None Include="Assets\StreamingAssets\Level9.txt" />
+     <None Include="Assets\StreamingAssets\Adventure5backup.txt" />
      <None Include="Assets\StreamingAssets\DoubleHitMaps2.txt" />
      <None Include="Assets\FilteredRemoved.txt" />
      <None Include="Assets\StreamingAssets\Level10.txt" />
@@ -504,6 +507,7 @@
      <None Include="Assets\StreamingAssets\4x4_LRUD1_Medium.txt" />
      <None Include="Assets\StreamingAssets\DoubleHitMaps4.txt" />
      <None Include="Assets\StreamingAssets\TestMap.txt" />
+     <None Include="Assets\StreamingAssets\Candidateslrudportals.txt" />
      <None Include="Assets\StreamingAssets\newestpotd.txt" />
      <None Include="Assets\StreamingAssets\Level70.txt" />
      <None Include="Assets\StreamingAssets\MapDatabase.txt" />
@@ -581,6 +585,7 @@
      <None Include="Assets\StreamingAssets\Level-102.txt" />
      <None Include="Assets\StreamingAssets\Level49.txt" />
      <None Include="Assets\StreamingAssets\Goodmaps.txt" />
+     <None Include="Assets\StreamingAssets\RemovedMaps.txt" />
      <None Include="Assets\StreamingAssets\Level79.txt" />
      <None Include="Assets\StreamingAssets\TwoTouchMaps.txt" />
      <None Include="Assets\StreamingAssets\Level38.txt" />

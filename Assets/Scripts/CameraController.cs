@@ -18,6 +18,7 @@ public class CameraController : MonoBehaviour {
 	public Sprite World2;
 	public Sprite World3;
 	public Sprite World4;
+	public Sprite World5;
 	public Sprite[] WorldTitles;
 	public Sprite[] WorldNumber;
 	public Sprite[] WorldName;
@@ -86,7 +87,11 @@ public class CameraController : MonoBehaviour {
 		Instance = GameObject.Find("Main Canvas").GetComponent<CameraController>();
 		//Debug.Log(GameObject.Find("Main Canvas").GetComponent<CameraController>());
 		Debug.Log(Instance + "IS THE INSTANCE OF CAMERACONTROLLER");
+		Debug.Log("place is "  + place);
 		int world = Mathf.FloorToInt((place-1)/40)  + 1;
+		Debug.Log("world is " + world);
+		if(world>5)
+		world=5;
 		Instance.gameModeBackground.GetComponent<Image>().sprite = Instance.CheckBackground(world);
 		if(SceneLoading.Instance.isMenu){
 			Instance.WorldTitle.GetComponent<Image>().sprite = Instance.CheckWorldName(world);
@@ -103,30 +108,30 @@ public class CameraController : MonoBehaviour {
 
 	}
 	private Sprite CheckWorldNumber(int world){
-		if(world>4){
-			return WorldNumber[3];
-		}
+		// if(world>4){
+		// 	return WorldNumber[3];
+		// }
 		return WorldNumber[world-1];		
 	}	
 	private Sprite CheckWorldSprite(int world){
-		if(world>4){
-			if(LanguageHandler.IsEnglish())
-			return WorldName[3];
-			else
-			return WorldNameSpanish[3];
-		}
+		// if(world>4){
+		// 	if(LanguageHandler.IsEnglish())
+		// 	return WorldName[3];
+		// 	else
+		// 	return WorldNameSpanish[3];
+		// }
 		if(LanguageHandler.IsEnglish())
 		return WorldName[world-1];		
 		else return WorldNameSpanish[world-1];
 	}
 	private Sprite CheckWorldName(int world){
 		//Debug.Log("Current World is " + world);
-		if(world>4){
-			if(LanguageHandler.IsEnglish())
-			return WorldTitles[3];
-			else
-			return WorldTitlesSpanish[3];
-		}
+		// if(world>4){
+		// 	if(LanguageHandler.IsEnglish())
+		// 	return WorldTitles[3];
+		// 	else
+		// 	return WorldTitlesSpanish[3];
+		// }
 		if(LanguageHandler.IsEnglish())
 		return WorldTitles[world-1];
 		else
@@ -150,8 +155,12 @@ public class CameraController : MonoBehaviour {
 			case 4:
 				return World4;
 			break;
+
+			case 5:
+				return World5;
+			break;
 		}
-		return World4;
+		return World5;
 	}
 	public void ChangeResolution(){
 		Debug.Log(Screen.currentResolution);

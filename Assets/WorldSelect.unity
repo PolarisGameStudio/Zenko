@@ -3428,8 +3428,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 229.15, y: -109.8}
-  m_SizeDelta: {x: 150, y: 100}
+  m_AnchoredPosition: {x: 227.3, y: -85}
+  m_SizeDelta: {x: 293.3, y: 83.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &466578341
 MonoBehaviour:
@@ -3498,14 +3498,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19873619, g: 0.42056414, b: 0.5471698, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: e2d5c1cb093c04b12a4d104a1ae0029e, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -11807,8 +11807,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -229.15, y: -109.8}
-  m_SizeDelta: {x: 150, y: 100}
+  m_AnchoredPosition: {x: -232.4, y: -85.1}
+  m_SizeDelta: {x: 293.3, y: 83.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1206074110
 MonoBehaviour:
@@ -11877,14 +11877,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.31947404, g: 0.6132076, b: 0.24586153, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: b608f3d75b9154cd9bd39fe081536035, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -21681,30 +21681,36 @@ MonoBehaviour:
   World2: {fileID: 21300000, guid: a0fe72d0caa67461dbd34b316e4cdc36, type: 3}
   World3: {fileID: 21300000, guid: 64c0c573437df4e9ab5bff139a002a7f, type: 3}
   World4: {fileID: 21300000, guid: 5e03834f6ad6b407582b4a9107e00527, type: 3}
+  World5: {fileID: 21300000, guid: a0fe72d0caa67461dbd34b316e4cdc36, type: 3}
   WorldTitles:
   - {fileID: 21300000, guid: 56148b805676c403f89d1eab3a03c79e, type: 3}
   - {fileID: 21300000, guid: bc4cbaec2a9a54fdbabe73f433346c89, type: 3}
   - {fileID: 21300000, guid: e163eaea7f34a4cdc905952504e2f2b5, type: 3}
+  - {fileID: 21300000, guid: 82cfc8e8e44d444e691e1d98745ecda6, type: 3}
   - {fileID: 21300000, guid: 82cfc8e8e44d444e691e1d98745ecda6, type: 3}
   WorldNumber:
   - {fileID: 21300000, guid: 311148fce47aa4f66b522858a3bc26f4, type: 3}
   - {fileID: 21300000, guid: f3bdec58944c14164ae0fd6d43e089ee, type: 3}
   - {fileID: 21300000, guid: 5651b06c765fa41b487567ce40f62eeb, type: 3}
   - {fileID: 21300000, guid: 5d12a4f95b326449ba4e6416df4a18b8, type: 3}
+  - {fileID: 21300000, guid: 5d12a4f95b326449ba4e6416df4a18b8, type: 3}
   WorldName:
   - {fileID: 21300000, guid: 506f663ea89b34eb4b7bbec741ffc54f, type: 3}
   - {fileID: 21300000, guid: 963635da0fda14bd48e44275c092c919, type: 3}
   - {fileID: 21300000, guid: ca39513a799cd463790a22f98584e187, type: 3}
+  - {fileID: 21300000, guid: 4119414feccc24cb29d0ac905e22c8ef, type: 3}
   - {fileID: 21300000, guid: 4119414feccc24cb29d0ac905e22c8ef, type: 3}
   WorldTitlesSpanish:
   - {fileID: 21300000, guid: 6e6db6d76d58340d3a1149a89f970ef2, type: 3}
   - {fileID: 21300000, guid: 492aeb358c3f04e1ca8ca913e33ca9be, type: 3}
   - {fileID: 21300000, guid: 4f0d0481bdd764ce688efb7df22a7d61, type: 3}
   - {fileID: 21300000, guid: b3347566c464740649595e2d437f5c3a, type: 3}
+  - {fileID: 21300000, guid: b3347566c464740649595e2d437f5c3a, type: 3}
   WorldNameSpanish:
   - {fileID: 21300000, guid: 194a9a8853f6945088ed9a3ca0e88333, type: 3}
   - {fileID: 21300000, guid: 949228a26c8a2424b9db93aa2fc45f72, type: 3}
   - {fileID: 21300000, guid: a9a198a8c97c94a1e8df7c35d44353b7, type: 3}
+  - {fileID: 21300000, guid: cfe786812cc344bc29956b1995364f28, type: 3}
   - {fileID: 21300000, guid: cfe786812cc344bc29956b1995364f28, type: 3}
   WorldTitle: {fileID: 1065260549}
   World: {fileID: 75909531}

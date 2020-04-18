@@ -243,7 +243,7 @@ public class LevelMenu : MonoBehaviour {
 			buttonForward.SetActive(true);
 			return;
 		}
-		else if(curfirst == 141){
+		else if(curfirst == 181){
 			buttonBack.SetActive(true);
 			buttonForward.SetActive(false);
 		}
@@ -319,7 +319,7 @@ public class LevelMenu : MonoBehaviour {
 
 
 	public void populateMenuUp(){
-		if(currentfirst <181){
+		if(currentfirst <221){
 			clearMenu();
 			for (int i = currentfirst+20; i < currentfirst+40; i++){
 				//Debug.Log(i);

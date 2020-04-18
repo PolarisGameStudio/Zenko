@@ -576,7 +576,7 @@ public class PlayerMovement : MonoBehaviour {
 
 
 	void ActOnTile(){
-		Debug.Log(tilescript.type);
+		//Debug.Log(tilescript.type);
 		Swiping.mydirection = "Null";
 		if(outofmap == true)
 		{

@@ -124,7 +124,7 @@ public class Dragger : MonoBehaviour {
 			PlaneBehavior.readyToDrop = false;
 
 			//PieceHolders.placedpieces.Remove(this);
-			if(myType == "Wall"){
+			if(myType == "Wall" || myType == "Portal"){
 				this.gameObject.GetComponent<Animator>().SetInteger("Phase", 1);
 			}
 			if(myType == "Left" || myType == "Right" ||myType == "Up" ||myType == "Down"){
@@ -393,7 +393,7 @@ public void OnMouseDrag()
 		//Debug.Log("lastgoodtile is" + lastgoodtile.transform.position);
 		particle.transform.position = new Vector3(lastgoodtile.transform.position.x, particle.transform.position.y, lastgoodtile.transform.position.z);//change this
 
-		if(myType == "Wall" || myType == "Up" ||myType == "Down" ||myType == "Right" ||myType == "Left" ){
+		if(myType == "Wall" || myType == "Up" ||myType == "Down" ||myType == "Right" ||myType == "Left" || myType == "Portal" ){
 			this.gameObject.GetComponent<Animator>().SetInteger("Phase", 1);
 
 		}
@@ -507,7 +507,7 @@ public void OnMouseDrag()
 				LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].tileObj = this.gameObject;*/				
 			}
 			
-			if(myType == "Wall"){
+			if(myType == "Wall" || myType == "Portal"){
 			this.gameObject.GetComponent<Animator>().SetInteger("Phase", 2);
 			}
 			if(myType == "Left" || myType == "Right" ||myType == "Up" ||myType == "Down"){
@@ -544,7 +544,7 @@ public void OnMouseDrag()
 				LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].tileObj = this.gameObject;*/				
 			}
 			
-			if(myType == "Wall"){
+			if(myType == "Wall" || myType == "Portal"){
 			this.gameObject.GetComponent<Animator>().SetInteger("Phase", 2);
 			}
 			if(myType == "Left" || myType == "Right" ||myType == "Up" ||myType == "Down"){
