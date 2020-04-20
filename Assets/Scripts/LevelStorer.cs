@@ -79,7 +79,7 @@ public class LevelStorer : MonoBehaviour {
 	public static string importantValues;
 
 
-	public static void PopulateFourChapters(){
+	public static void PopulateFiveChapters(){
 
 		LevelStats lv1  = new LevelStats(1,2,false,0);
 		LevelStats lv2  = new LevelStats(2,3,true,0); 
@@ -541,7 +541,7 @@ public class LevelStorer : MonoBehaviour {
 		for(int i=1; i<leveldic.Count+1; i++){
 
 			string mystring = "Level"+i+"Rating";
-
+			
 			if(PlayerPrefs.GetInt(mystring)>0){
 
 				PlayerPrefs.SetInt(mystring, 0);

@@ -70,7 +70,7 @@ public class RatingPopUp : MonoBehaviour {
 
 		//PlayerPrefs.SetString("SaveFile",LevelManager.levelnum.ToString());
 		if(LevelManager.levelnum+1 > LevelMenu.highestLevelSolved && !LevelManager.ispotd){
-			Debug.Log("new highest solved is " + LevelManager.levelnum+1);
+			Debug.Log("new highest solved is " + (LevelManager.levelnum+1));
 			LevelMenu.highestLevelSolved = LevelManager.levelnum+1;
 		}
 		if(!LevelManager.ispotd){

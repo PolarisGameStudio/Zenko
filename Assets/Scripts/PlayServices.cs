@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using System;
@@ -51,7 +51,7 @@ public class PlayServices : MonoBehaviour
 
                 //Debug.Log("Doingit");
                 //Debug.Log(instance);
-                LevelStorer.PopulateFourChapters(); //load level data (200) int levelstorer.leveldic
+                LevelStorer.PopulateFiveChapters(); //load level data (200) int levelstorer.leveldic
                 LevelStorer.PopulatePotd500(); //
 
 
@@ -229,6 +229,28 @@ public class PlayServices : MonoBehaviour
         	}
         }
 
+        for(int i=161; i < 201; i++){
+            if(i == 200){
+                Debug.Log("200 is happening and " + LevelStorer.leveldic[i].rating + " is its rating");
+            }
+            if(LevelStorer.leveldic[i].rating == 0){
+                if(LevelStorer.leveldic[i].islocked == true){
+                stringToSave = stringToSave + "0";  
+                }
+                else{
+                stringToSave = stringToSave + "1";  
+                }
+                 
+            }
+            else{
+                
+                int rating = LevelStorer.leveldic[i].rating;
+                //Debug.Log("place " + i + " is " + (rating+1).ToString());
+                stringToSave = stringToSave + "" + (rating+1).ToString() + "";
+                //Debug.Log(stringToSave);
+            }            
+        }
+
 //        Debug.Log("GameData is " + stringToSave);
  //       Debug.Log("GD SIZE IS " + stringToSave.Length);
 
@@ -263,12 +285,26 @@ public class PlayServices : MonoBehaviour
 
         AssignFirstFourChapters(dataArray);
         AssignPotdData(dataArray);
+        AssignChapterFive(dataArray);
         if(finishedLoading)
         loader.Loaded();
 
 
     }
-
+    void AssignChapterFive(string[] dataArray){
+        if(dataArray.Length>666){
+            for(int i=161; i<201;i++){
+                int rating = int.Parse(dataArray[i+500]);
+                if(rating == 1){
+                    LevelStorer.leveldic[i].rating = 0;
+                    LevelStorer.leveldic[i].islocked = false;       
+                }
+                if(rating>1){
+                UpdateImportantValue(i, rating-1);
+                }
+            }
+        }
+    }
     void AssignFirstFourChapters(string[] dataArray){
         for(int i=1; i<161;i++){
             int rating = int.Parse(dataArray[i]);
@@ -298,6 +334,7 @@ public class PlayServices : MonoBehaviour
     		}
     	}
     }
+
 
     void UpdateImportantValue(int place, int value){ //grabs a value from datastring and places  it in leveldic
         LevelStorer.leveldic[place].rating = value;
@@ -353,7 +390,8 @@ public class PlayServices : MonoBehaviour
     }
 
     void StringToGameData(string localData){
-        Debug.Log("GONNA ASSIGN DATA FROM LOCAL");
+
+        Debug.Log("GONNA ASSIGN DATA FROM LOCAL with size " + localData.Length);
         //Debug.Log(localData);
         if(localData == null){
             localData = "0";

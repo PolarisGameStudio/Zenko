@@ -638,7 +638,7 @@ public class SceneLoading : MonoBehaviour {
 		if (highest == 0 || highest == null || highest == 1){
 			return 1;
 		}
-		for (int i = 1; i<159; i+=20){
+		for (int i = 1; i<199; i+=20){
 			if(i<highest+1){
 				candidate = i;
 			}

@@ -220,6 +220,7 @@ public class LevelMenu : MonoBehaviour {
 		// if(!LevelStorer.leveldic[num].islocked){
 		// 	//Debug.Log("NOT LOCKED");
 		// }
+//		Debug.Log("level number " + num + " rating is " + LevelStorer.leveldic[num].rating);
 		if(LevelStorer.leveldic[num].rating == 1){
 			curbutton.transform.GetChild(4).GetChild(1).GetChild(1).gameObject.SetActive(true);
 		}
@@ -297,6 +298,7 @@ public class LevelMenu : MonoBehaviour {
 			createButton(i);
 			counter++;
 		}		
+		Debug.Log("current first is" + currentfirst);
 		AssignWorldText(currentfirst);
 	}
 
