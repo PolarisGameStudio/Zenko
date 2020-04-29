@@ -21,6 +21,7 @@ ScriptsOnlyBuild:
     - GameModeHandler
     - GoalBehaviour
     - GoogleAds
+    - GoogleMobileAds.Common.MobileAdsEventExecutor
     - HintMenuHandler
     - HueModifier
     - ImageColorModulator
@@ -91,8 +92,10 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -117,6 +120,7 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.Toggle
     - UnityEngine.UI.VerticalLayoutGroup
     com.unity.multiplayer-hlapi.Runtime.dll:
+    - UnityEngine.Networking.NetworkCallbacks
     - UnityEngine.Networking.NetworkIdentity
   sceneClasses:
     Assets/Level.unity:
@@ -840,7 +844,7 @@ ScriptsOnlyBuild:
     className: Image
   - hash:
       serializedVersion: 2
-      Hash: e0a3ccedac5f3a76d8162e54c196fd52
+      Hash: 93aa3efd2a5b2cae5a9a8c29c976c19a
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: WinMessage
@@ -2010,7 +2014,7 @@ ScriptsOnlyBuild:
     className: PotdUnlocker
   - hash:
       serializedVersion: 2
-      Hash: 2bcde547e81196ec80089c4985ff5421
+      Hash: 0a4d6b265f1705d6c93bc2d6a337ffad
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: TutorialDictionary
@@ -2072,4 +2076,4 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/WorldSelect.unity
   - Assets/Level.unity
-  playerPath: /Users/bernardolimon/Desktop/ZenkoApk/Zenko_263.aab
+  playerPath: /Users/bernardolimon/Desktop/ZenkoApk/Zenko_265.aab

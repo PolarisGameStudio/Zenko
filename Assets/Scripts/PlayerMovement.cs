@@ -269,7 +269,9 @@ public class PlayerMovement : MonoBehaviour {
 		}
 		else if (nextaction == "Portal_Action")
 		{
+
 			Debug.Log("TRIGGERING PORTAL ACTION");
+			GameObject currentPortal = GetCurrentPortal(transform.position);
 			GameObject newPortal = GetMatchingPortal(transform.position);
 			Vector3 newPosition = newPortal.transform.position;
 			transform.position = newPosition;
@@ -279,7 +281,8 @@ public class PlayerMovement : MonoBehaviour {
 			string newDirection = newPortal.GetComponent<Dragger>().portalType;
 			character_direction = newDirection;
 			canmove = true;
-			
+			currentPortal.GetComponent<Animator>().SetTrigger("Enter");
+			newPortal.GetComponent<Animator>().SetTrigger("Exit");
 			NewPortalStart(character_direction);
 
 		}
@@ -289,6 +292,14 @@ public class PlayerMovement : MonoBehaviour {
 			hasstopped = true;
 
 		}
+	}
+	GameObject GetCurrentPortal(Vector3 entrancePosition){
+		foreach(GameObject portal in LevelBuilder.Portals){
+			if(portal.transform.position.x == entrancePosition.x && portal.transform.position.z == entrancePosition.z){
+				return portal;
+			}
+		}
+		return null;
 	}
 	GameObject GetMatchingPortal(Vector3 entrancePosition){
 		foreach(GameObject portal in LevelBuilder.Portals)

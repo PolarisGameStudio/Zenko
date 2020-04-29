@@ -8160,10 +8160,15 @@ MonoBehaviour:
   - I'll wake it once I go over it.
   tut_122:
   - You can tell by the arrow in the bag, the direction it'll blow when it wakes!
+  tut_161:
+  - Those two are Tanukis
+  - Their bellies are connected!
+  - If I touch one, I'll exit through the other belly
+  - That is if nothing is blocking the exit
   tut_200:
-  - This is the end of our adventure for now
-  - You should try out puzzles of the day!
-  - Be sure to come back soon for more levels and new friends!
+  - I wonder what I'll encounter next...
+  - Thanks for coming with me in this adventure!!!
+  - Dont forget to try out the puzzles of the day!
   random1:
   - Focus! You can do it!
   random2:
@@ -8245,10 +8250,15 @@ MonoBehaviour:
   tut_122_sp:
   - "La direcci\xF3n de la flecha en la bolsa, \xA1es la misma direcci\xF3n en la
     Icarus soplar\xE1 al despertar!"
+  tut_161_sp:
+  - Esos dos son Tanukis
+  - "\xA1Sus panzas est\xE1n conectadas!"
+  - Si toco una voy a salir por la otra
+  - Eso mientras la salida no este tapada
   tut_200_sp:
-  - "Aqu\xED termina nuestra aventura por ahora"
-  - Puedes checar los niveles del dia!
-  - "\xA1Recuerda regresar pronto para jugar en nuevos niveles y conocer nuevos amigos!"
+  - "No puedo imaginarme que encontraremos despu\xE9s..."
+  - "\xA1Gracias por acompa\xF1arme en \xE9sta aventura!"
+  - "\xA1No olvides probar los niveles del dia!"
   random1_sp:
   - "\xA1Conc\xE9ntrate!\xA1T\xFA puedes!"
   random2_sp:
