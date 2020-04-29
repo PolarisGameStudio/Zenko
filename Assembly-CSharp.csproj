@@ -607,6 +607,7 @@
      <None Include="Assets\StreamingAssets\Level-107.txt" />
      <None Include="Assets\StreamingAssets\Level68.txt" />
      <None Include="Assets\StreamingAssets\4x4_LRUD1_Easy.txt" />
+     <None Include="Assets\StreamingAssets\exceptionalmaps.txt" />
      <None Include="Assets\StreamingAssets\Level36.txt" />
      <None Include="Assets\StreamingAssets\Level81.txt" />
      <None Include="Assets\StreamingAssets\Ch4_6x6.txt" />

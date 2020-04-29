@@ -29,7 +29,7 @@ public class TutorialDictionary : MonoBehaviour
     public string[] tut_81 = new string[]{"That bag with the circle becomes Pedro once I go over it!"};
     public string[] tut_121 = new string[]{"That bag with the arrow has an Icarus sleeping inside!", "I'll wake it once I go over it."};
     public string[] tut_122 = new string[]{"You can tell by the arrow in the bag, the direction it'll blow when it wakes!"};
-	public string[] tut_160 = new string[]{"This is the end of our adventure for now", "Be sure to come back soon for more levels and new friends!"};
+	public string[] tut_200 = new string[]{"This is the end of our adventure for now", "You should try out puzzles of the day!", "Be sure to come back soon for more levels and new friends!"};
 	
     //Choose one of the dialogs to happen after 30s of innactivity
 
@@ -64,7 +64,7 @@ public class TutorialDictionary : MonoBehaviour
 	public string[] tut_81_sp = new string[]{"¡Esa bolsa con el círculo se transforma en Pedro al pasar sobre ella!"};
 	public string[] tut_121_sp = new string[]{"¡Dentro de esa bolsa con la flecha está Icarus dormido!" , "Lo despertaré al pasar encima"};
 	public string[] tut_122_sp = new string[]{"La dirección de la flecha en la bolsa, ¡es la misma dirección en la Icarus soplará al despertar!"};
-	public string[] tut_160_sp = new string[]{"Aquí termina nuestra aventura por ahora", "¡Recuerda regresar pronto para jugar en nuevos niveles y conocer nuevos amigos!"};
+	public string[] tut_200_sp = new string[]{"Aquí termina nuestra aventura por ahora", "Puedes checar los niveles del dia!" , "¡Recuerda regresar pronto para jugar en nuevos niveles y conocer nuevos amigos!"};
 	
     //Choose one of the dialogs to happen after 30s of innactivity
 
@@ -110,7 +110,7 @@ public class TutorialDictionary : MonoBehaviour
 		tutDic.Add(81,tut_81);
 		tutDic.Add(121,tut_121);
 		tutDic.Add(122,tut_122);
-		tutDic.Add(160,tut_160);
+		tutDic.Add(200,tut_200);
 
 		tutDicSpanish.Add(0,tut_button_sp);
 		tutDicSpanish.Add(1,tut_1_sp);
@@ -127,7 +127,7 @@ public class TutorialDictionary : MonoBehaviour
 		tutDicSpanish.Add(81,tut_81_sp);
 		tutDicSpanish.Add(121,tut_121_sp);
 		tutDicSpanish.Add(122,tut_122_sp);
-		tutDicSpanish.Add(160,tut_160_sp);
+		tutDicSpanish.Add(200,tut_200_sp);
 	}
 
 

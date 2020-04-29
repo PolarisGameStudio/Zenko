@@ -476,7 +476,9 @@ public class PlayServices : MonoBehaviour
             int.TryParse(originalStr.Substring(0,4), out originalNum);
             int.TryParse(unmergedStr.Substring(0,4), out unmergedNum);
 
-
+            if(originalStr.Length < unmergedStr.Length){
+                resolver.ChooseMetadata(unmerged);
+            }
             if (originalNum > unmergedNum){
 
                 resolver.ChooseMetadata(original);

@@ -51,8 +51,8 @@ public class WorldName : MonoBehaviour
     }
     public void AssignAdventureTag(int worldnum, int level){
         RectTransform rt = AdvHolder[0].GetComponent<RectTransform>();
-        if(worldnum >4)
-        worldnum = 4;
+        //if(worldnum >4)
+        //worldnum = 4;
         if(LanguageHandler.IsEnglish()){
             AdvHolder[0].GetComponent<Image>().sprite = world[worldnum-1];
             rt.sizeDelta = new Vector2((float)254.5, rt.sizeDelta.y);

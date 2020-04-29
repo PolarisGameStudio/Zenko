@@ -8160,8 +8160,9 @@ MonoBehaviour:
   - I'll wake it once I go over it.
   tut_122:
   - You can tell by the arrow in the bag, the direction it'll blow when it wakes!
-  tut_160:
+  tut_200:
   - This is the end of our adventure for now
+  - You should try out puzzles of the day!
   - Be sure to come back soon for more levels and new friends!
   random1:
   - Focus! You can do it!
@@ -8244,8 +8245,9 @@ MonoBehaviour:
   tut_122_sp:
   - "La direcci\xF3n de la flecha en la bolsa, \xA1es la misma direcci\xF3n en la
     Icarus soplar\xE1 al despertar!"
-  tut_160_sp:
+  tut_200_sp:
   - "Aqu\xED termina nuestra aventura por ahora"
+  - Puedes checar los niveles del dia!
   - "\xA1Recuerda regresar pronto para jugar en nuevos niveles y conocer nuevos amigos!"
   random1_sp:
   - "\xA1Conc\xE9ntrate!\xA1T\xFA puedes!"
@@ -10196,7 +10198,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 56148b805676c403f89d1eab3a03c79e, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -21681,37 +21683,37 @@ MonoBehaviour:
   World2: {fileID: 21300000, guid: a0fe72d0caa67461dbd34b316e4cdc36, type: 3}
   World3: {fileID: 21300000, guid: 64c0c573437df4e9ab5bff139a002a7f, type: 3}
   World4: {fileID: 21300000, guid: 5e03834f6ad6b407582b4a9107e00527, type: 3}
-  World5: {fileID: 21300000, guid: a0fe72d0caa67461dbd34b316e4cdc36, type: 3}
+  World5: {fileID: 21300000, guid: e41393d9450944f8f824af68e769b878, type: 3}
   WorldTitles:
   - {fileID: 21300000, guid: 56148b805676c403f89d1eab3a03c79e, type: 3}
   - {fileID: 21300000, guid: bc4cbaec2a9a54fdbabe73f433346c89, type: 3}
   - {fileID: 21300000, guid: e163eaea7f34a4cdc905952504e2f2b5, type: 3}
   - {fileID: 21300000, guid: 82cfc8e8e44d444e691e1d98745ecda6, type: 3}
-  - {fileID: 21300000, guid: 82cfc8e8e44d444e691e1d98745ecda6, type: 3}
+  - {fileID: 21300000, guid: 48a0a83fe4f634e79bbb729fbda06376, type: 3}
   WorldNumber:
   - {fileID: 21300000, guid: 311148fce47aa4f66b522858a3bc26f4, type: 3}
   - {fileID: 21300000, guid: f3bdec58944c14164ae0fd6d43e089ee, type: 3}
   - {fileID: 21300000, guid: 5651b06c765fa41b487567ce40f62eeb, type: 3}
   - {fileID: 21300000, guid: 5d12a4f95b326449ba4e6416df4a18b8, type: 3}
-  - {fileID: 21300000, guid: 5d12a4f95b326449ba4e6416df4a18b8, type: 3}
+  - {fileID: 21300000, guid: d8317f7721a2c4c11b349422e3cd313e, type: 3}
   WorldName:
   - {fileID: 21300000, guid: 506f663ea89b34eb4b7bbec741ffc54f, type: 3}
   - {fileID: 21300000, guid: 963635da0fda14bd48e44275c092c919, type: 3}
   - {fileID: 21300000, guid: ca39513a799cd463790a22f98584e187, type: 3}
   - {fileID: 21300000, guid: 4119414feccc24cb29d0ac905e22c8ef, type: 3}
-  - {fileID: 21300000, guid: 4119414feccc24cb29d0ac905e22c8ef, type: 3}
+  - {fileID: 21300000, guid: 3db15fb24d40e42879bb17986c8bce62, type: 3}
   WorldTitlesSpanish:
   - {fileID: 21300000, guid: 6e6db6d76d58340d3a1149a89f970ef2, type: 3}
   - {fileID: 21300000, guid: 492aeb358c3f04e1ca8ca913e33ca9be, type: 3}
   - {fileID: 21300000, guid: 4f0d0481bdd764ce688efb7df22a7d61, type: 3}
   - {fileID: 21300000, guid: b3347566c464740649595e2d437f5c3a, type: 3}
-  - {fileID: 21300000, guid: b3347566c464740649595e2d437f5c3a, type: 3}
+  - {fileID: 21300000, guid: 88c28cbc21a3d469fb76523e657e20cb, type: 3}
   WorldNameSpanish:
   - {fileID: 21300000, guid: 194a9a8853f6945088ed9a3ca0e88333, type: 3}
   - {fileID: 21300000, guid: 949228a26c8a2424b9db93aa2fc45f72, type: 3}
   - {fileID: 21300000, guid: a9a198a8c97c94a1e8df7c35d44353b7, type: 3}
   - {fileID: 21300000, guid: cfe786812cc344bc29956b1995364f28, type: 3}
-  - {fileID: 21300000, guid: cfe786812cc344bc29956b1995364f28, type: 3}
+  - {fileID: 21300000, guid: f3ebfdc477ef14c78a7a4dfd3e9f9336, type: 3}
   WorldTitle: {fileID: 1065260549}
   World: {fileID: 75909531}
 --- !u!114 &2119554900

@@ -15,8 +15,6 @@ public class LoseMessage : MonoBehaviour
 	}
 	public void AssignLoseSprite(int world){
 		RectTransform rt = spriteHolder.GetComponent<RectTransform>();
-		if(world>4)
-		world=4;
 		if(LanguageHandler.IsEnglish())
 		{
 			spriteHolder.GetComponent<Image>().sprite = images[world-1];

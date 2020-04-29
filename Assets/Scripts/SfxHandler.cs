@@ -48,7 +48,7 @@ public class SfxHandler : MonoBehaviour
         //source.PlayOneShot(pedro_Hit, 1f);
 
         string typeOfWall = FindType(x,y);
-//        Debug.Log(typeOfWall + " IS THE HIT");
+        Debug.Log(typeOfWall + " IS THE HIT");
         switch(typeOfWall){
             case "Wall":
                 source.PlayOneShot(pedro_Hit, .8f);
@@ -81,6 +81,9 @@ public class SfxHandler : MonoBehaviour
                     source.PlayOneShot(icarus_Sound[Random.Range(0,icarus_Sound.Length)], 1f);    
                 }
                 source.PlayOneShot(pedro_Hit, 1f);
+                break;
+            case "Portal":
+                source.PlayOneShot(pedro_Hit, .8f);
                 break;
 
         }

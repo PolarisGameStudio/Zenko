@@ -689,7 +689,7 @@ public class PieceHolders : MonoBehaviour {
 				//filter out solutions without this piece
 					Debug.Log("Piece in the right place");
 					//CrownPiece(Dragger placedpieces[i]);
-					placedpieces[i].transform.GetChild(1).GetComponent<Renderer>().material.color = Color.green;
+					//placedpieces[i].transform.GetChild(1).GetComponent<Renderer>().material.color = Color.green;
 					rightones++;
 				}
 
@@ -860,9 +860,13 @@ public class PieceHolders : MonoBehaviour {
 		if(placedpieces[position].myType == "Seed"){
 			postype =placedpieces[position].mySeedType + placedpieces[position].myType;
 		}
+		else if(placedpieces[position].myType == "Portal"){
+			postype = placedpieces[position].myType + placedpieces[position].portalType;
+		}
 		else{
 			postype = placedpieces[position].myType;
 		}
+		Debug.Log(postype + " is postype");
 		for (int i = 0; i <LevelManager.hints.Count; i++){
 //		Debug.Log(placedpieces[position].myType + "" + LevelManager.hints[i].type);
 

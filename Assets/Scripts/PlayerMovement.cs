@@ -109,6 +109,7 @@ public class PlayerMovement : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void Update () {
+		//Debug.Log(nextaction);
 //		Debug.Log(PieceHolders.placedpieces.Count);
 //		Debug.Log(PieceHolders.placedpieces[0].transform.position);
 //		Debug.Log(PieceHolders.placedpieces[1].transform.position);
@@ -133,20 +134,25 @@ public class PlayerMovement : MonoBehaviour {
 				lastbooped = currenttile;
 				AssignShakeOrientation(character_direction);
 			}
+			// Debug.Log("BOOP 1");
+			// Debug.Log("boop value" + boop);
+			// Debug.Log(currenttile + "is current tile " + transform.position + "is position");
 		}
-		if(Vector3.Distance(currenttile, transform.position) <.8f && !boop && 
-			transform.position != startingposition && nextaction !="Goal_Action"){
-			if(wallToHit!= null){
-				wallToHit.GetComponent<Animator>().SetTrigger("Hit");
-				wallToHit = null;				
-			}
-		}		
+		// if(Vector3.Distance(currenttile, transform.position) <.8f && !boop && 
+		// 	transform.position != startingposition && nextaction !="Goal_Action"){
+		// 	if(wallToHit!= null){
+		// 		wallToHit.GetComponent<Animator>().SetTrigger("Hit");
+		// 		wallToHit = null;				
+		// 	}
+		// 	Debug.Log("BOOP 2");
+		// }		
 
 
 		if (currenttile == transform.position /*&& !hasstopped*/) {//do this when reached currenttile
 			//Debug.Log("WHAT IS NEXTACTION BABY DONT " + nextaction + " ME");
 			//Debug.Log("On tile");
 			//Debug.Log("GOT TO TILE");
+			//Debug.Log(currenttile + " " + transform.position + " " + nextaction + canmove + hasmoved);
 			ActOnStopped();
 		}
 			Movement ();
@@ -172,6 +178,7 @@ public class PlayerMovement : MonoBehaviour {
 			hasstopped = true;
 			if(hasmoved){
 //				Debug.Log(tiletotest);
+				//Debug.Log("Played hit");
 			SfxHandler.Instance.PlayWallHit((int)tiletotest.x, (int)-tiletotest.z);
 			SfxHandler.Instance.StopSlide();					
 			}
@@ -609,6 +616,7 @@ public class PlayerMovement : MonoBehaviour {
 					wallToHit = component.transform.GetChild(0).gameObject;
 					wallToHit.GetComponent<Animator>().ResetTrigger("Hit");
 				} 
+
 			}
 
 			canmove = false;

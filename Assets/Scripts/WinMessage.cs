@@ -9,11 +9,13 @@ public class WinMessage : MonoBehaviour
 	public Sprite[] World2Messages;
 	public Sprite[] World3Messages;
 	public Sprite[] World4Messages;
+    public Sprite[] World5Messages;
 
     public Sprite[] World1MessagesSprite;
     public Sprite[] World2MessagesSprite;
     public Sprite[] World4MessagesSprite;
     public Sprite[] World3MessagesSprite;
+    public Sprite[] World5MessagesSprite;
 
     public GameObject Next;
     public GameObject Home;
@@ -32,11 +34,13 @@ public class WinMessage : MonoBehaviour
         worldMessageStorer.Add(World2Messages);
         worldMessageStorer.Add(World3Messages);
         worldMessageStorer.Add(World4Messages);
+        worldMessageStorer.Add(World5Messages);
 
         worldMessageStorerSpanish.Add(World1MessagesSprite);
         worldMessageStorerSpanish.Add(World2MessagesSprite);
         worldMessageStorerSpanish.Add(World3MessagesSprite);
         worldMessageStorerSpanish.Add(World4MessagesSprite);
+        worldMessageStorerSpanish.Add(World5MessagesSprite);
         Debug.Log("SizeSIZESZIEZIZISISISIDISDIAISDIASIDIASDIAISDIASIDIASDIASA " + size);
         movingUpwards = true;
         timer = 0;
@@ -51,8 +55,8 @@ public class WinMessage : MonoBehaviour
     }
 
     public void AssignMessage(int world, int stars){
-        if(world >4)
-        world = 4;
+        //if(world >4)
+        //world = 4;
         mystars = stars;
         Sprite cursprite;
         if(LanguageHandler.IsEnglish())
@@ -98,7 +102,7 @@ public class WinMessage : MonoBehaviour
         return Mathf.Sin(time * speed / Mathf.PI) * scale;
     }
     public void CheckNext(){
-        if(LevelManager.levelnum == 160 && !LevelManager.ispotd){
+        if(LevelManager.levelnum == 200 && !LevelManager.ispotd){
             Next.SetActive(false);
             Home.SetActive(true);
             return;
