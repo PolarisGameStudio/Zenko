@@ -75,6 +75,8 @@ public class LevelBuilder : MonoBehaviour {
 
 	public GameObject loadingGO;
 
+	public Texture portalTexture2;
+
 	int wallIndex;
 	int holeIndex;
 	int flowerIndex;
@@ -708,7 +710,7 @@ public class LevelBuilder : MonoBehaviour {
 
 		//}
 		//Debug.Log()
-		if(xy.x == positionOutsidePlayer.x && xy.y == positionOutsidePlayer.y){
+		if(xy.x == positionOutsidePlayer.x && xy.y == positionOutsidePlayer.y){	
 			Debug.Log(xy);
 			Debug.Log(positionOutsidePlayer);
 			Debug.Log("This is it at " + xy);
@@ -1688,6 +1690,7 @@ public class LevelBuilder : MonoBehaviour {
 			portalleftpiece.gameObject.GetComponent<Dragger>().portalType = "Left";
 			PieceHolders.placedpieces.Add(portalleftpiece.gameObject.GetComponent<Dragger>());
 			Portals.Add(portalleftpiece.gameObject);
+			//AssignPortalSkin();
 			break;
 		case "PortalUp":
 			//Debug.Log("PU");
@@ -1701,6 +1704,7 @@ public class LevelBuilder : MonoBehaviour {
 			portaluppiece.gameObject.GetComponent<Dragger>().portalType = "Up";
 			PieceHolders.placedpieces.Add(portaluppiece.gameObject.GetComponent<Dragger>());
 			Portals.Add(portaluppiece.gameObject);
+			//AssignPortalSkin();
 			break;
 		case "PortalRight":
 			//Debug.Log("PR");
@@ -1713,6 +1717,7 @@ public class LevelBuilder : MonoBehaviour {
 			portalrightpiece.gameObject.GetComponent<Dragger>().portalType = "Right";
 			PieceHolders.placedpieces.Add(portalrightpiece.gameObject.GetComponent<Dragger>());
 			Portals.Add(portalrightpiece.gameObject);
+			//AssignPortalSkin();
 			break;
 		case "PortalDown":
 			Transform portaldownpiece = Instantiate (floor_portal, pieceplace, Quaternion.Euler(new Vector3(0,180,0)));
@@ -1724,6 +1729,7 @@ public class LevelBuilder : MonoBehaviour {
 			portaldownpiece.gameObject.GetComponent<Dragger>().portalType = "Down";
 			PieceHolders.placedpieces.Add(portaldownpiece.gameObject.GetComponent<Dragger>());
 			Portals.Add(portaldownpiece.gameObject);
+			//AssignPortalSkin();
 			break;
 
 		case "Seed":
@@ -1785,6 +1791,11 @@ public class LevelBuilder : MonoBehaviour {
 			if(LevelManager.hints[i].type == creaturetype){
 				iceTiles.Remove(new Vector2(LevelManager.hints[i].x, LevelManager.hints[i].y));
 			}
+		}
+	}
+	public void AssignPortalSkin(){
+		if(Portals.Count>1){
+			Portals[1].transform.GetChild(0).GetChild(0).GetComponent<Renderer>().material.mainTexture = portalTexture2;
 		}
 	}
 }
