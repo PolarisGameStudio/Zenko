@@ -289,6 +289,7 @@
      <Compile Include="Assets\GooglePlayGames\Platforms\PlayGamesClientFactory.cs" />
      <Compile Include="Assets\GooglePlayGames\Platforms\TokenClient.cs" />
      <Compile Include="Assets\GooglePlayGames\PluginVersion.cs" />
+     <Compile Include="Assets\GPGSIds.cs" />
      <Compile Include="Assets\HintMenuHandler.cs" />
      <Compile Include="Assets\KeyLogoSwitcher.cs" />
      <Compile Include="Assets\LanguageHandler.cs" />
@@ -342,7 +343,6 @@
      <Compile Include="Assets\Scripts\Goal_Behaviour.cs" />
      <Compile Include="Assets\Scripts\GoalBehaviour.cs" />
      <Compile Include="Assets\Scripts\GoogleAds.cs" />
-     <Compile Include="Assets\Scripts\GPGSIds.cs" />
      <Compile Include="Assets\Scripts\HueModifier.cs" />
      <Compile Include="Assets\Scripts\ImageColorModulator.cs" />
      <Compile Include="Assets\Scripts\ImageHolder.cs" />
