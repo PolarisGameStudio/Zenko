@@ -153,6 +153,7 @@ public class GoogleAds : MonoBehaviour
         //.AddTestDevice("7B4A528D487015EA780FDA9E0F1541EB").
         // Load the interstitial with the request.
         this.interstitial.LoadAd(request);
+        
         this.interstitial.OnAdClosed += HandleOnAdClosed;
     }
     public void ShowInterstitial(){

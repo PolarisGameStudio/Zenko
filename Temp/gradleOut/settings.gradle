@@ -1,0 +1,3 @@
+include 'GoogleMobileAdsPlugin'
+include 'GooglePlayGamesManifest.plugin'
+include 'unity-android-resources'
