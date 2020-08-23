@@ -21,7 +21,6 @@ ScriptsOnlyBuild:
     - GameModeHandler
     - GoalBehaviour
     - GoogleAds
-    - GoogleMobileAds.Common.MobileAdsEventExecutor
     - HintMenuHandler
     - HueModifier
     - ImageColorModulator
@@ -2074,4 +2073,4 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/WorldSelect.unity
   - Assets/Level.unity
-  playerPath: /Users/bernardolimon/Desktop/ZenkoApk/Zenko_269.aab
+  playerPath: /Users/bernardolimon/Desktop/ZenkoApk/Zenko_270.aab

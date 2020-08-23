@@ -626,6 +626,7 @@
      <None Include="Assets\StreamingAssets\Level-103.txt" />
      <None Include="Assets\StreamingAssets\Level58.txt" />
      <None Include="Assets\StreamingAssets\Ch2Harder.txt" />
+     <None Include="Assets\StreamingAssets\GOOD6.txt" />
      <None Include="Assets\StreamingAssets\Ch3_8x8.txt" />
      <None Include="Assets\StreamingAssets\Level0.txt" />
      <None Include="Assets\StreamingAssets\Level31.txt" />

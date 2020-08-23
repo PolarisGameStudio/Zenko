@@ -33,29 +33,20 @@ public class PlayServices : MonoBehaviour
     {
         read = 0;
         finishedLoading = false;
-        //Debug.Log(int.Parse("??"));
-        //  int num;
-        // Debug.Log(int.TryParse("1211212121212121212".Substring(0,4), out num));
-        //  Debug.Log(num);
+
         #if UNITY_EDITOR
         //PlayerPrefs.DeleteAll();
         #endif
-        //Debug.Log(instance);
         Debug.Log("cursavepref " + PlayerPrefs.GetString(SAVE_NAME));
-        //Debug.Log("curcloudsave " + )
         if(instance == null)
             {
                 loader = GameObject.Find("Handler").GetComponent<Loading>();
                 instance = this;
                 DontDestroyOnLoad(this.gameObject);
 
-                //Debug.Log("Doingit");
-                //Debug.Log(instance);
                 LevelStorer.PopulateFiveChapters(); //load level data (200) int levelstorer.leveldic
-                LevelStorer.PopulatePotd500(); //
+                LevelStorer.PopulatePotd500(); 
 
-
-               // Debug.Log(PlayerPrefs.GetString(SAVE_NAME));
                 if(!PlayerPrefs.HasKey("PoTD"))
                     PlayerPrefs.SetInt("PoTD", 0);
 
@@ -68,7 +59,6 @@ public class PlayServices : MonoBehaviour
                     
                 LoadLocal();              
 
-                //Debug.Log()
                 if(PlayerPrefs.GetString(SAVE_NAME).Length < GameDataToString().Length){
                     Debug.Log("NEW MAPS ARE IN EXTRA EXTRA NEW MAPS ARE IN");
                 }
@@ -76,36 +66,16 @@ public class PlayServices : MonoBehaviour
                 //checks for first4chapters
                 if (PlayerPrefs.HasKey ("Loaded")) {
                     Debug.Log ("Has playerpref");
-                    //LevelStorer.AddRatingsToDictionary(); //Playerprefs into leveldic.
                     Debug.Log(PlayerPrefs.GetInt("hintCurrency"));
-
-
                 } 
                 else {
                     LevelStorer.PopulatePlayerPrefs(); //initializeprefs
                     PlayerPrefs.SetInt("CurrentFirst", 1);
                     GameManager.mycurrency = 0;
                     PlayerPrefs.SetInt("Currency", 0);
-                    //PopulateRatings();
                     PlayerPrefs.SetInt("Loaded",1);
                 }
-
-                // if(PlayerPrefs.HasKey "LoadedPotd"){
-                // 	LevelStorer.PopulatePotdPrefs();
-                // }
-                // else{
-
-                // }
-
-                //StartCoroutine(LoadIn(10));
-                //Debug.Log(int.Parse("1 1 1 1"));
-//                SplitString("1 2 3 4 5");
-                //byte[] dataToSave = Encoding.ASCII.GetBytes("1 23 4 5");
-                //Debug.Log(dataToSave[0]);
-                
                 loader.DaDebug("prepgp");
-                //LoadIn(10);
-
                 return;
             }
         Destroy(this.gameObject);
@@ -123,15 +93,12 @@ public class PlayServices : MonoBehaviour
         loader.Loaded();
     }
     public string[] SplitString(string str){
-
-        //string[] strArray = Regex.Split(str, "");
         string[] strArray = new string[str.Length];
         for(int i=0; i<str.Length; i++){
             strArray[i] = str[i].ToString();
         }
         Debug.Log(strArray.Length + " is the datasize");
         Debug.Log(strArray[0]);
-        //Debug.Log(strArray[1]);
         return strArray;
 
     }
@@ -143,7 +110,6 @@ public class PlayServices : MonoBehaviour
         PlayGamesClientConfiguration.Builder builder = new PlayGamesClientConfiguration.Builder();
         builder.EnableSavedGames();
         PlayGamesPlatform.InitializeInstance(builder.Build());
-        //PlayGamesPlatform.DebugLogEnabled = true;
         PlayGamesPlatform.Activate();    
         loader.DaDebug("postpgp");
         #endif
@@ -154,23 +120,16 @@ public class PlayServices : MonoBehaviour
             if(success){
                 Debug.Log("Login success");
                 loader.DaDebug("Login Success");
-                //teller.SetActive(true);
                 finishedLoading = true;
                 LoadData();
-                //MobileAds.Initialize("ca-app-pub-3301322474937909~4906291296");
-                //Loading.Loaded();
-                
             }
             else
             {
-                //teller2.SetActive(true);
                 Debug.Log("Login failed");
                 Debug.Log("Error : " + err);
                 loader.DaDebug("Error : " + err);
                 finishedLoading = true;
                 loader.Loaded();
-
-                //finishedLoading = true;
             }
         });        
     }
@@ -192,9 +151,7 @@ public class PlayServices : MonoBehaviour
         else{
             stringToSave = stringToSave + "0";
         }
-//        Debug.Log(LevelStorer.leveldic.Count+ " LEVELDIC COUNT");
         //200 from 4 chapters
-
         //feeds string with first four chapters
         for(int i=1; i< 160+1; i++){
             if(i == 160){
@@ -207,16 +164,12 @@ public class PlayServices : MonoBehaviour
             	else{
             	stringToSave = stringToSave + "1"; 	
             	}
-                 
             }
             else{
                 
                 int rating = LevelStorer.leveldic[i].rating;
-                //Debug.Log("place " + i + " is " + (rating+1).ToString());
                 stringToSave = stringToSave + "" + (rating+1).ToString() + "";
-                //Debug.Log(stringToSave);
             }
-
         }
 
         for(int i=0; i<500; i++){
@@ -243,27 +196,12 @@ public class PlayServices : MonoBehaviour
                  
             }
             else{
-                
                 int rating = LevelStorer.leveldic[i].rating;
-                //Debug.Log("place " + i + " is " + (rating+1).ToString());
                 stringToSave = stringToSave + "" + (rating+1).ToString() + "";
-                //Debug.Log(stringToSave);
             }            
         }
-
-//        Debug.Log("GameData is " + stringToSave);
- //       Debug.Log("GD SIZE IS " + stringToSave.Length);
-
-
-
-
-
         return stringToSave;
     }
-
-    // string StringWithValueAdded(string value){
-    //     string newString = value + 
-    // }
 
     void AssignData(string Data){
         Debug.Log("ASSIGNING DATA WITH STRING: " + Data);
@@ -384,15 +322,11 @@ public class PlayServices : MonoBehaviour
         isCloudDataLoaded = true;
         AssignData(mergedData);
         loader.DaDebug("stringtogamedata2");
-        SaveData();
-        
-        //Loading.Loaded();
+        SaveData();        
     }
 
     void StringToGameData(string localData){
-
         Debug.Log("GONNA ASSIGN DATA FROM LOCAL with size " + localData.Length);
-        //Debug.Log(localData);
         if(localData == null){
             localData = "0";
         }
@@ -407,22 +341,17 @@ public class PlayServices : MonoBehaviour
             ((PlayGamesPlatform)Social.Active).SavedGame.OpenWithManualConflictResolution(SAVE_NAME, 
                 DataSource.ReadCacheOrNetwork, true, ResolveConflict, OnSavedGameOpened);
             Debug.Log("LOADED DATA SUCCESFFULY");
-
         }
         else{
             LoadLocal();
-            
-
         }
         #endif
     }
-
     private void LoadLocal(){
         Debug.Log("LoadingLocal");
         StringToGameData(PlayerPrefs.GetString(SAVE_NAME));
 
     }
-
     public void SaveData(){
         #if UNITY_ANDROID
         if(!isCloudDataLoaded){
