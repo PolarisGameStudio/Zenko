@@ -20,7 +20,6 @@ public class Holder{
 		active = isactive;
 
 	}
-
 }
 public class PieceHolders : MonoBehaviour {
 	public static PieceHolders Instance;

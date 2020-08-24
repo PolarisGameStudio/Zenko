@@ -33,7 +33,7 @@ public class PlaneBehavior : MonoBehaviour {
 		cam = GameObject.Find ("Main Camera").GetComponent<Camera>();
 //		plane = this.parent;
 		plane = new Plane(Vector3.up, transform.position);
-		Debug.Log(previouspos);
+//		Debug.Log(previouspos);
 		//ClosestTile();
 	}
 	

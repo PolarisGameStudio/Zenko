@@ -8,7 +8,8 @@ public class TextModulator : MonoBehaviour
 	public static int hue;
 	public static int s;
 	public static int v;
-    // Start is called before the first frame update
+
+//tutorialhandler references this
     void Start()
     {
         hue =131;
@@ -16,7 +17,6 @@ public class TextModulator : MonoBehaviour
        	v = 82;
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
     hue++;

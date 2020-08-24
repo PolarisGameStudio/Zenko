@@ -21,6 +21,7 @@ ScriptsOnlyBuild:
     - GameModeHandler
     - GoalBehaviour
     - GoogleAds
+    - GoogleMobileAds.Common.MobileAdsEventExecutor
     - HintMenuHandler
     - HueModifier
     - ImageColorModulator
@@ -120,7 +121,7 @@ ScriptsOnlyBuild:
     - UnityEngine.Networking.NetworkCallbacks
     - UnityEngine.Networking.NetworkIdentity
   sceneClasses:
-    Assets/Level.unity:
+    Assets/Scenes/Level.unity:
     - Class: 1
       Script: {instanceID: 0}
     - Class: 4
@@ -365,7 +366,7 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 258
       Script: {instanceID: 0}
-    Assets/WorldSelect.unity:
+    Assets/Scenes/WorldSelect.unity:
     - Class: 1
       Script: {instanceID: 0}
     - Class: 4
@@ -2071,6 +2072,6 @@ ScriptsOnlyBuild:
     className: IAPDemo
   platform: 13
   scenePathNames:
-  - Assets/WorldSelect.unity
-  - Assets/Level.unity
-  playerPath: /Users/bernardolimon/Desktop/ZenkoApk/Zenko_270.aab
+  - Assets/Scenes/WorldSelect.unity
+  - Assets/Scenes/Level.unity
+  playerPath: /Users/bernardolimon/Desktop/Desktop/ZenkoApk/zenko_272.aab

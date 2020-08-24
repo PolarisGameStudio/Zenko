@@ -164,7 +164,7 @@ public class LevelBuilder : MonoBehaviour {
 		string text = result;
 		//string text = System.IO.File.ReadAllText(System.IO.Path.Combine (Application.streamingAssetsPath, "Ch4_Easy.txt"));
 		string[] lines = Regex.Split(text, "\r?\n");
-		Debug.Log(lines[0]);
+//		Debug.Log(lines[0]);
 		for(int i =0; i<lines.Length;i++){
 			startersPotd.Add(i);
 //			Debug.Log(lines[i].Length);
@@ -177,7 +177,7 @@ public class LevelBuilder : MonoBehaviour {
 			}			
 			i = i + mapsize + 2;
 		}
-		Debug.Log(startersPotd.Count + " number of maps filtered");
+//		Debug.Log(startersPotd.Count + " number of maps filtered");
 		levelsPotd = (string[])lines.Clone();
 		if(LevelManager.ispotd){
 			//Debug.Log(LevelManager.levelnum + " LEVELNUM " );
@@ -404,7 +404,7 @@ public class LevelBuilder : MonoBehaviour {
 	}
 	IEnumerator CloseLoading(){
 		yield return new WaitForSeconds(1);
-		Debug.Log("GONNA CLOSE LOADING");
+//		Debug.Log("GONNA CLOSE LOADING");
 		loadingGO.SetActive(false);
 	}
 	string[][] readAdventure(int place){
@@ -817,7 +817,7 @@ public class LevelBuilder : MonoBehaviour {
 					playertransform.eulerAngles = new Vector3(0f,270f,0f);
 					starttransform.eulerAngles = new Vector3(0f,270f,0f);
 					playerInitialRotation = 270;
-					Debug.Log("Looking Down");
+//					Debug.Log("Looking Down");
 					positionOutsidePlayer = new Vector2(myx,-(myy-1));
 					//CheckAndPlaceEnvironment(myx,myy-1);
 					return;
@@ -832,7 +832,7 @@ public class LevelBuilder : MonoBehaviour {
 					playertransform.eulerAngles = new Vector3(0f,90f,0f);
 					starttransform.eulerAngles = new Vector3(0f,90f,0f);
 					playerInitialRotation = 90;
-					Debug.Log("Looking Up");
+					//Debug.Log("Looking Up");
 					positionOutsidePlayer = new Vector2(myx,-(myy+1));
 					//CheckAndPlaceEnvironment(myx,myy+1);
 					return;				
@@ -848,7 +848,7 @@ public class LevelBuilder : MonoBehaviour {
 					playertransform.eulerAngles = new Vector3(0f,180f,0f);
 					starttransform.eulerAngles = new Vector3(0f,180f,0f);
 					playerInitialRotation = 180;
-					Debug.Log("Looking Right");
+					//Debug.Log("Looking Right");
 					positionOutsidePlayer = new Vector2(myx-1,-myy);
 					//CheckAndPlaceEnvironment(myx-1,myy);
 					return;
@@ -862,7 +862,7 @@ public class LevelBuilder : MonoBehaviour {
 					playertransform.eulerAngles = new Vector3(0f,0f,0f);
 					starttransform.eulerAngles = new Vector3(0f,0f,0f);
 					playerInitialRotation = 0;
-					Debug.Log("Looking Left");
+					//Debug.Log("Looking Left");
 					positionOutsidePlayer = new Vector2(myx+1,-myy);
 					//CheckAndPlaceEnvironment(myx+1,myy);
 					//Debug.Log("Left");
@@ -892,7 +892,7 @@ public class LevelBuilder : MonoBehaviour {
 			foreach (Collider component in colliders) {
 				if (component.tag == "Tile"|| component.tag == "Fragile"){
 					if(tiles[myx,myy+1].type != "Wall" && tiles[myx,myy+1].type != "Start"){
-						Debug.Log("Down");
+						//Debug.Log("Down");
 						goaltransform.eulerAngles = new Vector3(0f,180f,0f);
 						GoalBehaviour.isvertical = true;
 						return;
@@ -903,7 +903,7 @@ public class LevelBuilder : MonoBehaviour {
 			foreach (Collider component in colliders) {
 				if (component.tag == "Tile"|| component.tag == "Fragile"){
 					if(tiles[myx,myy-1].type != "Wall" && tiles[myx,myy-1].type != "Start"){
-						Debug.Log("Up");
+						//Debug.Log("Up");
 						goaltransform.eulerAngles = new Vector3(0f,0f,0f);
 						GoalBehaviour.isvertical = true;	
 						return;				}
@@ -913,7 +913,7 @@ public class LevelBuilder : MonoBehaviour {
 			foreach (Collider component in colliders) {
 				if (component.tag == "Tile"|| component.tag == "Fragile"){
 					if(tiles[myx+1,myy].type != "Wall" && tiles[myx+1,myy].type != "Start"){
-						Debug.Log("Right");
+						//Debug.Log("Right");
 						goaltransform.eulerAngles = new Vector3(0f,90f,0f);
 						GoalBehaviour.isvertical = false;
 						return;
@@ -926,7 +926,7 @@ public class LevelBuilder : MonoBehaviour {
 					if(tiles[myx-1,myy].type != "Wall" && tiles[myx-1,myy].type != "Start"){
 						goaltransform.eulerAngles = new Vector3(0f,270,0f);
 						GoalBehaviour.isvertical = false;
-						Debug.Log("Left");
+//						Debug.Log("Left");
 						return;
 					}
 				}

@@ -37,7 +37,7 @@ public class PlayServices : MonoBehaviour
         #if UNITY_EDITOR
         //PlayerPrefs.DeleteAll();
         #endif
-        Debug.Log("cursavepref " + PlayerPrefs.GetString(SAVE_NAME));
+//        Debug.Log("cursavepref " + PlayerPrefs.GetString(SAVE_NAME));
         if(instance == null)
             {
                 loader = GameObject.Find("Handler").GetComponent<Loading>();
@@ -64,9 +64,8 @@ public class PlayServices : MonoBehaviour
                 }
 
                 //checks for first4chapters
-                if (PlayerPrefs.HasKey ("Loaded")) {
-                    Debug.Log ("Has playerpref");
-                    Debug.Log(PlayerPrefs.GetInt("hintCurrency"));
+                if (PlayerPrefs.HasKey ("Loaded")) {//has player prefs
+
                 } 
                 else {
                     LevelStorer.PopulatePlayerPrefs(); //initializeprefs
@@ -79,7 +78,6 @@ public class PlayServices : MonoBehaviour
                 return;
             }
         Destroy(this.gameObject);
-
     }
     void Start(){
         #if UNITY_ANDROID
@@ -98,7 +96,7 @@ public class PlayServices : MonoBehaviour
             strArray[i] = str[i].ToString();
         }
         Debug.Log(strArray.Length + " is the datasize");
-        Debug.Log(strArray[0]);
+//        Debug.Log(strArray[0]);
         return strArray;
 
     }
@@ -155,7 +153,7 @@ public class PlayServices : MonoBehaviour
         //feeds string with first four chapters
         for(int i=1; i< 160+1; i++){
             if(i == 160){
-                Debug.Log("160 is happening and " + LevelStorer.leveldic[i].rating + " is its rating");
+                //Debug.Log("160 is happening and " + LevelStorer.leveldic[i].rating + " is its rating");
             }
             if(LevelStorer.leveldic[i].rating == 0){
             	if(LevelStorer.leveldic[i].islocked == true){
@@ -184,7 +182,7 @@ public class PlayServices : MonoBehaviour
 
         for(int i=161; i < 201; i++){
             if(i == 200){
-                Debug.Log("200 is happening and " + LevelStorer.leveldic[i].rating + " is its rating");
+                //Debug.Log("200 is happening and " + LevelStorer.leveldic[i].rating + " is its rating");
             }
             if(LevelStorer.leveldic[i].rating == 0){
                 if(LevelStorer.leveldic[i].islocked == true){
@@ -219,7 +217,7 @@ public class PlayServices : MonoBehaviour
         else
             LevelManager.adFree = false;
 
-        Debug.Log(dataArray.Length + " IS THE LENGTH");
+//        Debug.Log(dataArray.Length + " IS THE LENGTH");
 
         AssignFirstFourChapters(dataArray);
         AssignPotdData(dataArray);
@@ -348,7 +346,7 @@ public class PlayServices : MonoBehaviour
         #endif
     }
     private void LoadLocal(){
-        Debug.Log("LoadingLocal");
+//        Debug.Log("LoadingLocal");
         StringToGameData(PlayerPrefs.GetString(SAVE_NAME));
 
     }

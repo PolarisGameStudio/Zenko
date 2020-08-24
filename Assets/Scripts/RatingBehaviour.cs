@@ -29,7 +29,6 @@ public class RatingBehaviour : MonoBehaviour {
 		}
 		Destroy(this.gameObject);
 	}
-
 	void Start () {
 	}
 	
@@ -92,12 +91,10 @@ public class RatingBehaviour : MonoBehaviour {
 			star1.GetComponent<Image>().sprite = instance.Lnotstar;
 			star2.GetComponent<Image>().sprite = instance.Mnotstar;
 			star3.GetComponent<Image>().sprite = instance.Rnotstar;
-			//ProgressBar.progressFluid2.GetComponent<Image>().color = new Color(1,76/255f,76/255f,1);
 			if(totturns == 2){
 				instance.StartCoroutine(instance.ModulateColor(.2f, new Color(1,76/255f,76/255f,1)));
 			
 			}
-			//Debug.Log(ProgressBar.progressFluid2.GetComponent<Image>().color);
 
 		}
 		currentrating = newrating;

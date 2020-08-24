@@ -34,46 +34,30 @@ public class LevelMenu : MonoBehaviour {
 	// Use this for initialization
 	void Awake(){
 		Instance = this;
-		
-		//Debug.Log(LevelMenu.Instance);
 	}
 	void Start () {
 		levels=20;
 		sl = mc.GetComponent<SceneLoading>();
-		/*for (int i = 1; i < 21; i++){
-			createButton(i);
-
-		}
-		*/
-		//currentfirst = 1;
-		//Debug.Log("CURRENTFIRST" + currentfirst);
-		//LevelMenu.highestLevelSolved = FindHighestSolved();
-		//Debug.Log("CURHIGHEST IS"  + FindHighestSolved());
-		// foreach(Transform child in transform){
-		// 	levelbuttons.Add(child.gameObject);
-		// }
 	}
 
 	// Update is called once per frame
 	public static int FindHighestSolved(){
-
 		int curHighest = 0;
 		int maxMaps = LevelStorer.leveldic.Count;
-		Debug.Log(maxMaps + "Is max maps");
+		//Debug.Log(maxMaps + " Is max maps (for purposes of finding current highest solved");
 		for(int i=1; i<maxMaps+1; i++){
 			string mystring = "Level"+i+"Rating";
-			//Debug.Log(PlayerPrefs.GetInt(mystring));
 			if(PlayerPrefs.GetInt(mystring)>0){
 				curHighest = i;
 			}	
 		}
-		Debug.Log(curHighest+1 + " IS CURHIGHEST");
+		//Debug.Log(curHighest+1 + " IS CURHIGHEST");
 		return curHighest+1;	
 	}
 	public static void UnlockPotdLevel(int num){
-		Debug.Log("UNLOCK ACT");
+		//Debug.Log("UNLOCK ACT");
 		PotdUnlocker.Instance.keysAvailable--;
-		Debug.Log(PotdUnlocker.Instance.keysAvailable);
+		//Debug.Log(PotdUnlocker.Instance.keysAvailable);
 		PlayerPrefs.SetInt("KeysAvailable", PotdUnlocker.Instance.keysAvailable);	
 		if(SceneLoading.Instance.isMenu){
 			SceneLoading.Instance.LoadPotdMap(num);
@@ -84,19 +68,14 @@ public class LevelMenu : MonoBehaviour {
 		}
 	}
 	public void OpenUnlockMenu(int num, int starter){
-		//UnlockMenu = GameObject.Find("UnlockPotdMenu");
 		if(LanguageHandler.IsEnglish())
 		UnlockMenu.transform.Find("Title").GetComponent<Text>().text = "UNLOCK LEVEL " + (num+1).ToString() + "?";
 		else
 		UnlockMenu.transform.Find("Title").GetComponent<Text>().text = "ABRIR NIVEL " + (num+1).ToString() + "?";
 		UnlockMenu.transform.Find("UnlockAdButton").transform.Find("contador").GetComponent<Text>().text = "x " + PotdUnlocker.Instance.keysAvailable.ToString();
-		//GameObject.Find()
-		//buyMenu = GameObject.Find("")
 		buyMenu.GetComponent<BuyMenu>().AssignTitle("Unlock Archive?");
 		if(PotdUnlocker.Instance.keysAvailable>0){
-			levelToUnlock = num+starter;
-			//UnlockMenu.transform.Find("UnlockAdButton").GetComponent<Button>().onClick.AddListener(delegate{GoogleAds.Instance.UserOptToOpenPotd(num+starter);});
-			
+			levelToUnlock = num+starter;			
 		}
 		else{
 			UnlockMenu.transform.Find("UnlockAdButton").transform.Find("Text").GetComponent<Text>().text = "COME BACK TOMORROW";
@@ -192,9 +171,6 @@ public class LevelMenu : MonoBehaviour {
 	}
 
 	void createButton(int num){
-		//GameObject curbutton = Instantiate(buttonprefab, new Vector3(0, 0, 0), Quaternion.identity);
-		//curbutton.transform.SetParent(this.transform, false);
-		//curbutton.transform.localScale = new Vector3(1,1,1);
 		GameObject curbutton = levelbuttons[counter];
 		curbutton.SetActive(true);
 		curbutton.transform.GetChild(7).gameObject.SetActive(false);
@@ -208,33 +184,24 @@ public class LevelMenu : MonoBehaviour {
 		int world = Mathf.FloorToInt((num-1)/40)  + 1;                                                                                                                                           
 		int levelinworld = num - ((world-1)*40);
 		curbutton.transform.GetChild(5).GetComponent<Image>().sprite = snowSprites[world-1];
-		//txt.text = "World " + world.ToString() + "-" + levelinworld.ToString();		
 		curbutton.transform.GetChild(2).GetComponent<Text>().text =levelinworld.ToString();	
-
+		
 		if(LevelStorer.leveldic[num].islocked == true && num != 0){
 			curbutton.transform.GetChild(3).gameObject.SetActive(true);	
 			curbutton.transform.GetChild(6).gameObject.SetActive(true);	
-
-
 		}
-		// if(!LevelStorer.leveldic[num].islocked){
-		// 	//Debug.Log("NOT LOCKED");
-		// }
-//		Debug.Log("level number " + num + " rating is " + LevelStorer.leveldic[num].rating);
 		if(LevelStorer.leveldic[num].rating == 1){
 			curbutton.transform.GetChild(4).GetChild(1).GetChild(1).gameObject.SetActive(true);
 		}
-		if(LevelStorer.leveldic[num].rating == 2){
+		else if(LevelStorer.leveldic[num].rating == 2){
 			curbutton.transform.GetChild(4).GetChild(1).GetChild(0).gameObject.SetActive(true);
 			curbutton.transform.GetChild(4).GetChild(1).GetChild(2).gameObject.SetActive(true);
 		}
-		if(LevelStorer.leveldic[num].rating == 3){
+		else if(LevelStorer.leveldic[num].rating == 3){
 			curbutton.transform.GetChild(4).GetChild(1).GetChild(0).gameObject.SetActive(true);
 			curbutton.transform.GetChild(4).GetChild(1).GetChild(1).gameObject.SetActive(true);
 			curbutton.transform.GetChild(4).GetChild(1).GetChild(2).gameObject.SetActive(true);
 		}			
-
-		//levelbuttons.Add(curbutton);
 	}
 
 	public void CheckDownUpButtons(int curfirst){
@@ -270,11 +237,8 @@ public class LevelMenu : MonoBehaviour {
 			levelbuttons[i].transform.GetChild(4).GetChild(1).GetChild(0).gameObject.SetActive(false);
 			levelbuttons[i].transform.GetChild(4).GetChild(1).GetChild(1).gameObject.SetActive(false);
 			levelbuttons[i].transform.GetChild(4).GetChild(1).GetChild(2).gameObject.SetActive(false);
-			//Destroy(levelbuttons[i]);
-
 		}
 		counter = 0;
-		//levelbuttons.Clear();
 	}
 	public void populateMenuDown(){
 		if(currentfirst >20){
@@ -289,7 +253,6 @@ public class LevelMenu : MonoBehaviour {
 		AssignWorldText(currentfirst);
 	}
 	public void populateMenu(){
-		//Debug.Log(currentfirst + " is starting first")
 		clearMenu();
 		if(currentfirst==0 | currentfirst==null){
 			currentfirst = 1;
@@ -298,7 +261,7 @@ public class LevelMenu : MonoBehaviour {
 			createButton(i);
 			counter++;
 		}		
-		Debug.Log("current first is" + currentfirst);
+		//Debug.Log("current first is" + currentfirst);
 		AssignWorldText(currentfirst);
 	}
 

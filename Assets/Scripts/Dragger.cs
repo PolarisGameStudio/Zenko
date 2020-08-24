@@ -110,7 +110,7 @@ public class Dragger : MonoBehaviour {
 		StartCoroutine(HintMove(postogo));
 	}
 	 public void OnMouseDown() {
-	 	Debug.Log(TurnBehaviour.turn + " " + LevelBuilder.resetting + " " + LevelManager.isdragging);
+//	 	Debug.Log(TurnBehaviour.turn + " " + LevelBuilder.resetting + " " + LevelManager.isdragging);
 	 	//PieceHolders.placedpieces.Remove(this);
 		//transform.GetChild(1).gameObject.SetActive(false);
   	  //screenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position); // I removed this line to prevent centring 
@@ -132,7 +132,7 @@ public class Dragger : MonoBehaviour {
 			}	
 	 		LevelManager.isdragging = true;
 			Cursor.visible = false;
-			Debug.Log("just onmouseupdcanswipeoff");
+//			Debug.Log("just onmouseupdcanswipeoff");
 
 			Swiping.canswipe = false;
 			offset = gameObject.transform.position - Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 15));
@@ -148,8 +148,8 @@ public class Dragger : MonoBehaviour {
 				if(positiontogo.x == 0 && positiontogo.y ==0 && positiontogo.z == 0){
 					positiontogo = transform.position;
 				}
-				Debug.Log(transform.position);
-				Debug.Log(positiontogo + " " + Mathf.RoundToInt(positiontogo.x) + -Mathf.RoundToInt(positiontogo.z));
+//				Debug.Log(transform.position);
+//				Debug.Log(positiontogo + " " + Mathf.RoundToInt(positiontogo.x) + -Mathf.RoundToInt(positiontogo.z));
 				mytile = LevelBuilder.tiles[Mathf.RoundToInt(positiontogo.x), -Mathf.RoundToInt(positiontogo.z)];
 				Debug.Log(mytile);
 				mytile.type = "Ice";
@@ -160,12 +160,12 @@ public class Dragger : MonoBehaviour {
 				//Debug.Log("UNTOOK AT" + gameObject.transform.position.x + -gameObject.transform.position.z);
 				mytile.isTaken = false;
 				//Debug.Log(LevelBuilder.tiles[(int)gameObject.transform.position.x, -(int)gameObject.transform.position.z-1].isTaken);
-				Debug.Log(mytile.isSideways);
+//				Debug.Log(mytile.isSideways);
 				if(mytile.isSideways != null){
 					mytile.type = mytile.isSideways;
 					mytile.isTaken = false;
 				}
-				Debug.Log(mytile);
+//				Debug.Log(mytile);
 				if(myType == "Left" || myType == "Right" ||myType == "Up" ||myType == "Down"){
 					Debug.Log("Removing ice");
 					removeIcarus(myType, new Vector3((int)gameObject.transform.position.x,(int)gameObject.transform.position.y,(int)gameObject.transform.position.z));
@@ -291,7 +291,7 @@ public void OnMouseDrag()
 			positiontogo = PlaneBehavior.planePos;	
 			piecePosition = new Vector3(PlaneBehavior.planePos.x, PlaneBehavior.planePos.y, PlaneBehavior.planePos.z);
 			positiontogo = new Vector3(Mathf.RoundToInt(PlaneBehavior.planePos.x), PlaneBehavior.planePos.y, Mathf.RoundToInt(PlaneBehavior.planePos.z));	
-			Debug.Log("positiontogo" + positiontogo);
+//			Debug.Log("positiontogo" + positiontogo);
 //			Debug.Log("value of test" + LevelBuilder.tiles[2,1].isTaken);
 //			Debug.Log("isreadytodrop" + PlaneBehavior.readyToDrop);
 			if(lastposition != positiontogo || currenttile == null){

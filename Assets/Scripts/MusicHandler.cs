@@ -28,7 +28,6 @@ public class MusicHandler : MonoBehaviour
 		if(thisMH == null)
 		{
 			thisMH = this;
-			//DontDestroyOnLoad(this.gameObject);
             source1.volume = source1.volume*.3f;
             source2.volume = source2.volume*.3f;
 			return;  
@@ -111,7 +110,7 @@ public class MusicHandler : MonoBehaviour
     {
         nextLoop = Random.Range(1,4);
         int measureToEnter = 64;
-        Debug.Log(currentLoop + " is current and " + nextLoop + " is next.");
+//        Debug.Log(currentLoop + " is current and " + nextLoop + " is next.");
         if(currentLoop!=1)
         {
             measureToEnter = measureToEnter +2;

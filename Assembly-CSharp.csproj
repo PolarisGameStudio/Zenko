@@ -2,8 +2,6 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
-    <CscToolPath>/Applications/Unity/Hub/Editor/2019.2.11f1/Unity.app/Contents/Tools/RoslynScripts</CscToolPath>
-    <CscToolExe>unity_csc.sh</CscToolExe>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -47,19 +45,9 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="UnityEngine">
-      <HintPath>/Applications/Unity/Hub/Editor/2019.2.11f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor">
-      <HintPath>/Applications/Unity/Hub/Editor/2019.2.11f1/Unity.app/Contents/Managed/UnityEditor.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-     <Compile Include="Assets\AwakeSprite.cs" />
-     <Compile Include="Assets\AwakeText.cs" />
-     <Compile Include="Assets\BuyMenu.cs" />
-     <Compile Include="Assets\EnvironmentKeeper.cs" />
-     <Compile Include="Assets\GameManager.cs" />
+     <Compile Include="Assets\2DAssets\UI\Languages\Scripts\TutorialDictionary_v002.cs" />
+     <Compile Include="Assets\2DAssets\UI\NokobotUIPack\Demo\Scripts\GoToNextScene.cs" />
+     <Compile Include="Assets\2DAssets\UI\UI stuff\zenko_PKT_v003\TutorialDictionary.cs" />
      <Compile Include="Assets\GoogleMobileAds\Api\AdapterStatus.cs" />
      <Compile Include="Assets\GoogleMobileAds\Api\AdErrorEventArgs.cs" />
      <Compile Include="Assets\GoogleMobileAds\Api\AdFailedToLoadEventArgs.cs" />
@@ -289,44 +277,13 @@
      <Compile Include="Assets\GooglePlayGames\Platforms\PlayGamesClientFactory.cs" />
      <Compile Include="Assets\GooglePlayGames\Platforms\TokenClient.cs" />
      <Compile Include="Assets\GooglePlayGames\PluginVersion.cs" />
-     <Compile Include="Assets\GPGSIds.cs" />
-     <Compile Include="Assets\HintMenuHandler.cs" />
-     <Compile Include="Assets\KeyLogoSwitcher.cs" />
-     <Compile Include="Assets\LanguageHandler.cs" />
-     <Compile Include="Assets\Languages\Scripts\TutorialDictionary_v002.cs" />
-     <Compile Include="Assets\LanguageWrapper.cs" />
-     <Compile Include="Assets\LevelButton.cs" />
-     <Compile Include="Assets\LevelMakerAssets\AIBrain.cs" />
-     <Compile Include="Assets\LevelMakerAssets\ANN.cs" />
-     <Compile Include="Assets\LevelMakerAssets\ANNBrain.cs" />
-     <Compile Include="Assets\LevelMakerAssets\BotMovement.cs" />
-     <Compile Include="Assets\LevelMakerAssets\BotTurns.cs" />
-     <Compile Include="Assets\LevelMakerAssets\Brain.cs" />
-     <Compile Include="Assets\LevelMakerAssets\CreateMethod.cs" />
-     <Compile Include="Assets\LevelMakerAssets\DNA.cs" />
-     <Compile Include="Assets\LevelMakerAssets\KeySimulator.cs" />
-     <Compile Include="Assets\LevelMakerAssets\Layer.cs" />
-     <Compile Include="Assets\LevelMakerAssets\Neuron.cs" />
-     <Compile Include="Assets\LevelMakerAssets\PopulationManager.cs" />
-     <Compile Include="Assets\LevelMakerAssets\Seed_Behaviour.cs" />
-     <Compile Include="Assets\LevelMakerAssets\Solution.cs" />
-     <Compile Include="Assets\LevelMakerAssets\SolveMethod.cs" />
-     <Compile Include="Assets\LevelMakerAssets\TileHandler.cs" />
-     <Compile Include="Assets\LevelMakerAssets\TileProperties.cs" />
-     <Compile Include="Assets\LevelMakerAssets\Worker.cs" />
-     <Compile Include="Assets\Loading.cs" />
-     <Compile Include="Assets\LoadingTextAnimator.cs" />
-     <Compile Include="Assets\ModulateImage.cs" />
-     <Compile Include="Assets\MovementLeft.cs" />
-     <Compile Include="Assets\NokobotUIPack\Demo\Scripts\GoToNextScene.cs" />
-     <Compile Include="Assets\PotdMenu.cs" />
-     <Compile Include="Assets\PotdShortcut.cs" />
-     <Compile Include="Assets\PotdUnlocker.cs" />
-     <Compile Include="Assets\RotatingLogo.cs" />
      <Compile Include="Assets\Scripts\AssignCamera.cs" />
      <Compile Include="Assets\Scripts\AssignCanvasAndButton.cs" />
      <Compile Include="Assets\Scripts\AuroraModulator.cs" />
+     <Compile Include="Assets\Scripts\AwakeSprite.cs" />
+     <Compile Include="Assets\Scripts\AwakeText.cs" />
      <Compile Include="Assets\Scripts\BoxPad.cs" />
+     <Compile Include="Assets\Scripts\BuyMenu.cs" />
      <Compile Include="Assets\Scripts\CameraController.cs" />
      <Compile Include="Assets\Scripts\CameraShake.cs" />
      <Compile Include="Assets\Scripts\CanvasBehaviour.cs" />
@@ -336,20 +293,46 @@
      <Compile Include="Assets\Scripts\DateChecker.cs" />
      <Compile Include="Assets\Scripts\DotHandler.cs" />
      <Compile Include="Assets\Scripts\Dragger.cs" />
+     <Compile Include="Assets\Scripts\EnvironmentKeeper.cs" />
      <Compile Include="Assets\Scripts\FragileBehaviour.cs" />
      <Compile Include="Assets\Scripts\FragileBehaviour1.cs" />
      <Compile Include="Assets\Scripts\FragileProperties.cs" />
+     <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\GameModeHandler.cs" />
      <Compile Include="Assets\Scripts\Goal_Behaviour.cs" />
      <Compile Include="Assets\Scripts\GoalBehaviour.cs" />
      <Compile Include="Assets\Scripts\GoogleAds.cs" />
+     <Compile Include="Assets\Scripts\GPGSIds.cs" />
+     <Compile Include="Assets\Scripts\HintMenuHandler.cs" />
      <Compile Include="Assets\Scripts\HueModifier.cs" />
      <Compile Include="Assets\Scripts\ImageColorModulator.cs" />
      <Compile Include="Assets\Scripts\ImageHolder.cs" />
      <Compile Include="Assets\Scripts\ImageSwitch.cs" />
+     <Compile Include="Assets\Scripts\KeyLogoSwitcher.cs" />
+     <Compile Include="Assets\Scripts\LanguageHandler.cs" />
+     <Compile Include="Assets\Scripts\LanguageWrapper.cs" />
      <Compile Include="Assets\Scripts\LevelBuilder.cs" />
+     <Compile Include="Assets\Scripts\LevelButton.cs" />
      <Compile Include="Assets\Scripts\LevelDecoder.cs" />
      <Compile Include="Assets\Scripts\LevelHandler.cs" />
+     <Compile Include="Assets\Scripts\LevelMakerAssets\AIBrain.cs" />
+     <Compile Include="Assets\Scripts\LevelMakerAssets\ANN.cs" />
+     <Compile Include="Assets\Scripts\LevelMakerAssets\ANNBrain.cs" />
+     <Compile Include="Assets\Scripts\LevelMakerAssets\BotMovement.cs" />
+     <Compile Include="Assets\Scripts\LevelMakerAssets\BotTurns.cs" />
+     <Compile Include="Assets\Scripts\LevelMakerAssets\Brain.cs" />
+     <Compile Include="Assets\Scripts\LevelMakerAssets\CreateMethod.cs" />
+     <Compile Include="Assets\Scripts\LevelMakerAssets\DNA.cs" />
+     <Compile Include="Assets\Scripts\LevelMakerAssets\KeySimulator.cs" />
+     <Compile Include="Assets\Scripts\LevelMakerAssets\Layer.cs" />
+     <Compile Include="Assets\Scripts\LevelMakerAssets\Neuron.cs" />
+     <Compile Include="Assets\Scripts\LevelMakerAssets\PopulationManager.cs" />
+     <Compile Include="Assets\Scripts\LevelMakerAssets\Seed_Behaviour.cs" />
+     <Compile Include="Assets\Scripts\LevelMakerAssets\Solution.cs" />
+     <Compile Include="Assets\Scripts\LevelMakerAssets\SolveMethod.cs" />
+     <Compile Include="Assets\Scripts\LevelMakerAssets\TileHandler.cs" />
+     <Compile Include="Assets\Scripts\LevelMakerAssets\TileProperties.cs" />
+     <Compile Include="Assets\Scripts\LevelMakerAssets\Worker.cs" />
      <Compile Include="Assets\Scripts\LevelManager.cs" />
      <Compile Include="Assets\Scripts\LevelMenu.cs" />
      <Compile Include="Assets\Scripts\LevelOrganizer.cs" />
@@ -357,14 +340,18 @@
      <Compile Include="Assets\Scripts\LevelSaver.cs" />
      <Compile Include="Assets\Scripts\LevelStorer.cs" />
      <Compile Include="Assets\Scripts\LightController.cs" />
+     <Compile Include="Assets\Scripts\Loading.cs" />
+     <Compile Include="Assets\Scripts\LoadingTextAnimator.cs" />
      <Compile Include="Assets\Scripts\LoseMessage.cs" />
      <Compile Include="Assets\Scripts\ManagerScript.cs" />
      <Compile Include="Assets\Scripts\MenuButton.cs" />
+     <Compile Include="Assets\Scripts\ModulateImage.cs" />
      <Compile Include="Assets\Scripts\ModulateThis.cs" />
      <Compile Include="Assets\Scripts\MonsterPanel.cs" />
      <Compile Include="Assets\Scripts\MouseDownTouch.cs" />
      <Compile Include="Assets\Scripts\MouseEventsGenerator.cs" />
      <Compile Include="Assets\Scripts\MouseOverer.cs" />
+     <Compile Include="Assets\Scripts\MovementLeft.cs" />
      <Compile Include="Assets\Scripts\MusicHandler.cs" />
      <Compile Include="Assets\Scripts\MyIAPManager.cs" />
      <Compile Include="Assets\Scripts\NoAdScript.cs" />
@@ -375,36 +362,39 @@
      <Compile Include="Assets\Scripts\PlayerMovement.cs" />
      <Compile Include="Assets\Scripts\PlayServices.cs" />
      <Compile Include="Assets\Scripts\PotdHolder.cs" />
+     <Compile Include="Assets\Scripts\PotdMenu.cs" />
+     <Compile Include="Assets\Scripts\PotdShortcut.cs" />
+     <Compile Include="Assets\Scripts\PotdUnlocker.cs" />
      <Compile Include="Assets\Scripts\ProgressBar.cs" />
      <Compile Include="Assets\Scripts\Purchaser.cs" />
      <Compile Include="Assets\Scripts\RatingBehaviour.cs" />
      <Compile Include="Assets\Scripts\RatingButtonText.cs" />
      <Compile Include="Assets\Scripts\RatingPopUp.cs" />
      <Compile Include="Assets\Scripts\Rayito.cs" />
+     <Compile Include="Assets\Scripts\RotatingLogo.cs" />
      <Compile Include="Assets\Scripts\Rotator.cs" />
      <Compile Include="Assets\Scripts\SceneLoading.cs" />
      <Compile Include="Assets\Scripts\SfxHandler.cs" />
      <Compile Include="Assets\Scripts\showFPS.cs" />
      <Compile Include="Assets\Scripts\SizeModulator.cs" />
+     <Compile Include="Assets\Scripts\SpriteSwitcher.cs" />
      <Compile Include="Assets\Scripts\StarModulator.cs" />
      <Compile Include="Assets\Scripts\Swiping.cs" />
      <Compile Include="Assets\Scripts\TextModulator.cs" />
+     <Compile Include="Assets\Scripts\TileKeeper.cs" />
      <Compile Include="Assets\Scripts\Timer.cs" />
+     <Compile Include="Assets\Scripts\ToggleForEditor.cs" />
      <Compile Include="Assets\Scripts\TurnBehaviour.cs" />
      <Compile Include="Assets\Scripts\TurnCounter.cs" />
      <Compile Include="Assets\Scripts\TurnGraphics.cs" />
+     <Compile Include="Assets\Scripts\TurnOffIfAdFree.cs" />
      <Compile Include="Assets\Scripts\TutorialHandler.cs" />
      <Compile Include="Assets\Scripts\UIMonster.cs" />
+     <Compile Include="Assets\Scripts\UiOff.cs" />
      <Compile Include="Assets\Scripts\VolumeSliders.cs" />
      <Compile Include="Assets\Scripts\WinMessage.cs" />
      <Compile Include="Assets\Scripts\WorldName.cs" />
      <Compile Include="Assets\Scripts\XYPad.cs" />
-     <Compile Include="Assets\SpriteSwitcher.cs" />
-     <Compile Include="Assets\TileKeeper.cs" />
-     <Compile Include="Assets\ToggleForEditor.cs" />
-     <Compile Include="Assets\TurnOffIfAdFree.cs" />
-     <Compile Include="Assets\UI stuff\zenko_PKT_v003\TutorialDictionary.cs" />
-     <Compile Include="Assets\UiOff.cs" />
      <None Include="Assets\StreamingAssets\Level-7.txt" />
      <None Include="Assets\StreamingAssets\Ch3_3piece.txt" />
      <None Include="Assets\StreamingAssets\Map.txt" />
@@ -414,8 +404,8 @@
      <None Include="Assets\StreamingAssets\Level85.txt" />
      <None Include="Assets\StreamingAssets\Level27.txt" />
      <None Include="Assets\StreamingAssets\Level-10.txt" />
-     <None Include="Assets\Pedro\Pedro_AnimationList.txt" />
-     <None Include="Assets\newbigmaps.txt" />
+     <None Include="Assets\3DAssets\Pedro\Pedro_AnimationList.txt" />
+     <None Include="Assets\Maps\newbigmaps.txt" />
      <None Include="Assets\StreamingAssets\Level29.txt" />
      <None Include="Assets\StreamingAssets\Level96.txt" />
      <None Include="Assets\StreamingAssets\Level12.txt" />
@@ -446,12 +436,12 @@
      <None Include="Assets\StreamingAssets\Level91.txt" />
      <None Include="Assets\StreamingAssets\Level72.txt" />
      <None Include="Assets\StreamingAssets\Level34.txt" />
-     <None Include="Assets\4x4_1Icarus.txt" />
-     <None Include="Assets\ToonBasicOutline.shader" />
+     <None Include="Assets\Maps\4x4_1Icarus.txt" />
+     <None Include="Assets\3DAssets\ToonBasicOutline.shader" />
      <None Include="Assets\StreamingAssets\Level30.txt" />
      <None Include="Assets\StreamingAssets\Level98.txt" />
      <None Include="Assets\StreamingAssets\Ch4_allv1.txt" />
-     <None Include="Assets\mapsData.txt" />
+     <None Include="Assets\Maps\mapsData.txt" />
      <None Include="Assets\StreamingAssets\Level78.txt" />
      <None Include="Assets\StreamingAssets\Ch4_7x7.txt" />
      <None Include="Assets\StreamingAssets\Ch4_8x8.txt" />
@@ -462,7 +452,7 @@
      <None Include="Assets\StreamingAssets\Level21.txt" />
      <None Include="Assets\StreamingAssets\Level6.txt" />
      <None Include="Assets\StreamingAssets\FilteredMaps.txt" />
-     <None Include="Assets\Icarus\Icarus_Animation.txt" />
+     <None Include="Assets\3DAssets\Icarus\Icarus_Animation.txt" />
      <None Include="Assets\StreamingAssets\Level46.txt" />
      <None Include="Assets\StreamingAssets\AdventureLevels.txt" />
      <None Include="Assets\StreamingAssets\notboring4.txt" />
@@ -473,14 +463,14 @@
      <None Include="Assets\StreamingAssets\SmallDoubleHitMaps1.txt" />
      <None Include="Assets\StreamingAssets\Level20.txt" />
      <None Include="Assets\StreamingAssets\Level67.txt" />
-     <None Include="Assets\RemovedDecentMaps.txt" />
+     <None Include="Assets\Maps\RemovedDecentMaps.txt" />
      <None Include="Assets\StreamingAssets\Level-17.txt" />
      <None Include="Assets\GooglePlayGames\Plugins\Android\GooglePlayGamesManifest.plugin\AndroidManifest.xml" />
      <None Include="Assets\StreamingAssets\Level-106.txt" />
      <None Include="Assets\StreamingAssets\Level9.txt" />
      <None Include="Assets\StreamingAssets\Adventure5backup.txt" />
      <None Include="Assets\StreamingAssets\DoubleHitMaps2.txt" />
-     <None Include="Assets\FilteredRemoved.txt" />
+     <None Include="Assets\Maps\FilteredRemoved.txt" />
      <None Include="Assets\StreamingAssets\Level10.txt" />
      <None Include="Assets\StreamingAssets\Level76.txt" />
      <None Include="Assets\StreamingAssets\newnewpotd.txt" />
@@ -498,7 +488,7 @@
      <None Include="Assets\StreamingAssets\Level55.txt" />
      <None Include="Assets\StreamingAssets\Level80.txt" />
      <None Include="Assets\StreamingAssets\Ch4_GoodCandidates.txt" />
-     <None Include="Assets\exceptionalmaps.txt" />
+     <None Include="Assets\Maps\exceptionalmaps.txt" />
      <None Include="Assets\StreamingAssets\Level63.txt" />
      <None Include="Assets\StreamingAssets\Level14.txt" />
      <None Include="Assets\StreamingAssets\3test.txt" />
@@ -521,6 +511,7 @@
      <None Include="Assets\StreamingAssets\Level32.txt" />
      <None Include="Assets\StreamingAssets\Level51.txt" />
      <None Include="Assets\StreamingAssets\Level23.txt" />
+     <None Include="Assets\exceptionalmaps.txt" />
      <None Include="Assets\StreamingAssets\Level61.txt" />
      <None Include="Assets\StreamingAssets\Level-1.txt" />
      <None Include="Assets\StreamingAssets\Ch2_Candidates.txt" />
@@ -529,10 +520,10 @@
      <None Include="Assets\StreamingAssets\Level99.txt" />
      <None Include="Assets\StreamingAssets\Level60.txt" />
      <None Include="Assets\StreamingAssets\Level59.txt" />
-     <None Include="Assets\NormalLevels.txt" />
+     <None Include="Assets\Maps\NormalLevels.txt" />
      <None Include="Assets\StreamingAssets\Level-19.txt" />
      <None Include="Assets\StreamingAssets\Level44.txt" />
-     <None Include="Assets\TSF\Shaders\TSFOutline.shader" />
+     <None Include="Assets\Demo_TSF\Shaders\TSFOutline.shader" />
      <None Include="Assets\StreamingAssets\Ch3_7x7.txt" />
      <None Include="Assets\StreamingAssets\8by8ice.txt" />
      <None Include="Assets\StreamingAssets\Ch3_GoodCandidates.txt" />
@@ -543,7 +534,7 @@
      <None Include="Assets\StreamingAssets\Ch4_2piece.txt" />
      <None Include="Assets\StreamingAssets\Seed_Experiments.txt" />
      <None Include="Assets\StreamingAssets\Level25.txt" />
-     <None Include="Assets\TSF\Shaders\TSF.shader" />
+     <None Include="Assets\Demo_TSF\Shaders\TSF.shader" />
      <None Include="Assets\StreamingAssets\Level-9.txt" />
      <None Include="Assets\StreamingAssets\Level71.txt" />
      <None Include="Assets\StreamingAssets\Ch4_Easy.txt" />
@@ -557,7 +548,7 @@
      <None Include="Assets\StreamingAssets\Level90.txt" />
      <None Include="Assets\StreamingAssets\RandomMaps.txt" />
      <None Include="Assets\StreamingAssets\Level66.txt" />
-     <None Include="Assets\SobelFilter.shader" />
+     <None Include="Assets\3DAssets\SobelFilter.shader" />
      <None Include="Assets\StreamingAssets\Level5.txt" />
      <None Include="Assets\StreamingAssets\Level-14.txt" />
      <None Include="Assets\StreamingAssets\Level77.txt" />
@@ -568,7 +559,7 @@
      <None Include="Assets\StreamingAssets\Level-3.txt" />
      <None Include="Assets\StreamingAssets\Level47.txt" />
      <None Include="Assets\StreamingAssets\3pmaps.txt" />
-     <None Include="Assets\Flowerpod\FlowerPod_Animations.txt" />
+     <None Include="Assets\3DAssets\Flowerpod\FlowerPod_Animations.txt" />
      <None Include="Assets\StreamingAssets\1Icarusmaps.txt" />
      <None Include="Assets\StreamingAssets\Level8.txt" />
      <None Include="Assets\StreamingAssets\DoubleHitMaps5.txt" />
@@ -577,7 +568,7 @@
      <None Include="Assets\StreamingAssets\Level11.txt" />
      <None Include="Assets\StreamingAssets\Ch2_5x5_Candidates.txt" />
      <None Include="Assets\StreamingAssets\Level-5.txt" />
-     <None Include="Assets\Portal_tanuki\fbx\animations.txt" />
+     <None Include="Assets\3DAssets\Portal_tanuki\fbx\animations.txt" />
      <None Include="Assets\StreamingAssets\Level-15.txt" />
      <None Include="Assets\StreamingAssets\Level-18.txt" />
      <None Include="Assets\StreamingAssets\Ch4notboring2.txt" />
@@ -714,6 +705,9 @@
  </Reference>
  <Reference Include="com.unity.multiplayer-hlapi.Runtime">
  <HintPath>/Users/bernardolimon/Documents/GitHub/Zenko/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Runtime.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine">
+ <HintPath>/Applications/Unity/Hub/Editor/2019.2.11f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>/Applications/Unity/Hub/Editor/2019.2.11f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -886,14 +880,11 @@
  <Reference Include="UnityEngine.XRModule">
  <HintPath>/Applications/Unity/Hub/Editor/2019.2.11f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.XRModule.dll</HintPath>
  </Reference>
+ <Reference Include="UnityEditor">
+ <HintPath>/Applications/Unity/Hub/Editor/2019.2.11f1/Unity.app/Contents/Managed/UnityEditor.dll</HintPath>
+ </Reference>
  <Reference Include="UDP">
  <HintPath>/Users/bernardolimon/Documents/GitHub/Zenko/Assets/Plugins/UDP/UDP.dll</HintPath>
- </Reference>
- <Reference Include="ChannelPurchase">
- <HintPath>/Users/bernardolimon/Documents/GitHub/Zenko/Assets/Plugins/UnityChannel/ChannelPurchase.dll</HintPath>
- </Reference>
- <Reference Include="UnityStore">
- <HintPath>/Users/bernardolimon/Documents/GitHub/Zenko/Assets/Plugins/UnityChannel/UnityStore.dll</HintPath>
  </Reference>
  <Reference Include="Editor">
  <HintPath>/Users/bernardolimon/Documents/GitHub/Zenko/Assets/Plugins/UnityPurchasing/Bin/Editor.dll</HintPath>
@@ -907,11 +898,11 @@
  <Reference Include="Apple">
  <HintPath>/Users/bernardolimon/Documents/GitHub/Zenko/Assets/Plugins/UnityPurchasing/Bin/Apple/Apple.dll</HintPath>
  </Reference>
- <Reference Include="FacebookStore">
- <HintPath>/Users/bernardolimon/Documents/GitHub/Zenko/Assets/Plugins/UnityPurchasing/Bin/Facebook/FacebookStore.dll</HintPath>
- </Reference>
  <Reference Include="Security">
  <HintPath>/Users/bernardolimon/Documents/GitHub/Zenko/Assets/Plugins/UnityPurchasing/Bin/Security/live/Security.dll</HintPath>
+ </Reference>
+ <Reference Include="FacebookStore">
+ <HintPath>/Users/bernardolimon/Documents/GitHub/Zenko/Assets/Plugins/UnityPurchasing/Bin/Facebook/FacebookStore.dll</HintPath>
  </Reference>
  <Reference Include="Tizen">
  <HintPath>/Users/bernardolimon/Documents/GitHub/Zenko/Assets/Plugins/UnityPurchasing/Bin/Tizen/Tizen.dll</HintPath>
@@ -919,17 +910,29 @@
  <Reference Include="winrt">
  <HintPath>/Users/bernardolimon/Documents/GitHub/Zenko/Assets/Plugins/UnityPurchasing/winrt/winrt.dll</HintPath>
  </Reference>
+ <Reference Include="ChannelPurchase">
+ <HintPath>/Users/bernardolimon/Documents/GitHub/Zenko/Assets/Plugins/UnityChannel/ChannelPurchase.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityStore">
+ <HintPath>/Users/bernardolimon/Documents/GitHub/Zenko/Assets/Plugins/UnityChannel/UnityStore.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Analytics.Tracker">
+ <HintPath>/Users/bernardolimon/Documents/GitHub/Zenko/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Tracker.dll</HintPath>
+ </Reference>
  <Reference Include="Unity.Analytics.Editor">
  <HintPath>/Users/bernardolimon/Documents/GitHub/Zenko/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.StandardEvents">
  <HintPath>/Users/bernardolimon/Documents/GitHub/Zenko/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.StandardEvents.dll</HintPath>
  </Reference>
- <Reference Include="Unity.Analytics.Tracker">
- <HintPath>/Users/bernardolimon/Documents/GitHub/Zenko/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Tracker.dll</HintPath>
- </Reference>
  <Reference Include="UnityEngine.Purchasing">
  <HintPath>/Users/bernardolimon/Documents/GitHub/Zenko/Library/PackageCache/com.unity.purchasing@2.0.6/UnityEngine.Purchasing.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.iOS.Extensions.Xcode">
+ <HintPath>/Applications/Unity/Hub/Editor/2019.2.11f1/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.iOS.Extensions.Common">
+ <HintPath>/Applications/Unity/Hub/Editor/2019.2.11f1/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Common.dll</HintPath>
  </Reference>
  <Reference Include="mscorlib">
  <HintPath>/Applications/Unity/Hub/Editor/2019.2.11f1/Unity.app/Contents/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>
@@ -1288,12 +1291,12 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{7A9450D2-E133-CE3A-0346-DA78DE4B984C}</Project>
+      <Project>{5133D1FD-CCE9-CE8C-069E-C51CAD21A1E6}</Project>
       <Name>Assembly-CSharp-firstpass</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>

@@ -12,45 +12,21 @@ public class ColorModulator : MonoBehaviour {
 	LevelMenu ButtonHolder;
 	public GameObject Star;
 	bool up;
-	/*int ImageS;
-	int LetterS;
-	int LightS;*/
-
-	// Use this for initialization
+	
 	void Start () {
 		ButtonHolder = ButtonParent.GetComponent<LevelMenu>();
 		up = true;
 		hue = 30;
 	}
 	
-	// Update is called once per frame
 	void FixedUpdate () {
 		hue++;
 		if(hue>359){
 			hue = 0;
 		}
-		/*if(up){
-			if(hue<200){
-				hue++;
-			}
-			else{
-				up = false;
-			}
-		}
-		else if(!up){
-			if(hue>30){
-				hue--;
-			}
-			else{
-				up =true;
-			}
-		}*/
-
 		modifyAll();
-//		Debug.Log(ButtonHolder.levelbuttons.Count);
 	}
 	void modifyAll(){
-
 		for(int i = 0; i<ImageDudes.Count; i++){
 			ImageDudes[i].GetComponent<Image>().color = Color.HSVToRGB((float)hue/359,(float)10/255, (float)255/255);
 		}
@@ -63,11 +39,7 @@ public class ColorModulator : MonoBehaviour {
 			Color thecolor = Color.HSVToRGB((float)hue/359,(float)43/255, (float)248/255);
 			thecolor.a = (float)167/255;
 			LetterDudes[i].GetComponent<Text>().color = thecolor;
-			//LetterDudes[i].GetComponent<Text>().color = Color.HSVToRGB((float)hue/359,(float)43/255, (float)248/255);
-			//LetterDudes[i].GetComponent<Text>().color.a = (float)167/255;
-
 		}
 		Star.GetComponent<Image>().color = Color.HSVToRGB((float)hue/359,(float)10/255, (float)255/255);
-		//for
 	}
 }

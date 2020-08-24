@@ -92,7 +92,7 @@ public class DateChecker : MonoBehaviour
 			System.DateTime date = System.DateTime.Parse(firstDate);
 			System.DateTime now = System.DateTime.Parse(secondDate);
 			System.TimeSpan diff = now - date;
-			Debug.Log((int)diff.Days);	
+			//Debug.Log((int)diff.Days);	
 			todayIndex = diff.Days;
 			currentIndex = diff.Days;	
 			todayDate = System.DateTime.Now.ToString("yyyy-MM-dd");

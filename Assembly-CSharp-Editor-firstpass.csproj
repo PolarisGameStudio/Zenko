@@ -2,8 +2,6 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
-    <CscToolPath>/Applications/Unity/Hub/Editor/2019.2.11f1/Unity.app/Contents/Tools/RoslynScripts</CscToolPath>
-    <CscToolExe>unity_csc.sh</CscToolExe>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -46,14 +44,6 @@
     <ImplicitlyExpandNETStandardFacades>false</ImplicitlyExpandNETStandardFacades>
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="UnityEngine">
-      <HintPath>/Applications/Unity/Hub/Editor/2019.2.11f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor">
-      <HintPath>/Applications/Unity/Hub/Editor/2019.2.11f1/Unity.app/Contents/Managed/UnityEditor.dll</HintPath>
-    </Reference>
-  </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Plugins\UDP\Editor\Analytics\Common.cs" />
      <Compile Include="Assets\Plugins\UDP\Editor\Analytics\EditorAnalytcisApi.cs" />
@@ -161,6 +151,9 @@
  </Reference>
  <Reference Include="com.unity.multiplayer-hlapi.Runtime">
  <HintPath>/Users/bernardolimon/Documents/GitHub/Zenko/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Runtime.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine">
+ <HintPath>/Applications/Unity/Hub/Editor/2019.2.11f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>/Applications/Unity/Hub/Editor/2019.2.11f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -339,6 +332,9 @@
  <Reference Include="UnityEngine.XRModule">
  <HintPath>/Applications/Unity/Hub/Editor/2019.2.11f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.XRModule.dll</HintPath>
  </Reference>
+ <Reference Include="UnityEditor">
+ <HintPath>/Applications/Unity/Hub/Editor/2019.2.11f1/Unity.app/Contents/Managed/UnityEditor.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEditor.VR">
  <HintPath>/Applications/Unity/Hub/Editor/2019.2.11f1/Unity.app/Contents/UnityExtensions/Unity/UnityVR/Editor/UnityEditor.VR.dll</HintPath>
  </Reference>
@@ -354,26 +350,23 @@
  <Reference Include="UnityEditor.Android.Extensions">
  <HintPath>/Applications/Unity/Hub/Editor/2019.2.11f1/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll</HintPath>
  </Reference>
- <Reference Include="Google.IOSResolver_v1.2.124.0">
- <HintPath>/Users/bernardolimon/Documents/GitHub/Zenko/Assets/PlayServicesResolver/Editor/Google.IOSResolver_v1.2.124.0.dll</HintPath>
- </Reference>
- <Reference Include="Google.JarResolver_v1.2.124.0">
- <HintPath>/Users/bernardolimon/Documents/GitHub/Zenko/Assets/PlayServicesResolver/Editor/Google.JarResolver_v1.2.124.0.dll</HintPath>
+ <Reference Include="UnityEditor.iOS.Extensions">
+ <HintPath>/Applications/Unity/Hub/Editor/2019.2.11f1/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll</HintPath>
  </Reference>
  <Reference Include="Google.VersionHandler">
  <HintPath>/Users/bernardolimon/Documents/GitHub/Zenko/Assets/PlayServicesResolver/Editor/Google.VersionHandler.dll</HintPath>
  </Reference>
+ <Reference Include="Google.JarResolver_v1.2.124.0">
+ <HintPath>/Users/bernardolimon/Documents/GitHub/Zenko/Assets/PlayServicesResolver/Editor/Google.JarResolver_v1.2.124.0.dll</HintPath>
+ </Reference>
  <Reference Include="Google.VersionHandlerImpl_v1.2.124.0">
  <HintPath>/Users/bernardolimon/Documents/GitHub/Zenko/Assets/PlayServicesResolver/Editor/Google.VersionHandlerImpl_v1.2.124.0.dll</HintPath>
  </Reference>
+ <Reference Include="Google.IOSResolver_v1.2.124.0">
+ <HintPath>/Users/bernardolimon/Documents/GitHub/Zenko/Assets/PlayServicesResolver/Editor/Google.IOSResolver_v1.2.124.0.dll</HintPath>
+ </Reference>
  <Reference Include="UDP">
  <HintPath>/Users/bernardolimon/Documents/GitHub/Zenko/Assets/Plugins/UDP/UDP.dll</HintPath>
- </Reference>
- <Reference Include="ChannelPurchase">
- <HintPath>/Users/bernardolimon/Documents/GitHub/Zenko/Assets/Plugins/UnityChannel/ChannelPurchase.dll</HintPath>
- </Reference>
- <Reference Include="UnityStore">
- <HintPath>/Users/bernardolimon/Documents/GitHub/Zenko/Assets/Plugins/UnityChannel/UnityStore.dll</HintPath>
  </Reference>
  <Reference Include="Editor">
  <HintPath>/Users/bernardolimon/Documents/GitHub/Zenko/Assets/Plugins/UnityPurchasing/Bin/Editor.dll</HintPath>
@@ -387,11 +380,11 @@
  <Reference Include="Apple">
  <HintPath>/Users/bernardolimon/Documents/GitHub/Zenko/Assets/Plugins/UnityPurchasing/Bin/Apple/Apple.dll</HintPath>
  </Reference>
- <Reference Include="FacebookStore">
- <HintPath>/Users/bernardolimon/Documents/GitHub/Zenko/Assets/Plugins/UnityPurchasing/Bin/Facebook/FacebookStore.dll</HintPath>
- </Reference>
  <Reference Include="Security">
  <HintPath>/Users/bernardolimon/Documents/GitHub/Zenko/Assets/Plugins/UnityPurchasing/Bin/Security/live/Security.dll</HintPath>
+ </Reference>
+ <Reference Include="FacebookStore">
+ <HintPath>/Users/bernardolimon/Documents/GitHub/Zenko/Assets/Plugins/UnityPurchasing/Bin/Facebook/FacebookStore.dll</HintPath>
  </Reference>
  <Reference Include="Tizen">
  <HintPath>/Users/bernardolimon/Documents/GitHub/Zenko/Assets/Plugins/UnityPurchasing/Bin/Tizen/Tizen.dll</HintPath>
@@ -399,17 +392,23 @@
  <Reference Include="winrt">
  <HintPath>/Users/bernardolimon/Documents/GitHub/Zenko/Assets/Plugins/UnityPurchasing/winrt/winrt.dll</HintPath>
  </Reference>
+ <Reference Include="ChannelPurchase">
+ <HintPath>/Users/bernardolimon/Documents/GitHub/Zenko/Assets/Plugins/UnityChannel/ChannelPurchase.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityStore">
+ <HintPath>/Users/bernardolimon/Documents/GitHub/Zenko/Assets/Plugins/UnityChannel/UnityStore.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEditor.Advertisements">
  <HintPath>/Users/bernardolimon/Documents/GitHub/Zenko/Library/PackageCache/com.unity.ads@2.0.8/Editor/UnityEditor.Advertisements.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Analytics.Tracker">
+ <HintPath>/Users/bernardolimon/Documents/GitHub/Zenko/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Tracker.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.Editor">
  <HintPath>/Users/bernardolimon/Documents/GitHub/Zenko/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.StandardEvents">
  <HintPath>/Users/bernardolimon/Documents/GitHub/Zenko/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.StandardEvents.dll</HintPath>
- </Reference>
- <Reference Include="Unity.Analytics.Tracker">
- <HintPath>/Users/bernardolimon/Documents/GitHub/Zenko/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Tracker.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Purchasing">
  <HintPath>/Users/bernardolimon/Documents/GitHub/Zenko/Library/PackageCache/com.unity.purchasing@2.0.6/UnityEngine.Purchasing.dll</HintPath>
@@ -419,6 +418,12 @@
  </Reference>
  <Reference Include="nunit.framework">
  <HintPath>/Users/bernardolimon/Documents/GitHub/Zenko/Library/PackageCache/com.unity.ext.nunit@1.0.0/net35/unity-custom/nunit.framework.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.iOS.Extensions.Xcode">
+ <HintPath>/Applications/Unity/Hub/Editor/2019.2.11f1/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.iOS.Extensions.Common">
+ <HintPath>/Applications/Unity/Hub/Editor/2019.2.11f1/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Common.dll</HintPath>
  </Reference>
  <Reference Include="mscorlib">
  <HintPath>/Applications/Unity/Hub/Editor/2019.2.11f1/Unity.app/Contents/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>
@@ -777,12 +782,12 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{7A9450D2-E133-CE3A-0346-DA78DE4B984C}</Project>
+      <Project>{5133D1FD-CCE9-CE8C-069E-C51CAD21A1E6}</Project>
       <Name>Assembly-CSharp-firstpass</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>

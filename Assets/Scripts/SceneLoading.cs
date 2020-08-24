@@ -8,6 +8,7 @@ using CompleteProject;
 
 
 public class SceneLoading : MonoBehaviour {
+	int numberOfAdventureMaps = 200; //change this when expanding levels
 	public static bool adFree; //true if theyve paid for ad-free
 	public int num;
 	public static GameObject gamewon;
@@ -21,7 +22,7 @@ public class SceneLoading : MonoBehaviour {
 	public GameObject buyMenu;
 	bool canOpen;
 	public static string menuState;
-	public bool isMenu;
+	public bool isMenu; // checks if its world select scene
 	public GameObject PotdShortcut;
 	//public bool isPotdOpen;
 //	public IceTileHandler myhandler;
@@ -32,130 +33,307 @@ public class SceneLoading : MonoBehaviour {
 		menuState = "Start";
 		canOpen = true;
 		Instance = this;
-		Debug.Log("NEW SCENE LOADING");
-		string teststring = "WallSeed";
-		Debug.Log(teststring.Length);
-		Debug.Log(teststring.Substring(teststring.Length-4,4));
+//		Debug.Log("SceneLoadingStart");
 		//Application.targetFrameRate = 30;
-		if (!level){ //if loading menu, this is pointless and relies on bugs, try a public bool.
+
+		//if in world select
+		if (!level){ 
+			//Start music
 			MusicHandler.PlayTitleTheme();
 			isMenu = true;
+//			Debug.Log("Starting World Select Scene");
 		}
-		else{//if loading level scenew
-//			Debug.Log(levelnum + "level");
+		//else if loading level scene
+		else{
 			isMenu = false;
+
+			//DO I REALLY WANT TO BE SAVING EVERYTIME A NEW MAP IS OPENING?
 			PlayServices.instance.SaveLocal();
 			PlayServices.instance.SaveData();
+			//DO I?
 
-			
-			Debug.Log(LevelManager.levelnum);
+//			Debug.Log("Starting Level Scene with level number " + LevelManager.levelnum);
+
+			//NOT SURE WHY I DO THIS. PROBABLY TO PREVENT BUGS
 			if(LevelManager.levelnum == 0 || LevelManager.levelnum ==null){
 			LevelManager.levelnum = 103;				
 			}
-			Debug.Log("sceneloadingstuff");
+			//PROBABLY TO PREVENT BUG INDEED
 
-			//MusicHandler.PlayInitialLoop();
-			//LevelStorer.Lookfor(LevelManager.levelnum);
-			//txt2.text = ("Efficient turns is " + LevelStorer.efficientturns);
-			// int world = Mathf.FloorToInt(LevelManager.levelnum/50)  + 1;
-			// int levelinworld = LevelManager.levelnum - ((world-1)*50);
-			// txt.text = "World " + world.ToString() + "-" + levelinworld.ToString();
+			//assign appropriate ui LevelName
+			FillLevelNameUI();
 
-			if(!LevelManager.ispotd)
-			AssignLevelName();
-			else
-			AssignPotdName();
+			//initialize rating and rating UI
 			RatingBehaviour.InitializeRating();
-
-			// if(!GoogleAds.Instance.potdVideo.IsLoaded()){
-			// 	GoogleAds.Instance.RequestPotdAd();
-			// }
-
-
-
-//			Debug.Log(LevelManager.levelnum);
 		}
-		//#if Unity_Editor
-		//#endif
-		//GameObject.Find("CurrencyHolder").GetComponentInChildren<Text>().text = GameManager.mycurrency.ToString();
-		
 	}
-	public void RotateClockWise(){
-		
+
+	//Assigns UI Assets that correspond to the level name. calls either assignlevelname or assignpotdname
+	public void FillLevelNameUI(){
+		if(!LevelManager.ispotd)
+		AssignLevelName();
+		else
+		AssignPotdName();
 	}
-	public void ShowAchievementsUI(){
-		//PlayServices.ShowAchievementsUI();
-		PlayServices.UnlockWorldAchievement(1);
-	}
-	public void RemoveAdFree(){
-		LevelManager.adFree = false;
-	}
+	
+	//Assigns name according to current level in format "World 1-20"
 	public void AssignLevelName(){
 		int world = Mathf.FloorToInt((LevelManager.levelnum-1)/40)  + 1;
 		int levelinworld = LevelManager.levelnum - ((world-1)*40);
 		WorldName.Instance.AssignLevelName(world, levelinworld);
-		//txt.text = "World " + world.ToString() + "-" + levelinworld.ToString();		
 	}
+	
+	//Assigns name depending on date of PoTD in format "11/11/2011"
 	public void AssignPotdName(){
 		WorldName.Instance.AssignPotdDate(DateChecker.Instance.currentIndex);
-		
-		//txt.text = "World " + world.ToString() + "-" + levelinworld.ToString();		
 	}
+
+	//Called from UI, opens Adventure Mode Selection
+	public void adventureMode(){
+		Transform levelBox = transform.Find("Level_Box");
+		Transform buttonHolder = levelBox.Find("ButtonHolder");
+		Transform menuHolder = transform.Find("MenuHolder");
+		LevelMenu levelMenuScript = buttonHolder.GetComponent<LevelMenu>();
+		int curfirst = getCurFirst(LevelMenu.FindHighestSolved());
+		if(canOpen){
+			menuState = "Adventure";
+			levelBox.gameObject.SetActive(true);
+			levelMenuScript.clearMenu();
+			
+			PlayerPrefs.SetInt("CurrentFirst", curfirst); //sets in format 1,21,41,61 etc. 
+			PlayerPrefs.Save();
+			levelMenuScript.currentfirst = curfirst;
+			levelMenuScript.populateMenu();
+			LevelMenu.Instance.CheckDownUpButtons(curfirst);
+
+			GameModeHandler.TurnOff();
+			menuHolder.Find("Menu").gameObject.SetActive(false);
+			menuHolder.Find("CloseLevel_Box").gameObject.SetActive(true);
+			menuHolder.Find("Config").gameObject.SetActive(false);
+			if(MenuButton.open){
+				MenuButton.thisMB.closeMenu();
+			}
+			canOpen = false;
+		}
+	}
+	
+	//Returns 1,21,41,61,81 etc depending on where the fed int lies
+	//Can change for loop
+	public int getCurFirst(int highest){
+		int candidate = 1;
+		if (highest == 0 || highest == null || highest == 1){
+			return 1;
+		}
+		for (int i = 1; i<numberOfAdventureMaps-1; i+=20){
+			if(i<highest+1){
+				candidate = i;
+			}
+			else{
+				return candidate;
+			}
+		}
+		return candidate;
+	}
+	
+	//Called from UI, Closes Adventure Mode Selection
+	public void closeAdventureMode(){
+		Transform levelBox = transform.Find("Level_Box");
+		Transform menuHolder = transform.Find("MenuHolder");
+		menuState = "Start";
+		levelBox.gameObject.SetActive(false);
+		//remove curbuttons
+		levelBox.Find("ButtonHolder").GetComponent<LevelMenu>().currentfirst = PlayerPrefs.GetInt("CurrentFirst");
+		if(isMenu){
+			menuHolder.Find("Menu").gameObject.SetActive(true);
+			menuHolder.Find("CloseLevel_Box").gameObject.SetActive(false);
+			GameModeHandler.Return();		
+			CameraController.Fade(.2f,0f);	
+		}
+		canOpen = true;
+	}
+	
+	//Called from UI, Opens Puzzle of the Day Mode Selection
+	public void PuzzleOfTheDayMenu(){
+		if(menuState == "Start"){
+			if(canOpen){
+				Transform potdBox = transform.Find("PoTD_Box");
+				LevelMenu levelmenuScript = potdBox.Find("ButtonHolder").GetComponent<LevelMenu>();
+				Transform menuHolder = transform.Find("MenuHolder");
+
+				menuState = "Potd";
+				potdBox.gameObject.SetActive(true);
+
+				levelmenuScript.clearMenu();
+				//GET DATE
+				//USE DATE
+				levelmenuScript.populatePotdMenu();
+				canOpen = false;
+
+				TurnOffIfAdFree.Instance.SetImages();
+
+				if(isMenu){
+					GameModeHandler.TurnOff();
+					menuHolder.Find("Menu").gameObject.SetActive(false);
+					menuHolder.Find("ClosePotd_Box").gameObject.SetActive(true);
+					menuHolder.Find("Config").gameObject.SetActive(false);
+
+					if(MenuButton.open){
+						MenuButton.thisMB.closeMenu();
+					}
+
+					CameraController.Fade(.2f,1f, 1);
+					PotdShortcut.SetActive(false);
+				}
+				if(!isMenu){
+					LevelManager.configging = true;
+        			Swiping.canswipe = false;
+
+					menuHolder.Find("Menu").gameObject.SetActive(false);
+					menuHolder.Find("Config").gameObject.SetActive(false);
+					menuHolder.Find("ClosePotd_Box").gameObject.SetActive(true);
+					
+					if(MenuButton.open){
+						MenuButton.thisMB.closeMenu();
+					}
+
+					CameraController.Fade(.2f,1f, 1);
+					transform.Find("NOADS").gameObject.SetActive(true);
+				}
+			}	
+		}
+		else if(menuState == "Potd"){
+
+		}
+		else if(menuState == "Adventure"){
+			closeAdventureMode();
+			if(canOpen){
+				menuState = "Potd";
+				transform.Find("PoTD_Box").gameObject.SetActive(true);
+
+				transform.Find("PoTD_Box").Find("ButtonHolder").GetComponent<LevelMenu>().clearMenu();
+
+				//GET DATE
+				//USE DATE
+				transform.Find("PoTD_Box").Find("ButtonHolder").GetComponent<LevelMenu>().populatePotdMenu();
+
+
+				GameModeHandler.TurnOff();
+				transform.Find("MenuHolder").Find("Menu").gameObject.SetActive(false);
+				transform.Find("MenuHolder").Find("ClosePotd_Box").gameObject.SetActive(true);
+				transform.Find("MenuHolder").Find("Config").gameObject.SetActive(false);
+				canOpen = false;			
+				
+				if(MenuButton.open){
+					MenuButton.thisMB.closeMenu();
+				}
+				CameraController.Fade(.2f,1f, 1);
+
+				if(LevelManager.adFree){
+
+				}
+				else{
+					if(HasUnlocked()){
+
+					}
+				}
+				PotdShortcut.SetActive(false);
+			}
+		}
+	}
+	
+	//Called from UI, closes Puzzle of the Day Mode Selection
+	public void ClosePotdMode(){
+		menuState = "Start";
+		transform.Find("PoTD_Box").Find("ButtonHolder").GetComponent<LevelMenu>().CloseUnlockMenu();
+		transform.Find("PoTD_Box").gameObject.SetActive(false);
+
+		if(isMenu){
+			transform.Find("PoTD_Box").Find("ButtonHolder").GetComponent<LevelMenu>().currentfirst = PlayerPrefs.GetInt("CurrentFirst");
+
+			transform.Find("MenuHolder").Find("Menu").gameObject.SetActive(true);
+			transform.Find("MenuHolder").Find("ClosePotd_Box").gameObject.SetActive(false);
+			GameModeHandler.Return();		
+
+			CameraController.Fade(.2f,0f);
+			PotdShortcut.SetActive(true);			
+		}
+		else{
+			transform.Find("PoTD_Box").Find("ButtonHolder").GetComponent<LevelMenu>().currentfirst = PlayerPrefs.GetInt("CurrentFirst");
+			transform.Find("MenuHolder").Find("Menu").gameObject.SetActive(true);
+			transform.Find("MenuHolder").Find("ClosePotd_Box").gameObject.SetActive(false);
+			CameraController.Fade(.2f,0f);	
+			LevelManager.configging = false;
+        	Swiping.canswipe = true;
+        	Swiping.mydirection = "Null";
+        	TutorialHandler.Instance.TutorialClosebutton();
+	        if(Input.touchCount>0){
+	            Touch t = Input.GetTouch(0);
+	            Swiping.firstPressPos = new Vector2(t.position.x,t.position.y);
+
+	        }
+	        else{
+	            Swiping.firstPressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+	        }
+	        transform.Find("NOADS").gameObject.SetActive(false);
+
+		}
+		//remove curbuttons
+		canOpen = true;
+	}
+	
+	//This is called by UI if pressed a adventure level button
+	public void LoadLevel(int num){
+		//Debug.Log(LevelStorer.leveldic[num].islocked + " is the locked status.");
+		if(LevelStorer.leveldic[num].islocked == false || num==1 ){
+			//Debug.Log("Going to Level " + num + " since it is either not locked or level 1 (which can't be locked)");
+			LevelManager.levelnum = num;
+			LoadScene(LevelManager.levelnum);
+			MusicHandler.PlayInitialLoop();
+		}
+	}
+	
+	//called by LoadLevel. Prepares stuff (rsets) to open level scene in adventure mode and opens new scene
 	public void LoadScene(int num){
 		Swiping.mydirection = "Null";
 		TurnCounter.turncount = 0;
-		Debug.Log ("Going to Scene at level " + num);
+//		Debug.Log ("Going to Level Scene at level " + num);
+		//sets efficient turns
 		LevelStorer.Lookfor(num);
 		LevelManager.levelnum = num;
 		LevelManager.readytodraw = true;
 		LevelManager.ispotd = false;
+		//This is a unity specific command to open new scene
 		SceneManager.LoadScene(1);
-		//NextlevelButton();
 	}
+	
+	//Opens World Select Scene
 	public void LoadMenu(){
 		SceneManager.LoadScene(0);
 	}
+	
+	//Opens Remove Ads Interface
 	public void OpenRemoveAdsMenu(){
 		buyMenu.SetActive(true);
 	}
+	
+	//Closes Remove Ads Interface
 	public void CloseRemoveAdsMenu(){
 		buyMenu.SetActive(false);
 		if(!PieceHolders.hintMenuOpen){
 			LevelManager.isdragging = false;
 		}
 	}
+	
+	//Calls NoAdsCommand
 	public void RemoveAds(){
 		Purchaser.Instance.BuyNoAds();
-		// PlayerPrefs.SetInt("AdFree", 1);
-		// SceneLoading.adFree = true;
-
-		
 	}
-	public void NextSpecificButton(int level){
-		LevelManager.levelnum = level;
-		Swiping.mydirection = "Null";
-		LevelBuilder.ChangeBackground("Color_A7A46709",new Color(0,0,0,0), .3f);
-		LevelManager.israndom = false;
-		//Debug.Log("Next button");
-
-		LevelManager.levelnum++;
-		AssignLevelName();
-
-		LevelStorer.UnlockLevel (LevelManager.levelnum);
-		LevelStorer.Lookfor (LevelManager.levelnum);
-
-		TurnCounter.turncount = 0;
-		LevelManager.NextLevel(LevelManager.levelnum);
-		TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
-		
-		Swiping.mydirection = "Null";
-		RatingBehaviour.RestartRating();
-	}
+	
+	//Opens Next Adventure Mode Level once already in level scene
 	public void NextlevelButton(){
 		Swiping.mydirection = "Null";
 		LevelBuilder.ChangeBackground("Color_A7A46709",new Color(0,0,0,0), .3f);
 		LevelManager.israndom = false;
-		//Debug.Log("Next button");
 
 		LevelManager.levelnum++;
 		AssignLevelName();
@@ -169,78 +347,34 @@ public class SceneLoading : MonoBehaviour {
 		
 		Swiping.mydirection = "Null";
 		RatingBehaviour.RestartRating();
-
-
-		//myhandler.GiveIce();
 	}
+	
+	//Called from UI, opens help	
 	public void TutorialButton(){
+		Debug.Log("PUSHED TUTORIAL BUTTON");
 		TutorialHandler.Instance.HelpButton();
 		MenuButton.thisMB.closeMenu();
 	}
-	public void TestLevel(){
-		Swiping.mydirection = "Null";
-		LevelBuilder.ChangeBackground("Color_A7A46709",new Color(0,0,0,0), .3f);
-		LevelManager.israndom = false;
-		//Debug.Log("Next button");
-
-		LevelManager.levelnum++;
-		AssignLevelName();
-
-		//LevelStorer.UnlockLevel (LevelManager.levelnum);
-		//LevelStorer.Lookfor (LevelManager.levelnum);
-
-		TurnCounter.turncount = 0;
-		LevelManager.NextLevel(161);
-		TurnGraphics.SetTurnCounter(161);
-		
-		Swiping.mydirection = "Null";
-		RatingBehaviour.RestartRating();
-	}
-
+	
+	//Called from UI when pressing "next" on victory screen, starts next level and shows ad if required
 	public void NextWon(){
 		Swiping.mydirection = "Null";
 		if(LevelManager.ispotd){
 			Potd();
 			GoogleAds.Instance.ShowInterstitial();
-
 		}
 		if(!LevelManager.ispotd){
 			NextlevelButton();
 			GoogleAds.Instance.ShowInterstitial();
-
 		}
 	}
+	
+	//Called from UI
 	public void CloseTryAgainScreen(){
 		GameObject.Find("TryAgainScreen").transform.GetChild(0).gameObject.SetActive(false);
-		
 	}
-	public void muteMusic(){
-		AudioSource ms = GameObject.Find("Music Source").GetComponent<AudioSource>();
-		ms.mute = !ms.mute;
-		if(ms.mute){
-			EventSystem.current.currentSelectedGameObject.GetComponent<Image>().sprite = 
-			EventSystem.current.currentSelectedGameObject.GetComponent<ImageSwitch>().imagetwo;			
-		}
-		else{
-			EventSystem.current.currentSelectedGameObject.GetComponent<Image>().sprite = 
-			EventSystem.current.currentSelectedGameObject.GetComponent<ImageSwitch>().imageone;
-		}
-
-
-
-	}
-	public void muteSfx(){
-		AudioSource sfxs = GameObject.Find("Sfx Source").GetComponent<AudioSource>();
-		sfxs.mute = !sfxs.mute;
-		if(sfxs.mute){
-			EventSystem.current.currentSelectedGameObject.GetComponent<Image>().sprite = 
-			EventSystem.current.currentSelectedGameObject.GetComponent<ImageSwitch>().imagetwo;			
-		}
-		else{
-			EventSystem.current.currentSelectedGameObject.GetComponent<Image>().sprite = 
-			EventSystem.current.currentSelectedGameObject.GetComponent<ImageSwitch>().imageone;
-		}
-	}
+	
+	
 	public void RandomLevel(){
 		Swiping.mydirection = "Null";
 		LevelManager.israndom = true;
@@ -264,23 +398,18 @@ public class SceneLoading : MonoBehaviour {
 	}
 	public void Potd(){
 		LevelBuilder.ChangeBackground("Color_A7A46709",new Color(0,0,0,0), .3f);
-
 		Swiping.mydirection = "Null";
-		//txt.text = "RANDOM POTD";
 		TurnCounter.turncount = 0;
 		LevelManager.ispotd = true;
 		LevelManager.NextPotd();
 		TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
 		RatingBehaviour.RestartRating();
 		AssignPotdName();
-		//MusicHandler.PlayInitialLoop();
-
 	}	
 	public void PotdSpecific(int num){
 		LevelBuilder.ChangeBackground("Color_A7A46709",new Color(0,0,0,0), .3f);
 
 		Swiping.mydirection = "Null";
-		//txt.text = "RANDOM POTD";
 		TurnCounter.turncount = 0;
 		LevelManager.ispotd = true;
 		PlayerPrefs.SetInt("PoTD", num);
@@ -294,9 +423,6 @@ public class SceneLoading : MonoBehaviour {
 		AssignPotdName();
 		ClosePotdMode();
 		ChangeSprites();
-
-		//MusicHandler.PlayInitialLoop();
-
 	}	
 	public void ChangeSprites(){
 		//transform.Find("Level_Box").Find("ButtonHolder").GetComponent<LevelMenu>().clearMenu();
@@ -323,9 +449,6 @@ public class SceneLoading : MonoBehaviour {
 		LevelStorer.potdDic[DateChecker.Instance.currentIndex].isNew = false;
 		Debug.Log ("Going to Scene POTD at " + num);
 
-		//LevelStorer.Lookfor(num);
-		//LevelManager.levelnum = num;
-		//AssignPotdName();
 		LevelManager.ispotd = true;
 		SceneManager.LoadScene(1);
 		MusicHandler.PlayInitialLoop();
@@ -392,62 +515,36 @@ public class SceneLoading : MonoBehaviour {
 		LevelStorer.Lookfor (LevelManager.levelnum);
 		TurnCounter.turncount = 0;
 		LevelManager.NextLevel (LevelManager.levelnum);
-		//LevelManager.NextLevel(Random.Range(0,100));
-		//myhandler.GiveIce();
-
 	}
 	public void ResetLevelButton(){
-		// int world = Mathf.FloorToInt(LevelManager.levelnum/50)  + 1;
-		// int levelinworld = LevelManager.levelnum - ((world-1)*50);
-		// txt.text = "World " + world.ToString() + "-" + levelinworld.ToString();
 		LevelBuilder.ChangeBackground("Color_A7A46709",new Color(0,0,0,0), .3f);
 		AssignLevelName();
-
-
-		//LevelStorer.UnlockLevel (LevelManager.levelnum);
-		//LevelStorer.Lookfor (LevelManager.levelnum);
 		TurnCounter.turncount = 0;
 		LevelManager.ResetLevel();
 		LevelManager.UnPop();
-		//TurnGraphics.ClearCounters();
-		//TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
 		ProgressBar.InitializeProgressBar(LevelStorer.efficientturns);
 		DotHandler.InitializeDots(LevelStorer.efficientturns);
-		//LevelManager.NextLevel (LevelManager.levelnum);
-		//myhandler.GiveIce();
 		Swiping.mydirection = "Null";
 		RatingBehaviour.RestartRating();
 		MenuButton.CloseMenu();
 	}
 	public void ResetAllButton(){
-		// int world = Mathf.FloorToInt(LevelManager.levelnum/50)  + 1;
-		// int levelinworld = LevelManager.levelnum - ((world-1)*50);
-		// txt.text = "World " + world.ToString() + "-" + levelinworld.ToString();
 		AssignLevelName();
-
-		//LevelStorer.UnlockLevel (LevelManager.levelnum);
-		//LevelStorer.Lookfor (LevelManager.levelnum);
 		TurnCounter.turncount = 0;
-		//LevelManager.ResetLevel();
 		LevelManager.NextLevel (LevelManager.levelnum);
 		TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
-		//myhandler.GiveIce();
 		Swiping.mydirection = "Null";
 		MenuButton.CloseMenu();
 	}
 	public void Testnum(int num){
-		//initializevalues
-//		AIBrain.pieces.Clear();
 		Swiping.mydirection = "Null";
 		LevelManager.levelnum = num;		
 		LevelStorer.Lookfor (num);
 		TurnCounter.turncount = 0;
 		LevelManager.NextLevel (num);
-		//myhandler.GiveIce();
 
 	}
 	public void GoToWorld(int worldnumber){
-
 		LevelBuilder.iscreated = false;
 		//LevelManager.worldnum = worldnumber;
 		SceneManager.LoadScene(worldnumber);
@@ -461,20 +558,8 @@ public class SceneLoading : MonoBehaviour {
 	public void LockAll(){
 		LevelStorer.LockAllLevels();
 	}
-	public void LoadLevel(int num){
-		//LevelManager.levelnum = 1;
-		Debug.Log(LevelStorer.leveldic[num].islocked);
-		if(LevelStorer.leveldic[num].islocked == false || num==1 ){
-
-			Debug.Log("Going to Level "+ num);
-			LevelManager.levelnum = num;
-			LoadScene(LevelManager.levelnum);
-			MusicHandler.PlayInitialLoop();
-		}
-
-	}
+	//This is called by button click if pressed a puzzle of the day button
 	public void LoadPotd(int index){
-
 		Swiping.mydirection = "Null";
 
 		TurnCounter.turncount = 0;
@@ -483,20 +568,14 @@ public class SceneLoading : MonoBehaviour {
 		LevelManager.NextPotd();
 		TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
 		RatingBehaviour.RestartRating();		
-
 	}
 	public void Plus(){
 		LevelManager.levelnum ++;
-		//txt.text = LevelManager.levelnum.ToString();
-
-
 	}
 	public void Minus(){
 		LevelManager.levelnum--;
-		//txt.text = LevelManager.levelnum.ToString();
-
 	}
-
+	//probably old
 	public void GoToLevelSelect(){
 		if (LevelManager.levelnum < 34) {
 			SceneManager.LoadScene (1);
@@ -506,205 +585,8 @@ public class SceneLoading : MonoBehaviour {
 			SceneManager.LoadScene (3);
 		}
 	}
-	public void adventureMode(){
-		if(canOpen){
-			menuState = "Adventure";
-			transform.Find("Level_Box").gameObject.SetActive(true);
-
-
-			transform.Find("Level_Box").Find("ButtonHolder").GetComponent<LevelMenu>().clearMenu();
-			PlayerPrefs.SetInt("CurrentFirst", getCurFirst(LevelMenu.FindHighestSolved()));
-			PlayerPrefs.Save();
-			transform.Find("Level_Box").Find("ButtonHolder").GetComponent<LevelMenu>().currentfirst = getCurFirst(LevelMenu.FindHighestSolved());
-			transform.Find("Level_Box").Find("ButtonHolder").GetComponent<LevelMenu>().populateMenu();
-
-
-			GameModeHandler.TurnOff();
-			transform.Find("MenuHolder").Find("Menu").gameObject.SetActive(false);
-			transform.Find("MenuHolder").Find("CloseLevel_Box").gameObject.SetActive(true);
-			transform.Find("MenuHolder").Find("Config").gameObject.SetActive(false);
-
-
-			if(MenuButton.open){
-				MenuButton.thisMB.closeMenu();
-
-			}
-			CameraController.Fade(.2f,1f, LevelMenu.FindHighestSolved());
-			LevelMenu.Instance.CheckDownUpButtons(getCurFirst(LevelMenu.FindHighestSolved()));
-			canOpen = false;
-		}
-	}
-	public void PuzzleOfTheDayMenu(){
-		if(menuState == "Start"){
-			if(canOpen){
-				menuState = "Potd";
-				transform.Find("PoTD_Box").gameObject.SetActive(true);
-
-
-				transform.Find("PoTD_Box").Find("ButtonHolder").GetComponent<LevelMenu>().clearMenu();
-				//PlayerPrefs.SetInt("CurrentFirst", getCurFirst(LevelMenu.FindHighestSolved()));
-				//PlayerPrefs.Save();
-
-				//GET DATE
-				//USE DATE
-				transform.Find("PoTD_Box").Find("ButtonHolder").GetComponent<LevelMenu>().populatePotdMenu();
-				canOpen = false;
-				TurnOffIfAdFree.Instance.SetImages();
-				if(isMenu){
-					GameModeHandler.TurnOff();
-					transform.Find("MenuHolder").Find("Menu").gameObject.SetActive(false);
-					transform.Find("MenuHolder").Find("ClosePotd_Box").gameObject.SetActive(true);
-					transform.Find("MenuHolder").Find("Config").gameObject.SetActive(false);
-
-					if(MenuButton.open){
-						MenuButton.thisMB.closeMenu();
-
-					}
-
-					CameraController.Fade(.2f,1f, 1);
-					PotdShortcut.SetActive(false);
-
-				}
-				if(!isMenu){
-					LevelManager.configging = true;
-        			Swiping.canswipe = false;
-
-					transform.Find("MenuHolder").Find("Menu").gameObject.SetActive(false);
-					transform.Find("MenuHolder").Find("Config").gameObject.SetActive(false);
-					transform.Find("MenuHolder").Find("ClosePotd_Box").gameObject.SetActive(true);
-					
-					if(MenuButton.open){
-						MenuButton.thisMB.closeMenu();
-					}
-
-					CameraController.Fade(.2f,1f, 1);
-					transform.Find("NOADS").gameObject.SetActive(true);
-				}
-			}	
-		}
-		else if(menuState == "Potd"){
-
-		}
-		else if(menuState == "Adventure"){
-			closeAdventureMode();
-			if(canOpen){
-				menuState = "Potd";
-				transform.Find("PoTD_Box").gameObject.SetActive(true);
-
-
-				transform.Find("PoTD_Box").Find("ButtonHolder").GetComponent<LevelMenu>().clearMenu();
-				//PlayerPrefs.SetInt("CurrentFirst", getCurFirst(LevelMenu.FindHighestSolved()));
-				//PlayerPrefs.Save();
-
-				//GET DATE
-				//USE DATE
-				transform.Find("PoTD_Box").Find("ButtonHolder").GetComponent<LevelMenu>().populatePotdMenu();
-
-
-				GameModeHandler.TurnOff();
-				transform.Find("MenuHolder").Find("Menu").gameObject.SetActive(false);
-				transform.Find("MenuHolder").Find("ClosePotd_Box").gameObject.SetActive(true);
-				transform.Find("MenuHolder").Find("Config").gameObject.SetActive(false);
-				canOpen = false;			
-				
-				if(MenuButton.open){
-					MenuButton.thisMB.closeMenu();
-
-				}
-				CameraController.Fade(.2f,1f, 1);
-
-				if(LevelManager.adFree){
-
-				}
-				else{
-					if(HasUnlocked()){
-						//transform.Find("
-					}
-				}
-				PotdShortcut.SetActive(false);
-			}
-		}
-		
-		//LevelMenu.Instance.CheckDownUpButtons(getCurFirst(LevelMenu.FindHighestSolved()));		
-	}
-
 	bool HasUnlocked(){
-
 		return true;
-	}
-
-	public int getCurFirst(int highest){
-		int candidate = 1;
-		if (highest == 0 || highest == null || highest == 1){
-			return 1;
-		}
-		for (int i = 1; i<199; i+=20){
-			if(i<highest+1){
-				candidate = i;
-			}
-			else{
-				return candidate;
-			}
-		}
-		return candidate;
-	}
-
-	public void ClosePotdMode(){
-		menuState = "Start";
-		transform.Find("PoTD_Box").Find("ButtonHolder").GetComponent<LevelMenu>().CloseUnlockMenu();
-		transform.Find("PoTD_Box").gameObject.SetActive(false);
-
-		if(isMenu){
-			transform.Find("PoTD_Box").Find("ButtonHolder").GetComponent<LevelMenu>().currentfirst = PlayerPrefs.GetInt("CurrentFirst");
-
-
-			transform.Find("MenuHolder").Find("Menu").gameObject.SetActive(true);
-			transform.Find("MenuHolder").Find("ClosePotd_Box").gameObject.SetActive(false);
-			GameModeHandler.Return();		
-
-			CameraController.Fade(.2f,0f);
-			PotdShortcut.SetActive(true);			
-		}
-		else{
-			transform.Find("PoTD_Box").Find("ButtonHolder").GetComponent<LevelMenu>().currentfirst = PlayerPrefs.GetInt("CurrentFirst");
-			transform.Find("MenuHolder").Find("Menu").gameObject.SetActive(true);
-			transform.Find("MenuHolder").Find("ClosePotd_Box").gameObject.SetActive(false);
-			CameraController.Fade(.2f,0f);	
-			LevelManager.configging = false;
-        	Swiping.canswipe = true;
-        	Swiping.mydirection = "Null";
-        	TutorialHandler.Instance.TutorialClosebutton();
-	        if(Input.touchCount>0){
-	            Touch t = Input.GetTouch(0);
-	            Swiping.firstPressPos = new Vector2(t.position.x,t.position.y);
-
-	        }
-	        else{
-	            Swiping.firstPressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-	        }
-	        transform.Find("NOADS").gameObject.SetActive(false);
-
-		}
-		//remove curbuttons
-
-		canOpen = true;
-	}
-
-	public void closeAdventureMode(){
-		menuState = "Start";
-		transform.Find("Level_Box").gameObject.SetActive(false);
-		//remove curbuttons
-		transform.Find("Level_Box").Find("ButtonHolder").GetComponent<LevelMenu>().currentfirst = PlayerPrefs.GetInt("CurrentFirst");
-
-		if(isMenu){
-		transform.Find("MenuHolder").Find("Menu").gameObject.SetActive(true);
-		transform.Find("MenuHolder").Find("CloseLevel_Box").gameObject.SetActive(false);
-		GameModeHandler.Return();		
-		CameraController.Fade(.2f,0f);	
-		}
-
-		
-		canOpen = true;
 	}
 	public void GoToWorldSelect(){
 			SceneManager.LoadScene (1);
@@ -717,21 +599,10 @@ public class SceneLoading : MonoBehaviour {
 			LevelBuilder.tiles[(int)target.x, -(int)target.z].tileObj = td.gameObject;
 			if(LevelBuilder.tiles[(int)target.x-1, -(int)target.z].type == "Ice"){
 				LevelBuilder.tiles[(int)target.x-1, -(int)target.z].type = type;		
-				//LevelBuilder.tiles[(int)target.x-1, -(int)target.z].isTaken = true;				
 			}	
-			/*else if(LevelBuilder.tiles[(int)target.x-1, -(int)target.z].type == "Wood"){
-				LevelBuilder.tiles[(int)target.x-1, -(int)target.z].type = "Wood" + type;		
-				LevelBuilder.tiles[(int)target.x-1, -(int)target.z].isTaken = true;				
-			}	
-			else if(LevelBuilder.tiles[(int)target.x-1, -(int)target.z].type == "Fragile"){
-				LevelBuilder.tiles[(int)target.x-1, -(int)target.z].type = "Fragile" + type;		
-				LevelBuilder.tiles[(int)target.x-1, -(int)target.z].isTaken = true;				
-			}	*/
 			else{
 				LevelBuilder.tiles[(int)target.x-1, -(int)target.z].isSideways = "Left";
 			}
-		
-
 		} 
 		if(type =="Right"){
 			LevelBuilder.tiles[(int)target.x, -(int)target.z].type = "Wall";
@@ -847,23 +718,21 @@ public class SceneLoading : MonoBehaviour {
 			}		
 		}
 	}
- void placeNormal(Vector3 positiontogo){
- 	if(LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].type == "Left" || 
- 	LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].type == "Down" ||
- 	LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].type == "Up" ||
- 	LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].type == "Right"){
- 		
- 		LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].isSideways = LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].type;
- 		
- 		}
-	Debug.Log(td.myType);
-	LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].type = td.myType;
-	LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].isTaken = true;
-	LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].tileObj = td.gameObject;	
-	
- }
+	void placeNormal(Vector3 positiontogo){
+		if(LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].type == "Left" || 
+		LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].type == "Down" ||
+		LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].type == "Up" ||
+		LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].type == "Right")
+		{
+			LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].isSideways = LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].type;
+
+		}
+		Debug.Log(td.myType);
+		LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].type = td.myType;
+		LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].isTaken = true;
+		LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].tileObj = td.gameObject;	
+	}
 	public void PlaceHint2(){
-		//Debug.Log
 		for(int i = 0; i<LevelManager.piecetiles.Count; i++){ //First go through the pieces outside of the board.
 			td = LevelManager.piecetiles[i].gameObject.GetComponent<Dragger>();
 			Debug.Log(td.gameObject.transform.position);
@@ -920,19 +789,11 @@ public class SceneLoading : MonoBehaviour {
 									Debug.Log("Same person in my place");
 									Vector3 Place2 = new Vector3 (LevelManager.myhints[j].x, 0, -LevelManager.myhints[j].y);	//place 2 is hint solution assigned to piece being tested
 									Debug.Log(Place2);		
-									//Debug.Log(LevelBuilder.tiles[(int)Place2.x, -(int)Place2.z].isTaken)	;				
 									if(LevelBuilder.tiles[(int)Place2.x, -(int)Place2.z].isTaken == false){ //Check if the selected piece of the same type has it's ideal spot open.
 										Debug.Log("new target free");
+										
 										//Place tile and return.
-
-//										LevelBuilder.tiles[(int)td.gameObject.transform.position.x, -(int)td.gameObject.transform.position.z].type = "Ice";
-//										LevelBuilder.tiles[(int)td.gameObject.transform.position.x, -(int)td.gameObject.transform.position.z].isTaken = false;
-
 										LevelManager.piecetiles[i].position = Place2;
-
-										//LevelBuilder.tiles[(int)Place2.x, -(int)Place2.z].type = td.myType;
-										//LevelBuilder.tiles[(int)Place2.x, -(int)Place2.z].isTaken = true;
-										//LevelBuilder.tiles[(int)Place2.x, -(int)Place2.z].tileObj = td.gameObject;
 										if(td.myType == "Left" || td.myType == "Right" || td.myType == "Up" || td.myType == "Down"){
 											placeIcarus(td.myType, Place2);
 
@@ -1004,12 +865,7 @@ public class SceneLoading : MonoBehaviour {
 					if(LevelBuilder.tiles[(int)Place.x, -(int)Place.z].isTaken == false){ //if hint place is free
 						Debug.Log("Locked on target");
 						//remove
-						removePiece(td.gameObject.transform.position, 
-							td.myType);
-						//LevelBuilder.tiles[(int)td.gameObject.transform.position.x, -(int)td.gameObject.transform.position.z].type = null;
-						//LevelBuilder.tiles[(int)td.gameObject.transform.position.x, -(int)td.gameObject.transform.position.z].isTaken = false;
-						
-
+						removePiece(td.gameObject.transform.position, td.myType);
 						LevelManager.piecetiles[i].position = Place;
 
 						if(td.myType == "Left" || td.myType == "Right" || td.myType == "Up" || td.myType == "Down"){
@@ -1018,10 +874,6 @@ public class SceneLoading : MonoBehaviour {
 						}
 						else{
 								placeNormal(Place);
-								//LevelBuilder.tiles[(int)Place.x, -(int)Place.z].type = td.myType;
-								//LevelBuilder.tiles[(int)Place.x, -(int)Place.z].isTaken = true;
-								//LevelBuilder.tiles[(int)Place.x, -(int)Place.z].tileObj = td.gameObject;				
-						
 						}
 						td.gameObject.GetComponent<BoxCollider>().enabled = false;					//disable collider so piece stays there.
 						
@@ -1064,5 +916,78 @@ public class SceneLoading : MonoBehaviour {
 
 	}
 
+	//Opens level with number assigned
+	public void NextSpecificButton(int level){
+		LevelManager.levelnum = level;
+		Swiping.mydirection = "Null";
+		LevelBuilder.ChangeBackground("Color_A7A46709",new Color(0,0,0,0), .3f);
+		LevelManager.israndom = false;
 
+		LevelManager.levelnum++;
+		AssignLevelName();
+
+		LevelStorer.UnlockLevel (LevelManager.levelnum);
+		LevelStorer.Lookfor (LevelManager.levelnum);
+
+		TurnCounter.turncount = 0;
+		LevelManager.NextLevel(LevelManager.levelnum);
+		TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
+		
+		Swiping.mydirection = "Null";
+		RatingBehaviour.RestartRating();
+	}
+
+	//Test For Unlocking An Achievement
+	public void ShowAchievementsUI(){
+		PlayServices.UnlockWorldAchievement(1);
+	}
+	//Makes adfree false (for testing purposes)
+	public void RemoveAdFree(){
+		LevelManager.adFree = false;
+	}
+	
+	//Called from UI, probably Test
+	public void TestLevel(){
+		Swiping.mydirection = "Null";
+		LevelBuilder.ChangeBackground("Color_A7A46709",new Color(0,0,0,0), .3f);
+		LevelManager.israndom = false;
+
+		LevelManager.levelnum++;
+		AssignLevelName();
+
+		TurnCounter.turncount = 0;
+		LevelManager.NextLevel(161);
+		TurnGraphics.SetTurnCounter(161);
+		
+		Swiping.mydirection = "Null";
+		RatingBehaviour.RestartRating();
+	}
+	
+	//Called from UI, probably unused
+	public void muteMusic(){
+		AudioSource ms = GameObject.Find("Music Source").GetComponent<AudioSource>();
+		ms.mute = !ms.mute;
+		if(ms.mute){
+			EventSystem.current.currentSelectedGameObject.GetComponent<Image>().sprite = 
+			EventSystem.current.currentSelectedGameObject.GetComponent<ImageSwitch>().imagetwo;			
+		}
+		else{
+			EventSystem.current.currentSelectedGameObject.GetComponent<Image>().sprite = 
+			EventSystem.current.currentSelectedGameObject.GetComponent<ImageSwitch>().imageone;
+		}
+	}
+	
+	//Called from UI, probably unused
+	public void muteSfx(){
+		AudioSource sfxs = GameObject.Find("Sfx Source").GetComponent<AudioSource>();
+		sfxs.mute = !sfxs.mute;
+		if(sfxs.mute){
+			EventSystem.current.currentSelectedGameObject.GetComponent<Image>().sprite = 
+			EventSystem.current.currentSelectedGameObject.GetComponent<ImageSwitch>().imagetwo;			
+		}
+		else{
+			EventSystem.current.currentSelectedGameObject.GetComponent<Image>().sprite = 
+			EventSystem.current.currentSelectedGameObject.GetComponent<ImageSwitch>().imageone;
+		}
+	}
 }

@@ -502,7 +502,7 @@ public class LevelStorer : MonoBehaviour {
 		}
 		else{
 			Destroy(this.gameObject);
-			Debug.Log("Destroyed LevelStorer");
+//			Debug.Log("Destroyed LevelStorer");
 			return;
 		}
 		//PlayerPrefs.DeleteAll();
@@ -577,17 +577,16 @@ public class LevelStorer : MonoBehaviour {
 			}
 		}
 	}
-
+	//Sets efficient turns
 	public static void Lookfor(int levelnum){ //unlocks and locks according to save file.
 		maxlevels = leveldic.Count ;
-
+//		Debug.Log("Max levels is " + leveldic.Count);
 		if (levelnum <= maxlevels && levelnum >= 0) {
 			efficientturns = leveldic [levelnum].turns;
+			//Debug.Log("Efficient turns is " + efficientturns + " at level " + levelnum);
 		} 
-
 		else {
-		Debug.Log ("No turn number stored" + levelnum + efficientturns);
-
+			//Debug.Log ("No turn number stored " + levelnum + ". Therfore efficient turns is " + efficientturns);
 		}
 	}
 	public static void UnlockLevel(int levelnum){

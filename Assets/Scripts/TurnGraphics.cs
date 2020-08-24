@@ -36,7 +36,7 @@ public class TurnGraphics : MonoBehaviour {
 	//AssignDimensions();
 	}
 	void AssignDimensions(){
-		Debug.Log("ASssigning");
+//		Debug.Log("ASssigning");
 		RectTransform rtransform = gameObject.GetComponent<RectTransform>();
 		cwidth = rtransform.rect.width-rtransform.rect.width/6;
 		cheight = rtransform.rect.height-rtransform.rect.height/6;		

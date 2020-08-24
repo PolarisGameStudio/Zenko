@@ -18,9 +18,6 @@ public class TutorialHandler : MonoBehaviour
     {
     	Instance = this;
     }
-    // void Update(){
-    //     Debug.Log(Swiping.canswipe + " " + LevelManager.isdragging + " " + LevelManager.configging);
-    // }
     public void HelpButton(){
         Swiping.canswipe = false;
         LevelManager.isdragging = true;
@@ -79,7 +76,7 @@ public class TutorialHandler : MonoBehaviour
         Swiping.canswipe = false;
         LevelManager.isdragging = true;
         LevelManager.configging = true;
-        Debug.Log("PREPARING TUTORIAL");
+//        Debug.Log("PREPARING TUTORIAL");
         text.color = Color.HSVToRGB((float)TextModulator.hue/359,(float)TextModulator.s/99, (float)TextModulator.v/99);
         this.gameObject.transform.GetChild(0).gameObject.SetActive(true);
         this.gameObject.transform.GetChild(1).gameObject.SetActive(true);

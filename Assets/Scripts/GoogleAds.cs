@@ -32,7 +32,7 @@ public class GoogleAds : MonoBehaviour
         }
         else{
             Destroy(this.gameObject);
-            Debug.Log("Destroyed LevelStorer");
+//            Debug.Log("Destroyed LevelStorer");
             return;
         }
 
@@ -44,7 +44,7 @@ public class GoogleAds : MonoBehaviour
         #endif
 
         #if UNITY_EDITOR
-        	Debug.Log("UNITY EDITOR,UNITY EDITOR,UNITY EDITOR,UNITY EDITOR,UNITY EDITOR,UNITY EDITOR,UNITY EDITOR,UNITY EDITOR");
+//        	Debug.Log("UNITY EDITOR,UNITY EDITOR,UNITY EDITOR,UNITY EDITOR,UNITY EDITOR,UNITY EDITOR,UNITY EDITOR,UNITY EDITOR");
         #endif
 
     	#if UNITY_IOS
@@ -66,7 +66,7 @@ public class GoogleAds : MonoBehaviour
         else{
             PlayerPrefs.SetInt("InitNum", PlayerPrefs.GetInt("InitNum") + 1);
         }
-        Debug.Log("COUNTER AT " + PlayerPrefs.GetInt("InitNum"));
+        //Debug.Log("COUNTER AT " + PlayerPrefs.GetInt("InitNum"));
     }
     void Start(){
         levelsInSession = 0;
@@ -81,6 +81,7 @@ public class GoogleAds : MonoBehaviour
         #endif
     }
     void Update(){
+        Debug.Log(levelsInSession);
     	//Debug.Log(levelsToShowAd[0] + " " + levelsToShowAd[1] + " " + levelsToShowAd[2] + " " + levelsToShowAd[3] + " " + levelsToShowAd[4]);
     }
     public void RequestHintAd(){
@@ -160,7 +161,7 @@ public class GoogleAds : MonoBehaviour
     	levelsInSession++;
         if(PlayerPrefs.GetInt("InitNum") == 4 || PlayerPrefs.GetInt("InitNum") == 11 || PlayerPrefs.GetInt("InitNum") == 20 || PlayerPrefs.GetInt("InitNum") == 20){
             //Debug Log, Do you wish to rate this app? Not now, Yes
-            PlayerPrefs.SetInt("Initnum", PlayerPrefs.GetInt("Initnum") + 1);
+            PlayerPrefs.SetInt("InitNum", PlayerPrefs.GetInt("InitNum") + 1);
             //Application.OpenURL ("market://details?id=" + Application.identifier);
             
         }
@@ -198,60 +199,6 @@ public class GoogleAds : MonoBehaviour
     	}
     	return false;
     }	
-
-    // private void RequestFirstPotdAd(){
-    //     #if UNITY_ANDROID
-    //         string adUnitId = "ca-app-pub-3301322474937909/3389264645";
-    //     #elif UNITY_IOS
-    //         string adUnitId = "ca-app-pub-3301322474937909/3389264645";
-    //     #else
-    //         string adUnitId = "unexpected_platform";
-    //     #endif
-
-    //     // Create an empty ad request.
-    //     AdRequest request = new AdRequest.Builder().Build();
-    //     // Load the rewarded video ad with the request.
-    //     this.potdVideo.LoadAd(request, adUnitId);
-        
-    //     this.potdVideo.OnAdRewarded += HandleOnPotdAdClosed;        
-    // }
-
-
-
-    // public void RequestFirstRewardBasedVideo(){
-    //     #if UNITY_ANDROID
-    //         string adUnitId = "ca-app-pub-3301322474937909/3389088666";
-    //     #elif UNITY_IOS
-    //         string adUnitId = "ca-app-pub-3301322474937909/3389088666";
-    //     #else
-    //         string adUnitId = "unexpected_platform";
-    //     #endif
-
-    //     // Create an empty ad request.
-    //     AdRequest request = new AdRequest.Builder().Build();
-    //     // Load the rewarded video ad with the request.
-    //     this.rewardVideo.LoadAd(request, adUnitId);
-        
-    //     this.rewardVideo.OnAdRewarded += HandleOnRewardAdClosed;
-    // }
-
-
-
-    // public void RequestRewardBasedVideo(){
-    //     #if UNITY_ANDROID
-    //         string adUnitId = "ca-app-pub-3301322474937909/3389088666";
-    //     #elif UNITY_IOS
-    //         string adUnitId = "ca-app-pub-3301322474937909/3389088666";
-    //     #else
-    //         string adUnitId = "unexpected_platform";
-    //     #endif
-
-    //     // Create an empty ad request.
-    //     AdRequest request = new AdRequest.Builder().Build();
-    //     //.AddTestDevice("7B4A528D487015EA780FDA9E0F1541EB")
-    //     // Load the rewarded video ad with the request.
-    //     this.rewardVideo.LoadAd(request, adUnitId);
-    // }
 
     private void HandleOnRewardAdClosed(object sender, EventArgs args){
         
@@ -340,7 +287,5 @@ public class GoogleAds : MonoBehaviour
             GameObject.Find("TryAgainScreen").transform.GetChild(0).gameObject.SetActive(true);
         
         }
-        //Resources.FindObjectsOfTypeAll("TypeAgainScreen").gameObject.SetActive(true);
-
     }
 }
