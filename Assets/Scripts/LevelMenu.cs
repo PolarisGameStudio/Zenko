@@ -265,6 +265,9 @@ public class LevelMenu : MonoBehaviour {
 
 	public void AssignMonthText(){
 		int monthnum = (DateChecker.currentMonthIndex+10) % 12;
+		Debug.Log(monthnum + " is monthnum");
+		Debug.Log(PotdHolder.Instance.monthSpritesSpanish.Count + " is monthspritespanish size.");
+		Debug.Log(PotdHolder.Instance.monthSprites.Count + " is monthsprite size.");
 		if(LanguageHandler.IsEnglish())
 		{
 			monthSprite.sprite = PotdHolder.Instance.monthSprites[monthnum];
