@@ -35,64 +35,22 @@ public class LevelManager : MonoBehaviour {
 	public static bool adFree;
 	public static bool configging;
 	public static Transform playert;
-
 	public bool freeIt;
-	//public static int hintCurrency;
-	//public static GameObject lastgoodtile;
-	//public static IceTileHandler myicehandler;
-
-
 	public static LevelManager Instance = null;
-
-
 
 	void Awake(){
 		if(Instance == null)
 		{
 			Instance = this;
 			DontDestroyOnLoad(this.gameObject);
-			//InitializePlayerPrefs();
-
 			return;
 		}
 		Destroy(this.gameObject);
-
-	}
-
-	void Update(){
-		if(LevelManager.adFree && freeIt){
-			LevelManager.adFree = false;
-		}
-		if(Input.GetKeyDown(KeyCode.M)){
-			Cursor.visible = false;
-
-		}
-		if(Input.GetKeyDown(KeyCode.N)){
-			Cursor.visible = true;
-
-		}
-	}
-	void InitializePlayerPrefs(){
-		if (PlayerPrefs.HasKey ("CurrencyLoaded")) {
-			//Debug.Log(PlayerPrefs.GetInt("hintCurrency"));
-			//LevelManager.hintCurrency = PlayerPrefs.GetInt("hintCurrency");
-		} 
-		else {
-			//LevelManager.hintCurrency = 0;
-			//PlayerPrefs.SetInt("hintCurrency", 0);
-			//PlayerPrefs.SetInt("CurrencyLoaded",1);
-		}
-	}
-
-	public static void PopulateLists(){
-
 	}
 
 	public static void NextLevel(int mynum){
 		myhints = new List<Vector2>();
-		//Debug.Log("GONNAGETICE");
 		LevelStorer.Lookfor (mynum);
-//		TurnCounter.turncount = 0;
 		levelselector.DestroyAllExceptCamera ();
 		TileKeeper.Instance.Shuffle();
 		TileKeeper.Instance.Reset();
@@ -102,20 +60,12 @@ public class LevelManager : MonoBehaviour {
 			levelselector.CreateBase ();
 		}
 		levelselector.drawNormal(mynum);
-		/*levelselector.CreateOuterBase();
-		levelselector.PlaceBase();
-		//Debug.Log("GONNAGETICE");
-
-		levelselector.DrawNextLevel (mynum);*/
-//		Debug.Log("GONNAGETICE");
-//		myicehandler.GiveIce();
 	}
 
 	public static void NextRandomLevel(){
 		Debug.Log(LevelManager.levelnum);
 		myhints = new List<Vector2>();
 		hintsgiven = new List<int>();
-		Debug.Log("GONNAGETICE");
 		levelselector.DestroyAllExceptCamera ();
 		if(!LevelBuilder.iscreated){
 			levelselector.CreateBase ();
@@ -130,7 +80,6 @@ public class LevelManager : MonoBehaviour {
 		Debug.Log(LevelManager.levelnum);
 		myhints = new List<Vector2>();
 		hintsgiven = new List<int>();
-		Debug.Log("GONNAGETICE");
 		levelselector.DestroyAllExceptCamera ();
 		if(!LevelBuilder.iscreated){
 			levelselector.CreateBase ();
@@ -145,13 +94,11 @@ public class LevelManager : MonoBehaviour {
 	public static void NextPotd(){
 		myhints = new List<Vector2>();
 		hintsgiven = new List<int>();
-		Debug.Log("GONNAGETICE");
 		levelselector.DestroyAllExceptCamera ();
 		TileKeeper.Instance.Shuffle();
 		TileKeeper.Instance.Reset();
 		EnvironmentKeeper.Instance.Shuffle();
 		EnvironmentKeeper.Instance.Reset();
-		//PlayerPrefs.GetInt("PoTD");
 		PlayerPrefs.SetInt("PoTD", PlayerPrefs.GetInt("PoTD") + 1);
 		DateChecker.Instance.currentIndex = PlayerPrefs.GetInt("PoTD");
 		LevelStorer.potdDic[PlayerPrefs.GetInt("PoTD")].isNew = false;
@@ -161,13 +108,11 @@ public class LevelManager : MonoBehaviour {
 	public static void SpecificPotd(int num){
 		myhints = new List<Vector2>();
 		hintsgiven = new List<int>();
-		Debug.Log("GONNAGETICE");
 		levelselector.DestroyAllExceptCamera ();
 		TileKeeper.Instance.Shuffle();
 		TileKeeper.Instance.Reset();
 		EnvironmentKeeper.Instance.Shuffle();
 		EnvironmentKeeper.Instance.Reset();
-		//PlayerPrefs.GetInt("PoTD");
 		PlayerPrefs.SetInt("PoTD", num);
 		DateChecker.Instance.currentIndex = PlayerPrefs.GetInt("PoTD");
 		levelselector.drawPotd(PlayerPrefs.GetInt("PoTD"));
@@ -176,33 +121,25 @@ public class LevelManager : MonoBehaviour {
 	public static void RePotd(){
 		myhints = new List<Vector2>();
 		hintsgiven = new List<int>();
-		Debug.Log("GONNAGETICE");
 		levelselector.DestroyAllExceptCamera ();
-		//PlayerPrefs.GetInt("PoTD");
 		TileKeeper.Instance.Shuffle();
 		TileKeeper.Instance.Reset();
 		EnvironmentKeeper.Instance.Shuffle();
 		EnvironmentKeeper.Instance.Reset();
 		DateChecker.Instance.currentIndex = PlayerPrefs.GetInt("PoTD");
 		levelselector.RePotd();
-		//levelselector.drawPotd(PlayerPrefs.GetInt("PoTD"));
 	}
 
 	public static void ResetLevel(){
 		levelselector.ResetPlayer();
 	}
 
-		public void niuNextLevel(int mynum){
+	public void niuNextLevel(int mynum){
 		Debug.Log(mynum);
 		LevelStorer.Lookfor (mynum);
-//		TurnCounter.turncount = 0;
 		levelselector.DestroyAllExceptCamera ();
 		levelselector.CreateBase ();
-		//Debug.Log("GONNAGETICE");
-
 		levelselector.DrawNextLevel (mynum);
-//		Debug.Log("GONNAGETICE");
-//		myicehandler.GiveIce();
 	}
 	public static void UnPopIcarus(string type, Dragger dragger){
 		if(type == "Left"){
@@ -211,13 +148,10 @@ public class LevelManager : MonoBehaviour {
 				LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x-1, -(int)dragger.gameObject.transform.position.z].type = "Ice";
 				LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x-1, -(int)dragger.gameObject.transform.position.z].isTaken = false;
 				LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x-1, -(int)dragger.gameObject.transform.position.z].isSideways = null;
-
 			}
 			else{
 				LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x-1, -(int)dragger.gameObject.transform.position.z].isSideways = null;
-				//LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x-1, -(int)dragger.gameObject.transform.position.z].isTaken = false;
-			}
-					
+			}	
 		}
 		if(type == "Right"){
 			LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x, -(int)dragger.gameObject.transform.position.z].type = "Seed";	
@@ -225,11 +159,9 @@ public class LevelManager : MonoBehaviour {
 				LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x+1, -(int)dragger.gameObject.transform.position.z].type = "Ice";
 				LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x+1, -(int)dragger.gameObject.transform.position.z].isTaken = false;
 				LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x+1, -(int)dragger.gameObject.transform.position.z].isSideways = null;
-
 			}
 			else{
 				LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x+1, -(int)dragger.gameObject.transform.position.z].isSideways = null;
-				//LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x+1, -(int)dragger.gameObject.transform.position.z].isTaken = false;
 			}
 		}
 		if(type == "Up"){
@@ -238,11 +170,9 @@ public class LevelManager : MonoBehaviour {
 				LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x, -(int)dragger.gameObject.transform.position.z-1].type = "Ice";
 				LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x, -(int)dragger.gameObject.transform.position.z-1].isTaken = false;
 				LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x, -(int)dragger.gameObject.transform.position.z-1].isSideways = null;
-
 			}
 			else{
 				LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x, -(int)dragger.gameObject.transform.position.z-1].isSideways = null;
-				//LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x, -(int)dragger.gameObject.transform.position.z+1].isTaken = false;
 			}		
 		}
 		if(type == "Down"){
@@ -251,11 +181,9 @@ public class LevelManager : MonoBehaviour {
 				LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x, -(int)dragger.gameObject.transform.position.z+1].type = "Ice";
 				LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x, -(int)dragger.gameObject.transform.position.z+1].isTaken = false;
 				LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x, -(int)dragger.gameObject.transform.position.z+1].isSideways = null;
-
 			}
 			else{
 				LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x, -(int)dragger.gameObject.transform.position.z+1].isSideways = null;
-				//LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x, -(int)dragger.gameObject.transform.position.z].isTaken = false;
 			}		
 		}
 	}
@@ -270,7 +198,6 @@ public class LevelManager : MonoBehaviour {
 				Debug.Log((int)dragger.gameObject.transform.position.x);
 				Debug.Log(-(int)dragger.gameObject.transform.position.z);
 				if(dragger.gameObject.transform.position.z > -LevelBuilder.totaldimension){//checks for pieces inside board
-
 					if(dragger.mySeedType == "Wall"){
 						LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x, -(int)dragger.gameObject.transform.position.z].type = "Seed";
 						Debug.Log(LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x, -(int)dragger.gameObject.transform.position.z].type);						
@@ -279,29 +206,13 @@ public class LevelManager : MonoBehaviour {
 						UnPopIcarus(dragger.mySeedType, dragger);
 					}
 				}
-				//LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x, -(int)dragger.gameObject.transform.position.z].seedType = mySeedType;
-
 			}
 		}
 		GameObject[] fragiles = GameObject.FindGameObjectsWithTag("Fragile");
-		//Debug.Log(fragiles.Length);
-
 		foreach(GameObject fragile in fragiles){
-			//Debug.Log(fragile);
-			//LevelBuilder.tiles[(int)fragile.transform.position.x, -(int)fragile.transform.position.z].type = "Fragile";
-			//MeshRenderer mymesh = fragile.GetComponentInChildren<MeshRenderer>();
-			//FragileBehaviour myproperties = fragile.GetComponent<FragileBehaviour>();
-			//myproperties.myhole.SetActive(false);
-			//myproperties.myfragile.SetActive(true);
-			//myproperties.lavaWhenReady = false;
 			fragile.GetComponent<FragileBehaviour>().readytolava = false;
 			fragile.GetComponent<Animator>().SetInteger("Phase",0);
 			LevelBuilder.tiles[(int)fragile.transform.position.x, -(int)fragile.transform.position.z].type = "Fragile";
-//			Debug.Log(myproperties.mypink);
-			//Color mycolor = myproperties.mypink;
-			//mymesh.material.color = mycolor;
 		}
-
 	}
-
 }

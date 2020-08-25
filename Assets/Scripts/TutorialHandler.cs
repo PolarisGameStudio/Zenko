@@ -109,7 +109,6 @@ public class TutorialHandler : MonoBehaviour
         PrepareTutorial(levelLineBank, indexNumber);
     }
     public void TutorialClosebutton(){
-        Debug.Log("TUTCLOSE");
         LevelManager.configging = false;
         LevelManager.isdragging = false;
         this.gameObject.transform.GetChild(0).gameObject.SetActive(false);

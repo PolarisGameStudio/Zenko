@@ -15,7 +15,6 @@ public class TurnOffIfAdFree : MonoBehaviour
         SetImages();
     }
     public void SetImages(){
-//        Debug.Log(LevelManager.adFree);
         if(LevelManager.adFree){
             this.gameObject.SetActive(false);
             text.gameObject.SetActive(false);
@@ -23,10 +22,6 @@ public class TurnOffIfAdFree : MonoBehaviour
         else{
             image.enabled = true;
             text.enabled = true;
-            PotdUnlocker.Instance.Initiate();
-            
-        }        
-
+        }
     }
-
 }

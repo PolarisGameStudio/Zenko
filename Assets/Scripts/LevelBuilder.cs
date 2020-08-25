@@ -10,58 +10,31 @@ public class LevelBuilder : MonoBehaviour {
 	public static Material background;
 	private string filePath;
 	private string result;
-//	IceTileHandler myhandler;
-	//public Brain brain;
-
 	public GameObject[] tile;
-
 	Transform[] tileBank = new Transform[100];
-	//public static Transform icetile;
-
 	public static int rows = 10;
 	public static int cols = 10;
-
 	public static int totaldimension = 10;
-
 	bool renewBoard = false;
 	public static Tile [,] tiles = new Tile[10,10];
-
 	public static List<Vector2> iceTiles = new List<Vector2>();
-
 	static int levelidtoload;
-
 	static Vector2 startpos;
-
 	public static Transform playertransform;
-
 	public static Transform starttransform;
-
 	public static Transform goaltransform;
-
 	public static bool iscreated;
-
 	public static string[] levelsHorizontal;
-
 	public static int[] startersHorizonal;
-
 	List<GameObject> outertileBank = new List<GameObject>();
-
 	int howfar;
-
 	public static string[] levelsPotd;
-
 	public static string[] levelsAdventure;
-
 	public static List<int> startersAdventure;
-
 	public static List<int> startersPotd;
-
 	public Color mygray;// = new Color(173/255f,173/255f,173/255f,1f);
-
 	public static int playerInitialRotation;
-
 	public static bool resetting;
-
 	public GameObject mywinboard;
 	public static GameObject winboard;
 	public GameObject myloseboard;
@@ -70,13 +43,9 @@ public class LevelBuilder : MonoBehaviour {
 	public static GameObject hintboard;	
 	public static GameObject settingsBoard;
 	public static LevelBuilder Instance;
-
 	public static List<GameObject> Portals = new List<GameObject>();
-
 	public GameObject loadingGO;
-
 	public Texture portalTexture2;
-
 	int wallIndex;
 	int holeIndex;
 	int flowerIndex;
@@ -90,20 +59,7 @@ public class LevelBuilder : MonoBehaviour {
 	int environmentTreeIndex;
 
 	Vector3 positionOutsidePlayer;
-	//public static List<Transform> piecetiles = new List<Transform>();
 
-	/*void ShuffleList(){
-			System.Random rand = new System.Random();
-			int r = tileBank.Count;
-			while(r>1){
-				r--;
-				int n = rand.Next(r+1);
-				Debug.Log(n);
-				GameObject val = tileBank[n];
-				tileBank[n] = tileBank[r];
-				tileBank[r] = val;
-			}
-		}*/
 	public void Awake(){
 		Instance = this;
 		background = backgroundMaterial;
@@ -114,18 +70,16 @@ public class LevelBuilder : MonoBehaviour {
 	}
 	IEnumerator checkAndroid(string file){
 		filePath = System.IO.Path.Combine(Application.streamingAssetsPath, file);
-		//Debug.Log (filePath + "FILEPAPAPATH");
 		result = " ";
-		if (file.Contains ("://")) {
+		if (file.Contains ("://")) 
+		{
 			UnityWebRequest www = UnityWebRequest.Get (file);
 			yield return www.SendWebRequest ();
 			result = www.downloadHandler.text;
 			Debug.Log (result);
-
-		} else
+		} 
+		else
 			result = System.IO.File.ReadAllText (filePath);
-		//Debug.Log (result);
-		//Debug.Log (filePath);
 	}
 	public static void ChangeBackground(string colorVariable, Color newcolor, float fadetime){
 		Instance.StartCoroutine(Instance.ChangeColor(colorVariable, newcolor, fadetime));
@@ -149,38 +103,27 @@ public class LevelBuilder : MonoBehaviour {
 		startersPotd = new List<int>();
 		string file = "FilteredMaps.txt";
 		filePath = System.IO.Path.Combine(Application.streamingAssetsPath, file);
-		//Debug.Log (filePath + "FILEPAPAPATHASDASDASDASDASDASDASDASDASD");
 		result = " ";
 		if (filePath.Contains ("://") || filePath.Contains(":///"))  {
 			UnityWebRequest www = UnityWebRequest.Get (filePath);
 			yield return www.SendWebRequest ();
 			result = www.downloadHandler.text;
-			//Debug.Log (result);
-
 		} 
 		else{
 			result = System.IO.File.ReadAllText (filePath);
 		}
 		string text = result;
-		//string text = System.IO.File.ReadAllText(System.IO.Path.Combine (Application.streamingAssetsPath, "Ch4_Easy.txt"));
 		string[] lines = Regex.Split(text, "\r?\n");
-//		Debug.Log(lines[0]);
 		for(int i =0; i<lines.Length;i++){
 			startersPotd.Add(i);
-//			Debug.Log(lines[i].Length);
-//			Debug.Log(lines[i]);
-			//Debug.Log(i + "is line number");
 			int mapsize = int.Parse(lines[i].Substring(3,1));		
 			if(lines[i].Length == 5){
-				//Debug.Log("size it up for " );
 				mapsize = int.Parse(lines[i].Substring(3,2));
 			}			
 			i = i + mapsize + 2;
 		}
-//		Debug.Log(startersPotd.Count + " number of maps filtered");
 		levelsPotd = (string[])lines.Clone();
 		if(LevelManager.ispotd){
-			//Debug.Log(LevelManager.levelnum + " LEVELNUM " );
 			drawPotd(PlayerPrefs.GetInt("PoTD"));
 		}
 	}
@@ -334,15 +277,10 @@ public class LevelBuilder : MonoBehaviour {
 		environmentTreeIndex = 0;
 		pieceHolder.reset();
 		string[][] jagged = readPotd(num);
-		Debug.Log("TOTAL DIMENSION IS" + totaldimension);
 		tiles = new Tile [totaldimension, totaldimension];
-//		Debug.Log(tiles[9,9]);
-//		Debug.Log(tiles[10,10]);
 		if(!iscreated){
 			CreateBase ();
-		}
-		//CreateBase();
-		
+		}		
 		PlaceBase();
 		LevelManager.piecetiles = new List<Transform>();
 		LevelManager.myhints = new List<Vector2>();
@@ -353,24 +291,17 @@ public class LevelBuilder : MonoBehaviour {
 		Portals = new List<GameObject>();
 		piecenums = 0;
 		for (int y = 0; y < totaldimension; y++) {
-//			Debug.Log(y);
 			for (int x = 0; x < jagged [y].Length; x++) {
 				double zed = (-y) + (-0.8);
-				//Debug.Log(x + " + " + y);ww
-//				Debug.Log(jagged[y][x]);
 				placeOnWorld(jagged,y,x);
 							
 			}
 		} 
-
 		GoalDirection((int)goaltransform.position.x,-(int)goaltransform.position.z);
 		StartDirection((int)starttransform.position.x,-(int)starttransform.position.z);
 		for (int y = totaldimension; y < totaldimension+1; y++) {
-			Debug.Log(y);
 			for (int x = 0; x < jagged [y].Length; x++) {
 				double zed = (-y) + (-0.8);
-				//Debug.Log(x + " + " + y);ww
-				Debug.Log(jagged[y][x]);
 				placeOnWorld(jagged,y,x);
 							
 			}
@@ -379,14 +310,10 @@ public class LevelBuilder : MonoBehaviour {
 		if(LevelBuilder.totaldimension == 10){
 			CameraController.changePosition(1,1);
 			CameraController.changeFovAndRot((int)32,52.9f);
-			//LightController.setLight(1,1);
-
 		}
 		else if (LevelBuilder.totaldimension < 10){
 			CameraController.changePosition(0,0);
 			CameraController.changeFovAndRot((int)27,52f);
-			//LightController.setLight(0,0);
-
 		}
 		ProgressBar.InitializeProgressBar(LevelStorer.efficientturns);
 		DotHandler.InitializeDots(LevelStorer.efficientturns);
@@ -452,7 +379,6 @@ public class LevelBuilder : MonoBehaviour {
 	}
 	string[][] readPotd(int place){
 		LevelSaver.currentmap = new List<string>();
-		//string text = System.IO.File.ReadAllText(System.IO.Path.Combine (Application.streamingAssetsPath, "Ch4_Easy.txt"));
 		string firstline = levelsPotd[startersPotd[place]];
 		LevelSaver.currentmap.Add(firstline);
 		totaldimension = int.Parse(firstline.Substring(3,1));
@@ -465,9 +391,7 @@ public class LevelBuilder : MonoBehaviour {
 			LevelSaver.currentmap.Add(lines[i]);
 		}
 		LevelSaver.currentmap.Add("");
-		Debug.Log(lines[lines.Length-1]);
 		string[][] levelBase = new string [totaldimension+1][];
-//		Debug.Log(lines);
 		for (int i = 0; i<totaldimension+1; i++){
 			string[] stringsOfLine = Regex.Split (lines [i], " ");
 			levelBase [i] = stringsOfLine;
@@ -711,9 +635,6 @@ public class LevelBuilder : MonoBehaviour {
 		//}
 		//Debug.Log()
 		if(xy.x == positionOutsidePlayer.x && xy.y == positionOutsidePlayer.y){	
-			Debug.Log(xy);
-			Debug.Log(positionOutsidePlayer);
-			Debug.Log("This is it at " + xy);
 			if (randomizer<4){
 			EnvironmentKeeper.Instance.treeBank[environmentTreeIndex].position = new Vector3 (xy.x, 0, xy.y);
 			EnvironmentKeeper.Instance.treeBank[environmentTreeIndex].rotation = Quaternion.identity;
@@ -1409,12 +1330,9 @@ public class LevelBuilder : MonoBehaviour {
 			
 		}
 		if(jagged[y][x].Length ==4){
-			Debug.Log("LENGTH 4");
 			populateIce();
-		//					Debug.Log(jagged[y][x].Substring(0,1));
 			int hintx = int.Parse(jagged[y][x].Substring(2,1));
 			int hinty = int.Parse(jagged[y][x].Substring(3,1));
-			Debug.Log("HINT AT " + hintx + hinty);
 
 				switch(jagged[y][x].Substring(0,2)){
 
@@ -1426,7 +1344,6 @@ public class LevelBuilder : MonoBehaviour {
 					PlaceCreature("PortalLeft");
 					break;
 				case sfloor_portalright:
-				Debug.Log("PORTAL RIGHT");
 					//LevelManager.piecetiles.Add (Instantiate	(floor_right, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,90,0))));
 					//LevelManager.myhints.Add(new Vector2 (hintx,hinty));
 					//pieceHolder.AddPiece("Right");
@@ -1434,7 +1351,6 @@ public class LevelBuilder : MonoBehaviour {
 					PlaceCreature("PortalRight");
 					break;
 				case sfloor_portalup:
-				Debug.Log("PORTAL UP");
 					//LevelManager.piecetiles.Add (Instantiate	(floor_up, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,0,0))));
 					//LevelManager.myhints.Add(new Vector2 (hintx,hinty));
 					//pieceHolder.AddPiece("Up");

@@ -283,27 +283,17 @@ public class SceneLoading : MonoBehaviour {
 	
 	//This is called by UI if pressed a adventure level button
 	public void LoadLevel(int num){
-		//Debug.Log(LevelStorer.leveldic[num].islocked + " is the locked status.");
 		if(LevelStorer.leveldic[num].islocked == false || num==1 ){
-			//Debug.Log("Going to Level " + num + " since it is either not locked or level 1 (which can't be locked)");
 			LevelManager.levelnum = num;
-			LoadScene(LevelManager.levelnum);
+			Swiping.mydirection = "Null";
+			TurnCounter.turncount = 0;
+			LevelStorer.Lookfor(num);
+			LevelManager.levelnum = num;
+			LevelManager.readytodraw = true;
+			LevelManager.ispotd = false;
+			SceneManager.LoadScene(1);
 			MusicHandler.PlayInitialLoop();
 		}
-	}
-	
-	//called by LoadLevel. Prepares stuff (rsets) to open level scene in adventure mode and opens new scene
-	public void LoadScene(int num){
-		Swiping.mydirection = "Null";
-		TurnCounter.turncount = 0;
-//		Debug.Log ("Going to Level Scene at level " + num);
-		//sets efficient turns
-		LevelStorer.Lookfor(num);
-		LevelManager.levelnum = num;
-		LevelManager.readytodraw = true;
-		LevelManager.ispotd = false;
-		//This is a unity specific command to open new scene
-		SceneManager.LoadScene(1);
 	}
 	
 	//Opens World Select Scene
@@ -368,7 +358,19 @@ public class SceneLoading : MonoBehaviour {
 			GoogleAds.Instance.ShowInterstitial();
 		}
 	}
-	
+
+	//Loads Level Scene with potd after preparing for it
+	public void LoadPotdMap(int index){
+		Swiping.mydirection = "Null";
+		TurnCounter.turncount = 0;
+		PlayerPrefs.SetInt("PoTD", index);
+		DateChecker.Instance.currentIndex = index;
+		LevelStorer.potdDic[DateChecker.Instance.currentIndex].islocked = false;
+		LevelStorer.potdDic[DateChecker.Instance.currentIndex].isNew = false;
+		LevelManager.ispotd = true;
+		SceneManager.LoadScene(1);
+		MusicHandler.PlayInitialLoop();
+	}
 	//Called from UI
 	public void CloseTryAgainScreen(){
 		GameObject.Find("TryAgainScreen").transform.GetChild(0).gameObject.SetActive(false);
@@ -380,7 +382,6 @@ public class SceneLoading : MonoBehaviour {
 		LevelManager.israndom = true;
 		LevelManager.levelnum = Random.Range(1100,1800);
 		Debug.Log(LevelManager.levelnum);
-		//txt.text = LevelManager.levelnum.ToString();
 		TurnCounter.turncount = 0;
 		LevelManager.NextRandomLevel();
 		TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
@@ -391,7 +392,6 @@ public class SceneLoading : MonoBehaviour {
 		LevelManager.israndom = true;
 		LevelManager.levelnum = Random.Range(0,50);
 		Debug.Log(LevelManager.levelnum);
-		//txt.text = LevelManager.levelnum.ToString();
 		TurnCounter.turncount = 0;
 		LevelManager.NextRandomLevel2();
 		TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
@@ -417,6 +417,7 @@ public class SceneLoading : MonoBehaviour {
 		LevelStorer.potdDic[num].islocked = false;
 		LevelStorer.potdDic[num].isNew = false;
 		PotdShortcut.GetComponent<PotdShortcut>().AssignPotdShortcutAssets(PotdUnlocker.Instance.keysAvailable);
+		PotdUnlocker.Instance.Initiate();
 		LevelManager.SpecificPotd(num);
 		TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
 		RatingBehaviour.RestartRating();
@@ -439,20 +440,7 @@ public class SceneLoading : MonoBehaviour {
 		RatingBehaviour.RestartRating();
 		AssignPotdName();		
 	}
-	public void LoadPotdMap(int index){
-		Swiping.mydirection = "Null";
-		TurnCounter.turncount = 0;
-		//int num = Random.Range(0,10);
-		PlayerPrefs.SetInt("PoTD", index);
-		DateChecker.Instance.currentIndex = index;
-		LevelStorer.potdDic[DateChecker.Instance.currentIndex].islocked = false;
-		LevelStorer.potdDic[DateChecker.Instance.currentIndex].isNew = false;
-		Debug.Log ("Going to Scene POTD at " + num);
 
-		LevelManager.ispotd = true;
-		SceneManager.LoadScene(1);
-		MusicHandler.PlayInitialLoop();
-	}
 
 	public static void SetStars(int rating){
 

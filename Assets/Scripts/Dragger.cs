@@ -603,7 +603,7 @@ public void OnMouseDrag()
 		//Debug.Log()
 
 		//transform.position.y = PlaneBehavior.tiley;
-		Debug.Log("outside?");
+//		Debug.Log("outside?");
 		if(Input.touchCount>0){
 			Touch t = Input.GetTouch(0);
 			Swiping.firstPressPos = new Vector2(t.position.x,t.position.y);

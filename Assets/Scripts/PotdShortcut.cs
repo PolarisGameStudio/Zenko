@@ -17,20 +17,12 @@ public class PotdShortcut : MonoBehaviour
     {
         AssignPotdShortcutAssets(PotdUnlocker.Instance.keysAvailable);
     }
-
-    // Update is called once per frame
-    // void Update()
-    // {
-    //     // Debug.Log(LevelStorer.potdDic[DateChecker.Instance.todayIndex].isNew + " " +
-    //     //  LevelStorer.potdDic[DateChecker.Instance.todayIndex].islocked + " " + 
-    //     //  LevelStorer.potdDic[DateChecker.Instance.todayIndex].rating);
-    // }
-
     bool IsTodayNew(){
     	return true;
     }
     public void AssignPotdShortcutAssets(int keys)
     {
+        Debug.Log("Assigningpotdshortcutassets");
     	if(LevelManager.adFree){
     		keyNumber.enabled = false;
     	}
@@ -42,13 +34,8 @@ public class PotdShortcut : MonoBehaviour
 	    	else{
 	    		keyNumber.sprite = keySprites[keys-1];
 	    		keyNumber.enabled = true;
-
 	    	}    		
     	}
-
-
-        //Debug.Log(DateChecker.Instance.todayIndex);
-        //Debug.Log(LevelStorer.potdDic[DateChecker.Instance.todayIndex].isNew + " " + LevelStorer.potdDic[DateChecker.Instance.todayIndex].islocked + " " + LevelStorer.potdDic[DateChecker.Instance.todayIndex].rating);
     	if(LevelStorer.potdDic[DateChecker.Instance.todayIndex].islocked == true){
             if(LevelStorer.potdDic[DateChecker.Instance.todayIndex].isNew == true)
                 newPotd.enabled = true;
@@ -58,19 +45,6 @@ public class PotdShortcut : MonoBehaviour
     	else{
     		newPotd.enabled = false;
     	}
-
-
-    	// switch(keys){
-    	// 	case 1:
-
-     //            break;
-     //        case 2:
-     //            break;
-     //        case 3:
-     //            break;
-     //        default:
-     //            break;
-    	// }
     }
 
 }

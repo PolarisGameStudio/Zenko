@@ -44,8 +44,6 @@ public class SfxHandler : MonoBehaviour
     }
 
     public void PlayWallHit(int x, int y){
-//        Debug.Log(x + " " + y);
-        //source.PlayOneShot(pedro_Hit, 1f);
 
         string typeOfWall = FindType(x,y);
         Debug.Log(typeOfWall + " IS THE HIT");
@@ -138,22 +136,9 @@ public class SfxHandler : MonoBehaviour
         source.PlayOneShot(seed_Pop, .6f);
     }
 
-    // private IEnumerator CloseTimer(){
-    //     yield return new WaitForSeconds(.2f);
-    //     playingClose = false;
-    // }
-
-    // private IEnumerator OpenTimer(){
-    //     yield return new WaitForSeconds(.2f);
-    //     playingOpen = false;
-    // }
-
     public void PlayVictory(){
+        Debug.Log("Playing Victory while pvic is " + playingVictory + "and pvic 2 is " + playingVictory2);
         if(!playingVictory){
-            // DuckMusic(.3f);
-            // source.PlayOneShot(vicotry_Short,1f);
-            // playingVictory = true;
-            // StartCoroutine(Reseter(2));
             DuckMusic(1);
             if(Random.Range(0,10) > 8)
             source.PlayOneShot(victory_Sound,.6f);
@@ -187,7 +172,6 @@ public class SfxHandler : MonoBehaviour
         source.PlayOneShot(draggingSound, 1f);
     }
     public void StopSlide(){
-        //StartCoroutine(FadeOut(slideSource, .02f));
         slideSource.Stop();
     }
     public void StopSlideVictory(){
@@ -195,7 +179,6 @@ public class SfxHandler : MonoBehaviour
     }
     public IEnumerator DelayAndStop(){
         yield return new WaitForSeconds(.4f);
-        //StartCoroutine(FadeOut(slideSource, .02f));
         slideSource.Stop();
     }
     private void DuckMusic(float time){
@@ -214,7 +197,6 @@ public class SfxHandler : MonoBehaviour
     }
 
     private IEnumerator Duck(float fadeouttime, float fadeintime){
-        //yield return new WaitForSeconds(.4f);
         float initvalue = MusicSource[0].volume;
         for(float i=0; i<fadeouttime; i+=Time.deltaTime){
             MusicSource[0].volume = Mathf.Lerp(initvalue, .7f*initvalue, i/fadeouttime);

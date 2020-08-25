@@ -13,15 +13,13 @@ public class PotdUnlocker : MonoBehaviour
     public void Awake(){
     	if(Instance != this){
     		Instance = this;
-    		if(activated){
-    			Initiate();
-    		}
-    		activated = true;
+    		Initiate();
     	}
     }
 
     public void Initiate()
     {
+		Debug.Log("Initiating with " + keysAvailable + " available keys.");
     	string lastDate;
         if(!PlayerPrefs.HasKey("KeysAvailable")){
         	PlayerPrefs.SetInt("KeysAvailable", 3);
@@ -42,6 +40,7 @@ public class PotdUnlocker : MonoBehaviour
         	}
         }
         keysText.text = "x" + keysAvailable.ToString();        
+		Debug.Log("Finished initiating with " + keysAvailable + " keys available.");
     }
 
     public void UnlockCurrent(){

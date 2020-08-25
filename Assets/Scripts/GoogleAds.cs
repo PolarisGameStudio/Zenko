@@ -81,7 +81,7 @@ public class GoogleAds : MonoBehaviour
         #endif
     }
     void Update(){
-        Debug.Log(levelsInSession);
+        //Debug.Log(levelsInSession);
     	//Debug.Log(levelsToShowAd[0] + " " + levelsToShowAd[1] + " " + levelsToShowAd[2] + " " + levelsToShowAd[3] + " " + levelsToShowAd[4]);
     }
     public void RequestHintAd(){
@@ -235,7 +235,6 @@ public class GoogleAds : MonoBehaviour
     }
 
     public void UserOptToOpenPotd(){
-        Debug.Log("OPT POTD");
     	isPotd = true;
         potdNum = LevelMenu.levelToUnlock;
         #if UNITY_ANDROID

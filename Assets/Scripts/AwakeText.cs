@@ -35,7 +35,6 @@ public class AwakeText : MonoBehaviour
         }
     }
     public void SelectLanguage(){
-        Debug.Log(LanguageHandler.Instance.userLanguage);
     	if(LanguageHandler.Instance.userLanguage == LanguageHandler.Language.Spanish){
         	SelectSpanish();
         }

@@ -13,8 +13,6 @@ using System.Text.RegularExpressions;
 
 public class PlayServices : MonoBehaviour
 {
-    //public GameObject teller;
-    //public GameObject teller2;
     public static PlayServices instance;
     const string SAVE_NAME = "SaveFile";
     public static string mergedData;
@@ -26,20 +24,18 @@ public class PlayServices : MonoBehaviour
     bool finishedLoading;
     Loading loader;
     int read;
-    //int dataString;
-    //bool enableSaveGame = true;
-    // Start is called before the first frame update
+
     void Awake()
     {
         read = 0;
         finishedLoading = false;
 
-        #if UNITY_EDITOR
-        //PlayerPrefs.DeleteAll();
-        #endif
-//        Debug.Log("cursavepref " + PlayerPrefs.GetString(SAVE_NAME));
+
         if(instance == null)
             {
+                #if UNITY_EDITOR
+                //PlayerPrefs.DeleteAll();
+                #endif
                 loader = GameObject.Find("Handler").GetComponent<Loading>();
                 instance = this;
                 DontDestroyOnLoad(this.gameObject);
@@ -52,8 +48,7 @@ public class PlayServices : MonoBehaviour
 
                 if(!PlayerPrefs.HasKey(SAVE_NAME))
                     PlayerPrefs.SetString(SAVE_NAME, GameDataToString());
-
-
+                    
                 if(!PlayerPrefs.HasKey("IsFirstTime"))
                     PlayerPrefs.SetInt("IsFirstTime", 1);
                     
@@ -62,7 +57,6 @@ public class PlayServices : MonoBehaviour
                 if(PlayerPrefs.GetString(SAVE_NAME).Length < GameDataToString().Length){
                     Debug.Log("NEW MAPS ARE IN EXTRA EXTRA NEW MAPS ARE IN");
                 }
-
                 //checks for first4chapters
                 if (PlayerPrefs.HasKey ("Loaded")) {//has player prefs
 
@@ -324,7 +318,6 @@ public class PlayServices : MonoBehaviour
     }
 
     void StringToGameData(string localData){
-        Debug.Log("GONNA ASSIGN DATA FROM LOCAL with size " + localData.Length);
         if(localData == null){
             localData = "0";
         }

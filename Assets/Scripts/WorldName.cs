@@ -109,7 +109,6 @@ public class WorldName : MonoBehaviour
         System.DateTime levelDate = date.AddDays(index);
 
         string dateString = levelDate.ToString("ddMMyyyy");
-        Debug.Log(dateString + "IS THE STRING");
         PotdHolder[0].GetComponent<Image>().sprite = numbers[int.Parse(dateString.Substring(0,1))][0];
         PotdHolder[1].GetComponent<Image>().sprite = numbers[int.Parse(dateString.Substring(1,1))][0];
         PotdHolder[2].GetComponent<Image>().sprite = numbers[int.Parse(dateString.Substring(2,1))][0];

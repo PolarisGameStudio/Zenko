@@ -9,7 +9,6 @@ public class LevelMenu : MonoBehaviour {
 	public List<GameObject> levelbuttons;
 	public GameObject mc;//maincanvas
 	public SceneLoading sl;
-	int buttonnum;
 	public int currentfirst;
 	public static int highestLevelSolved;
 	public GameObject highestMarker;
@@ -18,55 +17,50 @@ public class LevelMenu : MonoBehaviour {
 	public GameObject buttonBack;
 	public GameObject buttonForward;
 	public Sprite[] snowSprites;
-
 	public Image monthSprite;
 	public Image yearSprite;
-
 	public int potdFirst;
-
 	public int lowestLocked;
 	public GameObject UnlockMenu;
 	public GameObject buyMenu;
-
 	private int counter;
-
 	public static int levelToUnlock;
-	// Use this for initialization
+
 	void Awake(){
 		Instance = this;
 	}
+
 	void Start () {
 		levels=20;
 		sl = mc.GetComponent<SceneLoading>();
 	}
 
-	// Update is called once per frame
+	//Find level number that is highest solved, for purposes of choosing which screen to spawn in
 	public static int FindHighestSolved(){
 		int curHighest = 0;
 		int maxMaps = LevelStorer.leveldic.Count;
-		//Debug.Log(maxMaps + " Is max maps (for purposes of finding current highest solved");
 		for(int i=1; i<maxMaps+1; i++){
 			string mystring = "Level"+i+"Rating";
 			if(PlayerPrefs.GetInt(mystring)>0){
 				curHighest = i;
 			}	
 		}
-		//Debug.Log(curHighest+1 + " IS CURHIGHEST");
 		return curHighest+1;	
 	}
+	
+	//Called from Google Ads, Unlocks and opens selected potd
 	public static void UnlockPotdLevel(int num){
-		//Debug.Log("UNLOCK ACT");
 		PotdUnlocker.Instance.keysAvailable--;
-		//Debug.Log(PotdUnlocker.Instance.keysAvailable);
 		PlayerPrefs.SetInt("KeysAvailable", PotdUnlocker.Instance.keysAvailable);	
-		if(SceneLoading.Instance.isMenu){
+		if(SceneLoading.Instance.isMenu){ //if in world select scene
 			SceneLoading.Instance.LoadPotdMap(num);
 		}
-		else{
+		else{ // if in level scene
 			SceneLoading.Instance.PotdSpecific(num);
-
 		}
 	}
+	
+	//Called from UI when pressing a "tap to unlock"
 	public void OpenUnlockMenu(int num, int starter){
 		if(LanguageHandler.IsEnglish())
 		UnlockMenu.transform.Find("Title").GetComponent<Text>().text = "UNLOCK LEVEL " + (num+1).ToString() + "?";
@@ -83,7 +77,6 @@ public class LevelMenu : MonoBehaviour {
 
 		}
 		UnlockMenu.SetActive(true);
-		//GoogleAds.Instance.RequestPotdAd();
 
 	}
 
@@ -94,45 +87,29 @@ public class LevelMenu : MonoBehaviour {
 
 
 	void createPotdButton(int num){
-		//GameObject curbutton = Instantiate(buttonprefab, new Vector3(0, 0, 0), Quaternion.identity);
 		GameObject curbutton = levelbuttons[num];
 		curbutton.SetActive(true);
 		curbutton.transform.GetChild(7).gameObject.SetActive(false);
 		curbutton.transform.GetChild(6).gameObject.SetActive(false);
-		//curbutton.transform.SetParent(this.transform, false);
-		//curbutton.transform.localScale = new Vector3(1,1,1);
 		Button btn = curbutton.GetComponent<Button>();
-		buttonnum = num;
-
-		//HAY QUE CAMBIAR ESTA FUNCION
-
-		//Debug.Log(DateChecker.Instance.mmyyyy + "is mmyyyy world");
 		int world = int.Parse(DateChecker.Instance.mmyyyy);
 		curbutton.transform.GetChild(2).GetComponent<Text>().text = (num+1).ToString();	
-
 		if(LevelManager.adFree){
 			if(num+1 <= DateChecker.Instance.dayInMonth || DateChecker.currentMonthIndex<DateChecker.todayMonthIndex){
 				LevelStorer.potdDic[num+potdFirst].islocked = false;
-				//btn.onClick.AddListener(delegate{sl.LoadPotdMap(num + potdFirst);}); 
 				curbutton.GetComponent<LevelButton>().level = num+potdFirst;
 				curbutton.GetComponent<LevelButton>().type = "Potd";
 				curbutton.transform.GetChild(3).gameObject.SetActive(false);	
 			}
 			else{
-
 				curbutton.transform.GetChild(3).gameObject.SetActive(true);	
 			 	curbutton.transform.GetChild(6).gameObject.SetActive(true);	
-			 	//curbutton.transform.GetChild(7).gameObject.SetActive(true);	
 			}
 		}
-
 		else{
-			//Debug.Log(num + " num plus " + DateChecker.Instance.dayInMonth + DateChecker.currentMonthIndex +DateChecker.todayMonthIndex + potdFirst );
 			if((num+1 == DateChecker.Instance.dayInMonth && DateChecker.currentMonthIndex == DateChecker.todayMonthIndex) 
 				|| !LevelStorer.potdDic[num+potdFirst].islocked){
-				//Debug.Log("UNLOCKING " + num + " in month " + DateChecker.currentMonthIndex );
 				LevelStorer.potdDic[num+potdFirst].islocked = false;
-				//btn.onClick.AddListener(delegate{sl.LoadPotdMap(num + potdFirst); 
 				curbutton.GetComponent<LevelButton>().level = num+potdFirst;
 				curbutton.GetComponent<LevelButton>().type = "Potd";
 				curbutton.transform.GetChild(3).gameObject.SetActive(false);	
@@ -144,16 +121,12 @@ public class LevelMenu : MonoBehaviour {
 			 	if(num+1 <= DateChecker.Instance.dayInMonth || DateChecker.currentMonthIndex<DateChecker.todayMonthIndex){
 		 			curbutton.transform.GetChild(7).gameObject.SetActive(true);	
 		 			curbutton.transform.GetChild(6).gameObject.SetActive(false);
-		 			//btn.onClick.AddListener(delegate{OpenUnlockMenu(num,potdFirst);});
 		 			curbutton.GetComponent<LevelButton>().level = num;
 		 			curbutton.GetComponent<LevelButton>().potdFirst = potdFirst;
 					curbutton.GetComponent<LevelButton>().type = "PotdUnlock";
 			 	}
-			 		
 			}
-
 		}
-
 		if(LevelStorer.potdDic[num+potdFirst].rating == 1){
 			curbutton.transform.GetChild(4).GetChild(1).GetChild(1).gameObject.SetActive(true);
 		}
@@ -165,47 +138,46 @@ public class LevelMenu : MonoBehaviour {
 			curbutton.transform.GetChild(4).GetChild(1).GetChild(0).gameObject.SetActive(true);
 			curbutton.transform.GetChild(4).GetChild(1).GetChild(1).gameObject.SetActive(true);
 			curbutton.transform.GetChild(4).GetChild(1).GetChild(2).gameObject.SetActive(true);
-		}		
-		
-		//levelbuttons.Add(curbutton);
+		}				
 	}
 
 	void createButton(int num){
 		GameObject curbutton = levelbuttons[counter];
 		curbutton.SetActive(true);
-		curbutton.transform.GetChild(7).gameObject.SetActive(false);
-		curbutton.transform.GetChild(6).gameObject.SetActive(false);
-		curbutton.transform.GetChild(3).gameObject.SetActive(false);	
-		Button btn = curbutton.GetComponent<Button>();
-		buttonnum = num;
-		//btn.onClick.AddListener(delegate{sl.LoadLevel(num);});
-		curbutton.GetComponent<LevelButton>().level = num;
-		curbutton.GetComponent<LevelButton>().type = "Adventure";
-		int world = Mathf.FloorToInt((num-1)/40)  + 1;                                                                                                                                           
+
+		curbutton.transform.GetChild(7).gameObject.SetActive(false);//taptounlock
+		curbutton.transform.GetChild(6).gameObject.SetActive(false);//lock
+		curbutton.transform.GetChild(3).gameObject.SetActive(false);//glass overlay
+
+		LevelButton currentLevelButton = curbutton.GetComponent<LevelButton>();
+		currentLevelButton.level = num;
+		currentLevelButton.type = "Adventure";
+
+		int world = Mathf.FloorToInt((num-1)/40)  + 1;  
+		curbutton.transform.GetChild(5).GetComponent<Image>().sprite = snowSprites[world-1];//assigns snow sprite according to world (higher world, more melt)                                                                                                                                     
 		int levelinworld = num - ((world-1)*40);
-		curbutton.transform.GetChild(5).GetComponent<Image>().sprite = snowSprites[world-1];
-		curbutton.transform.GetChild(2).GetComponent<Text>().text =levelinworld.ToString();	
-		
-		if(LevelStorer.leveldic[num].islocked == true && num != 0){
-			curbutton.transform.GetChild(3).gameObject.SetActive(true);	
-			curbutton.transform.GetChild(6).gameObject.SetActive(true);	
+		curbutton.transform.GetChild(2).GetComponent<Text>().text =levelinworld.ToString();	//assigns level number
+
+		Transform starHolder = curbutton.transform.GetChild(4).GetChild(1);
+		if(LevelStorer.leveldic[num].islocked == true && num != 0){//if locked
+			curbutton.transform.GetChild(3).gameObject.SetActive(true);//glass overlay
+			curbutton.transform.GetChild(6).gameObject.SetActive(true);//lock
 		}
 		if(LevelStorer.leveldic[num].rating == 1){
-			curbutton.transform.GetChild(4).GetChild(1).GetChild(1).gameObject.SetActive(true);
+			starHolder.GetChild(1).gameObject.SetActive(true);
 		}
 		else if(LevelStorer.leveldic[num].rating == 2){
-			curbutton.transform.GetChild(4).GetChild(1).GetChild(0).gameObject.SetActive(true);
-			curbutton.transform.GetChild(4).GetChild(1).GetChild(2).gameObject.SetActive(true);
+			starHolder.GetChild(0).gameObject.SetActive(true);
+			starHolder.GetChild(2).gameObject.SetActive(true);
 		}
 		else if(LevelStorer.leveldic[num].rating == 3){
-			curbutton.transform.GetChild(4).GetChild(1).GetChild(0).gameObject.SetActive(true);
-			curbutton.transform.GetChild(4).GetChild(1).GetChild(1).gameObject.SetActive(true);
-			curbutton.transform.GetChild(4).GetChild(1).GetChild(2).gameObject.SetActive(true);
+			starHolder.GetChild(0).gameObject.SetActive(true);
+			starHolder.GetChild(1).gameObject.SetActive(true);
+			starHolder.GetChild(2).gameObject.SetActive(true);
 		}			
 	}
 
 	public void CheckDownUpButtons(int curfirst){
-		//Debug.Log(curfirst);
 		if(curfirst == 1){
 			buttonBack.SetActive(false);
 			buttonForward.SetActive(true);
@@ -224,10 +196,6 @@ public class LevelMenu : MonoBehaviour {
 	public void AssignWorldText(int curfirst){
 		CameraController.Fade(.2f,1f, curfirst);
 		CheckDownUpButtons(curfirst);
-
-	}
-	void addFunction(){
-		sl.LoadLevel(buttonnum);
 	}
 
 	public void clearMenu(){
@@ -240,6 +208,7 @@ public class LevelMenu : MonoBehaviour {
 		}
 		counter = 0;
 	}
+
 	public void populateMenuDown(){
 		if(currentfirst >20){
 			clearMenu();
@@ -252,6 +221,7 @@ public class LevelMenu : MonoBehaviour {
 		}
 		AssignWorldText(currentfirst);
 	}
+
 	public void populateMenu(){
 		clearMenu();
 		if(currentfirst==0 | currentfirst==null){
@@ -261,7 +231,6 @@ public class LevelMenu : MonoBehaviour {
 			createButton(i);
 			counter++;
 		}		
-		//Debug.Log("current first is" + currentfirst);
 		AssignWorldText(currentfirst);
 	}
 
@@ -282,12 +251,10 @@ public class LevelMenu : MonoBehaviour {
 		}
 	}
 
-
 	public void populateMenuUp(){
 		if(currentfirst <221){
 			clearMenu();
 			for (int i = currentfirst+20; i < currentfirst+40; i++){
-				//Debug.Log(i);
 				createButton(i);
 				counter++;
 			}
@@ -298,7 +265,6 @@ public class LevelMenu : MonoBehaviour {
 
 	public void AssignMonthText(){
 		int monthnum = (DateChecker.currentMonthIndex+10) % 12;
-		//Debug.Log((int)11/12);
 		if(LanguageHandler.IsEnglish())
 		{
 			monthSprite.sprite = PotdHolder.Instance.monthSprites[monthnum];
@@ -308,10 +274,6 @@ public class LevelMenu : MonoBehaviour {
 			monthSprite.sprite = PotdHolder.Instance.monthSpritesSpanish[monthnum];
 		}
 		yearSprite.sprite = PotdHolder.Instance.yearSprites[(int)(DateChecker.currentMonthIndex+10)/12];
-
-		
-
-
 	}
 
 	public void populatePotdMenu(){
@@ -320,7 +282,6 @@ public class LevelMenu : MonoBehaviour {
 		DateChecker.currentMonthIndex = DateChecker.todayMonthIndex;
 		potdFirst = PotdHolder.monthBank[DateChecker.todayMonthIndex][0];
 		int numberOfLevels = PotdHolder.monthBank[DateChecker.todayMonthIndex][1];
-
 		for(int i = 0; i<numberOfLevels; i++){
 			createPotdButton(i);
 		}
@@ -328,7 +289,6 @@ public class LevelMenu : MonoBehaviour {
 		PlayServices.instance.SaveData();
 		AssignMonthText();
 		CheckPotdUpDown();
-		PrepareUnlockLowest();
 	}
 
 	public void populatePotdUp(){
@@ -338,13 +298,12 @@ public class LevelMenu : MonoBehaviour {
 		DateChecker.currentMonthIndex ++;
 		potdFirst = PotdHolder.monthBank[DateChecker.currentMonthIndex][0];
 		int numberOfLevels = PotdHolder.monthBank[DateChecker.currentMonthIndex][1];
-
-		for(int i = 0; i<numberOfLevels;i++){
+		for(int i = 0; i<numberOfLevels;i++)
+		{
 			createPotdButton(i);
 		}
 		AssignMonthText();
 		CheckPotdUpDown();
-		PrepareUnlockLowest();
 	}
 
 	public void populatePotdDown(){
@@ -354,16 +313,11 @@ public class LevelMenu : MonoBehaviour {
 		DateChecker.currentMonthIndex --;
 		potdFirst = PotdHolder.monthBank[DateChecker.currentMonthIndex][0];
 		int numberOfLevels = PotdHolder.monthBank[DateChecker.currentMonthIndex][1];
-
-		for(int i = 0; i<numberOfLevels;i++){
+		for(int i = 0; i<numberOfLevels;i++)
+		{
 			createPotdButton(i);
 		}
 		AssignMonthText();
 		CheckPotdUpDown();
-		PrepareUnlockLowest();
-	}
-
-	public void PrepareUnlockLowest(){
-
 	}
 }

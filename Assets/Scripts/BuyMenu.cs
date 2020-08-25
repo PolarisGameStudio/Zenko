@@ -15,11 +15,6 @@ public class BuyMenu : MonoBehaviour
         AssignPriceMessage();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     //Changes the text to display the message
     void AssignPriceMessage(){
     	float price  = Purchaser.Instance.PriceOfNoAds();

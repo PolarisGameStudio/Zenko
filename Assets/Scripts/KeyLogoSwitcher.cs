@@ -7,20 +7,11 @@ public class KeyLogoSwitcher : MonoBehaviour
 {
 
 	public List<Sprite> images;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     void SelectImage(int numkeys)
     {
+        Debug.Log("Selected key");
     	this.GetComponent<Image>().sprite = images[numkeys];
     }
 }
