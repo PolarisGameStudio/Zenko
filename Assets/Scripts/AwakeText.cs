@@ -24,17 +24,9 @@ public class AwakeText : MonoBehaviour
         else
         SelectSpanish();
     }
-    void Update()
-    {
-        if(currentLanguage != LanguageHandler.Instance.userLanguage){
-            if(LanguageHandler.IsEnglish())
-                SelectEnglish();
-            else
-                SelectSpanish();
-            currentLanguage = LanguageHandler.Instance.userLanguage;
-        }
-    }
+
     public void SelectLanguage(){
+		Debug.Log("About to sleect language");
     	if(LanguageHandler.Instance.userLanguage == LanguageHandler.Language.Spanish){
         	SelectSpanish();
         }

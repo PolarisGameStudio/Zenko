@@ -13,19 +13,19 @@ public class SpriteSwitcher : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if(mySpriteHolder == null)
+        mySpriteHolder = this.GetComponent<Image>();  
         currentLanguage = LanguageHandler.Instance.userLanguage;
         AssignSprite();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if(currentLanguage != LanguageHandler.Instance.userLanguage){
-        	AssignSprite();
-        	currentLanguage = LanguageHandler.Instance.userLanguage;
-        }
+    void OnEnable(){
+        AssignSprite();
     }
-    void AssignSprite(){
+
+    public void AssignSprite(){
+        //Debug.Log("assigning sprite");
+        if(mySpriteHolder == null)
+        mySpriteHolder = this.GetComponent<Image>();
         if(LanguageHandler.IsEnglish())
         mySpriteHolder.sprite = englishSprite;
         else

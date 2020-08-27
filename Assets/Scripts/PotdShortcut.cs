@@ -22,7 +22,6 @@ public class PotdShortcut : MonoBehaviour
     }
     public void AssignPotdShortcutAssets(int keys)
     {
-        Debug.Log("Assigningpotdshortcutassets");
     	if(LevelManager.adFree){
     		keyNumber.enabled = false;
     	}

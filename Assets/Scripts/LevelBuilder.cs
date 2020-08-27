@@ -6,7 +6,6 @@ using UnityEngine.Networking;
 using UnityEngine.UI;
 
 public class LevelBuilder : MonoBehaviour {
-	public Material backgroundMaterial;
 	public static Material background;
 	private string filePath;
 	private string result;
@@ -32,7 +31,7 @@ public class LevelBuilder : MonoBehaviour {
 	public static string[] levelsAdventure;
 	public static List<int> startersAdventure;
 	public static List<int> startersPotd;
-	public Color mygray;// = new Color(173/255f,173/255f,173/255f,1f);
+	public Color mygray;
 	public static int playerInitialRotation;
 	public static bool resetting;
 	public GameObject mywinboard;
@@ -62,8 +61,6 @@ public class LevelBuilder : MonoBehaviour {
 
 	public void Awake(){
 		Instance = this;
-		background = backgroundMaterial;
-		background.SetColor("Color_A7A46709", new Color(0,0,0,0));
 		winboard = mywinboard;
 		loseboard = myloseboard;
 		hintboard = myhintboard;
@@ -80,24 +77,6 @@ public class LevelBuilder : MonoBehaviour {
 		} 
 		else
 			result = System.IO.File.ReadAllText (filePath);
-	}
-	public static void ChangeBackground(string colorVariable, Color newcolor, float fadetime){
-		Instance.StartCoroutine(Instance.ChangeColor(colorVariable, newcolor, fadetime));
-	}
-	public IEnumerator ChangeColor(string colorVariable,Color newcolor, float fadetime){
-		Color initColor = backgroundMaterial.GetColor("Color_A7A46709");
-		Color currentColor;
-		for(float t = 0.0f; t<fadetime; t+= Time.deltaTime){
-			float normalizedTime = t/fadetime;
-			currentColor = new Color((float)Mathf.Lerp(initColor.r, newcolor.r, normalizedTime),
-				(float)Mathf.Lerp(initColor.g, newcolor.g, normalizedTime),
-				(float)Mathf.Lerp(initColor.b, newcolor.b, normalizedTime),
-				(float)Mathf.Lerp(initColor.a, newcolor.a, normalizedTime));
-
-			backgroundMaterial.SetColor(colorVariable, currentColor);
-			yield return null;
-		}		
-		backgroundMaterial.SetColor(colorVariable, newcolor);	
 	}
 	public IEnumerator initPotd(){ //feeds levelPotd string array from textfile.
 		startersPotd = new List<int>();
@@ -127,27 +106,23 @@ public class LevelBuilder : MonoBehaviour {
 			drawPotd(PlayerPrefs.GetInt("PoTD"));
 		}
 	}
+	
+	//turns the map .txt into string array
 	public IEnumerator initAdventure(){ //feeds Adventure string array from textfile.
 		startersAdventure = new List<int>();
 		string file = "AdventureLevels.txt";
 		filePath = System.IO.Path.Combine(Application.streamingAssetsPath, file);
-		//Debug.Log (filePath + "FILEPAPAPATH");
 		result = " ";
 		if (filePath.Contains ("://") || filePath.Contains(":///"))  {
 			UnityWebRequest www = UnityWebRequest.Get (filePath);
 			yield return www.SendWebRequest ();
 			result = www.downloadHandler.text;
-			//Debug.Log (result);
-
 		} 
 		else{
 			result = System.IO.File.ReadAllText (filePath);
 		}
 		string text = result;
-		//string text = System.IO.File.ReadAllText(System.IO.Path.Combine (Application.streamingAssetsPath, "AdventureLevels.txt"));
 		string[] lines = Regex.Split(text, "\r?\n");
-
-		//Debug.Log(lines[0]);
 		bool nextismap;
 		nextismap = true;
 		for(int i =0; i<lines.Length;i++){
@@ -155,18 +130,12 @@ public class LevelBuilder : MonoBehaviour {
 				startersAdventure.Add(i);
 			}
 			nextismap = false;
-//			Debug.Log(lines[i].Length);
-//			Debug.Log(lines[i]);		
 			if(lines[i] == ""){
-				//Debug.Log("BREAK");
 				nextismap = true;
 			}			
-			//i = i + mapsize + 2;
 		}
 		levelsAdventure = (string[])lines.Clone();
-		//if(LevelManager.levelnum)
 		if(!LevelManager.ispotd){
-			//load potd maps
 			drawNormal(LevelManager.levelnum);
 		}
 	}
@@ -183,7 +152,6 @@ public class LevelBuilder : MonoBehaviour {
 		environmentRockIndex = 0;
 		environmentFlowerIndex = 0;
 		environmentTreeIndex = 0;
-		//Debug.Log(levelnumber);
 		TutorialHandler.Instance.TutorialCheck(levelnumber);
 		pieceHolder.reset();
 		LevelManager.piecetiles = new List<Transform>();
@@ -193,74 +161,44 @@ public class LevelBuilder : MonoBehaviour {
 		PieceHolders.placedpieces = new List<Dragger>();
 		LevelManager.placedPieces = new string[10,10];
 		Portals = new List<GameObject>();
-		//PopulationManager.readytobrain = false;
 		string leveltext = ("Level" + levelnumber.ToString() + ".txt");
 		string levelname = ("Level" + levelnumber.ToString ());
-//		Debug.Log("Bouttodraw" + levelnumber);
-		//StartCoroutine(checkAndroid (leveltext));
-		//string filePath = System.IO.Path.Combine (Application.streamingAssetsPath, leveltext);
-		//Debug.Log(filePath);
 		string[][] jagged = readAdventure (levelnumber);
-		//mysnowh;
-		//check dimension.
-
 		tiles = new Tile [totaldimension, totaldimension];
 		if(!iscreated){
 			CreateBase();
 		}
 		PlaceBase();
 		if(levelnumber < 0){
-			//Debug.Log(LevelManager.levelnum);
 			jagged = readRandomFile(filePath, LevelManager.levelnum);
-			//Debug.Log(randomer);
 		}
 		piecenums = 0;
-		//Debug.Log(jagged.Length);	
-		// create planes based on matrix
 		for (int y = 0; y < totaldimension; y++) {
-//			Debug.Log(y);
 			for (int x = 0; x < jagged [y].Length; x++) {
 				double zed = (-y) + (-0.8);
-				//Debug.Log(x + " + " + y);ww
-//				Debug.Log(jagged[y][x]);
-				placeOnWorld(jagged,y,x);
-							
+				placeOnWorld(jagged,y,x);			
 			}
 		} 
-		
 		GoalDirection((int)goaltransform.position.x,-(int)goaltransform.position.z);
 		StartDirection((int)starttransform.position.x,-(int)starttransform.position.z);
 		CreateOuterBase();
 		for (int y = totaldimension; y < totaldimension+1; y++) {
-//			Debug.Log(y);
 			for (int x = 0; x < jagged [y].Length; x++) {
 				double zed = (-y) + (-0.8);
-				//Debug.Log(x + " + " + y);ww
-//				Debug.Log(jagged[y][x]);
-				placeOnWorld(jagged,y,x);
-							
+				placeOnWorld(jagged,y,x);		
 			}
 		} 
-		//Debug.Log(LevelManager.myhints.Count);
-		//Debug.Log(LevelStorer.efficientturns);
 		if(LevelBuilder.totaldimension == 10){
 			CameraController.changePosition(1,1);
 			CameraController.changeFovAndRot((int)32,52.9f);
-			//LightController.setLight(1,1);
-
 		}
 		else if (LevelBuilder.totaldimension < 10){
 			CameraController.changePosition(0,0);
 			CameraController.changeFovAndRot((int)27,52f);
-			//LightController.setLight(0,0);
-
 		}
 		ProgressBar.InitializeProgressBar(LevelStorer.efficientturns);
 		DotHandler.InitializeDots(LevelStorer.efficientturns);
 		playertransform.gameObject.GetComponent<PlayerMovement>().canmove = true;
-		// foreach (string nline in LevelSaver.currentmap)
-		// Debug.Log(nline);
-		//PopulationManager.readytobrain = true;
 		StartCoroutine(CloseLoading());
 	}
 	public void drawPotd(int num){
@@ -294,7 +232,6 @@ public class LevelBuilder : MonoBehaviour {
 			for (int x = 0; x < jagged [y].Length; x++) {
 				double zed = (-y) + (-0.8);
 				placeOnWorld(jagged,y,x);
-							
 			}
 		} 
 		GoalDirection((int)goaltransform.position.x,-(int)goaltransform.position.z);
@@ -302,8 +239,7 @@ public class LevelBuilder : MonoBehaviour {
 		for (int y = totaldimension; y < totaldimension+1; y++) {
 			for (int x = 0; x < jagged [y].Length; x++) {
 				double zed = (-y) + (-0.8);
-				placeOnWorld(jagged,y,x);
-							
+				placeOnWorld(jagged,y,x);			
 			}
 		} 
 		CreateOuterBase();
@@ -323,58 +259,39 @@ public class LevelBuilder : MonoBehaviour {
 			if (!GoogleAds.Instance.rewardVideo.IsLoaded())
 			GoogleAds.Instance.RequestHintAd();
 		}
-		
 		#endif
-
 		StartCoroutine(CloseLoading());
-
 	}
 	IEnumerator CloseLoading(){
 		yield return new WaitForSeconds(1);
-//		Debug.Log("GONNA CLOSE LOADING");
 		loadingGO.SetActive(false);
 	}
 	string[][] readAdventure(int place){
 		if(place>0)
 		place = place-1;
-		//Debug.Log("place is" + place);
 		LevelSaver.currentmap = new List<string>();
-		//string text = System.IO.File.ReadAllText(System.IO.Path.Combine (Application.streamingAssetsPath, "AdventureLevels.txt"));
 		string firstline = levelsAdventure[startersAdventure[place]];
 		LevelSaver.currentmap.Add(firstline);
-
-		//Debug.Log("Firstline" + firstline);
-		//totaldimension = int.Parse(firstline.Substring(3,1));
 		bool donescanning = false;
 		int linenumber = 1;
-		//Debug.Log(levelsAdventure[startersAdventure[place]+linenumber]);
 		while(!donescanning){
 			if(levelsAdventure[startersAdventure[place]+linenumber] == ""){
 				donescanning = true;
 				totaldimension = linenumber-2;
-				//Debug.Log(totaldimension);
 			}	
 			linenumber++;
 		}
-
 		string[] lines = new string[totaldimension+1];
-
 		for (int i=0; i<totaldimension+1; i++){
 			lines[i] = levelsAdventure[startersAdventure[place]+1+i];
-			//Debug.Log(lines[i]);
 			LevelSaver.currentmap.Add(lines[i]);
 		}
-
 		LevelSaver.currentmap.Add("");
-		//Debug.Log(lines[lines.Length-1]);
-
 		string[][] levelBase = new string [totaldimension+1][];
-//		Debug.Log(lines);
 		for (int i = 0; i<totaldimension+1; i++){
 			string[] stringsOfLine = Regex.Split (lines [i], " ");
 			levelBase [i] = stringsOfLine;
 		}
-		//Debug.Log(levelBase[5][6]);
 		return levelBase;
 	}
 	string[][] readPotd(int place){
@@ -651,9 +568,6 @@ public class LevelBuilder : MonoBehaviour {
 		}
 
 		if(randomizer<1){
-		
-			//int mynum = Random.Range(0,6);
-			//Instantiate (floor_rocks[mynum], new Vector3 (xy.x, 0, xy.y), Quaternion.identity);	
 			EnvironmentKeeper.Instance.rockBank[environmentRockIndex].position = new Vector3 (xy.x, 0, xy.y);
 			EnvironmentKeeper.Instance.rockBank[environmentRockIndex].rotation = Quaternion.identity;
 			EnvironmentKeeper.Instance.rockBank[environmentRockIndex].gameObject.SetActive(true);
@@ -662,9 +576,6 @@ public class LevelBuilder : MonoBehaviour {
 		if (howfar>8)
 		howfar = 8;
 		if(randomizer>10-howfar){
-		
-			//int mynum2 = Random.Range(0,4);
-			//Instantiate (floor_trees[mynum2], new Vector3 (xy.x, 0, xy.y), Quaternion.identity);	
 			int newrandomizer = Random.Range(0,5);
 			if(newrandomizer <1){
 				EnvironmentKeeper.Instance.flowerBank[environmentFlowerIndex].position = new Vector3 (xy.x, 0, xy.y);
@@ -680,21 +591,6 @@ public class LevelBuilder : MonoBehaviour {
 			}
 						
 		}
-		//if(xy.y!= 0){
-			//Instantiate (floor_ice, new Vector3 (-xy.x, 0, -xy.y), Quaternion.identity);
-			//mynum = Random.Range(0,6);
-			//Instantiate (floor_rocks[mynum], new Vector3 (-xy.x, 0, -xy.y), Quaternion.identity);			
-		// //}
-		// if(xy.x<8){
-		// 	Instantiate (floor_ice, new Vector3 (xy.x, 0, xy.y), Quaternion.identity);
-		// 	mynum = Random.Range(0,6);
-		// 	Instantiate (floor_rocks[mynum], new Vector3 (xy.x, 0, xy.y), Quaternion.identity);				
-		// }
-		// if(xy.y ==0){
-		// 	Instantiate (floor_ice, new Vector3 (xy.y, 0, xy.x), Quaternion.identity);
-		// 	mynum = Random.Range(0,6);
-		// 	Instantiate (floor_rocks[mynum], new Vector3 (xy.y, 0, xy.x), Quaternion.identity);					
-		// }
 	}	
 		
 
@@ -727,20 +623,14 @@ public class LevelBuilder : MonoBehaviour {
 		}
 	}
 	public void StartDirection(int myx, int myy){
-		//Debug.Log("Directing");
-		//Debug.Log(myx + " " + myy);
-		//Debug.Log(tiles.Length);
 		Collider[] colliders = Physics.OverlapSphere(new Vector3(myx,0,-(myy+1)), .5f);
 		foreach (Collider component in colliders) {
 			if (component.tag == "Tile" || component.tag == "Fragile"){
 				if(tiles[myx,myy+1].type != "Wall" && tiles[myx,myy+1].type != "Goal"){
-					//Debug.Log("Down");
 					playertransform.eulerAngles = new Vector3(0f,270f,0f);
 					starttransform.eulerAngles = new Vector3(0f,270f,0f);
 					playerInitialRotation = 270;
-//					Debug.Log("Looking Down");
 					positionOutsidePlayer = new Vector2(myx,-(myy-1));
-					//CheckAndPlaceEnvironment(myx,myy-1);
 					return;
 				}
 			}
@@ -749,29 +639,22 @@ public class LevelBuilder : MonoBehaviour {
 		foreach (Collider component in colliders) {
 			if (component.tag == "Tile"|| component.tag == "Fragile"){
 				if(tiles[myx,myy-1].type != "Wall" && tiles[myx,myy-1].type != "Goal"){
-					//Debug.Log("Up");
 					playertransform.eulerAngles = new Vector3(0f,90f,0f);
 					starttransform.eulerAngles = new Vector3(0f,90f,0f);
 					playerInitialRotation = 90;
-					//Debug.Log("Looking Up");
 					positionOutsidePlayer = new Vector2(myx,-(myy+1));
-					//CheckAndPlaceEnvironment(myx,myy+1);
 					return;				
 				}
 			}
 		}
 		colliders = Physics.OverlapSphere(new Vector3(myx+1,0,-myy), .5f);
 		foreach (Collider component in colliders) {
-			//Debug.Log(component.tag);
 			if (component.tag == "Tile"|| component.tag == "Fragile"){
 				if(tiles[myx+1,myy].type != "Wall"  && tiles[myx+1,myy].type != "Goal"){
-					//Debug.Log("Right");
 					playertransform.eulerAngles = new Vector3(0f,180f,0f);
 					starttransform.eulerAngles = new Vector3(0f,180f,0f);
 					playerInitialRotation = 180;
-					//Debug.Log("Looking Right");
 					positionOutsidePlayer = new Vector2(myx-1,-myy);
-					//CheckAndPlaceEnvironment(myx-1,myy);
 					return;
 				}
 			}
@@ -783,10 +666,7 @@ public class LevelBuilder : MonoBehaviour {
 					playertransform.eulerAngles = new Vector3(0f,0f,0f);
 					starttransform.eulerAngles = new Vector3(0f,0f,0f);
 					playerInitialRotation = 0;
-					//Debug.Log("Looking Left");
 					positionOutsidePlayer = new Vector2(myx+1,-myy);
-					//CheckAndPlaceEnvironment(myx+1,myy);
-					//Debug.Log("Left");
 					return;
 				}
 			}
@@ -803,12 +683,6 @@ public class LevelBuilder : MonoBehaviour {
 
 	}
 	public void GoalDirection(int myx, int myy){
-		//Debug.Log(tiles[0,11].type);
-//		if(tiles[0,11].type == null){
-//			Debug.Log("RURU");
-//		}
-		//Debug.Log("Directing");
-		//Debug.Log(myx + " " + myy);
 		Collider[] colliders = Physics.OverlapSphere(new Vector3(myx,0,-(myy+1)), .5f);
 			foreach (Collider component in colliders) {
 				if (component.tag == "Tile"|| component.tag == "Fragile"){
@@ -834,7 +708,6 @@ public class LevelBuilder : MonoBehaviour {
 			foreach (Collider component in colliders) {
 				if (component.tag == "Tile"|| component.tag == "Fragile"){
 					if(tiles[myx+1,myy].type != "Wall" && tiles[myx+1,myy].type != "Start"){
-						//Debug.Log("Right");
 						goaltransform.eulerAngles = new Vector3(0f,90f,0f);
 						GoalBehaviour.isvertical = false;
 						return;
@@ -847,65 +720,12 @@ public class LevelBuilder : MonoBehaviour {
 					if(tiles[myx-1,myy].type != "Wall" && tiles[myx-1,myy].type != "Start"){
 						goaltransform.eulerAngles = new Vector3(0f,270,0f);
 						GoalBehaviour.isvertical = false;
-//						Debug.Log("Left");
 						return;
 					}
 				}
 			}
-
-
-
-
-
-
-
-		// if(myx<5){	
-		// 	//Debug.Log(myx + "" + myy);
-		// 	Debug.Log(tiles[myx+1,myy].type);
-		// 	Debug.Log(myx+1 + " " + myy );
-		// 	if(tiles[myx+1,myy].type!="Wall" && tiles[myx+1,myy].type!="Start" && tiles[myx+1,myy].type!=null){
-		// 	goaltransform.eulerAngles = new Vector3(0f,90f,0f);
-		// 	GoalBehaviour.isvertical = false;
-		// 	return;
-
-		// 	Debug.Log("Right");
-
-		// 	}
-
-
-		// }
-		// if(myx>4){
-		// 	if(tiles[myx-1,myy].type!="Wall" && tiles[myx-1,myy].type!="Start" && tiles[myx-1,myy].type!=null){
-		// 	goaltransform.eulerAngles = new Vector3(0f,270,0f);
-		// 	GoalBehaviour.isvertical = false;
-
-		// 	Debug.Log("Left");
-		// 	return;
-		// 	}
-		// }
-		// if(myy>4){
-		// 	if(tiles[myx,myy-1].type!="Wall" && tiles[myx,myy-1].type!="Start" && tiles[myx,myy-1].type!=null){
-		// 	goaltransform.eulerAngles = new Vector3(0f,0f,0f);
-		// 	Debug.Log("Up");
-		// 	GoalBehaviour.isvertical = true;
-
-		// 	return;	
-		// 	}
-		// }
-		// if(myy<5){
-		// 	if(tiles[myx,myy+1].type!="Wall" && tiles[myx,myy+1].type!="Start" && tiles[myx,myy+1].type!=null){
-		// 	goaltransform.eulerAngles = new Vector3(0f,180f,0f);
-		// 	Debug.Log("Down");
-		// 	GoalBehaviour.isvertical = true;
-
-
-		// 	return;			//rotate transform
-		// 	//return;
-		// 	}
-		// }
 	}
 	public void MakeLevel(){
-		//FindDimension();
 
 	}
 	public void DrawNextLevel(int levelnumber){
@@ -958,75 +778,35 @@ public class LevelBuilder : MonoBehaviour {
 		//PopulationManager.readytobrain = true;
 	}
 	public void placeOnWorld(string[][] jagged,int y, int x){
-//		Debug.Log(tiles.GetLength(0));
-//		Debug.Log("X " +x + "Y "+ y);
-//		Debug.Log(jagged[y][x]);
+
 		if(jagged[y][x].Length == 1){
 		//					Debug.Log("1 in " + jagged[y][x]);
 			switch (jagged [y] [x]) {
 			case sstart:
 
-				//starttransform = Instantiate (floor_start, new Vector3 (x, 0, -y), Quaternion.identity);
 				starttransform = TileKeeper.Instance.zenkoStatue;
 				starttransform.position = new Vector3(x,0,-y);
-				//starttransform.gameObject.SetActive(true);
-				//GameObject p = player;
-				//Instantiate (player, new Vector3 (x, 0, -y), Quaternion.identity);
 				mysnowh = Random.Range(0f,0.08f);
-				//Instantiate (floor_snow, new Vector3 (x, -mysnowh, -y), Quaternion.identity);
-
-
-				//Debug.Log(x + "+" + y);
 				tiles[x,y].tileObj = starttransform.gameObject;
 				tiles[x,y].type = "Start";
 				tiles[x,y].isTaken = true;
 				startpos = new Vector2(x,y);
 				if(y == 0 || y==1 || y==2 ){
-					//FaceDown();
-					//p.transform.rotation.y = 270;
 					playertransform = Instantiate (player, new Vector3 (x, 0, -y), Quaternion.Euler(new Vector3(0,270,0)));
-					// playertransform = TileKeeper.Instance.zenko;
-					// playertransform.position = new Vector3(x,0,-y);
-					// playertransform.rotation = Quaternion.Euler(new Vector3(0,270,0));
-					// playertransform.GetComponent<PlayerMovement>().Start();
-
-					// playertransform.gameObject.SetActive(true);
-					//Debug.Log("Down");
 					break;
 				}
 				if(y == totaldimension-1 || y==totaldimension-2 || y==totaldimension-3){
-					//FaceUp();
-					//p.transform.rotation.y = 90;
 					playertransform = Instantiate (player, new Vector3 (x, 0, -y), Quaternion.Euler(new Vector3(0,90,0)));
-					// playertransform = TileKeeper.Instance.zenko;
-					// playertransform.position = new Vector3(x,0,-y);
-					// playertransform.rotation = Quaternion.Euler(new Vector3(0,90,0));
-					// playertransform.GetComponent<PlayerMovement>().Start();
-					// playertransform.gameObject.SetActive(true);
-					//Debug.Log("Up");
 					break;
 				}
 				if(x == 0 || x==1 || x==2){
-					//FaceRight();
-					//p.transform.rotation.y = 180;
+
 					playertransform = Instantiate (player, new Vector3 (x, 0, -y), Quaternion.Euler(new Vector3(0,180,0)));
-					//playertransform = TileKeeper.Instance.zenko;
-					// playertransform.position = new Vector3(x,0,-y);
-					// playertransform.rotation = Quaternion.Euler(new Vector3(0,180,0));
-					// playertransform.GetComponent<PlayerMovement>().Start();
-					// playertransform.gameObject.SetActive(true);
-					//Debug.Log("Right");
+
 					break;
 				}
 				if(x==totaldimension-1 || x==totaldimension-2 || x==totaldimension-3){
-					//FaceLeft();
 					playertransform = Instantiate (player, new Vector3 (x, 0, -y), Quaternion.identity);
-					// playertransform = TileKeeper.Instance.zenko;
-					// playertransform.position = new Vector3(x,0,-y);
-					// playertransform.rotation = Quaternion.identity;
-					// playertransform.GetComponent<PlayerMovement>().Start();
-					// playertransform.gameObject.SetActive(true);
-					//Debug.Log("Left");
 					break;
 				}
 				break;
@@ -1242,7 +1022,6 @@ public class LevelBuilder : MonoBehaviour {
 		}
 		if(jagged[y][x].Length ==3){
 			populateIce();
-		//					Debug.Log(jagged[y][x].Substring(0,1));
 			int hintx = int.Parse(jagged[y][x].Substring(1,1));
 			int hinty = int.Parse(jagged[y][x].Substring(2,1));
 			if(jagged[y][x].Substring(0,1) == "T"){
@@ -1252,75 +1031,50 @@ public class LevelBuilder : MonoBehaviour {
 				switch(jagged[y][x].Substring(0,1)){
 
 				case sfloor_left:
-					//LevelManager.piecetiles.Add (Instantiate	(floor_left, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,270,0))));
-					//LevelManager.myhints.Add(new Vector2 (hintx,hinty));
 					LevelManager.hints.Add(new Hint("Left", hintx,hinty));
-					//pieceHolder.AddPiece("Left");
+
 					PlaceCreature("Left");
 					break;
 				case sfloor_right:
-					//LevelManager.piecetiles.Add (Instantiate	(floor_right, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,90,0))));
-					//LevelManager.myhints.Add(new Vector2 (hintx,hinty));
-					//pieceHolder.AddPiece("Right");
+
 					LevelManager.hints.Add(new Hint("Right", hintx,hinty));
 					PlaceCreature("Right");
 					break;
 				case sfloor_up:
-					//LevelManager.piecetiles.Add (Instantiate	(floor_up, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,0,0))));
-					//LevelManager.myhints.Add(new Vector2 (hintx,hinty));
-					//pieceHolder.AddPiece("Up");
+
 					LevelManager.hints.Add(new Hint("Up", hintx,hinty));
 					PlaceCreature("Up");
 					break;
 				case sfloor_down:
-					//LevelManager.piecetiles.Add (Instantiate	(floor_down, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,180,0))));
-					//LevelManager.myhints.Add(new Vector2 (hintx,hinty));
-					//pieceHolder.AddPiece("Down");
+
 					LevelManager.hints.Add(new Hint("Down", hintx,hinty));
 					PlaceCreature("Down");
 					break;
 				case sfloor_rock:
-					//LevelManager.piecetiles.Add (Instantiate (floor_rock, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.identity));
-					//Debug.Log(LevelManager.piecetiles.Count);
-					//LevelManager.myhints.Add(new Vector2 (hintx,hinty));
-					//pieceHolder.AddPiece("Wall");
+
 					LevelManager.hints.Add(new Hint("Wall", hintx,hinty));
 					PlaceCreature("Wall");
 					break;
 
 				case ssfloor_left:
-					//LevelManager.piecetiles.Add (Instantiate	(s_floor_left, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,270,0))));
-					//LevelManager.myhints.Add(new Vector2 (hintx,hinty));
-					//pieceHolder.AddPiece("LeftSeed");
+
 					LevelManager.hints.Add(new Hint("LeftSeed", hintx,hinty));
 					PlaceCreature("LeftSeed");
 					break;
 				case ssfloor_right:
-					//pieceHolder.AddPiece("RightSeed");
 					LevelManager.hints.Add(new Hint("RightSeed", hintx,hinty));
 					PlaceCreature("RightSeed");
-					// LevelManager.piecetiles.Add (Instantiate	(s_floor_right, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,90,0))));
-					// LevelManager.myhints.Add(new Vector2 (hintx,hinty));
 					break;
 				case ssfloor_up:
-					//pieceHolder.AddPiece("UpSeed");
 					LevelManager.hints.Add(new Hint("UpSeed", hintx,hinty));
 					PlaceCreature("UpSeed");
-					// LevelManager.piecetiles.Add (Instantiate	(s_floor_up, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,0,0))));
-					// LevelManager.myhints.Add(new Vector2 (hintx,hinty));
 					break;
 				case ssfloor_down:
-				//	pieceHolder.AddPiece("DownSeed");
 					LevelManager.hints.Add(new Hint("DownSeed", hintx,hinty));
 					PlaceCreature("DownSeed");
-					// LevelManager.piecetiles.Add (Instantiate	(s_floor_down, new Vector3 (2+piecenums, 0, -totaldimension),Quaternion.Euler(new Vector3(0,180,0))));
-					// LevelManager.myhints.Add(new Vector2 (hintx,hinty));
 					break;
 				case ssfloor_rock:
-				//Debug.Log("Wallseed");
-					//LevelManager.piecetiles.Add (Instantiate (s_floor_rock, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.identity));
-					//LevelManager.myhints.Add(new Vector2 (hintx,hinty));
-					//pieceHolder.AddPiece("WallSeed");
+
 					LevelManager.hints.Add(new Hint("WallSeed", hintx,hinty));
 					PlaceCreature("WallSeed");
 					break;
@@ -1337,30 +1091,21 @@ public class LevelBuilder : MonoBehaviour {
 				switch(jagged[y][x].Substring(0,2)){
 
 				case sfloor_portalleft:
-					//LevelManager.piecetiles.Add (Instantiate	(floor_left, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,270,0))));
-					//LevelManager.myhints.Add(new Vector2 (hintx,hinty));
 					LevelManager.hints.Add(new Hint("PortalLeft", hintx,hinty));
-					//pieceHolder.AddPiece("Left");
 					PlaceCreature("PortalLeft");
 					break;
 				case sfloor_portalright:
-					//LevelManager.piecetiles.Add (Instantiate	(floor_right, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,90,0))));
-					//LevelManager.myhints.Add(new Vector2 (hintx,hinty));
-					//pieceHolder.AddPiece("Right");
+
 					LevelManager.hints.Add(new Hint("PortalRight", hintx,hinty));
 					PlaceCreature("PortalRight");
 					break;
 				case sfloor_portalup:
-					//LevelManager.piecetiles.Add (Instantiate	(floor_up, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,0,0))));
-					//LevelManager.myhints.Add(new Vector2 (hintx,hinty));
-					//pieceHolder.AddPiece("Up");
+
 					LevelManager.hints.Add(new Hint("PortalUp", hintx,hinty));
 					PlaceCreature("PortalUp");
 					break;
 				case sfloor_portaldown:
-					//LevelManager.piecetiles.Add (Instantiate	(floor_down, new Vector3 (2+piecenums, 0, -totaldimension), Quaternion.Euler(new Vector3(0,180,0))));
-					//LevelManager.myhints.Add(new Vector2 (hintx,hinty));
-					//pieceHolder.AddPiece("Down");
+
 					LevelManager.hints.Add(new Hint("PortalDown", hintx,hinty));
 					PlaceCreature("PortalDown");
 					break;
@@ -1378,23 +1123,7 @@ public class LevelBuilder : MonoBehaviour {
 	}
 
 	public void DestroyAllExceptCamera(){
-//		TurnBehaviour.turn = 0;
-		//tileBank.Clear();
-		// GameObject[] gameobjects = GameObject.FindObjectsOfType <GameObject>();
 
-		// foreach (GameObject component in gameobjects)
-		// {
-		// 	if (component.tag != "MainCamera" && component.tag != "Canvas" && component.tag != "Tile" && 
-		// 		component.tag != "Fragile") {
-		// 		component.SetActive(false);
-		// 		Destroy (component);
-		// 		//Debug.Log ("destroyed" + component);
-		// 	}
-		// 	if(component.tag == "Tile"){
-		// 		component.SetActive(false);
-		// 	}
-
-		// }
 		playertransform.gameObject.SetActive(false);
 		Destroy(playertransform.gameObject);
 		foreach (Dragger piece in PieceHolders.placedpieces){
@@ -1412,18 +1141,11 @@ public class LevelBuilder : MonoBehaviour {
 			resetting = true;
 			if(playertransform != null){
 				StartCoroutine(DestroyPlayer(.4f, playertransform));
-				//Destroy(playertransform.gameObject)/*.SetActive(false)*/;
-
 			}
-			// if(starttransform != null){
-			// 	Destroy(starttransform.gameObject)/*.SetActive(false)*/;
-			// 	SpawnStart(startpos);
-			// }
+
 			goaltransform.gameObject.GetComponentInChildren<Animator>().SetInteger("Phase",0);
 			GoalBehaviour.restartGoal();
 			GoalBehaviour.goaling = false;
-			//Debug.Log(goaltransform);
-			//Debug.Log(goaltransform.gameObject.GetComponentInChildren<Animator>().GetInteger("Phase"));
 			foreach (Dragger piece in PieceHolders.placedpieces){
 				piece.gameObject.GetComponent<BoxCollider>().enabled = true;
 			}		
@@ -1441,14 +1163,10 @@ public class LevelBuilder : MonoBehaviour {
 		}
 			ptransform.gameObject.GetComponent<PlayerAnimation>().dissolveMat.SetFloat("Vector1_B5CA3B27", highValue);
 			Destroy(playertransform.gameObject);
-			//ptransform.gameObject.SetActive(false);
 			SpawnPlayer(startpos);
 			resetting = false;
 			GoalBehaviour.active = true;
-			// if(starttransform != null){
-			// 	Destroy(starttransform.gameObject)/*.SetActive(false)*/;
-			// 	SpawnStart(startpos);
-			// }
+
 			DisappearStatue();
 
 	}
@@ -1466,21 +1184,11 @@ public class LevelBuilder : MonoBehaviour {
 	}
 
 	public void SpawnPlayer(Vector2 thevector){
-		//Debug.Log(starttransform);
-		//Debug.Log(playertransform);
 		int x = (int)thevector.x;
 		int y = (int)thevector.y;
 		playertransform = Instantiate (player, new Vector3 (x, 0, -y), Quaternion.Euler(new Vector3(0,0,0)));
 		playertransform.eulerAngles = new Vector3(0f,playerInitialRotation,0f);
-		// playertransform.position = new Vector3(x,0,-y);
-		// playertransform.GetComponent<PlayerMovement>().currenttile = new Vector3(x,0,-y);
-		// playertransform.rotation = Quaternion.Euler(new Vector3(0,0,0));
-		// playertransform.eulerAngles = new Vector3(0f,playerInitialRotation,0f);
-		// playertransform.gameObject.SetActive(true);
-		// playertransform.gameObject.GetComponent<PlayerAnimation>().dissolveMat.SetFloat("Vector1_B5CA3B27", -1);
 
-
-		//StartDirection((int)starttransform.position.x,-(int)starttransform.position.z);
 	}
 	public void populateIce(){
 		iceTiles.Clear();

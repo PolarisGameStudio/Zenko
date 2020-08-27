@@ -93,12 +93,9 @@ public class PlayerMovement : MonoBehaviour {
 	}
 	void TurnChanger(){
 		if (transform.position != startingposition && TurnBehaviour.turn == 0) {
-
 			TurnBehaviour.turn = 1;
 			menuButton.GetComponent<Image>().sprite = menuButton.GetComponent<ImageHolder>().imagetwo;
 			hintButton.GetComponent<Image>().sprite = hintButton.GetComponent<ImageHolder>().imagetwo;
-			
-			LevelBuilder.ChangeBackground("Color_A7A46709", new Color(154f/255f,53f/255f,53f/255f,0),.3f);
 		}
 		if (TurnBehaviour.turn == 1 && transform.position == startingposition) {
 			TurnBehaviour.turn = 0; 
@@ -617,13 +614,13 @@ public class PlayerMovement : MonoBehaviour {
 			{
 				if (component.tag == "Pedro") 
 				{
-					Debug.Log("Pedro");
+//					Debug.Log("Pedro");
 					wallToHit = component.gameObject;
 					wallToHit.GetComponent<Animator>().ResetTrigger("Hit");
 				} 
 				if (component.tag == "PedroSeed") 
 				{
-					Debug.Log("PedroSeed");
+//					Debug.Log("PedroSeed");
 					wallToHit = component.transform.GetChild(0).gameObject;
 					wallToHit.GetComponent<Animator>().ResetTrigger("Hit");
 				} 

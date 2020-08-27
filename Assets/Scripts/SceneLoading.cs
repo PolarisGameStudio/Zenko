@@ -322,7 +322,6 @@ public class SceneLoading : MonoBehaviour {
 	//Opens Next Adventure Mode Level once already in level scene
 	public void NextlevelButton(){
 		Swiping.mydirection = "Null";
-		LevelBuilder.ChangeBackground("Color_A7A46709",new Color(0,0,0,0), .3f);
 		LevelManager.israndom = false;
 
 		LevelManager.levelnum++;
@@ -397,7 +396,6 @@ public class SceneLoading : MonoBehaviour {
 		TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
 	}
 	public void Potd(){
-		LevelBuilder.ChangeBackground("Color_A7A46709",new Color(0,0,0,0), .3f);
 		Swiping.mydirection = "Null";
 		TurnCounter.turncount = 0;
 		LevelManager.ispotd = true;
@@ -407,8 +405,6 @@ public class SceneLoading : MonoBehaviour {
 		AssignPotdName();
 	}	
 	public void PotdSpecific(int num){
-		LevelBuilder.ChangeBackground("Color_A7A46709",new Color(0,0,0,0), .3f);
-
 		Swiping.mydirection = "Null";
 		TurnCounter.turncount = 0;
 		LevelManager.ispotd = true;
@@ -429,7 +425,6 @@ public class SceneLoading : MonoBehaviour {
 		//transform.Find("Level_Box").Find("ButtonHolder").GetComponent<LevelMenu>().clearMenu();
 	}
 	public void ReBringCurrentPotd(){
-		LevelBuilder.ChangeBackground("Color_A7A46709",new Color(0,0,0,0), .3f);
 
 		Swiping.mydirection = "Null";
 		//txt.text = "RANDOM POTD";
@@ -505,7 +500,6 @@ public class SceneLoading : MonoBehaviour {
 		LevelManager.NextLevel (LevelManager.levelnum);
 	}
 	public void ResetLevelButton(){
-		LevelBuilder.ChangeBackground("Color_A7A46709",new Color(0,0,0,0), .3f);
 		AssignLevelName();
 		TurnCounter.turncount = 0;
 		LevelManager.ResetLevel();
@@ -908,7 +902,6 @@ public class SceneLoading : MonoBehaviour {
 	public void NextSpecificButton(int level){
 		LevelManager.levelnum = level;
 		Swiping.mydirection = "Null";
-		LevelBuilder.ChangeBackground("Color_A7A46709",new Color(0,0,0,0), .3f);
 		LevelManager.israndom = false;
 
 		LevelManager.levelnum++;
@@ -937,7 +930,6 @@ public class SceneLoading : MonoBehaviour {
 	//Called from UI, probably Test
 	public void TestLevel(){
 		Swiping.mydirection = "Null";
-		LevelBuilder.ChangeBackground("Color_A7A46709",new Color(0,0,0,0), .3f);
 		LevelManager.israndom = false;
 
 		LevelManager.levelnum++;
