@@ -319,7 +319,7 @@ public class SceneLoading : MonoBehaviour {
 		Purchaser.Instance.BuyNoAds();
 	}
 	
-	//Opens Next Adventure Mode Level once already in level scene
+	//Called from next won, either after winning or in editor ui
 	public void NextlevelButton(){
 		Swiping.mydirection = "Null";
 		LevelManager.israndom = false;
@@ -375,26 +375,7 @@ public class SceneLoading : MonoBehaviour {
 		GameObject.Find("TryAgainScreen").transform.GetChild(0).gameObject.SetActive(false);
 	}
 	
-	
-	public void RandomLevel(){
-		Swiping.mydirection = "Null";
-		LevelManager.israndom = true;
-		LevelManager.levelnum = Random.Range(1100,1800);
-		Debug.Log(LevelManager.levelnum);
-		TurnCounter.turncount = 0;
-		LevelManager.NextRandomLevel();
-		TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
-	}
-
-	public void RandomLevel2(){
-		Swiping.mydirection = "Null";
-		LevelManager.israndom = true;
-		LevelManager.levelnum = Random.Range(0,50);
-		Debug.Log(LevelManager.levelnum);
-		TurnCounter.turncount = 0;
-		LevelManager.NextRandomLevel2();
-		TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
-	}
+	//Called from nextwon
 	public void Potd(){
 		Swiping.mydirection = "Null";
 		TurnCounter.turncount = 0;
@@ -424,10 +405,10 @@ public class SceneLoading : MonoBehaviour {
 	public void ChangeSprites(){
 		//transform.Find("Level_Box").Find("ButtonHolder").GetComponent<LevelMenu>().clearMenu();
 	}
+	
+	//for testing changes to potd map
 	public void ReBringCurrentPotd(){
-
 		Swiping.mydirection = "Null";
-		//txt.text = "RANDOM POTD";
 		TurnCounter.turncount = 0;
 		LevelManager.ispotd = true;
 		LevelManager.RePotd();

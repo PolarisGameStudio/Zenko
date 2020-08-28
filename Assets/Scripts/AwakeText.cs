@@ -26,7 +26,7 @@ public class AwakeText : MonoBehaviour
     }
 
     public void SelectLanguage(){
-		Debug.Log("About to sleect language");
+		//Debug.Log("About to sleect language");
     	if(LanguageHandler.Instance.userLanguage == LanguageHandler.Language.Spanish){
         	SelectSpanish();
         }
@@ -50,7 +50,7 @@ public class AwakeText : MonoBehaviour
     		case TextSection.Tutorial:
     			break;
     		case TextSection.Hint:
-    		Debug.Log("Ahora en español");
+//    		Debug.Log("Ahora en español");
     			for(int i = 0; i<texts.Length; i++)
     			{
     				texts[i].text = TutorialDictionary.Instance.hint_sp[i];
@@ -79,7 +79,7 @@ public class AwakeText : MonoBehaviour
 
     			break;
     		case TextSection.Hint:
-    		Debug.Log("Ahora en ingles");
+//    		Debug.Log("Ahora en ingles");
 	    		for(int i = 0; i<texts.Length; i++)
 	    			{
 	    				texts[i].text = TutorialDictionary.Instance.hint[i];

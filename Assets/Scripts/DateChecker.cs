@@ -53,9 +53,7 @@ public class DateChecker : MonoBehaviour
 	IEnumerator SimpleGetRequest(){
 		UnityWebRequest www = UnityWebRequest.Get(date);
 		string text;
-
 		yield return www.SendWebRequest();
-
 		if(www.isNetworkError  || www.isHttpError){
 			Debug.LogError(www.error);
 			text = System.DateTime.Now.ToString();
@@ -72,7 +70,6 @@ public class DateChecker : MonoBehaviour
 			System.DateTime date = System.DateTime.Parse(firstDate);
 			System.DateTime now = System.DateTime.Parse(secondDate);
 			System.TimeSpan diff = now - date;
-			Debug.Log((int)diff.Days);	
 			todayIndex = diff.Days;
 			currentIndex = diff.Days;
 			todayDate = System.DateTime.Now.ToString("yyyy-MM-dd");
@@ -92,16 +89,10 @@ public class DateChecker : MonoBehaviour
 			System.DateTime date = System.DateTime.Parse(firstDate);
 			System.DateTime now = System.DateTime.Parse(secondDate);
 			System.TimeSpan diff = now - date;
-			//Debug.Log((int)diff.Days);	
 			todayIndex = diff.Days;
 			currentIndex = diff.Days;	
 			todayDate = System.DateTime.Now.ToString("yyyy-MM-dd");
-
-
 		}
-		// #if UNITY_EDITOR
-		// todayDate = "2019-01-13";
-		// #endif
 		PotdUnlocker.Instance.Initiate();
 		PotdShortcut.Instance.AssignPotdShortcutAssets(PotdUnlocker.Instance.keysAvailable);
 

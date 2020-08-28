@@ -46,7 +46,6 @@ public class Loading : MonoBehaviour
 	void FixedUpdate(){
 		if(!finished){
 			time = time + Time.fixedDeltaTime;
-			//Debug.Log(time);
 			if (time>10){
 				if(!loaded)
 					Loaded();	
@@ -54,15 +53,12 @@ public class Loading : MonoBehaviour
 			}
 
 		}
-
 	}
-	// void Update(){
-	// 	//if()
-	// }
-
     public void Loaded(){
-    	// if(Instance == null)
-    	// Instance = GameObject.Find("Handler").GetComponent<Loading>();
+		if(!MapsHolder.mapsLoaded){
+			StartCoroutine(LoadWhenMapsLoaded());
+			return;
+		}
     	GameModeHandler.TurnMeOn();
     	image.enabled = false;
     	text.enabled = false;
@@ -71,13 +67,23 @@ public class Loading : MonoBehaviour
     	rotatingImage.enabled = false;
     }
 
+	IEnumerator LoadWhenMapsLoaded(){
+		while(!MapsHolder.mapsLoaded){
+			Debug.Log("waiting to hear from mapsholder and mapsloaded is " + MapsHolder.mapsLoaded);
+			yield return null;
+		}
+		GameModeHandler.TurnMeOn();
+    	image.enabled = false;
+    	text.enabled = false;
+    	loaded = true;
+    	publicText.enabled = false;
+    	rotatingImage.enabled = false;
+	}
+
     public void TurnOn(){
- //   	Debug.Log("turnt");
     	image.enabled = true;
     	text.enabled = true;
     	rotatingImage.enabled = true;
-//    	Debug.Log(rotatingImage);
-//    	Debug.Log(publicText);
     	publicText.enabled = true;
     }
 

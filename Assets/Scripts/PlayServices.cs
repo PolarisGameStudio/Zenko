@@ -20,7 +20,6 @@ public class PlayServices : MonoBehaviour
     public static string newMergedString;
     bool isSaving;
     bool isCloudDataLoaded = false;
-    string stringToShow;
     bool finishedLoading;
     Loading loader;
     int read;
@@ -29,8 +28,6 @@ public class PlayServices : MonoBehaviour
     {
         read = 0;
         finishedLoading = false;
-
-
         if(instance == null)
             {
                 #if UNITY_EDITOR
@@ -90,14 +87,12 @@ public class PlayServices : MonoBehaviour
             strArray[i] = str[i].ToString();
         }
         Debug.Log(strArray.Length + " is the datasize");
-//        Debug.Log(strArray[0]);
         return strArray;
 
     }
 
    
     public void InitializePGP(){
-
         #if UNITY_ANDROID
         PlayGamesClientConfiguration.Builder builder = new PlayGamesClientConfiguration.Builder();
         builder.EnableSavedGames();

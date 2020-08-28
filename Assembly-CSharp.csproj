@@ -277,6 +277,7 @@
      <Compile Include="Assets\GooglePlayGames\Platforms\PlayGamesClientFactory.cs" />
      <Compile Include="Assets\GooglePlayGames\Platforms\TokenClient.cs" />
      <Compile Include="Assets\GooglePlayGames\PluginVersion.cs" />
+     <Compile Include="Assets\MapsHolder.cs" />
      <Compile Include="Assets\Scripts\AssignCamera.cs" />
      <Compile Include="Assets\Scripts\AssignCanvasAndButton.cs" />
      <Compile Include="Assets\Scripts\AuroraModulator.cs" />

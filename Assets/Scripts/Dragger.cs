@@ -151,10 +151,10 @@ public class Dragger : MonoBehaviour {
 //				Debug.Log(transform.position);
 //				Debug.Log(positiontogo + " " + Mathf.RoundToInt(positiontogo.x) + -Mathf.RoundToInt(positiontogo.z));
 				mytile = LevelBuilder.tiles[Mathf.RoundToInt(positiontogo.x), -Mathf.RoundToInt(positiontogo.z)];
-				Debug.Log(mytile);
+//				Debug.Log(mytile);
 				mytile.type = "Ice";
 				mytile.portalType = null;
-				Debug.Log(mytile  + "tiltype: " + mytile.type +  " isitaken " + mytile.isTaken);
+//				Debug.Log(mytile  + "tiltype: " + mytile.type +  " isitaken " + mytile.isTaken);
 				LevelManager.placedPieces[Mathf.RoundToInt(positiontogo.x), -Mathf.RoundToInt(positiontogo.z)] = null;
 				//Debug.Log("UNTAKING IT at" + (int)gameObject.transform.position.x + -(int)gameObject.transform.position.z + "Type "+ myType);
 				//Debug.Log("UNTOOK AT" + gameObject.transform.position.x + -gameObject.transform.position.z);
@@ -475,9 +475,9 @@ public void OnMouseDrag()
 		Swiping.canswipe = true;
  		LevelManager.isdragging = false;
 
-		Debug.Log("just onmouseupdcanswipe");
-		Debug.Log(PlaneBehavior.tilex);
-		Debug.Log(PlaneBehavior.tiley);
+		// Debug.Log("just onmouseupdcanswipe");
+		// Debug.Log(PlaneBehavior.tilex);
+		// Debug.Log(PlaneBehavior.tiley);
 		GetComponent<BoxCollider>().enabled = true;
 		if(currenttile  == null){
 		positiontogo = PlaneBehavior.planePos;	

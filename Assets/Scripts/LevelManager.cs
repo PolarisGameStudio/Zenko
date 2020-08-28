@@ -62,35 +62,6 @@ public class LevelManager : MonoBehaviour {
 		levelselector.drawNormal(mynum);
 	}
 
-	public static void NextRandomLevel(){
-		Debug.Log(LevelManager.levelnum);
-		myhints = new List<Vector2>();
-		hintsgiven = new List<int>();
-		levelselector.DestroyAllExceptCamera ();
-		if(!LevelBuilder.iscreated){
-			levelselector.CreateBase ();
-		}
-		levelselector.CreateOuterBase();
-		levelselector.PlaceBase();
-		levelselector.DrawNextLevel (-19); // -4 means random
-	}
-
-
-	public static void NextRandomLevel2(){
-		Debug.Log(LevelManager.levelnum);
-		myhints = new List<Vector2>();
-		hintsgiven = new List<int>();
-		levelselector.DestroyAllExceptCamera ();
-		if(!LevelBuilder.iscreated){
-			levelselector.CreateBase ();
-		}
-
-		levelselector.PlaceBase();
-		levelselector.CreateOuterBase();
-
-		levelselector.DrawNextLevel (-105); // -4 means random
-	}
-
 	public static void NextPotd(){
 		myhints = new List<Vector2>();
 		hintsgiven = new List<int>();
@@ -118,6 +89,7 @@ public class LevelManager : MonoBehaviour {
 		levelselector.drawPotd(PlayerPrefs.GetInt("PoTD"));
 	}
 
+	//This is used when testing and need to refresh potd
 	public static void RePotd(){
 		myhints = new List<Vector2>();
 		hintsgiven = new List<int>();
@@ -127,20 +99,13 @@ public class LevelManager : MonoBehaviour {
 		EnvironmentKeeper.Instance.Shuffle();
 		EnvironmentKeeper.Instance.Reset();
 		DateChecker.Instance.currentIndex = PlayerPrefs.GetInt("PoTD");
-		levelselector.RePotd();
+		MapsHolder.RePotd();
 	}
 
 	public static void ResetLevel(){
 		levelselector.ResetPlayer();
 	}
 
-	public void niuNextLevel(int mynum){
-		Debug.Log(mynum);
-		LevelStorer.Lookfor (mynum);
-		levelselector.DestroyAllExceptCamera ();
-		levelselector.CreateBase ();
-		levelselector.DrawNextLevel (mynum);
-	}
 	public static void UnPopIcarus(string type, Dragger dragger){
 		if(type == "Left"){
 			LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x, -(int)dragger.gameObject.transform.position.z].type = "Seed";	
@@ -187,6 +152,7 @@ public class LevelManager : MonoBehaviour {
 			}		
 		}
 	}
+
 	public static void UnPop(){
 		Dragger[] draggers = (Dragger[]) GameObject.FindObjectsOfType(typeof(Dragger));
 		foreach(Dragger dragger in draggers){
