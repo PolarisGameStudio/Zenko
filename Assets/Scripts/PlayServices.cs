@@ -78,6 +78,7 @@ public class PlayServices : MonoBehaviour
         #endif        
     }
     IEnumerator LoadIn(int seconds){
+        
         yield return new WaitForSeconds(seconds);
         loader.Loaded();
     }
@@ -211,6 +212,7 @@ public class PlayServices : MonoBehaviour
         AssignFirstFourChapters(dataArray);
         AssignPotdData(dataArray);
         AssignChapterFive(dataArray);
+        LevelStorer.highestSolved = LevelMenu.FindHighestSolved();
         if(finishedLoading)
         loader.Loaded();
 

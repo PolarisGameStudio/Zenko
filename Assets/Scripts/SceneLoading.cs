@@ -94,7 +94,7 @@ public class SceneLoading : MonoBehaviour {
 		Transform buttonHolder = levelBox.Find("ButtonHolder");
 		Transform menuHolder = transform.Find("MenuHolder");
 		LevelMenu levelMenuScript = buttonHolder.GetComponent<LevelMenu>();
-		int curfirst = getCurFirst(LevelMenu.FindHighestSolved());
+		int curfirst = getCurFirst(LevelStorer.highestSolved);
 		if(canOpen){
 			menuState = "Adventure";
 			levelBox.gameObject.SetActive(true);

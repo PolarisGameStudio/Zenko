@@ -52,6 +52,7 @@ public class CameraController : MonoBehaviour {
 		tempColor.a = alphaPercentage;
 		image.color = tempColor;
 	}
+	
 	public static void Fade(float time, float alphaPercentage, int place){
 		if(Instance == null)
 		Instance = GameObject.Find("Main Canvas").GetComponent<CameraController>();
@@ -69,24 +70,29 @@ public class CameraController : MonoBehaviour {
 		Instance.StartCoroutine(Instance.FadeBackgroundTo(time,alphaPercentage));
 
 	}
+	
 	public static void Fade(float time, float alphaPercentage){
 		Instance.StartCoroutine(Instance.FadeBackgroundTo(time,alphaPercentage));
 
 	}
+
 	private Sprite CheckWorldNumber(int world){
 		return WorldNumber[world-1];		
 	}	
+
 	private Sprite CheckWorldSprite(int world){
 		if(LanguageHandler.IsEnglish())
 		return WorldName[world-1];		
 		else return WorldNameSpanish[world-1];
 	}
+
 	private Sprite CheckWorldName(int world){
 		if(LanguageHandler.IsEnglish())
 		return WorldTitles[world-1];
 		else
 		return WorldTitlesSpanish[world-1];
 	}
+
 	private Sprite CheckBackground(int world){
 		switch(world){
 			case 1:

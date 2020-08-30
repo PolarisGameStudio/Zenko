@@ -89,7 +89,7 @@ public class LevelManager : MonoBehaviour {
 		levelselector.drawPotd(PlayerPrefs.GetInt("PoTD"));
 	}
 
-	//This is used when testing and need to refresh potd
+	//This is used when testing and need to refresh potd.
 	public static void RePotd(){
 		myhints = new List<Vector2>();
 		hintsgiven = new List<int>();

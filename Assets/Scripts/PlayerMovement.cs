@@ -13,7 +13,6 @@ public class PlayerMovement : MonoBehaviour {
 	public string direction;
 	bool istiletaken;
 	public GameObject tileobject;
-//	Tilehandler tilescript;
 	Vector3 tiletotest;
 	public bool canmove;
 	GameObject tiletaker;
@@ -23,11 +22,9 @@ public class PlayerMovement : MonoBehaviour {
 	public static bool isspeeding;
 	public static string character_direction;
 	public GameObject lastSeed;
-//	Seed_Behaviour myseedbehaviour;
 	bool firstmove; //used to count turns
 	public GameObject levelWonBoard;
 	public GameObject LevelLostBoard;
-	//RatingPopUp PopupScript;
 	string myswipe;
 	bool outofmap;
 	Tile tilescript;
@@ -46,13 +43,8 @@ public class PlayerMovement : MonoBehaviour {
 	GameObject hintButton;
 	bool hasstopped;
 	GameObject wallToHit;
-
-	//public KeySimulator mykeysimulator;
-	// Use this for initialization
 	public void Start () {
-		//current tile works as a target to move to
 		LevelManager.playert = this.gameObject.transform;
-
 		hasstopped = false;
 		animationController = GetComponent<PlayerAnimation>();
 		startingposition = transform.position;
@@ -80,6 +72,8 @@ public class PlayerMovement : MonoBehaviour {
 		menuButton = GameObject.Find("Menu");
 		hintButton = GameObject.Find("Hint");
 	}
+
+	//called every frame seems week
 	void ResetBoards(){
 		if (levelWonBoard == null) {
 			levelWonBoard = SceneLoading.gamewon;
@@ -91,6 +85,7 @@ public class PlayerMovement : MonoBehaviour {
 			LevelLostBoard.SetActive (false);
 		}		
 	}
+
 	void TurnChanger(){
 		if (transform.position != startingposition && TurnBehaviour.turn == 0) {
 			TurnBehaviour.turn = 1;
@@ -104,12 +99,7 @@ public class PlayerMovement : MonoBehaviour {
 	
 		}		
 	}
-	// Update is called once per frame
 	void Update () {
-		//Debug.Log(nextaction);
-//		Debug.Log(PieceHolders.placedpieces.Count);
-//		Debug.Log(PieceHolders.placedpieces[0].transform.position);
-//		Debug.Log(PieceHolders.placedpieces[1].transform.position);
 		if(canmove){
 			this.transform.GetChild(0).GetComponent<Animator>().SetInteger("Phase", 0);
 
@@ -131,29 +121,16 @@ public class PlayerMovement : MonoBehaviour {
 				lastbooped = currenttile;
 				AssignShakeOrientation(character_direction);
 			}
-			// Debug.Log("BOOP 1");
-			// Debug.Log("boop value" + boop);
-			// Debug.Log(currenttile + "is current tile " + transform.position + "is position");
 		}
-		// if(Vector3.Distance(currenttile, transform.position) <.8f && !boop && 
-		// 	transform.position != startingposition && nextaction !="Goal_Action"){
-		// 	if(wallToHit!= null){
-		// 		wallToHit.GetComponent<Animator>().SetTrigger("Hit");
-		// 		wallToHit = null;				
-		// 	}
-		// 	Debug.Log("BOOP 2");
-		// }		
+
 
 
 		if (currenttile == transform.position /*&& !hasstopped*/) {//do this when reached currenttile
-			//Debug.Log("WHAT IS NEXTACTION BABY DONT " + nextaction + " ME");
-			//Debug.Log("On tile");
-			//Debug.Log("GOT TO TILE");
-			//Debug.Log(currenttile + " " + transform.position + " " + nextaction + canmove + hasmoved);
 			ActOnStopped();
 		}
 			Movement ();
 	}
+
 	void ActOnStopped(){
 		GoalBehaviour.isstatic = true;
 		if (lastFragile != null && lastFragile.transform.position == transform.position && nextaction== null) {
@@ -182,15 +159,14 @@ public class PlayerMovement : MonoBehaviour {
 		}  
 		else if (nextaction == "Goal_Action") {
 			RatingPopUp.GiveRating ();//stores to playerprefs
-				SceneLoading.SetStars(RatingBehaviour.currentrating);
-				this.enabled = false;
+			SceneLoading.SetStars(RatingBehaviour.currentrating);
+			this.enabled = false;
 			StartCoroutine(PopWin());
 		}			
 		else if (nextaction == "Hole_Action") {
 			SfxHandler.Instance.StopSlide();
 			SfxHandler.Instance.PlayHole();
 			this.enabled=false;
-			Debug.Log("Hole");
 			StartCoroutine(PopLose());
 			StartCoroutine(animationController.Disappear(.3f));
 		}
@@ -587,11 +563,8 @@ public class PlayerMovement : MonoBehaviour {
 		lastSeed.GetComponent<Dragger>().readyToPop = true;
 		lastSeed.GetComponent<Dragger>().playert = this.gameObject.transform;
 	}
-	//Individual Behaviours to be stored in the following.
-
 
 	void ActOnTile(){
-		//Debug.Log(tilescript.type);
 		Swiping.mydirection = "Null";
 		if(outofmap == true)
 		{
@@ -607,33 +580,26 @@ public class PlayerMovement : MonoBehaviour {
 		else if (tilescript.type == "Wall" || tilescript.type == "Start") 
 		{
 			Vector3 overlapV3 = tiletotest;	
-//				Debug.Log(tiletotest);
 			Collider[] colliders = Physics.OverlapSphere(overlapV3, .5f);
-//				Debug.Log("LF PEDRO");
 			foreach (Collider component in colliders) 
 			{
 				if (component.tag == "Pedro") 
 				{
-//					Debug.Log("Pedro");
 					wallToHit = component.gameObject;
 					wallToHit.GetComponent<Animator>().ResetTrigger("Hit");
 				} 
 				if (component.tag == "PedroSeed") 
 				{
-//					Debug.Log("PedroSeed");
 					wallToHit = component.transform.GetChild(0).gameObject;
 					wallToHit.GetComponent<Animator>().ResetTrigger("Hit");
 				} 
 
 			}
-
 			canmove = false;
-//				Debug.Log("canmove is false now");
 			Count ();
 		} 
 		else if (tilescript.type == "Goal") 
 		{
-			//you'll stop in the tile you checked and stop moving.
 			if (TurnCounter.turncount == 0) 
 			{
 				Debug.Log("0 turns");
@@ -659,19 +625,14 @@ public class PlayerMovement : MonoBehaviour {
 				Count ();
 				currenttile = tiletotest;
 				canmove = false;
-				//Qeue up an action when reaching the tile
-//					Debug.Log("aqui?");
 				nextaction = "Goal_Action";
 			}
 		} 
 		else if (tilescript.type == "Hole") 
 		{
-			//you'll stop in the tile you checked and stop moving.
 			Count();
 			currenttile = tiletotest;
 			canmove = false;
-
-			//Qeue up an action when reaching the tile
 			nextaction = "Hole_Action";
 		} 
 		else if (tilescript.type == "Wood") 
@@ -688,7 +649,6 @@ public class PlayerMovement : MonoBehaviour {
 		} 
 		else if (tilescript.type == "Left") 
 		{
-
 				Count ();
 				currenttile = tiletotest;
 				canmove = false;
@@ -740,14 +700,13 @@ public class PlayerMovement : MonoBehaviour {
 				nextaction = tilescript.isSideways+ "_Action";
 				Debug.Log(nextaction);
 				isspeeding = true;			
-
 			}
 			else
 			{
 
 			}
 			tilescript.type = "Hole";
-	
+
 		} 
 		else if (tilescript.type == "Quicksand") 
 		{
@@ -760,7 +719,6 @@ public class PlayerMovement : MonoBehaviour {
 				canmove = false;
 				nextaction = "Hole_action";
 			}
-
 		}
 		else if (tilescript.type == "Seed") 
 		{
@@ -769,10 +727,8 @@ public class PlayerMovement : MonoBehaviour {
 			Debug.Log(tilescript.tileObj);
 			PopSeed(tilescript.seedType);
 			Count();
-			
 			if(tilescript.isSideways!= null)
 			{
-
 				canmove = false;
 				nextaction = tilescript.isSideways+ "_Action";
 				Debug.Log(nextaction);
@@ -786,7 +742,6 @@ public class PlayerMovement : MonoBehaviour {
 		}
 		else if(tilescript.type == "Portal")
 		{
-			Debug.Log(character_direction +"." + tilescript.portalType);
 			if(Opposite(character_direction, tilescript.portalType) && !PathBlocked(tiletotest))
 			{
 				Count ();
@@ -794,13 +749,11 @@ public class PlayerMovement : MonoBehaviour {
 				currenttile = tiletotest;
 				canmove = false;
 				nextaction = "Portal_Action";
-				
 			}
 			else{
 				canmove = false;
 				Count ();
 			}
-			
 		}
 		else 
 		{
@@ -815,9 +768,7 @@ public class PlayerMovement : MonoBehaviour {
 		GameObject exitPortal = GetMatchingPortal(portalEntrancePosition);
 		string exitDirection = exitPortal.GetComponent<Dragger>().portalType;
 		Vector3 nextTilePos = NextTilePosition(exitPortal.transform.position,exitDirection );
-
 		Tile NextTile = LevelBuilder.tiles[(int)nextTilePos.x,-(int)nextTilePos.z];
-
 		if(Walkable(NextTile, exitDirection)){
 			return false;
 		}
@@ -839,12 +790,10 @@ public class PlayerMovement : MonoBehaviour {
 			case "Start":
 				return false;
 				break;
-			//case ""
 		}
 		return true;
 	}
 	Vector3 NextTilePosition(Vector3 pos, string direction){
-
 		switch(direction){
 			case "Up":
 				return pos+ Vector3.forward;
@@ -861,6 +810,7 @@ public class PlayerMovement : MonoBehaviour {
 		}
 		return pos;
 	}
+
 	bool Opposite(string d1, string d2){
 		if((d1 == "Left" && d2 == "Right") || (d1 == "Right" && d2 == "Left") ||
 			(d1 == "Up" && d2 == "Down") || (d1 == "Down" && d2 == "Up")){
@@ -869,6 +819,7 @@ public class PlayerMovement : MonoBehaviour {
 		else 
 			return false;
 	}
+
 	public void CheckAchievement(){
 		if(!LevelManager.ispotd){
 			if(LevelManager.levelnum == 40){
@@ -888,6 +839,7 @@ public class PlayerMovement : MonoBehaviour {
 			}			
 		}
 	}
+
 	IEnumerator PopWin(){
 		CheckAchievement();
 		int world = Mathf.FloorToInt((LevelManager.levelnum-1)/40)  + 1;
@@ -906,7 +858,6 @@ public class PlayerMovement : MonoBehaviour {
 			}
 		}
 		WinMessage.Instance.AssignMessage(world, RatingPopUp.myrating);
-
 	}
 
 
@@ -929,6 +880,4 @@ public class PlayerMovement : MonoBehaviour {
 			yield return null;
 		}
 	}
-
-
 }

@@ -334,7 +334,6 @@ public void OnMouseDrag()
 
 	}
  void placeNormal(string t, string sT){
- 	Debug.Log(t + " " + sT);
  	if(t != "Seed"){
  	LevelManager.placedPieces[(int)positiontogo.x,-(int)positiontogo.z] = t;
 
@@ -492,7 +491,7 @@ public void OnMouseDrag()
 		}
 		if(PlaneBehavior.readyToDrop){//from mouseoverer
 			//PieceHolders.placedpieces.Add(this);
-			Debug.Log("ADDED " + this + " Back to pieceholders");
+			//Debug.Log("ADDED " + this + " Back to pieceholders");
 			//transform.position = new Vector3(PlaneBehavior.tilex, 0, PlaneBehavior.tiley);
 			positiontogo = new Vector3(PlaneBehavior.tilex, 0, PlaneBehavior.tiley);
 			gototile = true;

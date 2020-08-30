@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MusicHandler : MonoBehaviour
 {
-	//public AudioClip titleTheme;
 	public AudioSource source1;
     public AudioSource source2;
 	public List<AudioClip> levelLoops;
@@ -45,22 +44,17 @@ public class MusicHandler : MonoBehaviour
         hasFocus = !hasFocus;
         if(!hasFocus) 
         AudioListener.pause = true;
-
-
-
     }
+
     void Update()
     {
-//        Debug.Log(AudioSettings.dspTime);
         if(AudioListener.pause == true){
             AudioListener.pause = false;
         }
         if(!running){
             return;
         }
-
         time  = AudioSettings.dspTime;
-
         if(time +1.0f> nextEventTime){
             if(flip == 0){
                 source2.clip = levelLoops[nextLoop-1];
@@ -68,7 +62,6 @@ public class MusicHandler : MonoBehaviour
                 lastBeginning = nextEventTime;
                 currentLoop = nextLoop;
                 FindNewLoopAndTime();
-
             }
             if(flip == 1){
                 source1.clip = levelLoops[nextLoop-1];
@@ -79,8 +72,8 @@ public class MusicHandler : MonoBehaviour
             }
             flip = 1 -flip;
         }
-
     }
+
     public static void PlayTitleTheme()
     {
         thisMH.source1.Stop();
@@ -90,10 +83,7 @@ public class MusicHandler : MonoBehaviour
     	thisMH.source1.Play();
         running = false;
     }
-    public static void FindNewTiTle(){
 
-        
-    }
     public static void PlayInitialLoop()
     {
         thisMH.source1.loop =false;
@@ -106,11 +96,11 @@ public class MusicHandler : MonoBehaviour
         thisMH.FindNewLoopAndTime();
         running = true;
     }
+
     public void FindNewLoopAndTime()
     {
         nextLoop = Random.Range(1,4);
         int measureToEnter = 64;
-//        Debug.Log(currentLoop + " is current and " + nextLoop + " is next.");
         if(currentLoop!=1)
         {
             measureToEnter = measureToEnter +2;

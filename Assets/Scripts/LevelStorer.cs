@@ -77,10 +77,10 @@ public class LevelStorer : MonoBehaviour {
 	int reset;
 	StreamWriter normalmaps;
 	public static string importantValues;
+	public static int highestSolved;
 
 
 	public static void PopulateFiveChapters(){
-
 		LevelStats lv1  = new LevelStats(1,2,false,0);
 		LevelStats lv2  = new LevelStats(2,3,true,0); 
 		LevelStats lv3  = new LevelStats(3,3,true,0); 
@@ -494,44 +494,15 @@ public class LevelStorer : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
-//		Debug.Log(instance);
 		if(instance == null){
 			instance = this;
 			DontDestroyOnLoad(this.gameObject);
-			//return;
 		}
 		else{
 			Destroy(this.gameObject);
-//			Debug.Log("Destroyed LevelStorer");
 			return;
 		}
-		//PlayerPrefs.DeleteAll();
-/*		reset = PlayerPrefs.GetInt ("Reset");
-		if (reset == 0) {
-			PlayerPrefs.DeleteAll ();
-			PlayerPrefs.SetInt ("Reset", 1);
-		}*/
-		/*if (PlayerPrefs.HasKey ("Loaded")) {
-			Debug.Log ("Has playerpref");
-		} else {*/
-			//Load levels for the first time. Init values. only level 1 unlocked.
-		//Debug.Log ("Giving loaded");
-		
-
-		//PlayerPrefs.SetInt ("Loaded", 1);
-
-		//PlayerPrefs.DeleteAll();
-		//GameManager.mycurrency = PlayerPrefs.GetInt("Currency");
-		//GameObject.Find("CurrencyHolder").GetComponentInChildren<Text>().text = GameManager.mycurrency.ToString();
 	}
-		//PlayerPrefs.DeleteAll();
-	//}
-	/*void Update () {
-		if (efficientturns <= 0) {
-			 (LevelManager.levelnum);
-		}
-	}*/
-
 
 	void OnApplicationQuit(){
 		//normalmaps.Close();
@@ -539,15 +510,10 @@ public class LevelStorer : MonoBehaviour {
 
 	public static void PopulatePlayerPrefs(){ //populates ratings for first 160
 		for(int i=1; i<leveldic.Count+1; i++){
-
 			string mystring = "Level"+i+"Rating";
-			
 			if(PlayerPrefs.GetInt(mystring)>0){
-
 				PlayerPrefs.SetInt(mystring, 0);
 			}
-
-
 		}		
 	}
 

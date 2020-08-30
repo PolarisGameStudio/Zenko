@@ -41,17 +41,9 @@ public class WinMessage : MonoBehaviour
         worldMessageStorerSpanish.Add(World3MessagesSprite);
         worldMessageStorerSpanish.Add(World4MessagesSprite);
         worldMessageStorerSpanish.Add(World5MessagesSprite);
-        Debug.Log("SizeSIZESZIEZIZISISISIDISDIAISDIASIDIASDIAISDIASIDIASDIASA " + size);
         movingUpwards = true;
         timer = 0;
         mystars = 0;
-    }
-
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        //timer += Time.deltaTime;
-		//this.GetComponent<RectTransform>().sizeDelta = new Vector2 (size + oscillate(timer,7,(25-((25/3)*(3-mystars)))), 70);
     }
 
     public void AssignMessage(int world, int stars){

@@ -97,12 +97,9 @@ public class MapsHolder : MonoBehaviour
 
     
     IEnumerator LoadChecker(){
-        Debug.Log("GONNA CHECK LOAD");
 		while(!adventureLoaded && !potdLoaded){
-			Debug.Log("Still Checking Maps Loaded");
 			yield return null;
 		}
-        Debug.Log("BOTH LOADED");
         mapsLoaded = true;
     }
 }

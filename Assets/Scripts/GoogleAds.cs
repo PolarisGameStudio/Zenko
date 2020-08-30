@@ -75,15 +75,10 @@ public class GoogleAds : MonoBehaviour
         RequestInterstitial();
         RequestHintAd();
         RequestPotdAd();
-        //this.potdVideo = RewardBasedVideoAd.Instance;
-        //RequestFirstRewardBasedVideo();
-        //RequestFirstPotdAd();
+
         #endif
     }
-    void Update(){
-        //Debug.Log(levelsInSession);
-    	//Debug.Log(levelsToShowAd[0] + " " + levelsToShowAd[1] + " " + levelsToShowAd[2] + " " + levelsToShowAd[3] + " " + levelsToShowAd[4]);
-    }
+
     public void RequestHintAd(){
         #if UNITY_ANDROID
             string adUnitId = "ca-app-pub-3301322474937909/3389088666";
@@ -280,11 +275,9 @@ public class GoogleAds : MonoBehaviour
     private void TryAgainScreen(){
         if (!Social.localUser.authenticated){
             GameObject.Find("TryAgainScreen").transform.GetChild(1).gameObject.SetActive(true);
-        
         }
         else{
             GameObject.Find("TryAgainScreen").transform.GetChild(0).gameObject.SetActive(true);
-        
         }
     }
 }

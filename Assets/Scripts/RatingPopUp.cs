@@ -27,32 +27,21 @@ public class RatingPopUp : MonoBehaviour {
 		
 		RatingBehaviour.CalculateRating ();
 		myrating = RatingBehaviour.rating;
-//		Debug.Log("My rating is" + myrating);
-//		Debug.Log("level "+ LevelManager.levelnum);
 		string prefname = "Level" + LevelManager.levelnum + "Rating";
 		int previousrating = PlayerPrefs.GetInt (prefname);
-		Debug.Log("previousrating" + previousrating);
-		//Debug.Log(prefname);
-		//Debug.Log(previousrating);
-		//Debug.Log(PlayerPrefs.GetInt("Player1Rating"));
+		//Debug.Log("previousrating" + previousrating);
 		if ((myrating > previousrating || myrating == 3) && !LevelManager.ispotd) {
-			Debug.Log("ADDING TO PLAYERPREFS " + prefname + myrating);
+			//Debug.Log("ADDING TO PLAYERPREFS " + prefname + myrating);
 			PlayerPrefs.SetInt (prefname, myrating);
-			//Debug.Log("gave "+ prefname + "rating" + myrating);
-			//Debug.Log(PlayerPrefs.GetInt(prefname));
 			LevelStorer.leveldic[LevelManager.levelnum].rating = myrating;
 		}
-		//LevelStorer.leveldic[LevelManager.levelnum].islocked = false;
-		//PlayerPrefs.Save();
+		if(LevelManager.levelnum > LevelStorer.highestSolved){
+			LevelStorer.highestSolved = LevelManager.levelnum;
+		}
 		ready = true;
-		//Debug.Log ("GIVEN");
 		text1.text = "You got " + RatingBehaviour.rating + " Stars";
 		text2.text = "You finished level " + LevelManager.levelnum + "!";
 		PlayerPrefs.Save();
-		//AddCurrency(previousrating, myrating);
-
-		//starholder = gameObject.transform.Find("Ribbon");
-
 
 		if(myrating == 1){
 			starholder.transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(true);
@@ -70,7 +59,7 @@ public class RatingPopUp : MonoBehaviour {
 
 		//PlayerPrefs.SetString("SaveFile",LevelManager.levelnum.ToString());
 		if(LevelManager.levelnum+1 > LevelMenu.highestLevelSolved && !LevelManager.ispotd){
-			Debug.Log("new highest solved is " + (LevelManager.levelnum+1));
+			//Debug.Log("new highest solved is " + (LevelManager.levelnum+1));
 			LevelMenu.highestLevelSolved = LevelManager.levelnum+1;
 		}
 		if(!LevelManager.ispotd){
@@ -79,7 +68,7 @@ public class RatingPopUp : MonoBehaviour {
 		}
 
 		if(LevelManager.ispotd){
-			Debug.Log( " CURRENT INDEX WON IS " + DateChecker.Instance.currentIndex);
+			//Debug.Log( " CURRENT INDEX WON IS " + DateChecker.Instance.currentIndex);
 			//Debug.Log("CURRENT")
 			LevelStorer.potdDic[DateChecker.Instance.currentIndex].rating = myrating;
 			LevelStorer.potdDic[DateChecker.Instance.currentIndex].islocked = false;

@@ -8,19 +8,12 @@ public class Loading : MonoBehaviour
 
 	[SerializeField]
 	public GameModeHandler gameScript;
-
 	public static Loading Instance;
-
 	public Image image;
-
 	public Text text;
-
 	public Image rotatingImage;
-
 	public Text publicText;
-
 	bool loaded;
-
 	float time;
 	bool finished;
 
@@ -31,16 +24,9 @@ public class Loading : MonoBehaviour
 			if(!loaded){
 				TurnOn();
 			}
-
-			//GameModeHandler.TurnMeOn();
-
 			return;
 		}
-
 		GameModeHandler.TurnMeOn();
-
-		//Destroy(this.gameObject);
-
 		}
 
 	void FixedUpdate(){
@@ -69,7 +55,6 @@ public class Loading : MonoBehaviour
 
 	IEnumerator LoadWhenMapsLoaded(){
 		while(!MapsHolder.mapsLoaded){
-			Debug.Log("waiting to hear from mapsholder and mapsloaded is " + MapsHolder.mapsLoaded);
 			yield return null;
 		}
 		GameModeHandler.TurnMeOn();

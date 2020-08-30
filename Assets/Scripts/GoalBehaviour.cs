@@ -30,8 +30,6 @@ public class GoalBehaviour : MonoBehaviour {
 		goaling = false;
 		active = true;
 		SfxHandler.isFlowerOpen = false;
-//		Debug.Log(transform.rotation.y);
-//		Debug.Log(newx);
 	}
 	public static void restartGoal(){
 		readytomove = false;
@@ -39,20 +37,14 @@ public class GoalBehaviour : MonoBehaviour {
 		goaling = false;
 		SfxHandler.isFlowerOpen = false;
 	}
-	// Update is called once per frame
-	void FixedUpdate () {
-		//if(myplayer.GetComponent<PlayerMovement>().currenttile != myplayer.transform.position){
-		//	Debug.Log("Moving");
-		//}
 
+	void FixedUpdate () {
 		if(LevelBuilder.playertransform!= null){
 		newx = LevelBuilder.playertransform.position.x;
 		newy = -LevelBuilder.playertransform.position.z;
 		xdif = Mathf.Abs(newx-transform.position.x);
 		ydif = Mathf.Abs(newy+transform.position.z);			
 		}
-
-//		Debug.Log(lastphase);
 
 		if(readytomove && active){
 			if(isstatic == true){
@@ -66,24 +58,17 @@ public class GoalBehaviour : MonoBehaviour {
 				newx = LevelBuilder.playertransform.position.x;
 				newy = -LevelBuilder.playertransform.position.z;
 			}
-			//Debug.Log(newx + "" + oldx +newy+oldy );
-//			Debug.Log(lastphase);
 			xdif = Mathf.Abs(newx-transform.position.x);
 			ydif = Mathf.Abs(newy+transform.position.z);
-			//if moving towards value
-			//if moving away from value
-			//Debug.Log(xdif + "" + ydif);
 			if(isvertical){//if plant is facing down/up
 				if(newx>oldx){//moving right
 					if(xdif<1.5){
 						if (transform.position.x>newx){//getting closer since im at its right.
 							myanim.SetInteger("Phase",1);
-			//				Debug.Log("orthis");
 							lastphase = 1;
 							SfxHandler.Instance.PlayFlowerOpen();
 						}							
 					}
-
 					if (transform.position.x<newx){//getting away since im at its left.
 						myanim.SetInteger("Phase",0);
 						lastphase = 0;
@@ -95,7 +80,6 @@ public class GoalBehaviour : MonoBehaviour {
 					if(xdif<1.5){
 						if (transform.position.x<newx){//getting closer because im at it's left
 							myanim.SetInteger("Phase",1);
-//							Debug.Log("this");
 							lastphase = 1;
 							SfxHandler.Instance.PlayFlowerOpen();
 						}								
@@ -104,19 +88,14 @@ public class GoalBehaviour : MonoBehaviour {
 						myanim.SetInteger("Phase",0);
 						lastphase = 0;
 						SfxHandler.Instance.PlayFlowerClose();
-					}					
-			
-					
+					}							
 				}
 				if(newy<oldy){//moving up
-//					Debug.Log("Moving where");
 					if(xdif<.9){
-						//Debug.Log(ydif);
 						if(ydif<1.5){
 							if(-transform.position.z<newy){
 								SfxHandler.Instance.StopSlideVictory();
 								SfxHandler.Instance.PlayVictory();
-
 								Debug.Log("Doing this");
 								goaling = true;
 								myanim.SetInteger("Phase",2);
@@ -124,7 +103,6 @@ public class GoalBehaviour : MonoBehaviour {
 								AnimateFoxGoal();
 								lastphase = 2;								
 							}
-
 						}
 						else{
 							if (-transform.position.z>newy){//getting closer
@@ -134,17 +112,13 @@ public class GoalBehaviour : MonoBehaviour {
 								SfxHandler.Instance.PlayFlowerOpen();
 							}							
 						}
-						
 					}
 				}
 				if(newy>oldy){//moving down
 					if(xdif<.9){
 						if(ydif<1.5){
 							if(-transform.position.z>newy){
-
-//								Debug.Log(newy);
 								goaling = true;
-//								Debug.Log("Doing this too");
 								myanim.SetInteger("Phase",2);
 								StartCoroutine(PlayChompAfterDelay());
 								SfxHandler.Instance.StopSlideVictory();
@@ -156,7 +130,6 @@ public class GoalBehaviour : MonoBehaviour {
 						else{
 							if (transform.position.x>newx){//getting closer
 								myanim.SetInteger("Phase",1);
-								//Debug.Log("orthis");
 								lastphase = 1;
 								SfxHandler.Instance.PlayFlowerOpen();
 							}							
@@ -172,25 +145,20 @@ public class GoalBehaviour : MonoBehaviour {
 					if(ydif<1.5){
 						if (-transform.position.z>newy){//getting closer
 							myanim.SetInteger("Phase",1);
-							//Debug.Log("orthis");
 							lastphase = 1;
 							SfxHandler.Instance.PlayFlowerOpen();
 						}							
-						
 					}
 						if (-transform.position.z<newy){//getting away
 							myanim.SetInteger("Phase",0);
 							lastphase = 0;
 							SfxHandler.Instance.PlayFlowerClose();					
 					}
-
-
 				}
 				if(newy<oldy){//moving down
 					if(ydif<1.5){
 						if (-transform.position.z<newy){//getting closer
 							myanim.SetInteger("Phase",1);
-							//Debug.Log("this");
 							lastphase = 1;
 							SfxHandler.Instance.PlayFlowerOpen();
 						}								
@@ -200,7 +168,6 @@ public class GoalBehaviour : MonoBehaviour {
 							lastphase = 0;
 							SfxHandler.Instance.PlayFlowerClose();
 						}							
-
 				}
 				if(newx>oldx){//moving right
 					if(ydif<.9){
@@ -218,12 +185,10 @@ public class GoalBehaviour : MonoBehaviour {
 						else{
 							if (-transform.position.z>newy){
 								myanim.SetInteger("Phase",1);
-							//	Debug.Log("orthis");
 								lastphase = 1;
 								SfxHandler.Instance.PlayFlowerOpen();
 							}							
 						}
-						
 					}
 				}
 				if(newx<oldx){//moving left
@@ -246,47 +211,27 @@ public class GoalBehaviour : MonoBehaviour {
 								SfxHandler.Instance.PlayFlowerOpen();
 							}							
 						}
-						
 					}
 				}
 			}
-			//myanim.SetInteger("Phase", lastphase);	
-
 			oldx = newx;
 			oldy = newy;
 		}
-		//if(!readytomove){
-		//	isstatic = true;
-		//}
-//		Debug.Log("Is vertical" + isvertical);
 	}
+
 	IEnumerator PlayChompAfterDelay(){
 		if(!chomping){
-//			Debug.Log("PLAYING CHOMP");
-
 			chomping = true;
 			yield return new WaitForSeconds(.66f);
 			SfxHandler.Instance.PlayChomp();	
 			yield return new WaitForSeconds(.4f);
 			chomping = false;		
 		}
-
-
 	}
 
-	void OpenFlower(){
-
-	}
-
-	void EatFox(){
-
-	}
 	void AnimateFoxGoal(){
 		StartCoroutine(LevelBuilder.playertransform.GetComponent<PlayerAnimation>().Disappear(.8f));
 		LevelBuilder.playertransform.GetComponent<PlayerMovement>().speed = 3;
 		LevelBuilder.playertransform.GetChild(0).GetComponent<Animator>().SetInteger("Phase", 2);
-		//LevelBuilder.playertransform.GetComponent<PlayerAnimation>().Disappear(1);
 	}
-
-
 }

@@ -15,7 +15,6 @@ public class PotdHolder : MonoBehaviour
 
 	public List<Sprite> yearSprites = new List<Sprite>();
 	//monthsizes starting in Nov2019
-
 	public List<Sprite> monthSpritesSpanish = new List<Sprite>();
 
 	public List<Sprite> yearSpritesSpanish = new List<Sprite>();

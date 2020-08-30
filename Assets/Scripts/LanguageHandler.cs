@@ -18,6 +18,7 @@ public class LanguageHandler : MonoBehaviour
             Destroy(this);
         }
 	}
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -43,12 +44,6 @@ public class LanguageHandler : MonoBehaviour
     	}
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void GetSpanish()
     {
     	userLanguage = Language.Spanish;
@@ -58,10 +53,6 @@ public class LanguageHandler : MonoBehaviour
             SceneLoading.Instance.AssignLevelName();
             else
             SceneLoading.Instance.AssignPotdName();
-        }
-        else
-        {
-
         }
         PlayerPrefs.SetString("Language", "Spanish");
         AwakeText[] awakeTexts = FindObjectsOfType(typeof(AwakeText)) as AwakeText[];
@@ -73,9 +64,9 @@ public class LanguageHandler : MonoBehaviour
             ss.AssignSprite();
         }
     }
+
     public void GetEnglish()
     {
-
         userLanguage = Language.English;
         if(!SceneLoading.Instance.isMenu)
         {
@@ -83,10 +74,6 @@ public class LanguageHandler : MonoBehaviour
             SceneLoading.Instance.AssignLevelName();
             else
             SceneLoading.Instance.AssignPotdName();
-        }
-        else
-        {
-
         }
         PlayerPrefs.SetString("Language", "English");
         AwakeText[] awakeTexts = FindObjectsOfType(typeof(AwakeText)) as AwakeText[];
@@ -98,10 +85,7 @@ public class LanguageHandler : MonoBehaviour
             ss.AssignSprite();
         }
     }
-    public void WriteTexts()
-    {
 
-    }
     public static bool IsEnglish(){
         if(Instance== null){
             return true;

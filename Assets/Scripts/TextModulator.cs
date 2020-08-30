@@ -19,9 +19,9 @@ public class TextModulator : MonoBehaviour
 
     void FixedUpdate()
     {
-    hue++;
-		if(hue>359){
-			hue = 0;
-		}
+      hue++;
+      if(hue>359){
+        hue = 0;
+      }
     }
 }

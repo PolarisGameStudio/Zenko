@@ -35,7 +35,6 @@ public class SfxHandler : MonoBehaviour
         if(Instance == null)
         {
             Instance = this;
-            //DontDestroyOnLoad(this.gameObject);
             MusicSource = GameObject.Find("Music Source").GetComponents<AudioSource>();
             isFlowerOpen = false;
             return;
@@ -46,13 +45,11 @@ public class SfxHandler : MonoBehaviour
     public void PlayWallHit(int x, int y){
 
         string typeOfWall = FindType(x,y);
-//        Debug.Log(typeOfWall + " IS THE HIT");
         switch(typeOfWall){
             case "Wall":
                 source.PlayOneShot(pedro_Hit, .8f);
                 break;
             case null:
-//                Debug.Log("NULL");
                 source.PlayOneShot(wall_Hit[Random.Range(0,wall_Hit.Length)], .65f);
                 break;
             case "Right":
@@ -83,61 +80,52 @@ public class SfxHandler : MonoBehaviour
             case "Portal":
                 source.PlayOneShot(pedro_Hit, .8f);
                 break;
-
         }
-
-
     }
 
     string FindType(int x, int y){
-
         if(x>=0 && x <LevelBuilder.totaldimension && 
             y>=0 && y < LevelBuilder.totaldimension){
             return LevelManager.placedPieces[x,y];
         }
-
         else
-        return null;
+            return null;
     }
 
     public void PlayFlowerOpen(){
         if(!isFlowerOpen){
         source.PlayOneShot(flowerOpen[Random.Range(0,flowerOpen.Length)], .6f);
         isFlowerOpen = true;
-        //StartCoroutine(OpenTimer());            
         }
-        //Debug.Log("Open");
     }
+
     public void PlayFlowerClose(){
         if(isFlowerOpen){
             source.PlayOneShot(flowerClose[Random.Range(0,flowerClose.Length)], .6f);
             isFlowerOpen = false;
-           //StartCoroutine(CloseTimer());
-        }
-        //Debug.Log("Close");
-    
+        }    
     }
     public void PlayFragile(){
         source.PlayOneShot(fragile[Random.Range(0,fragile.Length)], .7f);
     }
+
     public void PlayIcarus(){
-        //Debug.Log("ICARIRIRI");
         source.PlayOneShot(icarus_Blow[Random.Range(0,icarus_Blow.Length)], 1);
     }
+
     public void PlayHole(){
         source.PlayOneShot(hole_Sound, .2f);
-
-        //StartCoroutine(Duck(.1f, 1f));
     }
+
     public void PlayChomp(){
         source.PlayOneShot(flowerChomp[Random.Range(0 , flowerChomp.Length)], 1f);
     }
+
     public void PlaySeedPop(){
         source.PlayOneShot(seed_Pop, .6f);
     }
 
     public void PlayVictory(){
-        Debug.Log("Playing Victory while pvic is " + playingVictory + "and pvic 2 is " + playingVictory2);
         if(!playingVictory){
             DuckMusic(1);
             if(Random.Range(0,10) > 8)
@@ -156,34 +144,43 @@ public class SfxHandler : MonoBehaviour
             StartCoroutine(Reseter2(2));
         }
     }
+
     public void PlaySlide(){
         AudioClip clip = slideSounds[Random.Range(0, slideSounds.Length)];
         slideSource.loop = false;
         slideSource.clip = clip;
         slideSource.Play();
     }
+
     public void PickUp(){
         source.PlayOneShot(grabSound, 1f);
     }
+
     public void Drop(){
         source.PlayOneShot(dropSound, 1f);
     }
+
     public void Drag(){
         source.PlayOneShot(draggingSound, 1f);
     }
+
     public void StopSlide(){
         slideSource.Stop();
     }
+
     public void StopSlideVictory(){
         StartCoroutine(DelayAndStop());
     }
+
     public IEnumerator DelayAndStop(){
         yield return new WaitForSeconds(.4f);
         slideSource.Stop();
     }
+
     private void DuckMusic(float time){
         StartCoroutine(Duck(time,time*2.5f));
     }
+    
     private IEnumerator FadeOut(AudioSource source, float fadeouttime){
         float initvalue = source.volume;
         for(float i=0; i<fadeouttime; i+=Time.deltaTime){
