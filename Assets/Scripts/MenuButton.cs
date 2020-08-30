@@ -148,6 +148,7 @@ public class MenuButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler{
         VolumeSliders.ColorStuff();
 
         //AssignSettingsSprite
+        if(!SceneLoading.Instance.isMenu)
         closeMenu();
         if(open){
             toggleMenu();

@@ -109,7 +109,6 @@ public class SceneLoading : MonoBehaviour {
 			GameModeHandler.TurnOff();
 			menuHolder.Find("Menu").gameObject.SetActive(false);
 			menuHolder.Find("CloseLevel_Box").gameObject.SetActive(true);
-			menuHolder.Find("Config").gameObject.SetActive(false);
 			if(MenuButton.open){
 				MenuButton.thisMB.closeMenu();
 			}
@@ -175,7 +174,6 @@ public class SceneLoading : MonoBehaviour {
 					GameModeHandler.TurnOff();
 					menuHolder.Find("Menu").gameObject.SetActive(false);
 					menuHolder.Find("ClosePotd_Box").gameObject.SetActive(true);
-					menuHolder.Find("Config").gameObject.SetActive(false);
 
 					if(MenuButton.open){
 						MenuButton.thisMB.closeMenu();
