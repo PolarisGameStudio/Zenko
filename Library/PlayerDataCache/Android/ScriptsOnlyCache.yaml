@@ -483,8 +483,6 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12628}
     - Class: 114
-      Script: {instanceID: 12660}
-    - Class: 114
       Script: {instanceID: 12672}
     - Class: 114
       Script: {instanceID: 12740}
@@ -1409,7 +1407,7 @@ ScriptsOnlyBuild:
     className: LevelSaver
   - hash:
       serializedVersion: 2
-      Hash: a58c4d5acfddf8b624590ebbbb7c7224
+      Hash: 44126347376d9151c5712fc2f6d6e1bb
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Dragger
@@ -2083,4 +2081,4 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/Scenes/WorldSelect.unity
   - Assets/Scenes/Level.unity
-  playerPath: /Users/bernardolimon/Desktop/Desktop/ZenkoApk/zenko_280.aab
+  playerPath: /Users/bernardolimon/Desktop/Desktop/ZenkoApk/zenko_283.aab

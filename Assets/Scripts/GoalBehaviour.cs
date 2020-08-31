@@ -96,7 +96,6 @@ public class GoalBehaviour : MonoBehaviour {
 							if(-transform.position.z<newy){
 								SfxHandler.Instance.StopSlideVictory();
 								SfxHandler.Instance.PlayVictory();
-								Debug.Log("Doing this");
 								goaling = true;
 								myanim.SetInteger("Phase",2);
 								StartCoroutine(PlayChompAfterDelay());
@@ -107,7 +106,6 @@ public class GoalBehaviour : MonoBehaviour {
 						else{
 							if (-transform.position.z>newy){//getting closer
 								myanim.SetInteger("Phase",1);
-								//Debug.Log("orthis");
 								lastphase = 1;
 								SfxHandler.Instance.PlayFlowerOpen();
 							}							
@@ -206,7 +204,6 @@ public class GoalBehaviour : MonoBehaviour {
 						}
 						else{
 							if (-transform.position.z>newy){
-								Debug.Log("orthis");
 								lastphase = 1;
 								SfxHandler.Instance.PlayFlowerOpen();
 							}							

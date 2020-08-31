@@ -58,7 +58,6 @@ public class MapsHolder : MonoBehaviour
 			}			
 			i = i + mapsize + 2;
 		}
-        Debug.Log("Loaded Potd Maps");
 		levelsPotd = (string[])lines.Clone();
         potdLoaded = true;
 	}
@@ -90,7 +89,6 @@ public class MapsHolder : MonoBehaviour
 				nextismap = true;
 			}			
 		}
-        Debug.Log("Loaded Adventure Maps");
 		levelsAdventure = (string[])lines.Clone();
         adventureLoaded = true;
 	}

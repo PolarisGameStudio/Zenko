@@ -24,8 +24,6 @@ public class SceneLoading : MonoBehaviour {
 	public static string menuState;
 	public bool isMenu; // checks if its world select scene
 	public GameObject PotdShortcut;
-	//public bool isPotdOpen;
-//	public IceTileHandler myhandler;
 	void Awake(){
 		Instance = this;
 	}
@@ -33,15 +31,11 @@ public class SceneLoading : MonoBehaviour {
 		menuState = "Start";
 		canOpen = true;
 		Instance = this;
-//		Debug.Log("SceneLoadingStart");
 		//Application.targetFrameRate = 30;
-
-		//if in world select
 		if (!level){ 
 			//Start music
 			MusicHandler.PlayTitleTheme();
 			isMenu = true;
-//			Debug.Log("Starting World Select Scene");
 		}
 		//else if loading level scene
 		else{
@@ -51,8 +45,6 @@ public class SceneLoading : MonoBehaviour {
 			PlayServices.instance.SaveLocal();
 			PlayServices.instance.SaveData();
 			//DO I?
-
-//			Debug.Log("Starting Level Scene with level number " + LevelManager.levelnum);
 
 			//NOT SURE WHY I DO THIS. PROBABLY TO PREVENT BUGS
 			if(LevelManager.levelnum == 0 || LevelManager.levelnum ==null){
@@ -338,7 +330,6 @@ public class SceneLoading : MonoBehaviour {
 	
 	//Called from UI, opens help	
 	public void TutorialButton(){
-		Debug.Log("PUSHED TUTORIAL BUTTON");
 		TutorialHandler.Instance.HelpButton();
 		MenuButton.thisMB.closeMenu();
 	}
@@ -462,7 +453,6 @@ public class SceneLoading : MonoBehaviour {
 		LevelBuilder.tiles[(int)Place.x, -(int)Place.z].type = td.myType;
 		LevelBuilder.tiles[(int)Place.x, -(int)Place.z].isTaken = true;
 		LevelBuilder.tiles[(int)Place.x, -(int)Place.z].tileObj = td.gameObject;
-		Debug.Log(Place.z);
 
 		if(td.myType == "Seed"){
 			LevelBuilder.tiles[(int)Place.x, -(int)Place.z].seedType = td.mySeedType;	
@@ -625,7 +615,6 @@ public class SceneLoading : MonoBehaviour {
 		}
 	}
 	public void removeIcarus(string type, Vector3 target){
-		Debug.Log(type);
 		LevelBuilder.tiles[(int)target.x, -(int)target.z].type = "Ice";
 		LevelBuilder.tiles[(int)target.x, -(int)target.z].isTaken = false;	
 		if(LevelBuilder.tiles[(int)target.x, -(int)target.z].isSideways != null){
@@ -688,7 +677,6 @@ public class SceneLoading : MonoBehaviour {
 			LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].isSideways = LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].type;
 
 		}
-		Debug.Log(td.myType);
 		LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].type = td.myType;
 		LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].isTaken = true;
 		LevelBuilder.tiles[(int)positiontogo.x, -(int)positiontogo.z].tileObj = td.gameObject;	
@@ -696,9 +684,7 @@ public class SceneLoading : MonoBehaviour {
 	public void PlaceHint2(){
 		for(int i = 0; i<LevelManager.piecetiles.Count; i++){ //First go through the pieces outside of the board.
 			td = LevelManager.piecetiles[i].gameObject.GetComponent<Dragger>();
-			Debug.Log(td.gameObject.transform.position);
 			if(td.gameObject.transform.position.z < -7){//if piece is outside:
-				Debug.Log("Piece number "+ i + "is outside and good to go"); 
 				//need to check if taken by someone of similar type.
 				//If no one is on their assigned (ideal) tile, place it. and return.
 
@@ -724,7 +710,6 @@ public class SceneLoading : MonoBehaviour {
 					//LevelBuilder.tiles[(int)Place.x, -(int)Place.z].tileObj = td.gameObject;
 					//td.gameObject.GetComponent<BoxCollider>().enabled = false;					//disable collider so piece stays there.
 					
-					Debug.Log(Place.z);
 
 					if(td.myType == "Seed"){
 						LevelBuilder.tiles[(int)Place.x, -(int)Place.z].seedType = td.mySeedType;	
@@ -740,18 +725,14 @@ public class SceneLoading : MonoBehaviour {
 					//place it
 				}
 				else{
-					Debug.Log("Someone in my place");
 					//Check if one on my place is good or bad.
 					if(td.myType == LevelBuilder.tiles[(int)Place.x, -(int)Place.z].type && td.mySeedType == LevelBuilder.tiles[(int)Place.x, -(int)Place.z].seedType){//if someone of the same type is on it's ideal place. 
 						for(int j = 0; j<LevelManager.piecetiles.Count; j++){//search for a new spot (probably gonna end up being the one who has this one's place unless there's more than 2 of the same type)
 							if(j!=i){//skip self
 								td2 = LevelManager.piecetiles[j].gameObject.GetComponent<Dragger>();
 								if(td2.myType == td.myType && td.mySeedType == td2.mySeedType){		//check if the selected piece is of same type
-									Debug.Log("Same person in my place");
 									Vector3 Place2 = new Vector3 (LevelManager.myhints[j].x, 0, -LevelManager.myhints[j].y);	//place 2 is hint solution assigned to piece being tested
-									Debug.Log(Place2);		
 									if(LevelBuilder.tiles[(int)Place2.x, -(int)Place2.z].isTaken == false){ //Check if the selected piece of the same type has it's ideal spot open.
-										Debug.Log("new target free");
 										
 										//Place tile and return.
 										LevelManager.piecetiles[i].position = Place2;
@@ -764,15 +745,12 @@ public class SceneLoading : MonoBehaviour {
 											}
 
 										td.gameObject.GetComponent<BoxCollider>().enabled = false;					//disable collider so piece stays there.
-										
-										Debug.Log(Place2.z + "Testcloseearly");
-
+					
 										if(td.myType == "Seed"){
 											LevelBuilder.tiles[(int)Place2.x, -(int)Place2.z].seedType = td.mySeedType;	
 										} 
 										if(td.gameObject.GetComponent<Animator>() != null){
 											td.gameObject.GetComponent<Animator>().SetInteger("Phase", 2);
-
 										}
 										LevelManager.hintnum++;
 										LevelManager.hintsgiven.Add(i);
@@ -781,7 +759,6 @@ public class SceneLoading : MonoBehaviour {
 									
 									}							//check that their position is open
 																//take their position
-//Debug.Log("Same person in my place");
 								}
 							}
 						}
@@ -798,22 +775,18 @@ public class SceneLoading : MonoBehaviour {
 			}
 		}
 		for(int i=0; i < LevelManager.piecetiles.Count; i++){//If no pieces are outside the board.
-			Debug.Log("Trying for " + i);
 			bool alternative = false;
 			td = LevelManager.piecetiles[i].gameObject.GetComponent<Dragger>();
 			string piecetype = td.myType;
 			string seedtype = td.mySeedType;
 			Vector3 Place = new Vector3 (LevelManager.myhints[i].x, 0, -LevelManager.myhints[i].y); //target from hint.
 			Vector2 myv2 = new Vector2(td.gameObject.transform.position.x, -td.gameObject.transform.position.z);
-			Debug.Log(LevelManager.myhints[i] +"" +  myv2);
 			if(LevelManager.myhints[i] != myv2){//check if same position as same hint position
 				alternative = false;
-				Debug.Log("Time to work");
 				for(int j=0; j<LevelManager.piecetiles.Count; j++){//See if it is on a tile that also has same type.
 					if(i!=j){
 						td2 = LevelManager.piecetiles[j].gameObject.GetComponent<Dragger>();
 						if(myv2 == LevelManager.myhints[j] && td.myType == td2.myType && td.mySeedType == td.mySeedType){
-							Debug.Log("Piece " + i +  " is SITTING ON A GOOD ALTERNATIVE");
 							alternative = true;
 							break;
 						}
@@ -821,10 +794,8 @@ public class SceneLoading : MonoBehaviour {
 				}
 				if(alternative == false){//If not on an alternative (then move), look for it's hint.
 
-					Debug.Log("Time to place");
 					//this needs work.
 					if(LevelBuilder.tiles[(int)Place.x, -(int)Place.z].isTaken == false){ //if hint place is free
-						Debug.Log("Locked on target");
 						//remove
 						removePiece(td.gameObject.transform.position, td.myType);
 						LevelManager.piecetiles[i].position = Place;
@@ -838,8 +809,6 @@ public class SceneLoading : MonoBehaviour {
 						}
 						td.gameObject.GetComponent<BoxCollider>().enabled = false;					//disable collider so piece stays there.
 						
-						Debug.Log(Place.z);
-
 						if(td.myType == "Seed"){
 							LevelBuilder.tiles[(int)Place.x, -(int)Place.z].seedType = td.mySeedType;	
 						} 

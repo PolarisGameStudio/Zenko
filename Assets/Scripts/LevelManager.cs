@@ -157,16 +157,12 @@ public class LevelManager : MonoBehaviour {
 		Dragger[] draggers = (Dragger[]) GameObject.FindObjectsOfType(typeof(Dragger));
 		foreach(Dragger dragger in draggers){
 			if(dragger.mySeedType != "None"){
-				Debug.Log(dragger.mySeedType);
 				dragger.myshrinker.SetActive(true);
 				dragger.myBigger.SetActive(false);
 				dragger.convertWhenReady = false;
-				Debug.Log((int)dragger.gameObject.transform.position.x);
-				Debug.Log(-(int)dragger.gameObject.transform.position.z);
 				if(dragger.gameObject.transform.position.z > -LevelBuilder.totaldimension){//checks for pieces inside board
 					if(dragger.mySeedType == "Wall"){
 						LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x, -(int)dragger.gameObject.transform.position.z].type = "Seed";
-						Debug.Log(LevelBuilder.tiles[(int)dragger.gameObject.transform.position.x, -(int)dragger.gameObject.transform.position.z].type);						
 					}
 					else if(dragger.mySeedType == "Left" || dragger.mySeedType == "Right" || dragger.mySeedType == "Up" || dragger.mySeedType == "Down"){
 						UnPopIcarus(dragger.mySeedType, dragger);

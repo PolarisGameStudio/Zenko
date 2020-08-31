@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class MenuButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler{
+public class MenuButton : MonoBehaviour{
 	public Sprite menuImage;
 	public Sprite restartImage;
 	public List<GameObject> buttons;
@@ -28,26 +28,21 @@ public class MenuButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler{
     {
         thisMB = this;
     }
+
 	// Use this for initialization
 	void Start () {
 		open = false;	
         LevelBuilder.settingsBoard = ConfigMenu;
 	}
 	
-	// Update is called once per frame
-// 	void Update () {
-// //		StartCoroutine(buttonAction());
-// 	}
     public static void CloseMenu(){
         if(open){
             thisMB.toggleMenu();
-           
         }
     }
 
 	public void toggleMenu(){
         if(Swiping.canswipe){
-            //Debug.Log(levelText.GetComponent<RectTransform>());
             RectTransform myrt = levelText.GetComponent<RectTransform>();
             if(MenuButton.open){
                 if(!LevelManager.configging){
@@ -56,32 +51,25 @@ public class MenuButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler{
                     LevelManager.configging = false;
                     LevelManager.isdragging = false;                   
                 }
-
-
-                //myrt.localPosition = new Vector3 (myrt.localPosition.x,0,0);
                 StartCoroutine(RotateRing(30, .2f));
             }
             else{
-                //Swiping.canswipe = false;
-                //LevelManager.isdragging = true;
-                //myrt.localPosition = new Vector3 (myrt.localPosition.x,-450,0);
                 StartCoroutine(RotateRing(-30, .2f));
             }
             MenuButton.open = !MenuButton.open;
-
             for(int i=0; i<buttons.Count; i++){
                 buttons[i].SetActive(open);
             }            
         }
-            
 	}
 
 	public void toggleMenuWorld(){
-            MenuButton.open = !MenuButton.open;
-            for(int i=0; i<buttons.Count; i++){
-                buttons[i].SetActive(open);
-            }	
-        }
+        MenuButton.open = !MenuButton.open;
+        for(int i=0; i<buttons.Count; i++){
+            buttons[i].SetActive(open);
+        }	
+    }
+
     public IEnumerator RotateRing(float target, float fadetime){
         for(float t = 0.0f; t<fadetime; t+= Time.deltaTime){
             float normalizedTime = t/fadetime;
@@ -90,92 +78,58 @@ public class MenuButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler{
         }
         ringObject.GetComponent<RectTransform>().eulerAngles = new Vector3(0, 0, target);
     }
+
     public void closeMenu(){
         open = false;
         for(int i=0; i<buttons.Count; i++){
             buttons[i].SetActive(open);
         }       
     }
-/*	public IENumerator buttonAction(){
 
-	}*/
-    public void OnPointerDown(PointerEventData data)
-    {
-        //OnPress.Invoke();
- 
-        // do any custom "OnPress" behavior here
- 
-        //StartCoroutine(LoopWhileHolding());
-    }
-        public void OnPointerUp(PointerEventData data)
-    {
-        /*OnRelease.Invoke();
- 		done = true;
-
- 		if(!restarted){
-  		Debug.Log("menu");
-  			open = !open;
-  			for(int i=0; i<buttons.Count; i++){
-  				buttons[i].SetActive(open);
-  			}
- 		}*/
-
-        // do any custom "OnRelease" behavior here
- 
-    }
     private IEnumerator LoopWhileHolding()
     {
     	done = false;
-
 		yield return new WaitForSeconds(3);
         OnHold.Invoke();
         if(!done & open){
 		Debug.Log("restart");
 		done = true;
 		restarted = true;        	
-        }
-
-        // do any custom "OnHold" behavior here
- 
-            yield return null; // makes the loop wait until next frame to continue
+        } 
+        yield return null; // makes the loop wait until next frame to continue
     }
-    public void toggleCongifMenu(){
 
+    public void toggleCongifMenu(){
         ConfigMenu.SetActive(true);
         LevelManager.configging = true;
         Swiping.canswipe = false;
         LevelManager.isdragging = true;
         VolumeSliders.ColorStuff();
-
-        //AssignSettingsSprite
-        if(!SceneLoading.Instance.isMenu)
-        closeMenu();
+        if(!SceneLoading.Instance.isMenu){
+            closeMenu();
+        }
         if(open){
             toggleMenu();
         }
-        
-        //set menu to back only.
     }
+
     public void closeConfigMenu(){
         LevelManager.isdragging = false;
-
         ConfigMenu.SetActive(false);
         Swiping.canswipe = true;
         Swiping.mydirection = "Null";
         if(Input.touchCount>0){
             Touch t = Input.GetTouch(0);
             Swiping.firstPressPos = new Vector2(t.position.x,t.position.y);
-
         }
         else{
             Swiping.firstPressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
         }
         LevelManager.configging = false;
-
     }
+
     public void CloseSettings(){
         ConfigMenu.SetActive(false);
                 LevelManager.isdragging = false;
-
     }
 }
