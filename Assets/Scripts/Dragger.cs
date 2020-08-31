@@ -32,6 +32,7 @@ public class Dragger : MonoBehaviour {
 	public PieceHolders pieceHolder;
 	public Vector3 piecePosition;
 	public GameObject takenTile;
+	bool pushed;
 
 	void Start(){
 		particle = GameObject.Find("Main Camera").GetComponent<LevelBuilder>().smoke_particle.gameObject;
@@ -45,10 +46,6 @@ public class Dragger : MonoBehaviour {
 		}
 	}
 
-	void Update(){
-		//Debug.Log(transform.position);
-
-	}
 	void FixedUpdate(){
 		if(myType == "Seed"){
 			SeedChecking();
@@ -105,9 +102,11 @@ public class Dragger : MonoBehaviour {
 	}
 
 	public void OnMouseDown() {
+
 	 	toggleColliders();
-		PlaneBehavior.Instance.PlaneRay();
-		if ((TurnBehaviour.turn == 0 || LevelBuilder.resetting) & !LevelManager.configging) {
+		if (TurnBehaviour.turn == 0 & !LevelManager.configging) {
+			pushed = true;
+			PlaneBehavior.Instance.PlaneRay();
 			SfxHandler.Instance.PickUp();
 			PlaneBehavior.readyToDrop = false;
 			if(myType == "Wall" || myType == "Portal"){
@@ -179,7 +178,7 @@ public class Dragger : MonoBehaviour {
 
 	public void OnMouseDrag()
 	{ 
-		if ((TurnBehaviour.turn == 0 || LevelBuilder.resetting) & !LevelManager.configging) {
+		if (TurnBehaviour.turn == 0 & !LevelManager.configging & pushed) {
 			Vector3 curScreenPoint = new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 15);
 			Vector3 curPosition = Camera.main.ScreenToWorldPoint (curScreenPoint) + offset;
 			positiontogo = PlaneBehavior.planePos;	
@@ -283,6 +282,7 @@ public class Dragger : MonoBehaviour {
 
 	void OnMouseUp()
 	{
+		
 		Swiping.mydirection = "Null";
 		string pieceholdername;
 		if(particle != null){
@@ -290,8 +290,9 @@ public class Dragger : MonoBehaviour {
 		}
 		toggleColliders();
 		Cursor.visible = true;
-		if(TurnBehaviour.turn == 0 && !LevelManager.configging)
+		if(TurnBehaviour.turn == 0 && !LevelManager.configging && pushed)
 		{
+			pushed = false;
 			SfxHandler.Instance.Drop();
 			Swiping.canswipe = true;
 			LevelManager.isdragging = false;

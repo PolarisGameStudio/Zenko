@@ -468,6 +468,7 @@ public class SceneLoading : MonoBehaviour {
 		TurnCounter.turncount = 0;
 		LevelManager.NextLevel (LevelManager.levelnum);
 	}
+	
 	public void ResetLevelButton(){
 		AssignLevelName();
 		TurnCounter.turncount = 0;

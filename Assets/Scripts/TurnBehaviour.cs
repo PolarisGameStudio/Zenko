@@ -6,7 +6,6 @@ public class TurnBehaviour : MonoBehaviour {
 	public static int turn;
 	private static TurnBehaviour instance = null;
 
-
 	// Use this for initialization
 	void Awake(){
 		if(instance == null)
