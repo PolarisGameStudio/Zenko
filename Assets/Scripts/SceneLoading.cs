@@ -210,6 +210,7 @@ public class SceneLoading : MonoBehaviour {
 				GameModeHandler.TurnOff();
 				transform.Find("MenuHolder").Find("Menu").gameObject.SetActive(false);
 				transform.Find("MenuHolder").Find("ClosePotd_Box").gameObject.SetActive(true);
+				if(!isMenu)
 				transform.Find("MenuHolder").Find("Config").gameObject.SetActive(false);
 				canOpen = false;			
 				

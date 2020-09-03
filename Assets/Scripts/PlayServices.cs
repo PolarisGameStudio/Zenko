@@ -29,59 +29,62 @@ public class PlayServices : MonoBehaviour
         read = 0;
         finishedLoading = false;
         if(instance == null)
-            {
-                #if UNITY_EDITOR
-                //PlayerPrefs.DeleteAll();
-                #endif
-                loader = GameObject.Find("Handler").GetComponent<Loading>();
-                instance = this;
-                DontDestroyOnLoad(this.gameObject);
+        {
+            #if UNITY_EDITOR
+            //PlayerPrefs.DeleteAll();
+            #endif
+            loader = GameObject.Find("Handler").GetComponent<Loading>();
+            instance = this;
+            DontDestroyOnLoad(this.gameObject);
+            //initiateDictionarys
+            LevelStorer.PopulateFiveChapters(); //load level data (200) int levelstorer.leveldic
+            LevelStorer.PopulatePotd500(); //loads data into levelstorer.potddic
 
-                LevelStorer.PopulateFiveChapters(); //load level data (200) int levelstorer.leveldic
-                LevelStorer.PopulatePotd500(); 
+            if(!PlayerPrefs.HasKey("PoTD"))
+                PlayerPrefs.SetInt("PoTD", 0);
 
-                if(!PlayerPrefs.HasKey("PoTD"))
-                    PlayerPrefs.SetInt("PoTD", 0);
+            if(!PlayerPrefs.HasKey(SAVE_NAME))
+                PlayerPrefs.SetString(SAVE_NAME, GameDataToString());
+                
+            if(!PlayerPrefs.HasKey("IsFirstTime"))
+                PlayerPrefs.SetInt("IsFirstTime", 1);
+                
+            LoadLocal();              
 
-                if(!PlayerPrefs.HasKey(SAVE_NAME))
-                    PlayerPrefs.SetString(SAVE_NAME, GameDataToString());
-                    
-                if(!PlayerPrefs.HasKey("IsFirstTime"))
-                    PlayerPrefs.SetInt("IsFirstTime", 1);
-                    
-                LoadLocal();              
-
-                if(PlayerPrefs.GetString(SAVE_NAME).Length < GameDataToString().Length){
-                    Debug.Log("NEW MAPS ARE IN EXTRA EXTRA NEW MAPS ARE IN");
-                }
-                //checks for first4chapters
-                if (PlayerPrefs.HasKey ("Loaded")) {//has player prefs
-
-                } 
-                else {
-                    LevelStorer.PopulatePlayerPrefs(); //initializeprefs
-                    PlayerPrefs.SetInt("CurrentFirst", 1);
-                    GameManager.mycurrency = 0;
-                    PlayerPrefs.SetInt("Currency", 0);
-                    PlayerPrefs.SetInt("Loaded",1);
-                }
-                loader.DaDebug("prepgp");
-                return;
+            if(PlayerPrefs.GetString(SAVE_NAME).Length < GameDataToString().Length){
+                Debug.Log("NEW MAPS ARE IN EXTRA EXTRA NEW MAPS ARE IN");
             }
+            //checks for first4chapters
+            if (PlayerPrefs.HasKey ("Loaded")) {//has player prefs
+
+            } 
+            else {
+                LevelStorer.PopulatePlayerPrefs(); //initializeprefs
+                PlayerPrefs.SetInt("CurrentFirst", 1);
+                PlayerPrefs.SetInt("Currency", 0);
+                PlayerPrefs.SetInt("Loaded",1);
+            }
+            loader.DaDebug("prepgp");
+            return;
+        }
         Destroy(this.gameObject);
     }
     void Start(){
         #if UNITY_ANDROID
-
         InitializePGP();
         SignIn();
-        #endif        
+        #endif      
+        #if UNITY_IOS
+        finishedLoading = true;
+        loader.Loaded();
+        #endif  
     }
+
     IEnumerator LoadIn(int seconds){
-        
         yield return new WaitForSeconds(seconds);
         loader.Loaded();
     }
+
     public string[] SplitString(string str){
         string[] strArray = new string[str.Length];
         for(int i=0; i<str.Length; i++){
@@ -89,7 +92,6 @@ public class PlayServices : MonoBehaviour
         }
         Debug.Log(strArray.Length + " is the datasize");
         return strArray;
-
     }
 
    
@@ -121,6 +123,7 @@ public class PlayServices : MonoBehaviour
             }
         });        
     }
+
     public void SignOut() 
     {
         #if UNITY_ANDROID
@@ -194,20 +197,14 @@ public class PlayServices : MonoBehaviour
     void AssignData(string Data){
         Debug.Log("ASSIGNING DATA WITH STRING: " + Data);
         if(Data == null){
-            
             Data = "0";
         }
         string[] dataArray = SplitString(Data);
-
-
-
         //assigns adfree with first digit
         if(int.Parse(dataArray[0])== 1)
             LevelManager.adFree = true;
         else
             LevelManager.adFree = false;
-
-//        Debug.Log(dataArray.Length + " IS THE LENGTH");
 
         AssignFirstFourChapters(dataArray);
         AssignPotdData(dataArray);
@@ -334,19 +331,20 @@ public class PlayServices : MonoBehaviour
             LoadLocal();
         }
         #endif
+        #if UNITY_IOS
+            LoadLocal();
+        #endif
     }
-    private void LoadLocal(){
-//        Debug.Log("LoadingLocal");
-        StringToGameData(PlayerPrefs.GetString(SAVE_NAME));
 
+    private void LoadLocal(){
+        StringToGameData(PlayerPrefs.GetString(SAVE_NAME));
     }
+
     public void SaveData(){
         #if UNITY_ANDROID
         if(!isCloudDataLoaded){
             curCloudData = "0";
             isCloudDataLoaded = true;
-            //SaveLocal();
-            //return;
         }
         if(Social.localUser.authenticated){
             Debug.Log("SAVINGTOCLOUD");
@@ -358,17 +356,17 @@ public class PlayServices : MonoBehaviour
             SaveLocal();
         }
         #endif
+
+        #if UNITY_IOS
+            SaveLocal();
+        #endif
     }
 
     public void SaveLocal(){
         PlayerPrefs.SetString(SAVE_NAME, GameDataToString());
     }
 
-    private void ResolveConflict(IConflictResolver resolver, ISavedGameMetadata original, byte[] originalData, 
-        ISavedGameMetadata unmerged, byte[] unmergedData){
-        //Debug.Log(Encoding.ASCII.GetString(originalData)  +  " is original data");
-        //Debug.Log(Encoding.ASCII.GetString(unmergedData) + " is UNMERGED DATA");
-        //Debug.Log(originalData + "Orig" + unmergedData + "unmerged");
+    private void ResolveConflict(IConflictResolver resolver, ISavedGameMetadata original, byte[] originalData, ISavedGameMetadata unmerged, byte[] unmergedData){
         if(originalData == null){
             Debug.Log("Chossing unmerged in conflict");
             resolver.ChooseMetadata(unmerged);
@@ -378,21 +376,12 @@ public class PlayServices : MonoBehaviour
             resolver.ChooseMetadata(original);
         }
         else{
-
-
             string originalStr = Encoding.ASCII.GetString(originalData);
             string unmergedStr = Encoding.ASCII.GetString(unmergedData);
-
-
-
-
-            // Debug.Log("TRynna parse");
             int originalNum;
             int unmergedNum;
-
             int.TryParse(originalStr.Substring(0,4), out originalNum);
             int.TryParse(unmergedStr.Substring(0,4), out unmergedNum);
-
             if(originalStr.Length < unmergedStr.Length){
                 resolver.ChooseMetadata(unmerged);
             }
@@ -413,7 +402,6 @@ public class PlayServices : MonoBehaviour
         read++;
         Debug.Log("ISSAVING IS " + isSaving);
         loader.DaDebug("SavedGameOpened + " + isSaving  + " + "+ SavedGameRequestStatus.Success + " + " + read);
-
         if (status == SavedGameRequestStatus.Success){
             if (!isSaving){
 
@@ -443,16 +431,13 @@ public class PlayServices : MonoBehaviour
         #if UNITY_ANDROID
         Debug.Log("GONNA SAVE DATA TO CLOUD");
         newMergedString = MergeData(curCloudData, GameDataToString());
-
         SaveLocal();
-
         byte[] dataToSave = Encoding.ASCII.GetBytes(newMergedString);//////////needtofixthis
-
         SavedGameMetadataUpdate update = new SavedGameMetadataUpdate.Builder().Build();
-
-        //Debug.Log("DataToSave length is " + dataToSave.Length);
-
         ((PlayGamesPlatform)Social.Active).SavedGame.CommitUpdate(game, update, dataToSave, OnSavedGameDataWritten);
+        #endif
+        #if UNITY_IOS
+        SaveLocal();
         #endif
     }
 
@@ -461,28 +446,20 @@ public class PlayServices : MonoBehaviour
         Debug.Log(Encoding.ASCII.GetString(savedData) + " IS THE DATA READ");
         loader.DaDebug("SavedGameDataRead");
         int parsed;
-        //int.TryParse(Encoding.ASCII.GetString(savedData), out parsed);
-        //Debug.Log(parsed + " IS PARSED");
         if(!int.TryParse(Encoding.ASCII.GetString(savedData).Substring(0,4), out parsed)){
             savedData = Encoding.ASCII.GetBytes("0");
         }
         Debug.Log(parsed + " is parsed");
-
         if(status == SavedGameRequestStatus.Success){
             string cloudDataString;
             if(savedData.Length == 0 || savedData.Length == 1)
                 cloudDataString = GameDataToString();
             else
                 cloudDataString = Encoding.ASCII.GetString(savedData);
-
             string localDataString = PlayerPrefs.GetString(SAVE_NAME);
             Debug.Log("STRING FROM GAME DATA POST PROCESSING IS " + cloudDataString);
             curCloudData = cloudDataString;
             StringToGameData(cloudDataString, localDataString);
-            
-            //isCloudDataLoaded = true;
-            //curCloudData = mergedData;
-
         }
     } 
 
@@ -529,22 +506,5 @@ public class PlayServices : MonoBehaviour
         #endif
     }
 
-    public static void ShowAchievementsUI()
-    {
-        Social.ShowAchievementsUI();        
-    }
-
     #endregion /Achievements
-
-
-
-
-    #region Leaderboards
-
-    public static void AddScoreToLeaderboard(string leaderboardID, long score){
-        Social.ReportScore(score, leaderboardID, success => {});
-    }
-
-    #endregion /Leaderboards
-
 }

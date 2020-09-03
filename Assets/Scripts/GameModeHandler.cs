@@ -20,21 +20,6 @@ public class GameModeHandler : MonoBehaviour
     	currentMode = 0;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        // if(!initialized){
-	       //  if(Input.GetMouseButtonDown(0)){
-        //         Debug.Log("INITIALIZED");
-	       //  	TurnOn();
-	       //  	initialized = true;
-	       //  	foreach(GameObject go in initialObjects){
-	       //  		go.SetActive(false);
-	       //  	}
-        //         CameraController.Fade(.2f,.4f, 1);
-	       //  }        	
-        // }
-    }
     public static void TurnMeOn(){
         if(GameObject.Find("GameModeSelection")!=null){
             GameObject.Find("GameModeSelection").GetComponent<GameModeHandler>().enabled = true;

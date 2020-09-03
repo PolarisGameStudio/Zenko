@@ -40,12 +40,16 @@ namespace CompleteProject
 
 
             // If we haven't set up the Unity Purchasing reference
-            #if UNITY_ANDROID
+            #if UNITY_ANDROID || UNITY_IOS
             if (m_StoreController == null)
             {
                 // Begin to configure our connection to Purchasing
                 InitializePurchasing();
             }
+            #endif
+
+            #if UNITY_IOS
+
             #endif
         }
 
@@ -142,11 +146,6 @@ namespace CompleteProject
                 SceneLoading.Instance.PuzzleOfTheDayMenu();   
             }
             PotdShortcut.Instance.AssignPotdShortcutAssets(PotdUnlocker.Instance.keysAvailable);
-
-
-            //Close buymenu
-            //Refresh if potd menu open.
-            //Remove Keys on button
         }
 
         // Restore purchases previously made by this customer. Some platforms automatically restore purchases, like Google. 

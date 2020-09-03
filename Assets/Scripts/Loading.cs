@@ -18,7 +18,7 @@ public class Loading : MonoBehaviour
 	bool finished;
 
 	void Awake(){
-		if(Instance == null ){
+		if(Instance == null){
 			Instance = this;
 			DontDestroyOnLoad(this.gameObject);
 			if(!loaded){
@@ -27,7 +27,7 @@ public class Loading : MonoBehaviour
 			return;
 		}
 		GameModeHandler.TurnMeOn();
-		}
+	}
 
 	void FixedUpdate(){
 		if(!finished){
@@ -41,6 +41,7 @@ public class Loading : MonoBehaviour
 		}
 	}
     public void Loaded(){
+		Debug.Log("Loaded");
 		if(!MapsHolder.mapsLoaded){
 			StartCoroutine(LoadWhenMapsLoaded());
 			return;
