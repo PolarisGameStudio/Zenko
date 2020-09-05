@@ -53,6 +53,8 @@ public class GameModeHandler : MonoBehaviour
     }
     public static void TurnOff(){
     	Instance.transform.GetChild(0).gameObject.SetActive(false);
+        Instance.transform.GetChild(1).gameObject.SetActive(false);
+        Instance.transform.GetChild(2).gameObject.SetActive(false);
     	//Instance.addButton.SetActive(false);
         //Instance.menuButton.SetActive(false);
     }
@@ -67,8 +69,9 @@ public class GameModeHandler : MonoBehaviour
 
     public static void Return(){
         Instance.transform.GetChild(0).gameObject.SetActive(true);
-        //Instance.addButton.SetActive(true);
-        //Instance.menuButton.SetActive(true);        
+        Instance.transform.GetChild(1).gameObject.SetActive(true);
+        Instance.transform.GetChild(2).gameObject.SetActive(true);
+   
     }
     public int nextInCycle(int curPlace){
     	if(curPlace < Modes.Length-1){
