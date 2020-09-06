@@ -57,9 +57,9 @@ public class AwakeText : MonoBehaviour
     			}
     			break;
             case TextSection.UnlockPotd:
-                texts[0].text = "Ver anuncio para abrir";
+                texts[0].text = "Ver Anuncio para Abrir";
                 texts[1].text = "Cancelar";
-                texts[2].text = "Abrir todos los niveles pasados";
+                texts[2].text = "Desbloquear Todos";
                 break;
     	}
     }
@@ -88,7 +88,7 @@ public class AwakeText : MonoBehaviour
             case TextSection.UnlockPotd:
                 texts[0].text = "Watch Ad to Unlock";
                 texts[1].text = "Cancel";
-                texts[2].text = "Unlock all Past Levels";
+                texts[2].text = "Unlock Archive";
                 break;
     	}
     }
