@@ -42,8 +42,8 @@ public class SceneLoading : MonoBehaviour {
 			isMenu = false;
 
 			//DO I REALLY WANT TO BE SAVING EVERYTIME A NEW MAP IS OPENING?
-			PlayServices.instance.SaveLocal();
-			PlayServices.instance.SaveData();
+			//PlayServices.instance.SaveLocal();
+			//PlayServices.instance.SaveData();
 			//DO I?
 
 			//NOT SURE WHY I DO THIS. PROBABLY TO PREVENT BUGS

@@ -9,12 +9,14 @@ using GooglePlayGames.BasicApi.SavedGame;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Text.RegularExpressions;
+using VoxelBusters.NativePlugins;
 //using GoogleMobileAds.Api;
 
 public class PlayServices : MonoBehaviour
 {
     public static PlayServices instance;
     const string SAVE_NAME = "SaveFile";
+    const string TEST_NAME = "TestFile";
     public static string mergedData;
     public static string curCloudData;
     public static string newMergedString;
@@ -34,6 +36,7 @@ public class PlayServices : MonoBehaviour
             //PlayerPrefs.DeleteAll();
             #endif
             loader = GameObject.Find("Handler").GetComponent<Loading>();
+            Debug.Log("loader is " + loader);
             instance = this;
             DontDestroyOnLoad(this.gameObject);
             //initiateDictionarys
@@ -69,15 +72,112 @@ public class PlayServices : MonoBehaviour
         }
         Destroy(this.gameObject);
     }
+
     void Start(){
         #if UNITY_ANDROID
         InitializePGP();
         SignIn();
         #endif      
         #if UNITY_IOS
-        finishedLoading = true;
-        loader.Loaded();
+        NPBinding.CloudServices.Initialise();
+        //finishedLoading = true;
+        //loader.Loaded();
         #endif  
+    }
+
+    void OnEnable(){
+        CloudServices.KeyValueStoreDidInitialiseEvent += OnKeyValueStoreInitialised;
+        CloudServices.KeyValueStoreDidChangeExternallyEvent     += OnKeyValueStoreChanged;
+        CloudServices.KeyValueStoreDidSynchroniseEvent     += OnKeyValueStoreDidSynchronise;
+    }
+
+    void OnDisable(){
+        CloudServices.KeyValueStoreDidInitialiseEvent -= OnKeyValueStoreInitialised;
+        CloudServices.KeyValueStoreDidChangeExternallyEvent -= OnKeyValueStoreChanged;
+        CloudServices.KeyValueStoreDidSynchroniseEvent     -= OnKeyValueStoreDidSynchronise;
+    }
+
+    void SaveToCloud(bool signedin){
+        SaveLocal();
+        if(signedin){
+            NPBinding.CloudServices.SetString(SAVE_NAME, GameDataToString());
+            NPBinding.CloudServices.Synchronise();
+            Debug.Log("new cloud is " + NPBinding.CloudServices.GetString(SAVE_NAME));
+        }
+    }
+    void OnKeyValueStoreInitialised(bool success){
+        Debug.Log("INITIALIZED WITH SUCCESS BEING " + success);
+        Debug.Log(loader);
+        loader.DaDebug("ios init is " + success + " " + NPBinding.CloudServices.GetString(SAVE_NAME));
+        Debug.Log(NPBinding.CloudServices.GetString(SAVE_NAME));
+        Debug.Log("post loader.dadebug");
+        if(success){
+            isCloudDataLoaded = true;
+            Debug.Log("BOUTTAGETSTRING");
+            string stringValueOnCloud = NPBinding.CloudServices.GetString(SAVE_NAME);
+            string testValueOnCloud = NPBinding.CloudServices.GetString(TEST_NAME);
+            NPBinding.CloudServices.SetString(TEST_NAME, "test");
+            NPBinding.CloudServices.Synchronise();
+            Debug.Log("Stringvalueoncloud is " + stringValueOnCloud);
+            Debug.Log("gamedatatostring is " + GameDataToString());
+            Debug.Log("TEST DATA WAS " + testValueOnCloud);
+            Debug.Log("TEST DATA IS NOW " + NPBinding.CloudServices.GetString(TEST_NAME));
+            if(stringValueOnCloud == null){
+                NPBinding.CloudServices.SetString(SAVE_NAME, GameDataToString());
+                NPBinding.CloudServices.Synchronise();
+                loader.Loaded();
+                Debug.Log(NPBinding.CloudServices.GetString(SAVE_NAME));
+            }
+            else{
+
+                string mergedValue = MergeData(stringValueOnCloud, GameDataToString());
+                NPBinding.CloudServices.SetString(SAVE_NAME, mergedValue);
+                NPBinding.CloudServices.Synchronise();
+                finishedLoading = true;
+                AssignData(mergedValue);
+            }
+        }
+        else{
+            
+        }
+    }
+
+    private void OnKeyValueStoreChanged (eCloudDataStoreValueChangeReason _reason, string[] _changedKeys)
+    {
+        Debug.Log("Cloud key-value store has been changed.");
+        Debug.Log(string.Format("Reason: {0}.", _reason));
+
+        if (_changedKeys != null)
+        {
+            Debug.Log(string.Format("Total keys changed: {0}.", _changedKeys.Length));
+            Debug.Log(string.Format("Pick a value from old and new and set the value to cloud for resolving conflict."));
+
+            foreach (string _changedKey in _changedKeys)
+            {
+                string stringValueOnCloud = NPBinding.CloudServices.GetString(_changedKey);
+                if(stringValueOnCloud == null){
+                    NPBinding.CloudServices.SetString(_changedKey, GameDataToString());
+                }
+                else{
+                    string mergedValue = MergeData(stringValueOnCloud, GameDataToString());
+                    NPBinding.CloudServices.SetString(_changedKey, mergedValue);
+                    AssignData(mergedValue);
+                }               
+            }
+        }
+    }
+
+    void OnKeyValueStoreDidSynchronise(bool _success){
+        if (_success)
+        {
+            Debug.Log("Successfully synchronised in-memory keys and values.");
+            Debug.Log("TEST DATA POST SYNC IS NOW " + NPBinding.CloudServices.GetString(TEST_NAME));
+            Debug.Log("SAVE DATA POST SYNC IS NOW " + NPBinding.CloudServices.GetString(SAVE_NAME));
+        }
+        else
+        {
+            Debug.Log("Failed to synchronise in-memory keys and values.");
+        }
     }
 
     IEnumerator LoadIn(int seconds){
@@ -353,12 +453,14 @@ public class PlayServices : MonoBehaviour
                 DataSource.ReadCacheOrNetwork, true, ResolveConflict, OnSavedGameOpened);
         }
         else{
-            SaveLocal();
+                SaveLocal();
+            }
+            
         }
         #endif
 
         #if UNITY_IOS
-            SaveLocal();
+            SaveToCloud(isCloudDataLoaded);
         #endif
     }
 

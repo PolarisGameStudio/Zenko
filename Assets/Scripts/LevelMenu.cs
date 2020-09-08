@@ -285,8 +285,8 @@ public class LevelMenu : MonoBehaviour {
 		for(int i = 0; i<numberOfLevels; i++){
 			createPotdButton(i);
 		}
-		PlayServices.instance.SaveLocal();
-		PlayServices.instance.SaveData();
+		//PlayServices.instance.SaveLocal();
+		//PlayServices.instance.SaveData();
 		AssignMonthText();
 		CheckPotdUpDown();
 	}

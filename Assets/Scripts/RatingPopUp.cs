@@ -74,7 +74,7 @@ public class RatingPopUp : MonoBehaviour {
 			LevelStorer.potdDic[DateChecker.Instance.currentIndex].islocked = false;
 		}
 		PlayServices.instance.SaveLocal();
-		#if UNITY_ANDROID
+		#if UNITY_ANDROID || UNITY_IOS
 		PlayServices.instance.SaveData();
 		#endif
 	}
