@@ -25,6 +25,7 @@ public class PlayServices : MonoBehaviour
     bool finishedLoading;
     Loading loader;
     int read;
+    bool isGameServicesInitialized;
 
     void Awake()
     {
@@ -80,6 +81,7 @@ public class PlayServices : MonoBehaviour
         #endif      
         #if UNITY_IOS
         NPBinding.CloudServices.Initialise();
+        isGameServicesInitialized = InitializeGameServices();
         //finishedLoading = true;
         //loader.Loaded();
         #endif  
@@ -178,6 +180,51 @@ public class PlayServices : MonoBehaviour
         {
             Debug.Log("Failed to synchronise in-memory keys and values.");
         }
+    }
+
+    bool InitializeGameServices(){
+        bool _isAvailable = NPBinding.GameServices.IsAvailable();
+        bool success = false;
+        Debug.Log("is available is " + _isAvailable);
+        if(_isAvailable){
+            bool _isAuthenticated = NPBinding.GameServices.LocalUser.IsAuthenticated;
+            Debug.Log("is authenticated is " + _isAuthenticated);
+            if(!_isAuthenticated){
+
+                NPBinding.GameServices.LocalUser.Authenticate((bool _success, string _error)=>{
+                    if (_success)
+                    {
+                        Debug.Log("Sign-In Successfully");
+                        Debug.Log("Local User Details : " + NPBinding.GameServices.LocalUser.ToString());
+                        success = true;
+                    }
+                    else
+                    {
+                        Debug.Log("Sign-In Failed with error " + _error);
+                        success = false;
+                    }
+                });
+                return success;
+            }
+            else
+                return true;
+        }
+        else
+            return false;
+    }
+
+    static void iOSAchievement(string achievementID){
+        NPBinding.GameServices.ReportProgressWithGlobalID(achievementID, 100, (bool _status, string _error)=>{
+            if (_status)
+            {
+                Debug.Log(achievementID + " " + "successfully reported");
+            }
+            else
+            {
+                Debug.Log(achievementID + " " + "couldnt be reported");
+                Debug.Log("Achievement error is " + _error);
+            }
+        });
     }
 
     IEnumerator LoadIn(int seconds){
@@ -583,6 +630,7 @@ public class PlayServices : MonoBehaviour
 
     public static void UnlockWorldAchievement(int worldnumber){
         switch(worldnumber){
+            #if UNITY_ANDROID
             case 1:
                 IncrementAchievement("CgkIl8nVhZgLEAIQAQ", 50);
                 break;
@@ -598,6 +646,24 @@ public class PlayServices : MonoBehaviour
             case 5:
                 IncrementAchievement("CgkIl8nVhZgLEAIQCA", 50);
                 break;
+            #endif
+            #if UNITY_IOS
+            case 1:
+                iOSAchievement("world1complete");
+                break;
+            case 2:
+                iOSAchievement("world2complete");
+                break;
+            case 3:
+                iOSAchievement("world3complete");
+                break;
+            case 4:
+                iOSAchievement("world4complete");
+                break;
+            case 5:
+                iOSAchievement("world5complete");
+                break;            
+            #endif
         }
     }
 

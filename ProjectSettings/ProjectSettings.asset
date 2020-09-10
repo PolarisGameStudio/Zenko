@@ -120,7 +120,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 1.298
+  bundleVersion: 1.301
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -167,7 +167,7 @@ PlayerSettings:
     Android: com.BrightLights.Zenko
     iPhone: com.Zentric.Zenko
   buildNumber:
-    iPhone: 298
+    iPhone: 301
   AndroidBundleVersionCode: 288
   AndroidMinSdkVersion: 16
   AndroidTargetSdkVersion: 0

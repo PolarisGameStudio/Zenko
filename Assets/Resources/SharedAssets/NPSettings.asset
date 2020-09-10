@@ -97,7 +97,32 @@ MonoBehaviour:
       m_consumerSecret: 
   m_gameServicesSettings:
     m_leaderboardMetadataCollection: []
-    m_achievementMetadataCollection: []
+    m_achievementMetadataCollection:
+    - m_globalID: world1complete
+      m_platformIDs:
+      - m_platform: 0
+        m_value: world1complete
+      m_noOfSteps: 1
+    - m_globalID: world2complete
+      m_platformIDs:
+      - m_platform: 0
+        m_value: world2complete
+      m_noOfSteps: 1
+    - m_globalID: world3complete
+      m_platformIDs:
+      - m_platform: 0
+        m_value: world3complete
+      m_noOfSteps: 1
+    - m_globalID: world4complete
+      m_platformIDs:
+      - m_platform: 0
+        m_value: world4complete
+      m_noOfSteps: 1
+    - m_globalID: world5complete
+      m_platformIDs:
+      - m_platform: 0
+        m_value: world5complete
+      m_noOfSteps: 1
     m_iOS:
       m_showDefaultAchievementCompletionBanner: 1
     m_android:
