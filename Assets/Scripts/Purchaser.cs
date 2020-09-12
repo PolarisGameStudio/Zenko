@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Purchasing;
+using VoxelBusters.NativePlugins;
+
 
 // Placing the Purchaser class in the CompleteProject namespace allows it to interact with ScoreManager, 
 // one of the existing Survival Shooter scripts.
@@ -10,6 +12,8 @@ namespace CompleteProject
     // Deriving the Purchaser class from IStoreListener enables it to receive messages from Unity Purchasing.
     public class Purchaser : MonoBehaviour, IStoreListener
     {
+        public BillingProduct noAds;
+        public BillingProduct[] products;
         private static IStoreController m_StoreController;          // The Unity Purchasing system.
         private static IExtensionProvider m_StoreExtensionProvider; // The store-specific Purchasing subsystems.
 
@@ -49,10 +53,107 @@ namespace CompleteProject
             #endif
 
             #if UNITY_IOS
-
+                products = NPSettings.Billing.Products;
+                NPBinding.Billing.RequestForBillingProducts(products);
             #endif
         }
 
+        private void OnEnable ()
+        {
+            Debug.Log("Added on enable shits");
+            // Register for callbacks
+            Billing.DidFinishRequestForBillingProductsEvent    += OnDidFinishProductsRequest;
+            Billing.DidFinishProductPurchaseEvent            += OnDidFinishTransaction;
+
+            // For receiving restored transactions.
+            Billing.DidFinishRestoringPurchasesEvent        += OnDidFinishRestoringPurchases;
+
+        }
+
+        private void OnDisable ()
+        {
+            // Deregister for callbacks
+            Billing.DidFinishRequestForBillingProductsEvent    -= OnDidFinishProductsRequest;
+            Billing.DidFinishProductPurchaseEvent            -= OnDidFinishTransaction;
+            Billing.DidFinishRestoringPurchasesEvent        -= OnDidFinishRestoringPurchases;        
+        }
+        private void OnDidFinishProductsRequest (BillingProduct[] _regProductsList, string _error)
+        {
+            // Hide activity indicator
+
+            // Handle response
+            if (_error != null)
+            {        
+                // Something went wrong
+                Debug.Log("COULDNT LOAD PRODUCTS");
+            }
+            else 
+            {    
+                Debug.Log("LOADED PRODUCTS");
+                products = _regProductsList;
+                noAds = _regProductsList[0];
+
+                //encontrar uno legit
+                //noAdPrice.text = noAds.LocalizedPrice;
+                int index = 0;
+                NPBinding.Billing.RestorePurchases();
+            }
+        }
+
+        private void OnDidFinishRestoringPurchases (BillingTransaction[] _transactions, string _error)
+        {
+            Debug.Log("Finished restoring purchases loaded");
+            //Debug.Log(string.Format("Received restore purchases response. Error = {0}.", _error.GetPrintableString()));
+
+            if (_transactions != null)
+            {                
+                Debug.Log("Count of transaction information received = " + _transactions.Length);
+
+                foreach (BillingTransaction _currentTransaction in _transactions)
+                {
+                    Debug.Log("GOING WITH CURRENT RESTORE NAME " + _currentTransaction.ProductIdentifier);
+                    Debug.Log(_currentTransaction.ProductIdentifier);
+                    switch(_currentTransaction.ProductIdentifier){
+                        case "noads":
+                            //Debug.Log("RESTORING NO ADS");
+                            RemoveAds();
+                            break;
+                    }
+                }
+            }
+            if(_transactions == null){
+                Debug.Log("RETURNING TRANSACTIONS NULL");
+                Debug.Log("ERROR IS " + _error);
+            }
+        }
+
+        private void OnDidFinishTransaction (BillingTransaction _transaction)
+        {
+            if (_transaction != null)
+            {
+                Debug.Log("NON NULL TRANSACTION");
+                if (_transaction.VerificationState == eBillingTransactionVerificationState.SUCCESS)
+                {
+                    Debug.Log(_transaction.ProductIdentifier + "HAS SUCCESSFULLY BEEN SUCCESED");
+                    if (_transaction.TransactionState == eBillingTransactionState.PURCHASED)
+                    {
+                        Debug.Log(_transaction.ProductIdentifier + "HAS SUCCESSFULLY BEEN PURCHASED");
+                        switch(_transaction.ProductIdentifier){
+                            case "noads":
+                                RemoveAds();
+                                break;
+
+                        }
+                        // Your code to handle purchased products
+                    }
+                }
+            }
+            else{
+                Debug.Log("NULL TRANSACTION");
+                Debug.Log(_transaction);
+            }
+        }
+        
         public void InitializePurchasing() 
         {
             // If we have already connected to Purchasing ...
@@ -90,16 +191,26 @@ namespace CompleteProject
         }
 
         public float PriceOfNoAds(){
+            #if UNITY_ANDROID
             if(IsInitialized()){
                 Product product = m_StoreController.products.WithID(NO_ADS);
                 return (float)product.metadata.localizedPrice;
             }
             return 40f;
+            #endif
+            #if UNITY_IOS
+            if(noAds!=null)
+            return noAds.Price;
+            else{
+                return 25f;
+            }
+            #endif
         }
 
 
         void BuyProductID(string productId)
         {
+            #if UNITY_ANDROID
             // If Purchasing has been initialized ...
             if (IsInitialized())
             {
@@ -131,64 +242,38 @@ namespace CompleteProject
                 // retrying initiailization.
                 Debug.Log("BuyProductID FAIL. Not initialized.");
             }
+            #endif
+            #if UNITY_ANDROID
+            if (NPBinding.Billing.IsProductPurchased(noAds))
+            {       
+                // Show alert message that item is already purchased
+                Debug.Log("ALREADY PURCHASED");
+                RemoveAds();
+                return;
+            }
+            else{
+                // Call method to make purchase
+                NPBinding.Billing.BuyProduct(noAds);
+            }
+            #endif
         }
 
         // Takes action to remove ads. 
         public void RemoveAds(){   
+            Debug.Log("REMOVING ADS");
             PlayerPrefs.SetInt("AdFree", 1);
             LevelManager.adFree = true;
             PlayerPrefs.Save();
             PlayServices.instance.SaveLocal();
             PlayServices.instance.SaveData();
-            GameObject.Find("BuyMenu").SetActive(false);
+            if(GameObject.Find("BuyMenu")!=null)
+                GameObject.Find("BuyMenu").SetActive(false);
             if(SceneLoading.menuState == "Potd"){
                 SceneLoading.Instance.ClosePotdMode();
                 SceneLoading.Instance.PuzzleOfTheDayMenu();   
             }
             PotdShortcut.Instance.AssignPotdShortcutAssets(PotdUnlocker.Instance.keysAvailable);
         }
-
-        // Restore purchases previously made by this customer. Some platforms automatically restore purchases, like Google. 
-        // Apple currently requires explicit purchase restoration for IAP, conditionally displaying a password prompt.
-        public void RestorePurchases()
-        {
-            // If Purchasing has not yet been set up ...
-            if (!IsInitialized())
-            {
-                // ... report the situation and stop restoring. Consider either waiting longer, or retrying initialization.
-                Debug.Log("RestorePurchases FAIL. Not initialized.");
-                return;
-            }
-
-            // If we are running on an Apple device ... 
-            if (Application.platform == RuntimePlatform.IPhonePlayer || 
-                Application.platform == RuntimePlatform.OSXPlayer)
-            {
-                // ... begin restoring purchases
-                Debug.Log("RestorePurchases started ...");
-
-                // Fetch the Apple store-specific subsystem.
-                var apple = m_StoreExtensionProvider.GetExtension<IAppleExtensions>();
-                // Begin the asynchronous process of restoring purchases. Expect a confirmation response in 
-                // the Action<bool> below, and ProcessPurchase if there are previously purchased products to restore.
-                apple.RestoreTransactions((result) => {
-                    // The first phase of restoration. If no more responses are received on ProcessPurchase then 
-                    // no purchases are available to be restored.
-                    Debug.Log("RestorePurchases continuing: " + result + ". If no further messages, no purchases available to restore.");
-                });
-            }
-            // Otherwise ...
-            else
-            {
-                // We are not running on an Apple device. No work is necessary to restore purchases.
-                Debug.Log("RestorePurchases FAIL. Not supported on this platform. Current = " + Application.platform);
-            }
-        }
-
-
-        //  
-        // --- IStoreListener
-        //
 
         public void OnInitialized(IStoreController controller, IExtensionProvider extensions)
         {

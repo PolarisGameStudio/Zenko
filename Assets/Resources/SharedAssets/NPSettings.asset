@@ -16,7 +16,7 @@ MonoBehaviour:
   m_applicationSettings:
     m_supportedFeatures:
       m_usesAddressBook: 0
-      m_usesBilling: 0
+      m_usesBilling: 1
       m_usesCloudServices: 1
       m_usesGameServices: 1
       m_mediaLibrary:
@@ -66,7 +66,17 @@ MonoBehaviour:
     m_android:
       m_modifiesApplicationBadge: 1
   m_billingSettings:
-    m_products: []
+    m_products:
+    - m_name: noads
+      m_description: Remove Ads
+      m_isConsumable: 0
+      m_price: 0
+      m_productIdentifiers:
+      - m_platform: 0
+        m_value: removeads
+      m_developerPayload: 
+      m_iosProductId: 
+      m_androidProductId: 
     m_iOS:
       m_supportsReceiptValidation: 1
       m_validateUsingServerURL: 
