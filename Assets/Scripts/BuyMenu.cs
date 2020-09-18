@@ -9,7 +9,7 @@ public class BuyMenu : MonoBehaviour
     public Text title;
     public static BuyMenu Instance;
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         Instance = this;
         AssignPriceMessage();
@@ -19,6 +19,7 @@ public class BuyMenu : MonoBehaviour
     void AssignPriceMessage(){
     	float price  = Purchaser.Instance.PriceOfNoAds();
     	priceString.text = "$" + price.ToString();
+        Debug.Log(price);
     }
 
     public void AssignTitle(string newTitle){

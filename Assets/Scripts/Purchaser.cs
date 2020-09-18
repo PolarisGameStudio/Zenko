@@ -199,10 +199,14 @@ namespace CompleteProject
             return 40f;
             #endif
             #if UNITY_IOS
-            if(noAds!=null)
-            return noAds.Price;
+            if(noAds!=null){
+                Debug.Log("returning noads.price");
+                return (float)noAds.Price;
+            }
+                
             else{
-                return 25f;
+                Debug.Log("Returning 0.99");
+                return 0.99f;
             }
             #endif
         }
@@ -243,7 +247,7 @@ namespace CompleteProject
                 Debug.Log("BuyProductID FAIL. Not initialized.");
             }
             #endif
-            #if UNITY_ANDROID
+            #if UNITY_IOS
             if (NPBinding.Billing.IsProductPurchased(noAds))
             {       
                 // Show alert message that item is already purchased
