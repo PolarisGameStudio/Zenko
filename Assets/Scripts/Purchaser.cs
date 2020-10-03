@@ -29,7 +29,7 @@ namespace CompleteProject
         // specific mapping to Unity Purchasing's AddProduct, below.
         public static string NO_ADS = "zenko.noads";
         public static Purchaser Instance;
- 
+        bool manualRestore;
 
         void Start()
         {
@@ -100,6 +100,10 @@ namespace CompleteProject
             }
         }
 
+        public void Restore(){
+            manualRestore = true;
+            NPBinding.Billing.RestorePurchases();
+        }
         private void OnDidFinishRestoringPurchases (BillingTransaction[] _transactions, string _error)
         {
             Debug.Log("Finished restoring purchases loaded");
@@ -120,10 +124,19 @@ namespace CompleteProject
                             break;
                     }
                 }
+                if(manualRestore)
+                    if(_transactions.Length!=0)
+                    RestorePurchases.Instance.RestoreText();
+                    else{
+                    RestorePurchases.Instance.NoRestoreText();    
+                    }
+
             }
             if(_transactions == null){
                 Debug.Log("RETURNING TRANSACTIONS NULL");
                 Debug.Log("ERROR IS " + _error);
+                if(manualRestore)
+                RestorePurchases.Instance.NoRestoreText();
             }
         }
 
@@ -203,7 +216,6 @@ namespace CompleteProject
                 Debug.Log("returning noads.price");
                 return (float)noAds.Price;
             }
-                
             else{
                 Debug.Log("Returning 0.99");
                 return 0.99f;
