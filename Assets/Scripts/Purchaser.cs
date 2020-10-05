@@ -57,7 +57,7 @@ namespace CompleteProject
                 NPBinding.Billing.RequestForBillingProducts(products);
             #endif
         }
-
+        #if UNITY_IOS
         private void OnEnable ()
         {
             Debug.Log("Added on enable shits");
@@ -166,7 +166,7 @@ namespace CompleteProject
                 Debug.Log(_transaction);
             }
         }
-        
+        #endif
         public void InitializePurchasing() 
         {
             // If we have already connected to Purchasing ...

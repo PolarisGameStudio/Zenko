@@ -86,7 +86,7 @@ public class PlayServices : MonoBehaviour
         //loader.Loaded();
         #endif  
     }
-
+    #if UNITY_IOS
     void OnEnable(){
         CloudServices.KeyValueStoreDidInitialiseEvent += OnKeyValueStoreInitialised;
         CloudServices.KeyValueStoreDidChangeExternallyEvent     += OnKeyValueStoreChanged;
@@ -226,7 +226,7 @@ public class PlayServices : MonoBehaviour
             }
         });
     }
-
+    #endif
     IEnumerator LoadIn(int seconds){
         yield return new WaitForSeconds(seconds);
         loader.Loaded();
@@ -503,7 +503,6 @@ public class PlayServices : MonoBehaviour
                 SaveLocal();
             }
             
-        }
         #endif
 
         #if UNITY_IOS

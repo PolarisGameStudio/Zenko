@@ -12,7 +12,9 @@ public class RestoreButton : MonoBehaviour
         #endif
     }
     public void Restore(){
+        #if UNITY_IOS
         Purchaser.Instance.Restore();
+        #endif
     }
 
 }
