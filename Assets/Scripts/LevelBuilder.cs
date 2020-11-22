@@ -287,6 +287,7 @@ public class LevelBuilder : MonoBehaviour {
 	}
 
 	string[][] readPotd(int place){
+		Debug.Log("Drawing " + place);
 		LevelSaver.currentmap = new List<string>();
 		string firstline = MapsHolder.levelsPotd[MapsHolder.startersPotd[place]];
 		LevelSaver.currentmap.Add(firstline);

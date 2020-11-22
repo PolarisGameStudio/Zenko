@@ -9,10 +9,45 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f948d54487626463091054be543be75a, type: 3}
+  m_Script: {fileID: 0}
   m_Name: EditorGameCenter
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass:VoxelBusters.NativePlugins.Internal:EditorGameCenter
   m_registeredUsers: []
   m_leaderboardList: []
   m_achievementsList: []
-  m_achievementDescriptionList: []
+  m_achievementDescriptionList:
+  - m_identifier: world1complete
+    m_title: world1complete
+    m_achievedDescription: Achieved description
+    m_unachievedDescription: Unachieved description
+    m_image: {fileID: 0}
+    m_maximumPoints: 1
+    m_isHidden: 0
+  - m_identifier: world2complete
+    m_title: world2complete
+    m_achievedDescription: Achieved description
+    m_unachievedDescription: Unachieved description
+    m_image: {fileID: 0}
+    m_maximumPoints: 1
+    m_isHidden: 0
+  - m_identifier: world3complete
+    m_title: world3complete
+    m_achievedDescription: Achieved description
+    m_unachievedDescription: Unachieved description
+    m_image: {fileID: 0}
+    m_maximumPoints: 1
+    m_isHidden: 0
+  - m_identifier: world4complete
+    m_title: world4complete
+    m_achievedDescription: Achieved description
+    m_unachievedDescription: Unachieved description
+    m_image: {fileID: 0}
+    m_maximumPoints: 1
+    m_isHidden: 0
+  - m_identifier: world5complete
+    m_title: world5complete
+    m_achievedDescription: Achieved description
+    m_unachievedDescription: Unachieved description
+    m_image: {fileID: 0}
+    m_maximumPoints: 1
+    m_isHidden: 0

@@ -405,6 +405,8 @@ public class SceneLoading : MonoBehaviour {
 		TurnGraphics.SetTurnCounter(LevelStorer.efficientturns);
 		RatingBehaviour.RestartRating();
 		AssignPotdName();		
+		//LevelManager.levelselector.drawPotd(DateChecker.Instance.currentIndex);
+
 	}
 
 

@@ -13,6 +13,7 @@ public class MapsHolder : MonoBehaviour
 	public static List<int> startersPotd;
     bool adventureLoaded;
     bool potdLoaded;
+	bool repotding;
     public static bool mapsLoaded;
     
     void Awake(){
@@ -29,12 +30,15 @@ public class MapsHolder : MonoBehaviour
     }
 
     public static void RePotd(){
-        Instance.initPotd();
+		MapsHolder.Instance.repotding = true;
+        Instance.StartCoroutine(Instance.initPotd());
+		//LevelManager.levelselector.drawPotd(DateChecker.Instance.currentIndex);
     }
 
 	//feeds levelPotd string array from textfile.
     public IEnumerator initPotd(){ 
 		startersPotd = new List<int>();
+		
 		string file = "FilteredMaps.txt";
 		string filePath = System.IO.Path.Combine(Application.streamingAssetsPath, file);
 		string result = " ";
@@ -50,6 +54,7 @@ public class MapsHolder : MonoBehaviour
 		}
 		string text = result;
 		string[] lines = Regex.Split(text, "\r?\n");
+		levelsPotd = new string[lines.Length];
 		for(int i =0; i<lines.Length;i++){
 			startersPotd.Add(i);
 			int mapsize = int.Parse(lines[i].Substring(3,1));		
@@ -60,6 +65,11 @@ public class MapsHolder : MonoBehaviour
 		}
 		levelsPotd = (string[])lines.Clone();
         potdLoaded = true;
+		if(repotding){
+			Debug.Log("gonna repot draw");
+			LevelManager.levelselector.drawPotd(DateChecker.Instance.currentIndex);
+			repotding = false;
+		}
 	}
 
 	//turns the map .txt into string array
