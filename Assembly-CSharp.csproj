@@ -440,6 +440,7 @@
      <None Include="Assets\StreamingAssets\Adventure5.txt" />
      <None Include="Assets\StreamingAssets\Level62.txt" />
      <None Include="Assets\StreamingAssets\Ch1 5x5 candidates.txt" />
+     <None Include="Assets\good7.txt" />
      <None Include="Assets\StreamingAssets\Level52.txt" />
      <None Include="Assets\StreamingAssets\Level-8.txt" />
      <None Include="Assets\StreamingAssets\Level13.txt" />
