@@ -16,9 +16,9 @@ MonoBehaviour:
   m_applicationSettings:
     m_supportedFeatures:
       m_usesAddressBook: 0
-      m_usesBilling: 1
-      m_usesCloudServices: 1
-      m_usesGameServices: 1
+      m_usesBilling: 0
+      m_usesCloudServices: 0
+      m_usesGameServices: 0
       m_mediaLibrary:
         value: 0
         usesCamera: 0

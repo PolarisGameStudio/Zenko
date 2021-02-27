@@ -491,7 +491,11 @@ public class LevelStorer : MonoBehaviour {
 			potdDic.Add(i, new PotdStats());
 		}
 	}
-
+	public static void PopulatePotdRest(){
+		for(int i=500; i<1000;i++){
+			potdDic.Add(i, new PotdStats());
+		}
+	}
 	// Use this for initialization
 	void Awake () {
 		if(instance == null){

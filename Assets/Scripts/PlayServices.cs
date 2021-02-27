@@ -43,6 +43,7 @@ public class PlayServices : MonoBehaviour
             //initiateDictionarys
             LevelStorer.PopulateFiveChapters(); //load level data (200) int levelstorer.leveldic
             LevelStorer.PopulatePotd500(); //loads data into levelstorer.potddic
+            LevelStorer.PopulatePotdRest();
 
             if(!PlayerPrefs.HasKey("PoTD"))
                 PlayerPrefs.SetInt("PoTD", 0);
@@ -338,6 +339,7 @@ public class PlayServices : MonoBehaviour
                 stringToSave = stringToSave + "" + (rating+1).ToString() + "";
             }            
         }
+
         return stringToSave;
     }
 
@@ -362,20 +364,7 @@ public class PlayServices : MonoBehaviour
 
 
     }
-    void AssignChapterFive(string[] dataArray){
-        if(dataArray.Length>666){
-            for(int i=161; i<201;i++){
-                int rating = int.Parse(dataArray[i+500]);
-                if(rating == 1){
-                    LevelStorer.leveldic[i].rating = 0;
-                    LevelStorer.leveldic[i].islocked = false;       
-                }
-                if(rating>1){
-                UpdateImportantValue(i, rating-1);
-                }
-            }
-        }
-    }
+
     void AssignFirstFourChapters(string[] dataArray){
         for(int i=1; i<161;i++){
             int rating = int.Parse(dataArray[i]);
@@ -405,7 +394,23 @@ public class PlayServices : MonoBehaviour
     		}
     	}
     }
+    void AssignChapterFive(string[] dataArray){
+        if(dataArray.Length>666){
+            for(int i=161; i<201;i++){
+                int rating = int.Parse(dataArray[i+500]);
+                if(rating == 1){
+                    LevelStorer.leveldic[i].rating = 0;
+                    LevelStorer.leveldic[i].islocked = false;       
+                }
+                if(rating>1){
+                UpdateImportantValue(i, rating-1);
+                }
+            }
+        }
+    }
+    void AssignPotdBatchTwo(string[] dataArray){
 
+    }
 
     void UpdateImportantValue(int place, int value){ //grabs a value from datastring and places  it in leveldic
         LevelStorer.leveldic[place].rating = value;

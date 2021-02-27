@@ -72,6 +72,7 @@ public class LevelManager : MonoBehaviour {
 		EnvironmentKeeper.Instance.Reset();
 		PlayerPrefs.SetInt("PoTD", PlayerPrefs.GetInt("PoTD") + 1);
 		DateChecker.Instance.currentIndex = PlayerPrefs.GetInt("PoTD");
+		Debug.Log(PlayerPrefs.GetInt("PoTD"));
 		LevelStorer.potdDic[PlayerPrefs.GetInt("PoTD")].isNew = false;
 		levelselector.drawPotd(PlayerPrefs.GetInt("PoTD"));
 	}
