@@ -541,7 +541,6 @@ public class LevelStorer : MonoBehaviour {
 
 			if(PlayerPrefs.GetInt(mystring)>0){
 				leveldic[i].islocked = false;
-				//if(i != 160)
 				leveldic[i+1].islocked = false;
 				leveldic[i].rating = PlayerPrefs.GetInt(mystring);
 			}

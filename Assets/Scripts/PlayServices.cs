@@ -113,6 +113,7 @@ public class PlayServices : MonoBehaviour
         Debug.Log(loader);
         loader.DaDebug("ios init is " + success + " " + NPBinding.CloudServices.GetString(SAVE_NAME));
         Debug.Log(NPBinding.CloudServices.GetString(SAVE_NAME));
+        Debug.Log(NPBinding.CloudServices.GetString(SAVE_NAME).Length);
         Debug.Log("post loader.dadebug");
         if(success){
             isCloudDataLoaded = true;
@@ -121,7 +122,7 @@ public class PlayServices : MonoBehaviour
             string testValueOnCloud = NPBinding.CloudServices.GetString(TEST_NAME);
             NPBinding.CloudServices.SetString(TEST_NAME, "test");
             NPBinding.CloudServices.Synchronise();
-            Debug.Log("Stringvalueoncloud is " + stringValueOnCloud);
+            Debug.Log("Stringvalueoncloud is " + stringValueOnCloud + " with length " + stringValueOnCloud.Length);
             Debug.Log("gamedatatostring is " + GameDataToString());
             Debug.Log("TEST DATA WAS " + testValueOnCloud);
             Debug.Log("TEST DATA IS NOW " + NPBinding.CloudServices.GetString(TEST_NAME));
@@ -339,7 +340,16 @@ public class PlayServices : MonoBehaviour
                 stringToSave = stringToSave + "" + (rating+1).ToString() + "";
             }            
         }
-
+        for(int i=500; i<1000; i++){
+            if(LevelStorer.potdDic[i].islocked == true){
+                stringToSave = stringToSave + "0";
+            }
+            else{
+                int rating = LevelStorer.potdDic[i].rating;
+                stringToSave = stringToSave + "" + (rating+1).ToString() + "";
+            }
+        }
+        Debug.Log("gamedatatostring size is " + stringToSave.Length);
         return stringToSave;
     }
 
@@ -358,6 +368,7 @@ public class PlayServices : MonoBehaviour
         AssignFirstFourChapters(dataArray);
         AssignPotdData(dataArray);
         AssignChapterFive(dataArray);
+        AssignPotdBatchTwo(dataArray);
         LevelStorer.highestSolved = LevelMenu.FindHighestSolved();
         if(finishedLoading)
         loader.Loaded();
@@ -409,7 +420,21 @@ public class PlayServices : MonoBehaviour
         }
     }
     void AssignPotdBatchTwo(string[] dataArray){
-
+        for(int i=500; i<1000; i++){
+            int rating = int.Parse(dataArray[i+201]);
+    		if(rating == 0){
+    			LevelStorer.potdDic[i].rating = 0;
+    			LevelStorer.potdDic[i].islocked = true;
+    		}
+    		if(rating==1){
+    			LevelStorer.potdDic[i].rating = 0;
+    			LevelStorer.potdDic[i].islocked = false;
+    		}
+    		if(rating>1){
+    			LevelStorer.potdDic[i].rating = rating-1;
+    			LevelStorer.potdDic[i].islocked = false;
+    		}
+        }
     }
 
     void UpdateImportantValue(int place, int value){ //grabs a value from datastring and places  it in leveldic
