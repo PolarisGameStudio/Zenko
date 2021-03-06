@@ -420,6 +420,9 @@ public class PlayServices : MonoBehaviour
         }
     }
     void AssignPotdBatchTwo(string[] dataArray){
+        if(dataArray.Length<800){
+            return;
+        }
         for(int i=500; i<1000; i++){
             int rating = int.Parse(dataArray[i+201]);
     		if(rating == 0){
@@ -460,7 +463,7 @@ public class PlayServices : MonoBehaviour
         string[] localArray = SplitString(localData);
         Debug.Log("DATA TO MERGE IS " + cloudData + "which is cloud, and local is "+ localData);
         mergedData = "";
-        //string[] mergedArray = new String[localData.Length];
+        //string[] mergedArray = new String[localData.Length];                         
         for(int i=0; i<localData.Length; i++){
         	if(i<cloudData.Length){
 	            if (cloudData[i] > localData[i])
@@ -505,6 +508,7 @@ public class PlayServices : MonoBehaviour
             Debug.Log("LOADED DATA SUCCESFFULY");
         }
         else{
+            Debug.Log("Not authenticated, loading local");  
             LoadLocal();
         }
         #endif
@@ -635,7 +639,7 @@ public class PlayServices : MonoBehaviour
             else
                 cloudDataString = Encoding.ASCII.GetString(savedData);
             string localDataString = PlayerPrefs.GetString(SAVE_NAME);
-            Debug.Log("STRING FROM GAME DATA POST PROCESSING IS " + cloudDataString);
+            Debug.Log("STRING FROM GAME DATA POST PROCESSING IS " + cloudDataString + " with length " + cloudDataString.Length);
             curCloudData = cloudDataString;
             StringToGameData(cloudDataString, localDataString);
         }

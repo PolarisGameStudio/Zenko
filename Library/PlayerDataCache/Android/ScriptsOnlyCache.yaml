@@ -23,6 +23,7 @@ ScriptsOnlyBuild:
     - GameModeHandler
     - GoalBehaviour
     - GoogleAds
+    - GoogleMobileAds.Common.MobileAdsEventExecutor
     - HintMenuHandler
     - HueModifier
     - ImageColorModulator
@@ -102,6 +103,7 @@ ScriptsOnlyBuild:
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
+    - UnityEditor.TestTools.TestRunner.TestListCacheData
     UnityEngine.UI.dll:
     - UnityEngine.EventSystems.EventSystem
     - UnityEngine.EventSystems.EventTrigger
@@ -122,6 +124,7 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.Toggle
     - UnityEngine.UI.VerticalLayoutGroup
     com.unity.multiplayer-hlapi.Runtime.dll:
+    - UnityEngine.Networking.NetworkCallbacks
     - UnityEngine.Networking.NetworkIdentity
   sceneClasses:
     Assets/Scenes/Level.unity:
@@ -2407,4 +2410,4 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/Scenes/WorldSelect.unity
   - Assets/Scenes/Level.unity
-  playerPath: /Users/bernardolimon/Desktop/zenko_android_317.aab
+  playerPath: /Users/bernardolimon/Desktop/zenko_android_319.aab
