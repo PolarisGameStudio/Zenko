@@ -3,6 +3,8 @@
     <package>com.android.support:exifinterface:27.1+</package>
     <package>com.android.support:support-v4:27.1+</package>
     <package>com.google.android.gms:play-services-ads:18.1.1</package>
+    <package>com.google.android.gms:play-services-games:16.0+</package>
+    <package>com.google.android.gms:play-services-nearby:16.0+</package>
     <package>com.google.games:gpgs-plugin-support:0.9.64</package>
   </packages>
   <files>

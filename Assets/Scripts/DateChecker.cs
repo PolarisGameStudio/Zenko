@@ -32,6 +32,8 @@ public class DateChecker : MonoBehaviour
 
 	public string firstDate = "2019-11-01";
 
+	string testDate = "12/30/2021 13:57:48";
+
 
 	void Awake(){
 		if(Instance == null){
@@ -44,12 +46,37 @@ public class DateChecker : MonoBehaviour
 		
 
 	}
-
+	void AssignTestDates(){
+		mmyyyy="122021";
+	}
 	public void PopulateDate(){
 		//txt.text = "Downloading";
+		
 		StartCoroutine(SimpleGetRequest());
-	}
 
+		// StartCoroutine(TestAssign(0));
+
+
+	}
+	IEnumerator TestAssign(float time){
+		yield return new WaitForSeconds(time);
+		Debug.Log(System.DateTime.Now);
+		mmyyyy = "122021";
+		dayInMonth = 30;
+		currentMonthIndex = 25;
+		todayMonthIndex = 25;
+		mm=12;
+		yyyy=2021;
+		System.DateTime date = System.DateTime.Parse(firstDate);
+		System.DateTime now = System.DateTime.Parse("12/30/2021");
+		System.TimeSpan diff = now - date;
+		todayIndex = diff.Days;
+		currentIndex = diff.Days;
+		todayDate = "12/30/2021";
+
+		PotdUnlocker.Instance.Initiate();
+		PotdShortcut.Instance.AssignPotdShortcutAssets(PotdUnlocker.Instance.keysAvailable);
+	}
 	IEnumerator SimpleGetRequest(){
 		UnityWebRequest www = UnityWebRequest.Get(date);
 		string text;
@@ -58,8 +85,8 @@ public class DateChecker : MonoBehaviour
 			Debug.LogError(www.error);
 			text = System.DateTime.Now.ToString();
 			mmyyyy = System.DateTime.Now.Month.ToString("d2") + System.DateTime.Now.Year.ToString();
-			
 			dayInMonth = int.Parse(System.DateTime.Now.Day.ToString());
+			AssignTestDates();
 			currentMonthIndex = PotdHolder.monthTranslator[mmyyyy];
 			todayMonthIndex = PotdHolder.monthTranslator[mmyyyy];
 
@@ -121,7 +148,7 @@ public class DateChecker : MonoBehaviour
 			mm = 1;
 			yyyy= 2020;		
 	}
-	public string GetDate(string text){
-		return text.Substring(30, 10);
-	}
+	// public string GestDate(string text){
+	// 	return text.Substring(30, 10);
+	// }
 }

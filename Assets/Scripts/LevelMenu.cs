@@ -93,6 +93,7 @@ public class LevelMenu : MonoBehaviour {
 		curbutton.transform.GetChild(6).gameObject.SetActive(false);
 		Button btn = curbutton.GetComponent<Button>();
 		int world = int.Parse(DateChecker.Instance.mmyyyy);
+		Debug.Log(DateChecker.Instance.mmyyyy);
 		curbutton.transform.GetChild(2).GetComponent<Text>().text = (num+1).ToString();	
 		if(LevelManager.adFree){
 			if(num+1 <= DateChecker.Instance.dayInMonth || DateChecker.currentMonthIndex<DateChecker.todayMonthIndex){
